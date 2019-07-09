@@ -1,5 +1,5 @@
 import { fromEvent } from 'rxjs';
-import { BUILDER_MARKERS, IBuilderMarker, IGenplanMarker, GENPLAN_MARKERS } from './about-builder.markers';
+import { PROJECT_MARKERS, IProjectItem, IAboutMarker, ABOUT_MARKERS } from './about-builder.markers';
 import { PlatformDetectService } from './../../platform-detect.service';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -42,16 +42,16 @@ export class AboutBuilderComponent implements OnInit, AfterViewInit {
 
     public markersInnerOpacityState: string = 'inactive';
 
-    public markers: IBuilderMarker[] = BUILDER_MARKERS;
+    public projects: IProjectItem[] = PROJECT_MARKERS;
 
-    public genplans: IGenplanMarker [] = GENPLAN_MARKERS;
+    public abouts: IAboutMarker [] = ABOUT_MARKERS;
 
     private scrollEvent;
 
     constructor(
         private elRef: ElementRef,
         private platform: PlatformDetectService
-    ) { this.carousel = true;}
+    ) { this.carousel = true; }
 
     public ngOnInit() {
         $('.swiper-wrapper-about').owlCarousel({
