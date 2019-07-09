@@ -1,0 +1,112 @@
+<form class="shares-edit-form"
+    [formGroup]="form"
+    (ngSubmit)="onSave(form)">
+
+    <div class="shares-form__intro">
+
+        <img class="shares-form__intro-img" *ngIf="form.get('mainImage').value"
+            [src]="uploadsPath + form.get('mainImage').value"
+            [alt]="form.value.name">
+
+        <div class="shares-form__intro-countdown" *ngIf="form.value.countdown">
+            <div *ngIf="days >= 0">{{days | sharesDayPipe}} до конца акции
+                <span>Акция продлится до {{finishDate | date: 'dd.MM.yyyy'}}</span>
+            </div>
+            <div *ngIf="days < 0">Акция закончилась</div>
+        </div>
+
+        <div class="shares-form__intro-wrap">
+            <div class="shares-form__intro-img-btn" (click)="mainImgPicker.click()">Загрузить обложку</div>
+            <input [style.display]="'none'"
+                type="file"
+                #mainImgPicker
+                (change)="onImagePicked($event, 'main-image')">
+            
+
+            <input type="text"
+                class="shares-edit-form__title shares-edit-form__field"
+                placeholder="Название акции"
+                [formControlName]="'name'"
+                [ngClass]="{'invalid-value': form.get('name').invalid && form.get('name').touched}">
+
+            <ghm-textarea [formControlName]="'text'"
+                class="shares-edit-form__text shares-edit-form__field"
+                [ngClass]="{'invalid-value': form.get('text').invalid && form.get('text').dirty}"
+                [placeholder]="'Дополнительный текст'"
+                [whitePlaceholder]="true">
+            </ghm-textarea>
+        </div>
+    </div>
+
+    <div class="shares-form__main">
+        <div class="shares-form__main-time-wrap">
+            <div class="shares-form__main-time">
+                <span>Срок акции до:</span>
+                <app-ghm-date-picker [formControlName]="'finish_date'"></app-ghm-date-picker>
+            </div>
+
+            <label class="shares-form__countdown">
+                <input class="shares-form__countdown-checkbox" [style.display]="'none'" type="checkbox" [formControlName]="'countdown'">
+                <div class="shares-form__countdown-view"></div>
+                <div class="shares-form__countdown-text">Обратный отсчет</div>
+            </label>
+        </div>
+
+        <ul class="shares-form__main-body" formArrayName="body">
+
+            <li class="shares-form__main-item"
+                *ngFor="let block of body.controls; index as i"
+                [ngSwitch]="block.value.blockType">
+
+                <app-shares-edit-description
+                    [formControlName]="i"
+                    *ngSwitchCase="'description'"
+                    (remove)="removeBlock(i)">
+                </app-shares-edit-description>
+
+                <app-shares-edit-image
+                    [formControlName]="i"
+                    *ngSwitchCase="'image'"
+                    (remove)="removeBlock(i)">
+                </app-shares-edit-image>
+
+                <app-shares-edit-list
+                    [formControlName]="i"
+                    *ngSwitchCase="'list'"
+                    (remove)="removeBlock(i)">
+                </app-shares-edit-list>
+
+                <app-shares-edit-flats
+                    [formControlName]="i"
+                    *ngSwitchCase="'flats'"
+                    (remove)="removeBlock(i)">
+                </app-shares-edit-flats>
+
+            </li>
+
+        </ul>
+
+        <ul class="shares-form__main-btns">
+            <li class="shares-form__main-btn" (click)="addDescription()">Текст</li>
+            <li class="shares-form__main-btn" (click)="addList()">Список</li>
+            <li class="shares-form__main-btn" (click)="singleImgPicker.click()">Изображение
+                <input #singleImgPicker
+                    [style.display]="'none'"
+                    type="file"
+                    (change)="onImagePicked($event, 'single-image')">
+            </li>
+            <li class="shares-form__main-btn" (click)="addFlats()">Квартиры по акции</li>
+        </ul>
+        
+        <div class="shares-form__main-footer">
+            <button type="submit"
+                [disabled]="form.invalid"
+                [ngClass]="{'shares-edit-form__save_disabled': form.invalid}"
+                class="shares-edit-form__save">Сохранить</button>
+
+            <a class="shares-form__main-back" [routerLink]="['/shares/list/' + paginatorCount]">Вернуться ко всем акциям</a>
+        </div>
+    </div>
+
+    
+</form>

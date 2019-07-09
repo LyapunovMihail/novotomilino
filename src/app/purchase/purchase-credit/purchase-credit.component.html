@@ -1,0 +1,77 @@
+<div class="purchase_credit">
+
+    <button class="admin-credit_set-snippet" *ngIf="isAuthorizated"
+        (click)="setSnippet()">
+        Добавить банк
+    </button>
+
+    <ul class="credit_list">
+
+        <li *ngFor="let snippet of snippetArray" class="credit_list_item">
+
+            <div class="credit_list_item_logo_wrap">
+                <img class="credit_list_item_logo" 
+                    *ngIf="snippet.image.length > 0"
+                     [src]="uploadsPath + snippet.image"
+                />
+
+                <label class="admin-credit_load-img" *ngIf="isAuthorizated">
+                    <input style='display: none;' type="file" (change)="uploadSnippet($event, snippet._id)" placeholder="Upload file" accept=".jpg,.png,.svg">
+                    <div *ngIf="snippet.image.length == 0" class="admin-credit_load-img-button-1">Загрузить лого</div>
+                    <div *ngIf="snippet.image.length > 0" class="admin-credit_load-img-button-2"></div>
+                </label>
+            </div>
+
+            <span class="credit_list_item_content">Ставка:
+                <span class="credit_list_item_content_value--percent"
+                    [ngClass]="{'admin-credit_input-text' : isAuthorizated}"
+                    [attr.contenteditable]="isAuthorizated"
+                    (blur)="updateSnippet(snippet._id, 'percent', $event.target.innerHTML)">
+                    {{snippet.percent}}
+                </span>
+                <span> %</span>
+            </span>
+
+            <span class="credit_list_item_content credit_list_item_content--margin">Первоначальный взнос:
+                <span class="credit_list_item_content_value--initial"
+                    [ngClass]="{'admin-credit_input-text' : isAuthorizated}"
+                    [attr.contenteditable]="isAuthorizated"
+                    (blur)="updateSnippet(snippet._id, 'initial', $event.target.innerHTML)">
+                    {{snippet.initial}}
+                </span>
+                <span> %</span>
+            </span>
+
+            <label class="admin-credit_checkbox_wrap" *ngIf="isAuthorizated">
+                <input class="admin-credit_checkbox"
+                    [checked]="(snippet.category == 'military')" 
+                    type="checkbox" 
+                    (change)="updateSnippet(snippet._id, 'category', ((snippet.category == 'military')?'base':'military'))"
+                />
+                <div class="admin-credit_for-checkbox"></div>
+                <div class="credit_list_item_content credit_list_item_content--military">
+                    Военная ипотека
+                </div>
+            </label>
+
+            <div *ngIf="!isAuthorizated">
+                <div 
+                    [ngClass]="{
+                        'credit_list_item_content--military' : snippet.category == 'military',
+                        'credit_list_item_base' : snippet.category == 'base'
+                    }" class="credit_list_item_content">
+                    {{(snippet.category == 'military' ? "Военная ипотека" : "")}}
+                </div>
+            </div>
+
+            <div class="admin-credit_delete-bank"
+                *ngIf="isAuthorizated"
+                (click)="deleteSnippet(snippet._id)">
+                Удалить банк
+            </div>
+
+        </li>
+
+    </ul>
+
+</div>

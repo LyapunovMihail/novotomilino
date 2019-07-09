@@ -1,0 +1,59 @@
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin admin-button {
+    height: 50px;
+    padding: 0 20px;
+    color: #ffffff;
+    background-color: #cda571;
+    font: 18px/50px 'Montserrat', sans-serif;
+    @include font-smoothing;
+    cursor: pointer;
+}
+
+.add-news-btn {
+    position: absolute;
+    top: -5px;
+    left: 250px;
+    @include admin-button;
+    padding: 0 33px;
+}
+
+.admin-news_editing-controls {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 1;
+
+    &:not(.admin-news_editing-controls--main-news) {
+        right: 20px;
+        top: 30px;
+    }
+
+    &--main-news {
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        align-items: flex-end;
+        padding-bottom: 150px;
+        top: 0;
+
+        .admin-news_editing-controls_for-edit {
+            margin: 0 15px 0 0;
+        }
+    }
+
+    &_for-edit {@include admin-button;
+        @include admin-button;
+        margin-right: 10px;
+    }
+
+    &_for-delete {
+        @include admin-button;
+    }
+}

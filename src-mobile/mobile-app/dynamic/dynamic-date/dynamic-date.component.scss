@@ -1,0 +1,69 @@
+@import './../dynamic-vars';
+
+.dynamic_header_months {
+    width: 100%;
+    height: 46px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    border: 1px solid #cda571;
+    user-select: none;
+
+    &_item {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        flex: auto;
+        transition: .2s linear;
+        cursor: pointer;
+        font: 15px/22px 'Montserrat', sans-serif;
+        color: $color;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        &:hover:not(.dynamic_header_months_item--not-active):not(.dynamic_header_months_item--active) {
+            color: $color4;
+        }
+
+        &--active {
+            background: $color4;
+            color: $color6;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        &--not-active {
+            pointer-events: none;
+            cursor: default;
+            color: rgba(46,46,46,.4);
+        }
+    }
+}
+
+.dynamic_header_years {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+    width: 100%;
+    transition: .2s;
+
+    &_item {
+        box-sizing: border-box;
+        margin-left: 30px;
+        font: 15px/22px 'Montserrat', sans-serif;
+        color: rgba(0, 0, 0, 0.5);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        cursor: pointer;
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &--active {
+            color: #cda571;
+        }
+    }
+}

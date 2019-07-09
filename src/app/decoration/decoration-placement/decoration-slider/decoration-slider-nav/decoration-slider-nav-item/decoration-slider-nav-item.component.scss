@@ -1,0 +1,39 @@
+:host {
+
+    &:nth-of-type(1n + 2) {
+        margin-left: 25px; 
+    }
+}
+
+.nav__item {
+    cursor: pointer;
+    font-size: 15px;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    position: relative;
+    transition: .2s linear;
+
+    &:not(.nav__item_active) {
+
+        &:before {
+            content: '';
+            width: 100%;
+            height: 1px;
+            background: #ffffff;
+            transition: .2s linear;
+            position: absolute;
+            left: 0;
+            bottom: 1px;
+        }
+
+        &:hover {
+            text-shadow: 0 0 8px #ffffff;
+
+            &:before {
+                opacity: 0;
+            }
+        }
+    }
+}

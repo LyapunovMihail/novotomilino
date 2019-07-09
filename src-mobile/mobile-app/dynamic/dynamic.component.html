@@ -1,0 +1,49 @@
+<section class="dynamic">
+
+
+    <div class="dynamic_header">
+
+        <h1 class="title dynamic_header_title">Ход строительства</h1>
+
+
+        <app-dynamic-date
+            (monthChange)="monthChange($event)"
+            (yearChange)="yearChange($event)"
+            [month]="currentMonth"
+            [year]="currentYear"
+            [objectsArray]="objectsArray">
+        </app-dynamic-date>
+
+        <app-dynamic-link-list
+            [month]="currentMonth"
+            [year]="currentYear"
+            [objectsArray]="objectsArray">
+        </app-dynamic-link-list>
+
+    </div>
+
+
+    <app-dynamic-object
+        [month]="currentMonth"
+        [year]="currentYear"
+        [objectsArray]="objectsArray"
+        (changeObjectsArray)="objectsArray = $event">
+    </app-dynamic-object>
+
+
+    <app-dynamic-admin-create class="admin-controll"
+        *ngIf="isAuthorizated"
+        [month]="currentMonth"
+        [year]="currentYear"
+        [objectsArray]="objectsArray"
+        (changeObjectsArray)="objectsArray = $event">
+    </app-dynamic-admin-create>
+
+
+    <app-dynamic-month-switcher
+        (monthChange)="monthChange($event)"
+        [month]="currentMonth"
+        [year]="currentYear">
+    </app-dynamic-month-switcher>
+
+</section>

@@ -1,0 +1,297 @@
+<div class="about">
+    <section class="main">
+
+        <div class="main__wrap">
+        </div>
+        <div class="main__content">
+            <h1 class="main__title">Новый комплекс бизнес-класса на западе Москвы</h1>
+            <a routerLink="/flats" class="main__link-flats">Выбрать квартиру</a>
+        </div>
+       <!-- <div class="main__news">
+            <p class="main__news__title">Новости</p>
+            <div class="main__news__list">
+                <div class="main__news__item">
+                    <p class="main__news__text">Старт продаж в секциях №1 и 2!</p>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="main__board__news-container">
+            <ng-container *ngFor="let share of mainSnippets; index as i">
+                <a *ngIf="share.category"
+                    [routerLink]="['/news/' + share._id]"
+                    [ngClass]="{
+                                 'main__board__news__active': i === activeShare,
+                                 'main__board__news__not-active': i !== activeShare
+                            }"
+                    class="main__board__news">
+                    <h6 class="main__board__news__title">Новости</h6>
+                    <div class="main__board__news__text">
+                        <span class="main__board__news__text__content">{{share.title}}</span>
+                    </div>
+                    <div class="main__board__news__fill"></div>
+                </a>
+
+                <a *ngIf="!share.category && !share.countdown || !share.category && share.countdown && countDown(share.finish_date) >= 0"
+                   [routerLink]="['/shares/list/1', share._id]"
+                   [ngClass]="{
+                                 'main__board__news__active': i === activeShare,
+                                 'main__board__news__not-active': i !== activeShare
+                             }"
+                   class="main__board__news">
+
+                    <h6 class="main__board__news__title">Акция</h6>
+                    <div class="main__board__news__text">
+                        <span class="main__board__news__text__content">{{share.name}}</span>
+                    </div>
+                    <div class="main__board__news__fill"></div>
+                </a>
+
+            </ng-container>
+        </div>
+
+        <div class="main__comfort">
+            <ul class="main__list">
+                <li class="main__list__column">
+                    <ul>
+                        <li class="main__item main__item__1">
+                            <div class="main__item__text">Продажа в ЖК осуществляется <br> через эскроу-счета</div>
+                        </li>
+                        <li class="main__item main__item__2">
+                            <div class="main__item__text">Уютный парк Дубки в пешей доступности</div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li  class="main__list__column">
+                    <ul>
+                        <li class="main__item main__item__3">
+                            <div class="main__item__text">Наземная гостевая и приватная подземная автостоянки</div>
+                        </li>
+                        <li class="main__item main__item__4">
+                            <div class="main__item__text">Закрытая огороженная территория</div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="price">
+        <a *ngFor="let trigger of triggerSnippets; let i = index" [routerLink]="'/flats/search'" [queryParams]="{'rooms': i}" class="price__item">
+            <p class="price__item__text">
+                {{trigger.rooms_space}}
+            </p>
+            <p class="price__item__value">
+                <span>от </span>
+                <span class="price__item__big">
+                  {{trigger.price}}
+                </span>
+                <span> млн ₽</span>
+            </p>
+        </a>
+    </section>
+
+    <section class="project scroll-section">
+        <div class="project__description">
+            <div class="project__content">
+                <h1 class="project__title">О проекте</h1>
+                <div class="project__text text__top">
+                    Проект отличает лаконичность и забота
+                    о&nbsp;комфорте будущих резидентов. В нем учтены предпочтения москвичей
+                    и&nbsp;реализованы современные европейские тенденции. 
+                    Будущие жители смогут получить доступ ко&nbsp;всему необходимому внутри дома: закрытая охраняемая территория, 
+                    благоустроенный двор, подземная автостоянка и всегда свежие продукты в&nbsp;супермаркете.
+                </div>
+                <img src="/assets/img/supermarket.jpg" class="project__img img__bot">
+            </div>
+            <div class="project__content">
+                <img src="/assets/img/about/project/project2.jpg" class="project__img img__top">
+            </div>
+        </div>
+    </section>
+    
+    <section class="indicators">
+            <p class="indicators__title">Технико-экономические показатели</p>
+            <div class="indicators__roster">
+                <div class="indicators__item">
+                    <p class="indicators__subtitle">2019-2020</p>
+                    <span class="indicators__text">Сроки строительства</span>
+                </div>
+                <div class="indicators__item">
+                    <p class="indicators__subtitle">10</p>
+                    <span class="indicators__text">Количество этажей</span>
+                </div>
+                <div class="indicators__item">
+                    <p class="indicators__subtitle">261</p>
+                    <span class="indicators__text">Количество квартир</span>
+                </div>
+                <div class="indicators__item">
+                    <p class="indicators__subtitle">15 688 м²</p>
+                    <span class="indicators__text">Общая площадь квартир</span>
+                </div>
+            </div>
+    </section>
+
+    <section class="planning">
+
+        <h1 class="planning__title">Планировки</h1>
+        <div class="planning__description">
+            <div class="planning__text">
+                Жилая зона разбита на четыре девятиэтажные секции. Всего в корпусе 261
+                квартира: под разный состав семьи и бюджет, от небольших
+                уютных студий для тех, кто только начинает самостоятельную
+                жизнь, до просторных трехкомнатных квартир со светлыми детскими.
+            </div>
+        </div>
+        <a routerLink="/flats" class="planning__link-flat">Выбрать квартиру</a>
+
+        <h2 class="planning__example">Примеры планировочных решений</h2>
+        <ul class="planning__list">
+            <li class="planning__item">
+                <div class="planning__title-bt">
+                    <h1 class="planning__name">Квартира-студия</h1>
+                    <div class="planning__buttons">
+                        <div class="planning__render planning__active" data-plan-js>Рендер</div>
+                        <div class="planning__cheme" data-cheme-js data-show=".render__cheme">Схема</div>
+                    </div>
+                </div>
+                <a routerLink="/flats/search" [queryParams]="{'rooms':'0'}" class="planning__look">Смотреть все студии</a>
+                <div class="planning__wrap">
+                    <img src="/assets/img/about/planning/render1.png" class="render__img planning__img planning__img--active">
+                    <img src="/assets/img/study.svg" class="render__cheme planning__img">
+                </div>
+            </li>
+            <li class="planning__item">
+                <div class="planning__title-bt">
+                    <h1 class="planning__name">Однокомнатная квартира</h1>
+                    <div class="planning__buttons">
+                        <div class="planning__render planning__active" data-plan-js>Рендер</div>
+                        <div class="planning__cheme" data-cheme-js data-show=".render__cheme">Схема</div>
+                    </div>
+                </div>
+                <a routerLink="/flats/search" [queryParams]="{'rooms':'1'}" class="planning__look">Смотреть все однокомнатные</a>
+                <div class="planning__wrap">
+                    <img src="/assets/img/about/planning/render2.png" class="render__img planning__img planning__img--active">
+                    <img src="/assets/img/1opacity.svg" class="render__cheme planning__img">
+                </div>
+            </li>
+            <li class="planning__item">
+                <div class="planning__title-bt">
+                    <h1 class="planning__name">Двухкомнатная квартира</h1>
+                    <div class="planning__buttons">
+                        <div class="planning__render planning__active" data-plan-js>Рендер</div>
+                        <div class="planning__cheme" data-cheme-js data-show=".render__cheme">Схема</div>
+                    </div>
+                </div>
+                <a routerLink="/flats/search" [queryParams]="{'rooms':'2'}" class="planning__look">Смотреть все двухкомнатные</a>
+                <div class="planning__wrap">
+                    <img src="/assets/img/about/planning/render3.png" class="render__img planning__img planning__img--active">
+                    <img src="/assets/img/2empty.svg" class="render__cheme planning__img">
+                </div>
+            </li>
+            <li class="planning__item">
+                <div class="planning__title-bt">
+                    <h1 class="planning__name">Трехкомнатная квартира</h1>
+                    <div class="planning__buttons">
+                        <div class="planning__render planning__active" data-plan-js>Рендер</div>
+                        <div class="planning__cheme" data-cheme-js data-show=".render__cheme">Схема</div>
+                    </div>
+                </div>
+                <a routerLink="/flats/search" [queryParams]="{'rooms':'3'}" class="planning__look">Смотреть все трехкомнатные</a>
+                <div class="planning__wrap">
+                    <img src="/assets/img/about/planning/render4.png" class="render__img planning__img planning__img--active">
+                    <img src="/assets/img/6-floor-40-flat.svg" class="render__cheme planning__img">
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section class="storage">
+        <div class="storage__parking">
+            <div class="storage__block">
+                <h1 class="storage__title storage__title--parking">Парковки</h1>
+                <p class="storage__text storage__title--parking">Автостоянка зонируется на гостевую открытую и приватную подземную. Подземная стоянка будет двухъярусной — с любого яруса можно беспрепятственно попасть в жилую зону на лифте. Лифты современные, бесшумные — грузовой и пассажирский.</p>
+                <a href="http://barvihadom.ru/#/profitbase/house/20017/list?filter=property.status:AVAILABLE" target="_blank" class="storage__link storage__title--parking">Посмотреть предложения</a>
+            </div>
+        </div>
+        <div class="storage__storeroom">
+            <div class="storage__block">
+                <h1 class="storage__title storage__title--store">Зоны хранения</h1>
+                <p class="storage__text storage__title--store">Дополнительный бонус для новоселов: на подземных этажах будут располагаться просторные кладовые помещения. В кладовых есть место для хранения велосипедов, автомобильных шин, санок, колясок, горнолыжного снаряжения.</p>
+                <a href="http://barvihadom.ru/#/profitbase/house/20016/list?filter=property.status:AVAILABLE" target="_blank" class="storage__link storage__title--store">Посмотреть предложения</a>
+            </div>
+        </div>
+    </section>
+    <section class="infrastructure">
+        <h1 class="infrastructure__title">Инфраструктура района</h1>
+        <div class="infrastructure__slider">
+            <ul class="infrastructure__list swiper-wrapper owl-carousel owl-theme">
+                <li class="infrastructure__item">
+                    <img src="/assets/img/about/infrastructure/kindergarten.jpg" class="infrastructure__photo">
+                    <span class="infrastructure__name">Детские сады</span>
+                </li>
+                <li class="infrastructure__item swiper-slide">
+                    <img src="/assets/img/about/infrastructure/school.jpg" class="infrastructure__photo">
+                    <span class="infrastructure__name">Школы</span>
+                </li>
+                <li class="infrastructure__item swiper-slide">
+                    <img src="/assets/img/about/infrastructure/vegas.jpg" class="infrastructure__photo">
+                    <span class="infrastructure__name">ТРЦ Вегас</span>
+                </li>
+                <li class="infrastructure__item swiper-slide">
+                    <img src="/assets/img/about/infrastructure/dubki.jpg" class="infrastructure__photo">
+                    <span class="infrastructure__name">Парк Дубки</span>
+                </li>
+                <li class="infrastructure__item swiper-slide">
+                    <img src="/assets/img/about/infrastructure/skolkovo.jpg" class="infrastructure__photo">
+                    <span class="infrastructure__name">Инновационный центр «Сколково»</span>
+                </li>
+            </ul>
+        </div>
+        <div id="map" class="infrastructure__map"></div>
+        <div class="infrastructure__designation">
+            <div class="infrastructure__object infrastructure__object--1">Образовательные учреждения </div>
+            <div class="infrastructure__object infrastructure__object--2">Магазины и ТЦ</div>
+            <div class="infrastructure__object infrastructure__object--3">Досуг, культура, спорт</div>
+            <div class="infrastructure__object infrastructure__object--4">Больницы и аптеки</div>
+        </div>
+    </section>
+    <section class="office scroll-section">
+        <div class="office__contact">
+            <h1 class="office__title">Офис продаж</h1>
+            <div class="office__adress">Офис продаж расположен на объекте по адресу ул. Барвихинская, 6.</div>
+            <a routerLink="/location" class="office__location">Как добраться</a>
+            <div class="office__phone">Телефон: +7 (495) 970-18-32</div>
+            <div class="office__time">Мы работаем ежедневно с 9:00 до 21:00.</div>
+        </div>
+        <div class="office__photoBlock">
+            <img src="/assets/img/about/office/office.jpg" alt="" class="office__photo">
+        </div>
+    </section>
+   <!-- <section class="invite">
+        <h1 class="invite__title">Получите приглашение на персональную презентацию</h1>
+        <form action="url" class="invite__form">
+            <label>
+                <p class="invite__form__your-name">Ваше имя</p>
+                <input type="text" class="invite__form__name">
+            </label>
+            <label>
+                <p class="invite__form__your-mail">Эл. почта</p>
+                <input type="text" class="invite__form__mail">
+            </label>
+            <label>
+                <p class="invite__form__your-tel">Телефон</p>
+                <input type="tel" class="invite__form__tel">
+            </label>
+            <div class="invite__form__submit">
+                <input id="check" type="checkbox" class="invite__form__check"> 
+                <label for="check" class="invite__form__submit-one">
+                    <p>Я согласен с правилами <a href="#" class="invite__form__submit__link">обработки персональных данных</a></p>
+                </label>
+            </div>
+            <button class="invite__form__submit__button">Получить приглашение</button>
+        </form>
+    </section> -->
+</div>
+
+<app-scroll-up></app-scroll-up>

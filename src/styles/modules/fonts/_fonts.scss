@@ -1,0 +1,72 @@
+@font-face {
+
+    font-family: "Montserrat";
+    src: url("/assets/fonts/montserrat-regular/Montserrat-Regular.eot");
+    src: url("/assets/fonts/montserrat-regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/montserrat-regular/Montserrat-Regular.woff") format("woff"),
+    url("/assets/fonts/montserrat-regular/Montserrat-Regular.ttf") format("truetype"),
+    url("/assets/fonts/montserrat-regular/Montserrat-Regular.svg#arbat") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+
+    font-family: "Montserrat";
+    src: url("/assets/fonts/montserrat-black/Montserrat-Black.eot");
+    src: url("/assets/fonts/montserrat-black/Montserrat-Black.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/montserrat-black/Montserrat-Black.woff") format("woff"),
+    url("/assets/fonts/montserrat-black/Montserrat-Black.ttf") format("truetype"),
+    url("/assets/fonts/montserrat-black/Montserrat-Black.svg#arbat") format("svg");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+
+    font-family: "Montserrat";
+    src: url("/assets/fonts/montserrat-bold/Montserrat-Bold.eot");
+    src: url("/assets/fonts/montserrat-bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/montserrat-bold/Montserrat-Bold.woff") format("woff"),
+    url("/assets/fonts/montserrat-bold/Montserrat-Bold.ttf") format("truetype"),
+    url("/assets/fonts/montserrat-bold/Montserrat-Bold.svg#arbat") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+
+    font-family: "Oranienbaum";
+    src: url("/assets/fonts/oranienbaum/Oranienbaum.eot");
+    src: url("/assets/fonts/oranienbaum/Oranienbaum.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/oranienbaum/Oranienbaum.woff") format("woff"),
+    url("/assets/fonts/oranienbaum/Oranienbaum.ttf") format("truetype"),
+    url("/assets/fonts/oranienbaum/Oranienbaum.svg#arbat") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Leksa';
+    src: url('/assets/fonts/Leksa.otf');
+    src: local('Leksa'), local('Leksa'),
+    url('/assets/fonts/Leksa.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Museo Sans Cyrl';
+    src: url('/assets/fonts/MuseoSansCyrl_300.otf');
+    src: local('Museo'), local('Museo'),
+    url('/assets/fonts/MuseoSansCyrl_300.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Museo Sans Cyrl';
+    src: url('/assets/fonts/MuseoSansCyrl_500.otf');
+    src: local('Museo'), local('Museo'),
+    url('/assets/fonts/MuseoSansCyrl_500.otf');
+    font-weight: 500;
+    font-style: normal;
+}

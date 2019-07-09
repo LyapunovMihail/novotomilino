@@ -1,0 +1,188 @@
+.marker-content {
+    width: 30px;
+    height: 46px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    background: url('/assets/img/location/location-routes/marker-blue.svg') no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+    padding-top: 6px;
+
+    &.marker-content_tooltip-not-active {
+        transition: .3s;
+        opacity: 0;
+    }
+
+    &.marker-content_tooltip--active {
+
+        .marker-content_tooltip {
+            transform: translateX(0);
+        }
+    }
+
+    &--color {
+        background-image: url('/assets/img/location/location-routes/marker-violet.svg');
+
+        &:before {
+            border-color: #8370a5 !important;
+        }
+    }
+
+    &--route {
+        transition: .2s linear;
+
+        &:before {
+            width: 30px;
+            height: 30px;
+            border: 7px solid #83d6f4;
+            background: #ffffff;
+        }
+    }
+
+    &--office {
+        &:before {
+            background-image: url('/assets/img/office/marker-icon.svg') !important;
+            background-size: 18px 16px !important;
+        }
+    }
+
+    &--main-marker {
+        width: 50px;
+        height: 74px;
+
+        &:before {
+            width: 50px;
+            height: 50px;
+            background: #ffffff url('/assets/img/location/location-routes/marker-plain.svg') 50% no-repeat;
+            background-size: 19px 18px;
+            border: 9px solid #83d6f4;
+        }
+
+        .marker-content_tooltip-wrap {
+            height: 50px;
+        }
+
+        .marker-content_tooltip {
+            padding: 0 25px 0 30px;
+            background: #4d96d2;
+            transform: translateX(0);
+        }
+    }
+
+    &--shop {
+        background-image: url('/assets/img/location/location-infrastructure/shop.svg');
+
+        .marker-content_tooltip {
+            background: #4d96d2;
+        }
+    }
+
+    &--school {
+        background-image: url('/assets/img/location/location-infrastructure/school.svg'); 
+
+        .marker-content_tooltip {
+            background: #e08fa2;
+        }
+    }
+
+    &--kindergarten {
+        background-image: url('/assets/img/location/location-infrastructure/kindergarten.svg');
+        
+        .marker-content_tooltip {
+            background: #f9b45a;
+        }
+    }
+
+    &--hospital {
+        background-image: url('/assets/img/location/location-infrastructure/hospital.svg'); 
+
+        .marker-content_tooltip {
+            background: #99382a;
+        }
+    }
+
+    &--sport {
+        background-image: url('/assets/img/location/location-infrastructure/sport.svg'); 
+
+        .marker-content_tooltip {
+            background: #64256c;
+        }
+    }
+
+    &--recreation {
+        background-image: url('/assets/img/location/location-infrastructure/recreation.svg'); 
+
+        .marker-content_tooltip {
+            background: #1ea690;
+        }
+    }
+
+    &--transport {
+        background-image: url('/assets/img/location/location-infrastructure/transport.svg'); 
+
+        .marker-content_tooltip {
+            background: #d29200;
+        }
+    }
+
+    &--active {
+        transform: scale(1.65) translateY(-5px);
+
+        &:before {
+            border-width: 6px !important;
+        }
+    }
+    
+    &_text {
+        font: 14px 'abrade-book', sans-serif;
+        color: #2e2e2e;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: relative;
+        z-index: 1;
+    }
+
+    &_tooltip-wrap {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        z-index: -1;
+        height: 30px;
+        overflow: hidden;
+    }
+
+    &_tooltip {
+        padding: 0 15px 0 25px;
+        white-space: nowrap;
+        border-radius: 0 50px 50px 0;
+        height: 100%;
+        box-sizing: border-box;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font: 14px/18px 'abrade-book', sans-serif;
+        color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: .2s linear;
+        transform: translateX(-100%);
+
+    }
+}
+
+.marker-content--route, .marker-content--main-marker {
+    
+    &:before {
+        content: '';
+        border-radius: 50%;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: .2s linear;
+    }
+}

@@ -1,0 +1,11 @@
+<div class="slider__btns">
+
+    <div class="slider__btns-item slider__btns-item_prev"
+        (click)="(activeIndex > 0) ? changeIndex.emit(activeIndex - 1) : changeIndex.emit(slideList.length - 1)">
+    </div>
+
+    <div class="slider__btns-item slider__btns-item_next"
+        (click)="(activeIndex < slideList.length - 1) ? changeIndex.emit(activeIndex + 1) : changeIndex.emit(0)">
+    </div>   
+
+</div>

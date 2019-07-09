@@ -1,0 +1,29 @@
+<ul class="news-list">
+
+    <ng-container  *ngFor="let snippet of snippetsArray">
+
+        <li class="news-list_item">
+
+            <a [routerLink]="['/news/' + snippet._id]"
+                class="news-list_item_link">
+
+                <img class="news-list_item_img"
+                     [src]="uploadsPath + snippet.thumbnail">
+
+                <div class="news-list_item_description">
+
+                    <span *ngIf="snippet.category !== 'SHARE'" class="news-list_item_description_date">{{snippet.created_at | date: 'd.M.yyyy' }}</span>
+
+                    <span class="news-list_item_description_title" 
+                        [innerHTML]="snippet.title | myLineBreakPipe">
+                    </span>
+
+                </div>
+
+            </a>
+
+        </li>
+    
+    </ng-container>
+
+</ul>

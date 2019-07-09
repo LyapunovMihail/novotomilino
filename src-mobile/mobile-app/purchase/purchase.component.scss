@@ -1,0 +1,272 @@
+$font: 18px/31px 'Montserrat', sans-serif;
+$font2: 15px/19px 'Montserrat', sans-serif;
+$color: #2e2e2e;
+$color2: #1c1c1c;
+$color3: #cda571;
+
+.disabled-opacity {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.purchase {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 132px 0 151px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    @media(min-width: 600px) {
+        padding-bottom: 177px;
+    }
+
+    &_container {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 15px;
+
+        @media(min-width: 600px) {
+            padding: 0 25px;
+        }
+        @media(min-width: 1220px) {
+            max-width: 550px;
+            padding: 0;
+            margin: 0 auto;
+        }
+    }
+
+    &_title {
+        margin-bottom: 40px;
+        box-sizing: border-box;
+        font: 42px/50px Oranienbaum, Serif;
+        @media(min-width: 600px) {
+            line-height: 46px;
+        }
+    }
+
+    &_description {
+        display: block;
+        font: $font;
+        color: $color2;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        span:first-of-type {
+            font-weight: 700;
+        }
+
+        button {
+            background-color: inherit;
+        }
+
+        &_details {
+            position: relative;
+            bottom: 5px;
+            color: $color3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    &_links {
+        display: flex;
+        justify-content: flex-start;
+        margin: 40px 0 30px;
+        width: 292px;
+        height: 34px;
+        box-sizing: border-box;
+        background: #ffffff;
+        border: 1px solid $color3;
+        border-radius: 23px;
+
+        @media(max-width: 599px) {
+            width: 209px;
+        }
+
+        &_item {
+            border-radius: 17px;
+
+            &_content {
+                font: 15px/22px 'Montserrat', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                width: 100%;
+                height: 100%;
+                border-radius: 23px;
+                display: block; 
+                padding: 6px 16px 0;
+                box-sizing: border-box;
+
+
+                .short {
+                    display: none;
+                }
+
+                @media(max-width: 599px) {
+                    .long {
+                        display: none;
+                    }
+                    .short {
+                        display: initial;
+                    }
+                }
+            }
+
+
+            .dark-text_link{
+                background: transparent;
+                &:after {
+                    content: '';
+                    display: none;
+                }
+
+                &--active{
+                    background: $color3;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    &_installment {
+
+        @media(min-width: 600px) {
+            margin-bottom: -55px;
+        }
+    }
+}
+
+.installment_calculator {
+    width: 100%;
+    
+    &_item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 40px;
+
+        &:first-of-type {
+            margin-top: 0px;
+        }
+
+        &_text {
+            font: $font2;
+            color: $color2;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-bottom: 20px;
+            white-space: nowrap;
+
+            @media(min-width: 600px) {
+                margin-bottom: 15px;
+            }
+        }
+
+        &_hint {
+            display: block;
+            font: 15px 'Montserrat', sans-serif;
+            line-height: normal;
+            color: $color2;
+            opacity: 0.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-top: 15px;
+            user-select: none;
+        }
+
+        &--result {
+            margin-top: 40px;
+        }
+
+        &_title {
+            font: $font2;
+            color: $color2;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        &_result {
+            white-space: nowrap;
+            font: 23px/30px 'Montserrat', sans-serif;
+            color: $color3;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    }
+}
+
+.credit_list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+
+    @media(min-width: 600px) {
+        width: 524px;
+    }
+
+    &_item {
+        width: 250px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        transition: .2s linear;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        position: relative;
+
+        @media(min-width: 600px) {
+
+            &:nth-child(2n-1) {
+                margin-right: 30px;
+            }
+        }
+
+        &_logo_wrap {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        &_logo {
+            height: 35px;
+        }
+
+        &_content {
+            font: $font2;
+            color: $color2;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+
+            &--margin {
+                margin-top: 6px;
+            }
+
+
+            &--military {
+                position: relative;
+                box-sizing: border-box;
+                margin-top: 7px;
+                padding-left: 27px;
+
+                &:before {
+                    content: '';
+                    width: 22px;
+                    height: 20.2px;
+                    position: absolute;
+                    left: 0;
+                    background: url('/assets/img/purchase/credit/star.svg') no-repeat;
+                    background-size: 100%; 
+                }
+            }
+        }
+    }
+}

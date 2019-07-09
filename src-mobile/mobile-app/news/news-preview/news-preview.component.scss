@@ -1,0 +1,15 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+}
+
+.news-preview {
+
+    &_title {
+        font: 42px/50px 'Oranienbaum', serif;
+        color: #1c1c1c;
+        @include font-smoothing();
+    }
+
+}

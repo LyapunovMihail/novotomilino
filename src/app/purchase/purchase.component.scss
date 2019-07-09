@@ -1,0 +1,263 @@
+$font: 18px/31px 'Montserrat', sans-serif;
+$font2: 15px/19px 'Montserrat', sans-serif;
+$color: #2e2e2e;
+$color2: #1c1c1c;
+$color3: #cda571;
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.disabled-opacity {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.purchase {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 152px 0 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    &_container {
+        width: 1200px;
+    }
+
+    &_title {
+        margin-bottom: 40px;
+        box-sizing: border-box;
+        width: 889px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &_description {
+        display: block;
+        width: 889px;
+        font: $font;
+        color: $color2;
+        @include font-smoothing;
+
+        span {
+            font-weight: 700;
+        }
+
+        button {
+            background-color: inherit;
+        }
+
+        p {
+            margin-top: 30px;
+        }
+
+        p:first-child {
+            margin-top: 0;
+        }
+
+        &_details {
+            position: relative;
+            bottom: 5px;
+            color: $color3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    &_links {
+        display: flex;
+        justify-content: flex-start;
+        margin: 55px 0 40px;
+        width: 292px;
+        height: 34px;
+        box-sizing: border-box;
+        background: #ffffff;
+        border: 1px solid $color3;
+        border-radius: 23px;
+
+        &_item {
+            border-radius: 17px;
+
+            &_content {
+                font: 15px/22px 'Montserrat', sans-serif;
+                @include font-smoothing;
+                width: 100%;
+                height: 100%;
+                border-radius: 23px;
+                display: block; 
+                padding: 6px 16px 0;
+                box-sizing: border-box;
+            }
+
+
+            .dark-text_link{
+                background: transparent;
+                &:after {
+                    content: '';
+                    display: none;
+                }
+
+                &--active{
+                    background: $color3;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    &_credit {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: -48px;
+    }
+
+    &_installment {
+        width: 889px;
+    }
+}
+
+.installment_calculator {
+    width: 100%;
+    
+    &_item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+
+        &_wrap {
+            width: 270px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        &_wrap--noflex {
+            display: block;
+        }
+
+        &_field {
+            width: 100%;
+        }
+
+        &_text {
+            width: 100%;
+            font: $font2;
+            color: $color2;
+            @include font-smoothing;
+            margin-bottom: 20px;
+            white-space: nowrap;
+        }
+
+        &_hint {
+            display: block;
+            font: 15px 'Montserrat', sans-serif;
+            line-height: normal;
+            color: $color2;
+            opacity: 0.5;
+            @include font-smoothing;
+            margin-top: 14px;
+            user-select: none;
+        }
+
+        &--result {
+            margin-top: 14px;
+
+            div:first-child {
+                margin-bottom: 20px;
+            }
+        }
+
+        &_title {
+            font: $font2;
+            color: $color2;
+            @include font-smoothing;
+            margin-bottom: 4px;
+        }
+
+        &_result {
+            white-space: nowrap;
+            font: 23px/30px 'Montserrat', sans-serif;
+            color: $color3;
+            @include font-smoothing;
+        }
+    }
+}
+
+.credit_list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    &_item {
+        width: calc(100% / 4);
+        height: 170px;
+        cursor: pointer;
+        border-radius: 7px;
+        transition: .2s linear;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 20px 25px 0;
+        position: relative;
+
+        &:hover {
+            box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
+        }
+
+        &_logo_wrap {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        &_logo {
+            height: 35px;
+        }
+
+        &_content {
+            font: $font2;
+            color: $color2;
+            @include font-smoothing;
+
+            &--margin {
+                margin-top: 6px;
+            }
+
+            &_value--percent {
+                width: 120px;
+            }
+
+            &_value--initial {
+                width: 38px;
+            }
+
+            &--military {
+                position: relative;
+                box-sizing: border-box;
+                margin-top: 7px;
+                padding-left: 27px;
+
+                &:before {
+                    content: '';
+                    width: 22px;
+                    height: 20.2px;
+                    position: absolute;
+                    left: 0;
+                    background: url('/assets/img/purchase/credit/star.svg') no-repeat;
+                    background-size: 100%; 
+                }
+            }
+        }
+    }
+}

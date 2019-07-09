@@ -1,0 +1,71 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.main {
+
+    &__container {
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+
+    &__descr {
+        width: 100%;
+        background: rgba(170, 171, 34, .1);
+        position: relative;
+
+        &-paragraf {
+            font: 46px/1.52 'Leksa';
+            @include font-smoothing;
+            color: #000105;
+            max-width: $w1600;
+            margin: 155px 0;
+            text-align: center;
+
+            .g-link_red {
+                font: inherit;
+                position: relative;
+                text-decoration: none;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 3px;
+                    background-color: $col-orange;
+                    right: 0;
+                    bottom: 0;
+                    transition: width $trans-link;
+                }
+
+                &:hover {
+                    &:before {
+                        width: 0;
+                    }
+                }
+            }
+        }
+
+        &-img {
+            width: $w1600;
+            position: absolute;
+            bottom: 7px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+
+    .main__descr-paragraf {
+        font-size: 30px;
+        line-height: 1.8;
+        max-width: calc(100% - 60px);
+        margin: 150px 0;
+    }
+    .main__descr-img {
+        width: 100%;
+        max-width: none;
+    }
+}

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "novotomilino": {
+    "desktop": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,19 +17,22 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/novotomilino",
+            "outputPath": "dist/desktop",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+                "src/styles/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+                "src/assets/js/jquery-3.3.1.js",
+                "src/assets/js/owl.carousel.min.js",
+                "src/assets/js/swiper.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -62,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "novotomilino:build"
+            "browserTarget": "desktop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "novotomilino:build:production"
+              "browserTarget": "desktop:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "novotomilino:build"
+            "browserTarget": "desktop:build"
           }
         },
         "test": {
@@ -84,9 +87,13 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+                "src/assets/js/jquery-3.3.1.js",
+                "src/assets/js/owl.carousel.min.js",
+                "src/assets/js/swiper.min.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -107,7 +114,117 @@
         }
       }
     },
-    "novotomilino-e2e": {
+    "mobile": {
+      "root": "",
+      "sourceRoot": "src-mobile",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/mobile",
+            "index": "src-mobile/index-mobile.html",
+            "main": "src-mobile/main-mobile.ts",
+            "polyfills": "src-mobile/polyfills.ts",
+            "tsConfig": "src-mobile/tsconfig.app.json",
+            "assets": [
+              "src-mobile/assets"
+            ],
+            "styles": [
+                "src-mobile/styles/styles.scss"
+            ],
+            "scripts": [
+                "src-mobile/assets/js/jquery-3.3.1.js",
+                "src-mobile/assets/js/owl.carousel.min.js",
+                "src-mobile/assets/js/swiper.min.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src-mobile/environments/environment.ts",
+                  "with": "src-mobile/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mobile:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mobile:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mobile:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src-mobile/test.ts",
+            "polyfills": "src-mobile/polyfills.ts",
+            "tsConfig": "src-mobile/tsconfig.spec.json",
+            "karmaConfig": "src-mobile/karma.conf.js",
+            "styles": [
+                "src-mobile/styles/styles.scss"
+            ],
+            "scripts": [
+                "src-mobile/assets/js/jquery-3.3.1.js",
+                "src-mobile/assets/js/owl.carousel.min.js",
+                "src-mobile/assets/js/swiper.min.js"
+            ],
+            "assets": [
+              "src-mobile/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src-mobile/tsconfig.app.json",
+              "src-mobile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "desktop-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +233,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "novotomilino:serve"
+            "devServerTarget": "desktop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "novotomilino:serve:production"
+              "devServerTarget": "desktop:serve:production"
             }
           }
         },
@@ -136,5 +253,5 @@
       }
     }
   },
-  "defaultProject": "novotomilino"
+  "defaultProject": "desktop"
 }

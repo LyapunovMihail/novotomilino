@@ -1,0 +1,93 @@
+$font: 15px/28px 'abrade-book', sans-serif;
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.search_form_decoration {
+
+    &_item {
+        margin-bottom: 8px;
+        height: 22px;
+
+        &:last-of-type {
+            margin: 0;
+        }
+    }
+
+    &_checkbox {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        outline: none;
+
+        // &:hover {
+
+        //     .search_form_decoration_checkbox_for-click {
+        //         border-color: #ffde7c;
+        //     }
+
+        //     .search_form_decoration_checkbox_text {
+        //         color: #2e2e2e;
+        //         text-shadow: 0 0 8px #ffde7c;
+        //     }
+        // }
+
+        &_content {
+            display: none;
+
+            &:checked {
+
+                & + .search_form_decoration_checkbox_for-click {
+                    background: #cda571;
+
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+
+                & ~ .search_form_decoration_checkbox_text {
+                    color: #2e2e2e;
+                }
+            }
+        }
+
+        &_for-click {
+            width: 20px;
+            height: 20px;
+            border-radius: 1px;
+            box-sizing: border-box;
+            cursor: pointer;
+            border: 1px solid #d8d8d8;
+            transition: .2s linear;
+            position: relative;
+            background-size: 13px 10px;
+            margin-right: 8px;
+
+            &:before {
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: url('/assets/img/flats/search/v.svg') 50% no-repeat;
+                background-size: 100%;
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                // transform: translate(-50%, -50%);
+                transition: .2s linear;
+                opacity: 0;                  
+            }
+        }
+
+        &_text {
+            width: calc(100% - 30px);
+            font: 15px/19px 'Montserrat';
+            color: #606060;
+            @include font-smoothing();
+            transition: .2s linear;
+            white-space: nowrap;
+        }
+    }
+}

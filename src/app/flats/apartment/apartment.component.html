@@ -1,0 +1,88 @@
+<div class="apartment flats_main">
+
+    <div *ngIf="flatData" class="apartment_item">
+
+        <img class="apartment_item_scheme" [src]="'/assets/floor-plans/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'">
+        
+        <div class="flats_item-description">
+                
+            <div class="flats_item-description_number">
+                <img class="flats_item-description_number-img" [src]="'/assets/img/flats/apartment/' + flatData.rooms + '.svg'">
+                <span class="flats_item-description_number-text">№&nbsp;{{flatData.flat}}</span>
+            </div>
+
+           <!-- <div class="flats_item-description_download">
+                <div class="apartment-btn apartment-btn_favorite"
+                    (click)="toFavorite()"
+                    [ngClass]="{'apartment-btn_favorite_active': inFavorite}">
+                    В избранное
+                </div>
+
+                <a class="apartment-btn apartment-btn_pdf" [href]="pdfLink" target="_blank">Скачать pdf</a>
+            </div> -->
+
+            <div class="flats_item-description_section">
+
+                <span class="flats_item-description_section_name">Комнат</span>
+                <span class="flats_item-description_section_value">{{(flatData.rooms === '0') ? '' : flatData.rooms }} {{((flatData.rooms === '0') ? 'Студия' : ( flatData.rooms | myPluralizePipe : "комната_комнаты_комнат"))}}</span>
+
+            </div>
+
+            <div class="flats_item-description_section">
+
+                <span class="flats_item-description_section_name">Общая площадь</span>
+                <span class="flats_item-description_section_value">{{flatData.space}} м<sup>2</sup></span>
+
+            </div>
+
+            <div class="flats_item-description_section">
+
+                <span class="flats_item-description_section_name">Отделка</span>
+                <span class="flats_item-description_section_value">{{flatData.decorationName}}</span>
+
+            </div>
+
+            <div class="flats_item-description_section">
+
+                <span class="flats_item-description_section_name">Стоимость</span>
+                <span class="flats_item-description_section_value">{{flatData.price | myBitNumberPipe}} &#8381;</span>
+
+            </div>
+
+            <ul class="apartment_request-list">
+                <li (click)="isReserveFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--book-request">Забронировать квартиру</li>
+                <li (click)="isCreditFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--credit-request">Заявка на ипотеку</li>
+                <!-- <li (click)="isCallFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--call-request">Заказать звонок</li> -->
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+<app-apartment-side-bar *ngIf="flatData"
+    (svgClick)="svgRouterLink($event)"
+    [floorNumber]="flatData.floor"
+    [apartmentNumber]="flatData.flat"
+    [sectionNumber]="flatData.section">
+</app-apartment-side-bar>
+
+<!-- <app-form-call *ngIf="flatData"
+    (close)="isCallFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isCallFormOpen">
+</app-form-call> -->
+<app-form-credit *ngIf="flatData"
+    (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isCreditFormOpen"
+    [apartmentPrice]="flatData.price"
+    [apartmentNumber]="flatData.flat"
+    [type]="flatData.type">
+</app-form-credit>
+<app-form-reserve *ngIf="flatData"
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentPrice]="flatData.price"
+    [apartmentNumber]="flatData.flat"
+    [type]="flatData.type">
+</app-form-reserve>

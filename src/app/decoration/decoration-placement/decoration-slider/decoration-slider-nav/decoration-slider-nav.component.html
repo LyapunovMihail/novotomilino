@@ -1,0 +1,10 @@
+<ul class="nav">
+
+    <app-decoration-slider-nav-item
+        *ngFor="let item of slideList; let i = index"
+        (click)="changeIndex.emit(i)"
+        [isActive]="i === activeIndex"
+        [itemName]="item.name">
+    </app-decoration-slider-nav-item>
+
+</ul>

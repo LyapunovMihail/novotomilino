@@ -1,0 +1,264 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+}
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    position: relative;
+    box-sizing: border-box;
+
+    &:before {
+        content: '';
+        width: 100vw;
+        height: 1px;
+        background: rgba(136,138,161,.4);
+        position: absolute;
+        bottom: 0;
+    }
+
+    @media(min-width: 600px) {
+        width: 560px;
+        padding: calc(73px + 80px) 0 10px;
+
+        &:before {
+            left: calc((-100vw + 560px) / 2);
+        }
+    }
+
+    @media(max-width: 599px) {
+        width: 100%;
+        padding: calc(73px + 60px) 10px 10px;
+
+        &:before {
+            left: 0;
+        }
+    }
+
+    &_container {
+        margin-bottom: 29px;
+        user-select: none;
+    }
+
+    &_wrapper {
+        display: flex;
+
+        @media(max-width: 599px) {
+            flex-direction: column;
+        }
+
+        &__decoration {
+            margin: 0 20px 20px 0;
+        }
+
+        .search_container {
+
+            @media(min-width: 600px) {
+                width: 50%;
+            }
+        }
+    }
+
+    &_title {
+        font: 42px/50px 'Oranienbaum';
+        color: #1c1c1c;
+        @include font-smoothing();
+        margin-bottom: 40px;
+        width: 100%;
+
+        @media (max-width: 425px) {
+            max-width: 292px;
+        }
+    }
+
+    &_section-name {
+        font: 15px 'Montserrat';
+        color: #1c1c1c;
+        @include font-smoothing();
+        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+    }
+
+    .search_form_range-text {
+        font: 15px 'Montserrat';
+        color: #606060;
+        @include font-smoothing();
+        display: block;
+        width: 100%;
+    }
+
+    &_rooms {
+        display: flex;
+
+        &_item {
+
+            &:nth-of-type(2) {
+                
+                .search_rooms_checkbox_for-click {
+                    border-left: 1px solid #d9d9d9;
+                }
+            }
+
+            &:first-of-type {
+
+                .search_rooms_checkbox {
+                    border-radius: 2px 0 0 2px;
+                    border-left: 1px solid #d9d9d9;
+                    clip-path: border-box;
+                    padding-right: 36px !important;
+                    z-index: 1 !important;
+                    margin-right: -20px;
+                    -webkit-clip-path: inset(0 0 0 0 round 2px);
+                    clip-path: inset(0 0 0 0 round 2px );
+                }
+            }
+
+            &:last-of-type {
+
+                .search_rooms_checkbox {
+                    border-radius: 0 2px 2px 0;
+                    clip-path: border-box;
+                    padding-left: 36px !important;
+                    z-index: 1 !important;
+                    margin-left: -20px;
+                    -webkit-clip-path: inset(0 0 0 0 round 2px);
+                    clip-path: inset(0 0 0 0 round 2px );
+                }
+            }
+        }
+
+        &_checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 0 16px;
+            height: 40px;
+            min-width: 40px;
+            position: relative;
+            z-index: 2;
+            // overflow: hidden;
+            background: white;
+            cursor: pointer;
+            border: 1px solid #d9d9d9;
+            border-left: none;
+            user-select: none;
+
+            &_content {
+                display: none;
+
+                &:checked {
+
+                    & + .search_rooms_checkbox_for-click {
+                        background: #cda571;
+                    }
+
+                    & ~ .search_rooms_checkbox_text {
+                        color: #fff;
+                    }
+                }
+            }
+
+            &_for-click {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: .2s linear;
+            }
+
+            &_text {
+                position: relative;
+                z-index: 1;
+                font: 15px 'Montserrat';
+                color: #606060;
+                @include font-smoothing();
+                transition: .2s linear;
+            }
+        }
+    }
+
+    &_decoration {
+        .search_list_item {
+            margin-bottom: 8px;
+        }
+    }
+
+    &_list_item {
+
+        &:last-of-type {
+            margin: 0 !important;
+        }
+        
+        &_wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        &_checkbox {
+            display: none;
+
+            &:checked {
+                
+                & + .search_list_item_visualization {
+                    background: #cda571;
+
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+
+                & ~ .search_list_item_text {
+                    color: #2e2e2e;
+                }
+            }
+        }
+
+        &_visualization {
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            border: 1px solid #d8d8d8;
+            border-radius: 1px;
+            position: relative;
+            margin-right: 8px;
+
+            &:before {
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: url('/assets/img/flats/search/v.svg') no-repeat;
+                background-size: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                opacity: 0;
+            }
+        }
+
+        &_text {
+            font: 15px 'abrade-book', sans-serif;
+            color: #888aa1;
+            @include font-smoothing();
+        }
+    }
+
+    &_sections {
+        width: 200px;
+        height: 237px;
+        // margin: -26px 0 0 26px;
+        // background: url('/assets/mobile/img/flats/sections.svg') no-repeat;
+        // background-size: 100%; 
+    }
+}

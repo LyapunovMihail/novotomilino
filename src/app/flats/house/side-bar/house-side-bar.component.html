@@ -1,0 +1,19 @@
+<aside class="flats_aside">
+
+    <div class="flats_compass"></div>
+    
+    <ul class="flats_aside_breadcrumbs">
+        <li class="flats_aside_breadcrumbs_item">
+            <a class="flats_aside_breadcrumbs_item_link" routerLink="/flats/plan">Общий вид</a>
+        </li>
+    </ul>
+
+    <div class="flats_aside_description">
+        <h2 class="title flats_aside_description_title">Выберите секцию и этаж</h2>
+        <span class="flats_aside_description_hint">или подберите квартиру по<br>интересующим вас параметрам</span>
+        <div (click)="writePreviousUrl()" class="btn flats_aside_description_to-search">
+            <span class="btn_text">Подбор по параметрам</span>
+        </div>
+    </div>
+
+</aside>

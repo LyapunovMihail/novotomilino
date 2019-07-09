@@ -1,0 +1,47 @@
+<section class="main__preview">
+    <div class="main__preview-slider">
+        <div class="main__preview-btn">
+            <p class="main__preview-btn-count">
+                <span data-slider-count>0{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">04</span>
+            </p>
+            <button (click)="prevBtn()" class="main__preview-btn-item main__preview-btn-prev"></button>
+            <button (click)="nextBtn()" class="main__preview-btn-item main__preview-btn-next"></button>
+        </div>
+
+
+        <div class="main__preview-slider-wrap">
+            <ul class="main__preview-slider-list"  [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * this.slideWidth ) + 'px)') }">
+                <li  *ngFor="let item of gallerySlides; let i = index" class="main__preview-slider-item">
+                    <div class="main__preview-slider-item-img">
+                        <img alt="" [src]="uploadsPath + item.image">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <ng-container *ngFor="let item of gallerySlides; let i = index">
+            <div *ngIf="currentSlide === i" class="main__preview-slider-descr main__preview-slider-descr_show">
+                <h1 class="main__preview-slider-title g-title-path">{{item.name}}</h1>
+                <p class="main__preview-slider-text">
+                    {{item.description}}
+                </p>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <div class="main__preview-content">
+        <div class="preview-content__wrap">
+            <a class="preview-content__stock" [routerLink]="['/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
+                <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
+                <p class="g-link_white">{{shareSnippet.text}}</p>
+                <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
+                <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
+            </a>
+            <a class="preview-content__news" [routerLink]="['/news/' + newsSnippet._id]" *ngIf="newsSnippet">
+                <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
+                <p class="g-link_white">{{newsSnippet.description}}</p>
+            </a>
+        </div>
+    </div>
+</section>

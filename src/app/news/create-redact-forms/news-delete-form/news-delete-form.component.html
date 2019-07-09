@@ -1,0 +1,22 @@
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll admin-news_modal">
+
+    <div class="admin-news_modal-close-bgr" (click)="close.emit()" ></div>
+
+    <div class="admin-news_container">
+
+
+
+        <form (ngSubmit)="onSubmit()" class="admin-news_form">
+
+            <h2 class="admin-news_form_title admin-news_form_title--delete">Вы действительно хотите удалить новость?</h2>
+
+            <div>
+                <button (click)="close.emit()" class="admin-news_form_reject-btn">Отменить</button>
+                <button type="submit" class="admin-news_form_delete-btn">Удалить</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

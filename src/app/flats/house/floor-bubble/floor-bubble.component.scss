@@ -1,0 +1,74 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.house_floor-description {
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    transform: translateY(-50%);
+    z-index: 20;
+    transition: .1s;
+    pointer-events: none;
+
+    &.bubble-transform-left {
+        transform: translateY(-50%) translateX(-100%);
+        margin-left: -50px;
+    }
+
+    &_column {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    &_quantity {
+        box-sizing: border-box;
+        display: flex;
+        margin-left: 30px;
+
+        &_item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+
+            &:first-of-type {
+                margin: 0;
+            }
+
+            &_name {
+                margin-bottom: 8px;
+                font-size: 15px;
+                color: #606060;
+            }
+
+            &_quantity {
+                font-size: 15px;
+                font-weight: bold;
+                color: #1c1c1c;
+            }
+        }
+    }
+
+    &_section {
+        margin-bottom: 2px;
+        font: 18px 'Montserrat', sans-serif;
+        font-weight: bold;
+        color: #1c1c1c;
+        @include font-smoothing();
+
+    }
+
+    &_floor {
+        font: 15px 'abrade-book', sans-serif;
+        color: #cda571;
+        @include font-smoothing();
+    }
+}

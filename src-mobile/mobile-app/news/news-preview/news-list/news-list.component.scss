@@ -1,0 +1,49 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+}
+
+.news-list {
+    width: 100%;
+
+    &_item {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 40px;
+
+        &_link {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        &_img {
+            object-fit: cover;
+        }
+
+        &_description {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            &_date,
+            &_title {
+                @include font-smoothing();
+            }
+
+            &_date {
+                margin-top: 5px;
+                font: 15px/19px 'Montserrat', sans-serif;
+                color: #606060;
+            }
+
+            &_title {
+                margin-top: 5px;
+                font: 18px/26px 'Montserrat', sans-serif;
+                color: #1c1c1c;
+            }
+        }
+    }
+}

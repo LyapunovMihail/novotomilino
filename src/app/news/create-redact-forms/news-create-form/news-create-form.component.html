@@ -1,0 +1,119 @@
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll admin-news_modal">
+
+    <div class="admin-news_modal-close-bgr" (click)="close.emit()" ></div>
+
+    <div class="admin-news_container">
+
+        <div class='admin-news_progress-loader' *ngIf="isLoad">
+            <div class='admin-news_progress-loader-title'>Загрузка изображения {{imageUploadPercent}}%</div>
+            <div class='admin-news_progress-loader-line'>
+                <div class='admin-news_progress-loader-inner' [style.width.%]="imageUploadPercent"></div>
+            </div>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="admin-news_form">
+
+            <div (click)="close.emit()" class="admin-news_form_cls-btn"></div>
+
+            <h2 class="admin-news_form_title">Добавить</h2>
+
+
+
+                <!-- <div class="admin-news_form_news-type">
+
+                    <label class="admin-news_checkbox">
+                        <input [formControl]="form.controls['category']" name="category" [value]="enumCategory.NEW" type="radio" class="admin-news_checkbox_content">
+                        <div class="admin-news_checkbox_for-click"
+                            [ngClass]="{'invalid-input-value' : (!form.controls['category'].valid)}">
+                        </div>
+                        <span class="admin-news_checkbox_text admin-news_form_text">новость</span>
+                    </label>
+                    
+                </div> -->
+
+            <div class="admin-news_form_wrap">
+                <span class="admin-news_form_text admin-news_form_name">Дата</span>
+                <input [value]="form.controls['created_at'].value | date: 'd.M.yyyy'" disabled="true" class="admin-news_form_field" type="text">
+                <input [formControl]="form.controls['last_modifyed']" hidden="true" type="text">
+                <input [formControl]="form.controls['created_at']" hidden="true" type="text">
+            </div>
+
+
+
+            <div class="admin-news_form_wrap">
+                <span class="admin-news_form_text admin-news_form_name">Заголовок</span>
+                <textarea class="admin-news_form_field admin-news_form_field--for-title"
+                    name="title" 
+                    [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
+                    [formControl]="form.controls['title']">
+                </textarea>
+            </div>
+            
+
+            <div [ngClass]="{'admin-news_form_wrap--with-photo' : loadedImage.length > 0 }" class="admin-news_form_wrap">
+                    
+                <span class="admin-news_form_text admin-news_form_name">Фотография</span>
+
+                <div class="admin-news_form_photo">
+
+                    <img class="admin-news_form_photo_content" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
+
+                    <input [formControl]="form.controls['image']" hidden="true" type="text">
+                    <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
+
+                    <label [ngClass]="{'admin-news_form_photo_description--with-photo' : loadedImage.length > 0 }" class="admin-news_form_photo_description">
+                        <div class="admin-news_form_photo_description_btn"
+                            [ngClass]="{'invalid-input-value' : (!form.controls['image'].valid) }">
+                            {{ (loadedImage.length > 0) ? "Изменить" : "Загрузить" }}
+                        </div>
+                        <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
+                        <span class="admin-news_form_photo_description_text">
+                            Для лучшего отображения новости фото должно быть не менее 1280 px по ширине <br> и 1000 px по высоте.
+                        </span>
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-news_form_wrap">    
+                <span class="admin-news_form_text admin-news_form_name">Текст</span>
+                <textarea [formControl]="form.controls['description']" class="admin-news_form_field admin-news_form_field--for-description"></textarea>
+            </div>
+
+
+            <div class="admin-news_form_wrap admin-news_form_wrap--margin-40">
+
+                    <span class="admin-news_form_text">Показывать</span>
+
+                    <div class="admin-news_form_news-order">
+
+                        <ng-container *ngFor="let item of showOnMainModifycators">
+                            <label class="admin-news_checkbox">
+                                <input class="admin-news_checkbox_content"
+                                    [formControl]="form.controls['show_on_main']"
+                                    [value]="item.value" 
+                                    type="radio" name="show_on_main">
+                                <div class="admin-news_checkbox_for-click"
+                                    [ngClass]="{'invalid-input-value' : (!form.controls['show_on_main'].valid)}">
+                                </div>
+                                <span class="admin-news_checkbox_text admin-news_form_text">{{ item.description }}</span>
+                            </label>
+                        </ng-container>
+
+                    </div>
+
+            </div>
+
+
+            <button type="submit" class="admin-news_form_add-btn"
+                [ngClass]="{'submit-btn-disabled' : !form.valid}"
+                [disabled]="!form.valid">Добавить
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

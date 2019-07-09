@@ -1,0 +1,94 @@
+<div class="purchase_installment">
+
+    <ul class="installment_calculator">
+
+        <li class="installment_calculator_item">
+
+            <div class="installment_calculator_item_wrap">
+                <span class="installment_calculator_item_text">Стоимость квартиры, &#8381;</span>
+                <input (change)="formChanges($event.target.value, 'price')" 
+                    (input)="bitReplace($event.target.value, 'price')"
+                    (keyup)="keyUpReviuse($event)"
+                    [value]="form.price.val | installmentNumberPipe" 
+                    class="field installment_calculator_item_field" type="text">
+            </div>
+
+            <div class="installment_calculator_item_wrap">
+                <span class="installment_calculator_item_text">Первоначальный взнос, &#8381;<br>
+                </span>
+                <input (change)="formChanges($event.target.value, 'firstpay')" 
+                    (input)="bitReplace($event.target.value, 'firstpay')"
+                    (keyup)="keyUpReviuse($event)"
+                    [value]="form.firstpay.val | installmentNumberPipe" 
+                    class="field installment_calculator_item_field" type="text">
+            </div>
+
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment_calculator_item_wrap">
+                <span class="installment_calculator_item_text">Срок выплат, месяцев</span>
+                <input (change)="formChanges($event.target.value, 'month')"
+                    (input)="bitReplace($event.target.value, 'month')"
+                    (keyup)="keyUpReviuse($event)"
+                    [value]="form.month.val"
+                    class="field installment_calculator_item_field" type="text">
+            </div>
+
+        </li>
+
+
+        <li class="installment_calculator_item">
+
+            <div class="installment_calculator_item_wrap">
+                <ghm-range-number 
+                    (move)="form.price.val = $event"
+                    (moveend)="formChanges($event, 'price')"
+                    [toFixed]="true"
+                    [min]="form.price.min"
+                    [max]="form.price.max"
+                    [start]="form.price.val">
+                </ghm-range-number>
+
+                <li class="installment_calculator_item--result">
+
+                    <div [ngClass]="{'disabled-opacity': isFullPay }">
+                        <p class="installment_calculator_item_title">Ставка</p>
+                        <p class="installment_calculator_item_result">{{percent}}% годовых</p>
+                    </div>
+
+                    <div [ngClass]="{'disabled-opacity': isFullPay }">
+                        <p class="installment_calculator_item_title">Размер ежемесячных выплат</p>
+                        <p class="installment_calculator_item_result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
+                    </div>
+
+                </li>
+            </div>
+
+            <div class="installment_calculator_item_wrap installment_calculator_item_wrap--noflex">
+                <ghm-range-number 
+                    (move)="form.firstpay.val = $event"
+                    (moveend)="formChanges($event, 'firstpay')"
+                    [toFixed]="true"
+                    [min]="form.firstpay.min"
+                    [max]="form.firstpay.max"
+                    [start]="form.firstpay.val">
+                </ghm-range-number>
+                <span class="installment_calculator_item_hint">Не менее 50% от прайсовой цены квартиры</span>
+            </div>
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment_calculator_item_wrap  installment_calculator_item_wrap--noflex">
+                <ghm-range-number
+                    (move)="form.month.val = $event"
+                    (moveend)="formChanges($event, 'month')"
+                    [toFixed]="true"
+                    [min]="form.month.min"
+                    [max]="form.month.max"
+                    [start]="form.month.val">
+                </ghm-range-number>
+                <span class="installment_calculator_item_hint">На срок до 6 месяцев включительно предоставляется бесплатная рассрочка, на срок более 6 месяцев — рассрочка от 11% годовых.</span>
+            </div>
+
+        </li>
+
+
+
+        
+    </ul>
+</div>

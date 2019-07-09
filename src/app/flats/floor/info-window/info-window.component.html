@@ -1,0 +1,36 @@
+<div *ngIf="infoWindow" class="flats_item-description">
+        
+    <div class="flats_item-description_number">
+        <img class="flats_item-description_number-img" [src]="'/assets/img/flats/apartment/' + infoWindow.rooms + '.svg'">
+        <span class="flats_item-description_number-text">№&nbsp;{{infoWindow.flat}}</span>
+    </div>
+
+    <div class="flats_item-description_section">
+
+        <span class="flats_item-description_section_name">Комнат</span>
+        <span class="flats_item-description_section_value">{{(infoWindow.rooms === '0') ? '' : infoWindow.rooms }} {{((infoWindow.rooms === '0') ? 'Студия' : ( infoWindow.rooms | myPluralizePipe : "комната_комнаты_комнат"))}}</span>
+
+    </div>
+
+    <div class="flats_item-description_section">
+
+        <span class="flats_item-description_section_name">Общая площадь</span>
+        <span class="flats_item-description_section_value">{{infoWindow.space}} м<sup>2</sup></span>
+
+    </div>
+
+    <!-- <div class="flats_item-description_section">
+
+        <span class="flats_item-description_section_name">Отделка</span>
+        <span class="flats_item-description_section_value">{{infoWindow.decorationName}}</span>
+
+    </div> -->
+
+    <div class="flats_item-description_section">
+
+        <span class="flats_item-description_section_name">Стоимость</span>
+        <span class="flats_item-description_section_value">{{infoWindow.price | myBitNumberPipe}} &#8381;</span>
+
+    </div>
+
+</div>

@@ -1,0 +1,75 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.members {
+    padding-top: 120px;
+
+    &_list {
+        width: 1032px;
+        display: flex;
+
+        &_item {
+            width: 234px;
+            height: 157px;
+            transition: .2s linear;
+            cursor: pointer;
+            position: relative;
+            border-radius: 7px;
+
+            &:hover {
+                box-shadow: 0 7px 16px rgba(0,0,0,.3);
+            }
+
+            &_link {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                flex-direction: column;
+                justify-content: space-between;
+                box-sizing: border-box;
+                padding: 10px 22px 17px;
+
+                &--troika {
+                    background: url('/assets/img/about/members/trojka-2.svg') 0px 60px no-repeat;
+                    background-size: 226px 42px;
+                }
+
+                &--iskona {
+                    background: url('/assets/img/about/members/elit-stroy.svg') 13px 67px no-repeat;
+                    background-size: 192px 29px;
+                }
+
+                &--bsa {
+                    background: url('/assets/img/about/members/bsa-2.svg') 22px 61px no-repeat;
+                    background-size: 96px 33px;
+                }
+
+                &--sber {
+                    background: url('/assets/img/about/members/sber-b.png') 20px 57px no-repeat;
+                    background-size: 161px 40px;
+                }
+
+                &_text {
+                    font: 15px/27px 'Montserrat', sans-serif;
+                    @include font-smoothing();
+
+                    &:not(.members_list_item_link_text--blue) {
+                        color: #1c1c1c;
+                        opacity: 0.5;
+                    }
+
+                    &--blue {
+                        border-bottom: 1px solid;
+                        width: fit-content;
+                        color: #cda571;
+                    }
+                }
+            }
+        }
+    }
+}

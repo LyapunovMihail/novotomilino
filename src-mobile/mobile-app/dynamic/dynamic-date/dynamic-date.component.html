@@ -1,0 +1,27 @@
+<ul class="dynamic_header_years">
+
+    <li *ngFor="let item of yearsArray"
+        [ngClass]="{
+            'dynamic_header_years_item--active': item == year
+        }"
+        (click)="yearChange.emit(item); monthParser(item)"
+        class="dynamic_header_years_item">
+        {{item}}
+    </li>
+
+</ul>
+
+<ul class="dynamic_header_months">
+
+    <li *ngFor="let item of monthArray; let i = index"
+        [ngClass]="{
+            'dynamic_header_months_item--not-active': item.disabled,
+            'dynamic_header_months_item--active': (i + 1) == month
+        }"
+        (click)="monthChange.emit(i + 1)"
+        class="dynamic_header_months_item">
+        {{item.name}}
+    </li>
+
+</ul>
+

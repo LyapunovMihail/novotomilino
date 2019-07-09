@@ -1,0 +1,124 @@
+<div class="search_form_container with-scroll">
+
+    <div class="search_form_scroll-wrap">
+
+        <form [formGroup]="form" class="search_form">
+
+            <app-search-sorting
+                [formControl]="form.controls['sort']">
+            </app-search-sorting>
+
+            <h1 class="search_form_title">Подбор по параметрам</h1>
+
+            <div class="search_form_wrap">
+                
+                <span class="search_form_text">Тип</span>
+
+                <app-search-checkbox-list
+                    [btnList]="config.typeList"
+                    [formControl]="form.controls['type']">
+                </app-search-checkbox-list>
+            </div>
+
+            <div class="search_form_wrap">
+
+                <span class="search_form_text">Количество комнат</span>
+
+                <ul class="search_form_rooms">
+                    <li formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index"
+                        class="search_form_rooms_item">
+
+                        <label class="search_form_rooms_checkbox">
+                            <input [formControl]="control" name="rooms" [value]="control" class="search_form_rooms_checkbox_content" type="checkbox">
+                            <div class="search_form_rooms_checkbox_for-click"></div>
+                            <span class="search_form_rooms_checkbox_text">{{(i === 3) ? 'Студия' : i + 1}}</span>
+                        </label>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="search_form_wrap search_form_wrap--range">
+                    
+                <span class="search_form_text">Площадь</span>
+
+                <span class="search_form_range-text search_form_text">от 
+                    <span #minSpace></span>
+                    до 
+                    <span #maxSpace></span>  м²
+                </span>
+
+                <ghm-range-number
+                    [formControl]="form.controls['space']"
+                    [min]="config.space.min"
+                    [max]="config.space.max"
+                    (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
+                </ghm-range-number>
+                
+            </div>
+
+            <div class="search_form_wrap search_form_wrap--range">
+                    
+                <span class="search_form_text">Этаж</span>
+
+                <span class="search_form_range-text search_form_text">от 
+                    <span #minFloor></span> 
+                    до 
+                    <span #maxFloor></span>
+                </span>
+
+                <ghm-range-number
+                    [formControl]="form.controls['floor']"
+                    [min]="config.floor.min"
+                    [max]="config.floor.max"
+                    [toFixed]="true"
+                    (move)="minFloor.innerHTML = $event.min; maxFloor.innerHTML = $event.max">
+                </ghm-range-number>
+                
+            </div>
+
+            <div class="search_form_wrap search_form_wrap--range">
+                    
+                <span class="search_form_text">Цена</span>
+
+                <span class="search_form_range-text search_form_text">от 
+                    <span #minPrice></span>  
+                    до 
+                    <span #maxPrice></span> млн &#8381;
+                </span>
+
+                <ghm-range-number
+                    [formControl]="form.controls['price']"
+                    [min]="config.price.min"
+                    [max]="config.price.max"
+                    [toFixed]="true"
+                    (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
+                </ghm-range-number>
+                
+            </div>
+
+            <div class="search_form_wrap">
+
+                <span class="search_form_text">Отделка</span>
+                
+                <app-search-checkbox-list
+                    [btnList]="config.decorationList"
+                    [formControl]="form.controls['decoration']">
+                </app-search-checkbox-list>
+
+            </div>
+
+            <div class="search_form_wrap">
+
+                <span class="search_form_text">Секция</span>
+
+                <app-search-form-sections
+                    [formControl]="form.controls['sections']">
+                </app-search-form-sections>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

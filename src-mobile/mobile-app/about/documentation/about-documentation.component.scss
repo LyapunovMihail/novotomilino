@@ -1,0 +1,143 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.documentation {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 80px 15px 0;
+
+    @media (min-width: 600px) {
+        padding: 80px 25px 0;
+    }
+
+    @media (min-width: 1200px) {
+        max-width: 550px;
+        padding: 80px 0 0;
+        margin: 0 auto;
+    }
+
+    &__title {
+        @include font-smoothing();
+        font: 42px/50px 'Oranienbaum', serif;
+        color: #1c1c1c;
+        margin-bottom: 40px;
+
+        @media (min-width: 600px) {
+            line-height: 46px;
+        }
+    }
+
+    &__objects {
+        width: 100%;
+    }
+
+    &__object {
+        width: 100%;
+        margin-bottom: 20px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &-header {
+            width: 100%;
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        &-title {
+            font: 23px/30px 'Montserrat', sans-serif;
+            color: #1c1c1c;
+            @include font-smoothing();
+        }
+
+        &-content {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &-file {
+            position: relative;
+        }
+
+        &-link {
+            font: 18px/30px 'Montserrat', sans-serif;
+            color: #cda571;
+            @include font-smoothing();
+            display: block;
+            position: relative;
+            box-sizing: border-box;
+            padding: 0 0 0 25px;
+            cursor: pointer;
+            transition: text-shadow .2s linear, color .2s linear;
+            height: 100%;
+            background: url('/assets/img/about/doc.svg') 0 4px no-repeat;
+            background-size: 15px 17px;
+
+            @media (max-width: 599px) {
+                line-height: 26px;
+            }
+
+            &:hover {
+                text-shadow: 0 0 8px rgba(205,165,113,.7);
+                color: #cda571;
+            }
+        }
+    }
+}
+
+
+.admin-gallery_progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: 15px/25px Arial, sans-serif;
+    z-index: 100;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &-title {
+
+    }
+
+    &-info {
+
+    }
+
+    &-line {
+        width: 200px;
+        border: 1px solid white;
+        margin-top: 10px;
+        height: 15px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    &-line-inner {
+        box-sizing: border-box;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        background: white;
+        transition: .2s;
+    }
+}

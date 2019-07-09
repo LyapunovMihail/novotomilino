@@ -1,0 +1,25 @@
+<div class="search_output with-scroll">
+
+    <span class="search_output_text">Найдено {{flatsCount()}} квартир</span>
+
+    <div class="search_output_scroll-wrap">
+
+        <div class="search_output_result">
+            <div class="search_output_empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
+
+            <a *ngFor="let flat of flatsList" [routerLink]="['/flats/section/' + flat.section + '/floor/' + flat.floor + '/apartment/' + flat.flat]" class="search_output_result_item">
+                <img class="search_output_result_item_scheme" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+                <span class="search_output_result_item_content search_output_result_item_content--number">№{{flat.flat}}</span>
+                <span class="search_output_result_item_content search_output_result_item_content--section">Секция {{flat.section}}</span>
+                <span class="search_output_result_item_content search_output_result_item_content--floor">{{flat.floor}} этаж из {{flat.section | mySearchOutputPipe}}</span>
+                <span class="search_output_result_item_content search_output_result_item_content--type">{{flat.type}}.</span>
+                <span class="search_output_result_item_content search_output_result_item_content--room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
+                <span class="search_output_result_item_content search_output_result_item_content--size">{{flat.space}} м²</span>
+                <span class="search_output_result_item_content search_output_result_item_content--decoration">{{flat.decorationName}}</span>
+                <span class="search_output_result_item_content search_output_result_item_content--price">{{flat.price | myBitNumberPipe}} &#8381;</span>
+            </a>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+<ul class="result">
+
+    <li *ngFor="let flat of flatsList" class="result__item">
+
+        <div class="result__data">
+            <!-- <div class="to-favorites" (click)="toFavorite(flat)" [ngClass]="{'to-favorites_active': inFavorite(flat)}"></div> -->
+            <span class="result__data-number">№{{flat.flat}}</span>
+            <span class="result__data-location">Секция {{flat.section}}<span class="dot"></span>Этаж {{flat.floor}} из {{flat.section | mySearchOutputPipe}}</span>
+        </div>
+
+        <ul class="result__description">
+
+            <li class="wrapper">
+                <span class="result__description-name">Тип</span>
+                <div class="result__description-border"></div>
+                <span class="result__description-value">{{flat.type}}</span>
+            </li>
+
+            <li class="wrapper">
+                <span class="result__description-name">Комнат</span>
+                <div class="result__description-border"></div>
+                <span class="result__description-value">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
+            </li>
+
+            <li class="wrapper">
+                <span class="result__description-name">Общая площадь</span>
+                <div class="result__description-border"></div>
+                <span class="result__description-value">{{flat.space}} м&#178;</span>
+            </li>
+
+            <li class="wrapper">
+                <span class="result__description-name">Отделка</span>
+                <div class="result__description-border"></div>
+                <span class="result__description-value">{{flat.decorationName}}</span>
+            </li>
+
+            <li class="wrapper">
+                <span class="result__description-name">Стоимость</span>
+                <div class="result__description-border"></div>
+                <span class="result__description-value">{{flat.price | myBitNumberPipe}} &#8381;</span>
+            </li>
+        </ul>
+
+        <div class="result__scheme">
+            <img class="result__scheme-content" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+            <!-- <a class="result__pdf" href="">Скачать pdf</a> -->
+        </div>
+
+        <ul [ngClass]="{'result__request_active': showBtns === flat._id}" class="result__request">
+            <li (click)="flatDataForModalForm = flat; isReserveFormOpen = true; scrollLocker.block()" class="result__request-item">Забронировать</li>
+            <li (click)="flatDataForModalForm = flat; isCreditFormOpen = true; scrollLocker.block()" class="result__request-item">Заявка на ипотеку</li>
+            <!-- <li (click)="isCallFormOpen = true; scrollLocker.block()" class="result__request-item">Заказать звонок</li> -->
+        </ul>
+
+        <div (click)="showBtns = (showBtns === flat._id) ? '' : flat._id" class="result__btn"></div>
+
+    </li>
+
+</ul>
+
+<!-- <app-form-call
+    (close)="isCallFormOpen = $event; scrollLocker.unblock()"
+    [isOpen]="isCallFormOpen">
+</app-form-call> -->
+<app-form-credit *ngIf="flatDataForModalForm"
+    (close)="isCreditFormOpen = $event; flatDataForModalForm = null; scrollLocker.unblock()"
+    [isOpen]="isCreditFormOpen"
+    [apartmentPrice]="flatDataForModalForm.price"
+    [apartmentNumber]="flatDataForModalForm.flat">
+</app-form-credit>
+<app-form-reserve *ngIf="flatDataForModalForm"
+    (close)="isReserveFormOpen = $event; flatDataForModalForm = null; scrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentPrice]="flatDataForModalForm.price"
+    [apartmentNumber]="flatDataForModalForm.flat">
+</app-form-reserve>

@@ -1,0 +1,114 @@
+$abrade: 'abrade-book', sans-serif;
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page-404 {
+    width: calc(100% - 48px);
+    padding: 130px 24px 0 24px;
+    height: calc(100vh - 130px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 425px) {
+        width: calc(100% - 30px);
+        padding: 100px 15px 0 15px;
+        height: calc(100vh - 100px);
+
+    }
+
+    &_main_title {
+        width: 100%;
+    }
+
+    &_main_text {
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        color: #ffffff;
+        @include font-smoothing();
+        margin-bottom: 45px;
+        -webkit-text-fill-color: white;
+
+        @media (max-width: 425px) {
+            max-width: 440px;
+        }
+
+        @media (max-width: 390px) {
+            text-align: left;
+
+            &_item {
+                display: none;
+            }
+        }
+    }
+
+}
+
+.page-404_error {
+    display: inline-block;
+    font-size: 140px;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    text-align: center;
+    /* Color fallback */
+    color: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @media (min-width: 599px) {
+        font-size: 266px;
+    }
+
+    &:before {
+        position: absolute;
+        content: '';
+    }
+        
+    &:after {
+        position: absolute;
+        content: '';
+    }
+
+    &:before {
+        z-index: -2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: inherit;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    &:after {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        opacity: .7;
+    }
+
+}
+
+.page-404_error_img {
+    background-image: url("/assets/img/JK-head.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}

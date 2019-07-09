@@ -1,0 +1,270 @@
+@import './cross-browser-elipsis';
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+}
+
+$color: #2e2e2e;
+$color2: #888aa1;
+$color3: #888ba2;
+$color4: #ffffff;
+
+$font: 15px/23px 'abrade-book', sans-serif;
+$font2: 50px/60px 'LeksaSans', sans-serif;
+
+.news {
+    width: 1200px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 135px 0 175px;
+    position: relative;
+    margin: 0 auto;
+
+    @media(max-width: 1440px) {
+        width: 715px;
+    }
+
+    &_view {
+        
+        &_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &_wrapper {
+            position: relative;
+            width: 715px;
+            height: 365px;
+            margin-top: 11px;
+        }
+
+        &_back {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100px;
+            border: 1px solid #cda571;
+            border-radius: 5px;
+            font: 18px/46px 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #1c1c1c;
+            @include font-smoothing();
+            text-align: center;
+
+            &:hover {
+                color: #ffffff;
+                background-color: #cda571;
+                transition: 0.3s;
+            }
+        }
+
+        &_title {
+            font: 23px 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            @include font-smoothing();
+            transition: .2s linear;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        &_content {
+            font: 18px/31px 'Montserrat', sans-serif;
+            color: #1c1c1c;
+            @include font-smoothing();
+            width: 715px;
+            margin-top: 40px;
+        }
+    }
+
+    &_aside {
+        width: 715px;
+        height: 365px;
+        box-sizing: border-box;
+        user-select: none;
+        position: relative;
+        
+
+        .news_aside_container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        &:hover {
+
+            .news_aside_description_content {
+                text-shadow: 0 0 8px rgba(255,255,255,.7);
+                background-image: none;
+            }
+        }
+
+        &_img {
+            width: 100%;
+            position: relative;
+            flex: auto;
+            height: 1%;
+
+            &_content {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &_description {
+            min-height: 270px;
+            width: 100%;
+            background: #83d6f4 url('/assets/img/news/snippet-icon.svg') calc(100% - 20px) 20px no-repeat;
+            background-size: 20px;
+            padding: 50px 35px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            &:before {
+                content: '';
+                width: 100%;
+                height: calc(100vh - 130px);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+
+            &_wrap {
+                max-width: 650px;
+            }
+
+            &_content {
+                font: $font2;
+                color: $color4;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                transition: .2s linear;
+                background: linear-gradient($color4, $color4) 0 85% repeat-x;
+                background-size: 100% 1px;
+            }
+        }
+    }
+
+    &_snippets {
+        width: 1200px;
+        min-height: 100%;
+        box-sizing: border-box;
+        position: relative;
+
+        &_list {
+            width: 716px;
+
+            &_item {
+                width: 715px;
+                height: 365px;
+                box-sizing: border-box;
+                display: flex;
+                position: relative;
+                margin-top: 10px;
+
+                &:first-of-type{
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &_header {
+            width: 100%;
+            position: relative;
+
+            &_title {
+                user-select: none;
+            }
+
+            &_descr {
+                font: 18px/31px 'Montserrat', sans-serif;
+                margin: 50px 0;
+                color: #1c1c1c;
+            }
+        }
+    }
+}
+
+.snippets_header_filtration_item {
+    font: 17px/28px 'abrade-book', sans-serif;
+    color: $color3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: pointer;
+    margin-right: 25px;
+    transition: .2s linear;
+
+    &--active {
+        color: #67c3eb;
+    }
+
+    &:hover:not(.snippets_header_filtration_item--active) {
+        text-shadow: 0 0 8px rgba(131,214,244,.7);
+    }
+
+    &:last-of-type {
+        margin: 0;
+    }
+}
+
+.snippets_list_item_link {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+
+        .snippets_list_item_title {
+            background-image: none;
+            text-shadow: 0 0 8px rgba(205, 165, 113, 1);
+        }
+    }
+}
+
+.snippets_list_item_img {
+    height: 100%;
+    width: 100%;
+    margin-right: 35px;
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        opacity: .3;
+    }
+
+    &_content {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+    }
+}
+
+.snippets_list_item_title {
+    font: 23px 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    @include font-smoothing();
+    transition: .2s linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

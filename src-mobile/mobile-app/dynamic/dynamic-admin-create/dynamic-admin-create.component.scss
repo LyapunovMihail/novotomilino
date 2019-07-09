@@ -1,0 +1,86 @@
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility:    hidden;
+    -ms-backface-visibility:     hidden;
+}
+
+.invalid-input {
+    border: 1px solid red;
+}
+
+.admin-dynamic-create-form {
+    min-height: 90px;
+    width: 1000px;
+    box-sizing: border-box;
+    padding: 25px 0 0 166px;
+    border: 1px dashed #888aa1;
+    margin-bottom: 45px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    &-title {
+        font: 15px 'abrade-book', sans-serif;
+        color: #888ba2;
+        @include font-smoothing();
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        box-sizing: border-box;
+        height: 90px;
+        padding-left: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    &-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        &-item {
+            font: 15px 'abrade-book', sans-serif;
+            color: #ffffff;
+            @include font-smoothing();
+            height: 40px;
+            border-radius: 20px;
+            background: #888ba2;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 0 18px;
+            white-space: nowrap;
+            margin: 0 15px 14px 0;
+            cursor: pointer;
+        }
+    }
+
+    &-content {
+        height: 40px;
+        margin-bottom: 25px;
+
+        &-input {
+            width: 350px;
+            height: 100%;
+            outline: none;
+            font: 15px 'abrade-book', sans-serif;
+            color: #888aa1;
+            @include font-smoothing();
+            border-radius: 20px;
+            background: #fafafa;
+            border: 1px solid #d9d9d9;
+            padding: 0 18px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.admin-dynamic-create-hidden-item {
+    display: none;
+}

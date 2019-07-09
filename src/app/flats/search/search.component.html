@@ -1,0 +1,13 @@
+<div class="search">
+
+    <a *ngIf="isReturnLink" [routerLink]="[previousUrl]" class="search_cls-btn"></a>
+
+    <app-search-form (formChange)="formChange($event)"></app-search-form>
+
+    <div class="search_main">
+
+        <app-search-output [flatsList]="flatsList"></app-search-output>
+        
+    </div>
+
+</div>

@@ -1,0 +1,16 @@
+
+<ul class="dynamic_header_check-points">
+
+    <ng-container *ngFor="let object of objectsArray">
+
+        <li (click)="scrollLink(object._id)" 
+            *ngIf="(object.year === year && object.month === month)" 
+            class="dynamic_header_check-points_item">
+
+            {{object.title}}
+
+        </li>
+        
+    </ng-container>
+
+</ul>

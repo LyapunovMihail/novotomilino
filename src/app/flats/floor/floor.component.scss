@@ -1,0 +1,131 @@
+$white: #ffffff;
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#plan {
+    pointer-events: none;
+
+    * {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+}
+
+.floor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+    position: relative;
+
+    .floor-plan-error-description {
+        font: 18px/26px 'Montserrat', sans-serif;
+        color: #888ba2;
+        white-space: nowrap;
+        @include font-smoothing();
+    }
+
+    &_description {
+        position: relative;
+        
+        &_scheme {
+            display: flex;
+
+            svg {
+                height: 60vh;
+                min-height: 270px;
+            }
+        }
+    }
+
+    &_flats-colors {
+        display: flex;
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &_item {
+            margin-left: 20px;
+            box-sizing: border-box;
+            padding-left: 25px;
+            font: 15px/23px 'Montserrat', sans-serif;
+            color: #888ba2;
+            @include font-smoothing();
+            position: relative;
+
+            &:before {
+                content: '';
+                width: 17px;
+                height: 17px;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+            }
+
+            &:first-of-type {
+                margin: 0;
+            }
+
+            &--studio {
+
+                &:before {
+                    background: #de588d;
+                }
+            }
+
+            &--one-room {
+                
+                &:before {
+                    background: #5fb5a4;
+                }
+            }
+
+            &--two-room {
+                
+                &:before {
+                    background: #bfaeb2;
+                }
+            }
+
+            &--three-room {
+                
+                &:before {
+                    background: #cda571;
+                }
+            }
+        }
+    }
+}
+
+.flat-mod {
+    cursor: pointer;
+
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.flat-mod--studio path, .flat-mod--studio polygon, .flat-mod--studio polyline, .flat-mod--studio rect {
+    fill: #de588d;
+}
+
+.flat-mod--one-room path, .flat-mod--one-room polygon, .flat-mod--one-room polyline, .flat-mod--one-room rect {
+    fill: #5fb5a4;
+}
+
+.flat-mod--two-room path, .flat-mod--two-room polygon, .flat-mod--two-room polyline, .flat-mod--two-room rect {
+    fill: #bfaeb2;
+}
+
+.flat-mod--three-room path, .flat-mod--three-room polygon, .flat-mod--three-room polyline, .flat-mod--three-room rect {
+    fill: #cda571;
+}
+
+.flat-mod--out-of-stock path, .flat-mod--out-of-stock polygon, .flat-mod--out-of-stock polyline, .flat-mod--out-of-stock rect {
+    fill: $white;
+}

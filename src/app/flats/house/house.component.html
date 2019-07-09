@@ -1,0 +1,74 @@
+<div class="house flats_main">
+
+    <div *ngIf="houseResources" class="house_select-floor"> <!-- .flats__wrapper -->
+
+        <ng-container *ngFor="let item of service.sectionMarkers()">
+            <div
+                class="house_select-floor_section-title
+                house_select-floor_section-title--section-{{item.section}}"
+                [ngClass]="{'house_select-floor_section-title--active': hoverSection === item.section}">
+                Секция {{item.section}}
+            </div>
+        </ng-container>
+        
+        <img [src]="houseResources.image" class="house_select-floor_bgr flats_bgr">
+
+        <div id="house-svg-scheme" class="house_select-floor_svg">
+            <svg class="house_select-floor_svg_content flats_svg"
+                 viewBox="-218 -207 1920 880"
+                 preserveAspectRatio="none">
+
+                <g *ngFor="let section of houseResources.svg"
+                    [id]="'section-' + section.count">
+
+                    <g *ngFor="let floor of section.floors"
+                        class="select-floor_svg_content_item"
+                        [attr.data]="'s-' + section.count + '_fl-' + floor.count">
+
+                        <path class="select-floor_svg_content_item_path"
+                            [attr.d]="floor.content"
+                            [ngClass]="{'house__svg__floor_in-sale': floorWithFreeFlats(section.count, floor.count)}"/>
+                        <circle class="select-floor_svg_content_item_circle"
+                                [attr.cx]="floor.cx"
+                                [attr.cy]="floor.cy"
+                                r="6.7"/>
+                        <circle class="select-floor_svg_content_item_circle-big"
+                                [attr.cx]="floor.cx"
+                                [attr.cy]="floor.cy"
+                                r="14.2"/>
+                        <circle class="select-floor_svg_content_item_circle-white"
+                                [attr.cx]="floor.cx"
+                                [attr.cy]="floor.cy"
+                                r="6.7"/>
+                    </g>
+
+                </g>
+
+            </svg>
+        </div>
+
+    </div>
+
+    <div class="house__highlight" (click)="highlightFloors()">
+        <div class="house__highlight__toggle"
+            [ngClass]="{'house__highlight__toggle_active': highlight}"></div>
+        <div class="house__highlight__text">Подсветить свободные квартиры</div>
+
+    </div>
+    <div class="house__highlight__menu">
+        <ul class="house__highlight__menu-list">
+            <li class="house__highlight__menu-list_item"><a routerLink="/parking">Машиноместа</a></li>
+            <li class="house__highlight__menu-list_item"><a routerLink="/storerooms">Кладовки</a></li>
+        </ul>
+    </div>
+</div>
+
+<app-house-side-bar>
+</app-house-side-bar>
+
+<app-flats-floor-bubble
+    [bubbleData]="bubbleData"
+    [section]="hoverSection"
+    [floor]="hoverFloor"
+    [coords]="bubbleCoords">
+</app-flats-floor-bubble>

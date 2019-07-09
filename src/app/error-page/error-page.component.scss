@@ -1,0 +1,87 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page-404 {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &_main_title {
+        vertical-align: text-bottom;
+    }
+
+    &_main_text {
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        color: #ffffff;
+        @include font-smoothing();
+        margin-bottom: 45px;
+        -webkit-text-fill-color: white;
+    }
+
+}
+.page-404_error {
+    display: inline-block;
+    font-size: 480px;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    padding: 50px 0 0 0;
+    /* Color fallback */
+    color: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    &:before {
+        position: absolute;
+        content: '';
+    }
+        
+    &:after {
+        position: absolute;
+        content: '';
+    }
+
+    &:before {
+        z-index: -2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url("/assets/img/JK-head.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    &:after {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        opacity: .7;
+    }
+
+}
+
+.page-404_error_img {
+    background-image: url("/assets/img/JK-head.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

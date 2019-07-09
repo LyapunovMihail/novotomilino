@@ -1,0 +1,61 @@
+<header class="header" [ngClass]="{'header__fixed' : isFixed}">
+    <div class="header__left">
+        <a routerLink="/" class="header__logo"></a>
+    </div>
+    <div class="header__right">
+        <a href="tel: +74951374235" class="header__phone">+7 (495) 137-42-35</a>
+        <a href="tel: +74951374235" class="header__mobile"></a>
+        <div class="header__hamburger" data-toggle-js>
+            <span></span>
+        </div>
+    </div>
+    <div class="header__nav">
+        <div class="header__links">
+              <a *ngFor="let link of links"
+                 class="header__link"
+                 [routerLink]="link.url">{{link.name}}
+              </a>
+            <!-- <a
+              class="header__link"
+              [routerLink]="links[0].url">{{links[0].name}}
+          </a>
+          <a
+              class="header__link"
+              href="http://barvihadom.ru/#/profitbase/house/19521/plans?filter=property.status:AVAILABLE" target="_blank">Квартиры
+          </a>
+          <a
+              class="header__link"
+              [routerLink]="links[1].url">{{links[1].name}}
+          </a>
+            <a
+                class="header__link"
+                [routerLink]="links[2].url">{{links[2].name}}
+            </a>
+            <a
+                class="header__link"
+                [routerLink]="links[3].url">{{links[3].name}}
+            </a>
+            <a
+                class="header__link"
+                [routerLink]="links[4].url">{{links[4].name}}
+            </a>
+            <a
+                class="header__link header__link--favorites">Избранное
+            </a>
+            <a href="/documentation" class="header__link">Документация</a> -->
+        </div>
+        <div class="header__bot">
+            <a href="javascript:void(0)" class="header__link" (click)="scrollToOffice()">Офис продаж</a>
+            <a href="tel: +74951374235" class="header__phone-nav">+7 (495) 970-18-32</a>
+            <div class="header_networks">
+
+                <span class="header_networks_text">Мы в соцсетях:</span>
+
+                <a class="header_networks_link header_networks_link--instagram" href="https://www.instagram.com/barvihinskaya/" target="_blank"></a>
+                <a class="header_networks_link header_networks_link--fb" href="https://www.facebook.com/barvihinskaya6/" target="_blank"></a>
+                <a class="header_networks_link header_networks_link--vk" href="https://vk.com/barvihinskaya6" target="_blank"></a>
+
+            </div>
+        </div>
+    </div>
+</header>

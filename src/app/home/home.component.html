@@ -1,0 +1,21 @@
+<main class="main">
+
+    <app-home-preview *ngIf="newsSnippets.length && shareSnippets.length && gallerySlides.length"
+        [newsSnippets]="newsSnippets"
+        [shareSnippets]="shareSnippets"
+        [gallerySlides]="gallerySlides">
+    </app-home-preview>
+
+    <app-home-description></app-home-description>
+
+    <app-home-places *ngIf="gallerySlides.length"
+        [gallerySlides]="gallerySlides">
+    </app-home-places>
+
+    <app-home-news *ngIf="allSnippets.length"
+        [newsSnippets]="newsSnippets"
+        [shareSnippets]="shareSnippets"
+        [allSnippets]="allSnippets">
+    </app-home-news>
+
+</main>

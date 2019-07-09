@@ -1,0 +1,36 @@
+<div class="purchase_credit">
+
+    <ul class="credit_list">
+
+        <li *ngFor="let snippet of snippetArray" class="credit_list_item">
+
+            <div class="credit_list_item_logo_wrap">
+                <img class="credit_list_item_logo" 
+                    *ngIf="snippet.image.length > 0"
+                     [src]="uploadsPath + snippet.image"
+                />
+            </div>
+
+            <span class="credit_list_item_content">Ставка:
+                <span>{{snippet.percent}} %</span>
+            </span>
+
+            <span class="credit_list_item_content  credit_list_item_content--margin">Первоначальный взнос:
+                <span>{{snippet.initial}} %</span>
+            </span>
+
+            <div *ngIf="!isAuthorizated">
+                <div 
+                    [ngClass]="{
+                        'credit_list_item_content--military' : snippet.category == 'military',
+                        'credit_list_item_base' : snippet.category == 'base'
+                    }" class="credit_list_item_content">
+                    {{(snippet.category == 'military' ? "Военная ипотека" : "")}}
+                </div>
+            </div>
+
+        </li>
+
+    </ul>
+
+</div>

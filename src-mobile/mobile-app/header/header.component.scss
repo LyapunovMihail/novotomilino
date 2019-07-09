@@ -1,0 +1,364 @@
+$color:  #1c1c1c;
+$color2:  #ffffff;
+
+.header {
+
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 73px;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.header .header__logo {
+
+    margin-left: 25px;
+    width: 196px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+}
+
+.header__logo-hide {
+
+    opacity: 0;
+}
+
+.header .header__logo:before {
+
+    content: '';
+    display: block;
+    width: 196px;
+    height: 40px;
+    left: 50%;
+    background: url('/assets/img/header/logo-trans.svg') no-repeat;
+    background-size: 100% 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+@media (max-width: 599px) {
+
+    .header .header__logo {
+
+        width: 196px;
+        height: 40px;
+        margin-left: 15px;
+    }
+
+    .header .header__logo:before {
+
+        width: 196px;
+        height: 40px;
+    }
+}
+
+.header__link {
+
+    display: block;
+    vertical-align: top;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    color: $color;
+    margin-top: 25px;
+
+    &.header__link--favorites {
+        padding-left: 30px;
+        position: relative;
+    }
+
+    &.header__link--favorites::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        background: url("/assets/img/header/star-copy.svg") no-repeat;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.header__links {
+
+    margin-top: 45px;
+    margin-bottom: 70px;
+}
+
+.header__links .header__link {
+
+    margin-left: 25px;
+}
+
+.header__bot {
+
+    margin-bottom: 13px;
+    padding-left: 25px;
+}
+
+.header__bot .header__link {
+
+    padding-left: 26px;
+    position: relative;
+    display: block;
+    font-weight: 400;
+}
+
+.header__right {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.header__bot .header__link:before {
+
+    content: '';
+    display: inline-block;
+    width: 19px;
+    height: 23px;
+    background: url('/assets/img/header/location.svg') no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0;
+}
+
+.header__nav {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 310px;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    transform: translate(100%, 0);
+    top: 0;
+    right: 0;
+    transition-duration: .3s;
+    overflow-y: scroll;
+}
+
+.header__nav-show {
+
+    transform: translate(0, 0);
+    transition-duration: .3s;
+}
+
+.header__phone-nav {
+
+    font-size: 16px;
+    line-height: 23px;
+    font-weight: 700;
+    color: $color;
+    margin-top: 15px;
+    display: block;
+}
+.header_networks {
+
+    margin-top: 10px;
+    display: flex;
+}
+
+.header_networks_text {
+
+    font-size: 16px;
+    line-height: 26px;
+}
+.header_networks_link--instagram {
+
+    width: 21px;
+    display: block;
+    height: 21px;
+    background: url('/assets/img/header/instagramm-nav.svg') no-repeat;
+    background-size: 100% 100%;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.header_networks_link--fb {
+
+    width: 21px;
+    display: block;
+    height: 21px;
+    background: url('/assets/img/header/fb-nav.svg') no-repeat;
+    background-size: 100% 100%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.header_networks_link--vk {
+
+    width: 26px;
+    display: block;
+    height: 16px;
+    background: url('/assets/img/header/vk-nav.svg') no-repeat;
+    background-size: 100% 100%;
+    margin-right: 26px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+@media(min-width: 600px) {
+
+    .header__mobile {
+
+        display: none;
+    }
+
+    .header__phone {
+
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 23px;
+        color: $color;
+        margin-right: 25px;
+    }
+}
+
+@media(max-width: 599px) {
+
+    .header__phone {
+
+       display: none;
+    }
+
+    .header__mobile {
+
+        width: 16px;
+        height: 25px;
+        margin-left: 15px;
+        background: url('/assets/img/header/mobile-black.svg') no-repeat;
+        background-size: 100% 100%;
+        margin-right: 25px;
+    }
+}
+
+.header__hamburger {
+
+    width: 30px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+    margin-right: 25px;
+    background-size: 100% 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.header__hamburger:before {
+
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 100%;
+    height: 2px;
+    background-color: $color;
+    transition-duration: .3s;
+}
+
+.header__hamburger:after {
+
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $color;
+    transition-duration: .3s;
+}
+
+.header__hamburger__active span {
+
+    opacity: 0;
+    transition-duration: .3s;
+}
+
+.header__hamburger__active:before {
+
+    background-color: $color !important;
+    transform: rotate(45deg);
+    transition-duration: .3s;
+}
+
+.header__hamburger__active:after {
+
+    background-color: $color !important;
+    transform: rotate(-45deg);
+    transition-duration: .3s;
+    bottom: 6px;
+}
+
+.header__hamburger span {
+
+    display: block;
+    height: 2px;
+    background-color: $color;
+}
+
+@media (max-width: 599px) {
+
+    .header__hamburger {
+
+        margin-right: 15px;
+    }
+}
+
+.header__fixed {
+
+    position: fixed;
+    background-color: $color;
+    height: 73px;
+}
+
+.header__fixed .header__hamburger span {
+
+    background-color: $color2;
+    transition-duration: .3s;
+}
+
+.header__fixed .header__hamburger:before {
+
+    background-color: $color2;
+    transition-duration: .3s;
+}
+
+.header__fixed .header__hamburger:after {
+
+    background-color: $color2;
+    transition-duration: .3s;
+}
+
+.header__fixed .header__phone {
+
+    color: $color2
+}
+
+.header__fixed .header__mobile {
+
+    margin-left: 15px;
+    background-image: url('/assets/img/header/mobile.svg');
+}
+
+.header__fixed-hide {
+
+    background-color: transparent;
+}
+
+@media (min-width: 600px) {
+
+    .header__fixed .header__logo {
+
+        margin-left: 25px;
+    }
+}

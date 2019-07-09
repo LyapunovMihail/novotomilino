@@ -1,0 +1,14 @@
+<li class="variation-item">
+
+    <a class="variation-item__link" [routerLink]="[item.url]">
+        
+        <div class="variation-item__wrapper">
+            <img class="variation-item__bgr" [src]="[item.image]">
+        </div>
+
+        <h2 class="variation-item__name variation-item__name_{{item.mod}}"
+            [innerHTML]="[item.name]"></h2>
+
+    </a>
+
+</li>

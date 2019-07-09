@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="86px" height="72px" viewBox="0 0 86 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="лендинг" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Барвиха" transform="translate(-1554.000000, -7657.000000)">
+            <g id="1" transform="translate(1554.000000, 7657.000000)">
+                <polygon id="Rectangle-30-Copy-28" fill="#000000" opacity="0.149999991" points="38.888727 33 86 33 50.0713895 55.9709671 0 72"></polygon>
+                <polygon id="Rectangle-30-Copy-14" fill="#323789" points="0 0 47 0 47 39.1764706 0 72"></polygon>
+                <path d="M33.890128,20.655064 C33.890128,26.307424 29.307928,30.890464 23.654728,30.890464 C18.002368,30.890464 13.420168,26.307424 13.420168,20.655064 C13.420168,15.002704 18.002368,10.419664 23.654728,10.419664 C29.307928,10.419664 33.890128,15.002704 33.890128,20.655064 Z" id="Stroke-1" stroke="#FFFFFF"></path>
+                <polygon id="Stroke-3" stroke="#FFFFFF" points="23.655064 16.261192 28.275064 19.617832 26.510224 25.049272 20.799904 25.049272 19.035064 19.617832"></polygon>
+                <path d="M23.655064,16.261192 L23.655064,10.419832" id="Stroke-5" stroke="#FFFFFF"></path>
+                <path d="M19.035064,19.617832 L14.220184,16.687912" id="Stroke-7" stroke="#FFFFFF"></path>
+                <path d="M20.799736,25.048936 L17.855536,29.086816" id="Stroke-9" stroke="#FFFFFF"></path>
+                <path d="M28.262716,19.617832 L33.040636,16.710592" id="Stroke-11" stroke="#FFFFFF"></path>
+                <path d="M26.498044,25.048936 L29.447284,29.093536" id="Stroke-13" stroke="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

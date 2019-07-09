@@ -1,0 +1,64 @@
+.flats {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 0 50px 0;
+}
+
+.empty {
+    margin-top: 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 15px 'abrade-book', sans-serif;
+
+    &:not(.result__pdf):not(.result__request-item):not(.empty) {
+        color: #888ba2;
+    }
+}
+
+.up {
+    position: fixed;
+    visibility: hidden;
+    width: 54px;
+    height: 54px;
+    top: 100px;
+    right: 25px;
+    cursor: pointer;
+    z-index: 99;
+
+    @media (max-width: 599px) {
+        top: 85px;
+        right: 15px;
+    }
+
+    &_active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    svg path {
+
+        transition-duration: .3s;
+    }
+    
+    svg circle {
+    
+        transition-duration: .3s;
+    }
+}
+
+.more {
+    width: 177px;
+    height: 50px;
+    font: bold 18px 'Montserrat';
+    color: #3a3a39;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #cda571;
+    border-radius: 5px;
+    margin: -60px auto 60px;
+    user-select: none;
+}

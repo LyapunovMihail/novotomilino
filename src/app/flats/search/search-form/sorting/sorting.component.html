@@ -1,0 +1,12 @@
+<div class="search_form_output-sorting">
+        
+    <div *ngFor="let sort of sortList"
+        (click)="sortChange(sort.name, !sort.value)"
+        [ngClass]="{
+            'search_form_output-sorting_control--active': (activeSort === sort.name),
+            'search_form_output-sorting_control--turn': (activeSort === sort.name && !sort.value )
+        }"
+        class="search_form_output-sorting_control search_form_output-sorting_control--{{sort.name}}">
+    </div>
+
+</div>

@@ -1,0 +1,25 @@
+.news {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 132px 0 150px;
+
+    &_wrapper {
+
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 15px;
+
+        @media(min-width: 600px) {
+            padding: 0 25px;
+        }
+
+        @media(min-width: 1220px) {
+            padding: 0;
+            margin: 0 auto;
+            max-width: 550px;
+        }
+    }
+}

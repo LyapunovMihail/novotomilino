@@ -1,0 +1,58 @@
+<section class="news">
+
+
+    <div class="news_snippets">
+
+        <div class="news_snippets_header">
+                
+            <h1 class="title news_snippets_header_title">Новости</h1>
+
+            <div class="news_snippets_header_descr">Следите за новостями и акциями и не пропустите самые выгодные <br> предложения по покупке квартир</div>
+        
+            <div (click)="createSnippet()" *ngIf="isAuthorizated" class="admin-controll add-news-btn">Добавить</div>
+        
+        </div>
+    
+
+        <!-- список новостей -->
+        <app-news-list class="news_snippets_list"
+            (deleteSnippet)="deleteSnippet($event)"
+            (redactSnippet)="redactSnippet($event)"
+            [isAuthorizated]="isAuthorizated" 
+            [snippetsArray]="snippetsArray">
+        </app-news-list>
+        <!-- end : список новостей -->
+
+    </div>
+
+</section>
+
+
+
+<!-- форма создания новости -->
+<app-news-create-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)" 
+    (close)="isCreateForm = false; windowScrollLocker.unblock()" 
+    [isForm]="isCreateForm">
+</app-news-create-form>
+
+
+<!-- форма редактирования новости -->
+<app-news-redact-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)" 
+    (close)="isRedactForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="snippetsArray"
+    [redactId]="redactId" [isForm]="isRedactForm">
+</app-news-redact-form>
+
+<!-- форма удаления новости -->
+<app-news-delete-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)"
+    (close)="isDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="snippetsArray"
+    [redactId]="redactId" [isForm]="isDeleteForm">
+</app-news-delete-form>
+

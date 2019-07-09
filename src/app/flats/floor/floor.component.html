@@ -1,0 +1,29 @@
+<div class="floor flats_main">
+
+
+    <div class="floor_description">
+
+        <div [innerHTML]="floorSvg | houseSVGSanitizePipe"  class="floor_description_scheme"></div>
+
+        <app-floor-info-window
+            [infoWindow]="infoWindow">
+        </app-floor-info-window>
+
+    </div>
+
+
+    <ul class="floor_flats-colors">
+        <li *ngFor="let dot of dottedListMenu" 
+            class="floor_flats-colors_item floor_flats-colors_item--{{dot.mod}}">
+            {{dot.name}}
+        </li>
+    </ul>
+
+</div>
+
+<app-floor-side-bar
+    (svgClick)="svgRouterLink($event)"
+    [floorNumber]="floorNumber"
+    [sectionNumber]="sectionNumber"
+    [floorSelector]="floorSelector">
+</app-floor-side-bar>

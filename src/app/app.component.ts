@@ -1,10 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AppState } from './app.service';
+
+export const ROOT_SELECTOR = 'app-root';
+declare let $: any;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: ROOT_SELECTOR,
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    './app.component.css'
+  ],
+  template: `
+      <app-authorization></app-authorization>
+
+      <section>
+
+          <app-header></app-header>
+
+          <router-outlet></router-outlet>
+
+          <app-footer></app-footer>
+
+      </section>
+
+      <app-overlay></app-overlay>
+      <app-img-modal></app-img-modal>
+      <app-video-modal></app-video-modal>
+  `
 })
-export class AppComponent {
-  title = 'novotomilino';
+export class AppComponent implements OnInit {
+
+  constructor(
+    public appState: AppState
+  ) {}
+
+  public ngOnInit() {
+      console.log('Initial App State', this.appState.state);
+
+      $('[data-show-video-js]').click(function (e) {
+
+          e.preventDefault();
+
+          $('.overlay').fadeIn(function () {
+
+              $('.modal-video').fadeIn();
+          });
+      });
+
+      $('.overlay').click(function () {
+
+          $('.modal-video, .modal-plan').fadeOut(function () {
+
+              $('.overlay').fadeOut();
+          });
+      });
+  }
+
 }
+
+/**
+ * Please review the https://github.com/AngularClass/angular-examples/ repo for
+ * more angular app examples that you may copy/paste
+ * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
+ * For help or questions please contact us at @AngularClass on twitter
+ * or our chat on Slack at https://AngularClass.com/slack-join
+ */
