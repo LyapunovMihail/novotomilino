@@ -15,16 +15,11 @@
                 <div class="header__head-menu-item"></div>
             </div>
         </section>
-        <nav class="header__nav">
+        <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
             <ul class="header__nav-list">
-                <li class="header__nav-list-item"><a href="#">О ЖК</a></li>
-                <li class="header__nav-list-item"><a href="#">Расположение</a></li>
-                <li class="header__nav-list-item"><a href="#">Квартиры</a></li>
-                <li class="header__nav-list-item"><a href="#">Отделка</a></li>
-                <li class="header__nav-list-item"><a href="#">Ход строительства</a></li>
-                <li class="header__nav-list-item"><a href="#">Условия покупки</a></li>
-                <li class="header__nav-list-item"><a href="#">Новости</a></li>
-                <li class="header__nav-list-item"><a href="#">Избранное</a></li>
+                <li class="header__nav-list-item" *ngFor="let link of links">
+                    <a [routerLink]="link.url">{{link.name}}</a>
+                </li>
             </ul>
 
             <div class="header__nav-footer">

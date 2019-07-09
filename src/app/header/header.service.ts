@@ -27,13 +27,16 @@ export class HeaderService {
                 name: 'О ЖК',
                 url: '/about'
             }, {
+                name: 'Расположение',
+                url: `/location`
+            }, {
                 name: 'Квартиры',
                 url: `/flats`
             }, {
                 name: 'Отделка',
                 url: '/decoration'
             }, {
-                name: 'Фотоотчет',
+                name: 'Ход строительства',
                 url: `/dynamic/${year}/${month}`
             }, {
                 name: 'Условия покупки',
@@ -41,10 +44,7 @@ export class HeaderService {
             }, {
                 name: 'Новости',
                 url: '/news'
-            }, {
-                name: 'Акции',
-                url: '/shares'
-            }/*, {
+            } /*, {
                 name: 'Избранное',
                 url: '/favorites'
             }, */

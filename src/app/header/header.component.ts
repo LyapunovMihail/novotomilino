@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     public isFixed: boolean;
     public pageWithOffice: boolean;
+    public isHidden: boolean;
     public links = [];
 
     // подписка на скролл страницы HomePage
@@ -62,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 },
                 (err) => {
                     console.error(err);
-                    let date = new Date();
+                    const date = new Date();
                     this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
                 }
             );
@@ -88,18 +89,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
     }
 
-    // если расстояние скрлла больше высоты одного экрана
+    // если расстояние скрлла больше высоты хедера
     // хедер фиксируется
     public fixedHeader() {
-        this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
-            let windowHeight = document.querySelector('.main').clientHeight;
-            let winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-            if (winScrollTop >= windowHeight) {
+        let winScrollTopPrev = 0;
+
+        this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
+
+            const headerHeight = document.querySelector('.header').clientHeight;
+            const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const headerScrollTop = winScrollTop + document.querySelector('.header__nav').getBoundingClientRect().top;
+
+            if (winScrollTop > headerScrollTop + 46) {
                 this.isFixed = true;
-            } else {
+            } else if (winScrollTop < headerHeight - 46) {
                 this.isFixed = false;
             }
+
+            if (winScrollTopPrev < winScrollTop) {
+                this.isHidden = true;
+            } else {
+                this.isHidden = winScrollTop < headerHeight - 46;
+            }
+
+            winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         }));
     }
 }

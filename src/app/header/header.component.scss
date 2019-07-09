@@ -106,6 +106,14 @@
         justify-content: center;
         z-index: 1;
         transition: top $transition;
+        top: 0;
+
+        &--fixed {
+            position: fixed;
+        }
+        &--hidden {
+            top: -46px;
+        }
 
         &-list {
             width: 100%;
