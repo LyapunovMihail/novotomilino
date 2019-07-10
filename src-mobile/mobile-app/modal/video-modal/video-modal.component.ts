@@ -1,4 +1,3 @@
-import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { VideoModalService } from './video-modal.service';
@@ -7,7 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
     selector: 'app-video-modal',
     template: `
-        <div class="modal-video">
+        <div class="modal-video" [class.modal-video--active]="visible">
             <div class="iv-embed"
                  style="margin: 0 auto; padding: 0; border: 0; max-width:642px; width: 100%">
                 <div class="iv-v"
@@ -27,10 +26,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
                 </div>
             </div>
         </div>      `,
-    styleUrls: ['./video-modal.component.scss'],
-    providers: [
-        WindowScrollLocker
-    ]
+    styleUrls: ['./video-modal.component.scss']
 })
 export class VideoModalComponent implements OnInit, OnDestroy {
 
@@ -40,8 +36,7 @@ export class VideoModalComponent implements OnInit, OnDestroy {
     private _ngUnsubscribe: Subject<any> = new Subject();
 
     constructor(
-        private videoModalService: VideoModalService,
-        private windowScrollLocker: WindowScrollLocker
+        private videoModalService: VideoModalService
     ) {
     }
 
@@ -60,10 +55,5 @@ export class VideoModalComponent implements OnInit, OnDestroy {
         this.subs.forEach((sub: Subscription) => {
             sub.unsubscribe();
         });
-    }
-
-    public closeVideo(): void {
-        this.videoModalService.changeVideoVisibility(false);
-        this.windowScrollLocker.unblock();
     }
 }

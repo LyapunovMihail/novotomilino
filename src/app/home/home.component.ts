@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
@@ -17,10 +17,11 @@ declare let $: any;
     ],
     providers: [
         PlatformDetectService,
-        HomeService]
+        HomeService
+    ]
 })
 
-export class HomeComponent  {
+export class HomeComponent implements OnInit {
 
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
@@ -35,50 +36,6 @@ export class HomeComponent  {
     public ngOnInit() {
 
         if ( !this.platform.isBrowser ) { return false; }
-
-        let scrllTop = 0;
-
-        $(window).on('scroll', function() {
-
-            const scrllDown = $(this).scrollTop();
-
-            if (scrllTop < scrllDown) {
-                console.log('Вниз! Ты крутишь вниз!');
-
-                fixNav();
-                $('.header__nav').css('top', '-46px');
-            } else {
-                console.log('Вверх! Ты крутишь вверх!');
-
-                showHead();
-                fixNav();
-            }
-
-            scrllTop = $(this).scrollTop();
-        });
-
-        function fixNav() {
-
-            if ($(window).scrollTop() > ($('.header__nav').offset().top) + 46) { // Где 46 это высота .header__nav
-
-                $('.header__nav').css('position', 'fixed');
-            } else if ($(window).scrollTop() < ($('.header').outerHeight() - 46)) { // Где 46 это высота .header__nav
-
-                $('.header__nav').css({
-                    position: 'unset',
-                    top: ''
-                });
-            }
-        }
-        function showHead() {
-
-            if ($(window).scrollTop() > ($('.header').outerHeight() - 46)) {
-
-                $('.header__nav').css({
-                    top: '0px'
-                });
-            }
-        }
 
         combineLatest(
             this.homeService.getShares(),

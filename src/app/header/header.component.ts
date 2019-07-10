@@ -101,16 +101,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
             const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const headerScrollTop = winScrollTop + document.querySelector('.header__nav').getBoundingClientRect().top;
 
-            if (winScrollTop > headerScrollTop + 46) {
+            if (winScrollTop > headerScrollTop + 46) { // 46 - высота header__nav
                 this.isFixed = true;
-            } else if (winScrollTop < headerHeight - 46) {
+            } else if (winScrollTop < headerHeight - 46) { // 46 - высота header__nav
                 this.isFixed = false;
             }
 
             if (winScrollTopPrev < winScrollTop) {
                 this.isHidden = true;
             } else {
-                this.isHidden = winScrollTop < headerHeight - 46;
+                this.isHidden = winScrollTop < headerHeight - 46; // 46 - высота header__nav
             }
 
             winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;

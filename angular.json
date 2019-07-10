@@ -141,8 +141,7 @@
             ],
             "scripts": [
                 "src-mobile/assets/js/jquery-3.3.1.js",
-                "src-mobile/assets/js/owl.carousel.min.js",
-                "src-mobile/assets/js/swiper.min.js"
+                "src-mobile/assets/js/owl.carousel.min.js"
             ],
             "es5BrowserSupport": true
           },
@@ -202,8 +201,7 @@
             ],
             "scripts": [
                 "src-mobile/assets/js/jquery-3.3.1.js",
-                "src-mobile/assets/js/owl.carousel.min.js",
-                "src-mobile/assets/js/swiper.min.js"
+                "src-mobile/assets/js/owl.carousel.min.js"
             ],
             "assets": [
               "src-mobile/assets"

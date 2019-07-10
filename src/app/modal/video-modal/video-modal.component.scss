@@ -1,10 +1,19 @@
 .modal-video {
 
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: max-content;
-    z-index: 999;
+    position: unset;
+    width: 0;
+    z-index: 0;
+    opacity: 0;
+
+    &--active {
+
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: max-content;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.7s;
+    }
 }

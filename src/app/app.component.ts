@@ -36,24 +36,6 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
       console.log('Initial App State', this.appState.state);
-
-      $('[data-show-video-js]').click(function (e) {
-
-          e.preventDefault();
-
-          $('.overlay').fadeIn(function () {
-
-              $('.modal-video').fadeIn();
-          });
-      });
-
-      $('.overlay').click(function () {
-
-          $('.modal-video, .modal-plan').fadeOut(function () {
-
-              $('.overlay').fadeOut();
-          });
-      });
   }
 
 }
