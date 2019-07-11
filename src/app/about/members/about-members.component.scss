@@ -1,75 +1,121 @@
+@import "../../../styles/modules/mixins/mixin";
+
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 .members {
-    padding-top: 120px;
+    height: 962px;
+    height: 67vw;
+    min-height: 737px;
+    background: url('../../../assets/img/about/genplan_footer.jpg') bottom no-repeat;
+    background-size: 100% auto;
 
-    &_list {
-        width: 1032px;
-        display: flex;
+    &__head,
+    &__content {
+        width: 604.5px;
+        max-width: $w1600;
 
-        &_item {
-            width: 234px;
-            height: 157px;
-            transition: .2s linear;
-            cursor: pointer;
-            position: relative;
-            border-radius: 7px;
+        &:not(.members__content) {
+            margin: 0 30px 0 0;
+        }
+    }
+    &__head {
+        &-title {
+            margin: 120px 0 20px;
+            color: $col-black;
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-descr {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 134px 0 30px;
+            opacity: .8;
+        }
+        &-info {
+            width: 100%;
+            max-width: 392px;
+            display: flex;
+            flex-flow: column nowrap;
 
-            &:hover {
-                box-shadow: 0 7px 16px rgba(0,0,0,.3);
-            }
-
-            &_link {
+            &-item {
+                margin: 0 0 8px;
                 display: flex;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                flex-direction: column;
-                justify-content: space-between;
-                box-sizing: border-box;
-                padding: 10px 22px 17px;
 
-                &--troika {
-                    background: url('/assets/img/about/members/trojka-2.svg') 0px 60px no-repeat;
-                    background-size: 226px 42px;
+                &:nth-child(4) {
+                    margin-top: 21px;
                 }
-
-                &--iskona {
-                    background: url('/assets/img/about/members/elit-stroy.svg') 13px 67px no-repeat;
-                    background-size: 192px 29px;
+            }
+            &-title {
+                font: 500 16px/23px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                margin: 0 30px 0 0;
+                width: 181px;
+            }
+            &-subtitle {
+                font: 500 16px/22px $font-mus;
+                @include font-smoothing;
+                // width: 181px;
+                position: relative;
+                text-decoration: none;
+    
+                &:before {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    bottom: 1px;
+                    width: 100%;
+                    height: 1px;
+                    background-color: $col-orange;
+                    transition: width $trans-link;
                 }
-
-                &--bsa {
-                    background: url('/assets/img/about/members/bsa-2.svg') 22px 61px no-repeat;
-                    background-size: 96px 33px;
-                }
-
-                &--sber {
-                    background: url('/assets/img/about/members/sber-b.png') 20px 57px no-repeat;
-                    background-size: 161px 40px;
-                }
-
-                &_text {
-                    font: 15px/27px 'Montserrat', sans-serif;
-                    @include font-smoothing();
-
-                    &:not(.members_list_item_link_text--blue) {
-                        color: #1c1c1c;
-                        opacity: 0.5;
-                    }
-
-                    &--blue {
-                        border-bottom: 1px solid;
-                        width: fit-content;
-                        color: #cda571;
+    
+                &:hover {
+                    &:before {
+                        width: 0%;
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+    .members__head,
+    .members__content{
+        width: 100%;
+        max-width: 708px;
+    }
+    .members__head:not(.members__content) {
+        margin: 0;
+    }
+    .main__container_row {
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .members__content {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        
+        &-descr {
+            margin-top: 0;
+            padding-right: 100px;
+            box-sizing: border-box;
+        }
+        &-info {
+            max-width: 338px;
         }
     }
 }
