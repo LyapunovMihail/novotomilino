@@ -1,98 +1,40 @@
-@import './../dynamic-vars';
+@import '../../../styles/modules/mixins/mixin';
 
-.dynamic_month-switch {
+.dynamic-month__switch {
+    width: $w1600;
     display: flex;
-    width: 1199px;
-    align-items: flex-start;
-    justify-content: space-between;
 
-    &_item {
-        font: 18px/22px  Montserrat, serif;
-        font-weight: 700;
-        color: $color;
-        padding-left: 86px;
-        position: relative;
-        user-select: none;
-        transition: .2s linear;
-
-        &--to-left {
-        }
-
-        &--to-right {
-            padding-right: 86px;
-
-            &:before {
-                right: 0;
-                left: initial !important;
-            }
-
-            &:after {
-                right: 24px;
-                left: initial !important;
-                transform: rotate(-135deg) !important;
-            }
-        }
-
-        &:before {
-            content: '';
-            width: 56px;
-            height: 56px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto 0;
-            background-size: 100%;
-            border: 1px solid $color4;
-            border-radius: 29px;
-            transition: .2s linear;
-        }
-
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 24px;
-            width: 14px;
-            height: 14px;
-            margin: auto 0;
-            object-fit: contain;
-            border-left: solid 3px #cda571;
-            border-bottom: solid 3px #cda571;
-            transition: .2s linear;
-            transform: rotate(45deg);
-        }
+    &-item {
+        width: 182px;
+        height: 40px;
+        box-sizing: border-box;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        font: 500 16px/20px $font-mus;
+        @include font-smoothing;
+        color: #e7490f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: $transition;
+        cursor: pointer;
 
         &:hover {
-            color: $color4;
-            cursor: pointer;
-
-            &:before {
-                background-color: $color4;
-            }
-
-            &:after {
-                border-color: $color6;
-            }
+            color: #fff;
+            background: #e7490f;
         }
-
-        &--to-left {
+        &:hover svg g {
+            stroke: #fff;
         }
+        &_prev {
+            margin: 0 30px 0 0;
 
-        &--to-right {
-            padding-right: 86px;
-
-            &:before {
-                right: 0;
-                left: initial !important;
-            }
-
-            &:after {
-                right: 24px;
-                left: initial !important;
-                transform: rotate(-135deg) !important;
-            }
+            span { margin: 0 0 0 12px; }
+        }
+        &_next {
+            span { margin: 0 12px 0 0; }
+            svg  { transform: rotate(180deg); }
         }
     }
 }

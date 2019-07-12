@@ -1,78 +1,102 @@
 
 <ng-container *ngFor="let object of objectsArray">
 
-    <div [id]="object._id" *ngIf="(object.year === year && object.month === month)" class="dynamic_section">
+    <div [id]="object._id" *ngIf="(object.year === year && object.month === month)" class="dynamic-object">
 
-        <!-- полоса готовности объекта -->
-        <div class="dynamic_section_readiness">
-            <span class="dynamic_section_readiness_text">Готовность 
-
-                <div *ngIf="isAuthorizated" class="admin-dynamic-ready-wrap">
-                    <input class="admin-dynamic-ready admin-controll"  
-                        [value]="object.ready" 
-                        (change)="changeReady(object._id, $event)" type="number"
-                    />
+        <!-- Удалить объект / Заголовок / Прогресс / Добавить фото -->
+        <div class="dynamic-object__content">
+            <div class="dynamic-object__title-wrap">
+                <h2 class="dynamic-object__title">{{object.title}}</h2>
+    
+                <div class="dynamic-object__progress">
+                    <div *ngIf="isAuthorizated" class="dynamic-object__progress-wrap">
+                        <input class="dynamic-object__progress-input"  
+                            [value]="object.ready" 
+                            (change)="changeReady(object._id, $event)" type="number"
+                        />
+                    </div>
+    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+                        <g fill="none" fill-rule="evenodd">
+                            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" text-anchor="middle" transform="translate(7, 1.5)">
+                                <tspan x="13" y="22">{{object.ready}}%</tspan>
+                            </text>
+                            <path fill="#455A64" fill-opacity=".002" d="M20 0c7.15 0 13.75 3.81 17.32 10a20.013 20.013 0 0 1 0 20C33.75 36.19 27.15 40 20 40S6.25 36.19 2.68 30a20.013 20.013 0 0 1 0-20C6.25 3.81 12.85 0 20 0v4C14.28 4 9 7.05 6.14 12a15.99 15.99 0 0 0 0 16 16.004 16.004 0 0 0 27.72 0 15.99 15.99 0 0 0 0-16C31 7.05 25.72 4 20 4V0z"/>
+                            <g transform="translate(-180.000000, -116.000000)">
+                                <g transform="translate(179.000000, 116.000000)">
+                                    <g>
+                                        <path d="M21,0 C28.15,0 34.75,3.81 38.32,10 C41.89,16.19 41.89,23.81 38.32,30 C34.75,36.19 28.15,40 21,40 C13.85,40 7.25,36.19 3.68,30 C0.11,23.81 0.11,16.19 3.68,10 C7.25,3.81 13.85,0 21,0 L21,4 C15.28,4 10,7.05 7.14,12 C4.28,16.95 4.28,23.05 7.14,28 C10,32.95 15.28,36 21,36 C26.72,36 32,32.95 34.86,28 C37.72,23.05 37.72,16.95 34.86,12 C32,7.05 26.72,4 21,4 L21,0 Z" id="Base-plate" fill-opacity="0.002" fill="#455A64"></path>
+                                        <g transform="translate(0.997500, 0.000000)" fill="#DDDDDD" stroke="#FFFFFF" stroke-width="0.25">
+                                            <g id="Segment-18" transform="translate(20.002500, -0.000000)">
+                                                <path d="M0.125,0.125394025 L0.125,3.87548403 C3.44690007,3.901213 6.67571908,4.95203138 9.37229729,6.88572368 L11.5849781,3.84797541 C8.23886762,1.45347584 4.23137623,0.151307009 0.125,0.125394398 Z" id="Segment-1"></path>
+                                            </g>
+                                            <g id="Segment-19" transform="translate(29.402500, 3.820000)">
+                                                <path d="M2.38736672,0.174737599 L0.174326883,3.21297873 C2.85135931,5.1958601 4.85676606,7.94780714 5.89983533,11.0824617 L9.46206963,9.92004836 C8.15926261,6.00460627 5.69315908,2.60396879 2.3873665,0.174737894 Z" id="Segment-2"></path>
+                                            </g>
+                                            <g id="Segment-20" transform="translate(35.222500, 13.820000)">
+                                                <path d="M3.7195231,0.157747693 L0.156902604,1.32028701 C1.15436595,4.48213451 1.15436595,7.87786549 0.156902154,11.0397128 L3.7195231,12.2022523 C4.9701591,8.28096725 4.9701591,4.07903275 3.71952271,0.157747819 Z" id="Segment-3"></path>
+                                            </g>
+                                            <g id="Segment-11" transform="translate(29.402500, 24.940000)">
+                                                <path d="M9.46207041,1.31995189 L5.89983533,0.157538338 C4.85676606,3.29219286 2.85135931,6.0441399 0.174326587,8.02702087 L2.38736672,11.0652624 C5.69315908,8.63603121 8.15926261,5.23539373 9.46206963,1.31995164 Z" id="Segment-4"></path>
+                                            </g>
+                                            <g id="Segment-12" transform="translate(20.002500, 32.940000)">
+                                                <path d="M11.5849786,3.21202522 L9.37229757,0.174276704 C6.67571908,2.10796862 3.44690007,3.158787 0.125,3.18451595 L0.125,6.93460597 C4.23137623,6.90869299 8.23886762,5.60652416 11.5849781,3.21202459 Z" id="Segment-5"></path>
+                                            </g>
+                                            <g id="Segment-13" transform="translate(8.242500, 32.940000)">
+                                                <path d="M11.635,6.93460597 L11.635,3.18451597 C8.31309993,3.158787 5.08428092,2.10796862 2.38770271,0.174276317 L0.175021416,3.21202522 C3.52113238,5.60652416 7.52862377,6.90869299 11.635,6.9346056 Z" id="Segment-6"></path>
+                                            </g>
+                                            <g id="Segment-14" transform="translate(0.982500, 24.940000)">
+                                                <path d="M7.23263328,11.0652624 L9.44567312,8.02702127 C6.76864069,6.0441399 4.76323394,3.29219286 3.72016467,0.157538338 L0.157929594,1.31995189 C1.46073739,5.23539373 3.92684092,8.63603121 7.2326335,11.0652621 Z" id="Segment-7"></path>
+                                            </g>
+                                            <g id="Segment-15" transform="translate(-0.000000, 13.820000)">
+                                                <path d="M1.0629769,12.2022523 L4.6255974,11.039713 C3.62813405,7.87786549 3.62813405,4.48213451 4.62559785,1.32028716 L1.0629769,0.157747693 C-0.187659095,4.07903275 -0.187659095,8.28096725 1.06297729,12.2022522 Z" id="Segment-8"></path>
+                                            </g>
+                                            <g id="Segment-16" transform="translate(0.982500, 3.820000)">
+                                                <path d="M0.157930372,9.92004836 L3.72016465,11.0824617 C4.76323394,7.94780714 6.76864069,5.1958601 9.44567341,3.21297913 L7.23263328,0.174737599 C3.92684092,2.60396879 1.46073739,6.00460627 0.157930372,9.92004836 Z" id="Segment-9"></path>
+                                            </g>
+                                            <g id="Segment-17" transform="translate(8.242500, -0.000000)">
+                                                <path d="M0.175021416,3.84797478 L2.38770243,6.8857233 C5.08428092,4.95203138 8.31309993,3.901213 11.635,3.87548405 L11.635,0.125394025 C7.52862377,0.151307009 3.52113238,1.45347584 0.175021874,3.84797541 Z" id="Segment-10"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
-                
-                <span *ngIf="!isAuthorizated">{{object.ready}}</span> %
-            </span>
-            <div class="dynamic_section_readiness_scale">
-                <div [style.width.%]="object.ready" class="dynamic_section_readiness_scale_fill"></div>
-            </div>
-        </div>
-        <!-- end: полоса готовности объекта -->
-
-
-        <h2 class="dynamic_section_title">{{object.title}}</h2>
-
-        <span *ngIf="!isAuthorizated" class="dynamic_section_description" [innerHTML]="object.description | lineBreakPipe"></span>
-        
-        <textarea *ngIf="isAuthorizated" class="dynamic_section_description admin-dynamic-description admin-controll" (change)="changeDescription(object._id, $event)" [value]="object.description"></textarea>
-        
-
-        <!-- блок с изображениями -->
-        <ul class="dynamic_section_gallery">
-
-            <li (click)="image.type == 'VIDEO' ? startVideoShow(image.origin) : startSlideShow(object._id, item)" *ngFor="let image of object.images; let item = index"
-                class="dynamic_section_gallery_item"
-                [ngClass]="{
-                    'dynamic_section_gallery_item--img': image.type === 'IMAGE',
-                    'dynamic_section_gallery_item--video': image.type === 'VIDEO'
-                }">
-
-                <div *ngIf="isAuthorizated" class="admin-dynamic-delete-image admin-controll" (click)="deleteImage(object._id, image.thumbnail, image.type)"></div>
-                
-                <img *ngIf='image.type == "IMAGE"' class="dynamic_section_gallery_item_content" [src]="uploadsPath + image.thumbnail">
-
-                <iframe *ngIf='image.type == "VIDEO"' class="dynamic_section_gallery_item_content"
-                    [src]="image.thumbnail | videoSanitizerPipe">
-                </iframe>
-            </li>
-
-        </ul>
-        <!-- end: блок с изображениями -->
-
-        
-        <!-- блок загрузки изображиний и видео -->
-        <div *ngIf="isAuthorizated" [ngClass]="{'admin-dynamic-load-media-block--with-margin': object.images.length > 0}" class="admin-dynamic-load-media-block admin-controll">
-            
-            <div class="admin-dynamic-load-media-block_content">
-                Фотографии
-                <label class="admin-dynamics_content-load-btn">Загрузить
+    
+                <label class="dynamic-object__file" *ngIf="isAuthorizated">Загрузить фото
                     <input style='display: none;' type="file" (change)="setSlides(object._id, $event)" multiple placeholder="Upload file" accept=".jpg" multiple>
                 </label>
+    
+                <div class="dynamic-object__del-object" *ngIf="isAuthorizated" (click)="deleteObject(object._id)"></div>
             </div>
-
-            <form class="admin-dynamic-load-media-block_content" [formGroup]="formVideo" (ngSubmit)="setVideo(object._id, formVideo.value)">
-                Видео
-                <input class="admin-dynamic-load-media-block_input" [formControl]="formVideo.controls['origin']" type="text" placeholder="Введите ссылку на видео">
-                <button type="submit" class="admin-dynamics_content-load-btn">Добавить</button>
-            </form>
-
-            <div class="admin-dynamic-delete-object" (click)="deleteObject(object._id)">Удалить объект</div>
+    
+            <!-- End: Удалить объект / Заголовок / Прогресс / Добавить фото -->
+    
+            <!-- блок с изображениями -->
+            <ul class="dynamic-object__gallery">
+    
+                <li (click)="image.type == 'VIDEO' ? startVideoShow(image.origin) : startSlideShow(object._id, item)" *ngFor="let image of object.images; let item = index"
+                    class="dynamic-object__gallery-item"
+                    [ngClass]="{
+                        'dynamic-object__gallery-item_img': image.type === 'IMAGE',
+                        'dynamic-object__gallery-item_video': image.type === 'VIDEO'
+                    }">
+    
+                    <div *ngIf="isAuthorizated" class="dynamic-object__gallery-item-del admin-controll" (click)="deleteImage(object._id, image.thumbnail, image.type)"></div>
+                    
+                    <div class="dynamic-object__gallery-item-wrap">
+                        <img *ngIf='image.type == "IMAGE"' class="dynamic-object__gallery-item-content" [src]="uploadsPath + image.thumbnail">
+                    </div>
+    
+                    <iframe *ngIf='image.type == "VIDEO"' class="dynamic-object__gallery-item-content"
+                        [src]="image.thumbnail | videoSanitizerPipe">
+                    </iframe>
+                </li>
+    
+            </ul>
         </div>
-        <!-- end: блок загрузки изображиний и видео -->
-        
 
     </div>
 
