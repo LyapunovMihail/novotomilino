@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
-                    if (this.router.url === '/') {
+                    if (this.router.url === '/' || this.router.url === '/about') {
                         this.fixedHeader();
                         this.isFixed = false;
                         this.pageWithOffice = true;
@@ -49,7 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                         this.subscriptions.forEach((sub) => {
                             sub.unsubscribe();
                         });
-                        this.isFixed = true;
+                        this.isFixed = false;
+                        this.isHidden = false;
                         this.pageWithOffice = false;
                     }
                 }
