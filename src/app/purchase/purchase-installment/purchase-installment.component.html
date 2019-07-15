@@ -1,43 +1,42 @@
-<div class="purchase_installment">
+<div class="purchase-installment">
 
-    <ul class="installment_calculator">
+    <ul class="purchase-installment__calculator installment-calculator">
 
-        <li class="installment_calculator_item">
+        <!-- <li class="installment-calculator__item">
 
-            <div class="installment_calculator_item_wrap">
-                <span class="installment_calculator_item_text">Стоимость квартиры, &#8381;</span>
+            <div class="installment-calculator__item-wrap">
+                <span class="installment-calculator__item-text">Стоимость квартиры, &#8381;</span>
                 <input (change)="formChanges($event.target.value, 'price')" 
                     (input)="bitReplace($event.target.value, 'price')"
                     (keyup)="keyUpReviuse($event)"
                     [value]="form.price.val | installmentNumberPipe" 
-                    class="field installment_calculator_item_field" type="text">
+                    class="field installment-calculator__item-field" type="text">
             </div>
 
-            <div class="installment_calculator_item_wrap">
-                <span class="installment_calculator_item_text">Первоначальный взнос, &#8381;<br>
+            <div class="installment-calculator__item-wrap">
+                <span class="installment-calculator__item-text">Первоначальный взнос, &#8381;<br>
                 </span>
                 <input (change)="formChanges($event.target.value, 'firstpay')" 
                     (input)="bitReplace($event.target.value, 'firstpay')"
                     (keyup)="keyUpReviuse($event)"
                     [value]="form.firstpay.val | installmentNumberPipe" 
-                    class="field installment_calculator_item_field" type="text">
+                    class="field installment-calculator__item-field" type="text">
             </div>
 
-            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment_calculator_item_wrap">
-                <span class="installment_calculator_item_text">Срок выплат, месяцев</span>
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__item-wrap">
+                <span class="installment-calculator__item-text">Срок выплат, месяцев</span>
                 <input (change)="formChanges($event.target.value, 'month')"
                     (input)="bitReplace($event.target.value, 'month')"
                     (keyup)="keyUpReviuse($event)"
                     [value]="form.month.val"
-                    class="field installment_calculator_item_field" type="text">
+                    class="field installment-calculator__item-field" type="text">
             </div>
 
-        </li>
-
-
-        <li class="installment_calculator_item">
-
-            <div class="installment_calculator_item_wrap">
+        </li> -->
+    
+        <li class="installment-calculator__item">
+            <span class="installment-calculator__item-text">Стоимость квартиры, &#8381;</span>
+            <div class="installment-calculator__item-wrap">
                 <ghm-range-number 
                     (move)="form.price.val = $event"
                     (moveend)="formChanges($event, 'price')"
@@ -46,23 +45,11 @@
                     [max]="form.price.max"
                     [start]="form.price.val">
                 </ghm-range-number>
-
-                <li class="installment_calculator_item--result">
-
-                    <div [ngClass]="{'disabled-opacity': isFullPay }">
-                        <p class="installment_calculator_item_title">Ставка</p>
-                        <p class="installment_calculator_item_result">{{percent}}% годовых</p>
-                    </div>
-
-                    <div [ngClass]="{'disabled-opacity': isFullPay }">
-                        <p class="installment_calculator_item_title">Размер ежемесячных выплат</p>
-                        <p class="installment_calculator_item_result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
-                    </div>
-
-                </li>
             </div>
-
-            <div class="installment_calculator_item_wrap installment_calculator_item_wrap--noflex">
+        </li>
+        <li class="installment-calculator__item">
+            <span class="installment-calculator__item-text">Первоначальный взнос, &#8381;</span>
+            <div class="installment-calculator__item-wrap ">
                 <ghm-range-number 
                     (move)="form.firstpay.val = $event"
                     (moveend)="formChanges($event, 'firstpay')"
@@ -71,9 +58,12 @@
                     [max]="form.firstpay.max"
                     [start]="form.firstpay.val">
                 </ghm-range-number>
-                <span class="installment_calculator_item_hint">Не менее 50% от прайсовой цены квартиры</span>
+                <span class="installment-calculator__item-hint">Не менее 50% от прайсовой цены квартиры</span>
             </div>
-            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment_calculator_item_wrap  installment_calculator_item_wrap--noflex">
+        </li>
+        <li class="installment-calculator__item">
+            <span class="installment-calculator__item-text">Срок выплат, месяцев</span>
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__item-wrap">
                 <ghm-range-number
                     (move)="form.month.val = $event"
                     (moveend)="formChanges($event, 'month')"
@@ -82,13 +72,27 @@
                     [max]="form.month.max"
                     [start]="form.month.val">
                 </ghm-range-number>
-                <span class="installment_calculator_item_hint">На срок до 6 месяцев включительно предоставляется бесплатная рассрочка, на срок более 6 месяцев — рассрочка от 11% годовых.</span>
+                <span class="installment-calculator__item-hint">На срок до 6 месяцев включительно предоставляется бесплатная рассрочка, на срок более 6 месяцев — рассрочка от 11% годовых.</span>
             </div>
-
         </li>
-
-
-
-        
     </ul>
+
+    <div class="purchase-installment__result installment-calculator__result">
+
+        <div class="installment-calculator__result-item">
+            <p class="installment-calculator__result-title">Сумма</p>
+            <p class="installment-calculator__result-result">2 000 000 &#8381;</p>
+        </div>
+
+        <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item">
+            <p class="installment-calculator__result-title">Ставка</p>
+            <p class="installment-calculator__result-result">{{percent}}% годовых</p>
+        </div>
+
+        <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item">
+            <p class="installment-calculator__result-title">Размер ежемесячных выплат</p>
+            <p class="installment-calculator__result-result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
+        </div>
+
+    </div>
 </div>
