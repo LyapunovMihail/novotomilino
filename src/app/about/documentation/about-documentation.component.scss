@@ -1,3 +1,5 @@
+@import "../../../styles/modules/mixins/mixin";
+
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -10,20 +12,21 @@
 
     &__wrapper {
         width: 100%;
-        max-width: 1000px;
+        max-width: $w1600;
         box-sizing: border-box;
-        padding-top: 122px;
+        padding-top: 120px;
     }
 
     &__header {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        margin-bottom: 50px;
+        margin-bottom: 27px;
     }
 
     &__title {
-        width: calc(100% - 280px);
+        width: 100%;
+        display: flex;
 
         &-content,
         &-text {
@@ -31,34 +34,53 @@
         }
 
         &-content {
-            font: 62px/46px 'Oranienbaum', serif;
-            color: #1c1c1c;
-            margin-bottom: 8px;
+            width: 50%;
+            font: 54px/58px 'Leksa';
+            color: $col-black;
+            margin-bottom: 20px;
         }
 
         &-text {
-            font: 15px/20px 'Montserrat', sans-serif;
-            color: #888AA1;
+            width: 50%;
+            font: 16px/24px $font-mus;
+            color: $col-black;
             max-width: 600px;
+            box-sizing: border-box;
+            padding: 12px;
         }
     }
 
     &__adding-btn {
-        height: 50px;
+        height: 62px;
+        border: 1px solid #0070c9;
         border-radius: 5px;
-        background: #cda571;
-        font: 18px/50px 'Montserrat', sans-serif;
-        color: #fff;
+        background: transparent;
+        font: 500 16px/22px $font-mus;
+        color: $col-blue;
         @include font-smoothing();
         display: flex;
+        justify-content: center;
         align-items: center;
         box-sizing: border-box;
         padding: 0 30px;
         cursor: pointer;
         transition: box-shadow .2s linear;
+        margin: 0 0 6px;
 
-        &:hover {
-            box-shadow: 0 0 8px #cda571;
+        &-text {
+            position: relative;
+            padding-left: 42px;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                left: 0;
+                top: -5px;
+                background: url('../../../assets/img/about/admin/add_doc.svg') center no-repeat;
+                background-size: 100%;
+            }
         }
     }
 
@@ -68,97 +90,171 @@
 
     &__object {
         width: 100%;
-        margin-bottom: 40px;
+        min-height: 152px;
+        max-width: $w1600;
+        background: rgba(171, 171, 34, 0.06);
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: flex;
+        position: relative;
+        margin: 0 0 5px;
 
         &:last-of-type {
             margin-bottom: 0;
         }
 
         &-header {
-            width: 100%;
+            width: calc(50% + 30px);
+            max-width: 520px;
             position: relative;
             margin-bottom: 10px;
         }
 
         &-title {
-            font: 23px/30px 'Montserrat', sans-serif;
-            color: #1c1c1c;
+            font: 500 20px/24px $font-mus;
+            color: $col-black;
             @include font-smoothing();
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            max-width: 413px;
+            margin: 0 0 10px;
         }
 
         &-load-btn {
-            position: absolute;
-            top: 2px;
-            left: calc(100% + 12px);
+            // display: block;
+            font: 500 16px/22px $font-mus;
+            @include font-smoothing;
+            color: #0070c9;
+            margin: 10px 0 0;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            margin: 10px 0 0;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 22px;
+                background: url('../../../assets/img/about/admin/dwnld_doc.svg') no-repeat;
+                background-size: 100%;
+                top: 0;
+                left: calc(100% + 10px);
+            }
+        }
+        &-del-object {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #cda571 url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9ItCh0LvQvtC5XzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyMSAyMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjEgMjE7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS1taXRlcmxpbWl0OjEwO30KPC9zdHlsZT4KPGc+Cgk8bGluZSBjbGFzcz0ic3QwIiB4MT0iMTAuNSIgeTE9IjAiIHgyPSIxMC41IiB5Mj0iMjEiLz4KCTxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyMSIgeTE9IjEwLjUiIHgyPSIwIiB5Mj0iMTAuNSIvPgo8L2c+Cjwvc3ZnPgo=') 50% no-repeat;
-            background-size: 20px 20px; 
+            background-color: #d5210d;
+            position: absolute;
+            left: -30px - 15px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
-            transition: box-shadow .2s linear;
 
-            &:hover {
-                box-shadow: 0 0 8px #cda571;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 14px;
+                height: 2px;
+                background-color: #fff;
+                left: calc(50% - 7px);
+                top: calc(50% - .5px);
+            }
+        }
+        &-move-object {
+            width: 24px;
+            height: 8px;
+            position: absolute;
+            right: -39px;
+            top: calc(50% - 4px);
+            padding: 0;
+            margin: 0;
+            cursor: grab;
+
+            div {
+                width: 24px;
+                height: 1px;
+                background: #d8d8d8;
+
+                &:not(:last-child) {
+                    margin: 0 0 3px;
+                }
             }
         }
 
         &-content {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
+            width: calc(100% - 520px);
         }
 
         &-file {
-            width: calc((100% - 84px) / 3);
-            margin: 0 42px 0 0;
-            position: relative;
-
-            &:nth-of-type(3n) {
-                margin-right: 0;
-            }
+            display: flex;
+            &:not(:last-child) { margin: 0 0 12px; }
         }
 
         &-link {
-            font: 18px/30px 'Montserrat', sans-serif;
-            color: #cda571;
-            @include font-smoothing();
-            display: block;
             position: relative;
-            box-sizing: border-box;
-            padding: 0 0 0 25px;
-            cursor: pointer;
-            transition: text-shadow .2s linear, color .2s linear;
-            height: 100%;
+            font: 500 16px/23px $font-mus;
+            padding: 0 0 0 29px;
+            display: flex;
+            justify-content: space-between;
 
-            &:hover {
-                text-shadow: 0 0 8px rgba(205,165,113,.7);
-                color: #cda571;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 19px;
+                height: 22px;
+                background: url('../../../assets/img/about/admin/pdf.svg') no-repeat;
+                background-size: 100%;
             }
         
-            &:not(.documentation__object-link_admin) {
-                background: url('/assets/img/about/doc.svg') 0 4px no-repeat;
-                background-size: 15px 17px; 
-            }
+            // &:not(.documentation__object-link_admin) {
+            //     background: url('/assets/img/about/doc.svg') 0 4px no-repeat;
+            //     background-size: 15px 17px; 
+            // }
+        }
+        &-name-file {
+            width: calc(100% - 110px);
+        }
+        &-date {
+            width: 90px;
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: #999a9b;
         }
 
         &-del-file {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 14px;
-            height: 14px;
-            margin: auto;
-            z-index: 1;
+            font: 500 16px/22px $font-mus;
+            @include font-smoothing;
+            margin: 0 15px 0 0;
+            padding: 0 19px 0 0;
+            background: transparent;
             cursor: pointer;
-            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9ItCh0LvQvtC5XzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxMy43IDEzLjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEzLjcgMTMuNzsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOm5vbmU7c3Ryb2tlOiM5OTk5OTk7c3Ryb2tlLXdpZHRoOjAuNzU7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8Zz4KCTxsaW5lIGNsYXNzPSJzdDAiIHgxPSIwLjQiIHkxPSIwLjQiIHgyPSIxMy40IiB5Mj0iMTMuNCIvPgoJPGxpbmUgY2xhc3M9InN0MCIgeDE9IjEzLjQiIHkxPSIwLjQiIHgyPSIwLjQiIHkyPSIxMy40Ii8+CjwvZz4KPC9zdmc+Cg==') no-repeat;
-            background-size: 100% 100%; 
+            color: $col-black;
+            opacity: .5;
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                right: -1px;
+                top: 3px;
+                width: 15px;
+                height: 15px;
+                background: url('../../../assets/img/about/admin/cls.svg') no-repeat;
+                background-size: 100%;
+            }
         }
     }
 }
 
 .admin-input {
-    border: 2px dashed #B2B2B2;
+    border: 1px dashed #B2B2B2;
 }
 
 .admin-gallery_progress {

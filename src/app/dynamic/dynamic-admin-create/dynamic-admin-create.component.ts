@@ -78,5 +78,4 @@ export class DynamicAdminCreateComponent implements OnInit, OnChanges, OnDestroy
             );
         }
     }
-
 }

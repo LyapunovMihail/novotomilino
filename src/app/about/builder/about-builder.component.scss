@@ -1,627 +1,392 @@
 $font: 18px/31px 'Montserrat', sans-serif;
+@import "../../../styles/modules/mixins/mixin";
 
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.genplan {
+    width: 100%;
+    height: calc(100vh - 146px);
+    position: relative;
 
-.builder {
-    overflow: hidden;
-    padding-top: 63px !important;
-
-    &_head {
+    &__head {
         width: 100%;
-        height: 47vw;
-        position: relative;
-        &:before {
-            content: "";
-            width: 79px;
-            height: 81px;
-            background: url("/assets/img/compass.svg") no-repeat;
-            position: absolute;
-            top: 3%;
-            right: 3%;
-        }
+        height: 100%;
+        overflow: hidden;
 
-        img {
+        &-title {
+            width: 100%;
+            max-width: $w1600;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &_scrll,
+        &-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
-        
-        &_title {
+    }
+}
+
+.about-project {
+
+    &__head,
+    &__content {
+        width: 604.5px;
+        max-width: $w1600;
+
+        &:not(.about-project__content) {
+            margin: 0 30px 0 0;
+        }
+    }
+
+    &__head {
+        &-title {
+            margin: 120px 0 20px;
+            color: $col-black;
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-descr {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 134px 0 30px;
+            opacity: .8;
+        }
+        &-info {
             width: 100%;
-            position: absolute;
-            top: 60px;
-            left: 0;
             display: flex;
-            justify-content: center;
-        }
-        &_item {
-            width: 100%;
-            max-width: 1000px;
-            color: #ffffff;
-            line-height: 0.74;
-            margin: 60px 0 0 0;
+            flex-flow: row wrap;
         }
 
-        &_compass {
-            position: absolute;
-            top: 25px;
-            right: 40px;
+        &-item {
+            width: 50%;
+            margin: 0 0 20px;
         }
+        &-title {
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 6px;
+        }
+        &-subtitle {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            color: #e7490f;
+        }
+    }
+}
 
-        &_marker {
-            position: absolute;
-            font-size: 15px;
-            -webkit-font-smoothing: antialiased;
-            font-weight: normal;
-            color: #fff;
-            background-color: rgba(255,255,255,.1);
+.gallery {
+
+    &__title {
+        width: 100%;
+        max-width: $w1600;
+        margin: 120px 0 40px;
+    }
+    &__nav {
+        width: calc(100% - 60px);
+        max-width: $w1600;
+        margin: 0 0 30px;
+
+        &-list {
+            width: 394px;
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            border-radius: 15px;
-            padding: 0 15px;
-            transition: .6s;
-            
+            justify-content: space-between;
+            list-style: none;
+            @include fw18-24(rgba(0, 1, 5, .7));
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(0, 1, 4, .3);
+            padding: 0 0 10px;
+
+            &-item {
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    color: $col-black;
+                }
+            }
+
+            &-item_active {
+                position: relative;
+                color: $col-black;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -11px;
+                    width: 100%;
+                    height: 2px;
+                    background: $col-orange;
+                }
+            }
+        }
+    }
+}
+
+.developer {
+
+    &__head,
+    &__content {
+        width: 604.5px;
+        max-width: $w1600;
+
+        &:not(.developer__content) {
+            margin: 0 30px 0 0;
+        }
+    }
+    &__head {
+        &-title {
+            margin: 120px 0 20px;
+            color: $col-black;
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-info {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0;
+            opacity: .8;
+
+            &:not(:last-child) {
+                margin: 134px 0 30px;
+            }
+        }
+    }
+
+    &__project {
+        width: 100%;
+        max-width: $w1600;
+
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 30px 0;
+            width: 100%;
+        }
+        &-link {
+            text-decoration: none;
+            position: relative;
+
             &:before {
                 content: '';
                 position: absolute;
-                top: -2px;
-                left: -2px;
-                width: 35px;
-                height: 35px;
+                width: 100%;
+                height: 1px;
+                background-color: $col-orange;
+                right: 0;
+                bottom: 0;
+                transition: width .6s ease;
             }
-        }
-
-        &_marker--dub {
-            bottom: 9%;
-            left: 17%;
-            width: 124px;
-            border: 1px solid #7b9eb0;
-            height: 28px;
-            &:before {
-                background-image: url('/assets/img/about/group-35.svg');
-            }
-        }
-
-        &_marker--sht {
-            bottom: 12%;
-            left: 32%;
-            width: 226px;
-            height: 28px;
-            border: 1px solid #cda571;
-            &:before {
-                background-image: url('/assets/img/about/group-35-2.svg');
-            }
-        }
-
-        &_marker--scho {
-            bottom: 9%;
-            left: 62%;
-            width: 345px;
-            height: 28px;
-            border: 1px solid #7b9eb0;
-            &:before {
-                background-image: url('/assets/img/about/group-35-3.svg');
-            }
-        }
-
-        &_marker--sport {
-            left: 50%;
-            bottom: 18%;
-            width: 209px;
-            height: 28px;
-            border: 1px solid #ffca04;
-            &:before {
-                background-image: url('/assets/img/about/group-35-4.svg');
-                height: 45px;
-            }
-        }
-
-        &_marker--child {
-            left: 62%;
-            bottom: 30%;
-            width: 177px;
-            height: 28px;
-            border: 1px solid #ffca04;
-            &:before {
-                background-image: url('/assets/img/about/group-35-5.svg');
-                height: 45px;
-            }
-        }
-
-        &_marker--mag {
-            left: 78.8%;
-            bottom: 42%;
-            width: 135px;
-            height: 28px;
-            border: 1px solid #0095db;
-            &:before {
-                background-image: url('/assets/img/about/group-35-7.svg');
-                height: 45px;
-            }
-        }
-
-        &_marker--park {
-            left: 80.6%;
-            bottom: 32%;
-            width: 255px;
-            height: 28px;
-            border: 1px solid #cda571;
-            &:before {
-                background-image: url('/assets/img/about/group-35-6.svg');
-                height: 45px;
-            }
-        }
-
-        &_marker--skol {
-            left: 66%;
-            top: 2%;
-            width: 106px;
-            height: 28px;
-            border: 1px solid #7d9eb0;
-            &:before {
-                background-image: url('/assets/img/about/group-35-9.svg');
-            }
-        }
-
-        &_marker--vegas {
-            left: 33%;
-            top: 2%;
-            width: 100px;
-            height: 28px;
-            border: 1px solid #7d9eb0;
-            &:before {
-                background-image: url('/assets/img/about/group-35-8.svg');
-            }
-        }
-    }
-
-    &_gallery {
-        width: 100%;
-        max-width: 1000px;
-        height: 176px;
-        display: flex;
-        align-items: flex-end;
-        margin: 0 0 60px 0;
-    }
-
-    &_indicators {
-        padding-top: 130px;
-        box-sizing: border-box;
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 0 130px 0;
-
-        &__wrap {
-            width: 1183px;
-        }
-
-        &__title {
-            font-family: Oranienbaum, sans-serif;
-            font-size: 62px;
-            line-height: 0.74;
-            color: #1c1c1c;
-            @include font-smoothing;
-        }
-
-        &__roster {
-            margin-top: 43px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        &__item {
-            text-align: center;
-        }
-
-        &__subtitle {
-            font-size: 55px;
-            font-weight: 700;
-            color: #cda571;
-            @include font-smoothing;
-        }
-
-        &__text {
-            font-size: 18px;
-            font-weight: bold;
-            color: #606060;
-            margin-top: 8px;
-            display: inline-block;
-            @include font-smoothing;
-        }
-    }
-
-    &_main {
-        max-width: 1000px;
-        width: 100%;
-        box-sizing: border-box;
-        padding-top: 20px;
-        position: relative;
-
-        &_title {
-            margin-bottom: 50px;
-        }
-
-        &_description {
-            width: 464px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 1;
-
-            &_content {
-                font: 18px/31px 'Montserrat', sans-serif;
-                color: #1c1c1c;
-                @include font-smoothing();
-                margin-bottom: 35px;
-
-                &--margin {
-                    margin-bottom: 30px;
+            &:hover {
+                &:before {
+                    width: 0%;
                 }
             }
+        }
+        &-grid {
+            display: grid;
+            grid-template: repeat(4, 260px)/repeat(2, 605px);
+            gap: 30px;
 
-            &_territory {
-                font: 18px/30px 'Montserrat', sans-serif;
-                font-weight: bold;
-                color: #606060;
-                @include font-smoothing();
-                margin-top: 20px;
-                margin-bottom: 50px;
-
-                &_number {
-                    display: block;
-                    font: 55px 'Montserrat', sans-serif;
-                    font-weight: bold;
-                    color: #cda571;
-                    @include font-smoothing();
-                    margin-top: 11px;
-
-                    sup {
-                        font-size: 20px;
-                        vertical-align: super;
-                    }
-                }
-            }
-
-            &_link {
-                font: 18px/46px 'Montserrat', sans-serif;
-                font-weight: bold;
-                color: #1c1c1c;
-                @include font-smoothing();
-                display: flex;
-                align-items: center;
-                cursor: pointer;
+            &-item {
+                padding: 20px 20px 15px;
                 box-sizing: border-box;
-                border-radius: 5px;
-                border: solid 1px #cda571;
-                padding: 2px 15px 2px 15px;
-                align-self: flex-start;
-                transition: .2s linear;
+                width: 100%;
                 position: relative;
+                border-radius: 4px;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: space-between;
+                overflow: hidden;
+                will-change: transform;
 
-                &:hover {
-                    color: #ffffff;
-                    background: #cda571;
+                &:hover .grid-item__bg-image {
+                    transform: scale(1.1);
                 }
-            }
-        }
-
-        &_map {
-            width: 1075px;
-            height: 100%;
-            position: absolute;
-            left: 350px;
-            top: 0;
-            background: url('/assets/img/about/builder/map.svg') no-repeat;
-            background-size: 100%; 
-            
-            &_marker {
-                width: 1px;
-                background-color: #cda571;
-                position: absolute;
-                cursor: pointer;
-
-                &:hover {
-
-                    .builder_main_map_marker_description {
-                        border-width: 4px;
-
-                        &:not(.builder_main_map_marker_description--novo):not(.builder_main_map_marker_description--may):not(.builder_main_map_marker_description--barviha):not(.builder_main_map_marker_description--bh) {
-                            transform: scale(.8) translate(-60px, 60px);
-                        }
-
-                        &--novo,
-                        &--barviha,
-                        &--may,
-                        &--bh {
-                            transform: scale(.8) translate(60px, 60px);
-                        }
-                    }
-
-                    .builder_main_map_marker_description_content {
-                        opacity: 1;
-                    }
+                &:hover .grid-item__name-title {
+                    color: #d45a42; // Уточнить размер увеличения
                 }
 
                 &:before {
                     content: '';
                     position: absolute;
-                    width: 11px;
-                    height: 11px;
-                    border-radius: 6px;
-                    background-color: #cda571;
+                    left: 0;
                     bottom: 0;
-                    left: -5px;
-                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 4px;
+                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
                 }
 
-                &_text {
-                    display: flex;
-                    align-items: center;
-                    height: 30px;
-                    font: 15px/19px 'Montserrat', sans-serif;
-                    color: #434343;
-                    @include font-smoothing();
+                .grid-item__bg-image {
                     position: absolute;
-                    left: -110px;
-                    top: -30px;
-                    box-sizing: border-box;
-                    padding: 0 12px 0 24px;
-                    border: 1px solid #cda571;
-                    border-radius: 50px;
-                    white-space: nowrap;
-
-                    &--barviha {
-                        left: -110px;
-                        top: -29px;
-                    }
-
-                    &--oblaka {
-                        left: -65px;
-                        top: -29px;
-                    }
-
-                    &--vb {
-                        left: -89px;
-                        top: -29px;
-                    }
-
-                    &--may {
-                        left: -88px;
-                        top: -29px;
-                    }
-
-                    &--novo {
-                        left: -86px;
-                        top: -29px;
-                    }
-
-                    &--academicheskaya {
-                        left: -93px;
-                        top: -29px;
-                    }
-
-                    &--bh {
-                        left: -103px;
-                        top: -29px;
-                    }
-                }
-
-                &_description {
-                    width: 240px;
-                    height: 240px;
-                    background: black;
-                    position: absolute;
-                    top: -15px;
-                    transform: scale(.5);
-                    box-sizing: border-box;
-                    border: 8px solid #ffffff;
-                    transition: .2s linear ;
-                    display: flex;
-                    align-items: flex-end;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    left: 0;
+                    top: 0;
+                    z-index: -1;
+                    transform: scale(1);
+                    transition: $trans-img;
                     will-change: transform;
-
-                    &:not(.builder_main_map_marker_description--novo):not(.builder_main_map_marker_description--may):not(.builder_main_map_marker_description--barviha):not(.builder_main_map_marker_description--bh) {
-                        right: -53px;
-                    }
-
-                    &--novo,
-                    &--barviha,
-                    &--may,
-                    &--bh{
-                        left: -48px;
-                    }
-
-                    &_bgr {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-
-                    &_content {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        height: 60%;
-                        width: 100%;
-                        background: linear-gradient(180deg, transparent, rgba(0,0,0,.8));
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        flex-direction: column;
-                        transition: .3s linear .1s;
-                        box-sizing: border-box;
-                        padding-bottom: 15px;
-                        z-index: 1;
-                        opacity: 0;
-                    }
-
-                    &_logo {
-                        width: 100%;
-                        margin-bottom: 10px;
-                    }
-
-                    &_text {
-                        text-align: center;
-                        font: 14px/21px 'abrade-book',sans-serif;
-                        color: #ffffff;
-                        @include font-smoothing();
-                        box-sizing: border-box;
-                        padding: 0 10px;
-                    }
-
-                    &--barviha {
-                        left: -116px;
-                        top: -31px;
-                    }
-
-                    &--oblaka {
-                        left: -65px;
-                        top: -30px;
-                    }
-
-                    &--vb {
-                        left: -71px;
-                        top: 30px;
-                    }
-
-                    &--may {
-                        left: -65px;
-                        top: -30px;
-                    }
-
-                    &--novo {
-                        left: -71px;
-                        top: -10px;
-                    }
-
-                    &--academicheskaya {
-                        left: -71px;
-                        top: -30px;
-                    }
-
-                    &--bh {
-                        left: -71px;
-                        top: -30px;
-                    }
-
-                    &_bgr {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
                 }
 
-                &--position-1 {
-                    left: 522px;
-                    bottom: 573px;
-                }
+                .grid-item__location {
+                    display: flex;
 
-                &--position-2 {
-                    left: 566px;
-                    bottom: 549px;
-                }
-
-                &--oblaka {
-                    left: 400px;
-                    bottom: 605px;
-                    z-index: 2;
-                    height: 30px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 65px;
+                    &-city,
+                    &-distance {
+                        padding: 5px 10px;
+                        background: #fff;
+                        position: relative;
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: $col-black;
+                    }
+                    &-city {
+                        border-radius: 4px 0 0 4px;
+                        margin: 0 1px 0 0;
+                    }
+                    &-city_barviha {
+                        border-radius: 4px;
+                    }
+                    &-distance {
+                        border-radius: 0 4px 4px 0;
                     }
                 }
+                .grid-item__name {
+                    position: relative;
 
-                &--novo {
-                    left: 765px;
-                    bottom: 604px;
-                    height: 50px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 50px;
+                    &-title {
+                        font: 500 24px/29px $font-mus;
+                        @include font-smoothing;
+                        color: #fff;
+                        transition: $transition;
+                    }
+                    &-subtitle {
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: #fff;
                     }
                 }
-
-                &--vb {
-                    left: 246px;
-                    bottom: 350px;
-                    height: 90px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 65px;
-                    }
-                }
-
-                &--may {
-                    left: 420px;
-                    bottom: 336px;
-                    height: 30px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 62px;
-                    }
-                }
-
-                &--barviha{
-                    left: 215px;
-                    bottom: 620px;
-                    z-index: 3;
-                    height: 30px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 62px;
-                    }
-                }
-
-                &--academicheskaya{
-                    left: 585px;
-                    bottom: 584px;
-                    z-index: 4;
-                    height: 30px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 62px;
-                    }
-                }
-
-                &--bh{
-                    left: 605px;
-                    bottom: 380px;
-                    z-index: 3;
-                    height: 30px;
-
-                    .builder_main_map_marker_description_logo {
-                        height: 62px;
-                    }
-                }
+            }
+            .grid-item_one {
+                grid-row-start: 1;
+                grid-row-end: 3;
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+            .grid-item_five {
+                grid-row-start: 3;
+                grid-row-end: 5;
+                grid-column-start: 2;
+                grid-column-end: 3;
             }
         }
     }
 }
 
+@media (max-width: 1279px) {
+    .genplan {
+        max-height: 805px;
+        height: calc(62.94vw - 51px);
+        min-height: 432px;
+    }
 
-.builder__gallery-owl {
-    width: 100%;
-}
+    .main__container_row {
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .about-project__head,
+    .genplan__head-title,
+    .about-project__content,
+    .gallery__title,
+    .gallery__nav,
+    .developer__head,
+    .developer__content {
+        width: 100%;
+        max-width: 708px;
+    }
+    .about-project__head:not(.about-project__content),
+    .developer__head:not(.developer__content) {
+        margin: 0;
+    }
+    .about-project__head-title,
+    .about-project__head-subtitle,
+    .about-project__content-descr,
+    .about-project__content-info {
+        max-width: 615px;
+    }
+    .about-project__content-descr {
+        margin: 0 0 40px;
+    }
+    .about-project__content-subtitle {
+        margin-bottom: 5px;
+    }
+    .developer__content-info:not(:last-child) {
+        margin: 0 0 30px;
+    }
+    .developer__project {
+        width: 100%;
+        max-width: calc(100% - 60px);
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
 
-.builder__gallery__name {
-    margin: 10px 0 0 0;
-    white-space: nowrap;
-}
+        &-title {
+            width: 100%;
+            max-width: 708px;
+            margin: 40px 0 20px;
+        }
 
-.builder__gallery__item {
-    width: 100%;
-    max-width: 670px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    max-height: 450px;
-}
-
-.builder__gallery__slider {
-    position: relative;
+        &-grid {
+            width: 100%;
+            grid-template: repeat(6, auto)/repeat(1, 100%);
+            gap: 20px;
+    
+            &-item {
+                height: 300px;
+            }
+            .grid-item_one {
+                height: 440px;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+            .grid-item_five {
+                height: 440px;
+                grid-row-start: 4;
+                grid-row-end: 5;
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+        }
+    }
 }

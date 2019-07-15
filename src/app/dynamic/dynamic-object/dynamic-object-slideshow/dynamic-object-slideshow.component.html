@@ -1,20 +1,23 @@
 
-<div *ngIf="isSlideShow" class="dynamic_modal">
+<div *ngIf="isSlideShow" class="dynamic-modal">
 
-    <div (click)="close.emit(false)" class="dynamic_modal_cls-btn"></div>
-
-    <div class="dynamic_modal_wrap">
+    <div class="dynamic-modal__wrap">
+        <div (click)="close.emit(false)" class="dynamic-modal__cls-btn"></div>
 
         <ng-container *ngFor="let slide of slides; let i = index">
             <img *ngIf="slide.type === 'IMAGE'"
-                class="dynamic_modal_img"
+                class="dynamic-modal__img"
                 [src]="uploadsPath + slide.origin"
                 [ngClass]="{'dynamic-slider-current': i === slideShowCurrent}"
             />
         </ng-container>
 
-        <div (click)="prev()" class="dynamic_modal_btn dynamic_modal_btn--left"></div>
-        <div (click)="next()" class="dynamic_modal_btn dynamic_modal_btn--right"></div>
+        <div (click)="prev()" class="dynamic-modal__btn dynamic-modal__btn_left"></div>
+        <div (click)="next()" class="dynamic-modal__btn dynamic-modal__btn_right"></div>
+
+        <!-- Сюда должны подгружаться Заголовок и месяц с годом -->
+        <p class="dynamic-modal__text dynamic-modal__text-title">Корпус 1</p>
+        <p class="dynamic-modal__text dynamic-modal__text-month">Апрель 2019</p>
     </div>
 
 </div>

@@ -1,10 +1,11 @@
 @import './../../dynamic-vars';
+@import '../../../../styles/modules/mixins/mixin';
 
 .dynamic-slider-current {
     opacity: 1 !important;
 }
 
-.dynamic_modal {
+.dynamic-modal {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -16,28 +17,38 @@
     justify-content: center;
     align-items: center;
 
-    &--active {
+    &_active {
         display: flex;
     }
 
-    &_cls-btn {
+    &__cls-btn {
         position: absolute;
-        width: 40px;
-        height: 40px;
-        top: 20px;
-        right: 20px;
-        background: url('/assets/img/dynamic/cls-btn.svg');
+        width: 50px;
+        height: 50px;
+        top: 0;
+        right: -25px - 50px;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        background: url('/assets/img/dynamic/cls_white.svg') 49% no-repeat;
+        background-size: 20px;
         cursor: pointer;
+        transition: $transition;
         z-index: 100;
+
+        &:hover {
+            border-color: #fff;
+        }
     }
 
-    &_wrap {
+    &__wrap {
         height: 80%;
         position: relative;
-        width: 100%;
+        width: 1090px;
+        margin: 0 auto;
     }
 
-    &_img {
+    &__img {
+        width: 100%;
         height: 100%;
         object-fit: cover;
         pointer-events: none;
@@ -50,23 +61,38 @@
         z-index: 10;
     }
 
-    &_btn {
-        width: 50%;
-        height: 100%;
+    &__btn {
+        width: 40px;
+        height: 40px;
         position: absolute;
-        top: 0;
+        top: calc(50% - 20px);
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        transition: $transition;
         z-index: 50;
+        cursor: pointer;
 
-        &--left {
-            left: 0;
-            cursor: url('/assets/img/dynamic/n-cursor-left.cur') 50 25,
-                    url('/assets/img/dynamic/n-cursor-left.svg') 50 25, auto;
+        &_left {
+            left: -40px - 35px;
+            background: url('/assets/img/dynamic/btn_next_white.svg') 49% no-repeat;
         }
 
-        &--right {
-            right: 0;
-            cursor: url('/assets/img/dynamic/n-cursor-right.cur') 0 25,
-                    url('/assets/img/dynamic/n-cursor-right.svg') 0 25, auto;
+        &_right {
+            right: -40px - 35px;
+            background: url('/assets/img/dynamic/btn_next_white.svg') center no-repeat;
+            transform: rotate(180deg);
+            backface-visibility: hidden;
         }
+        &:hover {
+            border-color: #fff;
+        }
+    }
+    &__text {
+        @include fw18-24(#fff);
+        position: absolute;
+        bottom: -44px;
+
+        &-title { left: 0; }
+        &-month { right: 0; }
     }
 }

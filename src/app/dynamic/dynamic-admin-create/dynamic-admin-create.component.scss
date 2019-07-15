@@ -1,4 +1,4 @@
-
+@import "../../../styles/modules/mixins/mixin";
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -12,71 +12,96 @@
 }
 
 .admin-dynamic-create-form {
-    min-height: 147px;
-    width: 1200px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
     box-sizing: border-box;
-    padding-left: 166px;
-    border: 2px dashed #888aa1;
-    margin-bottom: 80px;
+    padding: 140px 0 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 30;
+}
+.dynamic__create-form {
+    width: 1018px;
+    background: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 40px;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    margin: 0 auto;
 
     &-title {
-        font: 15px/22px 'Montserrat', sans-serif;
-        color: #888aa1;
+        font: 42px/46px 'Leksa';
+        color: $col-black;
         @include font-smoothing();
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        box-sizing: border-box;
-        padding-left: 30px;
-        display: flex;
-        align-items: center;
+        margin: 0 0 30px;
     }
-
-    &-list {
-        display: flex;
-        flex-wrap: wrap;
-        margin-left: 37px;
-
-        &-item {
-            font: 15px/50px 'Montserrat', sans-serif;
-            color: #ffffff;
-            @include font-smoothing();
-            height: 50px;
-            border: 1px solid #cda571;
-            border-radius: 25px;
-            color: #1c1c1c;
-            display: flex;
-            align-items: center;
-            box-sizing: border-box;
-            padding: 0 29px;
-            white-space: nowrap;
-            margin-right: 30px;
-            cursor: pointer;
-        }
+    &-text,
+    &-subtitle {
+        @include f16-24();
+        color: rgba(0, 1, 5, 0.8);
+        margin: 0 0 40px;
+    }
+    &-cls {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        right: -50px - 27px;
+        top: 0;
+        border: 2px solid #fff;
+        background: url('../../../assets/img/dynamic/cls_white.svg') center no-repeat;
+        background-size: 15px;
+        border-radius: 50%;
+    }
+    &-subtitle {
+        margin: 0 0 6px;
+    }
+    &-list-subtitle {
+        margin: 30px 0 14px;
     }
 
     &-content {
-        height: 50px;
-
         &-input {
+            width: 100%;
+            height: 44px;
             box-sizing: border-box;
-            width: 430px;
-            height: 50px;
             outline: none;
-            font: 15px/50px 'Montserrat', sans-serif;
-            color: #bbbbbb;
+            font: 500 20px/24px $font-mus;
             @include font-smoothing();
-            border-radius: 25px;
-            border: 1px solid #bbbbbb;
-            padding: 0 30px;
-            display: flex;
-            align-items: center;
+            color: $col-black;
+            border: 1px solid $col-97;
+            padding: 10px 15px;
+        }
+        &-submit {
+            padding: 15px 30px;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: $col-blue;
+            color: #fff;
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing();
+            text-transform: uppercase;
+
+            &:disabled {
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+    &-list {
+        margin: 0 0 40px;
+
+        &-item {
+            font: 500 16px/24px $font-mus;
+            @include font-smoothing();
+            color: $col-blue;
+            margin: 0 0 5px;
+
+            &:last-child {
+                margin: 0;
+            }
         }
     }
 }
