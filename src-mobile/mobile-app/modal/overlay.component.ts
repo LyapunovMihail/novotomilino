@@ -3,7 +3,6 @@ import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OverlayService } from './overlay.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { VideoModalService } from './video-modal/video-modal.service';
 import { ImgModalService } from './img-modal/img-modal.service';
 
 @Component({
@@ -35,7 +34,6 @@ export class OverlayComponent implements OnInit, OnDestroy {
 
     constructor(
         private overlayService: OverlayService,
-        private videoModalService: VideoModalService,
         private imgModalService: ImgModalService,
         private windowScrollLocker: WindowScrollLocker
     ) {}
@@ -59,7 +57,6 @@ export class OverlayComponent implements OnInit, OnDestroy {
 
     public closeVideoAndImg(): void {
         this.overlayService.changeOverlayVisibility(false);
-        this.videoModalService.changeVideoVisibility(false);
         this.imgModalService.changeImgVisibility(false, '');
         this.windowScrollLocker.unblock();
     }
