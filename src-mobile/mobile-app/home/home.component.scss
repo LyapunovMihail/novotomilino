@@ -114,14 +114,13 @@
             width: calc(100% - 30px);
         }
         &-title {
-            width: calc(100% - 30px);
             font: 30px/30px 'Leksa';
             @include font-smoothing;
             color: $col-black;
             margin: 120px 0 40px;
         }
         &-nav {
-            width: calc(100% - 30px);
+            width: 100%;
             max-width: 768px;
             display: flex;
             justify-content: space-between;

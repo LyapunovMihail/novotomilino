@@ -9,6 +9,21 @@ export interface IBuilderMarker {
     empty: boolean;
 }
 
+export interface IAboutProject {
+    title: string;
+    subtitle: string;
+}
+
+export interface IProjectSnippet {
+    link: string;
+    city: string;
+    distance: string;
+    addDistance: boolean;
+    title: string;
+    subtitle: string;
+    background: string;
+}
+
 export let BUILDER_MARKERS: IBuilderMarker[] = [
     {
         title: 'ЖК «Облака»',
@@ -68,5 +83,74 @@ export let BUILDER_MARKERS: IBuilderMarker[] = [
         image: '/assets/img/about/builder/bh-dom.jpg',
         mod: 'bh',
         empty: false
+    }
+];
+
+export let ABOUT_PROJECT: IAboutProject[] = [
+    {
+        title: 'Общая площадь ЖК',
+        subtitle: '115 825 м²'
+    }, {
+        title: 'Количество мест в школе №19',
+        subtitle: '550'
+    }, {
+        title: 'Общая площадь квартир',
+        subtitle: '78 873 м²'
+    }, {
+        title: 'Окончание строительства 1 очереди',
+        subtitle: '2020 г.'
+    }, {
+        title: 'Количество квартир',
+        subtitle: '2147'
+    }, {
+        title: 'Окончание строительства 2 очереди',
+        subtitle: '2021 г.'
+    }, {
+        title: 'Площадь нежилых помещений',
+        subtitle: '7 403 м²'
+    }
+];
+
+export let PROJECT_SNIPPET: IProjectSnippet[] = [
+    {
+        link: 'https://oblakadom.ru',
+        city: 'г. Люберцы',
+        distance: '5 км от МКАД',
+        addDistance: true,
+        title: 'ЖК Облака',
+        subtitle: 'Квартиры от 2,3 млн. руб.',
+        background: '/assets/img/about/builder/oblak-dom.jpg'
+    }, {
+        link: 'https://novokraskovo.ru/',
+        city: 'Люберецкий р-н, пос. Красково',
+        distance: '13 км от МКАД',
+        addDistance: true,
+        title: 'ЖК Новокрасково',
+        subtitle: 'Квартиры от 2,2 млн. руб.',
+        background: '/assets/img/about/builder/novokraskogo-dom.jpg'
+    }, {
+        link: 'https://barvihadom.ru/',
+        city: 'г. Москва,',
+        distance: 'Барвихинская улица, вл. 6',
+        addDistance: true,
+        title: 'Дом на Барвихинской',
+        subtitle: 'Квартиры от 6,3 млн. руб.',
+        background: '/assets/img/about/builder/barvihinskaya-dom.jpg'
+    }, {
+        link: '#',
+        city: 'г. Видное',
+        distance: '7,5 км от МКАД',
+        addDistance: true,
+        title: 'Видный Берег 2',
+        subtitle: 'Скоро в продаже',
+        background: '/assets/img/about/builder/vb-2-dom.jpg'
+    }, {
+        link: 'https://residence.gorodmay.ru/',
+        city: 'Ленинский р-н, пос.Горки Ленинские',
+        distance: '10 км от МКАД',
+        addDistance: true,
+        title: 'Резиденция Май',
+        subtitle: 'Квартиры от 2,2 млн. руб.',
+        background: '/assets/img/about/builder/residence-dom.jpg'
     }
 ];

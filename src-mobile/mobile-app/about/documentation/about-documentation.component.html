@@ -1,6 +1,7 @@
 <section class="documentation">
 
         <h1 class="documentation__title">Документация</h1>
+        <p class="documentation__descr">{{description}}</p>
 
         <ul class="documentation__objects">
             <li class="documentation__object"
@@ -13,8 +14,10 @@
                 <ul class="documentation__object-content">
                     <li class="documentation__object-file"
                         *ngFor="let file of object.uploads">
+                        <!-- Тут должно подгружаться из админки -->
+                        <p class="documentation__object-date">02.05.2019</p>
                         <!-- При стабильной версии исправить ссылку -->
-                        <a class="documentation__object-link"
+                        <a class="documentation__object-link g-link_red"
                             target="_blank"
 
                             [href]="'/' + uploadsPath + file.name"

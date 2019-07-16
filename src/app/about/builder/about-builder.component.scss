@@ -156,6 +156,7 @@ $font: 18px/31px 'Montserrat', sans-serif;
         &-title {
             margin: 120px 0 20px;
             color: $col-black;
+            white-space: nowrap;
         }
         &-subtitle {
             font: 500 18px/24px $font-mus;
