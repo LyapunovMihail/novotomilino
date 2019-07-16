@@ -15,8 +15,6 @@ import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 // App is our top level component
 import { AppComponent } from './app.component';
-import { VideoModalService } from './modal/video-modal/video-modal.service';
-import { VideoModalComponent } from './modal/video-modal/video-modal.component';
 import { ImgModalService } from './modal/img-modal/img-modal.service';
 import { ImgModalComponent } from './modal/img-modal/img-modal.component';
 import { OverlayService } from './modal/overlay.service';
@@ -44,7 +42,6 @@ import { SharesModule } from './shares/shares.module';
 const APP_PROVIDERS = [
     ...APP_RESOLVER_PROVIDERS,
     AppState,
-    VideoModalService,
     ImgModalService,
     OverlayService,
     WindowEventsService,
@@ -88,7 +85,6 @@ interface StoreType {
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
-        VideoModalComponent,
         ImgModalComponent,
         OverlayComponent
     ],

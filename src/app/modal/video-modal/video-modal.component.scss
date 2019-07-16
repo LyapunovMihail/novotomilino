@@ -2,8 +2,10 @@
 
     position: unset;
     width: 0;
+    height: 0;
     z-index: 0;
     opacity: 0;
+    overflow: hidden;
 
     &--active {
 
@@ -11,9 +13,11 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        height: max-content;
         width: max-content;
         z-index: 9999;
         opacity: 1;
         transition: opacity 0.7s;
+        overflow: visible;
     }
 }

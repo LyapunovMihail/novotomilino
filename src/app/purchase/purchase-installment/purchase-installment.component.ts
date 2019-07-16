@@ -6,7 +6,7 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 @Component ({
     selector: 'app-purchase-installment',
     templateUrl: './purchase-installment.component.html',
-    styleUrls: ['./../purchase.component.scss'],
+    styleUrls: ['./purchase-installment.component.scss'],
     providers: [
         PurchaseInstallmentNumberPipe
     ]

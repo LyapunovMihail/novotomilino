@@ -1,0 +1,108 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.purchase {
+
+    &-installment {
+        width: $w1600;
+    }
+}
+.installment-calculator {
+    width: 100%;
+    max-width: 922px;
+    display: flex;
+    justify-content: space-between;
+    
+    &__item {
+        width: 287px;
+
+        &-wrap {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        &-text,
+        &-hint {
+            width: 100%;
+            @include fw14-20(rgba(0, 1, 5, .6));
+            @include font-smoothing();
+            margin-bottom: 10px;
+            white-space: nowrap;
+        }
+        &-hint {
+            margin: 14px 0 0;
+            white-space: normal;
+        }
+        &-field { width: 100%; }
+
+        &_result {
+            margin-top: 14px;
+
+            div:first-child {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &__result {
+        width: 100%;
+        max-width: 922px;
+        padding: 20px 0 0;
+        box-sizing: border-box;
+        border-top: 1px solid #999a9b;
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0 0;
+        
+        &-item { width: 287px; }
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            margin: 0 0 10px;
+            white-space: nowrap;
+        }
+        &-result {
+            font: 500 36px/40px $font-mus;
+            @include font-smoothing;
+            color: $col-orange;
+            white-space: nowrap;
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+    .purchase {
+
+        &-installment {
+            width: $w1279;
+            display: flex;
+
+            &__calculator,
+            &__result {
+                width: 50%;
+                box-sizing: border-box;
+            }
+        }
+    }
+    .installment-calculator {
+        display: block;
+        padding-right: 15px;
+
+        &__item {
+            width: 100%;
+            margin: 0 0 38px;
+            &:last-child { margin: 0; }
+        }
+
+        &__result {
+            border-top: none;
+            border-left: 1px solid #999a9b;
+            padding: 0 0 0 15px;
+            display: block;
+            margin: 0;
+
+            &-item {
+                width: 100%;
+                margin: 0 0 40px;
+                &:last-child { margin: 0; }
+            }
+        }
+    }
+}

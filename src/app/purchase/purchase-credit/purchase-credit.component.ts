@@ -8,7 +8,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
     selector: 'app-purchase-credit',
     templateUrl: './purchase-credit.component.html',
-    styleUrls: ['./../purchase.component.scss', './purchase-credit.admin.scss'],
+    styleUrls: ['./purchase-credit.scss', './purchase-credit.admin.scss'],
     providers: [
         PurchaseCreditService,
         Uploader

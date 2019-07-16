@@ -25,7 +25,6 @@ declare let $: any;
 
         <app-overlay></app-overlay>
         <app-img-modal></app-img-modal>
-        <app-video-modal></app-video-modal>
     `
 })
 export class AppComponent implements OnInit {

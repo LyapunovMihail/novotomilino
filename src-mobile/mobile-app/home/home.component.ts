@@ -1,4 +1,3 @@
-import { VideoModalService } from '../modal/video-modal/video-modal.service';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { MapService } from './map/map.service';
 import {
@@ -10,7 +9,7 @@ import { HomeService } from './home.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import {ITriggerSnippet} from "../../../serv-files/serv-modules/trigger-api/trigger.interfaces";
+import {ITriggerSnippet} from '../../../serv-files/serv-modules/trigger-api/trigger.interfaces';
 declare let $: any;
 
 @Component({
@@ -22,7 +21,6 @@ declare let $: any;
     providers: [
         PlatformDetectService,
         WindowScrollLocker,
-        VideoModalService,
         MapService
     ]
 })
@@ -38,7 +36,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         public windowScrollLocker: WindowScrollLocker,
         @Inject(DOCUMENT) private document: any,
         public platform: PlatformDetectService,
-        private videoModalService: VideoModalService,
         public mapService: MapService,
         private homeService: HomeService
     ) {}
@@ -104,7 +101,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         combineLatest(
             this.homeService.getShares(),
             this.homeService.getMainNews()
-        ).pipe(map(([shares, news]) => [...shares['sharesList'], ...news])
+        ).pipe(map(([shares, news]) => [...shares.sharesList, ...news])
         ).subscribe(
             (data: any[]) => {
                 this.mainSnippets = data;
@@ -114,7 +111,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         );
 
         this.homeService.getTriggerSnippet().subscribe(
-            (data) => { this.triggerSnippets = data; console.log('this.triggerSnippets: ', this.triggerSnippets)},
+            (data) => { this.triggerSnippets = data; console.log('this.triggerSnippets: ', this.triggerSnippets);},
             (err) => console.log(err)
         );
     }
@@ -149,10 +146,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     public scrollToTop() {
         if ( !this.platform.isBrowser ) { return false; }
         $('html, body').animate({ scrollTop: 0 }, 500);
-    }
-
-    public openVideo() {
-        this.videoModalService.changeVideoVisibility(true);
-        this.windowScrollLocker.block();
     }
 }
