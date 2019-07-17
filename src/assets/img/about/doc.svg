@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="15" height="17" viewBox="0 0 15 17">
-    <g fill="none" fill-rule="nonzero">
-        <path fill="#CDA571" d="M2.683 8.931h8.931v1.122H2.683zM2.683 10.914h8.931v1.122H2.683z"/>
-        <path fill="#FFF" d="M2.683 13.464h5.95"/>
-        <path fill="#CDA571" d="M2.683 12.897h5.95v1.122h-5.95z"/>
-        <path fill="#CDA571" d="M8.055 0H.122v17h14.03V6.449L8.056 0zm3.48 5.327H9.268v-2.46l2.267 2.46zm-10.28 10.54V1.133h6.8l.068 5.304h4.908v9.43H1.255z"/>
-    </g>
-</svg>
