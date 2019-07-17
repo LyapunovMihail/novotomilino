@@ -22,6 +22,8 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
 
     public AuthorizationEvent;
 
+    public showBankList: boolean = false;
+
     constructor(
         private authorization: AuthorizationObserverService,
         private service: PurchaseCreditService

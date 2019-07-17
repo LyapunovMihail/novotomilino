@@ -5,28 +5,17 @@ import { Component } from '@angular/core';
     styleUrls: ['./purchase.component.scss'],
     template: `
         <section class="purchase">
-            <div class="purchase_container">
-                <h1 class="title purchase_title">Условия покупки</h1>
-                <p class="purchase_description">
-
-                    <span>Продажа в ЖК осуществляется через эскроу-счета.</span><br>
-                    <button class="purchase_description_details" *ngIf="!showDetails" (click)="showDetails = true">Подробнее</button>
-                    <span *ngIf="showDetails">Эскроу-счет в долевом строительстве – это специальный счет, открываемый в банке, на котором замораживаются деньги дольщика на период строительства дома, и передаются Застройщику только после того, как тот исполнит свои обязательства перед дольщиком.
-                    Применение эскроу счетов регламентируется законом в ст. 860.7 ГК РФ.</span>
-                    
-                </p>
+            <div class="purchase__container">
+                <h1 class="purchase__title">Условия покупки</h1>
+                <p class="purchase__descr">Продажа в ЖК осуществляется через эскроу-счета.</p>
                 
-                <ul class="purchase_links">
-                    <li class="purchase_links_item">
-                        <a class="dark-text_link purchase_links_item_content" [routerLinkActive]="['dark-text_link--active']" routerLink="/purchase/credit">Ипотека</a>
-                    </li>
-                    <li class="purchase_links_item">
-                        <a class="dark-text_link purchase_links_item_content" [routerLinkActive]="['dark-text_link--active']" routerLink="/purchase/installment"><span class="long">Покупка в рассрочку</span><span class="short">Рассрочка</span></a>
-                    </li>
-                </ul>
-
-                <router-outlet></router-outlet>
+                <div class="purchase__links">
+                    <a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/credit">Ипотека</a>
+                    <a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/installment">Рассрочка</a>
+                </div>
             </div>
+
+            <router-outlet></router-outlet>
         </section>
     `
 })
