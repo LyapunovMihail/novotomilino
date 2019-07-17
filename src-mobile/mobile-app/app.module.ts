@@ -20,9 +20,9 @@ import { ImgModalComponent } from './modal/img-modal/img-modal.component';
 import { OverlayService } from './modal/overlay.service';
 import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
-import { LocationModule } from './location/location.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
+import { RoutesModule } from './routes/routes.module';
 import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
@@ -54,7 +54,7 @@ const APP_MODULES = [
     //  ErrorPageModule,
     AuthorizationModule,
     HomeModule,
-    LocationModule,
+    RoutesModule,
     FooterModule,
     HeaderModule,
     DynamicModule,

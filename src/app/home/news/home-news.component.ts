@@ -42,9 +42,7 @@ export class HomeNewsComponent implements OnInit {
     }
 
     public ngOnInit() {
-
         this.mainSnippets = this.allSnippets;
-        this.setSlidesOpacity(this.allSnippets);
     }
 
     public nextBtn() {
@@ -63,9 +61,9 @@ export class HomeNewsComponent implements OnInit {
     private setSlidesOpacity(snippets) {
         snippets.forEach((item, index) => {
             if (index < this.currentSlide || index > this.currentSlide + 2) {
-                $(`#slider-item-${index}`).css({ opacity: '0' });
+                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events'] : 'none'});
             } else {
-                $(`#slider-item-${index}`).css({ opacity: '1' });
+                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events'] : 'unset'});
             }
         });
     }

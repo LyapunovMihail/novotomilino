@@ -12,6 +12,6 @@ import { Component } from '@angular/core';
 
 export class LocationComponent {
 
-    constructor () { }
+    constructor () {}
 
 }

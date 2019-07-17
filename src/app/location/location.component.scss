@@ -6,4 +6,292 @@
         width: 100%;
         height: 100%;
     }
+
+    &_routes {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .location_aside_link--routes {
+            order: 1;
+        }
+
+        .location_aside_list {
+            order: 2;
+            margin-bottom: 20px;
+        }
+
+        .location_aside_link--infrastructure {
+            order: 3;
+        }
+    }
+
+    &_infrastructure {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .location_aside_link--routes {
+            margin-bottom: 25px;
+        }
+
+        .location_aside_link--infrastructure {
+            margin-bottom: 15px;
+        }
+
+        .location_aside_list_item {
+            
+            &:last-of-type {
+                margin: 0;
+            }
+        }
+    }
+
+    &_aside {
+        position: absolute;
+        background: #ffffff;
+        border-radius: 7px;
+        box-sizing: border-box;
+        width: 360px;
+        top: 140px;
+        left: 40px;
+        padding: 30px 0 44px 75px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        box-shadow: -12px 18px 17px rgba(0,0,0,.3);
+
+        &_link {
+            align-self: flex-start;
+
+            &:before {
+                width: 34px;
+                height: 20px;
+                left: -45px;
+            }
+
+            &--routes {
+                margin-bottom: 15px;
+
+                &:before {
+                    background: url('/assets/img/location/routes.svg') 50% no-repeat;
+                    background-size: 34px 16px; 
+                }
+            }
+
+            &--infrastructure {
+
+                &:before {
+                    background: url('/assets/img/location/infrastructure.svg') 50% no-repeat;
+                    background-size: 33px 20px;
+                }
+            }
+        }
+
+        &_list {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+
+            &_hint {
+                font: 16px/22px 'abrade-book', sans-serif;
+                color: #2E2E2E;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                margin-bottom: 12px;
+            }
+
+            &_title {
+                font: 14px/21px 'abrade-book', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                margin-bottom: 10px;
+
+                &:first-of-type {
+                    color: #67c3eb;
+                }
+
+                &:last-of-type {
+                    color: rgba(131,112,165,.7);
+                }
+            }
+
+            &_item {
+                font: 14px/21px 'abrade-book', sans-serif;
+                color: rgba(136,138,161,.7);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                cursor: pointer;
+                position: relative;
+                margin-bottom: 10px;
+                width: 260px;
+                transition: .2s linear;
+
+                &:hover:not(.location_aside_list_item--active) {
+                    color: #888aa1;
+                    
+                    .location_aside_list_item_icon {
+
+                        &--blue {
+                            background: #83d6f4;
+                        }
+
+                        &--violet {
+                            background: #8370a5;
+                        }
+
+                        &--shop {
+                            background: rgb(131,214,244);
+                        }
+    
+                        &--school {
+                            background: rgb(251,198,194);
+                        }
+    
+                        &--kindergarten {
+                            background: rgb(255,224,80);
+                        }
+    
+                        &--hospital {
+                            background: rgb(214,89,54);
+                        }
+    
+                        &--sport {
+                            background: rgb(166,68,147);
+                        }
+    
+                        &--recreation {
+                            background: rgb(102,213,188);
+                        }
+    
+                        &--transport {
+                            background: rgb(244,191,59);
+                        }
+                    }
+                }
+
+                &--active {
+                    color: #888aa1;
+
+                    .location_aside_list_item_icon {
+
+                        &:before {
+                            opacity: 1;
+                        }
+
+                        &--blue {
+                            background: #83d6f4;
+                        }
+
+                        &--violet {
+                            background: #8370a5;
+                        }
+
+                        &--shop {
+                            background: rgb(131,214,244);
+                        }
+    
+                        &--school {
+                            background: rgb(251,198,194);
+                        }
+    
+                        &--kindergarten {
+                            background: rgb(255,224,80);
+                        }
+    
+                        &--hospital {
+                            background: rgb(214,89,54);
+                        }
+    
+                        &--sport {
+                            background: rgb(166,68,147);
+                        }
+    
+                        &--recreation {
+                            background: rgb(102,213,188);
+                        }
+    
+                        &--transport {
+                            background: rgb(244,191,59);
+                        }
+                    }
+                }
+
+                &_icon {
+                    position: absolute;
+                    top: 3px;
+                    left: -25px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 16px;
+                    height: 16px;
+                    font: 14px 'abrade-book', sans-serif;
+                    color: #ffffff;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    transition: .2s linear;
+
+                    &:before {
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background: url('/assets/img/location/location-infrastructure/select-item.svg') 50% no-repeat;
+                        background-size: 7px 7px; 
+                        transition: .2s linear;
+                        opacity: 0;
+                    }
+
+                    &--blue {
+                        background: rgba(131,214,244,.7);
+
+                        &:before {
+                            display: none;
+                        }
+                    }
+
+                    &--violet {
+                        background: rgba(131,112,165,.7);
+
+                        &:before {
+                            display: none;
+                        }
+                    }
+
+                    &--shop {
+                        background: rgba(131,214,244,.7);
+                    }
+
+                    &--school {
+                        background: rgba(251,198,194,.7);
+                    }
+
+                    &--kindergarten {
+                        background: rgba(255,224,80,.7);
+                    }
+
+                    &--hospital {
+                        background: rgba(214,89,54,.7);
+                    }
+
+                    &--sport {
+                        background: rgba(166,68,147,.7);
+                    }
+
+                    &--recreation {
+                        background: rgba(102,213,188,.7);
+                    }
+
+                    &--transport {
+                        background: rgba(244,191,59,.7);
+                    }
+                }
+            }
+        }
+    }
 }
+
