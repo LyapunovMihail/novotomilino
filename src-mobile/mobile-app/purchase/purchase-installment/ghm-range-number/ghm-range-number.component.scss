@@ -1,5 +1,7 @@
+@import "../../../../styles/modules/mixins/mixin.scss";
+
 .ghm-range-number {
-    padding-top: 15px;
+    padding-top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -8,16 +10,10 @@
     user-select: none;
     box-sizing: border-box;
 
-    @media(max-width: 599px) {
-        padding-top: 10px;
-    }
-
     &-text {
-        font: 15px/19px 'Montserrat', sans-serif;
-        color: #1c1c1c;
-        opacity: 0.5;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        font: 500 18px/24px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
     }
 
     &-slider {
@@ -25,31 +21,21 @@
         user-select: none;
         width: calc(100% - 2px);
         position: relative;
-        height: 6px;
+        height: 1px;
         background: #d4d4d4;
-        margin: 17px 0 11px;
-
-        @media(max-width: 599px) {
-            margin: 20px 0 11px;
-        }
+        margin: 11px 0;
     }
 
     &-runner {
-        left: 0;
+        width: 22px;
+        height: 22px;
         position: absolute;
+        left: 0;
         top: 50%;
         transform: translateY(-50%);
-        border-radius: 1px; 
-        width: 16px;
-        height: 22px;
-        border: 1px solid #d9d9d9;
-        transition: border-color .2s linear;
-        background: #ffffff;
+        border-radius: 50%; 
+        background: $col-orange;
         cursor: pointer;
-
-        &:hover {
-            border-color: #ffde7c;
-        }
 
         &:before {
             content: '';
@@ -57,9 +43,9 @@
             right: 100%;
             top: 50%;
             transform: translateY(-50%);
-            height: 6px;
+            height: 1px;
             width: 1150px;
-            background: #cda571;
+            background: $col-orange;
         }
     }
 }

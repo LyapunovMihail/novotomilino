@@ -1,36 +1,118 @@
-<div class="purchase_credit">
+<div class="credit purchase__credit">
 
-    <ul class="credit_list">
-
-        <li *ngFor="let snippet of snippetArray" class="credit_list_item">
-
-            <div class="credit_list_item_logo_wrap">
-                <img class="credit_list_item_logo" 
-                    *ngIf="snippet.image.length > 0"
-                     [src]="uploadsPath + snippet.image"
-                />
+    <div class="credit__filter">
+        <!-- Range input -->
+        
+        <div class="credit__filter-checkbox">
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-war">
+                <input type="checkbox" name="type" id="war">
+                <label for="war" class="g-checkbox"></label>
+                <label for="war" class="credit__filter-checkbox-text">Военная ипотека</label>
             </div>
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-mom">
+                <input type="checkbox" name="type" id="mom">
+                <label for="mom" class="g-checkbox"></label>
+                <label for="mom" class="credit__filter-checkbox-text">Материнский капитал</label>
+            </div>
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-nation">
+                <input type="checkbox" name="type" id="nation">
+                <label for="nation" class="g-checkbox"></label>
+                <label for="nation" class="credit__filter-checkbox-text">Гражданство РФ</label>
+            </div>
+        </div>
 
-            <span class="credit_list_item_content">Ставка:
-                <span>{{snippet.percent}} %</span>
-            </span>
+        <button class="credit__filter-result" (click)="showBankList = true">
+            <p class="credit__filter-result-text">Вам подходит 5 программ</p>
+            <img src="/assets/img/purchase/btn_next_grey.svg" class="credit__filter-result-img" alt="open">
+        </button>
+    </div>
 
-            <span class="credit_list_item_content  credit_list_item_content--margin">Первоначальный взнос:
-                <span>{{snippet.initial}} %</span>
-            </span>
+    <div class="credit__list" *ngIf="showBankList == true">
 
-            <div *ngIf="!isAuthorizated">
-                <div 
-                    [ngClass]="{
-                        'credit_list_item_content--military' : snippet.category == 'military',
-                        'credit_list_item_base' : snippet.category == 'base'
-                    }" class="credit_list_item_content">
-                    {{(snippet.category == 'military' ? "Военная ипотека" : "")}}
+        <div class="credit__list-head">
+            <h1 class="credit__list-head-title">Вам подходит <span class="credit__list-head-title_nowrap">5 программ</span></h1>
+            <div class="credit__list-head-cls" (click)="showBankList = false"></div>
+        </div>
+        <div class="credit__list-snippet">
+            <div class="credit__list-snippet_scrll">
+                <div *ngFor="let snippet of snippetArray" class="list-snippet__item list-snippet__item_sber">
+        
+                    <div class="list-snippet__item-wrap">
+                        <div class="list-snippet__item-logo">
+                            <img class="list-snippet__item-logo-img" 
+                                *ngIf="snippet.image.length > 0"
+                                 [src]="uploadsPath + snippet.image"
+                            /> <!-- Картинка должна подгружаться в зависимости от выбранного банка из списка -->
+                        </div>
+                        <p class="list-snippet__item-logo-text">Сбербанк</p> <!-- Название банка должно будет подгружаться -->
+                    </div>
+    
+                    <div class="list-snippet__item-descr">
+                        <div class="list-snippet__item-descr-name">
+                            <p class="list-snippet__item-descr-text_b">Минимальный взнос 
+                                <span [ngClass]="{'list-snippet__item-descr_input' : isAuthorizated}">
+                                    <span [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
+                                        [attr.contenteditable]="isAuthorizated"
+                                        (blur)="updateSnippet(snippet._id, 'initial', $event.target.innerHTML)">
+                                        {{snippet.initial}}
+                                    </span>
+                                    <span>%</span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="list-snippet__item-descr-info">
+                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-ante"
+                                 [ngClass]="{'admin-credit__input-area' : isAuthorizated}">
+                                <p class="list-snippet__item-descr-text_s">Ставка</p>
+                                <p class="list-snippet__item-descr-text_b">
+                                    <span class="list-snippet__item-descr_ante-input"
+                                        [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
+                                        [attr.contenteditable]="isAuthorizated"
+                                        (blur)="updateSnippet(snippet._id, 'percent', $event.target.innerHTML)">
+                                        {{snippet.percent}}
+                                    </span>
+                                    <span>%</span>
+                                </p>
+                            </div>
+                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-date"
+                                 [ngClass]="{'admin-credit__input-area' : isAuthorizated}">
+                                <p class="list-snippet__item-descr-text_s">Срок до</p>
+                                <p class="list-snippet__item-descr-text_b">
+                                    <span class="list-snippet__item-descr_date-input"
+                                        [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
+                                        [attr.contenteditable]="isAuthorizated"
+                                        (blur)="updateSnippet(snippet._id, 'percent', $event.target.innerHTML)">
+                                        {{snippet.percent}}
+                                    </span>
+                                    <span> %</span>
+                                </p>
+                            </div>
+                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-payment">
+                                <p class="list-snippet__item-descr-text_s">Платеж в месяц</p>
+                                <p class="list-snippet__item-descr-text_b">—</p> <!-- Я так понял тут должно автоматом рассчитываться -->
+                            </div>
+                        </div>
+            
+                    </div>
+        
+                    <div class="admin-credit__check">
+                        <label class="admin-credit__check-wrap" *ngIf="isAuthorizated">
+                            <input class="admin-credit__check-checkbox"
+                                [checked]="(snippet.category == 'military')" 
+                                type="checkbox" 
+                                (change)="updateSnippet(snippet._id, 'category', ((snippet.category == 'military')?'base':'military'))"
+                            />
+                            <div class="g-checkbox"></div>
+                            <div class="admin-credit__check-text">
+                                Военная ипотека
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
+        </div>
 
-        </li>
 
-    </ul>
+    </div>
 
 </div>
