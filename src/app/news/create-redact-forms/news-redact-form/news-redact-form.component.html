@@ -1,8 +1,8 @@
-<div *ngIf="(isForm && isAuthorizated)" class="admin-controll admin-news_modal">
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll create-form__modal g-modal-bg">
     
         <div class="admin-news_modal-close-bgr" (click)="close.emit()" disabled="true"></div>
     
-        <div class="admin-news_container">
+        <div class="create-form__container">
 
             <div class='admin-news_progress-loader' *ngIf="isLoad">
                 <div class='admin-news_progress-loader-title'>Загрузка изображения {{imageUploadPercent}}%</div>
@@ -11,13 +11,14 @@
                 </div>
             </div>
     
-            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="admin-news_form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="admin-news_form create-form__form">
 
                 <input [formControl]="form.controls['category']" hidden="true" type="text">
     
-                <div (click)="close.emit()" class="admin-news_form_cls-btn"></div>
+                <div (click)="close.emit()" class="create-form__cls-btn"></div>
     
-                <h2 class="admin-news_form_title">Редактировать</h2>
+                <h1 class="create-form__form-title">Редактировать</h1>
+                <p class="create-form__form-date">29 марта 2019</p>
 
                 <!-- <div class="admin-news_form_wrap admin-news_form_wrap--date">
                     <div class="admin-news_form_date">
@@ -29,49 +30,42 @@
                 </div> -->
     
     
-                <div class="admin-news_form_wrap">
-                    <span class="admin-news_form_text admin-news_form_name">Заголовок</span>
-                    <textarea class="admin-news_form_field admin-news_form_field--for-title"
+                <div class="create-form__form-wrap">
+                    <p class="create-form__form-subtitle">Заголовок</p>
+                    <textarea class="create-form__form-area create-form__form-area_title"
                         name="title" 
                         [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
                         [formControl]="form.controls['title']">
                     </textarea>
                 </div>
                 
+                <div class="create-form__form-wrap">    
+                    <p class="create-form__form-subtitle">Текст</p>
+                    <textarea [formControl]="form.controls['description']" class="create-form__form-area create-form__form-area_text"></textarea>
+                </div>
     
-                <div [ngClass]="{'admin-news_form_wrap--with-photo' : loadedImage.length > 0 }" class="admin-news_form_wrap">
-                        
-                    <span class="admin-news_form_text admin-news_form_name">Фотография</span>
+                <div class="create-form__form-wrap">
+                    <p class="create-form__form-subtitle">Фотография</p>
     
-                    <div class="admin-news_form_photo">
-    
-                        <img class="admin-news_form_photo_content" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
+                    <div class="create-form__form-img">
+                        <img class="create-form__form-img-item" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
     
                         <input [formControl]="form.controls['image']" hidden="true" type="text">
                         <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
     
-                        <label [ngClass]="{'admin-news_form_photo_description--with-photo' : loadedImage.length > 0 }" class="admin-news_form_photo_description">
-                            <div class="admin-news_form_photo_description_btn">
-                                {{ (loadedImage.length > 0) ? "Изменить" : "Загрузить" }}
+                        <label [ngClass]="{'create-form__form-img-wrap_photo' : loadedImage.length > 0 }" class="create-form__form-img-wrap">
+                            <div class="create-form__form-img-btn">
+                                <span>{{ (loadedImage.length > 0) ? "Изменить" : "Загрузить" }}</span>
                             </div>
                             <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
-                            <span class="admin-news_form_photo_description_text">
-                                Для лучшего отображения новости фото должно быть не менее 1280 px по ширине <br> и 1000 px по высоте.
-                            </span>
                         </label>
-    
                     </div>
-    
                 </div>
     
     
-                <div class="admin-news_form_wrap">    
-                    <span class="admin-news_form_text admin-news_form_name">Текст</span>
-                    <textarea [formControl]="form.controls['description']" class="admin-news_form_field admin-news_form_field--for-description"></textarea>
-                </div>
     
     
-                <div class="admin-news_form_wrap admin-news_form_wrap--margin-40">
+                <!-- <div class="admin-news_form_wrap admin-news_form_wrap--margin-40">
     
                         <span class="admin-news_form_text">Показывать</span>
     
@@ -90,12 +84,12 @@
     
                         </div>
     
-                </div>
+                </div> -->
     
     
-                <button type="submit" class="admin-news_form_add-btn"
+                <button type="submit" class="create-form__form-submit"
                     [ngClass]="{'submit-btn-disabled' : !form.valid}"
-                    [disabled]="!form.valid">Добавить
+                    [disabled]="!form.valid">Сохранить изменения
                 </button>
     
             </form>

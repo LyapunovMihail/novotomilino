@@ -1,25 +1,46 @@
+@import "../../styles/modules/mixins/mixin.scss";
+
 .news {
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - (67px + 50px));
     display: flex;
-    justify-content: center;
+    flex-flow: column;
+    align-items: center;
     box-sizing: border-box;
-    padding: 132px 0 150px;
+    padding: 67px 0 0;
 
-    &_wrapper {
+    &__nav {
+        width: calc(100% - 30px);
+        max-width: $w1600;
 
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0 15px;
-
-        @media(min-width: 600px) {
-            padding: 0 25px;
+        &-list {
+            width: 223px;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, 0.7);
+            padding: 0 0 10px;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
         }
+        &-item {
+            cursor: pointer;
 
-        @media(min-width: 1220px) {
-            padding: 0;
-            margin: 0 auto;
-            max-width: 550px;
+            &_active {
+                color: #000105;
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -11px;
+                    width: 100%;
+                    height: 2px;
+                    background: #e7490f;
+                }
+            }
         }
     }
 }

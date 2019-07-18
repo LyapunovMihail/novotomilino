@@ -1,10 +1,5 @@
 @import './cross-browser-elipsis';
-
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-}
+@import '../../styles/modules/mixins/mixin';
 
 $color: #2e2e2e;
 $color2: #888aa1;
@@ -15,70 +10,303 @@ $font: 15px/23px 'abrade-book', sans-serif;
 $font2: 50px/60px 'LeksaSans', sans-serif;
 
 .news {
-    width: 1200px;
-    min-height: 100vh;
+    width: 100%;
+    min-height: calc(100vh - (146px + 50px)); // 146 + 50 это высота хедера и футера
     box-sizing: border-box;
-    padding: 135px 0 175px;
     position: relative;
-    margin: 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 
-    @media(max-width: 1440px) {
-        width: 715px;
-    }
-
-    &_view {
+    // @media(max-width: 1279px) {
+    //     width: 715px;
+    // }
+    
+    &__head {
+        width: calc(100% - 30px);
+        max-width: $w1600;
+        display: flex;
+        margin: 60px 0 30px;
         
-        &_img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        &-wrap {
+            width: 50%;
+            display: flex;
+            flex-flow: column nowrap;
+            &:last-child:not(:first-child) { align-items: flex-end; }
         }
-
-        &_wrapper {
-            position: relative;
-            width: 715px;
-            height: 365px;
-            margin-top: 11px;
-        }
-
-        &_back {
-            display: inline-block;
-            box-sizing: border-box;
-            width: 100px;
-            border: 1px solid #cda571;
-            border-radius: 5px;
-            font: 18px/46px 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #1c1c1c;
-            @include font-smoothing();
-            text-align: center;
-
-            &:hover {
-                color: #ffffff;
-                background-color: #cda571;
-                transition: 0.3s;
+        &-title {
+            margin: 0 0 40px;
+            @media(max-width: 1279px) {
+                font-size: 30px;
+                line-height: 34px;
+                margin: 0 0 30px;
             }
         }
+    }
+    &__nav {
+        width: calc(100% - 30px);
+        max-width: $w1600;
 
-        &_title {
-            font: 23px 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #ffffff;
-            @include font-smoothing();
-            transition: .2s linear;
+        &-list {
+            width: 223px;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, 0.7);
+            padding: 0 0 10px;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+        }
+        &-item {
+            cursor: pointer;
+
+            &_active {
+                color: #000105;
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -11px;
+                    width: 100%;
+                    height: 2px;
+                    background: #e7490f;
+                }
+            }
+        }
+    }
+
+    &__snippets {
+        width: calc(100% - 30px);
+        max-width: $w1600;
+
+        &-list {
+            display: flex;
+            flex-flow: row wrap;
+            // @media (max-width: 1279px) {}
+        }
+        &-item {
+            width: 287px;
+            margin: 0 30px 40px 0;
+            position: relative;
+            &:nth-child(6n),
+            &:nth-child(6n + 1) { width: 606px; }
+            &:nth-child(3n) { margin: 0 0 40px; }
+            &:hover .news__snippets-img img { transform: scale(1.1); }
+            &:hover .news__snippets-descr-title { color: $col-orange; }
+            @media (max-width: 1279px) {
+                width: calc(50% - 15px);
+                &:nth-child(3n + 1) {
+                    width: 100%;
+                    margin: 0 0 40px;
+                }
+                &:nth-child(3n) {
+                    width: calc(50% - 15px);
+                    margin: 0 0 40px;
+                }
+            }
+        }
+        &-link {
+            width: 100%;
+            height: 100%;
+        }
+        &-img {
+            width: 100%;
+            height: 383px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            &:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: scale(1);
+                will-change: transform;
+                transition: transform 0.7s linear;
+            }
+        }
+        &-end {
+            min-width: 257px;
+            height: 55px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
+            border-radius: 4px;
+            background: #e7490f;
+            opacity: .4;
+            box-sizing: border-box;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+
+            span {
+                font: 16px/24px "Museo Sans Cyrl";
+                @include font-smoothing;
+                color: #fff;
+                font-weight: 500;
+                position: relative;
+                padding: 0 0 0 32px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 25px;
+                    height: 25px;
+                    background: url('/assets/img/news/clock.svg') no-repeat;
+                    background-size: 100%;
+                }
+            }
         }
 
-        &_content {
-            font: 18px/31px 'Montserrat', sans-serif;
-            color: #1c1c1c;
-            @include font-smoothing();
-            width: 715px;
-            margin-top: 40px;
+        &-descr {
+            margin: 10px 0 0;
+
+            &-title {
+                font: 500 20px/24px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                margin: 0 0 10px;
+                transition: 0.2s linear;
+            }
+            &-text {
+                font: 16px/24px $font-mus;
+                @include font-smoothing;
+                color: rgba(0, 1, 5, 0.8);
+                margin: 0 0 10px;
+            }
+            &-date {
+                font: 500 12px/20px "Museo Sans Cyrl";
+                @include font-smoothing;
+                color: rgba(0, 1, 5, 0.6);
+                letter-spacing: .4px;
+            }
+        }
+    }
+
+    &__view {
+        
+        &-nav {
+            width: 1240px;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            @media (max-width: 1279px) {
+                width: calc(100% - 60px);
+                top: 30px;
+            }
+
+            &-link {
+                @include fw18-24;
+                position: relative;
+                padding: 0 0 0 27px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 19px;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    background: url(/assets/img/arrow-back.svg) center no-repeat;
+                    background-size: 19px 20px;
+                }
+            }
+        }
+        &-wrap {
+            width: 100%;
+            max-width: $w1600;
+            position: relative;
+            display: flex;
+            @media (max-width: 1279px) {
+                display: block;
+                width: calc(100% - 60px);
+            }
+        }
+        &-content {
+            width: 100%;
+            padding: 52px 0 0;
+            margin: 0 0 60px;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            @media (max-width: 1279px) { padding: 94px 0 0; }
+
+            &-btn {
+                height: 40px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: -20px;
+                right: -20px;
+                display: flex;
+                justify-content: space-between;
+
+                &-prev,
+                &-next {
+                    width: 40px;
+                    height: 40px;
+                    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+                    border-radius: 50%;
+                    &:hover { background-position: 49%; }
+                }
+                &-prev { background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff; }
+                &-next {
+                    background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
+                    transform: rotate(180deg);
+                }
+            }
+            &-img {
+                width: 100%;
+                height: 450px;
+                overflow: hidden;
+                border-radius: 4px;
+
+                &-item {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        &-title {
+            width: 50%;
+            font: 500 36px/40px "Leksa";
+            @include font-smoothing;
+            color: #000105;
+            box-sizing: border-box;
+            margin: 30px 0 0;
+        }
+        &-text-wrap {
+            width: 50%;
+            margin: 35px 0 0;
+            @media (max-width: 1279px) { margin: 10px 0 0; }
+        }
+        &-text {
+            @include f16-24;
+            color: rgba(0, 1, 5, 0.8);
+            margin: 0 0 10px;
+
+            &_date {
+                font: 12px/18px $font-mus;
+                @include font-smoothing;
+                color: rgba(0, 1, 5, 0.6);
+                letter-spacing: .4px;
+            }
         }
     }
 
@@ -161,7 +389,7 @@ $font2: 50px/60px 'LeksaSans', sans-serif;
         position: relative;
 
         &_list {
-            width: 716px;
+            // width: 716px;
 
             &_item {
                 width: 715px;

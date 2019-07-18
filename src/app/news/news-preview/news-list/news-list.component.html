@@ -1,32 +1,23 @@
 
-<ng-container  *ngFor="let snippet of snippetsArray">
 
     <!-- Отображать сниппет только если у него отрицательное значение показа на главной
         и если выбранная категория равна категории сниппета или 'ALL' -->
-    <li class="news_snippets_list_item">
-
-        <a [routerLink]="['/news/' + snippet._id]" class="snippets_list_item_link">
-
-            <div class="snippets_list_item_img">
-
-                <img class="snippets_list_item_img_content" [src]="uploadsPath + snippet.image">
-                <span class="snippets_list_item_title" [innerHTML]="snippet.title | lineBreakPipe"></span>
-
-            </div>
-
-            <!-- <div class="snippets_list_item_text">
-                <span class="snippets_list_item_date">{{snippet.created_at | date: 'd.M.yyyy' }}</span>
-                <span class="snippets_list_item_title" [innerHTML]="snippet.title | lineBreakPipe"></span>
-                <span *ngIf="snippet.description" class="snippets_list_item_description" [innerHTML]="snippet.description | lineBreakPipe"></span>
+<div class="news__snippets-item" *ngFor="let snippet of snippetsArray">
+    <a [routerLink]="['/news/' + snippet._id]" class="news__snippets-link">
+        <div class="news__snippets-img">
+            <img class="snippets_list_item_img_content" [src]="uploadsPath + snippet.image">
+            <!-- <div class="news__snippets-end">
+                <span>46 дней до конца акции</span>
             </div> -->
-
-        </a>
-
-        <div *ngIf="isAuthorizated" class="admin-controll admin-news_editing-controls">
-            <div (click)="redactSnippet.emit(snippet._id)" class="admin-controll admin-news_editing-controls_for-edit">Редактировать</div>     
-            <div (click)="deleteSnippet.emit(snippet._id)" class="admin-controll admin-news_editing-controls_for-delete">Удалить</div>
         </div>
-
-    </li>
-
-</ng-container>
+        <div class="news__snippets-descr">
+            <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
+            <p *ngIf="snippet.description" class="news__snippets-descr-text" [innerHTML]="snippet.description | lineBreakPipe"></p>
+            <p class="news__snippets-descr-date">{{snippet.created_at | date: 'd.M.yyyy' }}</p>
+        </div>
+    </a>
+    <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+        <button (click)="redactSnippet.emit(snippet._id)" class="admin-controll admin__news-btn-edit">Редактировать</button>     
+        <button (click)="deleteSnippet.emit(snippet._id)" class="admin-controll admin__news-btn-delete">Удалить</button>
+    </div>
+</div>
