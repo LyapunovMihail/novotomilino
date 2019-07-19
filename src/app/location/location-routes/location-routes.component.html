@@ -1,34 +1,48 @@
-<div class="location_routes">
-    <div class="location_aside">
-
-        <a class="dark-text_link location_aside_link location_aside_link--routes" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/routes">Как добраться</a>
-        <a class="dark-text_link location_aside_link location_aside_link--infrastructure" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/infrastructure">Инфраструктура района</a>
-
-        <ul class="location_aside_list">
-
-            <h3 class="location_aside_list_hint">Всего 3 минуты пешком от ж/д<br>станции Люберцы-1 (250 м)!</h3>
-
-            <span class="location_aside_list_title">Общественным транспортом:</span>
-            <!-- собираются маркеры с типом 'bus' или 'polyline' -->
-            <div *ngFor="let link of markers">
-                <!-- при клике меняется активный маршрут -->
-                <li (click)="changeRoute( link )" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'bus' || link.config.type == 'polyline'" class="location_aside_list_item">{{link.config.text}}
-                    <span class="location_aside_list_item_icon location_aside_list_item_icon--blue">{{link.config.content}}</span>
-                </li>
+<div class="location__routes">
+    <div class="location__head">
+        <div class="location__head-wrap">
+            <h1 class="location__head-title">Расположение</h1>
+            <div class="location__head-nav">
+                <a class="location__head-nav-link" [routerLinkActive]="['location__head-nav-link_active']" routerLink="/location/routes">Как добраться</a>
+                <a class="location__head-nav-link" [routerLinkActive]="['location__head-nav-link_active']" routerLink="/location/infrastructure">Инфраструктура</a>
             </div>
+        </div>
 
-            <span class="location_aside_list_title">На автомобиле:</span>
-            <!-- собираются маркеры с типом 'auto' -->
-            <div *ngFor="let link of markers">
-                <!-- при клике меняется активный маршрут -->
-                <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'auto'" class="location_aside_list_item">{{link.config.text}}
-                    <span class="location_aside_list_item_icon location_aside_list_item_icon--violet">{{link.config.content}}</span>
-                </li>
+        <div class="location__head-wrap">
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">2<span>мин</span></p>
+                <p class="location__head-subtitle">Остановка</p>
             </div>
-
-        </ul>
-        
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">10<span>мин</span></p>
+                <p class="location__head-subtitle">Парк Лапса</p>
+            </div>
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">20<span>мин</span></p>
+                <p class="location__head-subtitle">МКАД, 8-й километр</p>
+            </div>
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">30<span>мин</span></p>
+                <p class="location__head-subtitle">м. Выхино</p>
+            </div>
+            <img src="/assets/img/place.svg" alt="">
+        </div>
     </div>
+    <button class="location__way">
+        <span class="location__way-text">Как добраться</span>
+    </button>
 
-    <div id="map" class="location_map"></div>
+    <!-- Блок для офиса продаж -->
+    <!-- <div class="office__head">
+        <div class="office__head-wrap">
+            <h1 class="office__head-title">Офис продаж</h1>
+        </div>
+        <div class="office__head-wrap">
+            <p class="office__head-text">Отдел продаж расположен на объекте, на улице Гоголя, 13, Москва</p>
+            <p class="office__head-text">График работы <span>9:00-21:00 без выходных</span></p>
+            <p class="office__head-text office__head-text_bold">+7 (495) 137-40-12</p>
+        </div>
+    </div> -->
+    <!-- / Блок офиса продаж -->
+    <div id="map" class="location__map"></div>
 </div>

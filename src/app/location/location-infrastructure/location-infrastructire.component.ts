@@ -95,11 +95,11 @@ export class LocationInfrastructureComponent implements OnInit {
         ymaps.ready(() => {
 
             let myMap = new ymaps.Map('map', {
-                center: [55.687325, 37.896492],
-                zoom: 15,
+                center: [55.663139, 37.958373],
+                zoom: 17,
                 controls: []
             }, {
-                minZoom: 14,
+                minZoom: 11,
                 maxZoom: 18
             });
 
@@ -121,7 +121,7 @@ export class LocationInfrastructureComponent implements OnInit {
                 that.markers[index]['active'] = true;
                 that.markers[index]['type'] = item.type;
                 that.markers[index]['marker'] = new ymaps.Placemark(item.coord, {
-                    iconContent: `<div class="marker-content marker-content_tooltip--active marker-content--${item.type}">${item.content}</div>`
+                    iconContent: `<div class="marker-content marker-content__tooltip_active marker-content__${item.type}">${item.content}</div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',

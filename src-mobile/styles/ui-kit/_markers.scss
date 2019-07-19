@@ -1,3 +1,12 @@
+@import "../modules/mixins/mixin.scss";
+
+.main_map_marker {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: url(/assets/img/location/main_marker.svg) center no-repeat $col-orange;
+}
+
 .marker-content {
     width: 30px;
     height: 46px;

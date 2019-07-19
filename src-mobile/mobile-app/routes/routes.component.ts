@@ -23,15 +23,15 @@ export class RoutesComponent implements OnInit {
 
         ymaps.ready( () => {
             let myMap = new ymaps.Map('map', {
-                center: [55.686053, 37.896472],
-                zoom: 15,
+                center: [55.663139, 37.958373],
+                zoom: 17,
                 controls: []
             }, {
                 minZoom: 11,
                 maxZoom: 18
             });
 
-            let marker = new ymaps.Placemark([55.684853, 37.896472], {
+            let marker = new ymaps.Placemark([55.663139, 37.958373], {
                 iconContent: '<div class="main_map_marker"></div>'
             }, {
                 iconLayout: 'default#imageWithContent',

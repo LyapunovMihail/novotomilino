@@ -12,7 +12,7 @@ export let markersConfig = [
         content: 1,
         tooltip: '',
         lineCoords : [
-            [55.716199, 37.816873], 
+            [55.716199, 37.816873],
             [55.713813, 37.824018],
             [55.710175, 37.834825],
             [55.707497, 37.842641],
@@ -113,13 +113,13 @@ export let markersConfig = [
         text: 'От МКАД через Новорязанское шоссе 15 мин 7,4 км',
         type: 'auto'
     }, {
-        coords: [55.684853, 37.896472],
+        coords: [55.663139, 37.958373],
         size: [50, 74],
         offset: [-25, -74],
         zIndex: 0,
-        class: 'marker-content marker-content--main-marker',
+        class: 'marker-content marker-content__main-marker',
         content: '',
-        tooltip: '<div class="marker-content_tooltip-wrap"><div class="marker-content_tooltip">ЖК «Облака»<br>г. Люберцы, ул. Инициативная, 5</div></div>',
+        tooltip: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-title">ЖК Новотомилино</p><p class="marker-content__tooltip-content-text">Люберцы городской округ, Томилино пгт</p></div></div>',
         type: ''
     },
 ];

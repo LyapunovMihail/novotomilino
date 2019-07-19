@@ -130,8 +130,8 @@ export let markersConfig = [
     }, {
         type: 'main-marker',
         content: '',
-        coord: [55.684847, 37.896430],
-        size: [50, 74],
+        coord: [55.663139, 37.958373],
+        size: [56, 56],
         offset: [-25, -74],
     }
 ];
@@ -157,6 +157,12 @@ export let navList = [
         content: 'Рекреационные зоны'
     }, {
         type: 'transport',
-        content: 'Остановки общественного транспорта'
+        content: 'Остановки'
+    }, {
+        type: 'cafe',
+        content: 'Кафе'
+    }, {
+        type: 'pharmacy',
+        content: 'Аптеки'
     }
 ];

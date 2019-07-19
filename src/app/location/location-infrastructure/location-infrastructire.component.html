@@ -1,18 +1,46 @@
-<div class="location_infrastructure">
+<div class="location__infrastructure">
 
-    <div class="location_aside">
+    <div class="location__head">
+        <div class="location__head-wrap">
+            <h1 class="location__head-title">Расположение</h1>
+            <div class="location__head-nav">
+                <a class="location__head-nav-link" [routerLinkActive]="['location__head-nav-link_active']" routerLink="/location/routes">Как добраться</a>
+                <a class="location__head-nav-link" [routerLinkActive]="['location__head-nav-link_active']" routerLink="/location/infrastructure">Инфраструктура</a>
+            </div>
+        </div>
 
-        <a class="dark-text_link location_aside_link location_aside_link--routes" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/routes">Как добраться</a>
-        <a class="dark-text_link location_aside_link location_aside_link--infrastructure" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/infrastructure">Инфраструктура района</a>
-        
-        <ul class="location_aside_list">
-            <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="location_aside_list_item location_aside_list_item--{{item.type}} location_aside_list_item--active">{{item.content}}
-                <span class="location_aside_list_item_icon location_aside_list_item_icon--{{item.type}}"></span>
-            </li>
-        </ul>
+        <div class="location__head-wrap">
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">2<span>мин</span></p>
+                <p class="location__head-subtitle">Остановка</p>
+            </div>
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">10<span>мин</span></p>
+                <p class="location__head-subtitle">Парк Лапса</p>
+            </div>
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">20<span>мин</span></p>
+                <p class="location__head-subtitle">МКАД, 8-й километр</p>
+            </div>
+            <div class="location__head-text-wrap">
+                <p class="location__head-text">30<span>мин</span></p>
+                <p class="location__head-subtitle">м. Выхино</p>
+            </div>
+            <img src="/assets/img/place.svg" alt="">
+        </div>
 
+        <div class="location__infrastructure-filter">
+            <ul class="location__infrastructure-list">
+                <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="location__infrastructure-list-item location__infrastructure-list-item_{{item.type}}">
+                    <!-- <span class="location__infrastructure-item-icon location__infrastructure-item-icon_{{item.type}}"></span> -->
+                    <input type="checkbox" name="places" style="display: none;" id="{{item.type}}">
+                    <label for="{{item.type}}" class="location__infrastructure-checkbox location__infrastructure-checkbox_{{item.type}}"></label>
+                    <label for="{{item.type}}" class="location__infrastructure-text">{{item.content}}</label>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div id="map" class="location_map"></div>
+    <div id="map" class="location__map"></div> 
 
 </div>
