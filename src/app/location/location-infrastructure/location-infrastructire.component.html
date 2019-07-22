@@ -31,11 +31,9 @@
 
         <div class="location__infrastructure-filter">
             <ul class="location__infrastructure-list">
-                <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="location__infrastructure-list-item location__infrastructure-list-item_{{item.type}}">
-                    <!-- <span class="location__infrastructure-item-icon location__infrastructure-item-icon_{{item.type}}"></span> -->
-                    <input type="checkbox" name="places" style="display: none;" id="{{item.type}}">
-                    <label for="{{item.type}}" class="location__infrastructure-checkbox location__infrastructure-checkbox_{{item.type}}"></label>
-                    <label for="{{item.type}}" class="location__infrastructure-text">{{item.content}}</label>
+                <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="location__infrastructure-list-item location__infrastructure-list-item_{{item.type}} location__infrastructure-list-item_active">
+                    <div class="location__infrastructure-checkbox location__infrastructure-checkbox_{{item.type}}"></div>
+                    <p class="location__infrastructure-text">{{item.content}}</p>
                 </li>
             </ul>
         </div>

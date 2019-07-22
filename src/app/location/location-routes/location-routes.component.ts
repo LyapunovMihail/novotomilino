@@ -71,8 +71,13 @@ export class LocationRoutesComponent implements OnInit {
                 let marker = new ymaps.Placemark(item.coords, {
                     iconContent: `
                         <div class="${item.class}">
-                            <span class="marker-content_text">${item.content}</span>
-                            ${item.tooltip}
+                            <span class="marker-content__text">${item.content}</span>
+                            <div class="marker-content__tooltip marker-content__tooltip_${item.type}">
+                                <div class="marker-content__tooltip-content marker-content__tooltip-content_${item.type}">
+                                    <p class="marker-content__tooltip-content-title">${item.title}</p>
+                                    <p class="marker-content__tooltip-content-text">${item.text}</p>
+                                </div>
+                            </div>
                         </div>`
                 }, {
                     // опции
@@ -194,6 +199,8 @@ export class LocationRoutesComponent implements OnInit {
             // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
             that.ref.detectChanges();
         });
+
+        
     }
 
     // вызывается при клике на все маркеры кроме главного
@@ -236,11 +243,11 @@ export class LocationRoutesComponent implements OnInit {
 
         // так же активному маркеру добавляется активный класс для тултипов
         markerContentArr.forEach( ( elem ) => {
-            let elemInnerText = elem.querySelector('.marker-content_text').innerText;
+            let elemInnerText = elem.querySelector('.marker-content__text').innerText;
             if ( Number(elemInnerText) === val.config.content ) {
-                elem.classList.add('marker-content--active');
+                elem.classList.add('marker-content_active');
             } else {
-                elem.classList.remove('marker-content--active');
+                elem.classList.remove('marker-content_active');
             }
         });
 
