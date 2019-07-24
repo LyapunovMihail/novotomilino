@@ -4,11 +4,6 @@
         <div class="news__head-wrap">
             <h1 class="news__head-title g-title-path">Новости</h1>
             <ul class="news__nav-list">
-<<<<<<< HEAD:src/app/news/news-preview/news-preview.component.html
-                <li class="news__nav-item news__nav-item_active">Все</li>
-                <li class="news__nav-item">Новости</li>
-                <li class="news__nav-item">Акции</li>
-=======
                 <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
                     <a routerLink="/news-shares/all">Все</a>
                 </li>
@@ -18,7 +13,6 @@
                 <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
                     <a routerLink="/news-shares/shares">Акции</a>
                 </li>
->>>>>>> dev-test:src/app/news-shares/news/news-preview/news-preview.component.html
             </ul>
         </div>
         <div class="news__head-wrap" *ngIf="isAuthorizated">
