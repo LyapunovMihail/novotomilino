@@ -12,8 +12,8 @@ export const ROUTES: any[] = [
     '/dynamics/build/:year/:month',
     '/dynamics/built',
     '/dynamics/edit_news/:id',
-    '/dynamics/news/:indexNum',
-    '/dynamics/news/:indexNum/:id',
+    '/dynamics/news-shares/:indexNum',
+    '/dynamics/news-shares/:indexNum/:id',
 
     '/conditions/installment',
     '/conditions/credit',
@@ -23,7 +23,7 @@ export const ROUTES: any[] = [
     '/shares/list/:index/:id',
     '/shares/edit/:id',
 
-    '/news/:id',
+    '/news-shares/:id',
 
     // '/about/plan',
     // '/about/builder',

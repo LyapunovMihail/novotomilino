@@ -47,13 +47,13 @@ export class HomeNewsComponent implements OnInit {
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.mainSnippets.length - 3 ) ? this.currentSlide + 1 : this.mainSnippets.length - 3;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
+        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news-shares' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
+        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news-shares' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
 

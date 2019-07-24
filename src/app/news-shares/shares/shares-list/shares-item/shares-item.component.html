@@ -1,0 +1,76 @@
+<div *ngIf="share" class="client-share">
+
+    <a routerLink="/news-shares/shares/list/1" class="client-share__back">Назад</a>
+
+    <div class="client-share__header">
+        <div class="client-share__shadow"></div>
+        <div class="client-share__content">
+            <h1 class="client-share__name">{{share.name}}</h1>
+            <span class="client-share__text">{{share.text}}</span>
+            <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</div>
+            <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="client-share__time">Акция закончилась</div>
+        </div>
+        <img [src]="uploadsPath + share.mainImage" class="client-share__img">
+    </div>
+
+    <div class="client-share__period">Акция продлится до {{share.finish_date | date: 'dd.MM.yyyy'}}</div>
+
+    <ul class="client-share__list">
+        <li *ngFor="let b of share.body; index as blockIndex"
+            [ngSwitch]="b.blockType" class="client-share__item">
+
+            <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" class="client-share__icon">
+
+            <article *ngSwitchCase="'description'" class="client-share__descr">{{b.blockDescription}}</article>
+
+            <ul *ngSwitchCase="'list'" class="client-share__object">
+                <li *ngFor="let item of b.blockList" class="client-share__object__item">{{item}}</li>
+            </ul>
+
+            <ul *ngSwitchCase="'flats'" class="client-share__flats">
+                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="client-share__flats__item">
+                    <div class="client-share__number">№ {{flat.number}}</div>
+                    <div class="client-share__flats-header">
+                        <!-- <div class="client-share__flats__house">Корпус {{flat.house}}</div> -->
+                        <div class="client-share__flats__house">Секция {{flat.section}}</div>
+                        <div class="client-share__flats__house--divider">.</div>
+                        <div class="client-share__flats__house">Этаж {{flat.floor}}</div>
+                    </div>
+                    <div class="client-share__decoration">{{flat.decoration}}</div>
+                    <img [src]="flat.scheme" class="client-share__image">
+                    <div class="client-share__total">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>
+                    <div class="client-share__price-wrap">
+                        <div class="client-share__price">{{flat.price}} &#8381;</div>
+                        <div class="client-share__discount">−{{+flat.discount | bitNumber}}{{flat.discountType === shareFlatDiscountType.PERCENT ? '%' : '&#8381;'}}</div>
+                    </div>
+                    <div (click)="isReserveFormOpen = true; windowScrollLocker.block(); setFlatData(flat)" class="client-share__reserve">Забронировать</div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <h2 class="client-share__subscription__title">Я хочу получать уведомления о новых акциях и скидках.</h2>
+
+    <form method="POST" action="https://cp.unisender.com/ru/subscribe?hash=6kdhbz8pihc8duo3ouai9qqu89nqwdpwd5znwppre7cu4fd5dymdo" class="client-share__subscription" ngNoForm>
+        <div class="client-share__subscription__wrap">
+            <span class="client-share__subscription__name">Ваш email</span>
+            <input
+                   class="client-share__subscription__field"
+                   type="text" name="email" value="">
+        </div>
+        <input type="hidden" name="charset" value="UTF-8">
+        <input type="hidden" name="default_list_id" value="17731037">
+        <input type="hidden" name="overwrite" value="2">
+        <input type="hidden" name="is_v5" value="1">
+        <button class="client-share__subscription__submit" type="submit">Подписаться</button>
+    </form>
+</div>
+
+<app-form-reserve *ngIf="setFlatData"
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentNumber]="selectFlat.number"
+    [apartmentPrice]="selectFlat.price"
+    [type]="'КВ'">
+</app-form-reserve>

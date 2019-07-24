@@ -1,0 +1,23 @@
+<section class="news">
+
+    <div class="news_wrapper">
+
+        <div class="news-view_description">
+
+            <h2 [innerHTML]="title | myLineBreakPipe"
+                class="news-view_description_title"></h2>
+
+            <span *ngIf="description && description.length > 0"
+                [innerHTML]="description | myLineBreakPipe"
+                class="news-view_description_text">
+            </span>
+
+            <span *ngIf="category !== 'SHARE'" class="news-view_description_date">{{createdAt | date: 'd.M.yyyy' }}</span>
+
+        </div>
+
+        <a class="news-view_back" routerLink="/news-shares/news">Назад</a>
+
+    </div>
+
+</section>

@@ -5,7 +5,7 @@
         <div class="main__news-nav">
             <ul class="main__news-list">
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'all'" (click)="changeSnippets(allSnippets, 'all')">Все</li>
-                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'news'" (click)="changeSnippets(newsSnippets, 'news')">Новости</li>
+                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'news-shares'" (click)="changeSnippets(newsSnippets, 'news-shares')">Новости</li>
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'shares'" (click)="changeSnippets(shareSnippets, 'shares')">Акции</li>
             </ul>
             <div class="main__news-btn">
@@ -20,7 +20,7 @@
         <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'all'">
             <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of allSnippets; let i = index" id="slider-item-{{i}}">
-                    <a class="main__news-slider-item-link" [routerLink]="'news/' + item._id" *ngIf="item.thumbnail">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/' + item._id" *ngIf="item.thumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail">
                     </a>
                     <a class="main__news-slider-item-link" [routerLink]="'shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
@@ -33,10 +33,10 @@
             </ul>
         </div>
 
-        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'news'">
+        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'news-shares'">
             <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of newsSnippets; let i = index" id="slider-item-{{i}}">
-                    <a class="main__news-slider-item-link" [routerLink]="'news/' + item._id">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail" *ngIf="item.thumbnail">
                     </a>
                     <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>

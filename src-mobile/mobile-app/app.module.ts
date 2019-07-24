@@ -26,9 +26,9 @@ import { RoutesModule } from './routes/routes.module';
 import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
-import { NewsModule } from './news/news.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { FlatsModule } from './flats/flats.module';
+import { NewsSharesModule } from './news-shares/news-shares.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -36,7 +36,6 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { SharesModule } from './shares/shares.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -60,8 +59,7 @@ const APP_MODULES = [
     DynamicModule,
     AboutModule,
     PurchaseModule,
-    NewsModule,
-    SharesModule,
+    NewsSharesModule,
     FavoritesModule,
     FlatsModule,
 

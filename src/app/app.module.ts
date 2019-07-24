@@ -29,8 +29,7 @@ import { HeaderModule } from './header/header.module';
 import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
-import { NewsModule } from './news/news.module';
-import { SharesModule } from './shares/shares.module';
+import { NewsSharesModule } from './news-shares/news-shares.module';
 import { DecorationModule } from './decoration/decoration.module';
 import { FlatsModule } from './flats/flats.module';
 import { FavoritesModule } from './favorites/favorites.module';
@@ -67,8 +66,7 @@ const APP_MODULES = [
     DynamicModule,
     AboutModule,
     PurchaseModule,
-    NewsModule,
-    SharesModule,
+    NewsSharesModule,
     DecorationModule,
     FlatsModule,
     FavoritesModule,
