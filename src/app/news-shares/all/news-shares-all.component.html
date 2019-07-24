@@ -1,0 +1,24 @@
+<section class="news">
+    
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </div>
+        <div class="news__head-wrap" *ngIf="isAuthorizated">
+            <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
+            <button class="admin-controll admin__add-stock">Добавить акцию</button>
+        </div>
+    </div>
+
+</section>

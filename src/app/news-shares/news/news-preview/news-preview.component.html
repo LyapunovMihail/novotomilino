@@ -4,9 +4,15 @@
         <div class="news__head-wrap">
             <h1 class="news__head-title g-title-path">Новости</h1>
             <ul class="news__nav-list">
-                <li class="news__nav-item news__nav-item_active">Все</li>
-                <li class="news__nav-item">Новости</li>
-                <li class="news__nav-item">Акции</li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
             </ul>
         </div>
         <div class="news__head-wrap" *ngIf="isAuthorizated">
