@@ -43,7 +43,7 @@ export class HeaderService {
                 url: '/purchase'
             }, {
                 name: 'Новости',
-                url: '/news'
+                url: '/news-shares'
             } /*, {
                 name: 'Избранное',
                 url: '/favorites'

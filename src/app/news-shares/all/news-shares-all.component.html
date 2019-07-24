@@ -1,0 +1,62 @@
+<section class="news">
+    
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </div>
+        <div class="news__head-wrap" *ngIf="isAuthorizated">
+            <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
+            <button class="admin-controll admin__add-stock">Добавить акцию</button>
+        </div>
+    </div>
+
+    <ng-container *ngFor="let snippet of allSnippets">
+    
+        <div class="news_snippets_list_item" *ngIf="snippet.category">
+    
+            <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="snippets_list_item_link">
+    
+                <div class="snippets_list_item_img">
+    
+                    <img class="snippets_list_item_img_content" [src]="newsUploadsPath + snippet.image">
+                    <span class="snippets_list_item_title" [innerHTML]="snippet.title | lineBreakPipe"></span>
+    
+                </div>
+    
+            </a>
+    
+            <div *ngIf="isAuthorizated" class="admin-controll admin-news_editing-controls">
+                <div class="admin-controll admin-news_editing-controls_for-edit">Редактировать</div>
+                <div class="admin-controll admin-news_editing-controls_for-delete">Удалить</div>
+            </div>
+    
+        </div>
+    
+        <div *ngIf="!snippet.category">
+            <a class="shares-list__item-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
+                <div class="shares-list__item-shadow"></div>
+                <img class="shares-list__item-img" [src]="sharesUploadsPath + snippet.mainImage" alt="share">
+                <div class="shares-list__item-content">
+                    <h3 class="shares-list__item-title">{{snippet.name}}</h3>
+                    <span class="shares-list__item-text">{{snippet.text}}</span>
+                    <div *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0" class="shares-list__item-finishing">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</div>
+                    <div *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0" class="shares-list__item-finishing">Акция закончилась</div>
+                </div>
+            </a>
+            <a *ngIf="isAuthorizated" class="shares-list__item-edit">Редактировать</a>
+            <div *ngIf="isAuthorizated" class="shares-list__item-delete">Удалить</div>
+        </div>
+    
+    </ng-container>
+</section>

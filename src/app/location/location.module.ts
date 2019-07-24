@@ -1,3 +1,5 @@
+import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
+import { LocationInfrastructureComponent } from './location-infrastructure/location-infrastructire.component';
 import { LocationRoutesComponent } from './location-routes/location-routes.component';
 import { LocationComponent } from './location.component';
 import { RouterModule } from '@angular/router';
@@ -6,7 +8,9 @@ import { NgModule } from '@angular/core';
 
 const LocationComponents = [
     LocationComponent,
-    LocationRoutesComponent
+    LocationInfrastructureComponent,
+    LocationRoutesComponent,
+    LocationRoutesPipe
 ];
 
 @NgModule ({
@@ -23,7 +27,8 @@ const LocationComponents = [
             { path: 'location', component: LocationComponent,
                 children: [
                     { path: '', redirectTo: 'routes', pathMatch: 'full' },
-                    { path: 'routes', component: LocationRoutesComponent }
+                    { path: 'routes', component: LocationRoutesComponent },
+                    { path: 'infrastructure', component: LocationInfrastructureComponent },
                 ]}
         ])
     ]

@@ -20,15 +20,15 @@ import { ImgModalComponent } from './modal/img-modal/img-modal.component';
 import { OverlayService } from './modal/overlay.service';
 import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
-import { LocationModule } from './location/location.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
+import { RoutesModule } from './routes/routes.module';
 import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
-import { NewsModule } from './news/news.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { FlatsModule } from './flats/flats.module';
+import { NewsSharesModule } from './news-shares/news-shares.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -36,7 +36,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { SharesModule } from './shares/shares.module';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -54,14 +54,13 @@ const APP_MODULES = [
     //  ErrorPageModule,
     AuthorizationModule,
     HomeModule,
-    LocationModule,
+    RoutesModule,
     FooterModule,
     HeaderModule,
     DynamicModule,
     AboutModule,
     PurchaseModule,
-    NewsModule,
-    SharesModule,
+    NewsSharesModule,
     FavoritesModule,
     FlatsModule,
 
@@ -86,7 +85,7 @@ interface StoreType {
     declarations: [
         AppComponent,
         ImgModalComponent,
-        OverlayComponent
+        OverlayComponent,
     ],
     imports: [
         ...APP_MODULES

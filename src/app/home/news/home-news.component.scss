@@ -131,6 +131,7 @@
                 }
                 &:nth-child(n + 4) {
                     opacity: 0;
+                    pointer-events: none;
                 }
                 &:hover .main__news-img img {
                     transform: scale(1.1);

@@ -1,0 +1,34 @@
+<div class="location_routes">
+    <div class="location_aside">
+
+        <a class="dark-text_link location_aside_link location_aside_link--routes" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/routes">Как добраться</a>
+        <a class="dark-text_link location_aside_link location_aside_link--infrastructure" [routerLinkActive]="['dark-text_link--active']" routerLink="/location/infrastructure">Инфраструктура района</a>
+
+        <ul class="location_aside_list">
+
+            <h3 class="location_aside_list_hint">Всего 3 минуты пешком от ж/д<br>станции Люберцы-1 (250 м)!</h3>
+
+            <span class="location_aside_list_title">Общественным транспортом:</span>
+            <!-- собираются маркеры с типом 'bus' или 'polyline' -->
+            <div *ngFor="let link of markers">
+                <!-- при клике меняется активный маршрут -->
+                <li (click)="changeRoute( link )" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'bus' || link.config.type == 'polyline'" class="location_aside_list_item">{{link.config.text}}
+                    <span class="location_aside_list_item_icon location_aside_list_item_icon--blue">{{link.config.content}}</span>
+                </li>
+            </div>
+
+            <span class="location_aside_list_title">На автомобиле:</span>
+            <!-- собираются маркеры с типом 'auto' -->
+            <div *ngFor="let link of markers">
+                <!-- при клике меняется активный маршрут -->
+                <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'auto'" class="location_aside_list_item">{{link.config.text}}
+                    <span class="location_aside_list_item_icon location_aside_list_item_icon--violet">{{link.config.content}}</span>
+                </li>
+            </div>
+
+        </ul>
+        
+    </div>
+
+    <div id="map" class="location_map"></div>
+</div>

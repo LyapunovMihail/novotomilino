@@ -1,5 +1,5 @@
 import {Component, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, ControlValueAccessor, Validator } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'ghm-textarea',

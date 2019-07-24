@@ -1,0 +1,60 @@
+@import "../../../styles/modules/mixins/mixin.scss";
+
+.news-preview {
+
+    &_title {
+        font: 42px/50px 'Oranienbaum', serif;
+        color: #1c1c1c;
+        @include font-smoothing();
+    }
+
+}
+
+.preview {
+
+    &__head {
+        width: calc(100% - 30px);
+        padding: 30px 0 40px;
+
+        &-title {
+            font: 30px/34px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 30px;
+        }
+    }
+    &__nav {
+        width: 223px;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        font: 500 18px/24px $font-mus;
+        @include font-smoothing;
+        color: rgba(0, 1, 5, 0.7);
+        padding: 0 0 10px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+
+        &-item {
+            cursor: pointer;
+
+            &_active {
+                color: #000105;
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -11px;
+                    width: 100%;
+                    height: 2px;
+                    background: #e7490f;
+                }
+            }
+        }
+    }
+
+    &__snippet {
+        width: calc(100% - 30px);
+    }
+}

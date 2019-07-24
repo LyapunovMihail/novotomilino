@@ -42,20 +42,18 @@ export class HomeNewsComponent implements OnInit {
     }
 
     public ngOnInit() {
-
         this.mainSnippets = this.allSnippets;
-        this.setSlidesOpacity(this.allSnippets);
     }
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.mainSnippets.length - 3 ) ? this.currentSlide + 1 : this.mainSnippets.length - 3;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
+        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news-shares' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
+        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news-shares' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
 
@@ -63,9 +61,9 @@ export class HomeNewsComponent implements OnInit {
     private setSlidesOpacity(snippets) {
         snippets.forEach((item, index) => {
             if (index < this.currentSlide || index > this.currentSlide + 2) {
-                $(`#slider-item-${index}`).css({ opacity: '0' });
+                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events'] : 'none'});
             } else {
-                $(`#slider-item-${index}`).css({ opacity: '1' });
+                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events'] : 'unset'});
             }
         });
     }

@@ -1,0 +1,18 @@
+<section class="news preview">
+
+    <div class="preview__head">
+        <h1 class="preview__head-title">Новости</h1>
+        <ul class="preview__nav">
+            <li class="news__nav-item news__nav-item_active">Все</li>
+            <li class="news__nav-item">Новости</li>
+            <li class="news__nav-item">Акции</li>
+        </ul>
+    </div>
+
+    <div class="preview__snippet">
+        <app-news-list 
+            [snippetsArray]="snippetsArray">
+        </app-news-list>
+    </div>
+
+</section>
