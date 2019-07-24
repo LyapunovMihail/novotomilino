@@ -41,7 +41,7 @@
                     </div>
                 </a>
                 <div class="shares-list__item-btn">
-                    <a *ngIf="isAuth" class="shares-list__item-edit" [routerLink]="['/shares/edit/', share._id]">Редактировать</a>
+                    <a *ngIf="isAuth" class="shares-list__item-edit" [routerLink]="['/news-shares/shares/edit/', share._id]">Редактировать</a>
                     <div *ngIf="isAuth" class="shares-list__item-delete" (click)="deleteShare(share._id)">Удалить</div>
                 </div>
             </li>

@@ -13,7 +13,7 @@ export class HomeService {
     constructor( private http: HttpClient ) { }
 
     public getMainNews(): Observable<INewsSnippet[]> {
-        return this.http.get<INewsSnippet[]>('/api/news-shares/main');
+        return this.http.get<INewsSnippet[]>('/api/news/main');
     }
 
     public getShares(): Observable<{length: number, sharesList: Share[]}> {

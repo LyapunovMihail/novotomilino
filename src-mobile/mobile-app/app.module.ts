@@ -37,6 +37,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
 
+
 // Application wide providers
 const APP_PROVIDERS = [
     ...APP_RESOLVER_PROVIDERS,
@@ -84,7 +85,7 @@ interface StoreType {
     declarations: [
         AppComponent,
         ImgModalComponent,
-        OverlayComponent
+        OverlayComponent,
     ],
     imports: [
         ...APP_MODULES
