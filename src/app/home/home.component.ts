@@ -4,10 +4,8 @@ import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { INewsSnippet } from '../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../platform-detect.service';
 import { IGallerySnippet } from '../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
-
-declare let $: any;
 
 @Component({
     selector: 'app-home',
@@ -26,6 +24,7 @@ export class HomeComponent implements OnInit {
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
+    public newsLoaded = false;
     public gallerySlides: IGallerySnippet[] = [];
 
     constructor(
@@ -48,6 +47,7 @@ export class HomeComponent implements OnInit {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
+                this.newsLoaded = true;
             },
             (err) => console.log(err)
         );

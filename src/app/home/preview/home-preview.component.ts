@@ -58,6 +58,9 @@ export class HomePreviewComponent implements OnInit {
                 this.shareSnippet.finish_date = this.countDown(share.finish_date) + '';
             }
         });
+
+        console.log('this.shareSnippets: ', this.shareSnippets);
+        console.log('this.newsSnippets: ', this.newsSnippets);
         // this.shareSnippet = this.shareSnippets[0];
         // this.shareSnippet.finish_date = this.countDown(this.shareSnippet.finish_date) + '';
 

@@ -10,10 +10,7 @@ import { SharesModule } from './shares/shares.module';
 @NgModule({
     exports: [
         NewsSharesComponent,
-        NewsSharesAllComponent,
-
-        NewsModule,
-        SharesModule,
+        NewsSharesAllComponent
     ],
     declarations: [
         NewsSharesComponent,
@@ -22,6 +19,8 @@ import { SharesModule } from './shares/shares.module';
     providers: [
     ],
     imports: [
+        NewsModule,
+        SharesModule,
         CommonModule,
         CreateRedactFormsModule,
         RouterModule.forChild([
