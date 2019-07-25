@@ -3,9 +3,12 @@
     <!-- Отображать сниппет только если у него отрицательное значение показа на главной
         и если выбранная категория равна категории сниппета или 'ALL' -->
 <div class="news__snippets-item" *ngFor="let snippet of snippetsArray">
-    <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
+    <a [routerLink]="['/news/' + snippet._id]" class="news__snippets-link">
         <div class="news__snippets-img">
             <img class="snippets_list_item_img_content" [src]="uploadsPath + snippet.image">
+            <!-- <div class="news__snippets-end">
+                <span>46 дней до конца акции</span>
+            </div> -->
         </div>
         <div class="news__snippets-descr">
             <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>

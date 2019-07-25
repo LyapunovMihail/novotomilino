@@ -1,38 +1,74 @@
-<ng-container *ngFor="let snippet of allSnippets">
-
-    <li class="news_snippets_list_item" *ngIf="snippet.category">
-
-        <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="snippets_list_item_link">
-
-            <div class="snippets_list_item_img">
-
-                <img class="snippets_list_item_img_content" [src]="newsUploadsPath + snippet.image">
-                <span class="snippets_list_item_title" [innerHTML]="snippet.title | lineBreakPipe"></span>
-
-            </div>
-
-        </a>
-
-        <div *ngIf="isAuthorizated" class="admin-controll admin-news_editing-controls">
-            <div class="admin-controll admin-news_editing-controls_for-edit">Редактировать</div>
-            <div class="admin-controll admin-news_editing-controls_for-delete">Удалить</div>
+<section class="news">
+    
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
         </div>
+        <div class="news__head-wrap" *ngIf="isAuthorizated">
+            <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
+            <button class="admin-controll admin__add-stock">Добавить акцию</button>
+        </div>
+    </div>
 
-    </li>
+    <div class="news__snippets all__snippets">
+        <ng-container *ngFor="let snippet of allSnippets">
+        
+            <div class="news__snippets-item" *ngIf="snippet.category">
+        
+                <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
+                    <div class="news__snippets-img">
+                        <img [src]="newsUploadsPath + snippet.image" alt="news">
+                    </div>
+                    
+                    <div class="news__snippets-descr">
+                        <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
+                        <p *ngIf="snippet.description" class="news__snippets-descr-text" [innerHTML]="snippet.description | lineBreakPipe"></p>
+                        <p class="news__snippets-descr-date">{{snippet.created_at | date: 'd.M.yyyy' }}</p>
+                    </div>
+                </a>
 
-    <li *ngIf="!snippet.category">
-        <a class="shares-list__item-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
-            <div class="shares-list__item-shadow"></div>
-            <img class="shares-list__item-img" [src]="sharesUploadsPath + snippet.mainImage" alt="share">
-            <div class="shares-list__item-content">
-                <h3 class="shares-list__item-title">{{snippet.name}}</h3>
-                <span class="shares-list__item-text">{{snippet.text}}</span>
-                <div *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0" class="shares-list__item-finishing">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</div>
-                <div *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0" class="shares-list__item-finishing">Акция закончилась</div>
+                <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+                    <button class="admin-controll admin__news-btn-edit">Редактировать</button>     
+                    <button class="admin-controll admin__news-btn-delete">Удалить</button>
+                </div>
+        
             </div>
-        </a>
-        <a *ngIf="isAuthorizated" class="shares-list__item-edit">Редактировать</a>
-        <div *ngIf="isAuthorizated" class="shares-list__item-delete">Удалить</div>
-    </li>
+        
+            <div class="shares__snippets-item" *ngIf="!snippet.category">
+                <a class="shares__snippets-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
+                    <div class="shares__snippets-img">
+                        <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
+                        <div class="shares-list__item-end">
+                            <!--  Почему-то, из-за этих строчек все ломается
+                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0">{{countDown(share.finish_date) | sharesDayPipe}} дней до конца акции</span>
+                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0">Акция закончилась</span> 
+                            -->
+                        </div>
+                    </div>
 
-</ng-container>
+                    <div class="shares__snippets-descr">
+                        <h1 class="shares__snippets-descr-title">{{snippet.name}}</h1>
+                        <p class="shares__snippets-descr-text">{{snippet.text}}</p>
+                        <p class="shares__snippets-descr-date">21.12.12</p>
+                    </div>
+                </a>
+                <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+                    <button class="admin-controll admin__news-btn-edit">Редактировать</button>
+                    <button class="admin-controll admin__news-btn-delete">Удалить</button>
+                </div>
+            </div>
+        
+        </ng-container>
+    </div>
+</section>

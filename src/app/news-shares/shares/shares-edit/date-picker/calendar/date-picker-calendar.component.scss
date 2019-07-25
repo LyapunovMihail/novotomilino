@@ -1,3 +1,5 @@
+@import "../../../../../../styles/modules/mixins/mixin";
+
 :host {
     width: 100%;
     display: flex;
@@ -5,34 +7,36 @@
     flex-wrap: wrap;
     user-select: none;
     box-sizing: border-box;
-    padding: 0 10px;
+    padding: 0 15px 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .day {
-    width: calc(100% / 7);
-    height: 32px;
+    width: 28px;
+    height: 28px;
     display: inline-block;
     vertical-align: bottom;
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 14px 'Roboto-Regular', sans-serif;
-    color: #323232;
     box-sizing: border-box;
-    border-radius: 2px;
-}
-
-.calendar-day {
+    font: 16px/28px "Museo Sans Cyrl";
+    @include font-smoothing;
+    color: #000105;
     cursor: pointer;
+    border-radius: 2px;
+    transition: $transition;
+    &:not(:nth-child(7n)) { margin-right: 10.5px; }
 }
 
 .disabled-day {
-    background: rgba(50, 50, 50, .05);
+    background: #fff;
     border-radius: 0;
+    cursor: default;
 }
 
 .clicked-day {
-    background: #F16222 !important;
+    background: #0070c9 !important;
     color: white;
 }
 
@@ -42,10 +46,10 @@
 }
 
 .today-day {
-    background: lightsalmon;
-    color: white;
+    background: #ff8961;
+    color: $col-black;
 }
 
 .calendar-day:hover:not(.disabled-day) {
-    background: rgba(241,98,34,.2);
+    background: rgba(255, 136, 97, 0.2);
 }

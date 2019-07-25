@@ -1,3 +1,4 @@
+@import "../../../../styles/modules/mixins/mixin";
 $font: 15px/19px 'Montserrat', sans-serif;
 $color: #ffffff;
 $color2: #1c1c1c;
@@ -468,5 +469,218 @@ $required-input : #ffb3b3;
         display: flex;
         align-items: center;
         padding: 0 0 0 10px;
+    }
+}
+
+
+.create-form {
+
+    &__modal {
+        overflow: auto;
+        align-items: center;
+    }
+    &__container {
+        width: 1088px;
+        min-height: 100px;
+        border-radius: 5px;
+        position: relative;
+        z-index: 11;
+    }
+    &__cls-btn {
+        position: absolute;
+        right: -60px;
+        top: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background: url('/assets/img/cls_white.svg') center no-repeat;
+        background-size: 20px;
+        cursor: pointer;
+    }
+    &__form {
+        width: 100%;
+        height: 100%;
+        padding: 40px 35px 35px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        &-title {
+            font: 42px/46px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 25px;
+        }
+        &-wrap {
+            width: 100%;
+            margin: 0 0 30px;
+        }
+        &-date,
+        &-subtitle {
+            @include f16-24;
+            color: rgba(0, 1, 5, 0.8);
+            margin: 0 0 40px;
+        }
+        &-subtitle { margin: 0 0 5px; }
+        &-area {
+            width: 100%;
+            height: 82px;
+            border: 1px solid #979797;
+            box-sizing: border-box;
+            padding: 10px 15px;
+
+            &_title {
+                font: 500 20px/24px "Museo Sans Cyrl";
+                @include font-smoothing;
+                color: $col-black;
+            }
+            &_text {
+                @include f16-24;
+                color: rgba(0, 1, 5, 0.8);
+            }
+        }
+
+        &-img {
+            display: flex;
+            &-wrap_photo {
+                margin: 0 0 0 15px;
+            }
+            &-btn {
+                width: 166px;
+                height: 40px;
+                border: 1px solid #0070c9;
+                box-sizing: border-box;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                span {
+                    font: 500 16px/20px $font-mus;
+                    @include font-smoothing;
+                    position: relative;
+                    padding: 0 0 0 33px;
+                    text-transform: uppercase;
+                    color: #0070c9;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: -1px;
+                        width: 25px;
+                        height: 20px;
+                        background: url('/assets/img/news/camera.svg') no-repeat;
+                        background-size: 100%;
+                    }
+                }
+            }
+        }
+
+        &-show {
+            margin: 0 0 40px;
+        }
+        &-checkbox {
+            display: flex;
+            align-items: center;
+
+            input {
+                display: none;
+
+                &:checked + .g-checkbox {
+                    background: url('/assets/img/check.svg') center no-repeat #e7490f;
+                    border-color: #e7490f;
+                }
+            }
+            &-text { @include fw18-24; }
+        }
+
+        &-submit {
+            padding: 0 35px;
+            height: 50px;
+            background: #0070c9;
+            font: 500 16px/20px "Museo Sans Cyrl";
+            @include font-smoothing;
+            color: #fff;
+            letter-spacing: .5px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            &_disabled {
+                pointer-events: none;
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+}
+
+.delete-news {
+
+    &__modal {
+        overflow: auto;
+        align-items: center;
+    }
+    &__container {
+        width: 1088px;
+        min-height: 100px;
+        border-radius: 5px;
+        position: relative;
+        z-index: 11;
+    }
+    &__cls-btn {
+        position: absolute;
+        right: -60px;
+        top: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background: url('/assets/img/cls_white.svg') center no-repeat;
+        background-size: 20px;
+        cursor: pointer;
+    }
+
+    &__form {
+        width: 100%;
+        height: 100%;
+        padding: 40px 35px 35px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        position: relative;
+
+        &-title {
+            font: 42px/46px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 25px;
+        }
+        &-text {
+            @include f16-24;
+            margin: 0 0 30px;
+        }
+        &-cnsl,
+        &-del {
+            width: 160px;
+            height: 50px;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: $col-blue;
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        &-cnsl {
+            border: solid 1px $col-blue;
+            background-color: #fff;
+            color: $col-blue;
+            margin: 0 0 0 20px;
+        }
     }
 }
