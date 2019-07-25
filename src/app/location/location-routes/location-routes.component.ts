@@ -44,12 +44,12 @@ export class LocationRoutesComponent implements OnInit {
 
             // создание новой карты с опциями
             let myMap = new ymaps.Map('map', {
-                center: [55.688092, 37.844618],
-                zoom: 13,
+                center: [55.663139, 37.958373],
+                zoom: 17,
                 controls: []
             }, {
                 minZoom: 11,
-                maxZoom: 16
+                maxZoom: 18
             });
 
             // создание наземное наложение плана
