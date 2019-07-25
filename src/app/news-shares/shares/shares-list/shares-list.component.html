@@ -14,9 +14,9 @@
                 </li>
             </ul>
         </div>
-        <div class="news__head-wrap" *ngIf="isAuthorizated">
+        <div class="news__head-wrap" *ngIf="isAuth">
             <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
-            <button [routerLink]="['/shares/edit/', createId]" class="admin-controll admin__add-stock">Добавить акцию</button>
+            <button [routerLink]="['/news-shares/shares/edit/', createId]" class="admin-controll admin__add-stock">Добавить акцию</button>
         </div>
     </div>
 

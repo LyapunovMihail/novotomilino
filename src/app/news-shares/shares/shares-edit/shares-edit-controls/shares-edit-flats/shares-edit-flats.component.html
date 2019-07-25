@@ -1,73 +1,53 @@
 <ul class="form-flats-list">
     <li class="form-flats-list__item" *ngFor="let item of conf.blockFlats; index as i">
-        <div class="share-view__blocks-flat-wrap">
-            
-            <select [(ngModel)]="conf.blockFlats[i].section"
-                (ngModelChange)="changeSection($event, i)"
-                class="share-view__blocks-flat_hause">
-                <option *ngFor="let section of sectionsOptions"
-                    [value]="section">Секция {{section}}</option>
-            </select>
-            <select [(ngModel)]="conf.blockFlats[i].number"
-                (ngModelChange)="changeFlat($event, i)"
-                class="share-view__blocks-flat_hause">
-                <option *ngFor="let flat of flatsOptions[i]"
-                    [value]="flat">Квартира {{flat}}</option>
-            </select>
-
-            <div class="share-view__blocks-flat_buttons">
-                <span class="share-view__blocks-flat_buttons-text">Скидка</span>
-                <div class="share-view__blocks-flat_buttons-wrap">
-                    <label class="share-view__blocks-flat_label">
-                        <input [(ngModel)]="conf.blockFlats[i].discountType"
-                            class="share-view__blocks-flat_check"
-                            type="radio"
-                            [name]="'discountType' + i"
-                            [value]="shareFlatDiscountType.PERCENT">
-                        <div class="share-view__blocks-flat_cnt">Процент</div>
-                    </label>
-                    <label class="share-view__blocks-flat_label">
-                        <input [(ngModel)]="conf.blockFlats[i].discountType"
-                            class="share-view__blocks-flat_check"
-                            type="radio"
-                            [name]="'discountType' + i"
-                            [value]="shareFlatDiscountType.SUM">
-                        <div class="share-view__blocks-flat_cnt">Сумма</div>
-                    </label>
-                </div>
+        <div class="share-view__select-wrap">
+            <div class="share-view__select-item share-view__select-corpus">
+                <!-- Тут должен быть выбор корпуса -->
             </div>
+            <div class="share-view__select-item share-view__select-house">
+                <select [(ngModel)]="conf.blockFlats[i].section"
+                    (ngModelChange)="changeSection($event, i)"
+                    class="share-view__select-list">
+                    <option *ngFor="let section of sectionsOptions"
+                        [value]="section">Секция {{section}}</option>
+                </select>
+            </div>
+            <div class="share-view__select-item share-view__select_flat">
+                <select [(ngModel)]="conf.blockFlats[i].number"
+                    (ngModelChange)="changeFlat($event, i)"
+                    class="share-view__select-list">
+                    <option *ngFor="let flat of flatsOptions[i]"
+                        [value]="flat">Квартира {{flat}}</option>
+                </select>
+            </div>
+        </div>
 
+        <div class="share-view__sale-wrap">
+            <label class="share-view__sale-item share-view__sale-item_procent">
+                <input [(ngModel)]="conf.blockFlats[i].discountType"
+                    class="share-view__sale-item-input"
+                    type="radio"
+                    [name]="'discountType' + i"
+                    [value]="shareFlatDiscountType.PERCENT">
+                <div class="share-view__sale-item-check">Процент</div>
+            </label>
+            <label class="share-view__sale-item share-view__sale-item_sum">
+                <input [(ngModel)]="conf.blockFlats[i].discountType"
+                    class="share-view__sale-item-input"
+                    type="radio"
+                    [name]="'discountType' + i"
+                    [value]="shareFlatDiscountType.SUM">
+                <div class="share-view__sale-item-check">Сумма</div>
+            </label>
+        </div>
+
+        <div class="share-view__footer-wrap">
             <input [(ngModel)]="conf.blockFlats[i].discount"
                 (input)="changeText()"
                 type="text"
-                class="share-view__blocks-flat_disc">
-
-            <button class="share-view__blocks-flat_delete" (click)="removeItem(i)">Удалить</button>
-
-            <div *ngIf="conf.blockFlats[i].number != null">
-                <div class="share-view__blocks-flat-wrap">
-                    <div class="share-view__blocks-flat-header">
-                        <!-- <div class="share-view__blocks-flat-common">Корпус {{conf.blockFlats[i].house}}</div> -->
-                        <div class="share-view__blocks-flat-common flat__number">№ {{conf.blockFlats[i].number}}</div>
-                        <div class="share-view__blocks-flat-common">Секция {{conf.blockFlats[i].section}}</div>
-                        <div class="share-view__blocks-flat-common">Этаж {{conf.blockFlats[i].floor}}</div>
-                    </div>
-                    <div class="share-view__blocks-flat-type">{{conf.blockFlats[i].room}}, {{conf.blockFlats[i].space}} м&#178;</div>
-                    <div class="share-view__blocks-flat-decoration">{{conf.blockFlats[i].decoration}}</div>
-                </div>
-                <img *ngIf="conf.blockFlats[i].scheme != null" class="share-view__blocks-flat-scheme share-view__blocks-flat-scheme-admin" [src]="conf.blockFlats[i].scheme">
-                <div class="share-view__blocks-flat-wrap">
-                    <div class="share-view__blocks-flat-real-price">{{+conf.blockFlats[i].price - getDiscount(i) | bitNumber}} &#8381;</div>
-                    <div class="share-view__blocks-flat-prices">
-                        <div class="share-view__blocks-flat-price">{{conf.blockFlats[i].price | bitNumber}} &#8381;</div>
-                        <div class="share-view__blocks-flat-discount">− {{conf.blockFlats[i].discount | bitNumber}} {{conf.blockFlats[i].discountType === shareFlatDiscountType.PERCENT ? '%' : '&#8381;'}}</div>
-                    </div>
-                </div>
-            </div>
+                class="share-view__footer-result">
+    
+            <button class="share-view__footer-delete" (click)="removeItem(i)">Удалить</button>
         </div>
-    </li>
-
-    <li class="form-flats-list__item form-flats-list__item_add-btn" (click)="addFlat()">
-        <span>Добавить квартиру</span>
     </li>
 </ul>
