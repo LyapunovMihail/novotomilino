@@ -1,6 +1,6 @@
 
 
-export let destination = [55.684853, 37.896472]
+export let destination = [55.684853, 37.896472] // Вот сюда сходятся все пути от контрольных точек
 
 export let markersConfig = [
     {
@@ -8,7 +8,7 @@ export let markersConfig = [
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 0,
-        class: 'marker-content marker-content--route marker-content--active',
+        class: 'marker-content marker-content_active',
         content: 1,
         tooltip: '',
         lineCoords : [
@@ -42,7 +42,7 @@ export let markersConfig = [
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 0,
-        class: 'marker-content marker-content--route',
+        class: 'marker-content marker-content__bus',
         content: 2,
         tooltip: '',
         route: {
@@ -57,7 +57,7 @@ export let markersConfig = [
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 0,
-        class: 'marker-content marker-content--route',
+        class: 'marker-content marker-content__bus',
         content: 3,
         tooltip: '',
         route: {
@@ -72,7 +72,7 @@ export let markersConfig = [
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 0,
-        class: 'marker-content marker-content--route marker-content--color',
+        class: 'marker-content marker-content__auto',
         content: 4,
         tooltip: '',
         route: {
@@ -87,7 +87,7 @@ export let markersConfig = [
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 1,
-        class: 'marker-content marker-content--route marker-content--color',
+        class: 'marker-content marker-content__auto',
         content: 5,
         tooltip: '',
         route: {
@@ -98,19 +98,19 @@ export let markersConfig = [
         text: 'От МКАД через Октябрьский пр-т 12 мин 6,5 км',
         type: 'auto'
     }, {
-        coords: [55.684020, 37.837029],
+        coords: [55.662729730573844, 37.95612767326354], // Координаты отметки местоположение маркера
         size: [30, 46],
         offset: [-15, -46],
         zIndex: 0,
-        class: 'marker-content marker-content--route marker-content--color',
+        class: 'marker-content marker-content__auto',
         content: 6,
         tooltip: '',
         route: {
-            origin: [55.684020, 37.837029],
+            origin: [55.66282979831426, 37.95921221363068], // Начало линии откуда простраивается путь
             color: 'rgba(131,112,165,.6)',
             activeColor: 'rgb(131,112,165)'
         },
-        text: 'От МКАД через Новорязанское шоссе 15 мин 7,4 км',
+        text: 'Автобус 326 / маршрутка 222 от м. Выхино',
         type: 'auto'
     }, {
         coords: [55.663139, 37.958373],
@@ -119,7 +119,9 @@ export let markersConfig = [
         zIndex: 0,
         class: 'marker-content marker-content__main-marker',
         content: '',
-        tooltip: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-title">ЖК Новотомилино</p><p class="marker-content__tooltip-content-text">Люберцы городской округ, Томилино пгт</p></div></div>',
-        type: ''
+        tooltip: '',
+        title: 'ЖК Новотомилино',
+        text: 'Люберцы городской округ, Томилино пгт',
+        type: 'main'
     },
 ];

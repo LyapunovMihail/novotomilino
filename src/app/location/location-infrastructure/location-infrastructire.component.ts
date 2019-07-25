@@ -38,31 +38,31 @@ export class LocationInfrastructureComponent implements OnInit {
         if ( !this.platform.isBrowser ) { return false; }
 
         // элементы маркеров
-        let tooltipType = $(`.marker-content--${type}`);
+        let tooltipType = $(`.marker-content__${type}`);
         // кнопки бокового меню
-        let item = $(`.location_aside_list_item--${type}`);
+        let item = $(`.location__infrastructure-list-item_${type}`);
 
         if (this.isFirstClick) {
             // при первом клике у всех маркеров и кнопок боковой навигации
             // удаляются активные классы
             this.isFirstClick = false;
-            $('.marker-content').removeClass('marker-content_tooltip--active');
-            $('.location_aside_list_item').removeClass('location_aside_list_item--active');
+            $('.marker-content').removeClass('marker-content_active');
+            $('.location__infrastructure-list-item').removeClass('location__infrastructure-list-item_active');
             // а кнопкам выбранного типа добавляются
-            item.addClass('location_aside_list_item--active');
-            tooltipType.addClass('marker-content_tooltip--active');
+            item.addClass('location__infrastructure-list-item_active');
+            tooltipType.addClass('marker-content_active');
         } else {
             // при последующих выборах просто toggle
-            item.toggleClass('location_aside_list_item--active');
-            tooltipType.toggleClass('marker-content_tooltip--active');
+            item.toggleClass('location__infrastructure-list-item_active');
+            tooltipType.toggleClass('marker-content_active');
         }
 
         // для всех маркеров
         $('.marker-content').each(function (i) {
             // если в результате выполнения условия выше у маркера активный класс
-            if ( $(this).hasClass('marker-content_tooltip--active') ) {
+            if ( $(this).hasClass('marker-content_active') ) {
                 // то удаляем у него не активный
-                $(this).removeClass('marker-content_tooltip-not-active');
+                $(this).removeClass('marker-content_not-active');
             }
         });
 
@@ -71,8 +71,8 @@ export class LocationInfrastructureComponent implements OnInit {
         setTimeout (() => {
             $('.marker-content').each(function (i) {
                 // затем элементам без активного класса вешается не активный класс
-                if ( !$(this).hasClass('marker-content_tooltip--active') && !$(this).hasClass('marker-content--main-marker') ) {
-                    $(this).addClass('marker-content_tooltip-not-active');
+                if ( !$(this).hasClass('marker-content_active') && !$(this).hasClass('marker-content__main-marker') ) {
+                    $(this).addClass('marker-content_not-active');
                 }
             });
             // время за которое тултипы свернутся
@@ -121,7 +121,7 @@ export class LocationInfrastructureComponent implements OnInit {
                 that.markers[index]['active'] = true;
                 that.markers[index]['type'] = item.type;
                 that.markers[index]['marker'] = new ymaps.Placemark(item.coord, {
-                    iconContent: `<div class="marker-content marker-content__tooltip_active marker-content__${item.type}">${item.content}</div>`
+                    iconContent: `<div class="marker-content marker-content_active marker-content__${item.type}">${item.content}</div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',
