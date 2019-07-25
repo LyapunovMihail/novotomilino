@@ -125,6 +125,20 @@ label {
         background: url('/assets/img/stock-ic.svg') no-repeat;
     }
 }
+.g-flat-sale {
+    position: relative;
+    color: $col-orange;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 10px;
+        top: calc(50% - 5px);
+        left: -18px - 5px;
+        background: url('/assets/img/stock-ic.svg') no-repeat;
+        background-size: 100%;
+    }
+}
 
 // Стили контейнера
 .main__container {

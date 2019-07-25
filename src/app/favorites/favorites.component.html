@@ -1,69 +1,75 @@
 <section class="favorites">
-    <div class="favorites__header">
-        <h1 class="favorites__title">Избранное</h1>
-        <div class="favorites__form-btn" (click)="formIsOpen = true">Отправить pdf избранных квартир мне на почту</div>
-    </div>
-    <div class="search_form_output-sorting">
+    <div class="favorites__head">
+        <h1 class="favorites__head-title">Избранное</h1>
         
-        <div (click)="sort('price')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'price',
-                'search_form_output-sorting_control--turn': sortType === 'price' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--price">
-        </div>
-        <div (click)="sort('space')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'space',
-                'search_form_output-sorting_control--turn': sortType === 'space' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--space">
-        </div>
-        <div (click)="sort('floor')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'floor',
-                'search_form_output-sorting_control--turn': sortType === 'floor' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--floor">
-        </div>
-        <div (click)="sort('section')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'section',
-                'search_form_output-sorting_control--turn': sortType === 'section' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--section">
-        </div>
-        
+        <!-- Элементы ниже появляются когда избранное пусто -->
+        <!-- <h1 class="favorites__head-title favorites__head-title_empty">Интересующие вас квартиры вы можете добавлять в этот раздел</h1>
+        <button class="favorites__head-btn">Выбрать квартиру</button> -->
     </div>
-    <div class="search_output with-scroll">
+    <ul class="favorites__search-form search-form">
+        
+        <li (click)="sort('price')"
+            [ngClass]="{
+                'search-form__sorting_active': sortType === 'price',
+                'search-form__sorting_turn': sortType === 'price' && directionSort
+            }"
+            class="search-form__sorting search-form__sorting_price">
+            По цене
+        </li>
+        <li (click)="sort('space')"
+            [ngClass]="{
+                'search-form__sorting_active': sortType === 'space',
+                'search-form__sorting_turn': sortType === 'space' && directionSort
+            }"
+            class="search-form__sorting search-form__sorting_space">
+            По площади
+        </li>
+        <li (click)="sort('floor')"
+            [ngClass]="{
+                'search-form__sorting_active': sortType === 'floor',
+                'search-form__sorting_turn': sortType === 'floor' && directionSort
+            }"
+            class="search-form__sorting search-form__sorting_floor">
+        </li>
+        <li (click)="sort('section')"
+            [ngClass]="{
+                'search-form__sorting_active': sortType === 'section',
+                'search-form__sorting_turn': sortType === 'section' && directionSort
+            }"
+            class="search-form__sorting search-form__sorting_section">
+            По этажу
+        </li>
+        
+    </ul>
+    <div class="search-output">
 
-        <div class="search_output_scroll-wrap">
+        <ul class="search-output__result">
 
-            <ul class="search_output_result">
+            <li class="search-output__result-wrapper"
+                *ngFor="let flat of flats">
+                <a  [routerLink]="['/flats/section/' + flat.section + '/floor/' + flat.floor + '/apartment/' + flat.flat]" class="search-output__result-item">
+                    <span class="search-output__result-item-scheme_wrap">
+                        <img class="search-output__result-item-scheme" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+                    </span>
+                    <span class="search-output__result-item-content search-output__result-item-content_room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комната'}}</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_size">{{flat.space}} м²</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_section">Корпус {{flat.section}}</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_price-wrap">
+                        <span class="search-output__result-item-content search-output__result-item-content_price">{{flat.price | priceNumber}} &#8381;</span>
+                        <!-- Тут должна быть цена со скидкой, если скидка есть, элемент выше получает класс search-output__result-item-content_price-not-sale -->
+                        <!-- <span class="search-output__result-item-content search-output__result-item-content_price g-flat-sale">{{flat.price | priceNumber}} &#8381;</span> -->
+                    </span>
+                </a>
 
-                <li class="search_output_result_wrapper"
-                    *ngFor="let flat of flats">
-                    <a  [routerLink]="['/flats/section/' + flat.section + '/floor/' + flat.floor + '/apartment/' + flat.flat]" class="search_output_result_item">
-                        <img class="search_output_result_item_scheme" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
-                        <span class="search_output_result_item_content search_output_result_item_content--number">№{{flat.flat}}</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--section">Секция {{flat.section}}</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--floor">{{flat.floor}} этаж из {{flat.section}}</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--type">{{flat.type}}.</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--size">{{flat.space}} м²</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--decoration">{{flat.decorationName}}</span>
-                        <span class="search_output_result_item_content search_output_result_item_content--price">{{flat.price | priceNumber}} &#8381;</span>
-                    </a>
+                <div class="to-favorite search-output__result-item-content_favorite" (click)="removeFromFavorite(flat)"></div>
+            </li>
 
-                    <div class="to-favorite" (click)="removeFromFavorite(flat)"></div>
-                </li>
-
-            </ul>
-
-        </div>
+        </ul>
 
     </div>
 </section>
 
-<app-favorites-form [pdfUrls]="pdfUrls" [isOpen]="formIsOpen" (close)="formIsOpen = false">
-</app-favorites-form>
+<!-- <app-favorites-form [pdfUrls]="pdfUrls" [isOpen]="formIsOpen" (close)="formIsOpen = false">
+</app-favorites-form> -->
