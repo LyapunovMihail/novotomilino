@@ -1,13 +1,141 @@
+@import "../../styles/modules/mixins/mixin";
+
 .location {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 146px - 51px);
+    @media (max-width: 1279px) { height: calc(100vh - 67px - 51px); }
 
-    &_map {
-        width: 100%;
-        height: 100%;
+    &__way {
+        position: fixed;
+        left: calc(50% - (290px / 2));
+        bottom: 70px;
+        width: 290px;
+        height: 50px;
+        border-radius: 4px;
+        background-color: $col-orange;
+        display: none;
+        z-index: 1;
+        justify-content: center;
+        align-items: center;
+        @media (max-width: 1279px) { display: flex; }
+        
+        &-text {
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            color: #fff;
+            text-transform: uppercase;
+            padding-left: 34px;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 24px;
+                height: 20px;
+                background: url(/assets/img/location/how-to-get.svg) no-repeat;
+                background-size: 100%;
+            }
+        }
     }
 
-    &_routes {
+    &__head {
+        width: 100%;
+        height: 202px;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #dcddde;
+        position: relative;
+        @media (max-width: 1279px) { display: none; }
+
+        &-title {
+            font: 42px/46px 'Leksa';
+            @include font-smoothing;
+            margin: 60px 0 30px;
+        }
+        &-wrap {
+            width: calc(1240px / 2);
+            position: relative;
+            box-sizing: border-box;
+            &:nth-child(2) {
+                display: flex;
+                padding: 60px 0 30px;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: flex-end;
+            }
+
+            img {
+                margin: 0 0 5px;
+                position: absolute;
+                bottom: 15px + 30px;
+                left: 0;
+            }
+        }
+        &-nav {
+            width: 299px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0 10px;
+            border-bottom: 1px solid rgba(0, 1, 5, .3);
+
+            &-link {
+                @include fw18-24;
+                color: rgba(0, 1, 5, .7);
+                transition: $transition;
+                &:hover { color: $col-black; }
+
+                &_active {
+                    position: relative;
+                    color: $col-black;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -11px;
+                        width: 100%;
+                        height: 2px;
+                        background: $col-orange;
+                    }
+                }
+            }
+        }
+        &-text-wrap {
+            height: 89px;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            align-items: center;
+            &:nth-child(1) { margin: 0 0 0 41px; }
+            &:nth-child(2) { margin: 0 0 0 31px; }
+            &:nth-child(3) { margin: 0 0 0 95px; }
+            &:nth-child(4) { margin: 0 0 0 108px; }
+        }
+        &-text {
+            font: 500 36px/40px $font-mus;
+            @include font-smoothing;
+            color: #000105;
+
+            span {
+                font-size: 14px;
+                line-height: 20px;
+                margin: 0 0 0 3px;
+            }
+        }
+        &-subtitle {
+            font: 500 12px/18px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, 0.6);
+        }
+    }
+
+    &__map {
+        width: 100%;
+        height: calc(100% - 202px);
+        @media (max-width: 1279px) { height: 100%; }
+    }
+
+    &__routes {
         width: 100%;
         height: 100%;
         position: relative;
@@ -26,272 +154,124 @@
         }
     }
 
-    &_infrastructure {
+    &__infrastructure {
         width: 100%;
         height: 100%;
         position: relative;
 
-        .location_aside_link--routes {
-            margin-bottom: 25px;
-        }
-
-        .location_aside_link--infrastructure {
-            margin-bottom: 15px;
-        }
-
-        .location_aside_list_item {
-            
+        &-list-item {
             &:last-of-type {
                 margin: 0;
             }
         }
-    }
+        &-filter {
+            width: 100%;
+            height: 60px;
+            position: absolute;
+            left: 0;
+            top: calc(100% + 1px);
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+        &-list {
+            width: $w1600;
+            display: flex;
+            justify-content: space-between;
 
-    &_aside {
-        position: absolute;
-        background: #ffffff;
-        border-radius: 7px;
-        box-sizing: border-box;
-        width: 360px;
-        top: 140px;
-        left: 40px;
-        padding: 30px 0 44px 75px;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        box-shadow: -12px 18px 17px rgba(0,0,0,.3);
+            &-item {
+                display: flex;
+                &:hover { .location__infrastructure-checkbox { opacity: 1; } }
 
-        &_link {
-            align-self: flex-start;
-
-            &:before {
-                width: 34px;
-                height: 20px;
-                left: -45px;
-            }
-
-            &--routes {
-                margin-bottom: 15px;
-
-                &:before {
-                    background: url('/assets/img/location/routes.svg') 50% no-repeat;
-                    background-size: 34px 16px; 
-                }
-            }
-
-            &--infrastructure {
-
-                &:before {
-                    background: url('/assets/img/location/infrastructure.svg') 50% no-repeat;
-                    background-size: 33px 20px;
+                &_active {
+                    .location__infrastructure-checkbox {
+                        background-image: url(/assets/img/check.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 63%;
+                        opacity: 1;
+                    }
                 }
             }
         }
+        &-text {
+            @include fw14-20;
+            cursor: pointer;
+        }
+        &-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            opacity: .5;
+            margin: 1px 5px 0 0;
+            cursor: pointer;
+            transition: opacity $transition;
+            &:hover { opacity: 1; }
 
-        &_list {
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-
-            &_hint {
-                font: 16px/22px 'abrade-book', sans-serif;
-                color: #2E2E2E;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                margin-bottom: 12px;
-            }
-
-            &_title {
-                font: 14px/21px 'abrade-book', sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                margin-bottom: 10px;
-
-                &:first-of-type {
-                    color: #67c3eb;
-                }
-
-                &:last-of-type {
-                    color: rgba(131,112,165,.7);
-                }
-            }
-
-            &_item {
-                font: 14px/21px 'abrade-book', sans-serif;
-                color: rgba(136,138,161,.7);
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                cursor: pointer;
-                position: relative;
-                margin-bottom: 10px;
-                width: 260px;
-                transition: .2s linear;
-
-                &:hover:not(.location_aside_list_item--active) {
-                    color: #888aa1;
-                    
-                    .location_aside_list_item_icon {
-
-                        &--blue {
-                            background: #83d6f4;
-                        }
-
-                        &--violet {
-                            background: #8370a5;
-                        }
-
-                        &--shop {
-                            background: rgb(131,214,244);
-                        }
-    
-                        &--school {
-                            background: rgb(251,198,194);
-                        }
-    
-                        &--kindergarten {
-                            background: rgb(255,224,80);
-                        }
-    
-                        &--hospital {
-                            background: rgb(214,89,54);
-                        }
-    
-                        &--sport {
-                            background: rgb(166,68,147);
-                        }
-    
-                        &--recreation {
-                            background: rgb(102,213,188);
-                        }
-    
-                        &--transport {
-                            background: rgb(244,191,59);
-                        }
-                    }
-                }
-
-                &--active {
-                    color: #888aa1;
-
-                    .location_aside_list_item_icon {
-
-                        &:before {
-                            opacity: 1;
-                        }
-
-                        &--blue {
-                            background: #83d6f4;
-                        }
-
-                        &--violet {
-                            background: #8370a5;
-                        }
-
-                        &--shop {
-                            background: rgb(131,214,244);
-                        }
-    
-                        &--school {
-                            background: rgb(251,198,194);
-                        }
-    
-                        &--kindergarten {
-                            background: rgb(255,224,80);
-                        }
-    
-                        &--hospital {
-                            background: rgb(214,89,54);
-                        }
-    
-                        &--sport {
-                            background: rgb(166,68,147);
-                        }
-    
-                        &--recreation {
-                            background: rgb(102,213,188);
-                        }
-    
-                        &--transport {
-                            background: rgb(244,191,59);
-                        }
-                    }
-                }
-
-                &_icon {
-                    position: absolute;
-                    top: 3px;
-                    left: -25px;
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 16px;
-                    height: 16px;
-                    font: 14px 'abrade-book', sans-serif;
-                    color: #ffffff;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                    transition: .2s linear;
-
-                    &:before {
-                        content: '';
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        background: url('/assets/img/location/location-infrastructure/select-item.svg') 50% no-repeat;
-                        background-size: 7px 7px; 
-                        transition: .2s linear;
-                        opacity: 0;
-                    }
-
-                    &--blue {
-                        background: rgba(131,214,244,.7);
-
-                        &:before {
-                            display: none;
-                        }
-                    }
-
-                    &--violet {
-                        background: rgba(131,112,165,.7);
-
-                        &:before {
-                            display: none;
-                        }
-                    }
-
-                    &--shop {
-                        background: rgba(131,214,244,.7);
-                    }
-
-                    &--school {
-                        background: rgba(251,198,194,.7);
-                    }
-
-                    &--kindergarten {
-                        background: rgba(255,224,80,.7);
-                    }
-
-                    &--hospital {
-                        background: rgba(214,89,54,.7);
-                    }
-
-                    &--sport {
-                        background: rgba(166,68,147,.7);
-                    }
-
-                    &--recreation {
-                        background: rgba(102,213,188,.7);
-                    }
-
-                    &--transport {
-                        background: rgba(244,191,59,.7);
-                    }
-                }
-            }
+            &_school       { background-color: #abaeb3; }
+            &_kindergarten { background-color: #ffcb0d; }
+            &_shop         { background-color: #2095d2; }
+            &_cafe         { background-color: #f2883d; }
+            &_hospital     { background-color: #fa9191; }
+            &_pharmacy     { background-color: #ec1f27; }
+            &_sport        { background-color: #1da600; }
+            &_recreation   { background-color: #aaab22; }
+            &_transport    { background-color: #297acc; }
         }
     }
 }
+// Стили для офиса продаж
 
+// --> Иметь ввиду, Высота блока с картой настроена таким образом, что = 100%(высота экрана) - 202px(высота блока .location__head)
+// --> у блока .office__head высота = 152px, следовательно для стр офиса продаж нужно будет поменять высоту карты (100% - 152px)
+
+.office__head {
+    width: 100%;
+    height: 152px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #dcddde;
+    position: relative;
+
+    &-wrap {
+        width: calc(1240px / 2);
+        box-sizing: border-box;
+        padding: 50px 0 0;
+        &:nth-child(2) { padding: 60px 0 0; }
+    }
+    &-title {
+        font: 42px/46px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+    }
+    &-text {
+        @include f16-24;
+        color: rgba(0, 1, 5, 0.8);
+
+        &_bold {
+            font-weight: 500;
+            color: $col-black;
+        }
+        span { white-space: nowrap; }
+    }
+
+    @media (max-width: 1279px) {
+        height: 154px;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        &-wrap {
+            width: 708px;
+            padding: 30px 0 0;
+            &:nth-child(2) { padding: 0; }
+        }
+        &-title {
+            font-size: 30px;
+            line-height: 34px;
+            margin: 0 0 10px;
+        }
+    }
+}
