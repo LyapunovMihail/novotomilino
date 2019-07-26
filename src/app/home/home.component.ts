@@ -5,7 +5,6 @@ import { combineLatest } from 'rxjs';
 import { INewsSnippet } from '../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { PlatformDetectService } from '../platform-detect.service';
-import { IGallerySnippet } from '../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 
 @Component({
     selector: 'app-home',
@@ -25,7 +24,6 @@ export class HomeComponent implements OnInit {
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
     public newsLoaded = false;
-    public gallerySlides: IGallerySnippet[] = [];
 
     constructor(
         public platform: PlatformDetectService,
@@ -51,14 +49,6 @@ export class HomeComponent implements OnInit {
             },
             (err) => console.log(err)
         );
-
-        this.homeService.getGallerySnippet().subscribe(
-            (data: IGallerySnippet[]) => {
-                this.gallerySlides = data;
-            },
-            (err) => console.log(err)
-        );
-
     }
 
 }

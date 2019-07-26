@@ -5,7 +5,7 @@
         <div class="main__news-nav">
             <ul class="main__news-list">
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'all'" (click)="changeSnippets(allSnippets, 'all')">Все</li>
-                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'news-shares'" (click)="changeSnippets(newsSnippets, 'news-shares')">Новости</li>
+                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'news'" (click)="changeSnippets(newsSnippets, 'news')">Новости</li>
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'shares'" (click)="changeSnippets(shareSnippets, 'shares')">Акции</li>
             </ul>
             <div class="main__news-btn">

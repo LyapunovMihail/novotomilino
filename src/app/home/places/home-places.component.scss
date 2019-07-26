@@ -60,7 +60,7 @@
                 right: 0;
                 top: 0;
                 box-sizing: border-box;
-                left: calc( (100vw - (1600px - (180px *2)))/2);
+                left: calc( (100% - (1600px - (180px *2)))/2);
             }
 
             &-list {

@@ -66,7 +66,7 @@ export class HomePlacesAdminService {
                     index ++ ;
                     upload(index);
                 } else {
-                    resolve(JSON.parse(response));
+                    resolve(response);
                 }
             };
 

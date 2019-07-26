@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GALLERY_UPLOADS_PATH, IGallerySnippet} from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
+import {
+    EnumGallerySnippet,
+    GALLERY_UPLOADS_PATH,
+    IGallerySnippet
+} from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import {AuthorizationObserverService} from '../../authorization/authorization.observer.service';
 import * as moment from 'moment';
 import { HomeService } from '../home.service';
@@ -28,7 +32,7 @@ export class HomePlacesComponent implements OnInit {
 
     public isShowModalAdmin: boolean = false;
 
-    @Input() public gallerySlides: IGallerySnippet[];
+    public gallerySlides: IGallerySnippet[];
 
     constructor(
         private authorization: AuthorizationObserverService,
@@ -39,6 +43,13 @@ export class HomePlacesComponent implements OnInit {
 
         // ToDo отфильтровать картинки галлереи по типу
         // this.gallerySlides.filter((slide) => slide.type === EnumGallerySnippet.PLACES);
+
+        this.homeService.getGallerySnippet(EnumGallerySnippet.PLACES).subscribe(
+            (data: IGallerySnippet[]) => {
+                this.gallerySlides = data;
+            },
+            (err) => console.log(err)
+        );
     }
 
     public countDown(finishDate) {

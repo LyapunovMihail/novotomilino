@@ -20,8 +20,8 @@ export class HomeService {
         return this.http.get<{length: number, sharesList: Share[]}>(`/api/shares/list?limit=1000&skip=0`);
     }
 
-    public getGallerySnippet(): Observable<IGallerySnippet[]> {
-        return this.http.get<IGallerySnippet[]>('/api/gallery');
+    public getGallerySnippet(type): Observable<IGallerySnippet[]> {
+        return this.http.get<IGallerySnippet[]>('/api/gallery', {params: {}});
     }
 
     public changeDescription(id,  description) {

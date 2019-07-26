@@ -3,6 +3,7 @@ import {INewsSnippet} from '../../../../serv-files/serv-modules/news-api/news.in
 import {Share} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
 import {
+    EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
@@ -34,7 +35,8 @@ export class HomePreviewComponent implements OnInit {
 
     public slideWidth = document.documentElement.clientWidth;
 
-    @Input() public gallerySlides: IGallerySnippet[];
+    public gallerySlides: IGallerySnippet[];
+
     @Input() public newsSnippets: INewsSnippet[];
     @Input() public shareSnippets: Share[];
 
@@ -59,8 +61,6 @@ export class HomePreviewComponent implements OnInit {
             }
         });
 
-        console.log('this.shareSnippets: ', this.shareSnippets);
-        console.log('this.newsSnippets: ', this.newsSnippets);
         // this.shareSnippet = this.shareSnippets[0];
         // this.shareSnippet.finish_date = this.countDown(this.shareSnippet.finish_date) + '';
 
@@ -71,7 +71,7 @@ export class HomePreviewComponent implements OnInit {
             this.isAuthorizated = val;
         });
 
-        this.homeService.getGallerySnippet().subscribe(
+        this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
             (data: IGallerySnippet[]) => {
                 this.gallerySlides = data;
             },
