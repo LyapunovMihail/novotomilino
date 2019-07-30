@@ -1,11 +1,11 @@
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 
 @Component({
-    selector: 'app-search',
+    selector: 'app-flats-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     providers: [
@@ -13,12 +13,12 @@ import { PlatformDetectService } from '../../platform-detect.service';
     ]
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
 
     public previousUrl = '';
     public isReturnLink = false;
-
     public flatsList = [];
+    public showSearchWindow = false;
 
     constructor(
         public router: Router,
@@ -65,7 +65,9 @@ export class SearchComponent implements OnInit {
             params['sections'] = (form.sections).join(',');
         }
 
-        this.router.navigate(['/flats/search'], {queryParams: params});
+        console.log('queryParams: ', params);
+
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
@@ -75,5 +77,13 @@ export class SearchComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+
+    public ngOnChanges() {
+        // ToDo раскомментировать в случае если будет использоваться как выдвижная панель(принцип модалки)
+       /* if (this.showSearchWindow) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        }
+        */
     }
 }
