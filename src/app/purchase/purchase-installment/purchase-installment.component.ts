@@ -85,7 +85,7 @@ export class PurchaseInstallmentComponent implements OnInit {
         let monthPrice;
         if ( this.percent > 0 ) {
             monthPrice = this.excelPMT(this.percent / (100 * 12), this.form.month.val, leftSum);
-        }else {
+        } else {
             monthPrice = leftSum / this.form.month.val;
         }
 

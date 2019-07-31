@@ -7,9 +7,14 @@
             <div class="purchase__filter-item purchase__filter-price">
                 <p class="purchase__filter-item-text">Стоимость недвижимости</p>
                 <p class="purchase__filter-item-size">2 000 000 Р</p>
-                <div class="purchase__filter-item-range-line">
-                    <div class="purchase__filter-item-range-circle"></div>
-                </div>
+                <ghm-range-number
+                    (move)="form.price.val = $event"
+                    (moveend)="formChanges($event, 'price')"
+                    [toFixed]="true"
+                    [min]="form.price.min"
+                    [max]="form.price.max"
+                    [start]="form.price.val">
+                </ghm-range-number>
             </div>
             <div class="purchase__filter-item purchase__filter-size">
                 <p class="purchase__filter-item-text">Первоначальный взнос</p>

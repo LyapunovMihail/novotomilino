@@ -1,22 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {
-    EnumGallerySnippet,
-    GALLERY_UPLOADS_PATH,
-    IGallerySnippet
-} from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
-import {AuthorizationObserverService} from '../../authorization/authorization.observer.service';
-import * as moment from 'moment';
+import { Component, OnInit } from '@angular/core';
+import { EnumGallerySnippet, GALLERY_UPLOADS_PATH, IGallerySnippet } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { HomeService } from '../home.service';
-declare let $: any;
-declare let Swiper: any;
+import { PlatformDetectService } from '../../platform-detect.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 @Component({
     selector: 'app-home-places',
     templateUrl: './home-places.component.html',
-    styleUrls: [
-        './home-places.component.scss'
-    ],
+    styleUrls: ['./home-places.component.scss'],
     providers: [
+        PlatformDetectService,
+        WindowScrollLocker
     ]
 })
 
@@ -35,14 +30,19 @@ export class HomePlacesComponent implements OnInit {
     public gallerySlides: IGallerySnippet[];
 
     constructor(
+        public platform: PlatformDetectService,
         private authorization: AuthorizationObserverService,
+        public windowScrollLocker: WindowScrollLocker,
         public homeService: HomeService
     ) {}
 
     public ngOnInit() {
 
-        // ToDo отфильтровать картинки галлереи по типу
-        // this.gallerySlides.filter((slide) => slide.type === EnumGallerySnippet.PLACES);
+        if ( !this.platform.isBrowser ) { return false; }
+
+        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
+            this.isAuthorizated = val;
+        });
 
         this.homeService.getGallerySnippet(EnumGallerySnippet.PLACES).subscribe(
             (data: IGallerySnippet[]) => {
@@ -52,11 +52,9 @@ export class HomePlacesComponent implements OnInit {
         );
     }
 
-    public countDown(finishDate) {
-        let createdDateVal = moment(Date.now());
-        let finishDateVal = moment(finishDate);
-        let duration = moment.duration(createdDateVal.diff(finishDateVal));
-        return Math.ceil(duration.asDays() * -1);
+    ngOnDestroy() {
+        if (!this.platform.isBrowser) { return false; }
+        this.AuthorizationEvent.unsubscribe();
     }
 
     public nextBtn() {
@@ -69,6 +67,13 @@ export class HomePlacesComponent implements OnInit {
 
     public changeDescription(id, description) {
         this.homeService.changeDescription(id, description).subscribe(
+            (data: IGallerySnippet[]) => this.gallerySlides = data,
+            (err) => console.log(err)
+        );
+    }
+
+    public changeName(id, name) {
+        this.homeService.changeName(id, name).subscribe(
             (data: IGallerySnippet[]) => this.gallerySlides = data,
             (err) => console.log(err)
         );

@@ -1,25 +1,24 @@
 import { Uploader } from 'angular2-http-file-upload';
-import { HomePreviewAdminService } from './home-preview-admin.service';
+import { HomeGalleryAdminService } from './home-gallery-admin.service';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {
-    EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
-} from '../../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
+} from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 
 @Component({
-    selector: 'app-home-preview-admin',
-    templateUrl: './home-preview-admin.component.html',
+    selector: 'app-home-places-admin',
+    templateUrl: './home-gallery-admin.component.html',
     styleUrls: [
-        './home-preview-admin.component.scss'
+        './home-gallery-admin.component.scss'
     ],
     providers: [
         Uploader,
-        HomePreviewAdminService
+        HomeGalleryAdminService
     ]
 })
 
-export class HomePreviewAdminComponent {
+export class HomeGalleryAdminComponent {
 
     @Output() close = new EventEmitter();
 
@@ -29,6 +28,8 @@ export class HomePreviewAdminComponent {
 
     @Input() gallerySlides: IGallerySnippet[] = [];
 
+    @Input() type: string;
+
     public uploadsPath = `/${GALLERY_UPLOADS_PATH}`;
 
     public progressEvent;
@@ -37,7 +38,7 @@ export class HomePreviewAdminComponent {
     public progressLoaded = false;
 
     constructor(
-        private galleryAdminService: HomePreviewAdminService
+        private galleryAdminService: HomeGalleryAdminService
     ) { }
 
     public setSlides(e) {
@@ -47,7 +48,7 @@ export class HomePreviewAdminComponent {
         this.progressEvent = this.galleryAdminService.getCurrentLoadedImage().subscribe((val) => {
             this.progressCurrent = val;
         });
-        this.galleryAdminService.imageUpload(fileList, EnumGallerySnippet.PREVIEW).then((arr: IGallerySnippet[]) => {
+        this.galleryAdminService.imageUpload(fileList, this.type).then((arr: IGallerySnippet[]) => {
             console.log('data: ', arr);
             this.progressCount = 0;
             this.progressLoaded = false;

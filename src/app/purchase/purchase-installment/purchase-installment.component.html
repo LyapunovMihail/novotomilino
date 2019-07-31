@@ -81,7 +81,7 @@
 
         <div class="installment-calculator__result-item">
             <p class="installment-calculator__result-title">Сумма</p>
-            <p class="installment-calculator__result-result">2 000 000 &#8381;</p>
+            <p class="installment-calculator__result-result">{{form.price.val | installmentNumberPipe }} &#8381;</p>
         </div>
 
         <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item">
