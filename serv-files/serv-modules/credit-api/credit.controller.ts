@@ -27,7 +27,7 @@ export class CreditController extends CreditModel {
         }));
 
         this.router.post('/admin/credit/create', responseHandler(async(req) => {
-            return await this.setSnippet();
+            return await this.setSnippet(req.body);
         }));
 
         this.router.post('/admin/credit/delete', responseHandler(async(req) => {

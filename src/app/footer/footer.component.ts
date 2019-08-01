@@ -1,7 +1,10 @@
 import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { VideoModalService } from '../modal/video-modal/video-modal.service';
 import { OverlayService } from '../modal/overlay.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector : 'app-footer',
@@ -12,13 +15,37 @@ import { Component } from '@angular/core';
     ]
 })
 
-export class FooterComponent {
+export class FooterComponent implements OnInit, OnDestroy {
+
+    public isHidden: boolean;
+    private ngUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
         private windowScrollLocker: WindowScrollLocker,
         private videoModalService: VideoModalService,
-        private overlayService: OverlayService
+        private overlayService: OverlayService,
+        private router: Router
     ) { }
+
+    public ngOnInit() {
+
+        this.router.events
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    if (this.router.url === '/flats/plan' || this.router.url === '/flats/house') {
+                        this.isHidden = true;
+                    } else {
+                        this.isHidden = false;
+                    }
+                }
+            });
+    }
+
+    public ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
 
     openVideo() {
         this.overlayService.changeOverlayVisibility(true);

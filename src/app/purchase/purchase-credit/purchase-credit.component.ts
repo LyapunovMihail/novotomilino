@@ -4,6 +4,7 @@ import { ICreditSnippet, CREDIT_UPLOADS_PATH } from '../../../../serv-files/serv
 import { PurchaseCreditService } from './purchase-credit.service';
 import { AuthorizationObserverService } from './../../authorization/authorization.observer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BANKS, Banks } from './banks';
 
 @Component({
     selector: 'app-purchase-credit',
@@ -19,22 +20,30 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
 
     public isAuthorizated: boolean = false;
 
+    public banks: Banks[] = BANKS;
+
     public snippetArray: ICreditSnippet[] = [];
 
     public uploadsPath: string = `/${CREDIT_UPLOADS_PATH}`;
 
     public AuthorizationEvent;
 
+    public showModalBankList: boolean = false;
+
     constructor(
         private authorization: AuthorizationObserverService,
-        private service: PurchaseCreditService,
-        private  uploaderService: Uploader
+        private creditService: PurchaseCreditService,
+        private uploaderService: Uploader
     ) { }
 
     public ngOnInit() {
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => this.isAuthorizated = val );
-        this.service.getSnippet().subscribe(
-            (data) => this.snippetArray = data,
+        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => this.isAuthorizated = val);
+
+        this.creditService.getSnippet().subscribe(
+            (data) => {
+                console.log('this.snippetArray: ', data);
+                this.snippetArray = data;
+            },
             (error) => {
                 console.error(error);
             }
@@ -46,14 +55,17 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
     }
 
     public setSnippet() {
-        this.service.setSnippet().subscribe(
+        if (this.snippetArray.length) {
+            return;
+        }
+        this.creditService.setSnippet(this.banks).subscribe(
             (data) => this.snippetArray = data,
             (error) => console.error(error)
         );
     }
 
     public deleteSnippet(id) {
-        this.service.deleteSnippet(id).subscribe(
+        this.creditService.deleteSnippet(id).subscribe(
             (data) => this.snippetArray = data,
             (error) => console.error(error)
         );
@@ -61,7 +73,7 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
 
     public updateSnippet(id, key, value) {
         if ( this.isAuthorizated ) {
-            this.service.updateSnippet(id, key, value).subscribe(
+            this.creditService.updateSnippet(id, key, value).subscribe(
                 (data) => this.snippetArray = data,
                 (error) => console.error(error)
             );

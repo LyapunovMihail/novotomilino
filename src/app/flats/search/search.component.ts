@@ -1,6 +1,6 @@
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 
@@ -18,7 +18,8 @@ export class SearchComponent implements OnInit, OnChanges {
     public previousUrl = '';
     public isReturnLink = false;
     public flatsList = [];
-    public showSearchWindow = false;
+    public form: any;
+    @Input() public showSearchWindow = false;
 
     constructor(
         public router: Router,
@@ -28,6 +29,7 @@ export class SearchComponent implements OnInit, OnChanges {
 
     public ngOnInit() {
         if (this.platform.isBrowser) {
+            if (!this.showSearchWindow) {return; }
             if ( localStorage.getItem('previousRoute') ) {
                 this.previousUrl = localStorage.getItem('previousRoute');
                 localStorage.removeItem('previousRoute');
@@ -39,6 +41,10 @@ export class SearchComponent implements OnInit, OnChanges {
     }
 
     public formChange(form) {
+        console.log('this.showSearchWindow: ', this.showSearchWindow);
+        this.form = form;
+        if (!this.showSearchWindow) {return; }
+
         const params = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
@@ -80,6 +86,12 @@ export class SearchComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges() {
+        console.log('this.showSearchWindow: ', this.showSearchWindow);
+        if (this.showSearchWindow) {
+            this.formChange(this.form);
+        } else {
+            this.router.navigate([this.router.url.split('?')[0]]);
+        }
         // ToDo раскомментировать в случае если будет использоваться как выдвижная панель(принцип модалки)
        /* if (this.showSearchWindow) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});

@@ -7,14 +7,14 @@
             <div class="purchase__filter-item purchase__filter-price">
                 <p class="purchase__filter-item-text">Стоимость недвижимости</p>
                 <p class="purchase__filter-item-size">2 000 000 Р</p>
-                <ghm-range-number
+              <!--  <ghm-range-number
                     (move)="form.price.val = $event"
                     (moveend)="formChanges($event, 'price')"
                     [toFixed]="true"
                     [min]="form.price.min"
                     [max]="form.price.max"
                     [start]="form.price.val">
-                </ghm-range-number>
+                </ghm-range-number> -->
             </div>
             <div class="purchase__filter-item purchase__filter-size">
                 <p class="purchase__filter-item-text">Первоначальный взнос</p>
@@ -55,23 +55,23 @@
 
         <button class="admin-credit__set-snippet" 
             *ngIf="isAuthorizated"
-            (click)="setSnippet()">
+            (click)="setSnippet(); showModalBankList = !showModalBankList">
             <img src="/assets/img/purchase/ch_list_bank.svg" alt="">
             Изменить список банков
         </button>
     
         <ul class="credit-list">
     
-            <li *ngFor="let snippet of snippetArray" class="credit-list__item credit-list__item_sber">
+            <li *ngFor="let snippet of snippetArray" class="credit-list__item credit-list__item_{{snippet.cssclass}}">
     
                 <div class="credit-list__item-wrap">
                     <div class="credit-list__item-logo">
                         <img class="credit-list__item-logo-img" 
                             *ngIf="snippet.image.length > 0"
-                             [src]="uploadsPath + snippet.image"
+                             [src]="snippet.image"
                         /> <!-- Картинка должна подгружаться в зависимости от выбранного банка из списка -->
                     </div>
-                    <p class="credit-list__item-logo-text">Сбербанк</p> <!-- Название банка должно будет подгружаться -->
+                    <p class="credit-list__item-logo-text">{{snippet.name}}</p> <!-- Название банка должно будет подгружаться -->
                 </div>
 
                 <div class="credit-list__item-descr">
@@ -146,16 +146,19 @@
 </div>
 
 
-<section class="purchase-admin__bank-list">
+<section class="purchase-admin__bank-list" *ngIf="showModalBankList">
     <div class="purchase-admin__bank-list-contain">
         <button class="purchase-admin__bank-list-cls"></button>
         <h1 class="purchase-admin__bank-list-title g-title-path">Изменить список банков</h1>
         <div class="purchase-admin__bank-list-grid">
-            <div class="bank-list__item bank-list__item-sber">
-                <input type="checkbox" name="type" id="sber">
-                <label for="sber" class="g-checkbox"></label>
-                <label for="sber" class="bank-list__item-text bank-list__item-text_sber">Сбербанк</label>
+            <div class="bank-list__item bank-list__item-sber" *ngFor="let snippet of snippetArray; let i = index">
+                <input type="checkbox" name="type" id="bank{{i}}"
+                       [checked]="snippet.active"
+                       (change)="updateSnippet(snippet._id, 'active', !snippet.active)">
+                <label for="bank{{i}}" class="g-checkbox"></label>
+                <label for="bank{{i}}" class="bank-list__item-text bank-list__item-text_{{snippet.cssclass}}">{{snippet.name}}</label>
             </div>
+            <!--
             <div class="bank-list__item bank-list__item-alfa">
                 <input type="checkbox" name="type" id="alfa">
                 <label for="alfa" class="g-checkbox"></label>
@@ -215,8 +218,8 @@
                 <input type="checkbox" name="type" id="ross">
                 <label for="ross" class="g-checkbox"></label>
                 <label for="ross" class="bank-list__item-text bank-list__item-text_ross">РоссельхозБанк</label>
-            </div>
+            </div> -->
         </div>
-        <button class="purchase-admin__bank-list-success">Готово</button>
+        <button class="purchase-admin__bank-list-success" (click)="showModalBankList = !showModalBankList">Готово</button>
     </div>
 </section>
