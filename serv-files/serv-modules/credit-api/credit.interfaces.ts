@@ -16,8 +16,3 @@ export interface ICreditSnippet {
     active: boolean;
     created_at: string;
 }
-
-export enum SnippetCategoryEnum {
-    BASE = 'base',
-    MILITARY = 'military'
-}

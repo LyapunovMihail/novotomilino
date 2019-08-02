@@ -13,14 +13,37 @@ export class CreditModel {
         this.collection = db.collection(this.collectionName);
     }
 
-    async getSnippet() {
+    async getAllSnippet() {
         return await this.collection.find().sort({created_at: -1}).toArray();
+    }
+
+    async getActiveSnippet() {
+        return await this.collection.find({active: true}).sort({created_at: -1}).toArray();
+    }
+
+    async getActiveSnippetWithParams(params) {
+
+        console.log('params: ', params);
+
+        const snippets = await this.collection.find(
+            {
+                active: true,
+                initial: {$lte: params.initial},
+                deadline: {$gte: params.deadline},
+                military: params.military,
+                maternal: params.maternal,
+                nationality: params.nationality
+            })
+            .sort({created_at: -1}).toArray();
+
+        console.log('snippets: ', snippets);
+        return snippets;
     }
 
     async setSnippet(banks) {
         const date = new Date();
 
-        console.log('banks: ', banks);
+        const banksSnippets = [];
         banks.forEach((bank) => {
             const created_at = dateFormat(date, 'yyyy-mm-ddTHH:MM:ssZ');
             const snippet: ICreditSnippet = {
@@ -34,18 +57,20 @@ export class CreditModel {
                 maternal: false,
                 nationality: false,
                 active: true,
-                created_at
+                created_at,
             };
-            this.collection.insertOne(snippet);
+            banksSnippets.push(snippet);
         });
 
-        return await this.getSnippet();
+        this.collection.insertMany(banksSnippets);
+
+        return await this.getAllSnippet();
     }
 
     async deleteSnippet(id) {
         if ( id &&  ObjectId.isValid(id) ) {
             await this.collection.deleteOne({ _id : ObjectId(id) });
-            return await this.getSnippet();
+            return await this.getActiveSnippet();
         } else {
             throw new Error('Не корректный id.');
         }
@@ -67,8 +92,12 @@ export class CreditModel {
             case 'active':
 
                 // если key - правильный но нет его значения, отдается ошибка
-                if ( value === undefined ) { throw new Error(`Не передано значение ${key}`); }
-
+                if ( value === undefined ) {
+                    throw new Error(`Не передано значение ${key}`);
+                }
+                if ((key === 'initial' || key === 'percent' || key === 'deadline') && typeof value !== 'number') {
+                    throw new Error(`значение ${key} не цифровые, печатайте цифры`);
+                }
                 // если id валиден обновляем базу
                 if ( ObjectId.isValid(id) ) {
 
@@ -76,7 +105,7 @@ export class CreditModel {
                     options[key] = value;
 
                     await this.collection.update({ _id : ObjectId(id) }, {$set: options });
-                    return await this.getSnippet();
+                    return await this.getActiveSnippet();
 
                 } else {
                 // если id не валиден, отдается ошибка
@@ -93,6 +122,6 @@ export class CreditModel {
         const path = CREDIT_UPLOADS_PATH;
         const image = await imageSaver(req, path, 50);
         await this.collection.update({_id: ObjectId(req.headers.id)}, {$set: { image }});
-        return await this.getSnippet();
+        return await this.getActiveSnippet();
     }
 }

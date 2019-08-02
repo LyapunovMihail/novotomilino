@@ -1,38 +1,6 @@
 <div class="purchase-installment">
 
     <ul class="purchase-installment__calculator installment-calculator">
-
-        <!-- <li class="installment-calculator__item">
-
-            <div class="installment-calculator__item-wrap">
-                <span class="installment-calculator__item-text">Стоимость квартиры, &#8381;</span>
-                <input (change)="formChanges($event.target.value, 'price')" 
-                    (input)="bitReplace($event.target.value, 'price')"
-                    (keyup)="keyUpReviuse($event)"
-                    [value]="form.price.val | installmentNumberPipe" 
-                    class="field installment-calculator__item-field" type="text">
-            </div>
-
-            <div class="installment-calculator__item-wrap">
-                <span class="installment-calculator__item-text">Первоначальный взнос, &#8381;<br>
-                </span>
-                <input (change)="formChanges($event.target.value, 'firstpay')" 
-                    (input)="bitReplace($event.target.value, 'firstpay')"
-                    (keyup)="keyUpReviuse($event)"
-                    [value]="form.firstpay.val | installmentNumberPipe" 
-                    class="field installment-calculator__item-field" type="text">
-            </div>
-
-            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__item-wrap">
-                <span class="installment-calculator__item-text">Срок выплат, месяцев</span>
-                <input (change)="formChanges($event.target.value, 'month')"
-                    (input)="bitReplace($event.target.value, 'month')"
-                    (keyup)="keyUpReviuse($event)"
-                    [value]="form.month.val"
-                    class="field installment-calculator__item-field" type="text">
-            </div>
-
-        </li> -->
     
         <li class="installment-calculator__item">
             <span class="installment-calculator__item-text">Стоимость квартиры, &#8381;</span>

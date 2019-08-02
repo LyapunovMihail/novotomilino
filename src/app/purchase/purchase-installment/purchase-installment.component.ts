@@ -1,7 +1,6 @@
 import { PurchaseInstallmentNumberPipe } from './purchase-installment.pipe';
 import { PurchaseInstallmentService, FormParams } from './purchase-installment.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component ({
     selector: 'app-purchase-installment',
@@ -95,17 +94,7 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     public formChanges ( val, field ) {
         this.form[field]['val'] = val;
-        this.formConvert ( );
-    }
-
-    public fullPayChange () {
-        this.isFullPay = !this.isFullPay;
-        let values = this.srvc.values(this.form);
-        if ( this.isFullPay ) {
-            this.form.firstpay.val = values.price.val;
-        } else {
-            this.form.firstpay.val = values.price.val / 2;
-        }
+        this.formConvert();
     }
 
     // Эксель функция ПЛТ
