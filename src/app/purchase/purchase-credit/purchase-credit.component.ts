@@ -22,6 +22,8 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
 
     public AuthorizationEvent;
 
+    public showModalBankList = false;
+
     public params: any;
 
     constructor(
@@ -82,7 +84,7 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
             maternal: form.maternal,
             nationality: form.nationality
         };
-
+        console.log('initital: ', params.initial);
         this.params = params;
 
         if (!this.isAuthorizated) {
