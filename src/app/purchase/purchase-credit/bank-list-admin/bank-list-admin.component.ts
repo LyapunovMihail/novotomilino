@@ -35,7 +35,7 @@ export class BankListAdminComponent implements OnInit {
                     return;
                 }
                 this.creditService.setSnippet(this.banks).subscribe(
-                    (snippets) => {this.snippetArray = snippets; console.log('this.snippetArray: ', this.snippetArray); },
+                    (snippets) => this.snippetArray = snippets,
                     (error) => console.error(error)
                 );
             },
@@ -47,7 +47,7 @@ export class BankListAdminComponent implements OnInit {
 
     public updateSnippet(id, key, value) {
         this.creditService.updateSnippet(id, key, value).subscribe(
-            (data) => {console.log('data: ', data)},
+            (data) => {},
             (error) => console.error(error)
         );
     }
