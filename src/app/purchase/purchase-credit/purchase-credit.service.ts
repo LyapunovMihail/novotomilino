@@ -19,7 +19,6 @@ export class PurchaseCreditService {
     }
 
     public getActiveSnippetWithParams(params): Observable<ICreditSnippet[]> {
-        console.log('params: ', params);
         return this.http.post<ICreditSnippet[]>('/api/credit/active_with_params', {params});
     }
 
@@ -39,11 +38,14 @@ export class PurchaseCreditService {
     }
 
     public calculateMonthPay(params, snippets) {
-        let leftSum = params.price.val - params.firstpay.val
+        const leftSum = params.price - params.firstpay;
 
-        (present_value * rate) / (1 - Math.pow((1 + rate), -number_of_periods));
-
-
+        snippets.forEach((bank) => {
+            const rate = bank.percent / (100 * 12);
+            console.log('rate: ', rate);
+            bank.monthPay = (leftSum * rate) / (1 - Math.pow((1 + rate), -(params.deadline * 12))); // Формула для подсчета ежемесячного платежа
+            bank.monthPay = Math.round(bank.monthPay);
+        });
     }
 
 }

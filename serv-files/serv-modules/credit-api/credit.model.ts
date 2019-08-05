@@ -23,8 +23,6 @@ export class CreditModel {
 
     async getActiveSnippetWithParams(params) {
 
-        console.log('params: ', params);
-
         const snippets = await this.collection.find(
             {
                 active: true,
@@ -36,7 +34,6 @@ export class CreditModel {
             })
             .sort({created_at: -1}).toArray();
 
-        console.log('snippets: ', snippets);
         return snippets;
     }
 
@@ -77,11 +74,6 @@ export class CreditModel {
     }
 
     async updateSnippet(id, key, value) {
-
-        console.log('id: ', id);
-        console.log('key: ', key);
-        console.log('value: ', value);
-
         switch (key) {
             case 'percent':
             case 'initial':
