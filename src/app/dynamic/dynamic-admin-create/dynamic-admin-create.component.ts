@@ -20,6 +20,7 @@ export class DynamicAdminCreateComponent implements OnInit, OnChanges, OnDestroy
     @Input() public objectsArray: IDynamicObject[] = [];
 
     @Output() public changeObjectsArray: EventEmitter<IDynamicObject[]> = new EventEmitter();
+    @Output() public closeModal: EventEmitter<boolean> = new EventEmitter();
 
     public form: FormGroup = this.formBuilder.group({
         year: this.year,
