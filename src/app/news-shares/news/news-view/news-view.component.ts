@@ -18,6 +18,8 @@ export class NewsViewComponent implements OnInit {
 
     public image: string = '';
 
+    public created_at: string = '';
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private newsService: NewsService,
@@ -36,6 +38,7 @@ export class NewsViewComponent implements OnInit {
                     this.title = data[0].title;
                     this.description = data[0].description;
                     this.image = `/${NEWS_UPLOADS_PATH}${data[0].image}`;
+                    this.created_at = data[0].created_at;
                 } else {
                     this.router.navigate(['/error-404'], { skipLocationChange: true });
                 }

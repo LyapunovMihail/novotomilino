@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {INewsSnippet} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
-import {Share} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Component, Input, OnInit } from '@angular/core';
+import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
 import {
     EnumGallerySnippet,
@@ -9,15 +9,18 @@ import {
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { HomeService } from '../home.service';
-
-declare let $: any;
-declare let Swiper: any;
+import { PlatformDetectService } from '../../platform-detect.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 @Component({
     selector: 'app-home-preview',
     templateUrl: './home-preview.component.html',
     styleUrls: [
         './home-preview.component.scss'
+    ],
+    providers: [
+        PlatformDetectService,
+        WindowScrollLocker
     ]
 })
 
@@ -44,11 +47,19 @@ export class HomePreviewComponent implements OnInit {
     public shareSnippet: Share;
 
     constructor(
+        public platform: PlatformDetectService,
         private authorization: AuthorizationObserverService,
+        public windowScrollLocker: WindowScrollLocker,
         public homeService: HomeService
     ) {}
 
     public ngOnInit() {
+
+        if ( !this.platform.isBrowser ) { return false; }
+
+        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
+            this.isAuthorizated = val;
+        });
 
         this.newsSnippet = this.newsSnippets[0];
 
@@ -64,22 +75,12 @@ export class HomePreviewComponent implements OnInit {
         // this.shareSnippet = this.shareSnippets[0];
         // this.shareSnippet.finish_date = this.countDown(this.shareSnippet.finish_date) + '';
 
-        // ToDo отфильтровать картинки галлереи по типу
-        // this.gallerySlides.filter((slide) => slide.type === EnumGallerySnippet.PREVIEW);
-
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
-            this.isAuthorizated = val;
-        });
-
         this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
             (data: IGallerySnippet[]) => {
                 this.gallerySlides = data;
             },
             (err) => console.log(err)
         );
-
-
-
     }
 
     public countDown(finishDate) {
@@ -99,6 +100,13 @@ export class HomePreviewComponent implements OnInit {
 
     public changeDescription(id, description) {
         this.homeService.changeDescription(id, description).subscribe(
+            (data: IGallerySnippet[]) => this.gallerySlides = data,
+            (err) => console.log(err)
+        );
+    }
+
+    public changeName(id, name) {
+        this.homeService.changeName(id, name).subscribe(
             (data: IGallerySnippet[]) => this.gallerySlides = data,
             (err) => console.log(err)
         );

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { HomePreviewComponent } from './preview/home-preview.component';
 import { HomeDescriptionComponent } from './description/home-description.component';
 import { HomePlacesComponent } from './places/home-places.component';
+import { HomeGalleryAdminComponent } from './gallery-admin/home-gallery-admin.component';
 import { HomeNewsComponent } from './news/home-news.component';
 import { HomeService } from './home.service';
 import { SharesDayPipe } from './preview/shares-day.pipe';
@@ -19,6 +20,7 @@ import { LineBreakPipe } from './line-break.pipe';
       HomePreviewComponent,
       HomeDescriptionComponent,
       HomePlacesComponent,
+      HomeGalleryAdminComponent,
       HomeNewsComponent,
       SharesDayPipe,
       LineBreakPipe

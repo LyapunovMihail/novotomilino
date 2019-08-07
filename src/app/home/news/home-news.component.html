@@ -20,10 +20,10 @@
         <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'all'">
             <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of allSnippets; let i = index" id="slider-item-{{i}}">
-                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/' + item._id" *ngIf="item.thumbnail">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id" *ngIf="item.thumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail">
                     </a>
-                    <a class="main__news-slider-item-link" [routerLink]="'shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
                     <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
@@ -33,10 +33,10 @@
             </ul>
         </div>
 
-        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'news-shares'">
+        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'news'">
             <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of newsSnippets; let i = index" id="slider-item-{{i}}">
-                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/' + item._id">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail" *ngIf="item.thumbnail">
                     </a>
                     <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
@@ -48,7 +48,7 @@
         <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'shares'">
             <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of shareSnippets; let i = index" id="slider-item-{{i}}">
-                    <a class="main__news-slider-item-link" [routerLink]="'shares/list/1/' + item._id">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
                     <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>

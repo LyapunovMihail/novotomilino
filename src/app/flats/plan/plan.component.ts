@@ -31,6 +31,7 @@ export class PlanComponent implements OnInit {
     public activeLink: string = '';
     public houseOneFreeFlats: number;
     public houseTwoFreeFlats: number;
+    public showSearchWindow = false;
 
     constructor(
         public router: Router,

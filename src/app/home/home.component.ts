@@ -9,9 +9,6 @@ import { PlatformDetectService } from '../platform-detect.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: [
-        './home.component.scss'
-    ],
     providers: [
         PlatformDetectService,
         HomeService
@@ -40,11 +37,14 @@ export class HomeComponent implements OnInit {
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
                 this.shareSnippets = shares.sharesList;
+                console.log('this.shareSnippets: ', this.shareSnippets);
+                console.log('this.newsSnippets: ', this.newsSnippets);
                 return [...shares.sharesList, ...news];
             })
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
+                console.log('this.allSnippets', this.allSnippets);
                 this.newsLoaded = true;
             },
             (err) => console.log(err)

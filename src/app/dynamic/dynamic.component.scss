@@ -46,7 +46,7 @@
                     top: 1.5px;
                     width: 14px;
                     height: 14px;
-                    background: url('../../assets/img/dynamic/add-obj.svg') no-repeat;
+                    background: url('/assets/img/dynamic/add-obj.svg') no-repeat;
                     background-size: 100%;
                 }
             }
@@ -59,11 +59,5 @@
         justify-content: center;
 
         &-content { width: 952px; }
-        &-nav {
-            width: calc(100% - 952px);
-            display: flex;
-            justify-content: flex-end;
-            padding: 73px 0 0;
-        }
     }
 }

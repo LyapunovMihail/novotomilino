@@ -22,12 +22,20 @@ export class CreditController extends CreditModel {
     }
 
     routing() {
-        this.router.get('/credit', responseHandler(async(req) => {
-            return await this.getSnippet();
+        this.router.get('/credit/all', responseHandler(async(req) => {
+            return await this.getAllSnippet();
+        }));
+
+        this.router.get('/credit/active', responseHandler(async(req) => {
+            return await this.getActiveSnippet();
+        }));
+
+        this.router.post('/credit/active_with_params', responseHandler(async(req) => {
+            return await this.getActiveSnippetWithParams(req.body.params);
         }));
 
         this.router.post('/admin/credit/create', responseHandler(async(req) => {
-            return await this.setSnippet();
+            return await this.setSnippet(req.body.banks);
         }));
 
         this.router.post('/admin/credit/delete', responseHandler(async(req) => {

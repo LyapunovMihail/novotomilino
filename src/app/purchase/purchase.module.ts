@@ -8,12 +8,13 @@ import { PurchaseComponent } from './purchase.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PurchaseCreditComponents } from './purchase-credit/credit';
 
 const PurchaseComponents = [
     PurchaseComponent,
-    PurchaseCreditComponent,
     PurchaseInstallmentComponent,
-    PurchaseInstallmentNumberPipe
+    PurchaseInstallmentNumberPipe,
+    ...PurchaseCreditComponents
 ];
 
 @NgModule({

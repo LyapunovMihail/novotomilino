@@ -21,7 +21,7 @@
 
             <ng-container *ngFor="let plan of housesPlanSvg; let i = index">
 
-                <a (click)="svgRouterLink($event, ( '/flats/plan/house/' + plan.houseNumber ))" 
+                <a (click)="svgRouterLink($event, ( '/flats/plan/house/' + plan.houseNumber ))"
                         [attr.xlink:href]=" '/flats/plan/house/' + plan.houseNumber">
     
                     <path class="plan_house-select_svg_section"
@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<app-flats-search></app-flats-search>
+<app-flats-search [showSearchWindow]="showSearchWindow"></app-flats-search>
