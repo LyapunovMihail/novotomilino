@@ -1,19 +1,86 @@
+@import "../../styles/modules/mixins/mixin.scss";
+
+
 .flats {
     width: 100%;
     min-height: 100vh;
-    padding: 0 0 50px 0;
-}
-
-.empty {
-    margin-top: 40px;
-    box-sizing: border-box;
+    padding: (67px + 50px) 0 50px; // Где 50 это отступ от хедера
     display: flex;
-    justify-content: center;
+    flex-flow: column;
     align-items: center;
-    font: 15px 'abrade-book', sans-serif;
 
-    &:not(.result__pdf):not(.result__request-item):not(.empty) {
-        color: #888ba2;
+    &__title {
+        width: calc(100% - 60px);
+        max-width: 768px;
+        font: 30px/34px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+        margin: 0 0 40px;
+        @media (max-width: 767px) { width: calc(100% - 30px); }
+
+        span { display: block; }
+    }
+
+    &__show-filter {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: url(/assets/img/flats/show_filter.svg) center no-repeat $col-orange;
+        position: fixed;
+        bottom: 65px;
+        right: 15px;
+        z-index: 20;
+        // transition: background $transition;
+    }
+
+    &__filter {
+        width: 100%;
+        padding: 30px 0;
+        background-color: #fafaf2;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+
+        &-find {
+            width: calc(100% - 60px);
+            max-width: 768px;
+            font: 500 24px/29px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 45px;
+            @media (max-width: 767px) { width: calc(100% - 30px); }
+        }
+        &-wrap {
+            width: calc(100% - 60px);
+            max-width: 768px;
+            display: flex;
+            flex-flow: row wrap;
+            @media (max-width: 767px) { width: calc(100% - 30px); }
+        }
+
+        &-item {
+            @include fw18-24($col-black-7);
+            margin: 15px 30px 0 0;
+            cursor: pointer;
+
+            &_active,
+            &_turn {
+                color: $col-black;
+                position: relative;
+                padding: 0 15px 0 0;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 5px;
+                    width: 10px;
+                    height: 16px;
+                    background: url(/assets/img/filter_arrow.svg) no-repeat;
+                    background-size: 10px 16px;
+                }
+            }
+            &_turn:before { transform: rotate(180deg); }
+        }
     }
 }
 
@@ -61,4 +128,187 @@
     border-radius: 5px;
     margin: -60px auto 60px;
     user-select: none;
+}
+
+
+
+// Модалка Кваритры
+
+.flat {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 15px 0;
+
+    &_modal { z-index: 9999; }
+
+    &__cls-btn {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        width: 20px;
+        height: 20px;
+        background: url(/assets/img/cls_grey.svg) 50% 49% no-repeat;
+        background-size: 20px;
+        transition: border-color $transition;
+    }
+
+    &__nav {
+        width: calc(100% - 30px);
+        max-width: 768px;
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+        font: 500 9px/15px "Museo Sans Cyrl";
+        @include font-smoothing;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-sizing: border-box;
+        padding: 0 67px 0 0;
+        margin: 0 0 35px;
+        color: #323232;
+
+        &-item {
+            position: relative;
+            margin: 0 9.5px 5px 0;
+            white-space: nowrap;
+            &:last-child { &:before { display: none; } }
+            &:before {
+                content: '';
+                position: absolute;
+                right: -7px;
+                top: 2.9px;
+                width: 6px;
+                height: 8px;
+                transform: rotate(180deg);
+                background: url(/assets/img/btn_next_grey.svg) no-repeat;
+                background-size: 6px 8px;
+            }
+        }
+    }
+
+    &__title {
+        width: calc(100% - 30px);
+        font: 30px/34px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+        margin: 0 0 30px;
+    }
+    &__subtitle {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-black-6;
+        margin: 0 0 5px;
+    }
+    &__text {
+        font: 500 20px/24px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+
+        &_price {
+            font-size: 36px;
+            line-height: 40px;
+        }
+    }
+    &__favorite {
+        width: calc(100% - 30px);
+        max-width: 768px;
+        position: relative;
+        margin: 0 0 50px;
+        padding: 0 0 0 30px;
+        box-sizing: border-box;
+        &:before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 0;
+            top: -1px;
+            background: url(/assets/img/favorite.svg) no-repeat;
+            background-size: 22px 22px;
+        }
+        &_active:before { background: url(/assets/img/favorite_active.svg) no-repeat; }
+    }
+
+    &__wrap {
+        width: calc(100% - 30px);
+        max-width: 768px;
+        @media(max-width: 767px) { width: calc(100% - 30px); }
+
+        &_price {
+            margin: 0 0 30px;
+        }
+        &_image {
+            width: 100%;
+            padding: 20px 0 30px;
+            background-color: rgba(171, 171, 34, .2);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 30px;
+                top: 23px;
+                width: 8px;
+                height: 44px;
+                background: url(/assets/img/mobile_compass.svg) no-repeat;
+                background-size: 100%;
+                transform: rotate(45deg);
+            }
+        }
+    }
+    &__img {
+        width: calc(100% - 30px);
+        max-width: 768px;
+        height: 238px;
+    }
+
+    &__info {
+        width: calc(100% - 30px);
+        max-width: 768px;
+        display: flex;
+        flex-flow: row wrap;
+        padding: 0 0 10px;
+        border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+        margin: 0 0 50px;
+
+        &-item { margin: 20px 34px 0 0; }
+    }
+
+    &__btn {
+        width: calc(100% - 30px);
+        margin: 0 0 20px;
+
+        &-reserve,
+        &-credit {
+            width: 100%;
+            max-width: 290px;
+            height: 50px;
+            border-radius: 4px;
+            font: 500 16px/20px "Museo Sans Cyrl";
+            @include font-smoothing;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            margin: 0 0 10px;
+        }
+        &-reserve {
+            background: #e7490f;
+            color: #fff;
+        }
+        &-credit {
+            background: #fff;
+            color: #e7490f;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+    }
 }
