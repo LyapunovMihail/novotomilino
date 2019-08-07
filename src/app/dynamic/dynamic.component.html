@@ -20,7 +20,7 @@
 
     <div class="dynamic__main">
         <div class="dynamic__main-content">
-            <app-dynamic-object
+            <app-dynamic-object *ngIf="objectsArray.length"
                 [month]="currentMonth"
                 [year]="currentYear"
                 [objectsArray]="objectsArray"
@@ -43,7 +43,7 @@
             </app-dynamic-month-switcher>
         </div>
 
-        <app-dynamic-link-list
+        <app-dynamic-link-list *ngIf="objectsArray.length"
             [month]="currentMonth"
             [year]="currentYear"
             [objectsArray]="objectsArray">

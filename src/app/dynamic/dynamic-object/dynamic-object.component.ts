@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Uploader } from 'angular2-http-file-upload';
 import { DynamicObjectService } from './dynamic-object.service';
 import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
-import { Component, Input, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { DynamicLinkListService } from '../dynamic-link-list/dynamic-link-list.service';
 
 @Component({
     selector: 'app-dynamic-object',
@@ -13,11 +14,12 @@ import { Component, Input, EventEmitter, Output, OnInit, OnDestroy } from '@angu
     providers: [
         WindowScrollLocker,
         DynamicObjectService,
+        DynamicLinkListService,
         Uploader
     ]
 })
 
-export class DynamicObjectComponent implements OnInit, OnDestroy {
+export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input() month: number;
     @Input() year: number;
@@ -49,6 +51,7 @@ export class DynamicObjectComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
         private dynamicObjectService: DynamicObjectService,
+        private dynamicLinkListService: DynamicLinkListService,
         public windowScrollLocker: WindowScrollLocker
     ) { }
 
@@ -57,6 +60,10 @@ export class DynamicObjectComponent implements OnInit, OnDestroy {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
+    }
+
+    ngAfterViewInit() {
+        this.dynamicLinkListService.fillReadySegments(this.objectsArray, false);
     }
 
     ngOnDestroy() {

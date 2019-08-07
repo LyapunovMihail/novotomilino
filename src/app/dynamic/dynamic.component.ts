@@ -43,7 +43,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
             });
 
             this.dynamicService.getObjects().subscribe(
-                (data: IDynamicObject[]) => this.objectsArray = data,
+                (data: IDynamicObject[]) => {this.objectsArray = data; console.log('this.objectsArray: ', this.objectsArray)},
                 (err) => console.error(err)
             );
         }
@@ -91,9 +91,11 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
     public monthChange(val) {
         this.router.navigate([`/dynamic/${this.currentYear}/${val}`]);
+        window.location.href = `/dynamic/${this.currentYear}/${val}`;
     }
 
     public yearChange(val) {
         this.router.navigate([`/dynamic/${val}/${this.currentMonth}`]);
+        window.location.href = `/dynamic/${this.currentMonth}/${val}`;
     }
 }
