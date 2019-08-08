@@ -4,7 +4,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Uploader } from 'angular2-http-file-upload';
 import { DynamicObjectService } from './dynamic-object.service';
 import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
-import { Component, Input, EventEmitter, Output, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    EventEmitter,
+    Output,
+    OnInit,
+    OnDestroy,
+    AfterViewInit,
+    OnChanges,
+    SimpleChanges,
+    ChangeDetectorRef
+} from '@angular/core';
 import { DynamicLinkListService } from '../dynamic-link-list/dynamic-link-list.service';
 
 @Component({
@@ -19,7 +30,7 @@ import { DynamicLinkListService } from '../dynamic-link-list/dynamic-link-list.s
     ]
 })
 
-export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
 
     @Input() month: number;
     @Input() year: number;
@@ -52,7 +63,8 @@ export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit 
         private authorization: AuthorizationObserverService,
         private dynamicObjectService: DynamicObjectService,
         private dynamicLinkListService: DynamicLinkListService,
-        public windowScrollLocker: WindowScrollLocker
+        public windowScrollLocker: WindowScrollLocker,
+        public ref: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -63,6 +75,11 @@ export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     ngAfterViewInit() {
+        this.dynamicLinkListService.fillReadySegments(this.objectsArray, false);
+    }
+
+    ngOnChanges() {
+        this.ref.detectChanges();
         this.dynamicLinkListService.fillReadySegments(this.objectsArray, false);
     }
 
