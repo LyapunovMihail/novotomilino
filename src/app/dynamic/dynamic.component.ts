@@ -21,7 +21,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     public routerEvent;
     public AuthorizationEvent;
     public isAuthorizated: boolean = false;
-    public addPath: boolean = false;
+    public showModalAdmin: boolean = false;
 
     constructor(
         private router: Router,
@@ -87,10 +87,6 @@ export class DynamicComponent implements OnInit, OnDestroy {
             this.router.navigate(['/error-404'], { skipLocationChange: true });
             return false;
         }
-    }
-
-    public addObject() {
-        this.addPath = true;
     }
 
     public monthChange(val) {

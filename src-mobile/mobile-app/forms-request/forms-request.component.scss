@@ -1,8 +1,4 @@
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-}
+@import "../../styles/modules/mixins/mixin.scss";
 
 @mixin text($color: #2e2e2e) {
     font: 15px/18px 'Montserrat';
@@ -24,286 +20,171 @@
 
 .form-modal {
     width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10000;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: #ffffff;
-}
-
-.form {
-    position: absolute;
-    top: 0;
     box-sizing: border-box;
-    padding: 40px 0;
-    display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 0 0 34px;
+    z-index: 9999;
+}
 
-    @media(min-width: 600px) {
-        width: 560px;
-        left: 50%;
-        transform: translate(-50%);
-    }
 
-    @media(max-width: 599px) {
-        width: 100%;
-        padding: 23px 15px 55px;
-        box-sizing: border-box;
-        left: 0;
-    }
+.form-request {
+    width: calc(100% - 30px);
+    background-color: #fff;
+    box-sizing: border-box;
+    position: relative;
 
-    &_cls-btn {
-        width: 31px;
-        height: 31px;
+    &__cls-btn {
+        width: 20px;
+        height: 20px;
         position: absolute;
-        top: 40px;
-        right: 25px;
-        cursor: pointer;
-        background: url('/assets/img/flats/search/error.svg') no-repeat;
-        background-size: 100%;
+        top: 30px;
+        right: 30px;
+        background: url(/assets/img/cls_grey.svg) no-repeat;
+        background-size: 20px;
         z-index: 1;
-
-        @media (max-width: 425px) {
-            top: 20px;
-            right: 15px;
-        }
     }
 
-    &_title {
-        font: bold 18px/30px 'Montserrat';
-        color: #1c1c1c;
-        @include font-smoothing();
-        margin-bottom: 10px;
+    &__title {
+        font: 30px/34px 'Leksa';
+        @include font-smoothing;
+        margin: 75px 0 30px;
+        color: $col-black;
+    }
+    &__subtitle {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-black-6;
+        margin: 0 0 10px;
 
-        @media (max-width: 375px) {
-            width: 163px;
-        }
+        &_checkbox { margin: 0; }
     }
 
-    &_item {
+    &__wrap {
+        margin: 0 0 20px;
+        &_last { margin: 0 0 30px; }
+    }
+    &__field {
         width: 100%;
+        height: 44px;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        padding: 0 15px;
+        transition: border-color .2s linear;
+        @include fw18-24;
+        &::-webkit-input-placeholder { color: #999a9b; }
+        &::-moz-placeholder { color: #999a9b; }      
+        &:-moz-placeholder { color: #999a9b; }    
+        &:-ms-input-placeholder { color: #999a9b; }
 
-        &_title--discription {
-            font: 15px/19px 'Montserrat';
-            color: #606060;
-            @include font-smoothing();
-            margin-bottom: 30px;
-        }
-
-        &_title {
-            font: 15px/19px 'Montserrat';
-            color: #1c1c1c;
-            @include font-smoothing();
-            margin-bottom: 10px;
-
-            &--time {
-                line-height: 18px;
-                margin-bottom: 16px;
-            }
-
-            &--refinement {
-                margin: 0;
-            }
-
-            &--flat {
-                font: 18px/30px 'Montserrat';
-                color: #1c1c1c;
-                margin-bottom: 40px;
-
-                @media (max-width: 395px) {
-                    max-width: 255px;
-                }
-            }
-        }
-
-        &_field {
-            height: 40px;
-            box-sizing: border-box;
-            border-radius: 5px;
-            background: #f7f7f7;
-            border: 1px solid #d8d8d8;
-            display: flex;
-            align-items: center;
-            padding-left: 20px;
-            font: 15px 'Montserrat';
-            color: #2e2e2e;
-            @include font-smoothing();
-            outline: none;
-            margin-bottom: 30px;
-
-            &:focus {
-                border-color: #cda571;
-            }
-
-            &:not(.form_item_field--time) {
-                width: 100%;
-            }
-
-            &--time {
-                width: 80px;
-                pointer-events: none;
-            }
-
-            
-        }
-
-        &_wrap {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &--first {
-                margin-bottom: 5px;
-            }
-
-            // @media (max-width: 425px) {
-            //     margin-bottom: 30px;
-            // }
-        }
-
-        &_click {
-            display: none;
-
-            &:checked + .form_item_visualization {
-                background: #cda571;
-
-                &:before {
-                    opacity: 1;
-                }
-            }
-        }
-
-        &_visualization {
-            box-sizing: border-box;
-            border: 1px solid #d8d8d8;
-            position: relative;
-
-            &:not(.form_item_visualization--checkbox) {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-
-                &:before {
-                    width: 8px;
-                    height: 8px;
-                    background: #2e2e2e;
-                    border-radius: 50%;
-                }
-            }
-
-            &--checkbox {
-                width: 16px;
-                height: 16px;
-                border-radius: 1px;
-                position: relative;
-
-                &:before {
-                    width: 16px;
-                    height: 16px;
-                    position: absolute;
-                    left: -1px;
-                    top: -1px;
-                    background: url('/assets/img/flats/search/v.svg') no-repeat;
-                    background-size: 100%;
-                }
-            }
-
-            &:before {
-                content: '';
-                position: absolute;
-                top: -1px;
-                left: -1px;
-                bottom: 0;
-                right: 0;
-                margin: auto;
-                opacity: 0;
-            }
-        }
-
-        &_refinement {
-            width: calc(100% - 32px);
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            padding-top: 2px;
-
-            &_text {
-                font: 13px 'Montserrat', sans-serif;
-                color: #888aa1;
-                @include font-smoothing();
-            }
-        }
-
-        &_agreement {
-            font: 12px/22px 'Montserrat', sans-serif;
-            color: #606060;
-            @include font-smoothing();
-
-            a {
-                color: #606060;
-                text-decoration: underline;
-            }
-        }
-
-        &_btn {
-            width: 217px;
-            height: 50px;
-            border-radius: 5px;
-            background: #cda571;
-            transition: .2s linear;
-            position: relative;
-            outline: none;
-            border: none;
-            margin: 30px 0 0;
-    
-            &_text {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font: bold 18px 'Montserrat';
-                color: #ffffff;
-                @include font-smoothing();
-                white-space: nowrap;
-            }
-
-            @media (max-width: 425px) {
-                width: 100%;
-            }
-        }
-    
-        &_svg {
-            width: 20px;
-            height: 17px;
+        &_not-valid { border-color: #d8241d; }
+        &_time {
+            width: 78px;
             position: absolute;
-            top: 15px;
-            left: 46px;
-    
-            &_figure {
-                fill: none;
-                stroke: #404040;
-                stroke-width: 3;
-                stroke-miterlimit: 10;
-                stroke-dasharray: 30px;
-                animation: svg-animate .5s linear forwards;
+            top: calc(100% + 10px);
+            left: 30px;
+            pointer-events: none;
+            padding: 0 15px;
+        }
+
+
+    }
+
+    &__radio {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 1px solid #d9d9d9;
+        cursor: pointer;
+        position: relative;
+        transition: .2s linear;
+        margin-right: 10px;
+
+        &:before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transition: .2s linear;
+            opacity: 0;
+        }
+
+        &-wrap {
+            display: flex;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            margin: 0 0 20px;
+            &_time { margin: 0 0 104px; }
+            
+            input {
+                &:not(.form-request__field) { display: none; }
+                &:checked {
+                    & + .form-request__radio{
+                        background: $col-orange;
+                        border-color: $col-orange;
+                        &:before { opacity: 1; }
+                    }
+                }
+            }
+        }
+        &-text {
+            font: 500 14px/20px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+
+            &_remark {
+                display: block;
+                color: rgba(0, 1, 5, 0.39);
+            }
+        }
+
+    }
+
+    &__checkbox {
+        margin: 0 10px 0 0;
+
+        &-wrap {
+            display: flex;
+            align-items: center;
+            margin: 0 0 30px;
+
+            input {
+                display: none;
+                &:checked + .form-request__checkbox {
+                    background: url(/assets/img/check.svg) center no-repeat $col-orange;
+                    border-color: $col-orange;
+                }
             }
         }
     }
+    
+    &__btn {
+        width: 100%;
+        height: 50px;
+        font: 500 16px/20px $font-mus;
+        @include font-smoothing;
+        color: #fff;
+        background-color: $col-orange;
+        text-transform: uppercase;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+        letter-spacing: .5px;
+    }
 }
 
-@keyframes svg-animate {
-    0% {
-        stroke-dashoffset: 30px;
-    }
-
-    100% {
-        stroke-dashoffset: 0;
-    }
+.time-input-active {
+    pointer-events: auto !important;
 }
-

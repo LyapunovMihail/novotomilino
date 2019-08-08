@@ -33,7 +33,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     template: `
         <div class="ghm-range-number">
             <div class="ghm-slider">
-        
                 <div class="ghm-fill"></div>
         
                 <div class="ghm-runner ghm-runner--first"
@@ -45,7 +44,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
                     [style.left.px]="secondLeft"
                     (mousedown)="mouseDown($event, 'second')">
                 </div>
-
             </div>
         </div>
     `

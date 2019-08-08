@@ -47,7 +47,7 @@
         &-btn {
             width: 290px;
             height: 50px;
-            font: 500 16px/20px $font-mus;
+            font: 500 16px/50px $font-mus;
             @include font-smoothing;
             color: #fff;
             letter-spacing: .5px;
@@ -56,6 +56,7 @@
             border-radius: 4px;
             box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
             animation: bg-col 6s infinite;
+            text-align: center;
         }
     }
 

@@ -1,25 +1,38 @@
-<div class="search_output with-scroll">
+<div class="search-output with-scroll">
 
-    <span class="search_output_text">Найдено {{flatsCount()}} квартир</span>
+    <h1 class="search-output__title">Найдено {{flatsCount()}} квартир</h1>
 
-    <div class="search_output_scroll-wrap">
+    <div class="search-output__result">
+        <div class="search-output__empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
-        <div class="search_output_result">
-            <div class="search_output_empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
-
-            <a *ngFor="let flat of flatsList" [routerLink]="['/flats/section/' + flat.section + '/floor/' + flat.floor + '/apartment/' + flat.flat]" class="search_output_result_item">
-                <img class="search_output_result_item_scheme" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
-                <span class="search_output_result_item_content search_output_result_item_content--number">№{{flat.flat}}</span>
-                <span class="search_output_result_item_content search_output_result_item_content--section">Секция {{flat.section}}</span>
-                <span class="search_output_result_item_content search_output_result_item_content--floor">{{flat.floor}} этаж из {{flat.section | mySearchOutputPipe}}</span>
-                <span class="search_output_result_item_content search_output_result_item_content--type">{{flat.type}}.</span>
-                <span class="search_output_result_item_content search_output_result_item_content--room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
-                <span class="search_output_result_item_content search_output_result_item_content--size">{{flat.space}} м²</span>
-                <span class="search_output_result_item_content search_output_result_item_content--decoration">{{flat.decorationName}}</span>
-                <span class="search_output_result_item_content search_output_result_item_content--price">{{flat.price | myBitNumberPipe}} &#8381;</span>
+        <div *ngFor="let flat of flatsList" class="search-output__result-wrap">
+            <a [routerLink]="['/flats/section/' + flat.section + '/floor/' + flat.floor + '/apartment/' + flat.flat]" class="search-output__result-item">
+                <div class="search-output__result-item-img">
+                    <img class="search-output__result-item-scheme" 
+                         [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+                </div>
+                <span class="search-output__result-item-content search-output__result-item-content_room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
+                <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
+                <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
+                <!-- Нужен корпус а не секция -->
+                <span class="search-output__result-item-content search-output__result-item-content_section">Секция {{flat.section}}</span>
+                <!-- /Нужен корпус а не секция -->
+                <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
+                <span class="search-output__result-item-price">
+                    <span class="search-output__result-item-content 
+                                 search-output__result-item-content_price
+                                 search-output__result-item-content_price-not-sale">
+                        {{flat.price | myBitNumberPipe}} &#8381;
+                        <!-- 
+                            Класс "search-output__result-item-content_price-not-sale" отвечает за стили нескидочной цены,
+                            когда установленна скидка
+                         -->
+                    </span>
+                    <span class="search-output__result-item-content search-output__result-item-content_price-sale">{{flat.price | myBitNumberPipe}} &#8381;</span>
+                </span>
             </a>
+            <div class="search-output__result-item-favorite"></div>
         </div>
-
     </div>
 
 </div>

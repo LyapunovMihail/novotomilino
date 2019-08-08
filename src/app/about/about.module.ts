@@ -7,9 +7,17 @@ import { AboutComponent } from './about.component';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GHMTextAreaModule } from './../UI/ghm-textarea/ghm-textarea.module';
+import { AboutGenplanComponent } from './genplan/about-genplan.component';
+import { AboutProjectComponent } from './project/about-project.component';
+import { AboutGalleryComponent } from './gallery/about-gallery.component';
+import { AboutGalleryAdminComponent } from './gallery/gallery-admin/about-gallery-admin.component';
 
 const AboutComponents = [
     AboutComponent,
+    AboutGenplanComponent,
+    AboutProjectComponent,
+    AboutGalleryComponent,
+    AboutGalleryAdminComponent,
     AboutBuilderComponent,
     AboutMembersComponent,
     AboutDocumentationComponent

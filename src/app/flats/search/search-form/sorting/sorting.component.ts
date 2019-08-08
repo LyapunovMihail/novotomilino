@@ -21,18 +21,17 @@ export class SearchSortingComponent {
     public sortList = [
         {
             name: 'price',
+            text: 'По цене',
             value: false
         },
         {
             name: 'space',
+            text: 'По площади',
             value: false
         },
         {
             name: 'floor',
-            value: false
-        },
-        {
-            name: 'section',
+            text: 'По этажу',
             value: false
         }
     ];

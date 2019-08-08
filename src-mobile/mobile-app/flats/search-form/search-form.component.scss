@@ -1,8 +1,4 @@
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-}
+@import "../../../styles/modules/mixins/mixin.scss";
 
 :host {
     width: 100%;
@@ -10,255 +6,180 @@
     justify-content: center;
 }
 
-.search {
+.search-form {
+    width: calc(100% - 60px);
+    max-width: 768px;
+    display: flex;
+    flex-flow: row wrap;
     position: relative;
     box-sizing: border-box;
+    padding: 60px 0 0;
+    @media (max-width: 767px) { width: calc(100% - 30px); }
 
-    &:before {
-        content: '';
-        width: 100vw;
-        height: 1px;
-        background: rgba(136,138,161,.4);
-        position: absolute;
-        bottom: 0;
-    }
-
-    @media(min-width: 600px) {
-        width: 560px;
-        padding: calc(73px + 80px) 0 10px;
-
-        &:before {
-            left: calc((-100vw + 560px) / 2);
-        }
-    }
-
-    @media(max-width: 599px) {
+    &__container {
         width: 100%;
-        padding: calc(73px + 60px) 10px 10px;
-
-        &:before {
-            left: 0;
-        }
-    }
-
-    &_container {
-        margin-bottom: 29px;
+        margin-bottom: 50px;
         user-select: none;
-    }
 
-    &_wrapper {
-        display: flex;
-
-        @media(max-width: 599px) {
-            flex-direction: column;
-        }
-
-        &__decoration {
-            margin: 0 20px 20px 0;
-        }
-
-        .search_container {
-
-            @media(min-width: 600px) {
-                width: 50%;
-            }
-        }
-    }
-
-    &_title {
-        font: 42px/50px 'Oranienbaum';
-        color: #1c1c1c;
-        @include font-smoothing();
-        margin-bottom: 40px;
-        width: 100%;
-
-        @media (max-width: 425px) {
-            max-width: 292px;
-        }
-    }
-
-    &_section-name {
-        font: 15px 'Montserrat';
-        color: #1c1c1c;
-        @include font-smoothing();
-        margin-bottom: 10px;
-        display: block;
-        width: 100%;
-    }
-
-    .search_form_range-text {
-        font: 15px 'Montserrat';
-        color: #606060;
-        @include font-smoothing();
-        display: block;
-        width: 100%;
-    }
-
-    &_rooms {
-        display: flex;
-
-        &_item {
-
-            &:nth-of-type(2) {
-                
-                .search_rooms_checkbox_for-click {
-                    border-left: 1px solid #d9d9d9;
-                }
-            }
-
-            &:first-of-type {
-
-                .search_rooms_checkbox {
-                    border-radius: 2px 0 0 2px;
-                    border-left: 1px solid #d9d9d9;
-                    clip-path: border-box;
-                    padding-right: 36px !important;
-                    z-index: 1 !important;
-                    margin-right: -20px;
-                    -webkit-clip-path: inset(0 0 0 0 round 2px);
-                    clip-path: inset(0 0 0 0 round 2px );
-                }
-            }
-
-            &:last-of-type {
-
-                .search_rooms_checkbox {
-                    border-radius: 0 2px 2px 0;
-                    clip-path: border-box;
-                    padding-left: 36px !important;
-                    z-index: 1 !important;
-                    margin-left: -20px;
-                    -webkit-clip-path: inset(0 0 0 0 round 2px);
-                    clip-path: inset(0 0 0 0 round 2px );
-                }
-            }
-        }
-
-        &_checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            padding: 0 16px;
-            height: 40px;
-            min-width: 40px;
+        &_corpus {
+            width: calc(50% - 20px);
             position: relative;
-            z-index: 2;
-            // overflow: hidden;
-            background: white;
-            cursor: pointer;
-            border: 1px solid #d9d9d9;
-            border-left: none;
-            user-select: none;
-
-            &_content {
-                display: none;
-
-                &:checked {
-
-                    & + .search_rooms_checkbox_for-click {
-                        background: #cda571;
-                    }
-
-                    & ~ .search_rooms_checkbox_text {
-                        color: #fff;
-                    }
-                }
+            @media (max-width: 768px) { width: 100%; }
+            
+        }
+        &_room {
+            width: 50%;
+            min-width: 290px;
+            margin-right: 20px;
+            @media (max-width: 768px) {
+                width: 100%;
+                margin-right: 0;
             }
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    &__form-text { @include fw18-24; }
+    &__section-name {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing();
+        color: $col-black-7;
+        margin-bottom: 10px;
+    }
+
+    &__rooms {
+        display: flex;
+        
+        &-checkbox {
 
             &_for-click {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                transition: .2s linear;
-            }
-
-            &_text {
+                width: 58px;
+                height: 58px;
+                border: 1px solid $col-97;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
                 position: relative;
                 z-index: 1;
-                font: 15px 'Montserrat';
-                color: #606060;
-                @include font-smoothing();
-                transition: .2s linear;
+                transition: background-color $transition;
+                cursor: pointer;
+                @media (max-width: 767px) {
+                    width: 52px;
+                    height: 52px;
+                }
+            }
+            input { display: none; }
+            input:checked + &_for-click {
+                background-color: $col-orange;
+                border-color: $col-orange;
+                border-left-color: #fff;
+                z-index: 0;
+                color: #fff;
+            }
+            input:checked + &_for-click-first {
+                border-left-color: $col-orange;
             }
         }
-    }
-
-    &_decoration {
-        .search_list_item {
-            margin-bottom: 8px;
+        &-item {
+            &:first-child { .search-form__rooms-checkbox_for-click { border-radius: 2px 0 0 2px; } }
+            &:last-child {
+                .search-form__rooms-checkbox_for-click {
+                    width: auto;
+                    padding: 0 22px;
+                    border-radius: 0 2px 2px 0;
+                    @media (max-width: 767px) { padding: 0 10px; }
+                }
+            }
+            &:nth-child(2) { transform: translateX(-1px); }
+            &:nth-child(3) { transform: translateX(-2px); }
+            &:nth-child(4) { transform: translateX(-3px); }
+            // &:nth-child(5) { transform: translateX(-4px); }
         }
     }
-
-    &_list_item {
-
-        &:last-of-type {
-            margin: 0 !important;
+    &__corpus {
+        position: absolute;
+        width: calc(100vw - 30px);
+        max-width: 394px;
+        height: 338px;
+        background: #fff;
+        right: 0;
+        top: calc(100% + 10px);
+        border-radius: 2px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        box-sizing: border-box;
+        padding: 22px 20px 15px;
+        transition: .2s linear;
+        cursor: default;
+        @media (max-width: 767px) {
+            height: auto;
+            
+            &-wrap svg {
+                display: none;
+            }
         }
-        
-        &_wrap {
+
+        &-check {
             display: flex;
-            align-items: center;
-        }
+            margin: 0 0 14px;
 
-        &_checkbox {
-            display: none;
-
-            &:checked {
-                
-                & + .search_list_item_visualization {
-                    background: #cda571;
-
-                    &:before {
-                        opacity: 1;
-                    }
-                }
-
-                & ~ .search_list_item_text {
-                    color: #2e2e2e;
+            input {
+                display: none;
+                &:checked + .search-form__corpus-checkbox {
+                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
+                    border-color: #e7490f;
                 }
             }
         }
+        &-text,
+        &-checkbox {
+            transition: color $transition, border-color $transition;
+            cursor: pointer;
+        }
+        &-text { @include fw18-24(); }
+    }
 
-        &_visualization {
-            width: 20px;
-            height: 20px;
-            box-sizing: border-box;
-            border: 1px solid #d8d8d8;
-            border-radius: 1px;
-            position: relative;
-            margin-right: 8px;
+    &__range {
+        width: 100%;
+        height: 58px;
+        box-sizing: border-box;
+        padding: 0 15px;
+        border-radius: 2px 2px 0 0;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
 
+        &_corpus {
             &:before {
                 content: '';
-                width: 20px;
-                height: 20px;
-                background: url('/assets/img/flats/search/v.svg') no-repeat;
-                background-size: 100%;
+                width: 14px;
+                height: 16px;
                 position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                margin: auto;
-                opacity: 0;
+                top: 20px;
+                right: 15px;
+                background: url(/assets/img/btn_next_grey.svg) no-repeat;
+                background-size: 8px 15px;
+                transform: rotate(-90deg);
             }
-        }
-
-        &_text {
-            font: 15px 'abrade-book', sans-serif;
-            color: #888aa1;
-            @include font-smoothing();
         }
     }
 
-    &_sections {
-        width: 200px;
-        height: 237px;
-        // margin: -26px 0 0 26px;
-        // background: url('/assets/mobile/img/flats/sections.svg') no-repeat;
-        // background-size: 100%; 
+    &__decoration {
+        .search_list_item {
+            margin-bottom: 84px;
+        }
+    }
+
+    &__reset-btn {
+        @include f16-24;
+        color: rgba(0, 1, 5, 0.8);
+        background-color: #fff;
     }
 }

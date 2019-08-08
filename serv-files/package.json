@@ -1,8 +1,8 @@
 {
-  "name": "barviha-api",
+  "name": "novotomilino-api",
   "version": "1.0.0",
-  "description": "barviha-api",
-  "author": "pichuser",
+  "description": "novotomilino-api",
+  "author": "mlyapunov",
   "license": "MIT",
   "scripts": {
     "build:prod": "rimraf dist && cpx yarn.lock dist && cpx package.json dist && npm run webpack",

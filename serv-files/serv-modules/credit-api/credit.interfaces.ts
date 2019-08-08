@@ -4,14 +4,15 @@ export const CREDIT_UPLOADS_PATH = 'uploads/credit/';
 
 export interface ICreditSnippet {
     _id?: any;
+    name: string;
     image: string;
-    percent: string;
-    category: SnippetCategoryEnum;
-    initial: string;
+    cssclass: string;
+    percent: number;
+    initial: number;
+    deadline: number;
+    military: boolean;
+    maternal: boolean;
+    nationality: boolean;
+    active: boolean;
     created_at: string;
-}
-
-export enum SnippetCategoryEnum {
-    BASE = 'base',
-    MILITARY = 'military'
 }
