@@ -2,25 +2,24 @@
 
 
 
-.shares-list{
-    // width: 1200px;
-    // min-height: 100%;
-    // margin: 136px auto 150px;
+.shares-list {
 
-    &__content{
+    &__content {
         width: 100%;
         position: relative;
+        display: flex;
     }
 
     &__item {
         width: 287px;
         margin: 0 30px 40px 0;
         position: relative;
+        cursor: pointer;
         &:nth-child(6n),
         &:nth-child(6n + 1) { width: 606px; }
         &:nth-child(3n) { margin: 0 0 40px; }
-        &:hover .news__snippets-img img { transform: scale(1.1); }
-        &:hover .news__snippets-descr-title { color: $col-orange; }
+        &:hover .shares-list__item-img img { transform: scale(1.1); }
+        &:hover .shares-list__item-descr-title { color: $col-orange; }
         @media (max-width: 1279px) {
             width: calc(50% - 15px);
             &:nth-child(3n + 1) {
@@ -59,7 +58,7 @@
                 object-fit: cover;
                 transform: scale(1);
                 will-change: transform;
-                transition: transform 0.7s linear;
+                transition: $trans-img;
             }
         }
         &-end {
@@ -107,6 +106,17 @@
                 color: $col-black;
                 margin: 0 0 10px;
                 transition: 0.2s linear;
+                position: relative;
+                padding: 0 0 0 33px;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 27px;
+                    height: 15px;
+                    top: calc(50% - 8px);
+                    left: 0;
+                    background: url(/assets/img/stock-ic.svg) no-repeat;
+                }
             }
             &-text {
                 font: 16px/24px $font-mus;

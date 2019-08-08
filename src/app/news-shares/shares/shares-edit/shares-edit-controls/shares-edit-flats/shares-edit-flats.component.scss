@@ -113,9 +113,12 @@
             align-items: flex-end;
         }
         &-result {
+            @include fw18-24;
             width: 230px;
             height: 46px;
             border: 1px solid #979797;
+            box-sizing: border-box;
+            padding: 0 10px;
         }
         &-delete {
             width: 107px;
