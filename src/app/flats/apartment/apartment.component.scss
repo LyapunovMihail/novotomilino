@@ -1,209 +1,264 @@
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-$font: 15px/23px 'Montserrat'; 
-$color: #ffffff;
+@import "../../../styles/modules/mixins/mixin";
 
 .apartment {
+    width: 1088px;
+    height: 606px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: #ffffff;
+    background: #fff;
     position: relative;
 
-    &-btn {
-        font: 18px/30px 'Montserrat', sans-serif;
-        color: #cda571;
-        @include font-smoothing();
-        position: relative;
+    &__modal {
+        padding: 60px 0;
         box-sizing: border-box;
-        padding-left: 30px;
-        margin-bottom: 20px;
-        user-select: none;
-
-        &:hover {
-            font-weight: bold;
-        }
-
-        &:after {
-            content: '';
-            width: calc(100% - 30px);
-            height: 1px;
-            background: #cda571;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            transition: .2s all linear;
-        }
-
-        &_favorite {
-            cursor: pointer;
-
-            &:before {
-                content: '';
-                width: 20px;
-                height: 21px;
-                background: url('/assets/img/favorite.svg') no-repeat;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-
-            &_active {
-                &:before {
-                    background: url('/assets/img/favorite-active.svg') no-repeat;
-                }
-            }
-        }
-
-        &_pdf {
-            &:before {
-                content: '';
-                width: 20px;
-                height: 21px;
-                background: url('/assets/img/pdf.svg') no-repeat;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-        }
-    }
-
-    &_request-list {
-        // height: 50px;
-        // width: 100%;
-        // position: absolute;
-        // top: 65px;
-        // left: 0;
-        // background: #83D6F4;
-        // display: flex;
-        // justify-content: center;
-        // z-index: 100;
-
-        &_item {
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font: 18px 'Montserrat';
-            font-weight: bold;
-            color: #2E2E2E;
-            @include font-smoothing();
-            box-sizing: border-box;
-            position: relative;
-            border: 2px solid #cda571;
-            border-radius: 5px;
-            transition: .3s linear;
-
-            &:hover {
-                background-color: #cda571;
-                color: white
-            }
-
-            &:before {
-                content: '';
-                height: 20px;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-                background-size: 100%;
-            }
-
-            &--book-request {
-                width: 279px;
-                margin: 30px 0 10px 0;
-            }
-
-            &--credit-request {
-                width: 212px;
-            }
-
-            &--call-request {
-                margin: 0;
-
-                &:before {
-                    width: 14px;
-                    background: url('/assets/img/flats/apartment/call-request.svg') no-repeat;
-                }
-            }
-        }
-    }
-
-    &_item {
-        position: relative;
-        display: flex;
-        height: 70%;
-        width: 50vh;
-
-        &_scheme {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-        }
-    }
-}
-
-.flats_item-description {
-    width: 315px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-58%);
-    left: calc(100% + 50px);
-
-    &_download {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    &_number {
-        width: 100px;
-        height: 50px;
-        background-size: 100%;
-        display: flex;
-        justify-content: center;
         align-items: center;
-        font: 18px/22px 'Montserrat', sans-serif;
-        font-weight: bold;
-        color: $color;
-        @include font-smoothing();
-        margin-bottom: 20px;
-        position: relative;
+    }
+
+    &__elements {
+        width: 0;
+        height: 0;
+
+        &-cls {
+            position: absolute;
+            right: -80px;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: url(/assets/img/cls_white.svg) 50% 49% no-repeat;
+            background-size: 20px;
+            transition: border-color $transition;
+            &:hover { border-color: #fff; }
+        }
+        &-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+            p {
+                font: 500 16px/23px $font-mus;
+                @include font-smoothing;
+                color: #fff;
+            }
+            &_prev { left: - 70px; }
+            &_next { right: -70px; }
+        }
+        &-prev,
+        &-next {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.2s linear;
+            margin: 0 0 5px;
+            &:hover {
+                border-color: #fff;
+                background-position: calc(50% - 3px);
+            }
+        }
+        &-prev { background: url(/assets/img/btn_next_white.svg) 50% 49% no-repeat; }
+        &-next {
+            background: url(/assets/img/btn_next_white.svg) 50% 49% no-repeat;
+            transform: rotate(180deg);
+        }
+
+        &-compass {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    }
+
+    &__info {
+        width: calc(100% - 559px);
+        box-sizing: border-box;
+        padding: 40px 30px 0 40px;
+
+        &-subtitle {
+            font: 500 14px/20px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, .6);
+            margin: 0 0 5px;
+        }
+
+        &-nav {
+            margin: 0 0 10px;
+
+            &-list {
+                display: flex;
+                list-style: none;
+                font: 500 9px/15px $font-mus;
+                @include font-smoothing;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: #323232;
+            }
+            &-item {
+                position: relative;
+                margin: 0 9.5px 5px 0;
+                &:last-child { &:before { display: none; } }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    right: -7PX;
+                    top: 2.9px;
+                    width: 6px;
+                    height: 8px;
+                    transform: rotate(180deg);
+                    background: url(/assets/img/btn_next_grey.svg) no-repeat;
+                    background-size: 6px 8px;
+                }
+            }
+        }
+
+        &-title {
+            font: 42px/46px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 41px;
+        }
+
+        &-descr {
+            width: 100%;
+            display: flex;
+            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+            padding: 0 0 10px;
+            margin: 0 0 30px;
+
+            &-item {
+                margin: 0 45px 0 0;
+                &:last-child { margin: 0; }
+            }
+
+            &-value {
+                font: 500 20px/24px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+            }
+        }
+
+        &-price {
+            margin: 0 0 30px;
+
+            &-value {
+                font: 500 36px/40px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+
+                &_sale {
+                    position: relative;
+                    color: $col-orange;
+                    padding: 0 0 0 32px;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 12px;
+                        width: 27px;
+                        height: 15px;
+                        background: url(/assets/img/stock-ic.svg) no-repeat;
+                        background-size: 100%;
+                    }
+                }
+                &_not-sale {
+                    text-decoration: line-through;
+                    color: #999a9b;
+                }
+            }
+        }
 
         &-text {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            width: calc(100% - 30px);
+            @include f16-24(rgba(0, 1, 5, 0.8));
         }
-        &-img {
-            width: 100%;
+
+        &-btn {
+            position: absolute;
+            left: 40px;
+            bottom: 40px;
+
+            &-reserve,
+            &-credit {
+                width: 210px;
+                height: 50px;
+                border-radius: 4px;
+                font: 500 16px/20px $font-mus;
+                @include font-smoothing;
+                letter-spacing: .5px;
+                text-transform: uppercase;
+                box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+            }
+            &-reserve {
+                color: #fff;
+                background-color: $col-orange;
+                margin: 0 20px 0 0;
+            }
+            &-credit { color: $col-orange; }
         }
     }
 
-    &_section {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
+    &__plan {
+        width: 559px;
+        height: 606px;
+        box-sizing: border-box;
+        padding: 40px 30px;
+        background: rgba(170, 171, 34, 0.2);
 
-        &_name {
-            font: 15px 'Montserrat';
-            color: #606060;
-            @include font-smoothing();
-            white-space: nowrap;
+        &-link {
+            margin: 0 0 30px;
+
+            &-dwnld,
+            &-favorite {
+                display: block;
+                position: relative;
+                padding: 0 0 0 30px;
+                cursor: pointer;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 22px;
+                    height: 22px;
+                    left: 0;
+                    top: -1px;
+                }
+            }
+            &-dwnld {
+                margin: 0 0 10px;
+                &:before {
+                    background: url(/assets/img/pdf.svg) no-repeat;
+                    background-size: 22px 22px;
+                }
+            }
+            &-favorite {
+                &:before {
+                    background: url(/assets/img/favorite.svg) no-repeat;
+                    background-size: 100%;
+                }
+                &_active {
+                    &:before {
+                        background: url(/assets/img/favorite-active.svg) no-repeat;
+                        background-size: 100%;
+                    }
+                }
+            }
         }
 
-        &_value {
-            font: 18px 'Montserrat';
-            color: #1c1c1c;
-            @include font-smoothing();
-            white-space: nowrap;
+        &-img {
+            width: 490px;
+            height: 442px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                height: 100%;
+                max-width: 100%;
+            }
         }
     }
 }

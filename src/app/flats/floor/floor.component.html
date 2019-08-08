@@ -1,29 +1,74 @@
-<div class="floor flats_main">
+<div class="floor">
 
-
-    <div class="floor_description">
-
-        <div [innerHTML]="floorSvg | houseSVGSanitizePipe"  class="floor_description_scheme"></div>
-
-        <app-floor-info-window
-            [infoWindow]="infoWindow">
-        </app-floor-info-window>
-
+    <div class="floor__nav">
+        <ul class="floor__nav-list">
+            <li class="floor__nav-item"><a routerLink="/flats/plan" class="floor__nav-item-link">Общий вид</a></li>
+            <!-- Не хватает переменной для корпуса -->
+            <li class="floor__nav-item"><a routerLink="/flats/plan/house" class="floor__nav-item-link">Корпус</a></li>
+            <li class="floor__nav-item"><a class="floor__nav-item-link">Секция {{sectionNumber}}</a></li>
+            <li class="floor__nav-item">Этаж {{floorNumber}}</li>
+        </ul>
     </div>
 
+    <div class="floor__container">
+        <div class="floor__plan">
+            <svg xmlns="http://www.w3.org/2000/svg" width="86" height="355" viewBox="0 0 86 355">
+                <g fill="none" fill-rule="evenodd">
+                    <path fill="#767676" d="M14.83 54.05L7.05 36.5l-2.04-19.09 7.836 17.537z"></path>
+                    <path fill="#D5210D" d="M5.003 17.377l7.844 17.569-2.926.784z"></path>
+                    <path fill="#D5210D" d="M5.031 17.37l2.02 19.129 2.898-.777z"></path>
+                    <text fill="#323232" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" letter-spacing="1" opacity=".6" transform="rotate(-15 -5.263 165.256)">
+                        <tspan x="38.987" y="20.073">С</tspan>
+                    </text>
+                    <g>
+                        <path class="floor__plan_hover" fill="#999A9B" d="M48.138 338.023v-62.247h17.1V355h-57v-16.977h39.9z" opacity=".498"></path>
+                        <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                            <tspan x="14" y="73">Корпус 1</tspan>
+                        </text>
+                        <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                            <tspan x="101" y="73">Корпус 2</tspan>
+                        </text>
+                        <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                            <tspan x="192" y="73">Корпус 3</tspan>
+                        </text>
+                        <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                            <tspan x="282" y="73">Корпус 4</tspan>
+                        </text>
+                        <path class="floor__plan_hover" fill="#999A9B" d="M48.238 262.739v-79.224h17v79.224z" opacity=".498"></path>
+                        <path class="floor__plan_hover" fill="#999A9B" d="M48.238 172.484V93.26h17v79.224z" opacity=".498"></path>
+                        <path class="floor__plan_hover" fill="#999A9B" d="M48.238 80V.776h17V80z" opacity=".498"></path>
+                    </g>
+                </g>
+            </svg>
+        </div>
 
-    <ul class="floor_flats-colors">
-        <li *ngFor="let dot of dottedListMenu" 
-            class="floor_flats-colors_item floor_flats-colors_item--{{dot.mod}}">
-            {{dot.name}}
-        </li>
-    </ul>
+        <div class="floor__description">
+            <div [innerHTML]="floorSvg | houseSVGSanitizePipe"  class="floor__description-scheme"></div>
+        </div>
+
+        <div class="floor__slider">
+            <button class="floor__slider_btn-up"></button>
+
+            <div class="floor__slider_hidden">
+                <ul class="floor__slider-list">
+                    <li *ngFor="let floor of floorSelector" class="floor__slider-item">{{floor}}</li>
+                </ul>
+            </div>
+            <p class="floor__slider-text">Этаж</p>
+
+            <button class="floor__slider_btn-down"></button>
+        </div>
+    </div>
+
+    <app-floor-info-window
+        [infoWindow]="infoWindow">
+    </app-floor-info-window>
 
 </div>
-
+<!-- 
 <app-floor-side-bar
     (svgClick)="svgRouterLink($event)"
     [floorNumber]="floorNumber"
     [sectionNumber]="sectionNumber"
     [floorSelector]="floorSelector">
-</app-floor-side-bar>
+</app-floor-side-bar> -->

@@ -14,6 +14,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public formEvents: any;
     public form: FormGroup;
+    public moreFilter: boolean;
+    public showCorpus: boolean;
 
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 

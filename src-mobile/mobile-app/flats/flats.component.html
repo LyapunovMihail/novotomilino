@@ -11,14 +11,75 @@
         </svg>
     </div>
 
-    <app-search-form (formChange)="formChange($event)"></app-search-form>
-
-    <span *ngIf="counter > 0" class="empty">Найдено {{counter}} квартир</span>
+    <button class="flats__show-filter"></button>
     
-    <span *ngIf="counter === 0" class="empty">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</span>
+    <h1 class="flats__title">Подбор <span>по параметрам</span></h1>
 
+    <div class="flats__filter">
+        <p *ngIf="counter > 0" class="flats__filter-find">Найдено {{counter}} квартир</p>
+        <p *ngIf="counter === 0" class="flats__filter-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
+
+        <div class="flats__filter-wrap">
+            <p class="flats__filter-item flats__filter-item_active">По цене</p>
+            <p class="flats__filter-item">По площади</p>
+            <p class="flats__filter-item">По этажу</p>
+        </div>
+    </div>
+    
+    
+    <app-search-form (formChange)="formChange($event)"></app-search-form>
+    
     <app-search-output [flatsList]="flatsList"></app-search-output>
-
+    
     <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>
-
+    
 </section>
+
+
+<!-- <div class="g-modal-bg flat_modal">
+
+    <div class="flat">
+        <button class="flat__cls-btn"></button>
+        <ul class="flat__nav">
+            <li class="flat__nav-item"><a href="#">Корпус 2</a></li>
+            <li class="flat__nav-item"><a href="#">Секция 12</a></li>
+            <li class="flat__nav-item"><a href="#">Этаж 12</a></li>
+            <li class="flat__nav-item">Квартира 121</li>
+        </ul>
+    
+        <h1 class="flat__title">2 комнатная, №193</h1>
+    
+        <div class="flat__wrap flat__wrap_price">
+            <p class="flat__subtitle">Стоимость</p>
+            <p class="flat__text flat__text_price">4 334 852 Р</p>
+        </div>
+    
+        <div class="flat__wrap_image">
+            <p class="flat__favorite g-link_red">Добавить в избранное</p>
+            <div class="flat__img">
+                <img src="" alt="flat">
+            </div>
+        </div>
+    
+        <div class="flat__info">
+            <div class="flat__info-item .flat__info-decor">
+                <p class="flat__subtitle">Отделка</p>
+                <p class="flat__text">Черновая</p>
+            </div>
+            <div class="flat__info-item .flat__info-square">
+                <p class="flat__subtitle">Площадь</p>
+                <p class="flat__text">71,4 м²</p>
+            </div>
+            <div class="flat__info-item .flat__info-credit">
+                <p class="flat__subtitle">Ипотека от</p>
+                <p class="flat__text">96 000 Р</p>
+            </div>
+        </div>
+    
+        <div class="flat__btn">
+            <button (click)="flatDataForModalForm = flat; isReserveFormOpen = true; scrollLocker.block()" class="flat__btn-reserve">Забронировать</button>
+            <button (click)="flatDataForModalForm = flat; isCreditFormOpen = true; scrollLocker.block()" class="flat__btn-credit">Заявка на ипотеку</button>
+        </div>
+    </div>
+
+</div> -->
