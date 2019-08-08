@@ -130,6 +130,22 @@
     }
 }
 
+.shares__snippets {
+    &-descr-title {
+        position: relative;
+        padding-left: 33px;
+        &:before {
+            content: '';
+            position: absolute;
+            width: 27px;
+            height: 15px;
+            top: calc(50% - 8px);
+            left: 0;
+            background: url(/assets/img/stock-ic.svg) no-repeat;
+        }
+    }
+}
+
 .admin {
     &__add-news,
     &__add-stock {
