@@ -1,15 +1,8 @@
 .shares-wrapper {
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 67px - 51px);
     box-sizing: border-box;
-    padding: 0 0 150px;
-
-    @media(min-width: 600px) {
-        padding-bottom: 182px;
-    }
-
-    @media(min-width: 1220px) {
-        margin: 0 auto;
-        max-width: 550px;
-    }
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
