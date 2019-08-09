@@ -131,8 +131,18 @@
 
     &__map {
         width: 100%;
-        height: calc(100% - 152px);
+        height: calc(100% - 202px);
         @media (max-width: 1279px) { height: 100%; }
+
+        &--routes {
+            width: 100%;
+            height: calc(100% - 202px);
+        }
+
+        &--office {
+            width: 100%;
+            height: calc(100% - 152px);
+        }
     }
 
     &__routes {

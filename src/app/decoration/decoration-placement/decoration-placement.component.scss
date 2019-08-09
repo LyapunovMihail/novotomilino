@@ -24,14 +24,6 @@
         bottom: 58px;
         left: 40px;
         z-index: 3;
-        
-        &_flats {
-            background: url('/assets/img/decoration/variation/flats-icon.svg') 0 no-repeat;
-        }
-
-        &_places {
-            background: url('/assets/img/decoration/variation/places-icon.svg') 0 no-repeat;
-        }
 
         &:before {
             content: '';

@@ -1,9 +1,10 @@
 <ul class="variation">
 
-    <ng-container *ngFor="let item of variationList">
+    <ng-container *ngFor="let item of decorationList">
 
         <app-decoration-variation-item
-            [item]="item">
+            [item]="item"
+            [pageType]="pageType">
         </app-decoration-variation-item>
 
     </ng-container>

@@ -76,7 +76,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach((sub) => {
             sub.unsubscribe();
         });
-
     }
 
     public scrollToOffice() {
