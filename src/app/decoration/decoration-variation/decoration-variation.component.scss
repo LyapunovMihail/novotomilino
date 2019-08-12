@@ -7,8 +7,5 @@
 }
 
 .element-active {
-    width: 960px;
-}
-.element-not-active {
-    width: calc((100% - 960px) / 4);
+    min-width: 960px;
 }
