@@ -1,26 +1,28 @@
+@import "../../../../styles/modules/mixins/mixin";
+
 :host {
-    width: 50%;
+    width: calc(100% / 5);
     height: 100%;
+    transition: width $transition .1s;
 }
 
-.variation-item {
+.variation__item {
     width: 100%;
     height: 100%;
 
-    &__link,
-    &__wrapper,
-    &__bgr {
+    &-link,
+    &-wrapper,
+    &-bgr {
         width: 100%;
         height: 100%;
     }
 
-    &__link {
+    &-link {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         position: relative;
         box-sizing: border-box;
-        padding-left: 45px;
         cursor: pointer;
         user-select: none;
 
@@ -28,79 +30,54 @@
             content: '';
             width: 100%;
             height: 100%;
-            background: rgba(23,23,23,.4);
+            background: rgba(0, 0, 0, .5);
             position: absolute;
             top: 0;
             left: 0;
+            transition: $transition;
             z-index: 1;
         }
 
         &:hover {
+            &:before { background: rgba(0, 0, 0, .1); }
 
-            .variation-item__name {
-                text-shadow: 0 0 8px #ffffff;
-                
-                &:before {
-                    opacity: 0;
-                }
-            }
-
-            .variation-item__bgr {
-                transform: translate(-50%, -50%) scale(1.1);
+            .variation__item-bgr {
+                transform: scale(1.1);
             }
         }
     }
 
-    &__wrapper {
+    &-wrapper {
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 0;
         overflow: hidden;
     }
 
-    &__bgr {
+    &-bgr {
+        max-width: 100%;
+        height: 100%;
         object-fit: cover;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: 1.5s linear;
+        transition: $trans-img;
+        transform: scale(1);
+        will-change: transform;
+        backface-visibility: hidden;
     }
 
-    &__name {
-        font: 16px 'abrade-book', sans-serif;
+    &-name {
+        font: 500 16px/23px $font-mus;
+        @include font-smoothing;
         color: #ffffff;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        backface-visibility: hidden;
+        text-align: center;
         z-index: 2;
         position: relative;
         box-sizing: border-box;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding-left: 52px;
-        background-size: 40px;
-        position: relative;
         transition: .2s linear;
-        
-        &_flats {
-            background: url('/assets/img/decoration/variation/flats-icon.svg') 0 no-repeat;
-        }
 
         &_places {
-            background: url('/assets/img/decoration/variation/places-icon.svg') 0 no-repeat;
-        }
-
-        &:before {
-            content: '';
-            width: calc(100% - 52px);
-            height: 1px;
-            background: #ffffff;
-            position: absolute;
-            bottom: 10px;
-            right: 0;
-            transition: .2s linear;
+            word-break: break-word;
         }
     }
 }

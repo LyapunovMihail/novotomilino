@@ -1,5 +1,9 @@
 <div class="slider__btns">
 
+    <p class="slider__btns-counter">
+        <span>01</span>/<span>06</span>
+    </p>
+
     <div class="slider__btns-item slider__btns-item_prev"
         (click)="(activeIndex > 0) ? changeIndex.emit(activeIndex - 1) : changeIndex.emit(slideList.length - 1)">
     </div>
