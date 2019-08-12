@@ -2,7 +2,7 @@
     <div class="main__preview-slider">
         <div class="main__preview-btn">
             <p class="main__preview-btn-count">
-                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">{{gallerySlides.length}}</span>
+                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">{{gallerySlides.length < 10 ? '0' : ''}}{{gallerySlides.length}}</span>
             </p>
             <button (click)="prevBtn()" class="main__preview-btn-item main__preview-btn-prev"></button>
             <button (click)="nextBtn()" class="main__preview-btn-item main__preview-btn-next"></button>
