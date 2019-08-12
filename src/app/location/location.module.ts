@@ -27,6 +27,7 @@ const LocationComponents = [
             { path: 'location', component: LocationComponent,
                 children: [
                     { path: '', redirectTo: 'routes', pathMatch: 'full' },
+                    { path: 'office', component: LocationRoutesComponent },
                     { path: 'routes', component: LocationRoutesComponent },
                     { path: 'infrastructure', component: LocationInfrastructureComponent },
                 ]}

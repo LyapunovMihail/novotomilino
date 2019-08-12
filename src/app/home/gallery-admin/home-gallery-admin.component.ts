@@ -7,7 +7,7 @@ import {
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 
 @Component({
-    selector: 'app-home-places-admin',
+    selector: 'app-home-gallery-admin',
     templateUrl: './home-gallery-admin.component.html',
     styleUrls: [
         './home-gallery-admin.component.scss'
