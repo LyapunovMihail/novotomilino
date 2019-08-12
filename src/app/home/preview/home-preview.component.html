@@ -1,4 +1,4 @@
-<section class="main__preview">
+<section class="main__preview" *ngIf="gallerySlides">
     <div class="main__preview-slider">
         <div class="main__preview-btn">
             <p class="main__preview-btn-count">
@@ -51,11 +51,11 @@
     </div>
 </section>
 
-<app-home-places-admin class="admin-controll"
+<app-home-gallery-admin class="admin-controll"
     *ngIf="isAuthorizated"
     (galleryChange)="gallerySlides = $event"
     (close)="isShowModalAdmin = false; windowScrollLocker.unblock()"
     [isShowModal]="isShowModalAdmin"
     [gallerySlides]="gallerySlides"
     [type]="'PREVIEW'">
-</app-home-places-admin>
+</app-home-gallery-admin>

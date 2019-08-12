@@ -34,11 +34,11 @@
     </div>
 </section>
 
-<app-home-places-admin class="admin-controll"
+<app-home-gallery-admin class="admin-controll"
     *ngIf="isAuthorizated"
     (galleryChange)="gallerySlides = $event"
     (close)="isShowModalAdmin = false; windowScrollLocker.unblock()"
     [isShowModal]="isShowModalAdmin"
     [gallerySlides]="gallerySlides"
     [type]="'PLACES'">
-</app-home-places-admin>
+</app-home-gallery-admin>

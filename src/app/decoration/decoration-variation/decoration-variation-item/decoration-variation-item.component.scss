@@ -104,3 +104,14 @@
         }
     }
 }
+
+.element-hidden { // Чисто если понадобится сделать анимацию, так бы просто поставил display:none/display:block через Js. Можно переделать как-нибудь по-нормальному, opacity либо z-index либо height width менять и тд.
+    width: 0;
+    height: 0;
+    z-index: 0;
+    opacity: 0;
+}
+
+.element-show {
+    height: 100%;
+}

@@ -58,7 +58,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
     // проверка на корректность url - параметров 'year', 'month'
     public reviseUrlParams(params) {
-        if ( params['month'] &&  params['year'] ) {
+        if ( params['month'] && params['year'] ) {
 
             // удаляем все символы из параметров кроме чисел ( возможно случайно попавшие )
             let month = params['month'].replace(/[^0-9]/g, '');
