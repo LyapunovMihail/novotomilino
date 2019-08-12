@@ -1,7 +1,7 @@
 <div class="slider__btns">
 
     <p class="slider__btns-counter">
-        <span>01</span>/<span>06</span>
+        <span>{{slideList.length < 10 ? '0' : ''}}{{activeIndex + 1}}</span>/<span>{{slideList.length < 10 ? '0' : ''}}{{slideList.length}}</span>
     </p>
 
     <div class="slider__btns-item slider__btns-item_prev"
