@@ -1,13 +1,13 @@
-<li class="variation-item">
+<li class="variation__item">
 
-    <a class="variation-item__link" [routerLink]="[item.url]" [class.element-hidden]="pageType === item.mod">
+    <a class="variation__item-link" [routerLink]="[item.url]" [class.element-hidden]="pageType === item.mod">
         
-        <div class="variation-item__wrapper">
-            <img class="variation-item__bgr" [src]="[item.preview]">
+        <div class="variation__item-wrapper">
+            <img class="variation__item-bgr" [src]="[item.preview]">
         </div>
 
-        <h2 class="variation-item__name variation-item__name_{{item.mod}}"
-            [innerHTML]="[item.name]"></h2>
+        <h1 class="variation__item-name variation__item-name_{{item.mod}}"
+            [innerHTML]="[item.name]"></h1>
     </a>
 
     <div [ngClass]="{ 'element-hidden': pageType !== item.mod,
