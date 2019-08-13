@@ -2,8 +2,9 @@
 
 :host {
     width: calc(100% / 5);
+    min-width: calc((100% - 960px) / 4);
     height: 100%;
-    transition: width $transition .1s;
+    transition: min-width .3s linear .1s, width .3s linear .1s;
 }
 
 .variation__item {
