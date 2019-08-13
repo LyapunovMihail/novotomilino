@@ -1,8 +1,9 @@
 
 
-export let destination = [55.663149, 37.958393]; // Вот сюда сходятся все пути от контрольных точек
+export let destination = [55.65618531858043, 37.92175475135617]; // Вот сюда сходятся все пути от контрольных точек
 
 export let markersConfig = [
+    /* Оставил т.к вдруг придется писать пути для электирчек, если не нужно - удалить
     {
         coords: [55.715760, 37.816980],
         size: [30, 46],
@@ -37,10 +38,12 @@ export let markersConfig = [
         ],
         text: 'На электричке от ст. м. Выхино, 10 минут',
         type: 'polyline'
-    }, {
-        coords: [55.655325, 37.954210],
+    },
+    */
+    {
+        coords: [55.65530489185195, 37.954711361935246],
         size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -10],
         zIndex: 0,
         class: 'marker-content marker-content__bus',
         content: 2,
@@ -50,18 +53,18 @@ export let markersConfig = [
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)'
         },
-        text: 'На маршрутном такси №40 и №9 от ст. м. Котельники, 15 минут',
+        text: 'Москва-Голутвин / Москва-47км до ст. Томилино',
         type: 'bus'
     }, {
-        coords: [55.699627, 37.853663],
+        coords: [55.69964259049116, 37.853376418882235],
         size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -16],
         zIndex: 0,
         class: 'marker-content marker-content__bus',
         content: 3,
         tooltip: '',
         route: {
-            origin: [55.699627, 37.853663],
+            origin: [55.69964259049116, 37.853376418882235],
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)'
         },
@@ -98,25 +101,14 @@ export let markersConfig = [
         text: 'От МКАД через Новорязанское шоссе; 13 км; 25 мин',
         type: 'auto'
     }, {
-        coords: [55.66285513242427, 37.95827876151043],
+        coords: [55.656355158866056, 37.9214221574383],
         size: [50, 74],
-        offset: [-25, -74],
+        offset: [-20, -20],
         zIndex: 0,
         class: 'marker-content marker-content__main-marker',
         content: '',
         tooltip: '',
         title: 'ЖК Новотомилино',
-        text: 'Люберцы городской округ, Томилино пгт',
-        type: 'main'
-    }, {
-        coords: [55.663139, 37.958373],
-        size: [50, 74],
-        offset: [-25, -74],
-        zIndex: 0,
-        class: 'marker-content marker-content__office-marker',
-        content: '',
-        tooltip: '',
-        title: 'Офис продаж',
         text: 'Люберцы городской округ, Томилино пгт',
         type: 'main'
     }
