@@ -117,7 +117,9 @@
 
         &-list {
             width: 100%;
-            max-width: 777px;
+            max-width: 675px;
+            // max-width: 777px;
+            // сделал ширину меньше пока нет "Избранного", если добавиться - удалить "max-width: 675px" и раскомментировать "max-width: 777px"
             display: flex;
             margin: 0;
             padding: 0;
@@ -148,6 +150,18 @@
                 &:hover {
                     &:before {
                         width: 100%;
+                    }
+                }
+                &_active {
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -13px;
+                        width: 100%;
+                        height: 2px;
+                        background: $col-orange;
+                        transition: width .6s ease;
                     }
                 }
             }

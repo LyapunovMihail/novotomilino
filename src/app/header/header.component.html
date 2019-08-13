@@ -17,7 +17,7 @@
         </section>
         <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
             <ul class="header__nav-list">
-                <li class="header__nav-list-item" *ngFor="let link of links">
+                <li [routerLinkActive]="['header__nav-list-item_active']" class="header__nav-list-item" *ngFor="let link of links">
                     <a [routerLink]="link.url">{{link.name}}</a>
                 </li>
             </ul>
