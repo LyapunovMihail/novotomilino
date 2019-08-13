@@ -6,17 +6,6 @@
         [slideList]="slideList">
     </app-decoration-slider>
 
-    <!-- <app-decoration-switch
-        [pageType]="pageType">
-    </app-decoration-switch> -->
-
-    <a class="placement__link"
-        [ngClass]="{
-            'placement__link_places': (pageType === 'places'),
-            'placement__link_flats': (pageType === 'dawn' || pageType === 'sunset')
-        }"
-        [routerLink]="(pageType === 'dawn' || pageType === 'sunset') ? '/decoration/places' : '/decoration/dawn'">
-        {{(pageType === 'dawn' || pageType === 'sunset') ? 'Отделка общедомовых пространств' : 'Отделка квартир'}}
-    </a>
+    <p class="placement__title">{{name}}</p>
 
 </section>

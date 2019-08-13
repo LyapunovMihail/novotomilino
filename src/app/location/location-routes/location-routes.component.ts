@@ -1,6 +1,8 @@
 import { markersConfig, destination } from './config';
 import { PlatformDetectService } from './../../platform-detect.service';
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 declare let ymaps: any;
 declare let $: any;
 
@@ -15,7 +17,7 @@ declare let $: any;
     styleUrls: ['./../location.component.scss']
 })
 
-export class LocationRoutesComponent implements OnInit {
+export class LocationRoutesComponent implements OnInit, OnDestroy {
 
     // номер активного маркера для подсветки нужных маршрутов и ссылок бокового меню
     // берется из config.content
@@ -26,17 +28,37 @@ export class LocationRoutesComponent implements OnInit {
     // временное хранилище маркеров, их конфигов и маршрутов им принадлежащих
     public markers = [];
 
-    constructor (
+    public page: string;
+
+    private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+    constructor(
         private platform: PlatformDetectService,
-        private ref: ChangeDetectorRef
+        private ref: ChangeDetectorRef,
+        private router: Router
     ) { }
 
-    ngOnInit ( ) {
+    ngOnInit() {
+        // если страница офиса, то удаляем главный маркер роутов, если страница роутов, то удаляем главный маркер офиса
+        if (this.router.url === '/location/routes') {
+            markersConfig[markersConfig.length - 1].title = 'ЖК Новотомилино';
+            markersConfig[markersConfig.length - 1].class = 'marker-content marker-content__main-marker';
+            this.page = 'routes';
+        } else if (this.router.url === '/location/office') {
+            markersConfig[markersConfig.length - 1].title = 'Офис продаж';
+            markersConfig[markersConfig.length - 1].class = 'marker-content marker-content__office-marker';
+            this.page = 'office';
+        }
         // инициализация карты
         this.initMap();
     }
 
-    initMap ( ) {
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+
+    initMap() {
         if ( !this.platform.isBrowser ) { return false; }
 
         let that = this;

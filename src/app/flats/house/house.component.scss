@@ -1,187 +1,141 @@
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+@import "../../../styles/modules/mixins/mixin";
 
+// .search { position: static !important; }
 .house {
-    padding: 73px 0 50px;
+    width: 100%;
+    min-height: calc(100vh - 146px);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 65px 0 0;
     box-sizing: border-box;
 
-    &_select-floor {
-        height: calc(100vh - (73px + 50px));
-        min-height: 0;
-        width: 100%;
-        min-width: 177vh;
-        position: relative;
+    &__sections {
+        width: $w1600;
+        height: 774px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 30px;
 
-        &_section-title {
-            font: 15px 'Montserrat';
-            color: #ffffff;
-            @include font-smoothing();
-            position: absolute;
-            box-sizing: border-box;
-            padding-left: 12px;
-            z-index: 10;
-            transition: .2s linear;
-            padding: 6px 15px;
-            border: 1px solid #fff;
-            border-radius: 100px;
-            background: rgba(51, 51, 51, 0.2);
-            
-            &--section-1 {
-                top: 38%;
-                left: 24%;
+        &-plan {
+            display: flex;
+            align-items: flex-end;
+
+            &_wrap { 
+                width: 874px;
+                overflow: hidden;
+                margin: 0 30px 0 0;
+            }
+            &-btn {
+                width: 90px;
+                display: flex;
+                justify-content: space-between;
+
+                &_prev,
+                &_next {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+                    background: url(/assets/img/btn_next_or.svg) 50% no-repeat;
+                    transition: background-position $transition;
+                    &:hover { background-position: calc(50% - 3px); }
+                }
+                &_next { transform: rotate(180deg); }
+            }
+        }
+
+        &-aside {
+            width: 182px;
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+
+            &-plan {
+                &_corpus-one,
+                &_corpus-two,
+                &_corpus-three,
+                &_corpus-four {
+                    transition: fill $transition, stroke $transition;
+                    cursor: pointer;
+                    &:hover {
+                        fill: #E7490F;
+                        stroke: #E7490F;
+                    }
+                }
             }
 
-            &--section-2 {
-                top: 21%;
-                left: 34%;
-            }
+            &-text {
+                @include fw18-24;
+                position: relative;
+                display: flex;
+                margin: 0 0 10px;
+                align-items: center;
+                &:last-child { margin: 0; }
 
-            &--section-3 {
-                top: 8%;
-                left: 50%;
-            }
-
-            &--section-4 {
-                top: 21%;
-                left: 70%;
-            }
-
-            &:before {
-                content: '';
-                width: 11px;
-                height: 11px;
-                background: #cda571;
-                border: 2px solid #ffffff;
-                border-radius: 50%;
-                top: 200%;
-                left: calc(50% - 7.5px);
-                position: absolute;
-                z-index: 1;
-            }
-
-            &:after {
-                content: '';
-                width: 1px;
-                height: 35px;
-                background: rgba(255,255,255,.7);
-                position: absolute;
-                left: calc(50% - 1px);
-                top: 100%;
-            }
-
-            &--active {
-                border: 1px solid #cda571;
-
-                &:after {
-                    background: #cda571;
+                &_free,
+                &_sale,
+                &_reserve {
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 2px;
+                    margin: 0 10px 0 0;
+                    box-sizing: border-box;
+                }
+                &_free { background-color: rgba(0, 1, 5, .1); }
+                &_sale {
+                    color: $col-orange;
+                    border: 1px solid $col-orange;
+                }
+                &_reserve {
+                    border: 1px solid rgba(0, 1, 5, .1);
+                    background: url(/assets/img/flats/house/lock_flat.svg) center no-repeat;
                 }
             }
         }
     }
+}
 
-    &__highlight__menu {
-        position: absolute;
-        left: 2.1%;
-        bottom: 80px;
-        z-index: 100;
+.hover-flat {
+    width: 236px;
+    height: 288px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 2px;
 
-        &-list {
-            display: flex;
+    &__img {
+        width: 100%;
+        height: 210px;
+        background-color: rgba(171, 171, 34, .2);
+        box-sizing: border-box;
+        padding: 20px;
 
-            &_item a {
-                font: bold 18px 'Montserrat';
-                color: #fff;
-                text-decoration: underline;
-            }
+        img {
+            height: 100%;
+            max-width: 100%;
+        }
+    }
+    &__info {
+        width: 100%;
+        height: calc(100% - 210px);
+        box-sizing: border-box;
+        padding: 10px 20px;
+        display: flex;
+        flex-flow: row wrap;
 
-            &_item:first-child {
-                margin: 0 20px 0 0;
+        &-text {
+            @include f16-24(rgba(0, 1, 5, 0.8));
+            &:first-child { width: 100%; }
+            &:nth-child(2) { width: calc(50% + 10px); }
+
+            &_price {
+                font-weight: 500;
+                color: $col-black;
             }
         }
     }
-}
-
-.select-floor_svg_content_item {
-    cursor: pointer;
-
-    &:hover {
-
-        .select-floor_svg_content_item_path {
-            fill: rgba(205, 165, 113, 0.7);
-        }
-    }
-
-    &_path {
-        fill: transparent;
-        transition: .2s linear;
-    }
-
-    .highlight {
-        fill: rgba(242, 231, 213, 0.7);
-    }
-
-    &_circle {
-        fill: #8FE3F9;
-        transition: .2s linear;
-        opacity: 0;
-    }
-
-    &_circle-big {
-        fill: #8FE3F9;
-        transition: .2s linear;
-        opacity: 0;
-    }
-
-    &_circle-white {
-        fill: #ffffff;
-        transition: .2s linear;
-        opacity: 0;
-    }
-}
-
-.house__highlight{
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    width: 372px;
-    height: 50px;
-    bottom: 82px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0);
-    border-radius: 5px;
-    cursor: pointer;
-    border: 2px solid #cda571;
-    z-index: 100;
-
-    &__text{
-        font: 18px/21px 'Montserrat';
-        font-weight: bold;
-        color: #ffffff;
-        @include font-smoothing();
-        position: absolute;
-        cursor: pointer;
-        user-select: none;
-    }
-}
-
-.house__highlight__toggle_active {
-    width: 100%;
-    height: 100%;
-    background: #cda571;
-}
-
-// .house-img-wrapper {
-//     width: 100%;
-//     height: 100%;
-//     padding: 73px 0 50px;
-//     box-sizing: border-box;
-// }
-
-.flats_wrapper {
-    height: calc(100vh - (73px + 50px));
-    min-height: 0;
 }

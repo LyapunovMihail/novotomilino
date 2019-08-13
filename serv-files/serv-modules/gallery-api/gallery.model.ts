@@ -12,8 +12,9 @@ export class GalleryModel {
         this.collection = db.collection(this.collectionName);
     }
 
-    async getSnippet() {
-        return await this.collection.find({}).sort({order: -1}).toArray();
+    async getSnippet(options) {
+        console.log('options: ', options);
+        return await this.collection.find(options).sort({order: -1}).toArray();
     }
 
     async setSnippet(req) {
@@ -32,7 +33,7 @@ export class GalleryModel {
 
         await this.collection.insertOne(snippet);
 
-        return await this.getSnippet();
+        return await this.getSnippet({type: req.headers.type});
     }
 
     async updateImage(req) {
@@ -45,8 +46,9 @@ export class GalleryModel {
                 image: media.image,
                 thumbnail: media.thumbnail
             };
+            const snippet = await this.collection.findOne({ _id : ObjectId(id) });
             await this.collection.update({ _id : ObjectId(id) }, {$set: options });
-            return await this.getSnippet();
+            return await this.getSnippet({type: snippet.type});
         } else {
             throw new Error('Не корректный id.');
         }
@@ -54,36 +56,57 @@ export class GalleryModel {
 
     async deleteSnippet(id) {
         if ( id && ObjectId.isValid(id) ) {
+            const snippet = await this.collection.findOne({ _id : ObjectId(id) });
             await this.collection.deleteOne({ _id : ObjectId(id) });
-            return await this.getSnippet();
+            console.log('snippet: ', snippet);
+            console.log('snippet.type: ', snippet.type);
+            return await this.getSnippet({type: snippet.type});
         } else {
             throw new Error('Не корректный id.');
         }
     }
 
     async changeDescription(id, description) {
-        if ( id && ObjectId.isValid(id) && description && typeof description === 'string' ) {
+        console.log('description: ', description);
+        if ( id && ObjectId.isValid(id) && description !== undefined && typeof description === 'string' ) {
             let date = new Date();
             let options = {
                 last_modifyed: date,
                 description
             };
+            const snippet = await this.collection.findOne({ _id : ObjectId(id) });
             await this.collection.update({ _id : ObjectId(id) }, {$set: options });
-            return await this.getSnippet();
+            return await this.getSnippet({type: snippet.type});
+        } else {
+            throw new Error('Не корректный id.');
+        }
+    }
+
+    async changeName(id, name) {
+        console.log('name: ', name);
+        if ( id && ObjectId.isValid(id) && name !== undefined && typeof name === 'string' ) {
+            let date = new Date();
+            let options = {
+                last_modifyed: date,
+                name
+            };
+            const snippet = await this.collection.findOne({ _id : ObjectId(id) });
+            await this.collection.update({ _id : ObjectId(id) }, {$set: options });
+            return await this.getSnippet({type: snippet.type});
         } else {
             throw new Error('Не корректный id.');
         }
     }
 
     async changeType(id, type) {
-        if ( id && ObjectId.isValid(id) && type) {
+        if ( id && ObjectId.isValid(id) && type !== undefined) {
             let date = new Date();
             let options = {
                 last_modifyed: date,
                 type
             };
             await this.collection.update({ _id : ObjectId(id) }, {$set: options });
-            return await this.getSnippet();
+            return await this.getSnippet({type});
         } else {
             throw new Error('Не корректный id.');
         }

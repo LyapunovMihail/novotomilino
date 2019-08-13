@@ -1,69 +1,100 @@
-<div class="house flats_main">
+<div class="house">
 
-    <div *ngIf="houseResources" class="house_select-floor"> <!-- .flats__wrapper -->
-
-        <ng-container *ngFor="let item of service.sectionMarkers()">
-            <div
-                class="house_select-floor_section-title
-                house_select-floor_section-title--section-{{item.section}}"
-                [ngClass]="{'house_select-floor_section-title--active': hoverSection === item.section}">
-                Секция {{item.section}}
+    <div class="house__sections">
+        <div class="house__sections-plan">
+            <div class="house__sections-plan_wrap">
+                <!-- <ul>
+                    <li>
+                        <img src="/assets/img/flats/house/section_plan.svg" alt="plan">
+                    </li>
+                    <li>
+                        <img src="/assets/img/flats/house/section_plan.svg" alt="plan">
+                    </li>
+                </ul> -->
             </div>
-        </ng-container>
-        
-        <img [src]="houseResources.image" class="house_select-floor_bgr flats_bgr">
-
-        <div id="house-svg-scheme" class="house_select-floor_svg">
-            <svg class="house_select-floor_svg_content flats_svg"
-                 viewBox="-218 -207 1920 880"
-                 preserveAspectRatio="none">
-
-                <g *ngFor="let section of houseResources.svg"
-                    [id]="'section-' + section.count">
-
-                    <g *ngFor="let floor of section.floors"
-                        class="select-floor_svg_content_item"
-                        [attr.data]="'s-' + section.count + '_fl-' + floor.count">
-
-                        <path class="select-floor_svg_content_item_path"
-                            [attr.d]="floor.content"
-                            [ngClass]="{'house__svg__floor_in-sale': floorWithFreeFlats(section.count, floor.count)}"/>
-                        <circle class="select-floor_svg_content_item_circle"
-                                [attr.cx]="floor.cx"
-                                [attr.cy]="floor.cy"
-                                r="6.7"/>
-                        <circle class="select-floor_svg_content_item_circle-big"
-                                [attr.cx]="floor.cx"
-                                [attr.cy]="floor.cy"
-                                r="14.2"/>
-                        <circle class="select-floor_svg_content_item_circle-white"
-                                [attr.cx]="floor.cx"
-                                [attr.cy]="floor.cy"
-                                r="6.7"/>
-                    </g>
-
-                </g>
-
-            </svg>
+            <div class="house__sections-plan-btn">
+                <button class="house__sections-plan-btn_prev"></button>
+                <button class="house__sections-plan-btn_next"></button>
+            </div>
         </div>
-
+        <div class="house__sections-aside">
+            <div class="house__sections-aside-plan">
+                <svg width="171px" height="304px" viewBox="0 0 171 304" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g transform="translate(85.500000, 152.000000) rotate(-90.000000) translate(-85.500000, -152.000000) translate(-66.500000, 66.500000)">
+                            <g transform="translate(243.548069, 111.000000) scale(1, -1) rotate(-15.000000) translate(-243.548069, -111.000000) translate(218.548069, 94.000000)">
+                                <g transform="translate(17.000000, 17.000000) scale(1, -1) rotate(-270.000000) translate(-17.000000, -17.000000) ">
+                                    <polygon fill="#767676" opacity="0.601418" transform="translate(17.000000, 17.000000) rotate(-135.000000) translate(-17.000000, -17.000000) " points="5 5 19.1005051 14.8994949 29 29 14.8578644 19.1421356"></polygon>
+                                    <polygon fill="#D5210D" points="17 0 20.0294373 17 17 17"></polygon>
+                                    <polygon fill="#D5210D" transform="translate(15.529437, 8.500000) scale(1, -1) rotate(-180.000000) translate(-15.529437, -8.500000) " points="14.0294373 0 17.0294373 17 14.0294373 17"></polygon>
+                                </g>
+                                <text opacity="0.6" transform="translate(42.017638, 15.580896) scale(1, -1) rotate(-270.000000) translate(-42.017638, -15.580896) " font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" font-weight="normal" line-spacing="15" letter-spacing="1" fill="#323232">
+                                    <tspan x="37.5048902" y="16.0808962">С</tspan>
+                                </text>
+                            </g>
+                            <g transform="translate(20.000000, 46.238194)">
+                                <g transform="translate(-0.000000, 0.761806)">
+                                    <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                        <tspan x="1.13686838e-12" y="11">Корпус 1</tspan>
+                                    </text>
+                                    <path class="house__sections-aside-plan_corpus-one" fill="#FFFFFF" d="M63.5,37.5 L63.5,22.5 L0.5,22.5 L0.5,53.5 L15.5,53.5 L15.5,37.5 L63.5,37.5 Z" id="Combined-Shape" stroke="#979797"></path>
+                                </g>
+                                <g transform="translate(74.000000, 0.761806)">
+                                    <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                        <tspan x="2.27373675e-13" y="11">Корпус 2</tspan>
+                                    </text>
+                                    <rect class="house__sections-aside-plan_corpus-two" fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                                </g>
+                                <g transform="translate(138.000000, 0.761806)">
+                                    <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                        <tspan x="2.27373675e-13" y="11">Корпус 3</tspan>
+                                    </text>
+                                    <rect class="house__sections-aside-plan_corpus-three" fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                                </g>
+                                <g transform="translate(202.000000, 0.761806)">
+                                    <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                        <tspan x="2.27373675e-13" y="11">Корпус 4</tspan>
+                                    </text>
+                                    <rect class="house__sections-aside-plan_corpus-four" fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="house__sections-notice">
+                <p class="house__sections-aside-text">
+                    <span class="house__sections-aside-text_free">3</span>Свободно
+                </p>
+                <p class="house__sections-aside-text">
+                    <span class="house__sections-aside-text_sale">1</span>Скидка
+                </p>
+                <p class="house__sections-aside-text">
+                    <span class="house__sections-aside-text_reserve"></span>Забронировано
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="house__highlight" (click)="highlightFloors()">
-        <div class="house__highlight__toggle"
-            [ngClass]="{'house__highlight__toggle_active': highlight}"></div>
-        <div class="house__highlight__text">Подсветить свободные квартиры</div>
-
-    </div>
-    <div class="house__highlight__menu">
-        <ul class="house__highlight__menu-list">
-            <li class="house__highlight__menu-list_item"><a routerLink="/parking">Машиноместа</a></li>
-            <li class="house__highlight__menu-list_item"><a routerLink="/storerooms">Кладовки</a></li>
-        </ul>
-    </div>
+    <!--     
+        Это Блок который должен появлятся при наведении на квартиру внутри шахматки
+        
+    <div class="hover-flat">
+        <div class="hover-flat__img">
+            <img src="" alt="">
+        </div>
+        <div class="hover-flat__info">
+            <p class="hover-flat__info-text">2 комнатная</p>
+            <p class="hover-flat__info-text">49.5</p>
+            <p class="hover-flat__info-text hover-flat__info-text_price">8 335 996 Р</p>
+        </div>
+    </div> 
+    -->
+    
+    <app-flats-search></app-flats-search>
 </div>
 
-<app-house-side-bar>
+<!-- <app-house-side-bar>
 </app-house-side-bar>
 
 <app-flats-floor-bubble
@@ -72,3 +103,4 @@
     [floor]="hoverFloor"
     [coords]="bubbleCoords">
 </app-flats-floor-bubble>
+ -->

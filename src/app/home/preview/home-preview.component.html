@@ -1,13 +1,18 @@
-<section class="main__preview">
+<section class="main__preview" *ngIf="gallerySlides">
     <div class="main__preview-slider">
         <div class="main__preview-btn">
             <p class="main__preview-btn-count">
-                <span data-slider-count>0{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">04</span>
+                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">{{gallerySlides.length < 10 ? '0' : ''}}{{gallerySlides.length}}</span>
             </p>
             <button (click)="prevBtn()" class="main__preview-btn-item main__preview-btn-prev"></button>
             <button (click)="nextBtn()" class="main__preview-btn-item main__preview-btn-next"></button>
         </div>
 
+        <div class="main__preview__admin-open-btn"
+             *ngIf="isAuthorizated"
+             (click)="isShowModalAdmin = true; windowScrollLocker.block()">
+            Загрузить
+        </div>
 
         <div class="main__preview-slider-wrap">
             <ul class="main__preview-slider-list"  [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * this.slideWidth ) + 'px)') }">
@@ -21,27 +26,36 @@
 
         <ng-container *ngFor="let item of gallerySlides; let i = index">
             <div *ngIf="currentSlide === i" class="main__preview-slider-descr main__preview-slider-descr_show">
-                <h1 class="main__preview-slider-title g-title-path">{{item.name}}</h1>
-                <p class="main__preview-slider-text">
-                    {{item.description}}
-                </p>
+                <h1 *ngIf="!isAuthorizated" class="main__preview-slider-title g-title-path">{{item.name}}</h1>
+                <textarea (change)="changeName(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__preview-slider-title main__preview-slider-title--edit" [value]="item.name"></textarea>
+                <p *ngIf="!isAuthorizated" class="main__preview-slider-text">{{item.description}}</p>
+                <textarea (change)="changeDescription(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__preview-slider-text main__preview-slider-text--edit" [value]="item.description"></textarea>
             </div>
         </ng-container>
 
-    </div>
-
-    <div class="main__preview-content" >
-        <div class="preview-content__wrap">
-            <a class="preview-content__stock" [routerLink]="['/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
-                <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
-                <p class="g-link_white">{{shareSnippet.text}}</p>
-                <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
-                <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
-            </a>
-            <a class="preview-content__news" [routerLink]="['/news-shares/' + newsSnippet._id]" *ngIf="newsSnippet">
-                <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
-                <p class="g-link_white">{{newsSnippet.description}}</p>
-            </a>
+        <div class="main__preview-content" >
+            <div class="preview-content__wrap">
+                <a class="preview-content__stock" [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
+                    <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
+                    <p class="g-link_white">{{shareSnippet.text}}</p>
+                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
+                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
+                </a>
+                <a class="preview-content__news" [routerLink]="['/news-shares/news/list/' + newsSnippet._id]" *ngIf="newsSnippet">
+                    <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
+                    <p class="g-link_white">{{newsSnippet.description}}</p>
+                </a>
+            </div>
         </div>
+
     </div>
 </section>
+
+<app-home-gallery-admin class="admin-controll"
+    *ngIf="isAuthorizated"
+    (galleryChange)="gallerySlides = $event"
+    (close)="isShowModalAdmin = false; windowScrollLocker.unblock()"
+    [isShowModal]="isShowModalAdmin"
+    [gallerySlides]="gallerySlides"
+    [type]="'PREVIEW'">
+</app-home-gallery-admin>

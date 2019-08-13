@@ -87,7 +87,7 @@ export class DynamicDateComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit() {
         // подписка на авторизацию
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
-            this.isAuthorizated = false;
+            this.isAuthorizated = val;
             this.monthParser(this.year);
             this.ref.detectChanges();
         });
@@ -107,7 +107,7 @@ export class DynamicDateComponent implements OnInit, OnChanges, OnDestroy {
 
     monthParser(year) {
         const activeYear = year;
-        this.monthArray.forEach((item, i) => {
+        this.monthArray.forEach((item) => {
             item.disabled =
                 // если пользователь авторизован, то все месяца будут активны
                 (this.isAuthorizated) ? false : (

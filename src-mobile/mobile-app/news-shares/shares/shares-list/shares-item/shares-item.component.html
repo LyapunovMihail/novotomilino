@@ -1,69 +1,64 @@
-<div *ngIf="share" class="share__wrap">
+<div *ngIf="share" class="news shares-view">
 
-    <div class="share__wrap-container">
-        <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="share__wrap__finishing">{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</div>
-        <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="share__wrap__finishing">Акция закончилась</div>
-        <img [src]="uploadsPath + share.mainImage" class="share__wrap__img" alt="share">
+    <div class="shares-view__nav">
+        <a routerLink="/news-shares/shares/list/1" class="shares-view__nav-back">Все новости</a>
     </div>
 
-    <div class="share__wrap-info">
-        <h1 class="share__wrap__name">{{share.name}}</h1>
-        <span class="share__wrap__text">{{share.text}}</span>
-        <div class="share__wrap__date">Акция продлится до {{share.finish_date | date: 'dd.MM.yyyy'}}</div>
+    <div class="shares-view__header">
+        <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="shares-view__header-finishing">
+            {{countDown(share.finish_date) | sharesDayPipe}} до конца акции
+        </div>
+        <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="shares-view__header-finishing">
+            Акция закончилась
+        </div>
+        <div class="shares-view__header-wrap">
+            <button class="shares-view__header-btn shares-view__header-prev"></button>
+            <button class="shares-view__header-btn shares-view__header-next"></button>
+            <div class="shares-view__header-img">
+                <img [src]="uploadsPath + share.mainImage">
+            </div>
+        </div>
+        <div class="shares-view__content">
+            <h1 class="shares-view__content-title">{{share.name}}</h1>
+            <p class="shares-view__content-text">{{share.text}}</p>
+            <p class="shares-view__content-date">{{share.created_at | date: 'dd.MM.yyyy' }}</p>
+        </div>
     </div>
 
-    <ul class="share__wrap__cnt">
+    <ul class="shares-view__flat flat-list">
         <li *ngFor="let b of share.body; index as blockIndex"
-            [ngSwitch]="b.blockType" class="share__wrap__cnt__item">
-
-            <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image"
-                class="share__wrap__image">
-
-            <article *ngSwitchCase="'description'"
-                class="share__wrap__description">{{b.blockDescription}}</article>
-
-            <ul *ngSwitchCase="'list'" class="share__wrap__list">
-                <li *ngFor="let item of b.blockList" class="share__wrap__list__item">{{item}}</li>
-            </ul>
-
-            <ul *ngSwitchCase="'flats'"  class="share__wrap__flats">
-                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="share__wrap__flats__item">
-                    <div class="share__wrap__number">№ {{flat.number}}</div>
-                    <div class="share__wrap__flats__header">
-                        <div class="share__wrap__house">Секция {{flat.section}}</div>
-                        <div class="share__wrap__flats__house--divider">.</div>
-                        <div class="share__wrap__house">Этаж {{flat.floor}}</div>
-                    </div>
-                    <div class="share__wrap__decoration">{{flat.decoration}}</div>
-                    <img [src]="flat.scheme" class="share__wrap__icon">
-                    <div class="share__wrap__total">{{+flat.price - getDiscount(flat)}} &#8381;</div>
-                    <div class="share__wrap__content">
-                        <div class="share__wrap__price">{{flat.price}} &#8381;</div>
-                        <div class="share__wrap__discount">−{{+flat.discount}}{{flat.discountType === shareFlatDiscountType.PERCENT ? '%' : '&#8381;'}}</div>
-                    </div>
-                    <div (click)="isReserveFormOpen = true; windowScrollLocker.block(); setFlatData(flat)" class="share__wrap__reserve">Забронировать</div>
+            [ngSwitch]="b.blockType">
+            <ul *ngSwitchCase="'flats'"  class="flat-list__item-info">
+                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="flat-list__item flat-list__item_info">
+                    <a href="#" class="flat-list__item_link">
+                        <div class="flat-list__item-img">
+                            <!-- Изображение не работает -->
+                            <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image">
+                        </div>
+    
+                        <div class="flat-list__item-wrap">
+                            <div class="flat-list__item-text flat-list__item-text_room">{{flat.room}}</div> <!-- Должна быть "комнатная" а не "комн." -->
+                            <div class="flat-list__item-text flat-list__item-text_corpus">Секция {{flat.section}}</div> <!-- Должен быть корпус -->
+                            <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
+                        </div>
+                        <div class="flat-list__item-wrap">
+                            <div class="flat-list__item-text flat-list__item-text_space">{{flat.space}} м&#178;</div>
+                            <div class="flat-list__item-price">
+                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{+flat.price - getDiscount(flat)}} &#8381;</div>
+                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price}} &#8381;</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="flat-list__item-favorite"></div>
                 </li>
             </ul>
         </li>
     </ul>
-
-    <h2 class="share__wrap__subscription__title">Я хочу получать уведомления о новых акциях и скидках.</h2>
-
-    <form method="POST" action="https://cp.unisender.com/ru/subscribe?hash=6kdhbz8pihc8duo3ouai9qqu89nqwdpwd5znwppre7cu4fd5dymdo" class="share__wrap__subscription" ngNoForm>
-        <div class="share__wrap__subscription__wrap">
-            <span class="share__wrap__subscription__name">Ваш email</span>
-            <input
-                class="share__wrap__subscription__field"
-                type="text" name="email" value="">
-        </div>
-        <input type="hidden" name="charset" value="UTF-8">
-        <input type="hidden" name="default_list_id" value="17731037">
-        <input type="hidden" name="overwrite" value="2">
-        <input type="hidden" name="is_v5" value="1">
-        <button class="share__wrap__subscription__submit" type="submit">Подписаться</button>
-    </form>
 </div>
 
+<!-- 
+    TODO: Должны быть модалки квартиры и соответственно ипотека/забронировать (08.08.19)
+ -->
 <app-form-reserve *ngIf="setFlatData"
     (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
     [isOpen]="isReserveFormOpen"

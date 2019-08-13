@@ -2,7 +2,7 @@
 <div *ngIf="isAuthorizated" class="admin-dynamic-create-form admin-controll">
 
     <div class="dynamic__create-form">
-        <button class="dynamic__create-form-cls" (click)="clsObject()"></button>
+        <button class="dynamic__create-form-cls" (click)="closeModal.emit(false)"></button>
 
         <h1 class="dynamic__create-form-title">Добавить объект:</h1>
         <p class="dynamic__create-form-text">Введите название нового объекта или выберите из списка</p>

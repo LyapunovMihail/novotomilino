@@ -10,6 +10,8 @@ export let ROOMS_PARAMS: IParams[] = [
     }, {
         content: '3'
     }, {
+        content: '4'
+    }, {
         content: 'студия'
     }
 ];

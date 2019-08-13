@@ -26,6 +26,7 @@
             @include font-smoothing();
             margin-bottom: 10px;
             white-space: nowrap;
+            display: block;
         }
         &-hint {
             margin: 14px 0 0;

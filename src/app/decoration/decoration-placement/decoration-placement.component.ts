@@ -1,58 +1,24 @@
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DecorationService } from '../decoration.service';
-import { Subscription } from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'app-placement',
     templateUrl: './decoration-placement.component.html',
-    styleUrls: ['./decoration-placement.component.scss'],
-    providers: [
-        DecorationService
-    ]
+    styleUrls: ['./decoration-placement.component.scss']
 })
 
-export class DecorationPlacementComponent implements OnInit, OnDestroy {
+export class DecorationPlacementComponent implements OnChanges {
 
-    public slideList = [];
-    public routerEvents: Subscription;
-    public pageType: string;
-    public activeIndex: number = 0;
+    public activeIndex = 0;
+    @Input() public slideList: string[];
+    @Input() public name: string;
+    @Input() public pageType: string;
 
     constructor(
-        private decorationService: DecorationService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router
     ) {}
 
-    public ngOnInit() {
-        this.defineType();
-
-        this.routerEvents = this.router.events
-            .pipe(filter((router) => (router instanceof NavigationEnd)), map((router: NavigationEnd) => router.url))
-            .subscribe((router) => {
-                this.defineType();
-            });
-    }
-
-    public ngOnDestroy() {
-        this.routerEvents.unsubscribe();
-    }
-
-    public defineType() {
-        this.pageType = this.activatedRoute.snapshot.params['type'];
-        if (this.reviuseUrlType(this.pageType)) {
-            this.slideList = this.decorationService.placement[this.pageType];
-            if (this.activeIndex >=  this.slideList.length || this.pageType === 'places') {
-                this.activeIndex = 0;
-            }
-        } else {
-            this.router.navigate(['/error-404'], { skipLocationChange: true });
+    ngOnChanges(changes: SimpleChanges) {
+        if ('pageType' in changes) {
+            this.activeIndex = 0;
         }
-    }
-
-    public reviuseUrlType(urlType) {
-        return (Object.keys(this.decorationService.placement).some((key) => (key === urlType)));
     }
 }

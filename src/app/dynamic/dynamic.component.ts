@@ -21,7 +21,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     public routerEvent;
     public AuthorizationEvent;
     public isAuthorizated: boolean = false;
-    public addPath: boolean = false;
+    public showModalAdmin: boolean = false;
 
     constructor(
         private router: Router,
@@ -58,7 +58,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
     // проверка на корректность url - параметров 'year', 'month'
     public reviseUrlParams(params) {
-        if ( params['month'] &&  params['year'] ) {
+        if ( params['month'] && params['year'] ) {
 
             // удаляем все символы из параметров кроме чисел ( возможно случайно попавшие )
             let month = params['month'].replace(/[^0-9]/g, '');
@@ -87,10 +87,6 @@ export class DynamicComponent implements OnInit, OnDestroy {
             this.router.navigate(['/error-404'], { skipLocationChange: true });
             return false;
         }
-    }
-
-    public addObject() {
-        this.addPath = true;
     }
 
     public monthChange(val) {

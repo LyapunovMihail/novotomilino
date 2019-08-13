@@ -21,6 +21,16 @@
         //     bottom: 0;
         // }
 
+        &__admin-open-btn {
+            position: absolute;
+            width: 1240px;
+            top: 137px;
+            left: 50%;
+            transform: translate(-50%);
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 1;
+        }
 
         &-btn {
             position: absolute;
@@ -140,10 +150,10 @@
             }
             &-descr {
                 position: absolute;
-                width: calc(100% - 60px);
+                width: (1240px / 2);
                 left: 50%;
                 bottom: 50px;
-                transform: translateX(-47%);
+                transform: translateX(-100%);
                 backface-visibility: hidden;
                 max-width: $w1600;
                 transition: $transition;
@@ -157,7 +167,7 @@
                     transition-delay: .5s;
                 }
                 &_show {
-                    transform: translateX(-50%);
+                    // transform: translateX(-50%);
                     opacity: 1;
                     visibility: visible;
                     transition-delay: .8s;
@@ -167,20 +177,37 @@
                 max-width: 500px;
                 color: #fff;
                 margin: 0 0 20px;
+
+                &.main__preview-slider-title--edit {
+                    resize: none;
+                    border: 1px dashed black;
+                    box-sizing: border-box;
+                    outline: none;
+                    height: 50px;
+                    color: #2e2e2e;
+                }
             }
             &-text {
                 max-width: 500px;
                 font: 500 16px/24px $font-mus;
                 @include font-smoothing;
                 color: #fff;
+
+                &.main__preview-slider-text--edit {
+                    resize: none;
+                    border: 1px dashed black;
+                    box-sizing: border-box;
+                    outline: none;
+                    height: 50px;
+                    color: #2e2e2e;
+                }
             }
         }
         &-content {
             position: absolute;
-            width: 100%;
+            width: (1240px / 2);
             max-width: $w1600;
             left: 50%;
-            transform: translate(-50%);
             bottom: 50px;
             display: flex;
             justify-content: flex-end;
@@ -273,6 +300,11 @@
     .main__preview {
         height: 510px;
 
+        &__admin-open-btn {
+            left: 20px;
+            width: auto;
+            transform: none;
+        }
         &-btn {
             left: 20px;
             width: auto;
@@ -295,6 +327,12 @@
         &:before {
             height: 100%;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000);
+        }
+        &__admin-open-btn {
+            left: auto;
+            right: 30px;
+            top: auto;
+            bottom: 150px;
         }
         &-btn {
             left: auto;

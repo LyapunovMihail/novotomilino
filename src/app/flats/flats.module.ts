@@ -13,6 +13,8 @@ import { HouseComponents } from './house/house';
 import { FloorComponents } from './floor/floor';
 import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PlanComponent } from './plan/plan.component';
+import { PlanComponents } from './plan/plan';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -24,7 +26,9 @@ const FlatsComponents = [
     ApartmentComponent,
     ApartmentSideBarComponent,
 
-    ...SearchComponents
+    ...SearchComponents,
+
+    ...PlanComponents
 ];
 
 @NgModule({
@@ -46,7 +50,8 @@ const FlatsComponents = [
                 children: [
                     { path: '', redirectTo: 'plan', pathMatch: 'full' },
                     { path: 'search', component: SearchComponent },
-                    { path: 'plan', component: HouseComponent },
+                    { path: 'plan', component: PlanComponent },
+                    { path: 'house', component: HouseComponent },
                     { path: 'section/:section/floor/:floor', component: FloorComponent },
                     { path: 'section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
                 ]

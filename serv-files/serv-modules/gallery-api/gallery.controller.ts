@@ -23,7 +23,7 @@ export class GalleryController extends GalleryModel {
 
     routing() {
         this.router.get('/gallery', responseHandler(async(req) => {
-            return await this.getSnippet();
+            return await this.getSnippet(req.query);
         }));
 
         this.router.post('/admin/gallery/delete', responseHandler(async(req) => {
@@ -32,6 +32,10 @@ export class GalleryController extends GalleryModel {
 
         this.router.post('/admin/gallery/update/description', responseHandler(async(req) => {
             return await this.changeDescription(req.body.id, req.body.description);
+        }));
+
+        this.router.post('/admin/gallery/update/name', responseHandler(async(req) => {
+            return await this.changeName(req.body.id, req.body.name);
         }));
 
         this.router.post('/admin/gallery/update/type', responseHandler(async(req) => {

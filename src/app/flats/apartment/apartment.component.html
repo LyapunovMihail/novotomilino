@@ -1,77 +1,86 @@
-<div class="apartment flats_main">
+<div class="g-modal-bg apartment__modal">
 
-    <div *ngIf="flatData" class="apartment_item">
+    <div class="apartment">
 
-        <img class="apartment_item_scheme" [src]="'/assets/floor-plans/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'">
-        
-        <div class="flats_item-description">
-                
-            <div class="flats_item-description_number">
-                <img class="flats_item-description_number-img" [src]="'/assets/img/flats/apartment/' + flatData.rooms + '.svg'">
-                <span class="flats_item-description_number-text">№&nbsp;{{flatData.flat}}</span>
+        <div class="apartment__elements">
+            <div class="apartment__elements-btn apartment__elements-btn_prev">
+                <button class="apartment__elements-prev"></button>
+                <p>№ 99<!-- Сюда должен загружаться № след квартиры --></p>
             </div>
+            <div class="apartment__elements-btn apartment__elements-btn_next">
+                <button class="apartment__elements-next"></button>
+                <p>№ 101<!-- Сюда должен загружаться № пред квартиры --></p>
+            </div>
+            <button class="apartment__elements-cls"></button>
+            <div class="apartment__elements-compass">
+                <img src="/assets/img/flats/apartment/compass.svg" alt="compass">
+            </div>
+        </div>
 
-           <!-- <div class="flats_item-description_download">
-                <div class="apartment-btn apartment-btn_favorite"
-                    (click)="toFavorite()"
-                    [ngClass]="{'apartment-btn_favorite_active': inFavorite}">
-                    В избранное
+        <div class="apartment__info">
+            <nav class="apartment__info-nav">
+                <ul class="apartment__info-nav-list">
+                    <li class="apartment__info-nav-item"><a class="apartment__info-nav-item_link">Корпус</a></li>
+                    <li class="apartment__info-nav-item"><a class="apartment__info-nav-item_link">Секция {{sectionNumber}}</a></li>
+                    <li class="apartment__info-nav-item"><a class="apartment__info-nav-item_link">Этаж {{floorNumber}}</a></li>
+                    <li class="apartment__info-nav-item">Квартира №{{flatData.flat}}</li>
+                </ul>
+            </nav>
+
+            <h1 class="apartment__info-title">
+                {{(flatData.rooms < '1') ? '' : flatData.rooms }} {{((flatData.rooms < '1') ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
+            </h1>
+            <div class="apartment__info-descr">
+                <div class="apartment__info-descr-item">
+                    <p class="apartment__info-subtitle">Отделка</p>
+                    <p class="apartment__info-descr-value">{{flatData.decorationName}}</p>
                 </div>
-
-                <a class="apartment-btn apartment-btn_pdf" [href]="pdfLink" target="_blank">Скачать pdf</a>
-            </div> -->
-
-            <div class="flats_item-description_section">
-
-                <span class="flats_item-description_section_name">Комнат</span>
-                <span class="flats_item-description_section_value">{{(flatData.rooms === '0') ? '' : flatData.rooms }} {{((flatData.rooms === '0') ? 'Студия' : ( flatData.rooms | myPluralizePipe : "комната_комнаты_комнат"))}}</span>
-
+                <div class="apartment__info-descr-item">
+                    <p class="apartment__info-subtitle">Площадь</p>
+                    <p class="apartment__info-descr-value">{{flatData.space}} м<sup>2</sup></p>
+                </div>
+                <div class="apartment__info-descr-item">
+                    <p class="apartment__info-subtitle">Ипотека от</p>
+                    <p class="apartment__info-descr-value">100 000 &#8381;</p>
+                </div>
             </div>
-
-            <div class="flats_item-description_section">
-
-                <span class="flats_item-description_section_name">Общая площадь</span>
-                <span class="flats_item-description_section_value">{{flatData.space}} м<sup>2</sup></span>
-
+            <div class="apartment__info-price">
+                <!-- 
+                    Классы для скидочной и не скидочной цены:
+                    "apartment__info-price-value_not-sale" - Не скидочная(перечеркнута)
+                    "apartment__info-price-value_sale" - Скидочная
+                 -->
+                <p class="apartment__info-subtitle">Стоимость</p>
+                <p class="apartment__info-price-value">{{flatData.price | myBitNumberPipe}} &#8381;</p>
+                <!-- <p class="apartment__info-price-value apartment__info-price-value_sale">{{flatData.price | myBitNumberPipe}} &#8381;</p> -->
             </div>
-
-            <div class="flats_item-description_section">
-
-                <span class="flats_item-description_section_name">Отделка</span>
-                <span class="flats_item-description_section_value">{{flatData.decorationName}}</span>
-
+            <p class="apartment__info-text">
+                При покупке квартиры в ипотеку или при 100% оплате действует скидка 3%. 
+            </p>
+            <div class="apartment__info-btn">
+                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve">Забронировать</button>
+                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit">Заявка на ипотеку</button>
             </div>
+        </div>
 
-            <div class="flats_item-description_section">
-
-                <span class="flats_item-description_section_name">Стоимость</span>
-                <span class="flats_item-description_section_value">{{flatData.price | myBitNumberPipe}} &#8381;</span>
-
+        <div class="apartment__plan">
+            <div class="apartment__plan-link">
+                <a class="g-link_red apartment__plan-link-dwnld">План квартиры.pdf</a>
+                <!-- <div (click)="toFavorite()" 
+                     [ngClass]="{'apartment__plan-link-favorite_active': inFavorite}" 
+                     class="g-link_red apartment__plan-link-favorite">
+                    Добавить в избранное
+                </div> -->
             </div>
-
-            <ul class="apartment_request-list">
-                <li (click)="isReserveFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--book-request">Забронировать квартиру</li>
-                <li (click)="isCreditFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--credit-request">Заявка на ипотеку</li>
-                <!-- <li (click)="isCallFormOpen = true; windowScrollLocker.block()" class="apartment_request-list_item apartment_request-list_item--call-request">Заказать звонок</li> -->
-            </ul>
+            <div class="apartment__plan-img">
+                <img class="apartment_item_scheme" [src]="'/assets/floor-plans/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'">
+            </div>
         </div>
 
     </div>
-
-
 </div>
 
-<app-apartment-side-bar *ngIf="flatData"
-    (svgClick)="svgRouterLink($event)"
-    [floorNumber]="flatData.floor"
-    [apartmentNumber]="flatData.flat"
-    [sectionNumber]="flatData.section">
-</app-apartment-side-bar>
 
-<!-- <app-form-call *ngIf="flatData"
-    (close)="isCallFormOpen = $event; windowScrollLocker.unblock()"
-    [isOpen]="isCallFormOpen">
-</app-form-call> -->
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"
     [isOpen]="isCreditFormOpen"

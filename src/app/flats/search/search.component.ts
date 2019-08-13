@@ -1,11 +1,11 @@
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 
 @Component({
-    selector: 'app-search',
+    selector: 'app-flats-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     providers: [
@@ -13,12 +13,13 @@ import { PlatformDetectService } from '../../platform-detect.service';
     ]
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
 
     public previousUrl = '';
     public isReturnLink = false;
-
     public flatsList = [];
+    public form: any;
+    @Input() public showSearchWindow = false;
 
     constructor(
         public router: Router,
@@ -28,6 +29,7 @@ export class SearchComponent implements OnInit {
 
     public ngOnInit() {
         if (this.platform.isBrowser) {
+            if (!this.showSearchWindow) {return; }
             if ( localStorage.getItem('previousRoute') ) {
                 this.previousUrl = localStorage.getItem('previousRoute');
                 localStorage.removeItem('previousRoute');
@@ -39,6 +41,10 @@ export class SearchComponent implements OnInit {
     }
 
     public formChange(form) {
+        console.log('this.showSearchWindow: ', this.showSearchWindow);
+        this.form = form;
+        if (!this.showSearchWindow) {return; }
+
         const params = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
@@ -65,7 +71,9 @@ export class SearchComponent implements OnInit {
             params['sections'] = (form.sections).join(',');
         }
 
-        this.router.navigate(['/flats/search'], {queryParams: params});
+        console.log('queryParams: ', params);
+
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
@@ -75,5 +83,19 @@ export class SearchComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+
+    public ngOnChanges() {
+        console.log('this.showSearchWindow: ', this.showSearchWindow);
+        if (this.showSearchWindow) {
+            this.formChange(this.form);
+        } else {
+            this.router.navigate([this.router.url.split('?')[0]]);
+        }
+        // ToDo раскомментировать в случае если будет использоваться как выдвижная панель(принцип модалки)
+       /* if (this.showSearchWindow) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        }
+        */
     }
 }

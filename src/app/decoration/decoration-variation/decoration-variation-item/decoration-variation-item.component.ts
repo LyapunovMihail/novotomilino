@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 
 export class DecorationVariationItemComponent {
-
     @Input() public item;
+    @Input() public pageType;
 }
