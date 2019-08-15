@@ -73,11 +73,11 @@
                 transition: $transition;
 
                 &:hover {
-                    background-position-x: calc(50% - 3px);
+                    background-position-x: calc(50% + 3px);
                 }
             }
         }
-        &-next {
+        &-prev {
             transform: rotate(180deg);
         }
 

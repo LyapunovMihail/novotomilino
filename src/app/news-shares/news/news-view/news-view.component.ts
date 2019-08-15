@@ -52,8 +52,11 @@ export class NewsViewComponent implements OnInit {
                     this.description = data[0].description;
                     this.image = `/${NEWS_UPLOADS_PATH}${data[0].image}`;
                     this.created_at = data[0].created_at;
+<<<<<<< HEAD
                     this._id = data[0]._id;
                     this.getSnippets();
+=======
+>>>>>>> novot/RED3-183_location-marker
                 } else {
                     this.router.navigate(['/error-404'], { skipLocationChange: true });
                 }
