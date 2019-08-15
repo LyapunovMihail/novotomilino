@@ -40,7 +40,7 @@
             margin: 0 30px 0 0;
         }
         &-subtitle {
-            font: 500 16px/22px "Museo Sans Cyrl";
+            font: 500 16px/22px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             position: relative;
             text-decoration: none;

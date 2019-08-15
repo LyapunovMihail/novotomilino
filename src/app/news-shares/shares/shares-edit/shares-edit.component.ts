@@ -203,8 +203,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                         alert('Что-то пошло не так!');
                         console.log('Ошибка', err);
                     });
-
-                this.router.navigate(['/shares/list/1']);
             } else {
                 this.sharesService.updateShare(this.redactId, form.value as Share)
                     .subscribe(

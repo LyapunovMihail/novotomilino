@@ -49,9 +49,9 @@
                 <a class="shares__snippets-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
                     <div class="shares__snippets-img">
                         <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
-                        <div class="shares__snippets-end">
-                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0">{{countDown(snippet.finish_date) | sharesDayPipe}} дней до конца акции</span>
-                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0">Акция закончилась</span>
+                        <div class="shares__snippets-end" *ngIf="snippet.countdown">
+                            <span *ngIf="countDown(snippet.finish_date) >= 0">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</span>
+                            <span *ngIf="countDown(snippet.finish_date) < 0">Акция закончилась</span>
                         </div>
                     </div>
 

@@ -167,7 +167,7 @@
         display: flex;
         flex-flow: row wrap;
         list-style: none;
-        font: 500 9px/15px "Museo Sans Cyrl";
+        font: 500 9px/15px "Museo Sans Cyrl", sans-serif;
         @include font-smoothing;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -295,7 +295,7 @@
             max-width: 290px;
             height: 50px;
             border-radius: 4px;
-            font: 500 16px/20px "Museo Sans Cyrl";
+            font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             letter-spacing: .5px;
             text-transform: uppercase;

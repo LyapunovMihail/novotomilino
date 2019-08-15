@@ -44,7 +44,7 @@
                 }
             }
             &-paragraf {
-                font: 500 10px/15px "Museo Sans Cyrl";
+                font: 500 10px/15px "Museo Sans Cyrl", sans-serif;
                 @include font-smoothing;
                 letter-spacing: .4px;
                 color: #000105;

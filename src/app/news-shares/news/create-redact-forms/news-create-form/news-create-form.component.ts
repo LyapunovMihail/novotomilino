@@ -2,9 +2,10 @@ import { AuthorizationObserverService } from '../../../../authorization/authoriz
 import { IconModifycatorsRadioBtns, ShowOnMainRadioBtns } from './../resources';
 import { NewsCreateFormService } from './news-create-form.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
     selector : 'app-news-create-form',
@@ -71,6 +72,8 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     public imageUploadPercent: number;
     public isLoad: boolean = false;
 
+    public dateNow: string;
+
     constructor(
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
@@ -117,6 +120,9 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
+
+        moment.locale('ru');
+        this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
 
         this.form = this.formBuilder.group({
             created_at : '',

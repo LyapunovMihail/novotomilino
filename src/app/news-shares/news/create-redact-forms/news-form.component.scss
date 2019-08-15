@@ -535,7 +535,7 @@ $required-input : #ffb3b3;
             padding: 10px 15px;
 
             &_title {
-                font: 500 20px/24px "Museo Sans Cyrl";
+                font: 500 20px/24px "Museo Sans Cyrl", sans-serif;
                 @include font-smoothing;
                 color: $col-black;
             }
@@ -604,7 +604,7 @@ $required-input : #ffb3b3;
             padding: 0 35px;
             height: 50px;
             background: #0070c9;
-            font: 500 16px/20px "Museo Sans Cyrl";
+            font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             color: #fff;
             letter-spacing: .5px;
