@@ -10,7 +10,7 @@ import {
     ShareFlat,
     ShareFlatDiscountType
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import * as moment from 'moment';
 import { SharesObserverService } from '../shares-observer.service';
 import { Router } from '@angular/router';
@@ -47,12 +47,23 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public days: number;
 
+    public dateNow: string;
+
     public paginatorCount;
 
-    private activeRouteId: string;
+    @Input() isForm: boolean = false ;
+
+    @Input() redactId: any ;
+
+    // вызывается при изменении сниппета
+    @Output() snippetsChange = new EventEmitter();
+
+    @Output() close = new EventEmitter();
 
     private subs: Subscription[] = [];
     private _ngUnsubscribe: Subject<any> = new Subject();
+
+    public formLoading: boolean = true;
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -66,6 +77,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             text: new FormControl('', Validators.required),
             mainImage: new FormControl(null, Validators.required),
             mainThumbnail: new FormControl(null, Validators.required),
+            show_on_main: new FormControl(false, Validators.required),
             created_at: new FormControl('', Validators.required),
             countdown: new FormControl(false, Validators.required),
             requestBtn: new FormControl(false, Validators.required),
@@ -76,17 +88,18 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.days = 0;
 
         this.paginatorCount = 1;
+
+        moment.locale('ru');
     }
 
     // tslint:disable-next-line:member-access
+
     ngOnInit() {
-        this.activeRouteId = this.activeRoute.snapshot.params.id;
-        if (this.activeRouteId === SHARES_CREATE_ID) {
+        if (this.redactId === SHARES_CREATE_ID) {
             this.form.reset(createDynamicNewsObj());
         } else {
             this.getObjectById();
         }
-
         this.finishDate = this.form.value['finish_date'];
 
         this.countDown();
@@ -99,7 +112,10 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             }));
 
         this.identifyPaginatorCount();
+
+        this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
+
 
     // tslint:disable-next-line:member-access
     ngOnDestroy() {
@@ -107,33 +123,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     }
 
     public get body(): FormArray { return this.form.get('body') as FormArray; }
-
-    public addDescription(order?: number, value?: string) {
-        this.body.push(new FormControl({
-            blockType: 'description',
-            blockOrderNumber: order ? order : this.body.controls.length,
-            blockDescription: value ? value : ''
-        }));
-    }
-
-    public addImage(order?: number, obj?: object) {
-        this.body.push(new FormControl({
-            blockType: 'image',
-            blockOrderNumber: order ? order : this.body.controls.length,
-            blockImg: obj ? obj : {
-                image: '',
-                thumbnail: ''
-            }
-        }));
-    }
-
-    public addList(order?: number, value?: string[]) {
-        this.body.push(new FormControl({
-            blockType: 'list',
-            blockOrderNumber: order ? order : this.body.controls.length,
-            blockList: value ? value : ['']
-        }));
-    }
 
     public addFlats(order?: number, value?: ShareFlat[]) {
         this.body.push(new FormControl({
@@ -173,11 +162,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 if (type === 'main-image') {
                     this.form.patchValue({mainImage: data.image});
                     this.form.patchValue({mainThumbnail: data.thumbnail});
-                } else {
-                    this.addImage(this.body.controls.length, {
-                        image: data.image,
-                        thumbnail: data.thumbnail
-                    });
                 }
             }).catch((err) => {
                 alert('Что-то пошло не так!');
@@ -193,17 +177,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     }
 
     public getObjectById() {
-        this.sharesService.getShareById(this.activeRouteId).subscribe((data: Share[]) => {
+        this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
             this.finishDate = data[0].finish_date;
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
-                if (body.blockType === 'description') {
-                    this.addDescription(body.blockOrderNumber, body.blockDescription);
-                } else if (body.blockType === 'list') {
-                    this.addList(body.blockOrderNumber, body.blockList);
-                } else if (body.blockType === 'image') {
-                    this.addImage(body.blockOrderNumber, body.blockImg);
-                } else if (body.blockType === 'flats') {
+                if (body.blockType === 'flats') {
                     this.addFlats(body.blockOrderNumber, body.blockFlats);
                 }
             });
@@ -214,10 +192,12 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     public onSave(form): void {
 
         if (form.valid) {
-            if (this.activeRouteId === SHARES_CREATE_ID) {
+            if (this.redactId === SHARES_CREATE_ID) {
                 this.sharesService.createShare(form.value).subscribe(
                     (response) => {
                         console.log(response);
+                        this.close.emit();
+                        this.snippetsChange.emit(response);
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
@@ -226,10 +206,12 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
                 this.router.navigate(['/shares/list/1']);
             } else {
-                this.sharesService.updateShare(this.activeRouteId, form.value as Share)
+                this.sharesService.updateShare(this.redactId, form.value as Share)
                     .subscribe(
                         (response) => {
                             console.log(response);
+                            this.close.emit();
+                            this.snippetsChange.emit(response);
                         },
                         (err) => {
                             alert('Что-то пошло не так!');

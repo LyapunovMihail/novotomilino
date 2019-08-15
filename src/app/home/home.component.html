@@ -9,7 +9,7 @@
 
     <app-home-places></app-home-places>
 
-    <app-home-news *ngIf="allSnippets.length"
+    <app-home-news *ngIf="newsLoaded && allSnippets.length"
         [newsSnippets]="newsSnippets"
         [shareSnippets]="shareSnippets"
         [allSnippets]="allSnippets">

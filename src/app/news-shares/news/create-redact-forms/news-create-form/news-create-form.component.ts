@@ -154,7 +154,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     onSubmit(form) {
         // если форма вылидна, то при отправке
         // вызывается событие закрытия формы
-        console.log("form: ", form);
 
         this.close.emit();
         this.newsCreateService.formSubmit(form).subscribe(

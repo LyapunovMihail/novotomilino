@@ -26,8 +26,7 @@ export class NewsCreateFormService {
 
     public formSubmit(form) {
         let message = JSON.stringify({ form });
-        console.log("message: ", message);
-        return this.http.post('/api/admin/news-shares/create', message, adminHeaders());
+        return this.http.post('/api/admin/news/create', message, adminHeaders());
     }
 
     public imageUpload(e) {
@@ -40,11 +39,9 @@ export class NewsCreateFormService {
             myUploadItem.formData = { FormDataKey: 'Form Data Value' };
 
             this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
-                console.log("response: ", response);
                 resolve(response);
             };
             this.uploaderService.onErrorUpload = (item, response, status, headers) => {
-                console.log("response: ", response);
                 reject(response);
             };
             // this.uploaderService.onCompleteUpload = (item, response, status, headers) => {};

@@ -6,22 +6,24 @@ import { SharesService } from '../shares.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PlatformDetectService } from '../../../platform-detect.service';
 import { SharesObserverService } from '../shares-observer.service';
-import * as moment from 'moment';
 import { takeUntil } from 'rxjs/operators';
+import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 
 @Component({
     selector: 'app-shares-list',
     templateUrl: './shares-list.component.html',
-    styleUrls: ['./shares-list.component.scss']
+    styleUrls: ['./shares-list.component.scss'],
+    providers: [
+        WindowScrollLocker
+    ]
 })
 export class SharesListComponent implements OnInit, OnDestroy {
 
     public isAuth: boolean;
 
-    public createId: string;
+    public redactId: string;
 
-   // public shares: Share[];
-    public shares;
+    public shares: Share[];
 
     public paginator = [];
 
@@ -38,8 +40,13 @@ export class SharesListComponent implements OnInit, OnDestroy {
     private subs: Subscription[] = [];
     private _ngUnsubscribe: Subject<any> = new Subject();
 
+    public isCreateRedactForm: boolean = false ;
+
+    public isDeleteForm: boolean = false ;
+
     constructor(
         private authorization: AuthorizationObserverService,
+        public windowScrollLocker: WindowScrollLocker,
         private sharesService: SharesService,
         private router: Router,
         private platform: PlatformDetectService,
@@ -47,7 +54,6 @@ export class SharesListComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute
     ) {
         this.isAuth = false;
-        this.createId = SHARES_CREATE_ID;
         this.indexNum = Number(this.activatedRoute.snapshot.params.index);
     }
 
@@ -74,14 +80,6 @@ export class SharesListComponent implements OnInit, OnDestroy {
         this.sharesObserverService.changePageCount(this.indexNum);
     }
 
-    public toNewsView(id) {
-        if (!this.isAuth) {
-            this.router.navigate([`/news-shares/shares/list/${this.indexNum}/${id}`]);
-        } else {
-            this.router.navigate([`/news-shares/shares/edit/${id}`]);
-        }
-    }
-
     public getShares(skip) {
         this.sharesService.getShares(10, Number(skip)).subscribe((data: {length: number, sharesList: Share[]}) => {
             this.shares = data.sharesList;
@@ -90,40 +88,6 @@ export class SharesListComponent implements OnInit, OnDestroy {
         }, (err) => {
             console.log(err);
         });
-    }
-
-    public deleteShare(id) {
-        if (confirm(`Удалить раздел?`)) {
-            this.sharesService.deleteShare(id).subscribe(
-                (response) => {
-                    console.log(response);
-                    if (this.shares.length !== 1) {
-                        this.getShares(
-                            (Number(this.indexNum) === 1)
-                                ? 0
-                                : Number(Number(this.indexNum) - 1 + '0')
-                        );
-                    } else {
-                        this.router.navigate([`/shares/list/${
-                            (Number(this.indexNum) > 1)
-                                ? Number(this.indexNum) - 1
-                                : Number(this.indexNum)
-                        }`]);
-                        setTimeout(() => {
-                            this.getShares(
-                                (Number(this.indexNum) === 1)
-                                    ? 0
-                                    : Number(Number(this.indexNum) - 1 + '0')
-                            );
-                        });
-                    }
-                },
-                (err) => {
-                    alert('Что-то пошло не так!');
-                    console.log('Ошибка', err);
-                }
-            );
-        }
     }
 
     public createPaginator(count) {
@@ -146,17 +110,42 @@ export class SharesListComponent implements OnInit, OnDestroy {
         }
     }
 
-    public countDown(finishDate) {
-        const createdDateVal = moment(Date.now());
-        const finishDateVal = moment(finishDate);
-        const duration = moment.duration(createdDateVal.diff(finishDateVal));
-        return Math.ceil(duration.asDays() * -1);
-    }
-
     public unsubscribe() {
         this._ngUnsubscribe.next();
         this.subs.forEach((sub: Subscription) => {
             sub.unsubscribe();
         });
+    }
+
+    public createSharesSnippet() {
+        if ( this.isAuth ) {
+            this.redactId = SHARES_CREATE_ID;
+            this.isCreateRedactForm = true;
+            this.windowScrollLocker.block();
+        }
+    }
+
+    public redactSharesSnippet(id) {
+        if ( this.isAuth ) {
+            this.redactId = id;
+            this.isCreateRedactForm = true;
+            this.windowScrollLocker.block();
+        }
+    }
+
+    public deleteSharesSnippet(id) {
+        if ( this.isAuth ) {
+            this.redactId = id;
+            this.isDeleteForm = true ;
+            this.windowScrollLocker.block();
+        }
+    }
+
+    public snippetsChange() {
+        this.getShares(
+            (Number(this.indexNum) === 1)
+                ? 0
+                : Number(Number(this.indexNum) - 1 + '0')
+        );
     }
 }
