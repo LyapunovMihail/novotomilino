@@ -1,6 +1,5 @@
 @import './modules/fonts/fonts';
 @import './modules/reset/reset';
-@import './modules/vendor/swiper.min';
 @import './modules/mixins/mixin';
 @import './modules/ui-kit/marker';
 
@@ -8,7 +7,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0 0 51px;
-    font-family: 'Museo Sans Cyrl';
+    font-family: 'Museo Sans Cyrl', sans-serif;
     position: relative;
     min-height: calc(100vh - 51px);
 }
