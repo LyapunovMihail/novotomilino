@@ -1,8 +1,9 @@
 
 
-export let destination = [55.684853, 37.896472] // Вот сюда сходятся все пути от контрольных точек
+export let destination = [55.65618531858043, 37.92175475135617]; // Вот сюда сходятся все пути от контрольных точек
 
 export let markersConfig = [
+    /* Оставил т.к вдруг придется писать пути для электирчек, если не нужно - удалить
     {
         coords: [55.715760, 37.816980],
         size: [30, 46],
@@ -37,55 +38,42 @@ export let markersConfig = [
         ],
         text: 'На электричке от ст. м. Выхино, 10 минут',
         type: 'polyline'
-    }, {
-        coords: [55.674384, 37.859491],
+    },
+    */
+    {
+        coords: [55.65530489185195, 37.954711361935246],
         size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -10],
         zIndex: 0,
         class: 'marker-content marker-content__bus',
         content: 2,
         tooltip: '',
         route: {
-            origin: [55.674384, 37.859491],
+            origin: [55.655325, 37.954210],
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)'
         },
-        text: 'На маршрутном такси №40 и №9 от ст. м. Котельники, 15 минут',
+        text: 'Москва-Голутвин / Москва-47км до ст. Томилино',
         type: 'bus'
     }, {
-        coords: [55.700760, 37.852744],
+        coords: [55.69964259049116, 37.853376418882235],
         size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -16],
         zIndex: 0,
         class: 'marker-content marker-content__bus',
         content: 3,
         tooltip: '',
         route: {
-            origin: [55.700760, 37.852744],
+            origin: [55.69964259049116, 37.853376418882235],
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)'
         },
-        text: 'На маршрутном такси №405 К от ст. м. Лермонтовский проспект, 16 мин',
+        text: 'Лермонтовский проспект Автобусы 323, 463; Маршрутки 393к, 534к; 25 мин',
         type: 'bus'
     }, {
-        coords: [55.704881, 37.833872],
+        coords: [55.70394904600352, 37.833339779295756],
         size: [30, 46],
-        offset: [-15, -46],
-        zIndex: 0,
-        class: 'marker-content marker-content__auto',
-        content: 4,
-        tooltip: '',
-        route: {
-            origin: [55.704881, 37.833872],
-            color: 'rgba(131,112,165,.6)',
-            activeColor: 'rgb(131,112,165)'
-        },
-        text: 'От МКАД через Косинское шоссе 10 мин 5,5 км',
-        type: 'auto'
-    }, {
-        coords: [55.703891, 37.833485],
-        size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -15],
         zIndex: 1,
         class: 'marker-content marker-content__auto',
         content: 5,
@@ -98,24 +86,24 @@ export let markersConfig = [
         text: 'От МКАД через Октябрьский пр-т 12 мин 6,5 км',
         type: 'auto'
     }, {
-        coords: [55.662729730573844, 37.95612767326354], // Координаты отметки местоположение маркера
+        coords: [55.683909, 37.838216], // Координаты отметки местоположения маркера
         size: [30, 46],
-        offset: [-15, -46],
+        offset: [0, -20],
         zIndex: 0,
         class: 'marker-content marker-content__auto',
         content: 6,
         tooltip: '',
         route: {
-            origin: [55.66282979831426, 37.95921221363068], // Начало линии откуда простраивается путь
+            origin: [55.683909, 37.838216], // Начало линии откуда простраивается путь
             color: 'rgba(131,112,165,.6)',
             activeColor: 'rgb(131,112,165)'
         },
-        text: 'Автобус 326 / маршрутка 222 от м. Выхино',
+        text: 'От МКАД через Новорязанское шоссе; 13 км; 25 мин',
         type: 'auto'
     }, {
-        coords: [55.663139, 37.958373],
+        coords: [55.656355158866056, 37.9214221574383],
         size: [50, 74],
-        offset: [-25, -74],
+        offset: [-20, -20],
         zIndex: 0,
         class: 'marker-content marker-content__main-marker',
         content: '',

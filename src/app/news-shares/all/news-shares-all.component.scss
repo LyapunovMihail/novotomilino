@@ -160,4 +160,31 @@
         border-radius: 4px;
     }
     &__add-news { margin: 0 0 10px; }
+
+    &__news-btn {
+        position: absolute;
+        right: 20px;
+        top: 273px;
+        width: 180px;
+        height: 90px;
+        z-index: 1;
+
+        &-edit,
+        &-delete {
+            width: 180px;
+            height: 40px;
+            text-transform: uppercase;
+            font: 500 16px/20px "Museo Sans Cyrl";
+            @include font-smoothing;
+            color: #fff;
+            background: #0070c9;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        &-delete {
+            background: transparent;
+            border: 1px solid #0070c9;
+            margin: 10px 0 0;
+        }
+    }
 }

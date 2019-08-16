@@ -20,16 +20,6 @@
                 <h1 class="create-form__form-title">Редактировать</h1>
                 <p class="create-form__form-date">29 марта 2019</p>
 
-                <!-- <div class="admin-news_form_wrap admin-news_form_wrap--date">
-                    <div class="admin-news_form_date">
-                        <span class="admin-news_form_date_text admin-news_form_text">Дата</span>
-                        <input [value]="form.controls['created_at'].value | date: 'd.M.yyyy'" class="admin-news_form_date_field admin-news_form_field" disabled="true" type="text">
-                        <input [formControl]="form.controls['last_modifyed']" hidden="true" type="text">
-                        <input [formControl]="form.controls['created_at']" hidden="true" type="text">
-                    </div>
-                </div> -->
-    
-    
                 <div class="create-form__form-wrap">
                     <p class="create-form__form-subtitle">Заголовок</p>
                     <textarea class="create-form__form-area create-form__form-area_title"
@@ -61,31 +51,16 @@
                         </label>
                     </div>
                 </div>
-    
-    
-    
-    
-                <!-- <div class="admin-news_form_wrap admin-news_form_wrap--margin-40">
-    
-                        <span class="admin-news_form_text">Показывать</span>
-    
-                        <div class="admin-news_form_news-order">
-    
-                            <ng-container *ngFor="let item of showOnMainModifycators">
-                                <label class="admin-news_checkbox">
-                                    <input class="admin-news_checkbox_content"
-                                        [formControl]="form.controls['show_on_main']"
-                                        [value]="item.value" 
-                                        type="radio" name="show_on_main">
-                                    <div class="admin-news_checkbox_for-click"></div>
-                                    <span class="admin-news_checkbox_text admin-news_form_text">{{ item.description }}</span>
-                                </label>
-                            </ng-container>
-    
-                        </div>
-    
-                </div> -->
-    
+
+                <div class="create-form__form-show">
+                    <label class="create-form__form-checkbox">
+                        <input class="admin-news_checkbox_content"
+                               [formControl]="form.controls['show_on_main']"
+                               type="checkbox" name="show_on_main">
+                        <div class="create-form__form-box g-checkbox"></div>
+                        <p class="create-form__form-checkbox-text">Показать новость на главной</p>
+                    </label>
+                </div>
     
                 <button type="submit" class="create-form__form-submit"
                     [ngClass]="{'submit-btn-disabled' : !form.valid}"

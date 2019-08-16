@@ -26,7 +26,7 @@ export class NewsRedactFormService {
 
     formSubmit(id, form) {
         let message = JSON.stringify({ id, form });
-        return this.http.post('/api/admin/news-shares/update', message, adminHeaders());
+        return this.http.post('/api/admin/news/update', message, adminHeaders());
     }
 
     imageUpload(e) {

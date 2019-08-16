@@ -262,12 +262,18 @@ $font2: 50px/60px 'LeksaSans', sans-serif;
                     height: 40px;
                     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
                     border-radius: 50%;
-                    &:hover { background-position: 49%; }
+                    transition: .2s linear;
+                    &:hover { background-position: calc(50% - 3px); }
                 }
                 &-prev { background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff; }
                 &-next {
                     background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
                     transform: rotate(180deg);
+                }
+
+                &-inactive {
+                    visibility: hidden;
+                    pointer-events: none;
                 }
             }
             &-img {

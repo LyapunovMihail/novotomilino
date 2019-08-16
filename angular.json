@@ -29,9 +29,7 @@
                 "src/styles/styles.scss"
             ],
             "scripts": [
-                "src/assets/js/jquery-3.3.1.js",
-                "src/assets/js/owl.carousel.min.js",
-                "src/assets/js/swiper.min.js"
+                "src/assets/js/jquery-3.3.1.js"
             ],
             "es5BrowserSupport": true
           },
@@ -91,8 +89,6 @@
             ],
             "scripts": [
                 "src/assets/js/jquery-3.3.1.js",
-                "src/assets/js/owl.carousel.min.js",
-                "src/assets/js/swiper.min.js"
             ],
             "assets": [
               "src/favicon.ico",
@@ -140,8 +136,7 @@
                 "src-mobile/styles/styles.scss"
             ],
             "scripts": [
-                "src-mobile/assets/js/jquery-3.3.1.js",
-                "src-mobile/assets/js/owl.carousel.min.js"
+                "src-mobile/assets/js/jquery-3.3.1.js"
             ],
             "es5BrowserSupport": true
           },
@@ -200,8 +195,7 @@
                 "src-mobile/styles/styles.scss"
             ],
             "scripts": [
-                "src-mobile/assets/js/jquery-3.3.1.js",
-                "src-mobile/assets/js/owl.carousel.min.js"
+                "src-mobile/assets/js/jquery-3.3.1.js"
             ],
             "assets": [
               "src-mobile/assets"

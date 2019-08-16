@@ -19,11 +19,15 @@ import { SharesObserverService } from './shares-observer.service';
 import { AuthorizationGuard } from '../../authorization/authorization-guard.service';
 import { Uploader } from 'angular2-http-file-upload';
 import { BitNumberPipe } from './bit-number.pipe';
+import { SharesDeleteComponent } from './shares-delete/shares-delete.component';
+import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
     SharesListComponent,
+    SharesItemsComponent,
     SharesItemComponent,
+    SharesDeleteComponent,
     SharesEditComponent,
     SharesEditDescriptionComponent,
     SharesEditImageComponent,
@@ -49,8 +53,7 @@ const SHARES_COMPONENTS = [
                 children: [
                     { path: '', redirectTo: 'list/1', pathMatch: 'full' },
                     { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-                    { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' },
-                    { path: 'edit/:id', component: SharesEditComponent, canActivate: [AuthorizationGuard] }
+                    { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
                 ]
             }
         ])
