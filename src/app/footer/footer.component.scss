@@ -13,9 +13,10 @@
     box-sizing: border-box;
     padding: 0 40px;
     background: #fff;
+    z-index: 100;
 
     &--hidden {
-        visibility: hidden;
+        display: none;
     }
 
     &__dev-logo-link {

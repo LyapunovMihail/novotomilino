@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WindowScrollLocker } from '../commons/window-scroll-block';
 
 @Component({
     selector: 'app-flats-page',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./flats.component.scss']
 })
 
-export class FlatsComponent {}
+export class FlatsComponent {
+    constructor(
+    ) {}
+}

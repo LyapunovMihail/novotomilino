@@ -1,3 +1,5 @@
+@import "../../../styles/modules/mixins/mixin";
+
 $color: #ffffff;
 $color2: #83d6f4;
 
@@ -134,6 +136,49 @@ $color2: #83d6f4;
             font: 11px/11px 'abrade-book', sans-serif;
             color: #3f3f3f;
             margin-top: 4px;
+        }
+    }
+}
+
+.search__show-btn {
+    width: 248px;
+    height: 50px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    font: 500 16px/23px $font-mus;
+    @include font-smoothing;
+    color: #fff;
+    position: absolute;
+    top: calc(100% - 70px);
+    left: calc(50% - 124px);
+    border-radius: 4px;
+    background-color: $col-orange;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+    transition: background-color $transition, color $transition, top .5s ease;
+    z-index: 1000;
+    &:hover {
+        background-color: #fff;
+        color: $col-orange;
+        svg g g { stroke: $col-orange; }
+    }
+    svg { transform: rotate(-90deg); }
+
+    &_active {
+        top: 30px;
+        background-color: #fff;
+        color: $col-orange;
+        flex-flow: column-reverse;
+        &:hover {
+            background-color: $col-orange;;
+            color: #fff;
+            svg g g { stroke: #fff; }
+        }
+
+        svg {
+            transform: rotate(90deg);
+            g g { stroke: $col-orange; }
         }
     }
 }

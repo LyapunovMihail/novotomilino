@@ -17,4 +17,7 @@ export class SearchService {
         return this.http.get('/api/search-config');
     }
 
+    public setFlatsHeight() {
+
+    }
 }

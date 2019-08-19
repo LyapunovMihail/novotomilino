@@ -13,7 +13,6 @@ export class GalleryModel {
     }
 
     async getSnippet(options) {
-        console.log('options: ', options);
         return await this.collection.find(options).sort({order: -1}).toArray();
     }
 
@@ -58,8 +57,6 @@ export class GalleryModel {
         if ( id && ObjectId.isValid(id) ) {
             const snippet = await this.collection.findOne({ _id : ObjectId(id) });
             await this.collection.deleteOne({ _id : ObjectId(id) });
-            console.log('snippet: ', snippet);
-            console.log('snippet.type: ', snippet.type);
             return await this.getSnippet({type: snippet.type});
         } else {
             throw new Error('Не корректный id.');
@@ -67,7 +64,6 @@ export class GalleryModel {
     }
 
     async changeDescription(id, description) {
-        console.log('description: ', description);
         if ( id && ObjectId.isValid(id) && description !== undefined && typeof description === 'string' ) {
             let date = new Date();
             let options = {
@@ -83,7 +79,6 @@ export class GalleryModel {
     }
 
     async changeName(id, name) {
-        console.log('name: ', name);
         if ( id && ObjectId.isValid(id) && name !== undefined && typeof name === 'string' ) {
             let date = new Date();
             let options = {

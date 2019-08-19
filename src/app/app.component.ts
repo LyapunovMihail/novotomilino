@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppState } from './app.service';
 
 export const ROOT_SELECTOR = 'app-root';
-declare let $: any;
 
 @Component({
   selector: ROOT_SELECTOR,

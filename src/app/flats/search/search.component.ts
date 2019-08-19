@@ -1,30 +1,35 @@
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
+declare let $: any;
 
 @Component({
     selector: 'app-flats-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     providers: [
+        WindowScrollLocker,
         SearchService
     ]
 })
 
-export class SearchComponent implements OnInit, OnChanges {
+export class SearchComponent implements OnInit, OnChanges, AfterViewInit {
 
     public previousUrl = '';
     public isReturnLink = false;
     public flatsList = [];
     public form: any;
+    public flatsHeightWithoutParams: number; // для сохранения высоты квартир до открытия параметров подбора чтобы закрепить футер
     @Input() public showSearchWindow = false;
 
     constructor(
         public router: Router,
         public searchService: SearchService,
-        public platform: PlatformDetectService
+        public platform: PlatformDetectService,
+        public windowScrollLocker: WindowScrollLocker
     ) {}
 
     public ngOnInit() {
@@ -72,12 +77,12 @@ export class SearchComponent implements OnInit, OnChanges {
         }
 
         console.log('queryParams: ', params);
-
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.flatsList = data;
+                this.setFlatsHeight();
             },
             (err) => {
                 console.log(err);
@@ -85,17 +90,29 @@ export class SearchComponent implements OnInit, OnChanges {
         );
     }
 
+    public ngAfterViewInit() {
+        this.flatsHeightWithoutParams = $('.flats').height();
+    }
+
     public ngOnChanges() {
-        console.log('this.showSearchWindow: ', this.showSearchWindow);
         if (this.showSearchWindow) {
             this.formChange(this.form);
+            this.windowScrollLocker.unblock();
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
+            this.windowScrollLocker.block();
+            this.setFlatsHeight();
         }
-        // ToDo раскомментировать в случае если будет использоваться как выдвижная панель(принцип модалки)
-       /* if (this.showSearchWindow) {
-            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
-        }
-        */
+    }
+
+    // Для динамичного задания высоты квартир, так как при открытии параметров подбора изменяется высота и съезжает футер.
+    public setFlatsHeight() {
+        setTimeout(() => {
+            if (this.showSearchWindow) {
+                $('.flats').css('height', this.flatsHeightWithoutParams + $('.search-output').height() - 440);
+            } else {
+                $('.flats').css('height', this.flatsHeightWithoutParams);
+            }
+        }, 20);
     }
 }
