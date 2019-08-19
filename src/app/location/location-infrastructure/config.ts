@@ -1,10 +1,6 @@
 export let markersConfig = [
     {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Магнолия 24</p></div></div>',
-        coord: [55.662433, 37.911776]
-    }, {
-        type: 'shop',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Торговые ряды</p></div></div>',
         coord: [55.659087, 37.906569]
     }, {
@@ -25,14 +21,6 @@ export let markersConfig = [
         coord: [55.658929, 37.929644]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Пятерочка</p></div></div>',
-        coord: [55.659486, 37.934940]
-    }, {
-        type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Дикси</p></div></div>',
-        coord: [55.653161, 37.928270]
-    }, {
-        type: 'shop',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Гипермаркет “Metro”</p></div></div>',
         coord: [55.655302, 37.906233]
     }, {
@@ -41,7 +29,7 @@ export let markersConfig = [
         coord: [55.651759, 37.907408]
     }, {
         type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа реконструкция(строим)</p></div></div>',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа</p></div></div>',
         coord: [55.654523, 37.925840]
     }, {
         type: 'school',
@@ -69,20 +57,12 @@ export let markersConfig = [
         coord: [55.662628, 37.927192]
     }, {
         type: 'cafe',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Бургер Кинг</p></div></div>',
-        coord: [55.658355, 37.921279]
-    }, {
-        type: 'cafe',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Тануки</p></div></div>',
         coord: [55.659313, 37.917186]
     }, {
         type: 'cafe',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Ресторан “Старый замок”</p></div></div>',
         coord: [55.659419, 37.934282]
-    }, {
-        type: 'cafe',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Ресторан “Баринъ”</p></div></div>',
-        coord: [55.658916, 37.928857]
     }, {
         type: 'cafe',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Караоке-клуб Lampa</p></div></div>',
@@ -100,17 +80,9 @@ export let markersConfig = [
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Поликлиника № 3</p></div></div>',
         coord: [55.661575, 37.926461]
     }, {
-        type: 'hospital',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Медицинский центр “Лотос”</p></div></div>',
-        coord: [55.662939, 37.909468]
-    }, {
         type: 'pharmacy',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">А-Мега</p></div></div>',
         coord: [55.658780, 37.928430]
-    }, {
-        type: 'pharmacy',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Мелодия здоровья</p></div></div>',
-        coord: [55.659660, 37.926870]
     }, {
         type: 'pharmacy',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Будь здоров</p></div></div>',
@@ -139,10 +111,6 @@ export let markersConfig = [
         type: 'recreation',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Парк Лапса</p></div></div>',
         coord: [55.657205, 37.958470]
-    }, {
-        type: 'recreation',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Мемориал ВОВ</p></div></div>',
-        coord: [55.654089, 37.925937]
     }, {
         type: 'recreation',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Развлекательный центр</p></div></div>',

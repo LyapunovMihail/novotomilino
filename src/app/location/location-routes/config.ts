@@ -112,9 +112,9 @@ export let markersConfig = [
         text: 'Люберцы городской округ, Томилино пгт',
         type: 'main'
     }, {
-        coords: [55.663139, 37.958373],
+        coords: [55.656355158866056, 37.9214221574383],
         size: [50, 74],
-        offset: [-25, -74],
+        offset: [-20, -20],
         zIndex: 0,
         class: 'marker-content marker-content__office-marker',
         content: '',

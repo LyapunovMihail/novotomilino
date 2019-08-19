@@ -132,9 +132,8 @@
 }
 
 @media (max-width: 1279px) {
-    .purchase__filter,
-    .purchase__result {
-        width: 50%;
+    :host { width: 50%; }
+    .purchase__filter {
         box-sizing: border-box;
         padding: 0 15px 0 0;
     }
@@ -156,6 +155,9 @@
                 background-size: 77%;
             }
         }
-        &-item:not(:last-child) { margin: 0 0 38px; }
+        &-item {
+            width: calc(100% - 15px);
+            &:not(:last-child) { margin: 0 0 38px; }
+        }
     }
 }
