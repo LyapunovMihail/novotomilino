@@ -6,8 +6,8 @@
 
     <div class="client-share__header">
         <div class="client-share__header-wrap">
-            <button class="client-share__header-btn client-share__header-prev"></button>
-            <button class="client-share__header-btn client-share__header-next"></button>
+            <a class="client-share__header-btn client-share__header-prev" [class.client-share__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></a>
+            <a class="client-share__header-btn client-share__header-next" [class.client-share__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></a>
             <div class="client-share__header-img-wrap">
                 <img [src]="uploadsPath + share.mainImage" class="client-share__header-img">
                 <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">

@@ -4,7 +4,7 @@
     <div class="search-form__container search-form__container_room">
         <p class="search-form__section-name">Количество комнат</p>
         <ul class="search-form__rooms">
-            <li class="search-form__rooms-item"  formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index">
+            <li class="search-form__rooms-item" formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index">
                 <label class="search-form__rooms-checkbox">
                     <input [formControl]="control" name="rooms" [value]="control" type="checkbox">
                     <div class="search-form__rooms-checkbox_for-click search-form__form-text {{(i === 0) ? 'search-form__rooms-checkbox_for-click-first' : ''}}">

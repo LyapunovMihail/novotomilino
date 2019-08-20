@@ -95,7 +95,7 @@ export class LocationInfrastructureComponent implements OnInit {
         ymaps.ready(() => {
 
             let myMap = new ymaps.Map('map', {
-                center: [55.663139, 37.958373],
+                center: [55.656725165497704, 37.92175475135617],
                 zoom: 17,
                 controls: []
             }, {
@@ -126,7 +126,7 @@ export class LocationInfrastructureComponent implements OnInit {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',
                     iconImageSize: (item['size']) ? item['size'] : [30, 46],
-                    iconImageOffset: (item['offset']) ? item['offset'] : [-15, -46],
+                    iconImageOffset: (item['offset']) ? item['offset'] : [-5, -15],
                     zIndex: 10
                 });
 

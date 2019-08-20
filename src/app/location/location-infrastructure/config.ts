@@ -1,138 +1,166 @@
 export let markersConfig = [
     {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Книжный рынок</p></div></div>',
-        coord: [55.662775, 37.956132]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Магнолия 24</p></div></div>',
+        coord: [55.662433, 37.911776]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ТЦ</p></div></div>',
-        coord: [55.663569147595425,37.95618538977151]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Торговые ряды</p></div></div>',
+        coord: [55.659087, 37.906569]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Сельскохозяйственный рынок</p></div></div>',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Кондитерская</p></div></div>',
         coord: [55.682528, 37.899911]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Супермаркет</p></div></div>',
-        coord: [55.681508, 37.888488]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Цветы и подарки</p></div></div>',
+        coord: [55.658778, 37.922939]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ТРЦ «Выходной»</p></div></div>',
-        coord: [55.685062, 37.877896]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ТЦ “Томилино”</p></div></div>',
+        coord: [55.658187, 37.922954]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Крытый рынок</p></div></div>',
-        coord: [55.686259, 37.899114]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Перекресток</p></div></div>',
+        coord: [55.658929, 37.929644]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Супермаркет</p></div></div>',
-        coord: [55.687124, 37.891571]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Пятерочка</p></div></div>',
+        coord: [55.659486, 37.934940]
     }, {
         type: 'shop',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ТЦ «Светофор»</p></div></div>',
-        coord: [55.691894, 37.896836]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Дикси</p></div></div>',
+        coord: [55.653161, 37.928270]
+    }, {
+        type: 'shop',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Гипермаркет “Metro”</p></div></div>',
+        coord: [55.655302, 37.906233]
+    }, {
+        type: 'shop',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Строительный магазин “Петрович”</p></div></div>',
+        coord: [55.651759, 37.907408]
     }, {
         type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №6</p></div></div>',
-        coord: [55.683133, 37.882417]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа реконструкция(строим)</p></div></div>',
+        coord: [55.654523, 37.925840]
     }, {
         type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №2089</p></div></div>',
-        coord: [55.684501, 37.918464]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ДОУ</p></div></div>',
+        coord: [55.657261, 37.926373]
     }, {
         type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Гимназия №16</p></div></div>',
-        coord: [55.687034, 37.910943]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №9</p></div></div>',
+        coord: [55.659164, 37.910953]
     }, {
         type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №21</p></div></div>',
-        coord: [55.687762, 37.895442]
-    }, {
-        type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №27</p></div></div>',
-        coord: [55.689656, 37.908566]
-    }, {
-        type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Гимназия №24</p></div></div>',
-        coord: [55.691842, 37.886142]
-    }, {
-        type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Лицей №15</p></div></div>',
-        coord: [55.691697, 37.911806]
-    }, {
-        type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Лицей №12</p></div></div>',
-        coord: [55.693171, 37.895356]
-    }, {
-        type: 'school',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа №12</p></div></div>',
-        coord: [55.692648, 37.898912]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Гимназия №20</p></div></div>',
+        coord: [55.663080, 37.901599]
     }, {
         type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.679632, 37.896052]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад № 47</p></div></div>',
+        coord: [55.655774, 37.926889]
     }, {
         type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.684988, 37.899926]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад № 7</p></div></div>',
+        coord: [55.660123, 37.927132]
     }, {
         type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.688876, 37.907437]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад № 77</p></div></div>',
+        coord: [55.662628, 37.927192]
     }, {
-        type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.691266, 37.900948]
+        type: 'cafe',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Бургер Кинг</p></div></div>',
+        coord: [55.658355, 37.921279]
     }, {
-        type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.690032, 37.891274]
+        type: 'cafe',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Тануки</p></div></div>',
+        coord: [55.659313, 37.917186]
     }, {
-        type: 'kindergarten',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Детский сад</p></div></div>',
-        coord: [55.694809, 37.906613]
+        type: 'cafe',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Ресторан “Старый замок”</p></div></div>',
+        coord: [55.659419, 37.934282]
+    }, {
+        type: 'cafe',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Ресторан “Баринъ”</p></div></div>',
+        coord: [55.658916, 37.928857]
+    }, {
+        type: 'cafe',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Караоке-клуб Lampa</p></div></div>',
+        coord: [55.664332, 37.900718]
     }, {
         type: 'hospital',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Медицинский центр</p></div></div>',
-        coord: [55.681807, 37.888128]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Поликлиника № 4</p></div></div>',
+        coord: [55.659663, 37.926777]
     }, {
         type: 'hospital',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Поликлиника</p></div></div>',
-        coord: [55.683800, 37.881395]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Стоматология “Вуги”</p></div></div>',
+        coord: [55.660314, 37.933023]
     }, {
         type: 'hospital',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Поликлиника</p></div></div>',
-        coord: [55.689067, 37.888330]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Поликлиника № 3</p></div></div>',
+        coord: [55.661575, 37.926461]
+    }, {
+        type: 'hospital',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Медицинский центр “Лотос”</p></div></div>',
+        coord: [55.662939, 37.909468]
+    }, {
+        type: 'pharmacy',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">А-Мега</p></div></div>',
+        coord: [55.658780, 37.928430]
+    }, {
+        type: 'pharmacy',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Мелодия здоровья</p></div></div>',
+        coord: [55.659660, 37.926870]
+    }, {
+        type: 'pharmacy',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Будь здоров</p></div></div>',
+        coord: [55.659633, 37.916897]
+    }, {
+        type: 'pharmacy',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">ГорЗдрав</p></div></div>',
+        coord: [55.662478, 37.911740]
     }, {
         type: 'sport',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Фитнес-центр</p></div></div>',
-        coord: [55.690215, 37.899509]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Фитнес-клуб, бассейн</p></div></div>',
+        coord: [55.660600, 37.913532]
     }, {
         type: 'sport',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Фитнес-центр</p></div></div>',
-        coord: [55.691673, 37.896923]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Стадион “Урожай”</p></div></div>',
+        coord: [55.654208, 37.930734]
+    }, {
+        type: 'sport',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Школа здоровья и стройности</p></div></div>',
+        coord: [55.653589, 37.927213]
+    }, {
+        type: 'sport',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Стадион “Зенит”</p></div></div>',
+        coord: [55.655660, 37.944006]
     }, {
         type: 'recreation',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Парк</p></div></div>',
-        coord: [55.694877, 37.885680]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Парк Лапса</p></div></div>',
+        coord: [55.657205, 37.958470]
     }, {
         type: 'recreation',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Пешеходная улица</p></div></div>',
-        coord: [55.679934, 37.894909]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Мемориал ВОВ</p></div></div>',
+        coord: [55.654089, 37.925937]
+    }, {
+        type: 'recreation',
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Развлекательный центр</p></div></div>',
+        coord: [55.663035, 37.910593]
     }, {
         type: 'transport',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Автобусная остановка</p></div></div>',
-        coord: [55.681632, 37.897419]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Остановка Птицефабрика</p></div></div>',
+        coord: [55.653443, 37.925710]
     }, {
         type: 'transport',
-        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Ж/д станция</p></div></div>',
-        coord: [55.682179, 37.897156]
+        content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Остановка ВУГИ</p></div></div>',
+        coord: [55.659336, 37.928028]
     }, {
         type: 'main-marker',
         content: '',
-        coord: [55.663139, 37.958373],
+        coord: [55.656355158866056, 37.9214221574383],
         size: [56, 56],
-        offset: [-25, -74],
+        offset: [-20, -20],
     }
 ];
 

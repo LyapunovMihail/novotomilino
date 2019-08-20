@@ -57,16 +57,23 @@
             position: absolute;
             top: calc(50% - 25px);
             transition: $transition;
+
+            &-inactive {
+                visibility: hidden;
+                pointer-events: none;
+            }
         }
+
         &-prev {
             left: -20px;
-            background: url(/assets/img/btn_prev_or.svg) 50% no-repeat #fff;
+            background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
             &:hover { background-position: calc(50% - 3px); }
         }
         &-next {
             right: -20px;
             background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
-            &:hover { background-position: calc(50% + 3px); }
+            transform: rotate(180deg);
+            &:hover { background-position: calc(50% - 3px); }
         }
         &-wrap { 
             width: 100%;

@@ -50,7 +50,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
                 console.log('this.snippetsArray: ', this.snippetsArray);
                 this.ref.detectChanges();
             },
-            (err) => { console.error(err); this.snippetsArray = mockNews; }
+            (err) => console.error(err)
         );
     }
 
