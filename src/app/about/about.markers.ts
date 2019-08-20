@@ -78,7 +78,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         distance: '10 км от МКАД',
         addDistance: true,
         title: 'Резиденция Май',
-        subtitle: 'Квартиры от 2,2 млн. руб.',
+        subtitle: 'Квартиры от 3,8 млн. руб.',
         background: '/assets/img/about/project/residence.jpg',
         mod: '',
         classIndex: ''
