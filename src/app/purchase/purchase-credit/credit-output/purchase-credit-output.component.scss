@@ -25,10 +25,12 @@
     align-items: center;
 
     p {
+        width: calc(100% - 20px);
         font: 500 14px/20px $font-mus;
         @include font-smoothing;
         color: #000105;
         margin: 10px 0 0;
+        text-align: center;
     }
 }
 
@@ -143,9 +145,8 @@
 }
 
 @media (max-width: 1279px) {
-    .purchase__filter,
+    :host { width: 50%; }
     .purchase__result {
-        width: 50%;
         box-sizing: border-box;
         padding: 0 15px 0 0;
     }

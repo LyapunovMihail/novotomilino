@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
-import { HeaderService, IHeaderLink } from './header.service';
+import { HeaderService } from './header.service';
 
 declare let $: any;
 
@@ -17,7 +17,6 @@ declare let $: any;
 export class HeaderComponent implements OnInit, OnDestroy {
 
     public isFixed: boolean;
-    public pageWithOffice: boolean;
     public isHidden: boolean;
     public links = [];
 
@@ -32,7 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.isFixed = true;
-        this.pageWithOffice = false;
     }
 
     public ngOnInit() {
@@ -41,17 +39,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
+                    console.log('this.router.url: ', this.router.url);
+
                     if (this.router.url === '/' || this.router.url === '/about') {
                         this.fixedHeader();
                         this.isFixed = false;
-                        this.pageWithOffice = true;
                     } else {
                         this.subscriptions.forEach((sub) => {
                             sub.unsubscribe();
                         });
                         this.isFixed = false;
                         this.isHidden = false;
-                        this.pageWithOffice = false;
                     }
                 }
             });
@@ -76,17 +74,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach((sub) => {
             sub.unsubscribe();
         });
-    }
-
-    public scrollToOffice() {
-        if (this.pageWithOffice) {
-            $('html, body').animate({scrollTop: $('.office').offset().top}, 700);
-        } else {
-            this.router.navigate(['/'])
-                .then(() => {
-                    $('html, body').animate({scrollTop: $('.office').offset().top}, 700);
-                });
-        }
     }
 
     // если расстояние скрлла больше высоты хедера
@@ -115,5 +102,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
             winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         }));
+    }
+
+    public checkLink(linkUrl) {
+        return this.router.url.split('/')[1] === linkUrl.split('/')[1];
     }
 }

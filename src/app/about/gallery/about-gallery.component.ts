@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
     EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
-import {PlatformDetectService} from '../../platform-detect.service';
-import {AboutGalleryService} from './about-gallery.service';
-import {WindowScrollLocker} from '../../commons/window-scroll-block';
-import {AuthorizationObserverService} from '../../authorization/authorization.observer.service';
+import { PlatformDetectService } from '../../platform-detect.service';
+import { AboutGalleryService } from './about-gallery.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 
 @Component({
     selector: 'app-about-gallery',
@@ -22,9 +22,9 @@ import {AuthorizationObserverService} from '../../authorization/authorization.ob
 
 export class AboutGalleryComponent implements OnInit, OnDestroy {
 
-    public isShowModalAdmin: boolean = false;
+    public isShowModalAdmin = false;
 
-    public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
+    public uploadsPath = `/${GALLERY_UPLOADS_PATH}`;
 
     public activeSnippets = EnumGallerySnippet.ARCHITECTURE;
 
@@ -35,8 +35,10 @@ export class AboutGalleryComponent implements OnInit, OnDestroy {
 
     public currentSlide = 0;
 
-    public isAuthorizated: boolean = false ;
+    public isAuthorizated = false ;
     public AuthorizationEvent;
+
+    public slideShowTimer;
 
     constructor(
         public platform: PlatformDetectService,
@@ -74,11 +76,13 @@ export class AboutGalleryComponent implements OnInit, OnDestroy {
             (err) => console.log(err)
         );
 
+        this.slideShow();
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy() {
         if (!this.platform.isBrowser) { return false; }
         this.AuthorizationEvent.unsubscribe();
+        this.clearInt();
     }
 
     public nextBtn() {
@@ -105,6 +109,18 @@ export class AboutGalleryComponent implements OnInit, OnDestroy {
         } else if (this.activeSnippets === EnumGallerySnippet.PARKING) {
             this.parkingSnippets = newSlides;
         }
+    }
+
+    public slideShow() {
+        this.slideShowTimer = setInterval(() => {
+            this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ?
+                this.currentSlide + 1 : 0;
+        }, 3000);
+    }
+
+    public clearInt() {
+        if (!this.platform.isBrowser) { return false; }
+        clearInterval(this.slideShowTimer);
     }
 
     public changeDescription(id, description) {

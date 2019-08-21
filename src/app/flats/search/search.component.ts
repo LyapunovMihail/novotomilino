@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -16,13 +16,12 @@ declare let $: any;
     ]
 })
 
-export class SearchComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public previousUrl = '';
     public isReturnLink = false;
     public flatsList = [];
     public form: any;
-    public flatsHeightWithoutParams: number; // для сохранения высоты квартир до открытия параметров подбора чтобы закрепить футер
     @Input() public showSearchWindow = false;
 
     constructor(
@@ -82,16 +81,11 @@ export class SearchComponent implements OnInit, OnChanges, AfterViewInit, OnDest
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.flatsList = data;
-                this.setFlatsHeight();
             },
             (err) => {
                 console.log(err);
             }
         );
-    }
-
-    public ngAfterViewInit() {
-        this.flatsHeightWithoutParams = $('.flats').height();
     }
 
     public ngOnChanges() {
@@ -101,22 +95,10 @@ export class SearchComponent implements OnInit, OnChanges, AfterViewInit, OnDest
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
             this.windowScrollLocker.block();
-            this.setFlatsHeight();
         }
     }
 
     public ngOnDestroy() {
         this.windowScrollLocker.unblock();
-    }
-
-    // Для динамичного задания высоты квартир, так как при открытии параметров подбора изменяется высота и съезжает футер.
-    public setFlatsHeight() {
-        setTimeout(() => {
-            if (this.showSearchWindow) {
-                $('.flats').css('height', this.flatsHeightWithoutParams + $('.search-output').height() - 440);
-            } else {
-                $('.flats').css('height', this.flatsHeightWithoutParams);
-            }
-        }, 20);
     }
 }

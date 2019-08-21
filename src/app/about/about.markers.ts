@@ -78,8 +78,8 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         distance: '10 км от МКАД',
         addDistance: true,
         title: 'Резиденция Май',
-        subtitle: 'Квартиры от 2,2 млн. руб.',
-        background: '/assets/img/about/builder/may.jpg',
+        subtitle: 'Квартиры от 3,8 млн. руб.',
+        background: '/assets/img/about/project/residence.jpg',
         mod: '',
         classIndex: ''
     }, {
@@ -89,7 +89,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'Видный Берег 2',
         subtitle: 'Скоро в продаже',
-        background: '/assets/img/about/builder/vb2.jpg',
+        background: '/assets/img/about/project/vb2.jpg',
         mod: '',
         classIndex: 'grid-item_five'
     }, {
@@ -99,7 +99,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'Видный Берег',
         subtitle: 'Квартиры от 3,2 млн. руб.',
-        background: '/assets/img/about/builder/vb.jpg',
+        background: '/assets/img/about/project/vb.jpg',
         mod: '',
         classIndex: ''
     }
