@@ -68,11 +68,11 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 3) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
+            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
         }
 
-        if ( 'sections' in form && form.sections.length > 0 ) {
-            params['sections'] = (form.sections).join(',');
+        if ( 'houses' in form && form.houses.length > 0 ) {
+            params['houses'] = (form.houses).join(',');
         }
 
         console.log('queryParams: ', params);

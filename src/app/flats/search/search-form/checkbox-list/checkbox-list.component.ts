@@ -1,5 +1,5 @@
-import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-search-checkbox-list',
@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
+    @Input() public name: string;
 
     public activeList: string[] = [];
 
@@ -35,6 +36,7 @@ export class CheckboxListComponent {
                 this.activeList.splice(index, 1);
             }
         }
+        
         this.propagateChange(this.activeList);
     }
 

@@ -70,6 +70,7 @@
             &:nth-child(2) { transform: translateX(-1px); }
             &:nth-child(3) { transform: translateX(-2px); }
             &:nth-child(4) { transform: translateX(-3px); }
+            &:nth-child(5) { transform: translateX(-4px); }
         }
         &-checkbox {
 
@@ -190,35 +191,6 @@
         box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
         border: solid 1px #e7490f;
         @include fw18-24($col-orange);
-    }
-
-    &__decoration {
-        display: flex;
-        margin: 40px 0 0;
-
-        &-item {
-            margin: 0 30px 0 0;
-            display: flex;
-            &:hover .search-form__decoration-checkbox,
-            &:hover .search-form__decoration-text {
-                border-color: $col-orange;
-                color: $col-orange;
-            }
-            input {
-                display: none;
-                &:checked + .search-form__decoration-checkbox {
-                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
-                    border-color: #e7490f;
-                }
-            }
-        }
-        &-text,
-        &-checkbox {
-            transition: color $transition, border-color $transition;
-            cursor: pointer;
-        }
-        &-text { @include f16-24(rgba(0, 1, 5, 0.8)); }
-        &-checkbox { background-color: #fff; }
     }
     &__reset-filter {
         background: transparent;

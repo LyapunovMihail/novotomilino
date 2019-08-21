@@ -13,12 +13,11 @@
                 <ul class="search-form__rooms">
                     <li formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index"
                         class="search-form__rooms-item">
-    
                         <label class="search-form__rooms-checkbox">
                             <input [formControl]="control" name="rooms" [value]="control" type="checkbox">
-                            <!-- Тут нужно увеличить кол-во квартир до 4х, т.е 4 комнаты и студия, !потом удалить этот коммент! -->
-                            <div class="search-form__rooms-checkbox_for-click search-form__text {{(i === 0) ? 'search-form__rooms-checkbox_for-click-first' : ''}}">
-                                {{(i === 3) ? 'С' : i + 1}}
+                            <div class="search-form__rooms-checkbox_for-click search-form__text"
+                                 [class.search-form__rooms-checkbox_for-click-first]="i === 0">
+                                {{(i === 4) ? 'С' : i + 1}}
                             </div>
                         </label>
                     </li>
@@ -88,34 +87,12 @@
                     <p class="search-form__text">Все корпуса</p>
                 </div>
 
-                <div class="search-form__corpus" *ngIf="showCorpus === true">
-                    <div class="search-form__corpus-wrap">
-                        <div class="search-form__corpus-check">
-                            <input type="checkbox" name="corpus" id="corpusAll">
-                            <label for="corpusAll" class="g-checkbox search-form__corpus-checkbox"></label>
-                            <label for="corpusAll" class="search-form__corpus-text">Все корпуса</label>
-                        </div>
-                        <div class="search-form__corpus-check">
-                            <input type="checkbox" name="corpus" id="corpusOne">
-                            <label for="corpusOne" class="g-checkbox search-form__corpus-checkbox"></label>
-                            <label for="corpusOne" class="search-form__corpus-text">Корпус 1</label>
-                        </div>
-                        <div class="search-form__corpus-check">
-                            <input type="checkbox" name="corpus" id="corpusTwo">
-                            <label for="corpusTwo" class="g-checkbox search-form__corpus-checkbox"></label>
-                            <label for="corpusTwo" class="search-form__corpus-text">Корпус 2</label>
-                        </div>
-                        <div class="search-form__corpus-check">
-                            <input type="checkbox" name="corpus" id="corpusThree">
-                            <label for="corpusThree" class="g-checkbox search-form__corpus-checkbox"></label>
-                            <label for="corpusThree" class="search-form__corpus-text">Корпус 3</label>
-                        </div>
-                        <div class="search-form__corpus-check">
-                            <input type="checkbox" name="corpus" id="corpusFour">
-                            <label for="corpusFour" class="g-checkbox search-form__corpus-checkbox"></label>
-                            <label for="corpusFour" class="search-form__corpus-text">Корпус 4</label>
-                        </div>
-                    </div>
+                <div class="search-form__corpus" *ngIf="showCorpus">
+                    <app-search-checkbox-list
+                        [btnList]="config.housesList"
+                        [formControl]="form.controls['houses']"
+                        [name]="'houses'">
+                    </app-search-checkbox-list>
                     <div class="search-form__corpus-wrap">
                         <svg width="355px" height="94px" viewBox="0 0 355 94" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Квартиры_адаптив++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -159,26 +136,15 @@
                 </div>
             </div>
 
-            <button class="search-form__btn" (click)="moreFilter = !moreFilter">{{(moreFilter === true) ? 'Свернуть' : 'Еще параметры'}}</button>
+            <button class="search-form__btn" (click)="moreFilter = !moreFilter">{{(moreFilter) ? 'Свернуть' : 'Еще параметры'}}</button>
         </div>
-        <div class="search-form__wrap search-form__wrap_decoration" *ngIf="moreFilter === true">
-            <div class="search-form__decoration">
-                <div class="search-form__decoration-item">
-                    <input type="checkbox" name="decoration" id="no">
-                    <label for="no" class="g-checkbox search-form__decoration-checkbox"></label>
-                    <label for="no" class="search-form__decoration-text">Без отделки</label>
-                </div>
-                <div class="search-form__decoration-item">
-                    <input type="checkbox" name="decoration" id="black">
-                    <label for="black" class="g-checkbox search-form__decoration-checkbox"></label>
-                    <label for="black" class="search-form__decoration-text">Черновая отделка</label>
-                </div>
-                <div class="search-form__decoration-item">
-                    <input type="checkbox" name="decoration" id="white">
-                    <label for="white" class="g-checkbox search-form__decoration-checkbox"></label>
-                    <label for="white" class="search-form__decoration-text">Чистовая отделка</label>
-                </div>
-            </div>
+
+        <div class="search-form__wrap search-form__wrap_decoration" *ngIf="moreFilter">
+                <app-search-checkbox-list
+                    [btnList]="config.decorationList"
+                    [formControl]="form.controls['decoration']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
             <button class="search-form__reset-filter">Сбросить фильтры</button>
         </div>
 

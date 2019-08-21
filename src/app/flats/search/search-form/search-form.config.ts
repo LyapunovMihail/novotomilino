@@ -35,5 +35,28 @@ export const FormConfig = {
             name: 'Чистовая',
             value: '03'
         }
+    ],
+    housesList: [
+        {
+            name: 'Все корпуса',
+            value: '1,2,3,4'
+        },
+        {
+            name: 'Корпус 1',
+            value: '1'
+        },
+        {
+            name: 'Корпус 2',
+            value: '2'
+        },
+        {
+            name: 'Корпус 3',
+            value: '3'
+        },
+        {
+            name: 'Корпус 4',
+            value: '4'
+        }
     ]
+
 };

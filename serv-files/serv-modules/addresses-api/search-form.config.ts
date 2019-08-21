@@ -20,14 +20,6 @@ export const FormConfig = {
         {
             name: 'апартаменты',
             value: 'АП'
-        },
-        {
-            name: 'кладовые',
-            value: 'КЛ'
-        },
-        {
-            name: 'машиноместа',
-            value: 'ММ'
         }
     ],
     decorationList: [

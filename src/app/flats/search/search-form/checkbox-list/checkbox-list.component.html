@@ -1,17 +1,13 @@
-<ul class="search_form_decoration">
+<ul [class.search-form--row]="name === 'decoration'">
 
-    <li *ngFor="let btn of btnList" class="search_form_decoration_item">
-
-        <label class="search_form_decoration_checkbox">
-            <input class="search_form_decoration_checkbox_content"
-                (change)="checkBtn($event)"
-                [value]="btn.value"
-                [checked]="isChecked(btn.value)"
-                type="checkbox">
-            <div class="search_form_decoration_checkbox_for-click"></div>
-            <span class="search_form_decoration_checkbox_text">{{btn.name}}</span>
-        </label>
-
+    <li *ngFor="let btn of btnList" class="search-form__list-item search-form__list-item--{{name}}">
+        <input [id]="btn.value" [name]="name"
+            (change)="checkBtn($event)"
+            [value]="btn.value"
+            [checked]="isChecked(btn.value)"
+            type="checkbox">
+        <label [for]="btn.value" class="g-checkbox search-form__list-checkbox"></label>
+        <label [for]="btn.value" class="search-form__list-text--{{name}}">{{btn.name}}</label>
     </li>
 
 </ul>
