@@ -11,24 +11,25 @@
                     <img class="search-output__result-item-scheme" 
                          [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
                 </div>
-                <span class="search-output__result-item-content search-output__result-item-content_room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
+                <span class="search-output__result-item-content search-output__result-item-content_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</span>
                 <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
                 <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
                 <!-- Нужен корпус а не секция -->
-                <span class="search-output__result-item-content search-output__result-item-content_section">Секция {{flat.section}}</span>
+                <span class="search-output__result-item-content search-output__result-item-content_section">Корпус {{flat.house}}</span>
                 <!-- /Нужен корпус а не секция -->
                 <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
                 <span class="search-output__result-item-price">
                     <span class="search-output__result-item-content 
                                  search-output__result-item-content_price
-                                 search-output__result-item-content_price-not-sale">
+                                 search-output__result-item-content_price-not-sale"
+                          [ngClass]="{'search-output__result-item-content_price' : !getDiscount(flat),
+                                      'search-output__result-item-content_price-not-sale' : getDiscount(flat)}">
                         {{flat.price | myBitNumberPipe}} &#8381;
-                        <!-- 
-                            Класс "search-output__result-item-content_price-not-sale" отвечает за стили нескидочной цены,
-                            когда установленна скидка
-                         -->
                     </span>
-                    <span class="search-output__result-item-content search-output__result-item-content_price-sale">{{flat.price | myBitNumberPipe}} &#8381;</span>
+                    <span *ngIf="getDiscount(flat)"
+                          class="search-output__result-item-content search-output__result-item-content_price-sale">
+                          {{+flat.price - getDiscount(flat) | myBitNumberPipe}} &#8381;
+                    </span>
                 </span>
             </a>
             <div class="search-output__result-item-favorite"></div>

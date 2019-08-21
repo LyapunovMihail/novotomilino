@@ -1,6 +1,6 @@
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
@@ -16,7 +16,7 @@ declare let $: any;
     ]
 })
 
-export class SearchComponent implements OnInit, OnChanges, AfterViewInit {
+export class SearchComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     public previousUrl = '';
     public isReturnLink = false;
@@ -68,11 +68,11 @@ export class SearchComponent implements OnInit, OnChanges, AfterViewInit {
             params['decoration'] = (form.decoration).join(',');
         }
 
-        if ( 'rooms' in form && form['rooms'].some((i) => i === true) ) {
+        if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
             params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 3) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
         }
 
-        if ( 'sections' in form && form['sections'].length > 0 ) {
+        if ( 'sections' in form && form.sections.length > 0 ) {
             params['sections'] = (form.sections).join(',');
         }
 
@@ -103,6 +103,10 @@ export class SearchComponent implements OnInit, OnChanges, AfterViewInit {
             this.windowScrollLocker.block();
             this.setFlatsHeight();
         }
+    }
+
+    public ngOnDestroy() {
+        this.windowScrollLocker.unblock();
     }
 
     // Для динамичного задания высоты квартир, так как при открытии параметров подбора изменяется высота и съезжает футер.

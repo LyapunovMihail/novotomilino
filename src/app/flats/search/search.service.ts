@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
 
 @Injectable()
 
@@ -15,9 +15,5 @@ export class SearchService {
 
     public getConfig() {
         return this.http.get('/api/search-config');
-    }
-
-    public setFlatsHeight() {
-
     }
 }
