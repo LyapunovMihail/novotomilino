@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { WindowScrollLocker } from '../commons/window-scroll-block';
 
 @Component({
     selector: 'app-flats-page',

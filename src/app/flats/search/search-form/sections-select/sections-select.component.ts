@@ -1,5 +1,5 @@
-import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-search-form-sections',
@@ -22,7 +22,7 @@ export class SectionsSelectComponent {
 
     public writeValue(control) {
         if (control && Array.isArray(control) && control.every((item) => typeof item === 'number')) {
-            this.houses = [...control];
+            this.houses = control;
         }
     }
 
@@ -38,7 +38,7 @@ export class SectionsSelectComponent {
         return this.houses.some((item) => item === num);
     }
 
-    public selectSection(num) {
+    public selectHouse(num) {
         let index = this.houses.findIndex((item) => item === num);
 
         if (index >= 0) {
@@ -46,6 +46,7 @@ export class SectionsSelectComponent {
         } else {
             this.houses.push(num);
         }
-        this.propagateChange([...this.houses]);
+        console.log('this.houses: ', this.houses);
+        this.propagateChange(this.houses);
     }
 }

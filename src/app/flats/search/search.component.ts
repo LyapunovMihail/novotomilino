@@ -4,7 +4,6 @@ import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
-declare let $: any;
 
 @Component({
     selector: 'app-flats-search',
@@ -18,11 +17,11 @@ declare let $: any;
 
 export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
-    public previousUrl = '';
-    public isReturnLink = false;
     public flatsList = [];
     public form: any;
+
     @Input() public showSearchWindow = false;
+    @Input() public slideTop: boolean;
 
     constructor(
         public router: Router,
@@ -34,19 +33,13 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public ngOnInit() {
         if (this.platform.isBrowser) {
             if (!this.showSearchWindow) {return; }
-            if ( localStorage.getItem('previousRoute') ) {
-                this.previousUrl = localStorage.getItem('previousRoute');
-                localStorage.removeItem('previousRoute');
-                this.isReturnLink = true;
-            } else {
-                this.isReturnLink = false;
-            }
         }
     }
 
     public formChange(form) {
         console.log('this.showSearchWindow: ', this.showSearchWindow);
         this.form = form;
+        console.log('this.form: ', this.form);
         if (!this.showSearchWindow) {return; }
 
         const params = {
@@ -90,11 +83,17 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public ngOnChanges() {
         if (this.showSearchWindow) {
-            this.formChange(this.form);
-            this.windowScrollLocker.unblock();
+            setTimeout(() => {
+                this.formChange(this.form);
+                this.windowScrollLocker.unblock();
+            }, 500); // таймаут чтобы анимация открытия окна отработала без тормозов
+
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
-            this.windowScrollLocker.block();
+            this.flatsList = [];
+            setTimeout(() => {
+                this.windowScrollLocker.block();
+            }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла
         }
     }
 

@@ -28,14 +28,10 @@
 
                 <div class="search-form__range search-form__range_price">
                     <div class="search-form__range-text search-form__text">
-                        <!-- 
-                            Почему-то изначально значения подгружаются наоборот, в minPrice находится макс цена,
-                            а когда ползунок сдвигается то все становится на свои места
-                        -->
                         <p><span #minPrice></span> млн &#8381;</p>
                         <p><span #maxPrice></span> млн &#8381;</p>
                     </div>
-    
+
                     <ghm-range-number
                         [formControl]="form.controls['price']"
                         [min]="config.price.min"
@@ -46,14 +42,14 @@
                 </div>
             </div>
             <div class="search-form__wrap-item search-form__wrap-item_square">
-                <p class="search-form__subtitle">Площадь  м²</p>
+                <p class="search-form__subtitle">Площадь м²</p>
 
                 <div class="search-form__range search-form__range_square">
                     <div class="search-form__range-text search-form__text">
                         <p><span #minSpace></span></p>
                         <p><span #maxSpace></span></p>
                     </div>
-    
+
                     <ghm-range-number
                         [formControl]="form.controls['space']"
                         [min]="config.space.min"
@@ -70,7 +66,7 @@
                         <p><span #minFloor></span></p>
                         <p><span #maxFloor></span></p>
                     </div>
-    
+
                     <ghm-range-number
                         [formControl]="form.controls['floor']"
                         [min]="config.floor.min"
@@ -84,7 +80,7 @@
                 <p class="search-form__subtitle">Номер корпуса</p>
 
                 <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                    <p class="search-form__text">Все корпуса</p>
+                    <p class="search-form__text">{{form.controls['houses'].value | mySearchFormPipe}}</p>
                 </div>
 
                 <div class="search-form__corpus" *ngIf="showCorpus">
@@ -93,59 +89,24 @@
                         [formControl]="form.controls['houses']"
                         [name]="'houses'">
                     </app-search-checkbox-list>
-                    <div class="search-form__corpus-wrap">
-                        <svg width="355px" height="94px" viewBox="0 0 355 94" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Квартиры_адаптив++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g id="Новотомилино_квартиры_фильтр_выбор-корпуса_1279-768" transform="translate(-353.000000, -271.000000)">
-                                    <g id="Group-20" transform="translate(30.000000, 226.000000)">
-                                        <g id="Group-13-Copy" transform="translate(323.000000, 30.000000)">
-                                            <g id="Group-12" transform="translate(325.500000, 23.000000) rotate(-15.000000) translate(-325.500000, -23.000000) translate(301.000000, 6.000000)">
-                                                <g id="Group-11" transform="translate(17.000000, 17.000000) rotate(-270.000000) translate(-17.000000, -17.000000) ">
-                                                    <polygon id="Rectangle-Copy" fill="#767676" opacity="0.601418" transform="translate(17.000000, 17.000000) rotate(-135.000000) translate(-17.000000, -17.000000) " points="5 5 19.1005051 14.8994949 29 29 14.8578644 19.1421356"></polygon>
-                                                    <polygon id="Rectangle" fill="#D5210D" points="17 0 20.0294373 17 17 17"></polygon>
-                                                    <polygon id="Rectangle-Copy-5" fill="#D5210D" transform="translate(15.529437, 8.500000) scale(1, -1) rotate(-180.000000) translate(-15.529437, -8.500000) " points="14.0294373 0 17.0294373 17 14.0294373 17"></polygon>
-                                                </g>
-                                                <text id="С" opacity="0.6" transform="translate(41.500000, 17.512748) rotate(-270.000000) translate(-41.500000, -17.512748) " font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" font-weight="normal" line-spacing="15" letter-spacing="1" fill="#323232">
-                                                    <tspan x="36.9872521" y="18.0127479">С</tspan>
-                                                </text>
-                                            </g>
-                                            <g id="Group-9" transform="translate(0.000000, 30.238194)">
-                                                <path class="search-form__corpus-img" d="M16.4765277,0.5 L0.5,0.5 L0.5,56.5 L78.723796,56.5 L78.723796,40.4 L16.4765277,40.4 L16.4765277,0.5 Z" stroke="#999A9B" fill="#FFFFFF"></path>
-                                                <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
-                                                    <tspan x="14" y="73">Корпус 1</tspan>
-                                                </text>
-                                                <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
-                                                    <tspan x="101" y="73">Корпус 2</tspan>
-                                                </text>
-                                                <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
-                                                    <tspan x="192" y="73">Корпус 3</tspan>
-                                                </text>
-                                                <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
-                                                    <tspan x="282" y="73">Корпус 4</tspan>
-                                                </text>
-                                                <rect class="search-form__corpus-img" stroke="#999A9B" fill="#FFFFFF" x="92.2606232" y="40" width="79.223796" height="17"></rect>
-                                                <rect class="search-form__corpus-img" stroke="#999A9B" fill="#FFFFFF" x="182.515581" y="40" width="79.223796" height="17"></rect>
-                                                <rect class="search-form__corpus-img" stroke="#999A9B" fill="#FFFFFF" x="275" y="40" width="79.223796" height="17"></rect>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
+
+                    <app-search-form-sections
+                        [formControl]="form.controls['houses']">
+                    </app-search-form-sections>
                 </div>
             </div>
 
-            <button class="search-form__btn" (click)="moreFilter = !moreFilter">{{(moreFilter) ? 'Свернуть' : 'Еще параметры'}}</button>
+            <button class="search-form__btn"
+                    (click)="moreFilter = !moreFilter">{{moreFilter ? 'Свернуть' : 'Еще параметры'}}</button>
         </div>
 
         <div class="search-form__wrap search-form__wrap_decoration" *ngIf="moreFilter">
-                <app-search-checkbox-list
-                    [btnList]="config.decorationList"
-                    [formControl]="form.controls['decoration']"
-                    [name]="'decoration'">
-                </app-search-checkbox-list>
-            <button class="search-form__reset-filter">Сбросить фильтры</button>
+            <app-search-checkbox-list
+                [btnList]="config.decorationList"
+                [formControl]="form.controls['decoration']"
+                [name]="'decoration'">
+            </app-search-checkbox-list>
+            <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
         </div>
 
     </form>

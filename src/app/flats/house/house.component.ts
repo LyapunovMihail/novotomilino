@@ -8,6 +8,7 @@ import {
     HouseService
 } from './house.service';
 import {
+    ActivatedRoute,
     Router
 } from '@angular/router';
 import {
@@ -34,7 +35,9 @@ export class HouseComponent implements OnInit {
 
     public freeFlats: any;
 
+    public houseNumber: string;
     public houseResources: any = null; // image and svg for floor hover
+    public routerEvent;
     public activeLink: string = '';
     public hoverSection: string = ''; // change on floor hover
     public hoverFloor: string = ''; // change on floor hover
@@ -48,6 +51,7 @@ export class HouseComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private activatedRoute: ActivatedRoute,
         public service: HouseService,
         private platform: PlatformDetectService,
     ) {
@@ -55,38 +59,51 @@ export class HouseComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.highlight = false;
-        this.houseResources = HOUSES_IMAGE_AND_SVG;
-        // отписка от кликов и ховеров
-        this.unsubscribeFromDomEvents();
-        if (this.platform.isBrowser) {
-            // получение квартир для нужных секций
-            this.getFlats().subscribe(
-                (data) => {
-                    // удаление этажей для которых нет квартир
-                    // this.removeEmptyFloors(data);
+        this.routerEvent = this.routerChange();
+    }
 
-                    // инициализация клика по этажам
-                    this.floorClickInit();
-                    // инициализация ховера по этажам
-                    this.floorHoverInit(data);
+    public routerChange() {
+        return this.activatedRoute.params.subscribe((params) => {
+            if ((/^[1|2]$/).exec(params['house'])) {
+                this.highlight = false;
+                this.houseNumber = this.activatedRoute.snapshot.params['house'];
+                this.activeLink = this.houseNumber;
+                this.houseResources = HOUSES_IMAGE_AND_SVG[this.houseNumber];
+                // отписка от кликов и ховеров
+                this.unsubscribeFromDomEvents();
+                if (this.platform.isBrowser) {
+                    // получение квартир для нужных секций
+                    this.getFlats().subscribe(
+                        (data) => {
+                            // удаление этажей для которых нет квартир
+                            // this.removeEmptyFloors(data);
 
-                    this.freeFlats = this.service.createFreeFlats(data);
-                },
-                (err) => {
-                    console.log(err);
+                            // инициализация клика по этажам
+                            this.floorClickInit();
+                            // инициализация ховера по этажам
+                            this.floorHoverInit(data);
+
+                            this.freeFlats = this.service.createFreeFlats(data);
+                        },
+                        (err) => console.log(err)
+                    );
+                }
+            } else {
+                this.router.navigate(['/error-404'], {
+                    skipLocationChange: true
                 });
-        }
+            }
+        });
     }
 
     public removeEmptyFloors(data) {
         if (this.platform.isBrowser) {
             // class="select-floor_svg_content_item" data="k-2_s-6_fl-17"
-            const floorsElems = document.querySelectorAll('.select-floor_svg_content_item');
+            let floorsElems = document.querySelectorAll('.select-floor_svg_content_item');
             Array.prototype.forEach.call(floorsElems, (elem) => {
-                const section = this.replaceOnlyNum($(elem).attr('data').split('_')[0]);
-                const floor = this.replaceOnlyNum($(elem).attr('data').split('_')[1]);
-                const flatsCount = data.filter((item) => item.floor === Number(floor) && item.section === section && item.status === '4').length;
+                let section = this.replaceOnlyNum($(elem).attr('data').split('_')[1]);
+                let floor = this.replaceOnlyNum($(elem).attr('data').split('_')[2]);
+                let flatsCount = data.filter((item) => item.floor === Number(floor) && item.section === section && item.status === '4').length;
                 if (flatsCount === 0) {
                     elem.remove();
                 }
@@ -95,9 +112,9 @@ export class HouseComponent implements OnInit {
     }
 
     public floorClickInit() {
-        const that = this;
-        $('#house-svg-scheme').on('click', '.select-floor_svg_content_item', function(e) {
-            const data = $(this).attr('data');
+        let that = this;
+        $('#house-svg-scheme').on('click', '.select-floor_svg_content_item', function (e) {
+            let data = $(this).attr('data');
             if (data) {
                 that.svgRouterLink(null, url(data));
             }
@@ -105,23 +122,24 @@ export class HouseComponent implements OnInit {
 
         function url(data) {
             return (`/flats/${data.split('_')
-            .map((item) => that.replaceOnlyNum(item))
-            .reduce((prev, cur, i) => (
-                (i === 0) ? `section/${cur}`
-                : `section/${prev}/floor/${cur}`
-            ))}`);
+                .map((item) => that.replaceOnlyNum(item))
+                .reduce((prev, cur, i) => (
+                    (i === 0) ? ``
+                        : (i === 1) ? `section/${cur}`
+                        : `${prev}/floor/${cur}`
+                ))}`);
         }
     }
 
     public floorHoverInit(data) {
-        const that = this;
-        $('#house-svg-scheme').on('mouseenter', '.select-floor_svg_content_item', function(e) {
+        let that = this;
+        $('#house-svg-scheme').on('mouseenter', '.select-floor_svg_content_item', function (e) {
             // при наведении на этаж
             // получаем значение этажа и секции из атрибута 'data'
-            that.hoverSection = that.replaceOnlyNum($(this).attr('data').split('_')[0]);
-            that.hoverFloor = that.replaceOnlyNum($(this).attr('data').split('_')[1]);
+            that.hoverSection = that.replaceOnlyNum($(this).attr('data').split('_')[1]);
+            that.hoverFloor = that.replaceOnlyNum($(this).attr('data').split('_')[2]);
             // в этаже находим кружок
-            const circle = $(this).find('.select-floor_svg_content_item_circle');
+            let circle = $(this).find('.select-floor_svg_content_item_circle');
             // по которому центрируется всплывающее окошко
             that.bubbleCoords = {
                 top: circle.offset().top,
@@ -130,10 +148,6 @@ export class HouseComponent implements OnInit {
             // далее собираем данные для всплывающего окошка
             that.bubbleData = [
                 // заготовка для кол-ва квартир по каждой комнатности
-                {
-                    name: 0,
-                    count: 0
-                },
                 {
                     name: 1,
                     count: 0
@@ -145,13 +159,16 @@ export class HouseComponent implements OnInit {
                 {
                     name: 3,
                     count: 0
+                },
+                {
+                    name: 0,
+                    count: 0
                 }
-
             ].map((item) => {
                 // чистим общий массив по нужной секции и этажу
-                data.filter((flat) => flat.section === Number(that.hoverSection) && flat.floor === Number(that.hoverFloor))
-                    // и для каждой квартиры в зависимости от кол-ва комнат
-                    // увеличиваем счетчик
+                data.filter((flat) => flat.section === that.hoverSection && flat.floor === Number(that.hoverFloor))
+                // и для каждой квартиры в зависимости от кол-ва комнат
+                // увеличиваем счетчик
                     .forEach((flat) => {
                         item.count = (Number(flat.rooms) === item.name) ?
                             item.count + 1 :
@@ -162,7 +179,7 @@ export class HouseComponent implements OnInit {
             }).filter((item) => item.count > 0);
         });
         // при уходе курсора с этажа, всплывающее окошко исчезает
-        $('#house-svg-scheme').on('mouseleave', '.select-floor_svg_content_item', function(e) {
+        $('#house-svg-scheme').on('mouseleave', '.select-floor_svg_content_item', function (e) {
             // потому что оно видно когда этаж и секция определены
             that.hoverSection = null;
             that.hoverFloor = null;
@@ -174,9 +191,15 @@ export class HouseComponent implements OnInit {
     }
 
     public getFlats() {
+        this.houseNumber = this.activatedRoute.snapshot.params['house'];
         return this.service.getObjects({
-            sections: '1,2,3,4'
+            sections: (this.houseNumber === '1' ? '1,2,3' : '4,5,6')
         });
+    }
+
+    public ngOnDestroy() {
+        // отписка от событий роута
+        this.routerEvent.unsubscribe();
     }
 
     public unsubscribeFromDomEvents() {
@@ -213,9 +236,9 @@ export class HouseComponent implements OnInit {
             this.highlight = !this.highlight;
 
             Array.prototype.forEach.call(floors, (item) => {
-              this.highlight
-                ? item.classList.add('highlight')
-                : item.classList.remove('highlight');
+                this.highlight
+                    ? item.classList.add('highlight')
+                    : item.classList.remove('highlight');
             });
         }
     }

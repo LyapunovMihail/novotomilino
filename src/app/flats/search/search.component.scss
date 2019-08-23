@@ -12,7 +12,7 @@
     z-index: 21;
     transition: top .5s ease;
 
-    &_open { top: calc(0% + 70px); }
+    &_slide-top { top: calc(0% + 70px); }
 
     &__main {
         width: 100%;
@@ -55,7 +55,11 @@
         @include fw14-20(rgba(0, 1, 5, .6));
         margin: 0 0 10px;
     }
-    &__text { @include fw18-24; }
+    &__text {
+        @include fw18-24;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     &__rooms {
         display: flex;
         list-style: none;
@@ -126,7 +130,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            padding: 0 43px 0 15px;
+            padding: 0 38px 0 15px;
             box-sizing: border-box;
             overflow: hidden;
             &:before {
@@ -157,31 +161,6 @@
         padding: 22px 20px 15px;
         transition: .2s linear;
         cursor: default;
-
-        &-check {
-            display: flex;
-            margin: 0 0 14px;
-
-            input {
-                display: none;
-                &:checked + .search-form__corpus-checkbox {
-                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
-                    border-color: #e7490f;
-                }
-            }
-        }
-        &-text,
-        &-checkbox {
-            transition: color $transition, border-color $transition;
-            cursor: pointer;
-        }
-        &-text { @include fw18-24(); }
-
-        &-img {
-            cursor: pointer;
-            transition: $transition;
-            &:hover { fill: rgba(231, 73, 15, .8); }
-        }
     }
     &__btn {
         width: 182px;

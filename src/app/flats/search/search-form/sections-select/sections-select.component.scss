@@ -1,49 +1,29 @@
-.st0{fill:#888BA2;}
-.st1{fill:#ffffff;stroke:#888BA2;stroke-miterlimit:10;}
-.st2{clip-path:url(#SVGID_2_);}
-.st3{fill:none;}
-.st4{font-family:'Abrade-Book';}
-.st5{font-size:16.5922px;}
+.search-form__houses {
+    width: 355px;
+    height: 94px;
 
-
-.search_form_sections {
-    width: 170px;
-    height: 174px;
-    align-self: center;
-    margin: -26px 20px 0 0;
-
-    &_text {
+    &-text {
         pointer-events: none;
-        transition: .2s linear;
         user-select: none;
-        font: 15px 'Montserrat', sans-serif;
-        fill: #323232;
-        transition: .2s linear;
+        font: 500 12px/18px 'Museo Sans Cyrl', sans-serif;
+        fill: #000105;
         z-index: 1;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
-    &_item {
+    &-img {
+        fill: #FFFFFF;
+        stroke: #999A9B;
         cursor: pointer;
-
-        
-        &_content {
-            transition: .2s linear;
-        }
-
-        &.section--active {
-            .search_form_sections_item_content {
-                fill: #cda571;
-                stroke: #cda571;
-            }
-        }
+        transition: .2s linear;
 
         &:hover {
-            .search_form_sections_item_content {
-                fill: #f2e7d5;
-                stroke: #606060;
-            }
+            fill: rgba(231, 73, 15, .8);
+        }
+        &--active {
+            fill: rgba(231, 73, 15, 1);
+            stroke: rgba(231, 73, 15, 1);
         }
     }
 }

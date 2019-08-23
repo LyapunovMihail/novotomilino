@@ -1,6 +1,6 @@
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
@@ -22,13 +22,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     constructor(
         public formBuilder: FormBuilder,
         public router: Router,
-        public activatedRoute: ActivatedRoute
+        public activatedRoute: ActivatedRoute,
     ) {}
 
     public ngOnInit() {
-
         const params = this.activatedRoute.snapshot.queryParams;
+        this.buildForm(params);
+    }
 
+    public buildForm(params) {
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,
@@ -39,7 +41,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             const arr = [false, false, false, false, false];
             if (params.rooms) {
                 const result = parseQueryParams(params.rooms);
-                const test = result.every((item) => (/^[0|1|2|3][4]$/).exec((item).toString()) ? true : false);
+                const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
                     result.forEach((item) => arr[(item === 0) ? 4 : item - 1] = true);
                 }
@@ -47,18 +49,19 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             return arr.map((item) => (new FormControl(item)));
         })());
 
+        console.log('params: ', params);
         this.form = this.formBuilder.group({
             space: {
-                min: params.spaceMin || this.config.space.min,
-                max: params.spaceMax || this.config.space.max
+                min: Number(params.spaceMin) || this.config.space.min,
+                max: Number(params.spaceMax) || this.config.space.max
             },
             floor: {
-                min: params.floorMin || this.config.floor.min,
-                max: params.floorMax || this.config.floor.max
+                min: Number(params.floorMin) || this.config.floor.min,
+                max: Number(params.floorMax) || this.config.floor.max
             },
             price: {
-                min: params.priceMin || this.config.price.min,
-                max: params.priceMax || this.config.price.max
+                min: Number(params.priceMin) || this.config.price.min,
+                max: Number(params.priceMax) || this.config.price.max
             },
             type: [((type) => {
                 if (type && type.split(',').every((item) => this.config.typeList.some((i) => item === i.value))) {
@@ -89,6 +92,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.houses)]
         });
 
+        console.log('this.form formComp : ', this.form.value);
         this.formChange.emit(this.form.value);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
@@ -97,13 +101,16 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
         function parseQueryParams(val: string): number[] {
             return val.replace(/[^,0-9]/gim, '')
-            .split(',')
-            .map((item) => Number(item));
+                .split(',')
+                .map((item) => Number(item));
         }
+    }
+
+    public formReset() {
+        this.buildForm({});
     }
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
     }
-
 }

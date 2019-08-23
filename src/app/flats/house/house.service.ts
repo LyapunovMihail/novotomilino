@@ -12,13 +12,23 @@ export class HouseService {
     public sectionMarkers() {
         return ([
             {
-                section: '1'
+                section: '1',
+                house: '1'
             }, {
-                section: '2'
+                section: '2',
+                house: '1'
             }, {
-                section: '3'
+                section: '3',
+                house: '1'
             }, {
-                section: '4'
+                section: '4',
+                house: '2'
+            }, {
+                section: '5',
+                house: '2'
+            }, {
+                section: '6',
+                house: '2'
             }
         ]);
     }

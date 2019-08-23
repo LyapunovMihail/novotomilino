@@ -51,7 +51,7 @@ const FlatsComponents = [
                     { path: '', redirectTo: 'plan', pathMatch: 'full' },
                     { path: 'search', component: SearchComponent },
                     { path: 'plan', component: PlanComponent },
-                    { path: 'house', component: HouseComponent },
+                    { path: 'house/:house', component: HouseComponent },
                     { path: 'section/:section/floor/:floor', component: FloorComponent },
                     { path: 'section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
                 ]

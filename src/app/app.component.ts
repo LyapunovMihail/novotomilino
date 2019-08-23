@@ -30,20 +30,28 @@ export const ROOT_SELECTOR = 'app-root';
 })
 export class AppComponent implements OnInit {
 
-  constructor(
+    public previousUrl: string;
+    public currentUrl: string;
+
+    constructor(
     public appState: AppState,
     private router: Router
-  ) {}
+    ) {}
 
-  public ngOnInit() {
-      console.log('Initial App State', this.appState.state);
+    public ngOnInit() {
+        console.log('Initial App State', this.appState.state);
 
-      // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
-      this.router.events.subscribe((event) => {
-          if (!(event instanceof NavigationEnd)) {
+        // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
+        this.router.events.subscribe((event) => {
+            if (!(event instanceof NavigationEnd)) {
               return;
-          }
-          window.scrollTo(0, 0);
-      });
-  }
+            }
+            this.previousUrl = this.currentUrl;
+            this.currentUrl = this.router.url.split('?')[0];
+            if (this.previousUrl && this.currentUrl === '/flats/house') { // и пресекаем скролл если маршрут сменяется
+                return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
+            }
+            window.scrollTo(0, 0);
+        });
+    }
 }
