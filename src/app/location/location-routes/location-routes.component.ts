@@ -67,8 +67,8 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
             // создание новой карты с опциями
             let myMap = new ymaps.Map('map', {
                 center: [55.656513, 37.921365],
-                zoom: 17,
-                controls: []
+                zoom: 12,
+                controls: ['zoomControl']
             }, {
                 minZoom: 11,
                 maxZoom: 18

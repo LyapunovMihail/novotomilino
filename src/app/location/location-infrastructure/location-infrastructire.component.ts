@@ -17,9 +17,6 @@ export class LocationInfrastructureComponent implements OnInit {
     // кнопки боковой навигации
     navList = navList;
 
-    // определяет первое нажатие в боковом меню при заходе на страницу
-    isFirstClick = true;
-
     // массив для временного хранения маркеров
     // чтобы можно было их находить при необходимости давать z-index
     // при выборе определенного типа
@@ -42,20 +39,8 @@ export class LocationInfrastructureComponent implements OnInit {
         // кнопки бокового меню
         let item = $(`.location__infrastructure-list-item_${type}`);
 
-        if (this.isFirstClick) {
-            // при первом клике у всех маркеров и кнопок боковой навигации
-            // удаляются активные классы
-            this.isFirstClick = false;
-            $('.marker-content').removeClass('marker-content_active');
-            $('.location__infrastructure-list-item').removeClass('location__infrastructure-list-item_active');
-            // а кнопкам выбранного типа добавляются
-            item.addClass('location__infrastructure-list-item_active');
-            tooltipType.addClass('marker-content_active');
-        } else {
-            // при последующих выборах просто toggle
-            item.toggleClass('location__infrastructure-list-item_active');
-            tooltipType.toggleClass('marker-content_active');
-        }
+        item.toggleClass('location__infrastructure-list-item_active');
+        tooltipType.toggleClass('marker-content_active');
 
         // для всех маркеров
         $('.marker-content').each(function (i) {
@@ -96,8 +81,8 @@ export class LocationInfrastructureComponent implements OnInit {
 
             let myMap = new ymaps.Map('map', {
                 center: [55.656725165497704, 37.92175475135617],
-                zoom: 17,
-                controls: []
+                zoom: 14,
+                controls: ['zoomControl']
             }, {
                 minZoom: 11,
                 maxZoom: 18
@@ -121,7 +106,7 @@ export class LocationInfrastructureComponent implements OnInit {
                 that.markers[index]['active'] = true;
                 that.markers[index]['type'] = item.type;
                 that.markers[index]['marker'] = new ymaps.Placemark(item.coord, {
-                    iconContent: `<div class="marker-content marker-content_active marker-content__${item.type}">${item.content}</div>`
+                    iconContent: `<div id="marker-${index}" class="marker-content marker-content__${item.type}">${item.content}</div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',
@@ -131,7 +116,14 @@ export class LocationInfrastructureComponent implements OnInit {
                 });
 
                 myMap.geoObjects.add(that.markers[index]['marker']);
-
+                that.markers[index]['marker'].events.add('mouseenter', function (event) {
+                    console.log('event.target: ', $(event.originalEvent.target));
+                    $(`#marker-${index}`).addClass('marker-content_active');
+                });
+                that.markers[index]['marker'].events.add('mouseleave', function (event) {
+                    console.log('event.target: ', $(event.originalEvent.target));
+                    $(`#marker-${index}`).removeClass('marker-content_active');
+                });
             });
         });
 
