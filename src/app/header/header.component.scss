@@ -182,179 +182,179 @@
         }
     }
 
-    @media (max-width: 1279px) {
-        height: auto;
+    // @media (max-width: 1279px) {
+    //     height: auto;
 
-        &__head {
-            border: none;
-            padding: 0 30px;
-            height: 67px;
+    //     &__head {
+    //         border: none;
+    //         padding: 0 30px;
+    //         height: 67px;
 
-            &-sell,
-            &-phone {
-                display: none;
-            }
-            &-logo {
-                width: 303px;
-                height: 48px;
-                background: url('/assets/img/header/logo_tablet.svg') no-repeat;
-                background-size: 100%;
-            }
-            &-menu {
-                display: block;
+    //         &-sell,
+    //         &-phone {
+    //             display: none;
+    //         }
+    //         &-logo {
+    //             width: 303px;
+    //             height: 48px;
+    //             background: url('/assets/img/header/logo_tablet.svg') no-repeat;
+    //             background-size: 100%;
+    //         }
+    //         &-menu {
+    //             display: block;
 
-                &-item {
-                    width: 20px;
-                    height: 3px;
-                    border-radius: 1.5px;
-                    background: $col-black;
+    //             &-item {
+    //                 width: 20px;
+    //                 height: 3px;
+    //                 border-radius: 1.5px;
+    //                 background: $col-black;
 
-                    &:not(:last-child) {
-                        margin: 0 0 3px;
-                    }
-                }
-            }
-        }
+    //                 &:not(:last-child) {
+    //                     margin: 0 0 3px;
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        &__nav {
-            display: none;
-            width: 100%;
-            max-width: none;
-            height: calc(100vh - 67px);
-            min-height: calc(568px);
-            position: fixed;
-            left: 0;
-            top: 67px;
-            background: #fff;
-            padding: 0 0 0 30px;
-            box-sizing: border-box;
+    //     &__nav {
+    //         display: none;
+    //         width: 100%;
+    //         max-width: none;
+    //         height: calc(100vh - 67px);
+    //         min-height: calc(568px);
+    //         position: fixed;
+    //         left: 0;
+    //         top: 67px;
+    //         background: #fff;
+    //         padding: 0 0 0 30px;
+    //         box-sizing: border-box;
 
-            &-list {
-                margin: 38px 0 0;
-                flex-flow: column nowrap;
-                font-size: 24px;
-                line-height: 30px;
+    //         &-list {
+    //             margin: 38px 0 0;
+    //             flex-flow: column nowrap;
+    //             font-size: 24px;
+    //             line-height: 30px;
 
-                &-item {
-                    margin: 0;
+    //             &-item {
+    //                 margin: 0;
 
-                    &:not(:last-child) {
-                        margin: 0 0 20px;
-                    }
-                }
-            }
-            &-footer {
-                width: calc(100% - 60px);
-                position: absolute;
-                bottom: 30px;
-                left: 30px;
-                display: flex;
-                justify-content: space-between;
+    //                 &:not(:last-child) {
+    //                     margin: 0 0 20px;
+    //                 }
+    //             }
+    //         }
+    //         &-footer {
+    //             width: calc(100% - 60px);
+    //             position: absolute;
+    //             bottom: 30px;
+    //             left: 30px;
+    //             display: flex;
+    //             justify-content: space-between;
 
-                &-sell {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    justify-content: flex-end;
+    //             &-sell {
+    //                 display: flex;
+    //                 flex-flow: column nowrap;
+    //                 justify-content: flex-end;
 
-                    .g-link_red {
-                        font-size: 20px;
-                        line-height: 26px;
-                        text-decoration: none;
-                        position: relative;
-                        padding: 0 0 0 24px;
+    //                 .g-link_red {
+    //                     font-size: 20px;
+    //                     line-height: 26px;
+    //                     text-decoration: none;
+    //                     position: relative;
+    //                     padding: 0 0 0 24px;
 
-                        &:before {
-                            content: '';
-                            position: absolute;
-                            top: 2px;
-                            left: 0;
-                            width: 14px;
-                            height: 20px;
-                            background: url('/assets/img/header/location.svg') no-repeat;
-                            background-size: 100%;
-                        }
-                    }
-                }
-                &-phone {
-                    font: 500 20px/26px $font-mus;
-                    @include font-smoothing;
-                    color: $col-black;
-                    margin: 10px 0 0;
-                }
+    //                     &:before {
+    //                         content: '';
+    //                         position: absolute;
+    //                         top: 2px;
+    //                         left: 0;
+    //                         width: 14px;
+    //                         height: 20px;
+    //                         background: url('/assets/img/header/location.svg') no-repeat;
+    //                         background-size: 100%;
+    //                     }
+    //                 }
+    //             }
+    //             &-phone {
+    //                 font: 500 20px/26px $font-mus;
+    //                 @include font-smoothing;
+    //                 color: $col-black;
+    //                 margin: 10px 0 0;
+    //             }
 
-                &-link {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    align-items: flex-end;
-                }
-                &-list {
-                    display: flex;
-                    list-style: none;
-                    margin: 0 0 20px;
-                    padding: 0 5px 0 0;
+    //             &-link {
+    //                 display: flex;
+    //                 flex-flow: column nowrap;
+    //                 align-items: flex-end;
+    //             }
+    //             &-list {
+    //                 display: flex;
+    //                 list-style: none;
+    //                 margin: 0 0 20px;
+    //                 padding: 0 5px 0 0;
 
-                    &-item {
-                        display: flex;
-                        align-items: center;
+    //                 &-item {
+    //                     display: flex;
+    //                     align-items: center;
 
-                        &:not(:last-child) {
-                            margin: 0 15px 0 0;
-                        }
-                    }
-                }
-                &-descr {
-                    font: 500 12px/18px $font-mus;
-                    @include font-smoothing;
-                    color: $col-black;
-                    opacity: .6;
-                }
-            }
-        }
-    }
-    @media (max-width: 767px) {
-        &__container {
-            align-items: flex-end;
-        }
-        &__head {
-            width: calc(50% + (168px / 2)); // Где 168рх это ширина логотипа
-            padding: 0 15px 0 0;
+    //                     &:not(:last-child) {
+    //                         margin: 0 15px 0 0;
+    //                     }
+    //                 }
+    //             }
+    //             &-descr {
+    //                 font: 500 12px/18px $font-mus;
+    //                 @include font-smoothing;
+    //                 color: $col-black;
+    //                 opacity: .6;
+    //             }
+    //         }
+    //     }
+    // }
+    // @media (max-width: 767px) {
+    //     &__container {
+    //         align-items: flex-end;
+    //     }
+    //     &__head {
+    //         width: calc(50% + (168px / 2)); // Где 168рх это ширина логотипа
+    //         padding: 0 15px 0 0;
 
-            &-logo {
-                width: 168px;
-                height: 50px;
-                background: url('/assets/img/header/logo_desk.svg') no-repeat;
-                background-size: 100%;
-            }
-        }
-        &__nav {
-            padding: 0 0 0 15px;
+    //         &-logo {
+    //             width: 168px;
+    //             height: 50px;
+    //             background: url('/assets/img/header/logo_desk.svg') no-repeat;
+    //             background-size: 100%;
+    //         }
+    //     }
+    //     &__nav {
+    //         padding: 0 0 0 15px;
 
-            &-list {
-                margin: 17px 0 0;
+    //         &-list {
+    //             margin: 17px 0 0;
 
-                &-item {
-                    margin: 0;
+    //             &-item {
+    //                 margin: 0;
 
-                    &:not(:last-child) {
-                        margin: 0 0 15px;
-                    }
-                }
-            }
+    //                 &:not(:last-child) {
+    //                     margin: 0 0 15px;
+    //                 }
+    //             }
+    //         }
 
-            &-footer {
-                width: calc(100% - 30px);
-                left: 15px;
-                flex-flow: column nowrap;
+    //         &-footer {
+    //             width: calc(100% - 30px);
+    //             left: 15px;
+    //             flex-flow: column nowrap;
 
-                &-link {
-                    flex-flow: row nowrap;
-                    justify-content: space-between;
-                }
-                &-list {
-                    margin: 25px 0 0;
-                }
-            }
-        }
-    }
+    //             &-link {
+    //                 flex-flow: row nowrap;
+    //                 justify-content: space-between;
+    //             }
+    //             &-list {
+    //                 margin: 25px 0 0;
+    //             }
+    //         }
+    //     }
+    // }
 }
 // Не забыть что логотип должен "отъезжать" к левому краю при открытии меню на разрешениях < 768

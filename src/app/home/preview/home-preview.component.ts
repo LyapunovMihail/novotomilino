@@ -36,6 +36,8 @@ export class HomePreviewComponent implements OnInit {
 
     public isShowModalAdmin: boolean = false;
 
+    public showTrojka: boolean = false;
+
     public slideWidth = document.documentElement.clientWidth;
 
     public gallerySlides: IGallerySnippet[];
