@@ -67,12 +67,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 4px;
-        background: #e7490f;
-        opacity: .4;
+        background: rgba(231, 73, 15, .4);
         box-sizing: border-box;
         padding: 0 20px;
         display: flex;
         align-items: center;
+        justify-content: center;
         z-index: 1;
 
         span {

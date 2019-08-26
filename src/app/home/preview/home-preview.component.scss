@@ -296,9 +296,93 @@
                 }
             }
         }
+
+        &-threeRed {
+            width: 62px;
+            height: 237px;
+            min-height: 237px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50.1%);
+            backface-visibility: hidden;
+            will-change: width;
+            padding: 24px;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 4px 0 0 4px;
+            z-index: 30;
+            transition: .2s ease;
+            cursor: pointer;
+
+            &:hover {
+                width: 82.1px;
+                height: 237px;
+                min-height: 237px;
+            }
+
+            &:hover .main__preview-threeRed-title_transform {
+                right: -46px;
+            }
+            &_active {
+                width: 500px;
+                cursor: default;
+                &:hover { width: 500px; }
+                
+                .main__preview-threeRed-title_transform { opacity: 0; }
+
+                .main__preview-threeRed-title,
+                .main__preview-threeRed-text,
+                .main__preview-threeRed-link {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+            }
+
+            &-title_transform {
+                opacity: 1;
+                position: absolute;
+                right: -66px;
+                top: 102px;
+                transform: rotate(-90deg);
+                backface-visibility: hidden;
+                will-change: transform;
+                transition: .15s ease;
+                transition-delay: opacity .05s;
+            }
+            &-title,
+            &-text,
+            &-link {
+                opacity: 0;
+                pointer-events: none;
+                transition: .15s ease;
+            }
+            
+            &-title {
+                min-width: 452px;
+            }
+            &-text {
+                min-width: 452px;
+                font: 15px/23px 'abrade-book', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                color: #2e2e2e;
+                margin: 20px 0 44px;
+            }
+            &-link {
+                display: block;
+                min-width: 70px;
+                font: 15px/23px 'abrade-book', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-decoration: underline;
+                color: #67c3eb;
+            }
+        }
     }
 }
-
+/*
 @media (max-width: 1280px) {
     .main__preview {
         height: 510px;
@@ -383,3 +467,4 @@
         }
     }
 }
+*/

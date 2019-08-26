@@ -1,5 +1,12 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
+:host {
+    width: $w1600;
+    @media (max-width: 1279px) {
+        width: calc(100% - 60px);
+    }
+}
+
 .shares-list {
 
     &__content {
@@ -68,12 +75,12 @@
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 4px;
-            background: #e7490f;
-            opacity: .4;
+            background: rgba(231, 73, 15, .4);
             box-sizing: border-box;
             padding: 0 20px;
             display: flex;
             align-items: center;
+            justify-content: center;
             z-index: 1;
 
             span {

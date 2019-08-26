@@ -105,6 +105,8 @@
                 transition: height 1s ease-in-out;
                 border-radius: 4px;
                 overflow: hidden;
+                display: flex;
+                justify-content: center;
                 img {
                     width: 100%;
                     height: 100%;
@@ -158,7 +160,7 @@
         }
     }
 }
-
+/*
 @media (max-width: 1279px) {
 
     .main__place-title {
@@ -171,3 +173,4 @@
         top: 120px;
     }
 }
+*/
