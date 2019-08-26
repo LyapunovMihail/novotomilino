@@ -24,7 +24,7 @@ export class CheckboxListComponent {
     constructor() {}
 
     public isChecked(val) {
-        if (val === 0) {
+        if (val === 99) {
             return this.isCheckedAll();
         }
         return this.activeList.some((item) => item === val);

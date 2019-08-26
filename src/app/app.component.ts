@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
+import { FlatsDiscountService } from './commons/flats-discount.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -26,7 +27,8 @@ export const ROOT_SELECTOR = 'app-root';
       <app-overlay></app-overlay>
       <app-img-modal></app-img-modal>
       <app-video-modal></app-video-modal>
-  `
+  `,
+    providers: []
 })
 export class AppComponent implements OnInit {
 
@@ -35,7 +37,8 @@ export class AppComponent implements OnInit {
 
     constructor(
     public appState: AppState,
-    private router: Router
+    private router: Router,
+    public flatsDiscountService: FlatsDiscountService
     ) {}
 
     public ngOnInit() {
@@ -47,11 +50,14 @@ export class AppComponent implements OnInit {
               return;
             }
             this.previousUrl = this.currentUrl;
-            this.currentUrl = this.router.url.split('?')[0];
-            if (this.previousUrl && this.currentUrl === '/flats/house') { // и пресекаем скролл если маршрут сменяется
+            this.currentUrl = this.router.url;
+            if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }
             window.scrollTo(0, 0);
         });
+
+        // Загружаем акции для дальнейшего вычисления скидки по квартирам
+        this.flatsDiscountService.getShares();
     }
 }
