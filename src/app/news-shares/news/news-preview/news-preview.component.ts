@@ -3,7 +3,6 @@ import { AuthorizationObserverService } from '../../../authorization/authorizati
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { mockNews } from './mockNews';
 
 @Component({
     selector: 'app-news-preview',

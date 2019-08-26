@@ -20,6 +20,7 @@ export function createDynamicNewsObj(): Share {
     return ({
         name: '',
         text: '',
+        textPreview: '',
         mainImage: null,
         mainThumbnail: null,
         countdown: false,
@@ -73,8 +74,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
         this.form  = new FormGroup({
-            name: new FormControl('', Validators.required),
+            name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
             text: new FormControl('', Validators.required),
+            textPreview: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
             mainImage: new FormControl(null, Validators.required),
             mainThumbnail: new FormControl(null, Validators.required),
             show_on_main: new FormControl(false, Validators.required),

@@ -27,7 +27,7 @@
             <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="gallery__slider-list">
                 <li *ngFor="let item of mainSnippets; let i = index" class="gallery__slider-item" [ngClass]="{'gallery__slider-item--active' : currentSlide === i}">
 
-                    <img class="gallery__slider-img" [src]="uploadsPath + item.thumbnail" alt="">
+                    <img class="gallery__slider-img" [src]="uploadsPath + item.image" alt="">
 
                     <div class="gallery__slider-descr">
                         <h1 class="gallery__slider-title" *ngIf="!isAuthorizated">{{item.name}}</h1>

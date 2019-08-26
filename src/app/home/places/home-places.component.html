@@ -19,7 +19,7 @@
             <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="main__place-slider-list">
                 <li *ngFor="let item of gallerySlides; let i = index" class="main__place-slider-item" [ngClass]="{'main__place-slider-item--active' : currentSlide === i}">
                     <div class="main__place-slider-img">
-                        <img [src]="uploadsPath + item.thumbnail" alt="">
+                        <img [src]="uploadsPath + item.image" alt="">
                     </div>
 
                     <div class="main__place-slider-descr">

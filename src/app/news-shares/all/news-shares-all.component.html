@@ -33,7 +33,7 @@
                     
                     <div class="news__snippets-descr">
                         <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
-                        <p *ngIf="snippet.description" class="news__snippets-descr-text" [innerHTML]="snippet.description | lineBreakPipe"></p>
+                        <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
                         <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
                     </div>
                 </a>
@@ -57,7 +57,7 @@
 
                     <div class="shares__snippets-descr">
                         <h1 class="shares__snippets-descr-title">{{snippet.name}}</h1>
-                        <p class="shares__snippets-descr-text">{{snippet.text}}</p>
+                        <p class="shares__snippets-descr-text">{{snippet.textPreview}}</p>
                         <p class="shares__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
                     </div>
                 </a>

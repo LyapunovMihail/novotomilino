@@ -37,13 +37,13 @@
             <div class="preview-content__wrap">
                 <a class="preview-content__stock" [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
                     <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
-                    <p class="g-link_white">{{shareSnippet.text}}</p>
+                    <p class="g-link_white">{{shareSnippet.textPreview}}</p>
                     <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
                     <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
                 </a>
                 <a class="preview-content__news" [routerLink]="['/news-shares/news/list/' + newsSnippet._id]" *ngIf="newsSnippet">
                     <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
-                    <p class="g-link_white">{{newsSnippet.description}}</p>
+                    <p class="g-link_white">{{newsSnippet.descrPreview}}</p>
                 </a>
             </div>
         </div>

@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
-                    console.log('this.router.url: ', this.router.url);
 
                     if (this.router.url === '/' || this.router.url === '/about') {
                         this.fixedHeader();

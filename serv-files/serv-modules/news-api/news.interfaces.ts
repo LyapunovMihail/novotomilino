@@ -11,6 +11,7 @@ export interface INewsSnippet {
     category: EnumNewsSnippet ;
     title: string ;
     description: string ;
+    descrPreview: string ;
     show_on_main: boolean ;
     image: string ;
     thumbnail: string ;
