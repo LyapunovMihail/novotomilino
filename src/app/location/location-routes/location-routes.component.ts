@@ -179,6 +179,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                                 strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
                                 strokeWidth: 5,
                                 zIndex: 10,
+                                openBalloonOnClick: false
                             });
                             // во временное хранилище к нужному маркеру добавляем объект с созданным маршрутом
                             that.markers[index]['route'] = route;
