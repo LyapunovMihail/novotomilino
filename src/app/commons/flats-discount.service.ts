@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class FlatsDiscountService {
 
     public shareFLats: ShareFlat[] = [];
-    public shareFLatsLoaded = false;
 
     constructor(
         private http: HttpClient,
@@ -19,7 +18,6 @@ export class FlatsDiscountService {
                     share.body.forEach((block: ShareBodyBlock) => {
                         if (block.blockType === 'flats') {
                             this.shareFLats = [...this.shareFLats, ...block.blockFlats];
-                            this.shareFLatsLoaded = true;
                         }
                     });
                 });
@@ -29,8 +27,6 @@ export class FlatsDiscountService {
     }
 
     public getDiscount(flat): number {
-        if (!this.shareFLatsLoaded) { this.getShares(); }
-
         const shareFlat = this.shareFLats.find((sFlat) => +sFlat.number === flat.flat);
 
         if (shareFlat) {

@@ -22,13 +22,13 @@
                     <span class="search-output__result-item-content 
                                  search-output__result-item-content_price
                                  search-output__result-item-content_price-not-sale"
-                          [ngClass]="{'search-output__result-item-content_price' : !getDiscount(flat),
-                                      'search-output__result-item-content_price-not-sale' : getDiscount(flat)}">
+                          [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
+                                      'search-output__result-item-content_price-not-sale' : flat.discount}">
                         {{flat.price | myBitNumberPipe}} &#8381;
                     </span>
-                    <span *ngIf="getDiscount(flat)"
+                    <span *ngIf="flat.discount"
                           class="search-output__result-item-content search-output__result-item-content_price-sale">
-                          {{+flat.price - getDiscount(flat) | myBitNumberPipe}} &#8381;
+                          {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
                     </span>
                 </span>
             </a>
