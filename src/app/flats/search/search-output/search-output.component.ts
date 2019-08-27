@@ -1,10 +1,6 @@
-import { IAddressItemFlat } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
-
-interface IFlatsWithDiscount extends IAddressItemFlat {
-    discount: number;
-}
 
 @Component({
     selector: 'app-search-output',
@@ -14,7 +10,7 @@ interface IFlatsWithDiscount extends IAddressItemFlat {
 
 export class SearchOutputComponent implements OnChanges {
 
-    @Input() public flatsList: IFlatsWithDiscount[] = [];
+    @Input() public flatsList: IFlatWithDiscount[] = [];
 
     constructor(
         private flatsDiscountService: FlatsDiscountService

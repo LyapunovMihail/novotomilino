@@ -20,3 +20,6 @@ export interface IAddressItemFlat {
     _id?: any;
 }
 
+export interface IFlatWithDiscount extends IAddressItemFlat {
+    discount: number;
+}
