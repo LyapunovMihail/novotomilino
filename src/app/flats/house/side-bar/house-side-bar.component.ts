@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlatformDetectService } from './../../../platform-detect.service';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-house-side-bar',
@@ -10,16 +10,17 @@ import { Component } from '@angular/core';
 
 export class HouseSideBarComponent {
 
+    @Input() public houseNumber: string;
+    @Input() public sectionNumber: string;
+
     constructor(
         public router: Router,
+        private activatedRoute: ActivatedRoute,
         public platform: PlatformDetectService
     ) { }
 
-    public writePreviousUrl() {
-        if (this.platform.isBrowser) {
-            localStorage.setItem('previousRoute', this.router.url);
-            this.router.navigate(['/flats/search']);
-        }
-    }
 
+    public houseNavigate(num) {
+        this.router.navigate(['/flats/house/' + num + '/section/' + this.sectionNumber], {queryParams: this.activatedRoute.snapshot.queryParams});
+    }
 }

@@ -36,6 +36,7 @@ export class HouseComponent implements OnInit {
     public freeFlats: any;
 
     public houseNumber: string;
+    public sectionNumber: string;
     public houseResources: any = null; // image and svg for floor hover
     public routerEvent;
     public activeLink: string = '';
@@ -64,9 +65,10 @@ export class HouseComponent implements OnInit {
 
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
-            if ((/^[1|2]$/).exec(params['house'])) {
+            if ((/^[1|2|3|4]$/).exec(params['house'])) {
                 this.highlight = false;
                 this.houseNumber = this.activatedRoute.snapshot.params['house'];
+                this.sectionNumber = this.activatedRoute.snapshot.params['section'];
                 this.activeLink = this.houseNumber;
                 this.houseResources = HOUSES_IMAGE_AND_SVG[this.houseNumber];
                 // отписка от кликов и ховеров
@@ -242,4 +244,6 @@ export class HouseComponent implements OnInit {
             });
         }
     }
+
+
 }

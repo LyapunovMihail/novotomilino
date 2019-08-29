@@ -20,7 +20,7 @@ export const ADDRESSES_COLLECTION_NAME = 'addresses';
  *   жк   тип кв/ап  секция  этаж  отделка  номер
  */
 
-export interface IAddressItemFlat {
+/* export interface IAddressItemFlat {
     _id?: string;
     article: string; // ОБ-КВ-05-12-05-1010
     type: string; // 'АП' - апартаменты, 'КВ' - квартира
@@ -34,6 +34,30 @@ export interface IAddressItemFlat {
     rooms: string;
     space: number;
     price: number;
+} */
+
+export interface IAddressItemFlat {
+    type: string;
+    house: number;
+    section: number;
+    floor: number;
+    flat: number;
+    status: string;
+    statusName: string;
+    decoration: string;
+    decorationName: string;
+    rooms: number;
+    separateentrance: boolean;
+    terrasescount: boolean;
+    roofexit: boolean;
+    twolevel: boolean;
+    space: number;
+    price: number;
+    _id?: any;
+}
+
+export interface IFlatWithDiscount extends IAddressItemFlat {
+    discount: number;
 }
 
 export interface IFlatResponse {

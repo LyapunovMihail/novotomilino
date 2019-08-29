@@ -1,6 +1,6 @@
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
@@ -17,6 +17,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public moreFilter: boolean = false;
     public showCorpus: boolean = false;
 
+    @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 
     constructor(

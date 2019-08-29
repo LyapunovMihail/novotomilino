@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public form: any;
 
     @Input() public showSearchWindow = false;
-    @Input() public slideTop: boolean;
+    @Input() public parentPlan: boolean;
 
     constructor(
         public router: Router,

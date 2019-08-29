@@ -1,19 +1,69 @@
-<aside class="flats_aside">
-
-    <div class="flats_compass"></div>
-    
-    <ul class="flats_aside_breadcrumbs">
-        <li class="flats_aside_breadcrumbs_item">
-            <a class="flats_aside_breadcrumbs_item_link" routerLink="/flats/plan">Общий вид</a>
-        </li>
-    </ul>
-
-    <div class="flats_aside_description">
-        <h2 class="title flats_aside_description_title">Выберите секцию и этаж</h2>
-        <span class="flats_aside_description_hint">или подберите квартиру по<br>интересующим вас параметрам</span>
-        <div (click)="writePreviousUrl()" class="btn flats_aside_description_to-search">
-            <span class="btn_text">Подбор по параметрам</span>
-        </div>
+<aside class="house__sections-aside">
+    <div class="house__sections-aside-plan">
+        <svg width="171px" height="304px" viewBox="0 0 171 304" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(85.500000, 152.000000) rotate(-90.000000) translate(-85.500000, -152.000000) translate(-66.500000, 66.500000)">
+                    <g transform="translate(243.548069, 111.000000) scale(1, -1) rotate(-15.000000) translate(-243.548069, -111.000000) translate(218.548069, 94.000000)">
+                        <g transform="translate(17.000000, 17.000000) scale(1, -1) rotate(-270.000000) translate(-17.000000, -17.000000) ">
+                            <polygon fill="#767676" opacity="0.601418" transform="translate(17.000000, 17.000000) rotate(-135.000000) translate(-17.000000, -17.000000) " points="5 5 19.1005051 14.8994949 29 29 14.8578644 19.1421356"></polygon>
+                            <polygon fill="#D5210D" points="17 0 20.0294373 17 17 17"></polygon>
+                            <polygon fill="#D5210D" transform="translate(15.529437, 8.500000) scale(1, -1) rotate(-180.000000) translate(-15.529437, -8.500000) " points="14.0294373 0 17.0294373 17 14.0294373 17"></polygon>
+                        </g>
+                        <text opacity="0.6" transform="translate(42.017638, 15.580896) scale(1, -1) rotate(-270.000000) translate(-42.017638, -15.580896) " font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" font-weight="normal" line-spacing="15" letter-spacing="1" fill="#323232">
+                            <tspan x="37.5048902" y="16.0808962">С</tspan>
+                        </text>
+                    </g>
+                    <g transform="translate(20.000000, 46.238194)">
+                        <g transform="translate(-0.000000, 0.761806)">
+                            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                <tspan x="1.13686838e-12" y="11">Корпус 1</tspan>
+                            </text>
+                            <path class="house__sections-aside-plan_corpus-one"
+                                  [class.house__sections-aside-plan_corpus--active]="houseNumber === '1'"
+                                  (click)="houseNavigate(1)"
+                                  fill="#FFFFFF" d="M63.5,37.5 L63.5,22.5 L0.5,22.5 L0.5,53.5 L15.5,53.5 L15.5,37.5 L63.5,37.5 Z" id="Combined-Shape" stroke="#979797"></path>
+                        </g>
+                        <g transform="translate(74.000000, 0.761806)">
+                            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                <tspan x="2.27373675e-13" y="11">Корпус 2</tspan>
+                            </text>
+                            <rect class="house__sections-aside-plan_corpus-two"
+                                  [class.house__sections-aside-plan_corpus--active]="houseNumber === '2'"
+                                  (click)="houseNavigate(2)"
+                                  fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                        </g>
+                        <g transform="translate(138.000000, 0.761806)">
+                            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                <tspan x="2.27373675e-13" y="11">Корпус 3</tspan>
+                            </text>
+                            <rect class="house__sections-aside-plan_corpus-three"
+                                  [class.house__sections-aside-plan_corpus--active]="houseNumber === '3'"
+                                  (click)="houseNavigate(3)"
+                                  fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                        </g>
+                        <g transform="translate(202.000000, 0.761806)">
+                            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                                <tspan x="2.27373675e-13" y="11">Корпус 4</tspan>
+                            </text>
+                            <rect class="house__sections-aside-plan_corpus-four"
+                                  [class.house__sections-aside-plan_corpus--active]="houseNumber === '4'"
+                                  (click)="houseNavigate(4)"
+                                  fill="#FFFFFF" stroke="#979797" x="0.5" y="22.5" width="53" height="15"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
     </div>
-
+    <div class="house__sections-notice">
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_free">3</span>Свободно
+        </p>
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_sale">1</span>Скидка
+        </p>
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_reserve"></span>Забронировано
+        </p>
+    </div>
 </aside>

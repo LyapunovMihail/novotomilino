@@ -1,4 +1,5 @@
-<div class="search-form__container">
+<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan,
+                                                'search-form__container--slide' : moreFilter}">
 
     <form [formGroup]="form" class="search-form">
 
@@ -100,7 +101,7 @@
                     (click)="moreFilter = !moreFilter">{{moreFilter ? 'Свернуть' : 'Еще параметры'}}</button>
         </div>
 
-        <div class="search-form__wrap search-form__wrap_decoration" *ngIf="moreFilter">
+        <div class="search-form__wrap search-form__wrap_decoration" [class.search-form__wrap_decoration--show]="moreFilter">
             <app-search-checkbox-list
                 [btnList]="config.decorationList"
                 [formControl]="form.controls['decoration']"

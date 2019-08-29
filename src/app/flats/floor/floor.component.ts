@@ -25,6 +25,7 @@ export class FloorComponent implements OnInit, OnDestroy {
     public floorCount = FloorCount;
     public floorSvg: string = '';
     public routerEvents: any;
+    public houseNumber: number;
     public sectionNumber: number;
     public floorNumber: number;
     public dottedListMenu: any[] = [];
@@ -48,7 +49,8 @@ export class FloorComponent implements OnInit, OnDestroy {
         .subscribe((params: any) => {
             // проверка на соответствие секции и этажа из конфига ./floor-count.ts
             if ( Object.keys(this.floorCount).some((i) => params['section'] === i)
-                && this.floorCount[params['section']].some((i) => Number(params['floor']) === i) ) {
+                && this.floorCount[params['section']].some((i) => Number(params['floor']) === i) && (/^[1|2|3|4]$/).exec(params['house'])) {
+                this.houseNumber = Number(params['house']);
                 this.sectionNumber = Number(params['section']);
                 this.floorNumber = Number(params['floor']);
                 this.floorSelector = this.floorCount[this.sectionNumber];

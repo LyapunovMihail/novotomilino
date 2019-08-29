@@ -1,8 +1,11 @@
-<div class="search" [ngClass]="{'search_slide-top': slideTop && showSearchWindow}">
+<div class="search" [ngClass]="{'search_slide-top': parentPlan && showSearchWindow}">
 
 
 
-    <app-search-form (formChange)="formChange($event)"></app-search-form>
+    <app-search-form
+        [parentPlan]="parentPlan"
+        (formChange)="formChange($event)">
+    </app-search-form>
 
     <div class="search__main">
 

@@ -44,59 +44,6 @@
                 &_next { transform: rotate(180deg); }
             }
         }
-
-        &-aside {
-            width: 182px;
-            height: 100%;
-            display: flex;
-            flex-flow: column;
-            justify-content: space-between;
-
-            &-plan {
-                &_corpus-one,
-                &_corpus-two,
-                &_corpus-three,
-                &_corpus-four {
-                    transition: fill $transition, stroke $transition;
-                    cursor: pointer;
-                    &:hover {
-                        fill: #E7490F;
-                        stroke: #E7490F;
-                    }
-                }
-            }
-
-            &-text {
-                @include fw18-24;
-                position: relative;
-                display: flex;
-                margin: 0 0 10px;
-                align-items: center;
-                &:last-child { margin: 0; }
-
-                &_free,
-                &_sale,
-                &_reserve {
-                    width: 30px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 2px;
-                    margin: 0 10px 0 0;
-                    box-sizing: border-box;
-                }
-                &_free { background-color: rgba(0, 1, 5, .1); }
-                &_sale {
-                    color: $col-orange;
-                    border: 1px solid $col-orange;
-                }
-                &_reserve {
-                    border: 1px solid rgba(0, 1, 5, .1);
-                    background: url(/assets/img/flats/house/lock_flat.svg) center no-repeat;
-                }
-            }
-        }
     }
 }
 

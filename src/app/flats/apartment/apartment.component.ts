@@ -1,48 +1,54 @@
-import { FavoritesService } from './../../commons/favorites.service';
-import { WindowScrollLocker } from './../../commons/window-scroll-block';
-import { ApartmentService } from './apartment.service';
-import { FloorCount } from './../floor/floor-count';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FlatsDiscountService } from '../../commons/flats-discount.service';
+import { FavoritesService } from '../../commons/favorites.service';
+import { FloorCount } from '../floor/floor-count';
+import { Router } from '@angular/router';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Component({
-    selector: 'app-flats-apartment-page',
+    selector: 'app-flats-apartment-modal',
     templateUrl: './apartment.component.html',
-    styleUrls: ['./apartment.component.scss', '../flats.component.scss'],
-    providers: [
-        WindowScrollLocker,
-        ApartmentService
-    ]
+    styleUrls: ['./apartment.component.scss', '../flats.component.scss']
 })
 
-export class ApartmentComponent implements OnInit, OnDestroy {
+export class ApartmentComponent implements OnInit {
 
-    public routerEvents: any;
     public floorCount = FloorCount;
 
-    public isCallFormOpen: boolean = false;
     public isCreditFormOpen: boolean = false;
     public isReserveFormOpen: boolean = false;
-
-    public flatData: IAddressItemFlat;
-
+    public flatData: IFlatWithDiscount;
     public pdfLink: string;
 
+    @Input() public showApartmentWindow = false;
+    @Input() public flatIndex: number;
+    @Input() public flatsList: IFlatWithDiscount[];
+    @Output() public close: EventEmitter<boolean> = new EventEmitter();
+
     constructor(
-        public windowScrollLocker: WindowScrollLocker,
         public router: Router,
-        public activatedRoute: ActivatedRoute,
-        public apartmentService: ApartmentService,
+        private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
     ) {}
 
     public ngOnInit() {
-        this.routerEvents = this.routerChange();
+        this.flatData = this.flatsList[this.flatIndex];
+        this.flatData.discount = this.getDiscount(this.flatData);
+        this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
     }
 
-    public ngOnDestroy() {
-        this.routerEvents.unsubscribe();
+    public prevFlat() {
+        this.flatData = this.flatsList[--this.flatIndex];
+        this.flatData.discount = this.getDiscount(this.flatData);
+    }
+
+    public nextFlat() {
+        this.flatData = this.flatsList[++this.flatIndex];
+        this.flatData.discount = this.getDiscount(this.flatData);
+    }
+
+    public getDiscount(flat): number {
+        return this.flatsDiscountService.getDiscount(flat);
     }
 
     public toFavorite(): void {
@@ -51,43 +57,6 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
     get inFavorite(): boolean {
         return this.favoritesService.inFavorite(this.flatData);
-    }
-
-    public routerChange() {
-        return this.activatedRoute.params
-        .subscribe((params: any) => {
-            // проверка на соответствие секции и этажа из конфига ./floor-count.ts
-            if ( Object.keys(this.floorCount).some((i) => params['section'] === i )
-                && this.floorCount[params['section']].some((i) => Number(params['floor']) === i) ) {
-                this.apartmentService.getObjects({
-                    sections: params['section'],
-                    floor: params['floor'],
-                    number: params['apartment']
-                }).subscribe(
-                    (data: IAddressItemFlat[]) => {
-                        if (data.length === 1) {
-                            this.flatData = data[0];
-                            this.pdfLink = `/api/pdf?id=${data[0]['_id']}`;
-                        } else {
-                            this.router.navigate(['/error-404'], { skipLocationChange: true });
-                        }
-                    },
-                    (err) => {
-                        console.log(err);
-                    }
-                );
-
-            } else {
-                this.router.navigate(['/error-404'], { skipLocationChange: true });
-            }
-        });
-    }
-
-    public svgRouterLink(section) {
-        const floor = (this.floorCount[section].some((i) => Number(this.flatData.floor) === i))
-            ? this.flatData.floor
-            : this.floorCount[section][this.floorCount[section].length - 1];
-        this.router.navigate([`/flats/section/${section}/floor/${floor}`]);
     }
 
 }
