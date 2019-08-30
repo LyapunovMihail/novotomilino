@@ -1,9 +1,9 @@
+import { IAddressItemFlat, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FlatsDiscountService } from '../../commons/flats-discount.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import {
-    IFloorBubbleCoordinates
-} from './floor-bubble/floor-bubble.component';
-import {
-    HOUSES_IMAGE_AND_SVG
-} from './house-svg';
+    IFlatBubbleCoordinates
+} from './flat-bubble/flat-bubble.component';
 import {
     HouseService
 } from './house.service';
@@ -15,7 +15,7 @@ import {
     Component,
     OnInit,
     ViewEncapsulation,
-    Input
+    OnDestroy
 } from '@angular/core';
 import {
     PlatformDetectService
@@ -28,23 +28,30 @@ declare const $: any;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./house.component.scss', '../flats.component.scss'],
     templateUrl: './house.component.html',
-    providers: [HouseService]
+    providers: [
+        WindowScrollLocker,
+        HouseService
+    ]
 })
 
-export class HouseComponent implements OnInit {
+export class HouseComponent implements OnInit, OnDestroy {
 
     public freeFlats: any;
 
     public houseNumber: string;
     public sectionNumber: string;
-    public houseResources: any = null; // image and svg for floor hover
+    public sectionData: IFlatWithDiscount[][] = null;
+    public flatData: IFlatWithDiscount;
     public routerEvent;
     public activeLink: string = '';
     public hoverSection: string = ''; // change on floor hover
     public hoverFloor: string = ''; // change on floor hover
     public highlight: boolean;
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
+    public floorFlats: IFlatWithDiscount[];
 
-    public bubbleCoords: IFloorBubbleCoordinates = {
+    public bubbleCoords: IFlatBubbleCoordinates = {
         left: 100,
         top: 100
     };
@@ -54,6 +61,8 @@ export class HouseComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         public service: HouseService,
+        private flatsDiscountService: FlatsDiscountService,
+        public windowScrollLocker: WindowScrollLocker,
         private platform: PlatformDetectService,
     ) {
         this.highlight = false;
@@ -70,22 +79,14 @@ export class HouseComponent implements OnInit {
                 this.houseNumber = this.activatedRoute.snapshot.params['house'];
                 this.sectionNumber = this.activatedRoute.snapshot.params['section'];
                 this.activeLink = this.houseNumber;
-                this.houseResources = HOUSES_IMAGE_AND_SVG[this.houseNumber];
-                // отписка от кликов и ховеров
-                this.unsubscribeFromDomEvents();
                 if (this.platform.isBrowser) {
                     // получение квартир для нужных секций
                     this.getFlats().subscribe(
-                        (data) => {
-                            // удаление этажей для которых нет квартир
-                            // this.removeEmptyFloors(data);
-
-                            // инициализация клика по этажам
-                            this.floorClickInit();
+                        (flats) => {
                             // инициализация ховера по этажам
-                            this.floorHoverInit(data);
-
-                            this.freeFlats = this.service.createFreeFlats(data);
+                            console.log('data: ', flats);
+                            this.buildSectionData(flats);
+                            this.floorHoverInit(flats);
                         },
                         (err) => console.log(err)
                     );
@@ -98,44 +99,9 @@ export class HouseComponent implements OnInit {
         });
     }
 
-    public removeEmptyFloors(data) {
-        if (this.platform.isBrowser) {
-            // class="select-floor_svg_content_item" data="k-2_s-6_fl-17"
-            let floorsElems = document.querySelectorAll('.select-floor_svg_content_item');
-            Array.prototype.forEach.call(floorsElems, (elem) => {
-                let section = this.replaceOnlyNum($(elem).attr('data').split('_')[1]);
-                let floor = this.replaceOnlyNum($(elem).attr('data').split('_')[2]);
-                let flatsCount = data.filter((item) => item.floor === Number(floor) && item.section === section && item.status === '4').length;
-                if (flatsCount === 0) {
-                    elem.remove();
-                }
-            });
-        }
-    }
-
-    public floorClickInit() {
-        let that = this;
-        $('#house-svg-scheme').on('click', '.select-floor_svg_content_item', function (e) {
-            let data = $(this).attr('data');
-            if (data) {
-                that.svgRouterLink(null, url(data));
-            }
-        });
-
-        function url(data) {
-            return (`/flats/${data.split('_')
-                .map((item) => that.replaceOnlyNum(item))
-                .reduce((prev, cur, i) => (
-                    (i === 0) ? ``
-                        : (i === 1) ? `section/${cur}`
-                        : `${prev}/floor/${cur}`
-                ))}`);
-        }
-    }
-
     public floorHoverInit(data) {
         let that = this;
-        $('#house-svg-scheme').on('mouseenter', '.select-floor_svg_content_item', function (e) {
+        $('#house-svg-scheme').on('mouseenter', '.select-floor_svg_content_item', function(e) {
             // при наведении на этаж
             // получаем значение этажа и секции из атрибута 'data'
             that.hoverSection = that.replaceOnlyNum($(this).attr('data').split('_')[1]);
@@ -188,14 +154,33 @@ export class HouseComponent implements OnInit {
         });
     }
 
+    public buildSectionData(flats) {
+        this.sectionData = flats.reduce((section: IFlatWithDiscount[][], flat: IAddressItemFlat) => {
+            if (!section[flat.floor] && flat.floor !== 0) { // Убрать проверки на нулевой этаж барвихи
+                section[flat.floor] = [];
+            }
+            if (flat.floor !== 0) {
+                section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat)});
+            } // Убрать проверки на нулевой этаж барвихи
+            return section;
+        }, []);
+
+        this.sectionData.reverse();
+
+        this.sectionData.map((floor: IAddressItemFlat[]) => {
+            floor.sort();
+        });
+        console.log('this.sectionData: ', this.sectionData);
+    }
+
     public replaceOnlyNum(str) {
         return str.replace(/[^0-9]/gim, '');
     }
 
     public getFlats() {
-        this.houseNumber = this.activatedRoute.snapshot.params['house'];
         return this.service.getObjects({
-            sections: (this.houseNumber === '1' ? '1,2,3' : '4,5,6')
+            house: this.houseNumber,
+            sections: this.sectionNumber
         });
     }
 
@@ -204,45 +189,11 @@ export class HouseComponent implements OnInit {
         this.routerEvent.unsubscribe();
     }
 
-    public unsubscribeFromDomEvents() {
-        // отписка от событий dom
-        if (this.platform.isBrowser) {
-            $('#house-svg-scheme').off('click');
-            $('#house-svg-scheme').off('mouseenter');
-            $('#house-svg-scheme').off('mouseleave');
-        }
-    }
-
-    public svgRouterLink(event: Event, url) {
-        if (event) {
-            event.preventDefault();
-        }
-        this.router.navigate([url]);
-    }
-
-    public floorWithFreeFlats(section: number, floor: number): boolean {
-        if (this.freeFlats === undefined ||
-            this.freeFlats[String(section)] === undefined ||
-            this.freeFlats[String(section)][String(floor)] === undefined
-        ) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public highlightFloors(): void {
-        if (this.platform.isBrowser) {
-            const floors = document.querySelectorAll('.house__svg__floor_in-sale');
-
-            this.highlight = !this.highlight;
-
-            Array.prototype.forEach.call(floors, (item) => {
-                this.highlight
-                    ? item.classList.add('highlight')
-                    : item.classList.remove('highlight');
-            });
-        }
+    public openApartmentModal(index, floorFlats) {
+        this.selectedFlatIndex = index;
+        this.floorFlats = floorFlats;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 
 

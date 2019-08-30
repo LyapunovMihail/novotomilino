@@ -1,4 +1,4 @@
-import { FormsRequestModule } from './../forms-request/forms-request.module';
+import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentSideBarComponent } from './apartment/side-bar/apartment-side-bar.component';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';

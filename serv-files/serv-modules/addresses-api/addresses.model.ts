@@ -114,7 +114,6 @@ export class AddressesModel {
             };
         }
 
-        request['status'] = '4';
         return {
             request,
             parameters

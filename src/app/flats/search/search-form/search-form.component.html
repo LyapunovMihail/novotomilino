@@ -84,7 +84,9 @@
                     <p class="search-form__text">{{form.controls['houses'].value | mySearchFormPipe}}</p>
                 </div>
 
-                <div class="search-form__corpus" *ngIf="showCorpus">
+                <div *ngIf="showCorpus"
+                     class="search-form__corpus"
+                     [class.search-form__corpus--position-top]="!parentPlan">
                     <app-search-checkbox-list
                         [btnList]="config.housesList"
                         [formControl]="form.controls['houses']"

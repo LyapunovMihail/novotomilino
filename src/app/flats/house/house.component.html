@@ -1,16 +1,46 @@
 <div class="house">
 
     <div class="house__sections">
+
+        <div class="house__sections__nav">
+            <ul class="house__sections__nav-list">
+                <li class="house__sections__nav-item">
+                    <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
+                </li>
+            </ul>
+        </div>
+
         <div class="house__sections-plan">
-            <div class="house__sections-plan_wrap">
-                <!-- <ul>
-                    <li>
-                        <img src="/assets/img/flats/house/section_plan.svg" alt="plan">
-                    </li>
-                    <li>
-                        <img src="/assets/img/flats/house/section_plan.svg" alt="plan">
-                    </li>
-                </ul> -->
+            <div class="house__sections-plan_wrap" *ngIf="sectionData">
+                <div class="house__sections-chess">
+                    <div>
+                        <h2 class="house__sections-chess_title">Секция {{sectionNumber}}</h2>
+                        <ul class="house__sections-chess_section">
+                            <ng-container *ngFor="let floor of sectionData">
+                                <li *ngIf="floor" class="house__sections-chess_section_floor">
+                                    <ul>
+                                        <li *ngFor="let flat of floor; let i = index"
+                                            class="house__sections-chess_section_flat"
+                                            [ngClass]="{'house__sections-chess_section_flat--free' : flat.status === '4' && !flat.discount,
+                                                        'house__sections-chess_section_flat--reserved' : flat.status !== '4' && !flat.discount,
+                                                        'house__sections-chess_section_flat--discount' : flat.discount}">
+                                            <a class="house__sections-chess_section_flat_link"
+                                                (click)="openApartmentModal(i, floor)">
+                                                {{flat.status !== '4' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
+                                            </a>
+                                        </li>
+                                        <li class="house__sections-chess_section_floor-button">
+                                            <a class="house__sections-chess_section_floor-link"
+                                                [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionNumber + '/floor/' + floor[0].floor">
+                                                {{floor[0].floor}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="house__sections-plan-btn">
                 <button class="house__sections-plan-btn_prev"></button>
@@ -37,7 +67,7 @@
             <p class="hover-flat__info-text">49.5</p>
             <p class="hover-flat__info-text hover-flat__info-text_price">8 335 996 Р</p>
         </div>
-    </div> 
+    </div>
     -->
 
     <app-flats-search
@@ -49,10 +79,17 @@
 <!-- <app-house-side-bar>
 </app-house-side-bar>
 
-<app-flats-floor-bubble
+<app-flats-flat-bubble
     [bubbleData]="bubbleData"
     [section]="hoverSection"
     [floor]="hoverFloor"
     [coords]="bubbleCoords">
-</app-flats-floor-bubble>
+</app-flats-flat-bubble>
  -->
+
+<app-flats-apartment-modal *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="floorFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal>
