@@ -16,19 +16,17 @@ export class FloorService {
 
     public flatsHover(flats: IAddressItemFlat[], callbacks) {
         const mod = ['studio', 'one-room', 'two-room', 'three-room'];
-        flats.forEach((item: IAddressItemFlat) => {
+        flats.forEach((item: IAddressItemFlat, i) => {
             const flat = document.querySelector(`#_${item.flat}`);
-            // статус квартиры
-            const status = true; // item.status === '4';
             if (flat) {
                 $(flat).off('mouseenter');
                 $(flat).off('mouseleave');
                 $(flat).off('click');
                 $(flat).on('mouseenter', () => callbacks.hover(item));
                 $(flat).on('mouseleave', () => callbacks.hover(null));
-                $(flat).on('click', () => callbacks.click(item));
+                $(flat).on('click', () => callbacks.click(i));
                 $(flat).addClass('flat-mod');
-                $(flat).addClass(`flat-mod--${((status) ? mod[Number(item.rooms)] : 'out-of-stock')}`);
+                $(flat).addClass(`flat-mod--${((item.status === '4') ? mod[Number(item.rooms)] : 'out-of-stock')}`);
             }
         });
     }

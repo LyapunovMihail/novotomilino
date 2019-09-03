@@ -25,13 +25,15 @@
                                                         'house__sections-chess_section_flat--reserved' : flat.status !== '4' && !flat.discount,
                                                         'house__sections-chess_section_flat--discount' : flat.discount}">
                                             <a class="house__sections-chess_section_flat_link"
-                                                (click)="openApartmentModal(i, floor)">
+                                                (click)="openApartmentModal(i, floor)"
+                                                (mouseenter)="showFlatBubble($event, flat)"
+                                                (mouseleave)="showBubble = false">
                                                 {{flat.status !== '4' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
                                             </a>
                                         </li>
                                         <li class="house__sections-chess_section_floor-button">
                                             <a class="house__sections-chess_section_floor-link"
-                                                [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionNumber + '/floor/' + floor[0].floor">
+                                                [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionNumber + '/floor/' + floor[0].floor"> <!-- этаж прописан в любой квартире -->
                                                 {{floor[0].floor}}
                                             </a>
                                         </li>
@@ -43,8 +45,12 @@
                 </div>
             </div>
             <div class="house__sections-plan-btn">
-                <button class="house__sections-plan-btn_prev"></button>
-                <button class="house__sections-plan-btn_next"></button>
+                <a class="house__sections-plan-btn_prev" *ngIf="sectionSelector[sectionNumber - 2]"
+                   [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionSelector[sectionNumber - 2]"
+                   [queryParams]="activatedRoute.snapshot.queryParams"></a>
+                <a class="house__sections-plan-btn_next"  *ngIf="sectionSelector[sectionNumber]"
+                   [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionSelector[sectionNumber]"
+                   [queryParams]="activatedRoute.snapshot.queryParams"></a>
             </div>
         </div>
 
@@ -55,37 +61,17 @@
 
     </div>
 
-    <!--
-        Это Блок который должен появлятся при наведении на квартиру внутри шахматки
-        
-    <div class="hover-flat">
-        <div class="hover-flat__img">
-            <img src="" alt="">
-        </div>
-        <div class="hover-flat__info">
-            <p class="hover-flat__info-text">2 комнатная</p>
-            <p class="hover-flat__info-text">49.5</p>
-            <p class="hover-flat__info-text hover-flat__info-text_price">8 335 996 Р</p>
-        </div>
-    </div>
-    -->
-
     <app-flats-search
         [showSearchWindow]="true"
         [parentPlan]="false">
     </app-flats-search>
 </div>
 
-<!-- <app-house-side-bar>
-</app-house-side-bar>
-
 <app-flats-flat-bubble
     [bubbleData]="bubbleData"
-    [section]="hoverSection"
-    [floor]="hoverFloor"
-    [coords]="bubbleCoords">
+    [coords]="bubbleCoords"
+    [showBubble]="showBubble">
 </app-flats-flat-bubble>
- -->
 
 <app-flats-apartment-modal *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"

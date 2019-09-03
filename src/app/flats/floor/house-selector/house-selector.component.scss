@@ -1,0 +1,21 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.floor__plan {
+    width: calc((1240px - 924px) / 2);
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &_hover {
+        cursor: pointer;
+        transition: fill $transition;
+        &:hover {
+            fill: #E7490F;
+            opacity: 1;
+        }
+    }
+    &_active {
+        fill: #E7490F;
+        opacity: 1;
+    }
+}

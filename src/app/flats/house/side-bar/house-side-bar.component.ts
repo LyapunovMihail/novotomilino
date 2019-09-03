@@ -1,5 +1,4 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlatformDetectService } from './../../../platform-detect.service';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -15,8 +14,7 @@ export class HouseSideBarComponent {
 
     constructor(
         public router: Router,
-        private activatedRoute: ActivatedRoute,
-        public platform: PlatformDetectService
+        private activatedRoute: ActivatedRoute
     ) { }
 
 

@@ -20,15 +20,10 @@
         <div class="apartment__info">
             <nav class="apartment__info-nav">
                 <ul class="apartment__info-nav-list">
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a [routerLink]="'/flats/plan'" class="apartment__info-nav-item_link">Общий вид</a>
-                    </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a [routerLink]="'/flats/house/' + flatData.house" class="apartment__info-nav-item_link">Корпус {{flatData.house}}</a>
-                    </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" class="apartment__info-nav-item_link">Секция {{flatData.section}}, Этаж {{flatData.floor}}</a>
-                    </li>
+                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Общий вид</li>
+                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Корпус {{flatData.house}}</li>
+                    <li class="apartment__info-nav-item">Секция {{flatData.section}}</li>
+                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Этаж {{flatData.floor}}</li>
                     <li class="apartment__info-nav-item">Квартира №{{flatData.flat}}</li>
                 </ul>
             </nav>

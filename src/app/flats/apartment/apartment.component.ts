@@ -1,6 +1,5 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { FavoritesService } from '../../commons/favorites.service';
-import { FloorCount } from '../floor/floor-count';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
@@ -12,8 +11,6 @@ import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses
 })
 
 export class ApartmentComponent implements OnInit {
-
-    public floorCount = FloorCount;
 
     public isCreditFormOpen: boolean = false;
     public isReserveFormOpen: boolean = false;

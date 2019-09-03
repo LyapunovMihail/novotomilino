@@ -1,14 +1,9 @@
 <div *ngIf="infoWindow" class="flats-item__description">
-    <!-- 
-        Почему-то "infoWindow.rooms === '0' " не работал и он выводил не "Студия", а "0 комнат".
-        Поэтому поменял на "infoWindow.rooms < '1' "
-    -->
-    <p class="flats-item__description-section-text">{{(infoWindow.rooms < '1') ? '' : infoWindow.rooms }} {{((infoWindow.rooms < '1') ? 'Студия' : "комнатная")}}</p>
+    <p class="flats-item__description-section-text">{{(infoWindow.rooms === 0) ? '' : infoWindow.rooms }} {{((infoWindow.rooms === 0) ? 'Студия' : "комнатная")}}</p>
 
     <p class="flats-item__description-section-text">{{infoWindow.space}} м²</p>
 
     <p class="flats-item__description-section-text">{{infoWindow.decorationName}}</p>
     
     <p class="flats-item__description-section-text flats-item__description-section-text_price">{{infoWindow.price | myBitNumberPipe}} &#8381;</p>
-
 </div>

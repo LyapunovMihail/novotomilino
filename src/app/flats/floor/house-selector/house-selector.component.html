@@ -1,0 +1,46 @@
+<div class="floor__plan">
+    <svg xmlns="http://www.w3.org/2000/svg" width="86" height="355" viewBox="0 0 86 355">
+        <g fill="none" fill-rule="evenodd">
+            <path fill="#767676" d="M14.83 54.05L7.05 36.5l-2.04-19.09 7.836 17.537z"></path>
+            <path fill="#D5210D" d="M5.003 17.377l7.844 17.569-2.926.784z"></path>
+            <path fill="#D5210D" d="M5.031 17.37l2.02 19.129 2.898-.777z"></path>
+            <text fill="#323232" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" letter-spacing="1" opacity=".6" transform="rotate(-15 -5.263 165.256)">
+                <tspan x="38.987" y="20.073">С</tspan>
+            </text>
+            <g>
+                <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                    <tspan x="14" y="73">Корпус 1</tspan>
+                </text>
+                <path class="floor__plan_hover"
+                      [class.floor__plan_active]="houseNumber === 1"
+                      (click)="houseNavigate(1)"
+                      fill="#999A9B" d="M48.138 338.023v-62.247h17.1V355h-57v-16.977h39.9z" opacity=".498">
+                </path>
+                <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                    <tspan x="101" y="73">Корпус 2</tspan>
+                </text>
+                <path class="floor__plan_hover"
+                      [class.floor__plan_active]="houseNumber === 2"
+                      (click)="houseNavigate(2)"
+                      fill="#999A9B" d="M48.238 262.739v-79.224h17v79.224z" opacity=".498">
+                </path>
+                <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                    <tspan x="192" y="73">Корпус 3</tspan>
+                </text>
+                <path class="floor__plan_hover"
+                      [class.floor__plan_active]="houseNumber === 3"
+                      (click)="houseNavigate(3)"
+                      fill="#999A9B" d="M48.238 172.484V93.26h17v79.224z" opacity=".498">
+                </path>
+                <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" opacity=".6" transform="rotate(-90 181.62 173.38)">
+                    <tspan x="282" y="73">Корпус 4</tspan>
+                </text>
+                <path class="floor__plan_hover"
+                      [class.floor__plan_active]="houseNumber === 4"
+                      (click)="houseNavigate(4)"
+                      fill="#999A9B" d="M48.238 80V.776h17V80z" opacity=".498">
+                </path>
+            </g>
+        </g>
+    </svg>
+</div>
