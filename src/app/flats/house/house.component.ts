@@ -35,8 +35,8 @@ import {
 
 export class HouseComponent implements OnInit, OnDestroy {
 
-    public houseNumber: string;
-    public sectionNumber: string;
+    public houseNumber: number;
+    public sectionNumber: number;
     public sectionData: IFlatWithDiscount[][] = null;
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
