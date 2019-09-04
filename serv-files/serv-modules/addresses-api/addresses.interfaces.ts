@@ -37,7 +37,7 @@ export const ADDRESSES_COLLECTION_NAME = 'addresses';
 } */
 
 export interface IAddressItemFlat {
-    type: string;
+    type?: string;
     house: number;
     section: number;
     floor: number;

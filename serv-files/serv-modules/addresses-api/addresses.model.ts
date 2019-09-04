@@ -16,6 +16,7 @@ export class AddressesModel {
     }
 
     public async getObjects(query) {
+        console.log('query: ', query);
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
     }
@@ -36,11 +37,11 @@ export class AddressesModel {
     public parseRequest(query) {
         let request: any = {};
 
-        if ('sections' in query && (/[1|2|3|4]/).exec(query.sections)) {
+        if ('sections' in query && (/[1|2|3|4|5|6]/).exec(query.sections)) {
             request.section = { $in: query.sections.split(',').map(Number) };
         }
         if ('houses' in query && (/[1|2|3|4]/).exec(query.sections)) {
-            request.house = { $in: query.sections.split(',').map(Number) };
+            request.house = { $in: query.houses.split(',').map(Number) };
         }
         if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
             request.rooms = { $in: query.rooms.split(',').map(Number) };

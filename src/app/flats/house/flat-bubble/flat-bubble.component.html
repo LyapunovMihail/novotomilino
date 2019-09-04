@@ -1,6 +1,6 @@
 <div class="hover-flat" *ngIf="showBubble" [style.left.px]="coords.left" [style.top.px]="coords.top">
     <div class="hover-flat__img">
-        <img [src]="'/assets/floor-plans/section_' + bubbleData.section + '/floor_' + bubbleData.floor + '/' + bubbleData.floor + 'floor_' + bubbleData.flat + 'flat.svg'" alt=""> <!-- добавить дом -->
+        <img [src]="'/assets/floor-plans/house_' + bubbleData.house + '/section_' + bubbleData.section + '/floor_' + bubbleData.floor + '/' + bubbleData.floor + 'floor_' + bubbleData.flat + 'flat.svg'" alt=""> <!-- добавить дом -->
     </div>
     <div class="hover-flat__info">
         <p class="hover-flat__info-text">{{(bubbleData.rooms < 1) ? '' : bubbleData.rooms }} {{(bubbleData.rooms < 1) ? 'Студия' : 'комнатная'}}</p>

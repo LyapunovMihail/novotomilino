@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { FloorCount } from '../floor-count';
 
@@ -16,8 +16,7 @@ export class HouseSelectorComponent {
     @Input() public floorNumber: number;
 
     constructor(
-        public router: Router,
-        private activatedRoute: ActivatedRoute
+        public router: Router
     ) { }
 
 
@@ -29,8 +28,7 @@ export class HouseSelectorComponent {
             }
         }
 
-        this.router.navigate(['/flats/house/' + num + '/section/' + this.sectionNumber + '/floor/' + this.floorNumber],
-            {queryParams: this.activatedRoute.snapshot.queryParams});
+        this.router.navigate(['/flats/house/' + num + '/section/' + this.sectionNumber + '/floor/' + this.floorNumber]);
     }
 
 }

@@ -1,4 +1,4 @@
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,9 +14,8 @@ export class FloorService {
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
 
-    public flatsHover(flats: IAddressItemFlat[], callbacks) {
-        const mod = ['studio', 'one-room', 'two-room', 'three-room'];
-        flats.forEach((item: IAddressItemFlat, i) => {
+    public flatsHover(flats: IFlatWithDiscount[], callbacks) {
+        flats.forEach((item: IFlatWithDiscount, i) => {
             const flat = document.querySelector(`#_${item.flat}`);
             if (flat) {
                 $(flat).off('mouseenter');
@@ -26,7 +25,7 @@ export class FloorService {
                 $(flat).on('mouseleave', () => callbacks.hover(null));
                 $(flat).on('click', () => callbacks.click(i));
                 $(flat).addClass('flat-mod');
-                $(flat).addClass(`flat-mod--${((item.status === '4') ? mod[Number(item.rooms)] : 'out-of-stock')}`);
+                $(flat).addClass(`flat-mod--${((item.status === '4') ? 'free' : 'out-of-stock')}`);
             }
         });
     }

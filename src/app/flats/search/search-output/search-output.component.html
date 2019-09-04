@@ -9,7 +9,7 @@
             <a (click)="openApartmentModal(i)" class="search-output__result-item">
                 <div class="search-output__result-item-img">
                     <img class="search-output__result-item-scheme" 
-                         [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+                         [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
                 </div>
                 <span class="search-output__result-item-content search-output__result-item-content_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</span>
                 <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>

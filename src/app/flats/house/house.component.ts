@@ -91,12 +91,10 @@ export class HouseComponent implements OnInit, OnDestroy {
 
     public buildSectionData(flats) {
         this.sectionData = flats.reduce((section: IFlatWithDiscount[][], flat: IAddressItemFlat) => {
-            if (!section[flat.floor] && flat.floor !== 0) { // Убрать проверки на нулевой этаж барвихи
+            if (!section[flat.floor]) { // Убрать проверки на нулевой этаж барвихи
                 section[flat.floor] = [];
             }
-            if (flat.floor !== 0) {
-                section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat)});
-            } // Убрать проверки на нулевой этаж барвихи
+            section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat)});
             return section;
         }, []);
 
@@ -110,7 +108,7 @@ export class HouseComponent implements OnInit, OnDestroy {
 
     public getFlats() {
         return this.service.getObjects({
-            house: this.houseNumber,
+            houses: this.houseNumber,
             sections: this.sectionNumber
         });
     }
