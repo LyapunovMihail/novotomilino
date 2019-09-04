@@ -131,7 +131,7 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             title : ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
             description : '',
             descrPreview: ['', Validators.maxLength(60)],
-            show_on_main : [false, Validators.required],
+            show_on_main : [false],
             image : ['', Validators.required],
             thumbnail : ['', Validators.required],
             icon_mod : ''
