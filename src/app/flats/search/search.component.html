@@ -9,8 +9,14 @@
 
     <div class="search__main">
 
-        <app-search-output [flatsList]="flatsList"></app-search-output>
-        <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>
+        <app-search-output
+            [flatsList]="flatsList"
+            [count]="count"
+            (loadMore)="loadMore()">
+        </app-search-output>
+
+        <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="search__main-more">Показать еще</button>
+
     </div>
 
 </div>

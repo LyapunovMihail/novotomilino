@@ -16,7 +16,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export class SectionsSelectComponent {
 
-    public houses: number[] = [];
+    public houses: string[] = [];
 
     constructor() {}
 

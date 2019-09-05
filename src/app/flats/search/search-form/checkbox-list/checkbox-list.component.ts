@@ -19,12 +19,12 @@ export class CheckboxListComponent {
     @Input() public btnList: any[] = [];
     @Input() public name: string;
 
-    public activeList: number[] = [];
+    public activeList: string[] = [];
 
     constructor() {}
 
     public isChecked(val) {
-        if (val === 99) {
+        if (val === 'all') {
             return this.isCheckedAll();
         }
         return this.activeList.some((item) => item === val);
@@ -37,9 +37,9 @@ export class CheckboxListComponent {
     }
 
     public checkBtn(event) {
-        const value = Number(event.target.value);
+        const value = event.target.value;
 
-        if (value === 99) {
+        if (value === 'all') {
             this.checkAll(event);
             this.propagateChange(this.activeList);
             return;
@@ -60,7 +60,7 @@ export class CheckboxListComponent {
     // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
     public checkAll(event) {
         this.btnList.forEach((item) => {
-           if (item.value !== 99) {
+           if (item.value !== 'all') {
                if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
                    this.activeList.push(item.value);
                } else if (!event.target.checked) {

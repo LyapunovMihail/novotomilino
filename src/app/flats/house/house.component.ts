@@ -22,6 +22,10 @@ import {
     PlatformDetectService
 } from './../../platform-detect.service';
 
+interface IFLatDisabled extends IFlatWithDiscount {
+    disabled: boolean;
+}
+
 @Component({
     selector: 'app-flats-house-page',
     encapsulation: ViewEncapsulation.None,
@@ -37,7 +41,7 @@ export class HouseComponent implements OnInit, OnDestroy {
 
     public houseNumber: number;
     public sectionNumber: number;
-    public sectionData: IFlatWithDiscount[][] = null;
+    public sectionData: IFLatDisabled[][] = null;
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
     public routerEvent;
@@ -46,6 +50,7 @@ export class HouseComponent implements OnInit, OnDestroy {
     public floorFlats: IFlatWithDiscount[];
     public floorCount = FloorCount;
     public sectionSelector: string[] = [];
+    public searchFlats: IFlatWithDiscount[];
 
     public bubbleCoords: IFlatBubbleCoordinates = {
         left: 100,
@@ -77,6 +82,10 @@ export class HouseComponent implements OnInit, OnDestroy {
                     this.getFlats().subscribe(
                         (flats) => {
                             this.buildSectionData(flats);
+                            setTimeout(() => {
+                                this.searchFlatsSelection();
+
+                            }, 900);
                         },
                         (err) => console.log(err)
                     );
@@ -89,21 +98,34 @@ export class HouseComponent implements OnInit, OnDestroy {
         });
     }
 
-    public buildSectionData(flats) {
-        this.sectionData = flats.reduce((section: IFlatWithDiscount[][], flat: IAddressItemFlat) => {
-            if (!section[flat.floor]) { // Убрать проверки на нулевой этаж барвихи
+    private buildSectionData(flats) {
+        this.sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
+            if (!section[flat.floor]) {
                 section[flat.floor] = [];
             }
-            section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat)});
+            section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat), disabled: true});
             return section;
         }, []);
 
         this.sectionData.reverse();
 
-        this.sectionData.map((floor: IAddressItemFlat[]) => {
+        this.sectionData.map((floor: IFLatDisabled[]) => {
             floor.sort();
         });
         console.log('this.sectionData: ', this.sectionData);
+    }
+
+    public searchFlatsSelection() {
+        console.log('searchFlats: ', this.searchFlats);
+        this.sectionData.forEach((floor: IFLatDisabled[]) => {
+            floor.forEach((flat: IFLatDisabled) => {
+                this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
+                    if (flat.flat === searchFlat.flat) {
+                        flat.disabled = false;
+                    }
+                });
+            });
+        });
     }
 
     public getFlats() {

@@ -39,23 +39,23 @@ export const FormConfig = {
     housesList: [
         {
             name: 'Все корпуса',
-            value: 99
+            value: 'all'
         },
         {
             name: 'Корпус 1',
-            value: 1
+            value: '1'
         },
         {
             name: 'Корпус 2',
-            value: 2
+            value: '2'
         },
         {
             name: 'Корпус 3',
-            value: 3
+            value: '3'
         },
         {
             name: 'Корпус 4',
-            value: 4
+            value: '4'
         }
     ]
 

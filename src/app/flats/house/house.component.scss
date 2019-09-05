@@ -162,6 +162,10 @@
                         color: #e7490f;
                     }
 
+                    &--disabled {
+                        opacity: 0.3;
+                    }
+
                     &_link {
                         display: block;
                         cursor: pointer;

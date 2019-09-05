@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { IFlatResponse } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { IAddressItemFlat, IFlatResponse, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
@@ -18,13 +17,17 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
-    public flatsList = [];
+    public flatsList: IAddressItemFlat[] = [];
+    public searchFlats: IAddressItemFlat[] = [];
+    public count: number;
+    public skip: number;
     public form: any;
     public params: any;
     public isLoadMoreBtn = false;
 
     @Input() public showSearchWindow = false;
     @Input() public parentPlan: boolean;
+    @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
 
     constructor(
         public router: Router,
@@ -74,29 +77,36 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         console.log('queryParams: ', params);
 
         this.params = params;
-        this.params.skip = 0;
-        this.params.limit = 10;
+        this.skip = 0;
+        this.flatsList = [];
 
         this.getFlats(params);
-    }
-
-    public loadMore() {
-        this.params.skip += 10;
-        this.getFlats(this.params);
     }
 
     public getFlats(params) {
 
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         this.searchService.getObjects(params).subscribe(
-            (data: IFlatResponse) => {
-                this.isLoadMoreBtn = ( data.flats.length < params.limit ) ? false : true ;
-                this.flatsList = data.flats;
+            (data: IAddressItemFlat[]) => {
+                this.count = data.length;
+                console.log('count: ', this.count);
+                this.searchFlats = data;
+                this.loadMore();
+                this.flatsChanged.emit(this.searchFlats);
             },
             (err) => {
                 console.log(err);
             }
         );
+    }
+
+    public loadMore() {
+        for (let i = 0; i < 10; i++) {
+            if (this.skip < this.searchFlats.length) {
+                this.flatsList.push(this.searchFlats[this.skip++]);
+            }
+        }
+        this.isLoadMoreBtn = this.skip < this.searchFlats.length;
     }
 
     public ngOnChanges() {

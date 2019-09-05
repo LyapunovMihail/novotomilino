@@ -23,7 +23,8 @@
                                             class="house__sections-chess_section_flat"
                                             [ngClass]="{'house__sections-chess_section_flat--free' : flat.status === '4' && !flat.discount,
                                                         'house__sections-chess_section_flat--reserved' : flat.status !== '4' && !flat.discount,
-                                                        'house__sections-chess_section_flat--discount' : flat.discount}">
+                                                        'house__sections-chess_section_flat--discount' : flat.discount,
+                                                        'house__sections-chess_section_flat--disabled' : flat.disabled}">
                                             <a class="house__sections-chess_section_flat_link"
                                                 (click)="openApartmentModal(i, floor)"
                                                 (mouseenter)="showFlatBubble($event, flat)"
@@ -63,7 +64,8 @@
 
     <app-flats-search
         [showSearchWindow]="true"
-        [parentPlan]="false">
+        [parentPlan]="false"
+        (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
     </app-flats-search>
 </div>
 
