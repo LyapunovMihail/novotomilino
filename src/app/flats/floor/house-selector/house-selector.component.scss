@@ -10,12 +10,11 @@
         cursor: pointer;
         transition: fill $transition;
         &:hover {
-            fill: #E7490F;
-            opacity: 1;
+            fill: rgba(231, 73, 15, .8);
         }
     }
     &_active {
-        fill: #E7490F;
-        opacity: 1;
+        fill: rgba(231, 73, 15, 1);
+        stroke: rgba(231, 73, 15, 1);
     }
 }

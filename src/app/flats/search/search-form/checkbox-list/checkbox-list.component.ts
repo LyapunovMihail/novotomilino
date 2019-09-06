@@ -38,7 +38,6 @@ export class CheckboxListComponent {
 
     public checkBtn(event) {
         const value = event.target.value;
-
         if (value === 'all') {
             this.checkAll(event);
             this.propagateChange(this.activeList);

@@ -40,7 +40,7 @@ export class AddressesModel {
         if ('sections' in query && (/[1|2|3|4|5|6]/).exec(query.sections)) {
             request.section = { $in: query.sections.split(',').map(Number) };
         }
-        if ('houses' in query && (/[1|2|3|4]/).exec(query.sections)) {
+        if ('houses' in query && (/[1|2|3|9]/).exec(query.houses)) {
             request.house = { $in: query.houses.split(',').map(Number) };
         }
         if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {

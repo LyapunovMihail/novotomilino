@@ -9,7 +9,7 @@ export const FormConfig = {
     },
     space: {
         min: 17,
-        max: 100
+        max: 120
     },
     sort: 'floor_1',
     typeList: [
@@ -54,8 +54,8 @@ export const FormConfig = {
             value: '3'
         },
         {
-            name: 'Корпус 4',
-            value: '4'
+            name: 'Корпус 9',
+            value: '9'
         }
     ]
 

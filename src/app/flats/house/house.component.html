@@ -10,6 +10,12 @@
             </ul>
         </div>
 
+        <app-house-sidebar
+            [houseNumber]="houseNumber"
+            [sectionNumber]="sectionNumber"
+            [sectionSelector]="sectionSelector">
+        </app-house-sidebar>
+
         <div class="house__sections-plan">
             <div class="house__sections-plan_wrap" *ngIf="sectionData">
                 <div class="house__sections-chess">
@@ -45,20 +51,13 @@
                     </div>
                 </div>
             </div>
-            <div class="house__sections-plan-btn">
-                <a class="house__sections-plan-btn_prev" *ngIf="sectionSelector[sectionNumber - 2]"
-                   [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionSelector[sectionNumber - 2]"
-                   [queryParams]="activatedRoute.snapshot.queryParams"></a>
-                <a class="house__sections-plan-btn_next"  *ngIf="sectionSelector[sectionNumber]"
-                   [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionSelector[sectionNumber]"
-                   [queryParams]="activatedRoute.snapshot.queryParams"></a>
-            </div>
+
         </div>
 
-        <app-house-side-bar
+        <app-house-minimap
             [houseNumber]="houseNumber"
             [sectionNumber]="sectionNumber">
-        </app-house-side-bar>
+        </app-house-minimap>
 
     </div>
 

@@ -21,14 +21,17 @@ export class HouseSelectorComponent {
 
 
     public houseNavigate(num) {
-        if (this.floorCount[num]) {
-            const lastFloor = this.floorCount[num][this.sectionNumber][0];
-            if (lastFloor < this.floorNumber ) {
-                this.floorNumber = lastFloor;
-            }
+        // Проверяем есть ли в схеме дома, на который мы хотим перейти, такие секция и этаж
+        let section = Number(Object.keys(this.floorCount[num]).pop());
+        if (section > this.sectionNumber) {
+            section = this.sectionNumber;
+        }
+        let floor = this.floorCount[num][section][0];
+        if (floor > this.floorNumber) {
+            floor = this.floorNumber;
         }
 
-        this.router.navigate(['/flats/house/' + num + '/section/' + this.sectionNumber + '/floor/' + this.floorNumber]);
+        this.router.navigate(['/flats/house/' + num + '/section/' + section + '/floor/' + floor]);
     }
 
 }

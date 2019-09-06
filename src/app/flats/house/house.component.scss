@@ -3,7 +3,7 @@
 // .search { position: static !important; }
 .house {
     width: 100%;
-    min-height: calc(100vh - 146px);
+    min-height: calc(100vh - 415px);
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -13,7 +13,7 @@
 
     &__sections {
         width: $w1600;
-        height: 774px;
+       // height: 774px;
         display: flex;
         justify-content: space-between;
         margin: 0 0 30px;
@@ -32,7 +32,7 @@
             }
             &-item {
                 position: relative;
-                margin: 0 13px 0 0;
+                margin: 0 13px 0 16px;
                 text-decoration: underline;
                 &:before {
                     content: '';
@@ -52,7 +52,6 @@
 
         &-plan {
             display: flex;
-            align-items: flex-end;
 
             &_wrap { 
                 width: 874px;
@@ -132,6 +131,7 @@
                     text-align: center;
                     border-radius: 2px;
                     box-sizing: border-box;
+                    transition: 0.2s linear;
 
                     &:not(:last-child) {
                         margin-right: 10px;

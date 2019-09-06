@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { IAddressItemFlat, IFlatResponse, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
@@ -17,7 +17,7 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
-    public flatsList: IAddressItemFlat[] = [];
+    public outputFlatsList: IAddressItemFlat[] = [];
     public searchFlats: IAddressItemFlat[] = [];
     public count: number;
     public skip: number;
@@ -78,7 +78,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
         this.params = params;
         this.skip = 0;
-        this.flatsList = [];
+        this.outputFlatsList = [];
 
         this.getFlats(params);
     }
@@ -103,10 +103,11 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public loadMore() {
         for (let i = 0; i < 10; i++) {
             if (this.skip < this.searchFlats.length) {
-                this.flatsList.push(this.searchFlats[this.skip++]);
+                this.outputFlatsList.push(this.searchFlats[this.skip++]);
             }
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
+        this.searchService.setOutputFlatsChanged(this.outputFlatsList);
     }
 
     public ngOnChanges() {
@@ -118,7 +119,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
-            this.flatsList = [];
+            this.outputFlatsList = [];
             setTimeout(() => {
                 this.windowScrollLocker.block();
             }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла

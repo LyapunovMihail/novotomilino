@@ -11,8 +11,7 @@
 
         <app-search-output
             [flatsList]="flatsList"
-            [count]="count"
-            (loadMore)="loadMore()">
+            [count]="count">
         </app-search-output>
 
         <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="search__main-more">Показать еще</button>

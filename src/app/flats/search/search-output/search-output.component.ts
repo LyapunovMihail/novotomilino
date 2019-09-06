@@ -1,7 +1,8 @@
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
+import { SearchService } from '../search.service';
 
 @Component({
     selector: 'app-search-output',
@@ -12,7 +13,7 @@ import { WindowScrollLocker } from '../../../commons/window-scroll-block';
     ]
 })
 
-export class SearchOutputComponent implements OnChanges {
+export class SearchOutputComponent implements OnInit {
 
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
@@ -21,18 +22,20 @@ export class SearchOutputComponent implements OnChanges {
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
-        private flatsDiscountService: FlatsDiscountService
+        private flatsDiscountService: FlatsDiscountService,
+        private searchService: SearchService
     ) {}
 
-    public ngOnChanges(changes: SimpleChanges) {
-        console.log('flats: ', this.flatsList);
-        console.log('count: ', this.count);
-        if (changes.flatsList.currentValue.length) {
-            this.flatsList.map((flat) => {
-                flat.discount = this.getDiscount(flat);
-                return flat;
+    public ngOnInit() {
+        this.searchService.getOutputFlatsChanged()
+            .subscribe((flats: IFlatWithDiscount[]) => {
+                this.flatsList = flats;
+                this.flatsList.map((flat) => {
+                    flat.discount = this.getDiscount(flat);
+                    return flat;
+                });
+                console.log('This.flatsList: ', this.flatsList);
             });
-        }
     }
 
     public flatsCount() {

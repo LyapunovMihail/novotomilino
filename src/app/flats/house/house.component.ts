@@ -21,6 +21,7 @@ import {
 import {
     PlatformDetectService
 } from './../../platform-detect.service';
+import set = Reflect.set;
 
 interface IFLatDisabled extends IFlatWithDiscount {
     disabled: boolean;
@@ -59,7 +60,7 @@ export class HouseComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
-        private activatedRoute: ActivatedRoute,
+        public activatedRoute: ActivatedRoute,
         public service: HouseService,
         private flatsDiscountService: FlatsDiscountService,
         public windowScrollLocker: WindowScrollLocker,
@@ -82,10 +83,6 @@ export class HouseComponent implements OnInit, OnDestroy {
                     this.getFlats().subscribe(
                         (flats) => {
                             this.buildSectionData(flats);
-                            setTimeout(() => {
-                                this.searchFlatsSelection();
-
-                            }, 900);
                         },
                         (err) => console.log(err)
                     );
@@ -112,16 +109,26 @@ export class HouseComponent implements OnInit, OnDestroy {
         this.sectionData.map((floor: IFLatDisabled[]) => {
             floor.sort();
         });
+
         console.log('this.sectionData: ', this.sectionData);
+        if (this.searchFlats) {
+            this.searchFlatsSelection();
+        }
     }
 
     public searchFlatsSelection() {
-        console.log('searchFlats: ', this.searchFlats);
         this.sectionData.forEach((floor: IFLatDisabled[]) => {
             floor.forEach((flat: IFLatDisabled) => {
+                flat.disabled = true;
                 this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
-                    if (flat.flat === searchFlat.flat) {
+                    if (searchFlat.house === Number(this.houseNumber)
+                        && searchFlat.section === Number(this.sectionNumber)
+                        && searchFlat.flat === flat.flat ) {
                         flat.disabled = false;
+                        if (flat.rooms !== searchFlat.rooms) {
+                            console.log('houseFlat: ', flat);
+                            console.log('searchFlat: ', searchFlat);
+                        }
                     }
                 });
             });
@@ -148,7 +155,8 @@ export class HouseComponent implements OnInit, OnDestroy {
     }
 
     public showFlatBubble(event, flat) {
-        const distanceToBottom = event.target.offsetParent.offsetHeight + 30 - event.target.offsetTop;
+        const houseElem = document.querySelector('.house');
+        const distanceToBottom = houseElem.clientHeight + 30 - (event.target.offsetTop + 125);
         const bubbleHeight = flat.discount ? 312 : 288;
         this.bubbleCoords.top = (distanceToBottom > bubbleHeight) ? event.target.getBoundingClientRect().top : event.target.getBoundingClientRect().top - bubbleHeight + 30;
         this.bubbleCoords.left = event.target.getBoundingClientRect().left + 40;

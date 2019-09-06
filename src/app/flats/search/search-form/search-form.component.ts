@@ -27,8 +27,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        const params = this.activatedRoute.snapshot.queryParams;
-        this.buildForm(params);
+        this.activatedRoute.queryParams.subscribe((queryParams) => {
+            console.log('QUERYPARAMS: ', queryParams);
+            this.buildForm(queryParams);
+        });
     }
 
     public buildForm(params) {
@@ -44,7 +46,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 const result = parseQueryParams(params.rooms);
                 const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === 0) ? 4 : item - 1] = true);
+                    result.forEach((item) => arr[(item === '0') ? 4 : Number(item) - 1] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));
@@ -86,7 +88,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                  */
                 if (houses) {
                     const result = parseQueryParams(houses);
-                    const test = result.every((item) => (/^[1|2|3|4]$/).exec((item).toString()) ? true : false);
+                    const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
                     return (test) ? result : [];
                 }
                 return [];
@@ -100,10 +102,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             this.formChange.emit(form);
         });
 
-        function parseQueryParams(val: string): number[] {
+        function parseQueryParams(val: string): string[] {
             return val.replace(/[^,0-9]/gim, '')
-                .split(',')
-                .map((item) => Number(item));
+                .split(',');
         }
     }
 

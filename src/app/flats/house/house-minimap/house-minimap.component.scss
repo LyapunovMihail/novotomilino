@@ -1,0 +1,32 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.house__sections {
+    width: $w1600;
+    height: 774px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 30px;
+
+    &-aside {
+        width: 182px;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+
+        &-plan {
+            &_corpus {
+                transition: fill $transition, stroke $transition;
+                cursor: pointer;
+
+                &:hover {
+                    fill: rgba(231, 73, 15, .8);
+                }
+                &--active {
+                    fill: rgba(231, 73, 15, 1);
+                    stroke: rgba(231, 73, 15, 1);
+                }
+            }
+        }
+    }
+}
