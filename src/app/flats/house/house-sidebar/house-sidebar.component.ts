@@ -9,13 +9,13 @@ import { Component, Input } from '@angular/core';
 
 export class HouseSidebarComponent {
 
-    @Input() public houseNumber: string;
-    @Input() public sectionNumber: string;
+    @Input() public houseNumber: number;
+    @Input() public sectionNumber: number;
     @Input() public sectionSelector: string[];
 
     constructor(
         public router: Router,
-        private activatedRoute: ActivatedRoute
+        public activatedRoute: ActivatedRoute
     ) { }
 
     public houseNavigate(num) {
