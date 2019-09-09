@@ -78,14 +78,12 @@ export class DbCronUpdate {
     }
 
     public transformFlatItem(object: DbJsonObject) {
-        if (('Article' in object) && object.Article.indexOf('БР-КВ-') !== 0 && object.Article.indexOf('БР-КЛ-') !== 0
-          && object.Article.indexOf('БР-ММ-') !== 0) {
+        if (('Article' in object) && !object.Article.startsWith('ТОМ')) {
             return;
         }
-        const {type, section, floor, flat} = this.parseArticle(object.Article);
+        const {house, section, floor, flat} = this.parseArticle(object.Article);
         const itemflat: IAddressItemFlat = {
-            type,
-            house: 1,
+            house,
             section,
             floor,
             rooms: Number(object.Rooms),
@@ -106,11 +104,11 @@ export class DbCronUpdate {
     }
 
     private parseArticle(article: string) {
-        // БР-КВ-01-04-02-018
-        const [, type, sectionStr, floorStr, , flatStr] = article.split('-');
-        const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
+        // ТОМ-03-01-04-02-018
+        const [, houseStr, sectionStr, floorStr, , flatStr] = article.split('-');
+        const [house, section, floor, flat] = [houseStr, sectionStr, floorStr, flatStr].map(Number);
         return {
-            type,
+            house,
             section,
             floor,
             flat,

@@ -96,7 +96,7 @@ export class FlatsComponent implements OnInit {
 
     public loadMore() {
         this.params.skip += 10;
-        this.getFlats( );
+        this.getFlats();
     }
 
     public getFlats() {

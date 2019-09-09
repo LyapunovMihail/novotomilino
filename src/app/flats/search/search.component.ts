@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { IFlatResponse } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
@@ -19,6 +20,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public flatsList = [];
     public form: any;
+    public params: any;
+    public isLoadMoreBtn = false;
 
     @Input() public showSearchWindow = false;
     @Input() public parentPlan: boolean;
@@ -69,11 +72,26 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         console.log('queryParams: ', params);
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
+        this.params = params;
+        this.params.skip = 0;
+        this.params.limit = 10;
+
+        this.getFlats(params);
+    }
+
+    public loadMore() {
+        this.params.skip += 10;
+        this.getFlats(this.params);
+    }
+
+    public getFlats(params) {
+
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         this.searchService.getObjects(params).subscribe(
-            (data: IAddressItemFlat[]) => {
-                this.flatsList = data;
+            (data: IFlatResponse) => {
+                this.isLoadMoreBtn = ( data.flats.length < params.limit ) ? false : true ;
+                this.flatsList = data.flats;
             },
             (err) => {
                 console.log(err);

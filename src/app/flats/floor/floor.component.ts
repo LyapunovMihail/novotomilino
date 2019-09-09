@@ -55,13 +55,14 @@ export class FloorComponent implements OnInit, OnDestroy {
         return this.activatedRoute.params
         .subscribe((params: any) => {
             // проверка на соответствие дома, секции и этажа из конфига ./floor-count.ts
+            console.log('params: ', params);
             if (this.floorCount[params.house] && this.floorCount[params.house][params.section]
                 && this.floorCount[params.house][params.section].some((floor) => floor === Number(params.floor))) {
                 this.houseNumber = Number(params.house);
                 this.sectionNumber = Number(params.section);
                 this.floorNumber = Number(params.floor);
                 this.floorSelector = this.floorCount[this.houseNumber][this.sectionNumber];
-                this.getFloorSvg(`/assets/floor-plans/section_${this.sectionNumber}/floor_${this.floorNumber}/sect_${this.sectionNumber}_fl_${this.floorNumber}.svg`)  // добавить дом
+                this.getFloorSvg(`/assets/floor-plans/house_${this.houseNumber}/section_${this.sectionNumber}/floor_${this.floorNumber}/sect_${this.sectionNumber}_fl_${this.floorNumber}.svg`)  // добавить дом
                 .subscribe(
                     (data: string) => {
                         this.floorSvg = data;
@@ -71,10 +72,12 @@ export class FloorComponent implements OnInit, OnDestroy {
                             floor: this.floorNumber + ''
                         }).subscribe(
                             (flats: IAddressItemFlat[]) => {
+                                console.log('flats: ', flats);
+                                const discountizatedFlats = flats.map((flat: IFlatWithDiscount) => {flat.discount = this.flatsDiscountService.getDiscount(flat); return flat; });
                                 if ( this.platform.isBrowser ) {
-                                    this.floorService.flatsHover(flats, {
-                                        click: (i) => this.openApartmentModal(i, flats),
-                                        hover: (flat) => this.infoWindow = {...flat, discount: this.flatsDiscountService.getDiscount(flat)}
+                                    this.floorService.flatsHover(discountizatedFlats, {
+                                        click: (i) => this.openApartmentModal(i, discountizatedFlats),
+                                        hover: (flat) => this.infoWindow = flat
                                     });
                                 }
                             },
@@ -104,7 +107,7 @@ export class FloorComponent implements OnInit, OnDestroy {
 
     public openApartmentModal(index, floorFlats) {
         this.selectedFlatIndex = index;
-        this.floorFlats = floorFlats.map((flat: IFlatWithDiscount) => {flat.discount = this.flatsDiscountService.getDiscount(flat); return flat; });
+        this.floorFlats = floorFlats;
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
     }

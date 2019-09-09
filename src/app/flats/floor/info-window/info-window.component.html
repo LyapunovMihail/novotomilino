@@ -5,5 +5,14 @@
 
     <p class="flats-item__description-section-text">{{infoWindow.decorationName}}</p>
     
-    <p class="flats-item__description-section-text flats-item__description-section-text_price">{{infoWindow.price | myBitNumberPipe}} &#8381;</p>
+    <div>
+        <p class="flats-item__description-section-text flats-item__description-section-text_price"
+           [class.flats-item__description-section-text_price_not-sale]="infoWindow.discount">
+            {{infoWindow.price | myBitNumberPipe}} &#8381;
+        </p>
+        <p *ngIf="infoWindow.discount"
+           class="flats-item__description-section-text flats-item__description-section-text_price_sale">
+            {{infoWindow.price - infoWindow.discount | myBitNumberPipe}} &#8381;
+        </p>
+    </div>
 </div>

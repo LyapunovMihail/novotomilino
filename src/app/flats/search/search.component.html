@@ -10,7 +10,7 @@
     <div class="search__main">
 
         <app-search-output [flatsList]="flatsList"></app-search-output>
-        
+        <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>
     </div>
 
 </div>
