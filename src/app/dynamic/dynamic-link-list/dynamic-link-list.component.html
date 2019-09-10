@@ -1,21 +1,25 @@
 <div class="dynamic__main-nav">
-    <svg width="248px" height="305px" viewBox="0 0 248 305" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg width="282px" height="513px" viewBox="0 0 282 513" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="Фотоотчет++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Новотомилино_ход-строительства_админка_создан-пустой-корпус" transform="translate(-1172.000000, -457.000000)">
-
-                <g id="Group-15" transform="translate(1285.500000, 595.000000) rotate(-75.000000) translate(-1285.500000, -595.000000) translate(1130.000000, 481.000000)">
+            <g id="Artboard" transform="translate(-119.000000, -151.000000)">
+                <g id="план-комплекса" transform="translate(260.000000, 409.000000) rotate(90.000000) translate(-260.000000, -409.000000) translate(2.000000, 267.000000)">
 
                     <ng-container *ngFor="let link of linksArray; let i = index">
 
-                        <g (click)="scrollLink(link._id, link.year, link.month)" style="cursor: pointer">
-                            <path [attr.d]="link.path" id="Combined-Shape" fill="#DDDDDD" [attr.transform]="i === 0 ? 'translate(142.500000, 84.687274) rotate(-330.000000) translate(-142.500000, -84.687274)' : ''"></path>
+                        <g (click)="scrollLink(link._id, link.year, link.month)" style="cursor: pointer" [ngClass]="{'not-ready': link.dasharray }">
+                            <path [attr.d]="link.path" id="Combined-Shape" 
+                                  [attr.fill]="link.fill ? '#FFFFFF' : '#DDDDDD'" 
+                                  [attr.transform]="link.transform" 
+                                  [attr.stroke-dasharray]="link.dasharray" 
+                                  [attr.stroke]="link.stroke"
+                                  [attr.opacity]="link.opacity"></path>
 
                             <text id="{{i}}" opacity="0.6" [attr.transform]="link.name.transform" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
                                 <tspan [attr.x]="link.name.x" [attr.y]="link.name.y">{{link.name.value}}</tspan>
                             </text>
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-                                <g fill="none" fill-rule="evenodd" [attr.transform]="link.ready.transform">
-                                    <text id="0%" opacity="0.6" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105" text-anchor="middle" transform="translate(7, 1.5)">
+                                <g fill="none" fill-rule="evenodd" [attr.transform]="link.ready.transform" [attr.opacity]="link.ready.opacity ? link.ready.opacity : '0.6'">
+                                    <text id="0%" [attr.opacity]="link.name.opacity ? link.name.opacity : 0.6" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105" text-anchor="middle" transform="translate(7, 1.5)">
                                         <tspan x="14" y="22">{{link.ready.value}}%</tspan>
                                     </text>
                                     <g id="Segments-circle">

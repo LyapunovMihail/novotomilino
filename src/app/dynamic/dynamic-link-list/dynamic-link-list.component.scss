@@ -36,17 +36,14 @@
 //}
 
 .dynamic__main-nav {
-    width: calc(100% - 952px);
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: flex-end;
     padding: 73px 0 0;
-
-    svg {
-        overflow: visible;
-        transform: translate(288px);
-    }
 }
 
 .ready-segments {
     cursor: pointer;
 }
+.not-ready { pointer-events: none; }
