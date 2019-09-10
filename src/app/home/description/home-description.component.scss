@@ -26,23 +26,10 @@
                 font: inherit;
                 position: relative;
                 text-decoration: none;
+                border-bottom: 3px solid;
+                transition: border-color .2s ease;
 
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    height: 3px;
-                    background-color: $col-orange;
-                    right: 0;
-                    bottom: 0;
-                    transition: width $trans-link;
-                }
-
-                &:hover {
-                    &:before {
-                        width: 0;
-                    }
-                }
+                &:hover { border-bottom-color: transparent; }
             }
         }
 

@@ -43,7 +43,7 @@ export class DynamicLinkListComponent implements OnInit, OnChanges, AfterViewIni
         this.dynamicLinkListService.fillReadySegments(this.linksArray, true);
     }
 
-    // скролл до якоря
+    // Скролл до якоря
     public scrollLink(link, year, month) {
         if (!this.platform.isBrowser) { return false; }
         if (year !== this.year && month !== this.month) { return false; }
@@ -57,7 +57,7 @@ export class DynamicLinkListComponent implements OnInit, OnChanges, AfterViewIni
         this.linksArray = JSON.parse(JSON.stringify(SVGLINKS)); // Копирование массива
         this.objectsArray.forEach((obj) => {
             if (obj.year !== this.year || obj.month !== this.month) { return; }
-            if (obj.title.toLowerCase().indexOf('детский сад') !== -1) {
+            if (obj.title.toLowerCase().indexOf('665') !== -1) { // Детский сад #665
                 this.linksArray[0] = {...obj, ...this.linksArray[0]};
                 this.linksArray[0].ready.value = obj.ready;
                 this.linksArray[0]._id = obj._id;
@@ -73,10 +73,18 @@ export class DynamicLinkListComponent implements OnInit, OnChanges, AfterViewIni
                 this.linksArray[3] = {...obj, ...this.linksArray[3]};
                 this.linksArray[3].ready.value = obj.ready;
                 this.linksArray[3]._id = obj._id;
-            } else if (obj.title.indexOf('4') !== -1) {
-                this.linksArray[4] = {...obj, ...this.linksArray[4]};
-                this.linksArray[4].ready.value = obj.ready;
-                this.linksArray[4]._id = obj._id;
+            } else if (obj.title.indexOf('9') !== -1) {
+                this.linksArray[9] = {...obj, ...this.linksArray[9]};
+                this.linksArray[9].ready.value = obj.ready;
+                this.linksArray[9]._id = obj._id;
+            } else if (obj.title.indexOf('666') !== -1) { // Школа #666
+                this.linksArray[11] = {...obj, ...this.linksArray[11]};
+                this.linksArray[11].ready.value = obj.ready;
+                this.linksArray[11]._id = obj._id;
+            } else if (obj.title.indexOf('667') !== -1) { // Детский сад #667
+                this.linksArray[12] = {...obj, ...this.linksArray[12]};
+                this.linksArray[12].ready.value = obj.ready;
+                this.linksArray[12]._id = obj._id;
             }
         });
     }

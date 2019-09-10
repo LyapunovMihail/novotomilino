@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DynamicComponent } from './dynamic.component';
 import { NgModule } from '@angular/core';
 
-let DynamicComponents = [
+const DynamicComponents = [
     DynamicComponent,
     DynamicDateComponent,
     DynamicObjectComponent,

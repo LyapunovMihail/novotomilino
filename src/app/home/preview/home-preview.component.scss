@@ -299,8 +299,8 @@
 
         &-threeRed {
             width: 62px;
-            height: 237px;
-            min-height: 237px;
+            height: 255px;
+            min-height: 255px;
             position: absolute;
             right: 0;
             top: 50%;
@@ -318,8 +318,8 @@
 
             &:hover {
                 width: 82.1px;
-                height: 237px;
-                min-height: 237px;
+                height: 255px;
+                min-height: 255px;
             }
 
             &:hover .main__preview-threeRed-title_transform {
@@ -330,7 +330,10 @@
                 cursor: default;
                 &:hover { width: 500px; }
                 
-                .main__preview-threeRed-title_transform { opacity: 0; }
+                .main__preview-threeRed-title_transform {
+                    opacity: 0;
+                    pointer-events: none;
+                }
 
                 .main__preview-threeRed-title,
                 .main__preview-threeRed-text,
@@ -343,11 +346,8 @@
             &-title_transform {
                 opacity: 1;
                 position: absolute;
-                right: -66px;
-                top: 102px;
-                transform: rotate(-90deg);
-                backface-visibility: hidden;
-                will-change: transform;
+                top: 25px;
+                left: 15px;
                 transition: .15s ease;
                 transition-delay: opacity .05s;
             }
@@ -364,20 +364,18 @@
             }
             &-text {
                 min-width: 452px;
-                font: 15px/23px 'abrade-book', sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                color: #2e2e2e;
+                font: 500 16px/24px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
                 margin: 20px 0 44px;
             }
             &-link {
-                display: block;
+                display: inline-block;
                 min-width: 70px;
-                font: 15px/23px 'abrade-book', sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                text-decoration: underline;
-                color: #67c3eb;
+                font: 500 16px/22px $font-mus;
+                @include font-smoothing;
+                border-bottom: 1px solid;
+                color: $col-orange;
             }
         }
     }
