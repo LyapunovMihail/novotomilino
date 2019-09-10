@@ -7,19 +7,22 @@
                     <ng-container *ngFor="let link of linksArray; let i = index">
 
                         <g (click)="scrollLink(link._id, link.year, link.month)" style="cursor: pointer" [ngClass]="{'not-ready': link.dasharray }">
-                            <path [attr.d]="link.path" id="Combined-Shape" 
-                                  [attr.fill]="link.fill ? '#FFFFFF' : '#DDDDDD'" 
-                                  [attr.transform]="link.transform" 
-                                  [attr.stroke-dasharray]="link.dasharray" 
-                                  [attr.stroke]="link.stroke"
-                                  [attr.opacity]="link.opacity"></path>
-
-                            <text id="{{i}}" opacity="0.6" [attr.transform]="link.name.transform" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105">
+                            <path [attr.d]="link.path" id="Combined-Shape"
+                                  [attr.transform]="link.transform"
+                                  [attr.fill]="link.dasharray ? '#FFFFFF' : '#DDDDDD'"
+                                  [attr.opacity]="link.dasharray ? 0.4 : 1"
+                                  [attr.stroke]="link.dasharray ? '#000105' : ''"
+                                  [attr.stroke-dasharray]="link.dasharray"></path>
+                            <text id="{{i}}"
+                                  [attr.opacity]="link.dasharray ? 0.4 : 1"
+                                  [attr.transform]="link.name.transform" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" font-weight="500" line-spacing="18" fill="#000105">
                                 <tspan [attr.x]="link.name.x" [attr.y]="link.name.y">{{link.name.value}}</tspan>
                             </text>
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-                                <g fill="none" fill-rule="evenodd" [attr.transform]="link.ready.transform" [attr.opacity]="link.ready.opacity ? link.ready.opacity : '0.6'">
-                                    <text id="0%" [attr.opacity]="link.name.opacity ? link.name.opacity : 0.6" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="normal" line-spacing="18" fill="#000105" text-anchor="middle" transform="translate(7, 1.5)">
+                                <g fill="none" fill-rule="evenodd"
+                                   [attr.transform]="link.ready.transform"
+                                   [attr.opacity]="link.dasharray ? 0 : 1">
+                                    <text id="0%" opacity="0.6" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="12" font-weight="500" line-spacing="18" fill="#000105" text-anchor="middle" transform="translate(7, 1.5)">
                                         <tspan x="14" y="22">{{link.ready.value}}%</tspan>
                                     </text>
                                     <g id="Segments-circle">

@@ -41,6 +41,10 @@
     display: flex;
     justify-content: flex-end;
     padding: 73px 0 0;
+
+  svg {
+    overflow: visible;
+  }
 }
 
 .ready-segments {
