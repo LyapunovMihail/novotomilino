@@ -32,7 +32,7 @@
             <p class="form-request__subtitle">Телефон</p>
             <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
                 [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
-                class="form-request__field" [textMask]="{mask: phoneMask}" type="text">
+                class="form-request__field" placeholder="+7 (___) ___-__-__" [textMask]="{mask: phoneMask}" type="text">
         </div>
 
         <div class="form-request__wrap form-request__wrap_last">
