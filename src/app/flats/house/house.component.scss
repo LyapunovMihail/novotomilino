@@ -3,7 +3,7 @@
 // .search { position: static !important; }
 .house {
     width: 100%;
-    min-height: calc(100vh - 415px);
+    min-height: calc(100vh - 355px);
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -87,12 +87,6 @@
         &-chess {
             display: flex;
             justify-content: center;
-
-            &_title {
-                margin-bottom: 10px;
-                font: 500 20px/24px 'Museo Sans Cyrl', sans-serif;
-                color: $col-black;
-            }
 
             &_section {
                 position: relative;
