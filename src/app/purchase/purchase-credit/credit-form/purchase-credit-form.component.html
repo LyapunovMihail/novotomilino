@@ -5,6 +5,11 @@
     <div class="purchase__filter-range">
         <div class="purchase__filter-item purchase__filter-price">
             <p class="purchase__filter-item-text">Стоимость недвижимости, &#8381;</p>
+            <input (change)="formChanges($event.target.value, 'price')"
+                   (input)="bitReplace($event.target.value, 'price')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.price.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
             <ghm-range-number
                 (move)="form.price.val = $event"
                 (moveend)="formChanges($event, 'price')"
@@ -16,6 +21,11 @@
         </div>
         <div class="purchase__filter-item purchase__filter-size">
             <p class="purchase__filter-item-text">Первоначальный взнос, &#8381;</p>
+            <input (change)="formChanges($event.target.value, 'firstpay')"
+                   (input)="bitReplace($event.target.value, 'firstpay')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.firstpay.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
             <ghm-range-number
                 (move)="form.firstpay.val = $event"
                 (moveend)="formChanges($event, 'firstpay')"
@@ -27,6 +37,11 @@
         </div>
         <div class="purchase__filter-item purchase__filter-term">
             <p class="purchase__filter-item-text">Срок, лет</p>
+            <input (change)="formChanges($event.target.value, 'deadline')"
+                   (input)="bitReplace($event.target.value, 'deadline')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.deadline.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
             <ghm-range-number
                 (move)="form.deadline.val = $event"
                 (moveend)="formChanges($event, 'deadline')"

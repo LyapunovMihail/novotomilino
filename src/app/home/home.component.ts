@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
         combineLatest(
             this.homeService.getShares(),
-            this.homeService.getMainNews()
+            this.homeService.getNews()
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
                 this.shareSnippets = shares.sharesList;

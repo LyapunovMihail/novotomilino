@@ -13,11 +13,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class PurchaseInstallmentComponent implements OnInit {
 
-    public percent: number = 0;
+    public percent = 0;
 
-    public monthPay: number = 0;
+    public monthPay = 0;
 
-    public isFullPay: boolean = false;
+    public isFullPay = false;
 
     public form: FormParams = {
         price: {
@@ -37,23 +37,26 @@ export class PurchaseInstallmentComponent implements OnInit {
         }
     };
 
-    constructor (
+    constructor(
         private bitNumber: PurchaseInstallmentNumberPipe,
         private srvc: PurchaseInstallmentService
     ) { }
 
-    public ngOnInit ( ) {
+    public ngOnInit( ) {
         this.formConvert ( );
     }
 
-    public formConvert ( ) {
-        let values = this.srvc.values(this.form);
+    public formConvert( ) {
+        const values = this.srvc.values(this.form);
 
         // price
         if ( values.price.val < values.price.min ) {
             this.form.price.val = values.price.min;
         } else {
             this.form.price.val = values.price.val;
+        }
+        if (values.price.val > values.price.max) {
+            this.form.price.val = values.price.max;
         }
 
         // firstpay rewrite values
@@ -70,6 +73,16 @@ export class PurchaseInstallmentComponent implements OnInit {
         this.form.firstpay.min = values.price.val / 2;
         this.form.firstpay.max = values.price.val;
 
+        // month
+        if (values.month.val < values.month.min) {
+            this.form.month.val = values.month.min;
+        } else {
+            this.form.month.val = values.month.val;
+        }
+        if (values.month.val > values.month.max) {
+            this.form.month.val = values.month.max;
+        }
+
         this.percent = this.srvc.getPercent( values.month.val );
 
         this.monthPay = this.getEveryMonth().toFixed(0);
@@ -78,7 +91,7 @@ export class PurchaseInstallmentComponent implements OnInit {
     public getEveryMonth() {
 
         // оставшаяся сумма за вычетом скидки и первоначального взноса
-        let leftSum = (this.form.price.val - this.form.firstpay.val);
+        const leftSum = (this.form.price.val - this.form.firstpay.val);
 
         // ежемесячная оплата
         let monthPrice;
@@ -92,8 +105,8 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     }
 
-    public formChanges ( val, field ) {
-        this.form[field]['val'] = val;
+    public formChanges( val, field ) {
+        this.form[field].val = val;
         this.formConvert();
     }
 
@@ -112,7 +125,7 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     public keyUpReviuse(e) {
         let value = e.target.value;
-        let rep = /[-\.;":'a-zA-Zа-яА-Я]/;
+        const rep = /[-\.;":'a-zA-Zа-яА-Я]/;
         if (rep.test(value)) {
             value = value.replace(rep, '');
             e.target.value = value;
