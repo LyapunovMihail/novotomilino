@@ -20,6 +20,11 @@
         transition: $transition;
         cursor: pointer;
 
+        &--disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
         &:hover {
             color: #fff;
             background: #e7490f;

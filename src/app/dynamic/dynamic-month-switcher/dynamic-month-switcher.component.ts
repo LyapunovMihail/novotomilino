@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core';
-import {IDynamicObject} from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
+import { IDynamicObject } from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
 
 @Component({
     selector: 'app-dynamic-month-switcher',
@@ -7,10 +7,10 @@ import {IDynamicObject} from '../../../../serv-files/serv-modules/dynamic-api/dy
     styleUrls: ['./dynamic-month-switcher.component.scss']
 })
 
-export class DynamicMonthSwitcher implements OnChanges {
+export class DynamicMonthSwitcherComponent implements OnChanges {
 
-    @Input() month: number = 0;
-    @Input() year: number = 0;
+    @Input() month = 0;
+    @Input() year = 0;
     @Input() objectsArray: IDynamicObject[] = [];
 
     @Output() monthChange: EventEmitter<number> = new EventEmitter();
@@ -18,6 +18,8 @@ export class DynamicMonthSwitcher implements OnChanges {
 
     public prevBtn: string;
     public nextBtn: string;
+    public isValidPrevMonth: boolean;
+    public isValidNextMonth: boolean;
 
     public date = new Date();
 
@@ -39,32 +41,37 @@ export class DynamicMonthSwitcher implements OnChanges {
         'Декабрь'
     ];
 
-    ngOnChanges() {
+    public ngOnChanges() {
         this.prevBtn = (this.month === 1) ? this.monthArray[11] : this.monthArray[this.month - 2];
         this.nextBtn = (this.month === 12) ? this.monthArray[0] : this.monthArray[this.month];
+
+        this.checkPrevMonth();
+        this.checkNextMonth();
     }
 
-    prevMonth() {
+    public checkPrevMonth() {
         const prevMonth = this.month === 1 ? 12 : this.month - 1;
 
         // Проверяем совпадает ли хоть один объект из массива значению месяца и выбранного года
-        const isValidMonth = this.objectsArray.some((obj) => {
+        this.isValidPrevMonth = this.objectsArray.some((obj) => {
             return (obj.year === this.year && obj.month === prevMonth);
-        }) || prevMonth > this.realMonth && this.year === this.realYear;
-
-        if (!isValidMonth) { return; }
-        this.monthChange.emit(((this.month === 1) ? 12 : this.month - 1));
+        });
     }
 
-    nextMonth() {
+    public checkNextMonth() {
         const nextMonth = this.month === 12 ? 1 : this.month + 1;
 
         // Проверяем совпадает ли хоть один объект из массива значению месяца и выбранного года
-        const isValidMonth = this.objectsArray.some((obj) => {
+        this.isValidNextMonth = this.objectsArray.some((obj) => {
             return (obj.year === this.year && obj.month === nextMonth);
-        }) || nextMonth > this.realMonth && this.year === this.realYear;
+        });
+    }
 
-        if (!isValidMonth) { return; }
+    public toPrevMonth() {
+        this.monthChange.emit(((this.month === 1) ? 12 : this.month - 1));
+    }
+
+    public toNextMonth() {
         this.monthChange.emit(((this.month === 12) ? 1 : this.month + 1));
     }
 

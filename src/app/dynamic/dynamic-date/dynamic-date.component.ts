@@ -115,9 +115,9 @@ export class DynamicDateComponent implements OnInit, OnChanges, OnDestroy {
                     // если из массива объектов ни один не равен значению месяца и выбранного года
                     !this.objectsArray.some((obj) => {
                         return (obj.year === activeYear && obj.month === item.value);
-                    }) ||
+                    }) // ||
                     // или значение месяца больше месяца реальной даты
-                    (item.value > this.realMonth && activeYear === this.realYear)
+                    // (item.value > this.realMonth && activeYear === this.realYear)
                 );
         });
     }
