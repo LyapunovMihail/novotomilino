@@ -54,6 +54,19 @@ $font: 15px/18px 'Montserrat';
                 display: flex;
                 align-items: center;
                 margin: 0 59px 0 0;
+
+                &-error {
+                    display: flex;
+                    width: 100%;
+                    padding: 20px 12px;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    background-color: #fafafa;
+                    font: 500 14px/20px 'Museo Sans Cyrl', sans-serif;
+                    color: #000105;
+                    opacity: 0.6;
+                }
             }
             &-scheme{
                 height: 100%;
