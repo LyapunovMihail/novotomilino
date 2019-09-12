@@ -123,6 +123,10 @@
                     background: url(/assets/img/btn_next_grey.svg) no-repeat;
                     background-size: 6px 8px;
                 }
+
+                &-link {
+                    text-decoration: underline;
+                }
             }
         }
 
