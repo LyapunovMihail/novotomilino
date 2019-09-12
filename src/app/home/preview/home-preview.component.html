@@ -35,7 +35,7 @@
 
         <div class="main__preview-content" >
             <div class="preview-content__wrap">
-                <div class="preview-content__shares-container">
+                <div class="preview-content__shares-container" *ngIf="shareSnippets">
                     <ng-container *ngFor="let shareSnippet of shareSnippets; let i = index">
                         <a class="preview-content__share"
                            [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]"
@@ -49,7 +49,7 @@
                         </a>
                     </ng-container>
                 </div>
-                <div class="preview-content__news-container">
+                <div class="preview-content__news-container"  *ngIf="newsSnippets">
                     <ng-container *ngFor="let newsSnippet of newsSnippets; let i = index">
                         <a class="preview-content__news"
                            [routerLink]="['/news-shares/news/list/' + newsSnippet._id]"

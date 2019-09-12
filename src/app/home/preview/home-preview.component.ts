@@ -110,7 +110,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             news.title = news.title.length < 38 ? news.title : news.title.slice(0, 35) + '...';
             news.descrPreview = news.descrPreview.length < 28 ? news.descrPreview : news.descrPreview.slice(0, 25) + '...';
         });
-        this.newsSlider(this.newsSnippets);
+        if (this.newsSnippets.length) {
+            this.newsSlider(this.newsSnippets);
+        }
 
         this.shareSnippets.reverse();
         this.shareSnippets = this.shareSnippets.filter((share: Share) => {
@@ -123,7 +125,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             share.name = share.name.length < 38 ? share.name : share.name.slice(0, 35) + '...';
             share.textPreview = share.textPreview.length < 28 ? share.textPreview : share.textPreview.slice(0, 25) + '...';
         });
-        this.sharesSlider(this.shareSnippets);
+        if (this.shareSnippets.length) {
+            this.sharesSlider(this.shareSnippets);
+        }
     }
 
     public countDown(finishDate) {
