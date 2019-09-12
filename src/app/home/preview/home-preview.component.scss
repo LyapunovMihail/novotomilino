@@ -208,8 +208,8 @@
             position: absolute;
             width: (1240px / 2);
             max-width: $w1600;
-            left: 50%;
-            bottom: 50px;
+            left: 48%;
+            bottom: 70px;
             display: flex;
             justify-content: flex-end;
 
@@ -231,13 +231,13 @@
 
 
                 .preview-content__shares-container {
-                    width: 247px + 70px;
+                    width: 280px + 70px;
                     height: 80px;
                     box-sizing: border-box;
                 }
                 .preview-content__share {
                     position: absolute;
-                    width: 247px + 70px;
+                    width: 280px + 70px;
                     display: block;
                     box-sizing: border-box;
                     padding: 0 45px 0 0;
@@ -251,6 +251,18 @@
                         .preview-content__share-paragraf { opacity: 0.7}
                     }
 
+                    &-row {
+                        display: flex;
+                        align-items: baseline;
+                    }
+
+                    &-icon {
+                        margin-right: 8px;
+                        background: url('/assets/img/stock-ic.svg');
+                        width: 28px;
+                        height: 15px;
+                    }
+
                     &-title {
                         font: 500 24px/29px $font-mus;
                         @include font-smoothing;
@@ -259,23 +271,16 @@
                         margin: 0 0 11px;
                         opacity: 0;
                         transition: opacity 1s ease-in;
-
-                        &:before {
-                            content: '';
-                            position: absolute;
-                            left: -5px - 28px;
-                            top: 7.5px;
-                            width: 28px;
-                            height: 15px;
-                            background: url('/assets/img/stock-ic.svg') no-repeat;
-                            background-size: 100%;
-                        }
+                        word-break: break-word;
                     }
                     &-text-preview {
+                        padding-left: 37px;
                         opacity: 0;
                         transition: opacity 1s ease-in;
+                        word-break: break-word;
                     }
                     &-paragraf {
+                        padding-left: 37px;
                         font: 500 12px/18px $font-mus;
                         @include font-smoothing;
                         letter-spacing: .4px;
@@ -292,13 +297,13 @@
                 }
 
                 .preview-content__news-container {
-                    width: 288px;
+                    width: 321px;
                     height: 80px;
                     box-sizing: border-box;
                 }
                 .preview-content__news {
                     position: absolute;
-                    width: 288px;
+                    width: 321px;
                     display: block;
                     z-index: 0;
 
@@ -310,20 +315,26 @@
                         .preview-content__news-paragraf { opacity: 0.7}
                     }
 
+                    &-row {
+                        display: flex;
+                        align-items: flex-start;
+                    }
+
+                    &-icon {
+                        margin-right: 8px;
+                        background: url('/assets/img/news-ic.svg');
+                        width: 37px;
+                        height: 30px;
+                    }
+
                     &-title {
                         @extend .preview-content__share-title;
-
-                        &:before {
-                            width: 37px;
-                            height: 30px;
-                            left: -5px - 37px;
-                            top: 0;
-                            background: url('/assets/img/news-ic.svg') no-repeat;
-                        }
                     }
                     &-text-preview {
+                        padding-left: 46px;
                         opacity: 0;
                         transition: opacity 1s ease-in;
+                        word-break: break-word;
                     }
                     .g-link_white {
                         span {

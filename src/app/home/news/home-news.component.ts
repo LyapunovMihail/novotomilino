@@ -2,7 +2,6 @@ import {Component, Input, OnInit } from '@angular/core';
 import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import {Share, SHARES_UPLOADS_PATH} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 declare let $: any;
-declare let Swiper: any;
 import * as moment from 'moment';
 
 @Component({
