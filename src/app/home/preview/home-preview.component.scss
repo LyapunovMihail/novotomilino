@@ -252,11 +252,12 @@
                     }
 
                     &-row {
-                        display: flex;
-                        align-items: baseline;
                     }
 
                     &-icon {
+                        position: absolute;
+                        top: 7px;
+                        display: block;
                         margin-right: 8px;
                         background: url('/assets/img/stock-ic.svg');
                         width: 28px;
@@ -264,10 +265,10 @@
                     }
 
                     &-title {
+                        padding-left: 37px;
                         font: 500 24px/29px $font-mus;
                         @include font-smoothing;
                         color: #fff;
-                        position: relative;
                         margin: 0 0 11px;
                         opacity: 0;
                         transition: opacity 1s ease-in;
@@ -316,11 +317,10 @@
                     }
 
                     &-row {
-                        display: flex;
-                        align-items: flex-start;
                     }
 
                     &-icon {
+                        position: absolute;
                         margin-right: 8px;
                         background: url('/assets/img/news-ic.svg');
                         width: 37px;
@@ -329,9 +329,10 @@
 
                     &-title {
                         @extend .preview-content__share-title;
+                        padding-left: 45px;
                     }
                     &-text-preview {
-                        padding-left: 46px;
+                        padding-left: 45px;
                         opacity: 0;
                         transition: opacity 1s ease-in;
                         word-break: break-word;

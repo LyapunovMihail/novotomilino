@@ -106,14 +106,21 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         this.newsSnippets = this.newsSnippets.filter((news: INewsSnippet) => {
             return news.show_on_main;
         });
-        this.newsSnippets.forEach((news) => {
-            news.title = news.title.length < 38 ? news.title : news.title.slice(0, 35) + '...';
-            news.descrPreview = news.descrPreview.length < 28 ? news.descrPreview : news.descrPreview.slice(0, 25) + '...';
-        });
-        if (this.newsSnippets.length) {
+
+        console.log('this.newsSnippets: ', this.newsSnippets);
+        if (this.newsSnippets) {
+            this.newsSnippets.forEach((news) => {
+                if (news.title) {
+                    news.title = news.title.length < 30 ? news.title : news.title.slice(0, 27) + '...';
+                }
+                if (news.descrPreview) {
+                    news.descrPreview = news.descrPreview.length < 28 ? news.descrPreview : news.descrPreview.slice(0, 25) + '...';
+                }
+            });
             this.newsSlider(this.newsSnippets);
         }
 
+        console.log('this.shareSnippets: ', this.shareSnippets);
         this.shareSnippets.reverse();
         this.shareSnippets = this.shareSnippets.filter((share: Share) => {
             if (share.show_on_main) {
@@ -121,11 +128,16 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
                 return true;
             }
         });
-        this.shareSnippets.forEach((share) => {
-            share.name = share.name.length < 38 ? share.name : share.name.slice(0, 35) + '...';
-            share.textPreview = share.textPreview.length < 28 ? share.textPreview : share.textPreview.slice(0, 25) + '...';
-        });
-        if (this.shareSnippets.length) {
+
+        if (this.shareSnippets) {
+            this.shareSnippets.forEach((share) => {
+                if (share.name) {
+                    share.name = share.name.length < 30 ? share.name : share.name.slice(0, 27) + '...';
+                }
+                if (share.textPreview) {
+                    share.textPreview = share.textPreview.length < 28 ? share.textPreview : share.textPreview.slice(0, 25) + '...';
+                }
+            });
             this.sharesSlider(this.shareSnippets);
         }
     }
