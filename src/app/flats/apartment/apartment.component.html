@@ -26,7 +26,9 @@
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
                     </li>
-                    <li class="apartment__info-nav-item">Секция {{flatData.section}}</li>
+                    <li class="apartment__info-nav-item">
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Секция {{flatData.section}}</a>
+                    </li>
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
                     </li>
