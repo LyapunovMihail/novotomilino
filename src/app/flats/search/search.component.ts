@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public count: number;
     public skip: number;
     public form: any;
+    public sort: string = FormConfig.sort;
     public params: any;
     public isLoadMoreBtn = false;
 
@@ -55,7 +57,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             priceMax: form.price.max,
             floorMin: form.floor.min,
             floorMax: form.floor.max,
-            sort: form.sort,
         };
 
         if (form.type.length > 0) {
@@ -91,6 +92,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.count = data.length;
                 console.log('count: ', this.count);
                 this.searchFlats = data;
+                this.sortFlats();
                 this.loadMore();
                 this.flatsChanged.emit(this.searchFlats);
             },
@@ -124,6 +126,19 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.windowScrollLocker.block();
             }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла
         }
+    }
+
+    public sortChange(sort) {
+        this.sort = sort;
+        this.skip = 0;
+        this.outputFlatsList = [];
+
+        this.sortFlats();
+        this.loadMore();
+    }
+
+    public sortFlats() {
+        this.searchService.sortFlats(this.sort, this.searchFlats);
     }
 
     public ngOnDestroy() {

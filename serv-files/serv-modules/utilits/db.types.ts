@@ -15,4 +15,5 @@ export interface DbJsonObject {
     TerrasesCount: string;
     IsEuro: string;
     ArticleTypeCode: string;
+    DeliveryPeriodDate: string;
 }

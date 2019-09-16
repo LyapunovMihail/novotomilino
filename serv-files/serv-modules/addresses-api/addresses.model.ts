@@ -89,10 +89,10 @@ export class AddressesModel {
             parameters['sort'] = { floor : 1 };
         } else if ('sort' in query && query.sort === 'floor_0') {
             parameters['sort'] = { floor : -1 };
-        } else if ('sort' in query && query.sort === 'section_1') {
-            parameters['sort'] = { section : 1 };
-        } else if ('sort' in query && query.sort === 'section_0') {
-            parameters['sort'] = { section : -1 };
+        } else if ('sort' in query && query.sort === 'delivery_1') {
+            parameters['sort'] = { deliveryDate : 1 };
+        } else if ('sort' in query && query.sort === 'delivery_0') {
+            parameters['sort'] = { deliveryDate : -1 };
         }
 
         if ('flats' in query) {

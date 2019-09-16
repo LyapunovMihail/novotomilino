@@ -33,6 +33,11 @@ export class SearchSortingComponent {
             name: 'floor',
             text: 'По этажу',
             value: false
+        },
+        {
+            name: 'delivery',
+            text: 'По сроку сдачи',
+            value: false
         }
     ];
 

@@ -109,15 +109,17 @@ $font: 15px/18px 'Montserrat';
                     }
                 }
 
-                &_room { width: 23.5%; }
-                &_space,
+                &_number,
                 &_floor,
-                &_section { // Должен быть корпус!
+                &_house { // Должен быть корпус!
                     width: 9.12%;
                     min-width: 106px;
-                } 
-                &_decoration {
-                    width: 30.7%;
+                }
+                &_room,
+                &_space,
+                &_decoration,
+                &_delivery {
+                    width: 18.5%;
                     min-width: 135px;
                 }
             }

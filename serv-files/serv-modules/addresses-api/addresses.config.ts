@@ -17,6 +17,7 @@ export interface IAddressItemFlat {
     twolevel: boolean;
     space: number;
     price: number;
+    deliveryDate: string;
     _id?: any;
 }
 
