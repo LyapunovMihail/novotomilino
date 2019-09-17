@@ -71,7 +71,6 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         this.sharesService.getShareById(id)
             .subscribe((share: Share[]) => {
                 this.share = share[0];
-                console.log('this.share: ', this.share);
                 this.getSnippets();
             }, (err) => {
                 console.error(err);

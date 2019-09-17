@@ -74,7 +74,6 @@ export class AboutDocumentationComponent implements OnInit {
 
     public fileUpload(id, e) {
         let fileList: FileList = e.target.files;
-        console.log('filelist: ', fileList[0]);
         this.progressCount = fileList.length;
         this.progressLoaded = true;
         this.progressEvent = this.docsService.getCurrentLoadedFile().subscribe((val) => {

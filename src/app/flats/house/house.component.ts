@@ -110,7 +110,6 @@ export class HouseComponent implements OnInit, OnDestroy {
             floor.sort();
         });
 
-        console.log('this.sectionData: ', this.sectionData);
         if (this.searchFlats) {
             this.searchFlatsSelection();
         }

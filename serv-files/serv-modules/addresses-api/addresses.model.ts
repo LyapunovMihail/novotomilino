@@ -16,7 +16,6 @@ export class AddressesModel {
     }
 
     public async getObjects(query) {
-        console.log('query: ', query);
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
     }

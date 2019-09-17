@@ -34,7 +34,6 @@ export class SearchOutputComponent implements OnInit {
                     flat.discount = this.getDiscount(flat);
                     return flat;
                 });
-                console.log('This.flatsList: ', this.flatsList);
             });
     }
 

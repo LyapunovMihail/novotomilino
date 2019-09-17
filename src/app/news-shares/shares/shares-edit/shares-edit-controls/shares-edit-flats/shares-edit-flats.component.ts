@@ -101,19 +101,12 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.sharesService.getFlatsBySectionNum(e)
             .subscribe((data) => {
                 this.flats.splice(i, 0, data);
-                console.log("this.flats: ", this.flats);
                 this.initFlatsOptions(i);
             });
     }
 
     changeFlat(e, i) {
         const flat = this.flats[i].find((flatItem) => flatItem.flat === Number(e));
-        console.log("this.flats: ", this.flats);
-        console.log("i: ", i);
-        console.log("e: ", e);
-        console.log("typeof e: ", typeof e);
-        console.log("flat: ", flat);
-        console.log("this.conf.blockFlats[i]: ", this.conf.blockFlats[i]);
         if (flat == null) {
             return;
         }
@@ -160,8 +153,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         }
         this.conf.blockFlats[i].scheme = `/assets/floor-plans/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
         this.conf.blockFlats[i].price = flat.price;
-        console.log("flat: ", flat);
-        console.log("this.conf.blockFlats[i]: ", this.conf.blockFlats[i]);
     }
 
     initFlatsOptions(i) {
@@ -172,7 +163,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.flatsOptions.splice(i, 0, this.flats[i].map((flat) => {
             return flat.flat;
         }));
-        console.log("this.flatsOptions: ",this.flatsOptions);
     }
 
     getDiscount(i): number {

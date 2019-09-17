@@ -107,7 +107,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             return news.show_on_main;
         });
 
-        console.log('this.newsSnippets: ', this.newsSnippets);
         if (this.newsSnippets) {
             this.newsSnippets.forEach((news) => {
                 if (news.title) {
@@ -120,7 +119,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             this.newsSlider(this.newsSnippets);
         }
 
-        console.log('this.shareSnippets: ', this.shareSnippets);
         this.shareSnippets.reverse();
         this.shareSnippets = this.shareSnippets.filter((share: Share) => {
             if (share.show_on_main) {
@@ -151,7 +149,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public newsSlider(newsList) {
         if ( !this.platform.isBrowser ) { return false; }
-        console.log('newsList: ', newsList);
         if (newsList.length > 1) {
             this.newsTimer = setInterval(() => {
                 this.activeNews = this.activeNews < newsList.length - 1 ? this.activeNews + 1 : 0;

@@ -59,7 +59,6 @@ export class PurchaseCreditFormComponent implements OnInit {
         }
 
         // firstpay
-        console.log('this.form.firstpay.val: ', this.form.firstpay.val);
         this.form.firstpay.min = 0;
         this.form.firstpay.max = values.price.val;
         if (this.form.firstpay.val > this.form.price.val) {

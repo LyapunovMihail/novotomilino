@@ -30,7 +30,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.activatedRoute.queryParams.subscribe((queryParams) => {
-            console.log('QUERYPARAMS: ', queryParams);
             this.buildForm(queryParams);
         });
     }
@@ -54,7 +53,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             return arr.map((item) => (new FormControl(item)));
         })());
 
-        console.log('params: ', params);
         this.form = this.formBuilder.group({
             space: {
                 min: Number(params.spaceMin) || this.config.space.min,
@@ -96,7 +94,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.houses)]
         });
 
-        console.log('this.form formComp : ', this.form.value);
         this.formChange.emit(this.form.value);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {

@@ -54,7 +54,6 @@ export class SharesDeleteComponent implements OnInit, OnDestroy {
             },
             (err) => {
                 alert('Что-то пошло не так!');
-                console.log('Ошибка', err);
             }
         );
     }

@@ -45,9 +45,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public formChange(form) {
-        console.log('this.showSearchWindow: ', this.showSearchWindow);
         this.form = form;
-        console.log('this.form: ', this.form);
         if (!this.showSearchWindow) {return; }
 
         const params = {
@@ -75,8 +73,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             params['houses'] = (form.houses).join(',');
         }
 
-        console.log('queryParams: ', params);
-
         this.params = params;
         this.skip = 0;
         this.outputFlatsList = [];
@@ -90,7 +86,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.count = data.length;
-                console.log('count: ', this.count);
                 this.searchFlats = data;
                 this.sortFlats();
                 this.loadMore();
