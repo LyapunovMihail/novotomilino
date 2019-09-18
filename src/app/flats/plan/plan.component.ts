@@ -3,7 +3,7 @@ import {
 } from '@angular/router';
 import {
     PLAN_SVG,
-    IPlanSvgItem
+    IHousePlanItem
 } from './plan-svg';
 import {
     PlanService
@@ -26,12 +26,8 @@ import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-
 
 export class PlanComponent implements OnInit {
 
-    public housesPlanSvg: IPlanSvgItem[] = PLAN_SVG;
-    public links: string[] = this.planService.links();
-    public activeLink: string = '';
-    public houseOneFreeFlats: number;
-    public houseTwoFreeFlats: number;
-    public showSearchWindow = false;
+    public houses: IHousePlanItem[] = PLAN_SVG;
+    public activeLink = '';
 
     constructor(
         public router: Router,
@@ -40,12 +36,30 @@ export class PlanComponent implements OnInit {
 
     ngOnInit() {
         combineLatest(
-            this.planService.getHouseOne(),
-            this.planService.getHouseTwo()
-        ).subscribe(([houseOne, houseTwo]) => {
-            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4').length;
-            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4').length;
+            this.planService.getHouse(1),
+            this.planService.getHouse(2),
+            this.planService.getHouse(3),
+            this.planService.getHouse(9)
+        ).subscribe(([houseOne, houseTwo, houseThree, houseNine]) => {
+            this.buildHousesData(0, houseOne);
+            this.buildHousesData(1, houseTwo);
+            this.buildHousesData(2, houseThree);
+            this.buildHousesData(3, houseNine);
         });
+    }
+
+    private buildHousesData(i, flats) {
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        this.houses[i].freeFlats = flats.length;
+        if (flats.length) {
+            this.houses[i].rooms.forEach((room)  => {
+                room.minPrice = flats.filter((flat) => flat.rooms === room.name)
+                    .reduce((minPrice, flat) => {
+                        return flat.price < minPrice ? flat.price : minPrice;
+                    }, 9999999999);
+                room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
+            });
+        }
     }
 
     public svgRouterLink(event: Event, url) {

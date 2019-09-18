@@ -1,13 +1,5 @@
 @import "../../../styles/modules/mixins/mixin";
 
-$color: #ffffff;
-$color2: #83d6f4;
-
-@mixin font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 .plan {
     width: 100%;
     height: calc(100vh - 146px);
@@ -16,126 +8,130 @@ $color2: #83d6f4;
 
         &_svg {
 
-            &_section {
+            &_house {
                 opacity: 0;
                 cursor: pointer;
-                fill: rgba(131,214,244,.3);
+                fill: rgba(231,73,15,0.2);
                 transition: .2s linear;
             }
         }
 
         &_link {
             position: absolute;
-            font: 40px/23px 'abrade-book', sans-serif;
-            color: $color;
-            @include font-smoothing();
+            @include fw14-20(#ffffff);
+            background-color: #e7490f;
+            border-radius: 25px;
             cursor: pointer;
-            transition: .2s linear;
+            transition: .2s linear, .7s opacity ease-in;
             transform: translateX(-50%);
             white-space: nowrap;
-            // z-index: 11;
-            display: flex;
-            flex-direction: column;
+            z-index: 11;
+            opacity: 1;
+            padding: 5px 15px;
 
-            &_floors {
-                margin-top: 20px;
+
+            &--active {
+                color: #000105;
+                background-color: #ffffff;
+
+                .plan_house-select_info {
+                    pointer-events: all;
+                    opacity: 1;
+                }
             }
 
-            &_floors,
-            &_in-sale {
-                font: 18px/23px 'abrade-book', sans-serif;
-                color: $color;
-                @include font-smoothing();
+            &--house-1 {
+                bottom: 20%;
+                left: 20%;
+            }
+            &--house-2 {
+                bottom: 39%;
+                left: 44%;
+            }
+            &--house-3 {
+                bottom: 51%;
+                left: 62%;
+            }
+            &--house-9 {
+                bottom: 74%;
+                left: 88%;
             }
 
-            &:before {
-                content: '';
-                width: 5px;
-                height: 5px;
-                background: $color;
-                border-radius: 50%;
-                position: absolute;
-                top: 12px;
-                transition: .2s linear;
+            &--z-index-off {
+                z-index: unset;
+                opacity: 0;
             }
+        }
+
+        &_info {
+            position: absolute;
+            left: -77px;
+            bottom: 48px;
+            width: 250px;
+            background-color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: .2s linear;
+            pointer-events: none;
+            opacity: 0;
 
             &:after {
                 content: '';
-                width: 32px;
-                height: 1px;
-                background: rgba(255,255,255,.7);
                 position: absolute;
-                top: 14px;
+                bottom: -22px;
+                left: 46%;
+                margin: auto;
+                border: 9px solid transparent;
+                border-top: 13px solid #ffffff;
+            }
+            &:before {
+                content: '';
+                position: absolute;
+                width: 50%;
+                height: 18px;
+                bottom: -18px;
+                left: 26%;
             }
 
-            &--active {
-                color: $color2;
-                text-shadow: 0 0 8px $color2;
-
-                &:before {
-                    background: $color2;
-                }
-            }
-
-            &--section-1 {
-                bottom: 43%;
-                left: 19%;
-                align-items: flex-end;
-
-                &:before {
-                    right: -22px;
-                }
+            &--house-9 {
+                bottom: -266px;
 
                 &:after {
-                    right: -53px;
+                    bottom: 248px;
+                    border: 9px solid transparent;
+                    border-bottom: 13px solid #ffffff;
                 }
-            }
-
-            &--section-2 {
-                bottom: 43%;
-                left: 81%;
-
                 &:before {
-                    left: -18px;
-                }
-
-                &:after {
-                    left: -49px;
+                    bottom: 248px;
                 }
             }
-        }
-    }
-    
-    .flats_main__quantity{
-        width: 88px;
-        height: 88px;
-        background: #8AD0EC;
-        border-radius: 50%;
-        position: absolute;
 
-        &--left{
-            left: 25%;
-            top: 40%;
-        }
+            &_title {
+                font: 500 20px/24px $font-mus;
+                @include font-smoothing();
+                color: #e7490f;
+            }
 
-        &--right{
-            right: 25%;
-            top: 40%;
-        }
+            &_row {
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(0,1,5,0.3);
 
-        &__number{
-            width: 100%;
-            text-align: center;
-            font: 22px/23px 'abrade-book', sans-serif;
-            margin-top: 14px;
-        }
+                &:last-child {
+                    padding-bottom: 0;
+                    border-bottom: none;
+                }
+            }
 
-        &__text{
-            width: 100%;
-            text-align: center;
-            font: 11px/11px 'abrade-book', sans-serif;
-            color: #3f3f3f;
-            margin-top: 4px;
+            &_rooms {
+                @include fw14-20();
+            }
+
+            &_min-price {
+                float: right;
+                @include fw14-20();
+                color: rgba(0,1,5,0.6);
+            }
         }
     }
 }
