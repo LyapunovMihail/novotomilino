@@ -17,6 +17,7 @@ export class SearchOutputComponent implements OnInit {
 
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
+    public errorImg = '<div class="search-output__result-item-img-error">Изображение не доступно</div>';
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
 

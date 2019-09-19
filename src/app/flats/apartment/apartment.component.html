@@ -86,8 +86,9 @@
                 </div> -->
             </div>
             <div class="apartment__plan-img">
-                <img class="apartment_item_scheme" [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
-                <div *ngIf="!img.width" class="apartment__plan-img-error">Изображение не доступно</div>
+                <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
+                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
+                <div *ngIf="img.style.display === 'none'" class="apartment__plan-img-error">Изображение не доступно</div>
             </div>
         </div>
 

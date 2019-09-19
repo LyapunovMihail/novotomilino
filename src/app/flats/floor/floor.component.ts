@@ -65,6 +65,10 @@ export class FloorComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (data: string) => {
                         this.floorSvg = data;
+                        console.log('this.floorSvg.slice(1, 4): ', this.floorSvg.slice(1, 4));
+                        this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
+
+                        console.log('this.floorSvg: ', this.floorSvg);
                         this.floorService.getObjects({
                             houses: this.houseNumber + '',
                             sections: this.sectionNumber + '',
@@ -85,7 +89,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                         );
                     },
                     (err) => {
-                        this.floorSvg = `<div class="floor-plan-error-description">Для этого этажа изображение отсутствует</div>`;
+                        this.floorSvg = '';
                         console.log(err);
                     }
                 );
