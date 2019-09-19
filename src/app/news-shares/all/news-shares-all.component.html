@@ -33,8 +33,8 @@
                     
                     <div class="news__snippets-descr">
                         <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
-                        <p *ngIf="snippet.description" class="news__snippets-descr-text" [innerHTML]="snippet.description | lineBreakPipe"></p>
-                        <p class="news__snippets-descr-date">{{snippet.created_at | date: 'd.M.yyyy' }}</p>
+                        <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
+                        <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
                     </div>
                 </a>
 
@@ -49,16 +49,16 @@
                 <a class="shares__snippets-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
                     <div class="shares__snippets-img">
                         <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
-                        <div class="shares__snippets-end">
-                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0">{{countDown(snippet.finish_date) | sharesDayPipe}} дней до конца акции</span>
-                            <span *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0">Акция закончилась</span>
+                        <div class="shares__snippets-end" *ngIf="snippet.countdown">
+                            <span *ngIf="countDown(snippet.finish_date) >= 0">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</span>
+                            <span *ngIf="countDown(snippet.finish_date) < 0">Акция закончилась</span>
                         </div>
                     </div>
 
                     <div class="shares__snippets-descr">
                         <h1 class="shares__snippets-descr-title">{{snippet.name}}</h1>
-                        <p class="shares__snippets-descr-text">{{snippet.text}}</p>
-                        <p class="shares__snippets-descr-date">{{snippet.created_at | date: 'd.M.yyyy' }}</p>
+                        <p class="shares__snippets-descr-text">{{snippet.textPreview}}</p>
+                        <p class="shares__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
                     </div>
                 </a>
                 <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">

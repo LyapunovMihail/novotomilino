@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./flats.component.scss']
 })
 
-export class FlatsComponent {}
+export class FlatsComponent {
+    constructor(
+    ) {}
+}

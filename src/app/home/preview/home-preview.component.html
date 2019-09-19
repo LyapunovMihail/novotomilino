@@ -37,17 +37,31 @@
             <div class="preview-content__wrap">
                 <a class="preview-content__stock" [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
                     <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
-                    <p class="g-link_white">{{shareSnippet.text}}</p>
+                    <p class="g-link_white">{{shareSnippet.textPreview}}</p>
                     <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
                     <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
                 </a>
                 <a class="preview-content__news" [routerLink]="['/news-shares/news/list/' + newsSnippet._id]" *ngIf="newsSnippet">
                     <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
-                    <p class="g-link_white">{{newsSnippet.description}}</p>
+                    <p class="g-link_white">{{newsSnippet.descrPreview}}</p>
                 </a>
             </div>
         </div>
 
+    </div>
+
+    <div class="main__preview-threeRed" [class.main__preview-threeRed_active]="showTrojka">
+        <div class="main__preview-threeRed-title_transform">
+            <img alt="logo-red" src="/assets/img/3-red-dev.svg">
+        </div>
+        <div class="main__preview-threeRed-title">
+            <img alt="logo-red" src="/assets/img/3-red_logo.svg">
+        </div>
+        <p class="main__preview-threeRed-text">
+            Тройка РЭД — одна из ведущих девелоперских компаний полного цикла, входящая
+            в ТОП-10 крупнейших застройщиков Московской области.
+        </p>
+        <a class="main__preview-threeRed-link" href="https://3-red.com/" target="_blank">3-red.com</a>
     </div>
 </section>
 

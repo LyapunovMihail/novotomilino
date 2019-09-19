@@ -1,7 +1,7 @@
 export const ADDRESSES_COLLECTION_NAME = 'addresses';
 
 export interface IAddressItemFlat {
-    type: string;
+    type?: string;
     house: number;
     section: number;
     floor: number;
@@ -20,3 +20,6 @@ export interface IAddressItemFlat {
     _id?: any;
 }
 
+export interface IFlatWithDiscount extends IAddressItemFlat {
+    discount: number;
+}

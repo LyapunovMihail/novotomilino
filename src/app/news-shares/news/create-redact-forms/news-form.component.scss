@@ -11,6 +11,11 @@ $required-input : #ffb3b3;
     -moz-osx-font-smoothing: grayscale;
 }
 
+.g-modal-bg {
+    padding: 60px 0;
+    box-sizing: border-box;
+}
+
 .admin-news_progress-loader {
     background: rgba(0,0,0,.7);
     position: absolute;
@@ -475,10 +480,6 @@ $required-input : #ffb3b3;
 
 .create-form {
 
-    &__modal {
-        overflow: auto;
-        align-items: center;
-    }
     &__container {
         width: 1088px;
         min-height: 100px;
@@ -535,7 +536,7 @@ $required-input : #ffb3b3;
             padding: 10px 15px;
 
             &_title {
-                font: 500 20px/24px "Museo Sans Cyrl";
+                font: 500 20px/24px "Museo Sans Cyrl", sans-serif;
                 @include font-smoothing;
                 color: $col-black;
             }
@@ -604,7 +605,7 @@ $required-input : #ffb3b3;
             padding: 0 35px;
             height: 50px;
             background: #0070c9;
-            font: 500 16px/20px "Museo Sans Cyrl";
+            font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             color: #fff;
             letter-spacing: .5px;

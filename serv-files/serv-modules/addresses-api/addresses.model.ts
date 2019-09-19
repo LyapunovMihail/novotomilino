@@ -16,6 +16,7 @@ export class AddressesModel {
     }
 
     public async getObjects(query) {
+        console.log('query: ', query);
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
     }
@@ -36,10 +37,13 @@ export class AddressesModel {
     public parseRequest(query) {
         let request: any = {};
 
-        if ('sections' in query && (/[1|2|3|4]/).exec(query.sections)) {
+        if ('sections' in query && (/[1|2|3|4|5|6]/).exec(query.sections)) {
             request.section = { $in: query.sections.split(',').map(Number) };
         }
-        if ('rooms' in query && (/[0|1|2|3]/).exec(query.rooms)) {
+        if ('houses' in query && (/[1|2|3|9]/).exec(query.houses)) {
+            request.house = { $in: query.houses.split(',').map(Number) };
+        }
+        if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
             request.rooms = { $in: query.rooms.split(',').map(Number) };
         }
         if ( 'priceMin' in query && 'priceMax' in query ) {
@@ -58,10 +62,10 @@ export class AddressesModel {
             request.flat = Number(query.number);
         }
         if ('type' in query && query.type.split(',').every((item) => FormConfig.typeList.some((i) => item === i.value))) {
-            request['$or'] = query['type'].split(',').map((item) => ({type: item}));
+            request.type = { $in: query.type.split(',')};
         }
-        if ('decoration' in query && query['decoration'].split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
-            request['$or'] = query['decoration'].split(',').map((item) => ({decoration: item}));
+        if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
+            request.decoration = { $in: query.decoration.split(',')};
         }
 
         let parameters = {};
@@ -111,7 +115,6 @@ export class AddressesModel {
             };
         }
 
-        request['status'] = '4';
         return {
             request,
             parameters

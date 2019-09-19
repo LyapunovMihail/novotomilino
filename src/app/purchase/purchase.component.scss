@@ -57,7 +57,7 @@
 
         &-item {
             width: 50%;
-            font: 500 14px/20px "Museo Sans Cyrl";
+            font: 500 14px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             box-sizing: border-box;
             color: $col-black;

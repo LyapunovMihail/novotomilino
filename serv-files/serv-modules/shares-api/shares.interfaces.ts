@@ -63,6 +63,7 @@ export interface Share {
     _id?: any;
     name: string;
     text: string;
+    textPreview: string;
     mainImage: string;
     mainThumbnail: string;
     countdown: boolean;

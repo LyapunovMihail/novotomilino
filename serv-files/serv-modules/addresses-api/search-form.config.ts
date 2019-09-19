@@ -20,14 +20,6 @@ export const FormConfig = {
         {
             name: 'апартаменты',
             value: 'АП'
-        },
-        {
-            name: 'кладовые',
-            value: 'КЛ'
-        },
-        {
-            name: 'машиноместа',
-            value: 'ММ'
         }
     ],
     decorationList: [
@@ -42,6 +34,28 @@ export const FormConfig = {
         {
             name: 'чистовая',
             value: '03'
+        }
+    ],
+    housesList: [
+        {
+            name: 'Все корпуса',
+            value: 'all'
+        },
+        {
+            name: 'Корпус 1',
+            value: '1'
+        },
+        {
+            name: 'Корпус 2',
+            value: '2'
+        },
+        {
+            name: 'Корпус 3',
+            value: '3'
+        },
+        {
+            name: 'Корпус 4',
+            value: '4'
         }
     ]
 };

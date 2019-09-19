@@ -1,6 +1,5 @@
 @import "../../../styles/modules/mixins/mixin";
 
-
 .all__snippets,
 .news__snippets,
 .shares__snippets {
@@ -68,16 +67,16 @@
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 4px;
-        background: #e7490f;
-        opacity: .4;
+        background: rgba(231, 73, 15, .4);
         box-sizing: border-box;
         padding: 0 20px;
         display: flex;
         align-items: center;
+        justify-content: center;
         z-index: 1;
 
         span {
-            font: 16px/24px "Museo Sans Cyrl";
+            font: 16px/24px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             color: #fff;
             font-weight: 500;
@@ -113,7 +112,7 @@
             margin: 0 0 10px;
         }
         &-date {
-            font: 500 12px/20px "Museo Sans Cyrl";
+            font: 500 12px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             color: rgba(0, 1, 5, 0.6);
             letter-spacing: .4px;
@@ -139,7 +138,7 @@
             position: absolute;
             width: 27px;
             height: 15px;
-            top: calc(50% - 8px);
+            top: 5px;
             left: 0;
             background: url(/assets/img/stock-ic.svg) no-repeat;
         }
@@ -174,7 +173,7 @@
             width: 180px;
             height: 40px;
             text-transform: uppercase;
-            font: 500 16px/20px "Museo Sans Cyrl";
+            font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             color: #fff;
             background: #0070c9;

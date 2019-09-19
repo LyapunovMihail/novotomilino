@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
@@ -11,6 +11,7 @@ import { AuthorizationObserverService } from '../../authorization/authorization.
 import { HomeService } from '../home.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+declare let $: any;
 
 @Component({
     selector: 'app-home-preview',
@@ -35,6 +36,8 @@ export class HomePreviewComponent implements OnInit {
     public currentSlide: number = 0;
 
     public isShowModalAdmin: boolean = false;
+
+    public showTrojka: boolean = false;
 
     public slideWidth = document.documentElement.clientWidth;
 
@@ -64,16 +67,13 @@ export class HomePreviewComponent implements OnInit {
         this.newsSnippet = this.newsSnippets[0];
 
         this.shareSnippets.reverse();
-        // ToDo добавить св-во show_on_main и выводить первую из этих шар на главную
+
         this.shareSnippets.forEach((share) => {
             if (share.show_on_main) {
                 this.shareSnippet = share;
                 this.shareSnippet.finish_date = this.countDown(share.finish_date) + '';
             }
         });
-
-        // this.shareSnippet = this.shareSnippets[0];
-        // this.shareSnippet.finish_date = this.countDown(this.shareSnippet.finish_date) + '';
 
         this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
             (data: IGallerySnippet[]) => {
@@ -110,5 +110,15 @@ export class HomePreviewComponent implements OnInit {
             (data: IGallerySnippet[]) => this.gallerySlides = data,
             (err) => console.log(err)
         );
+    }
+
+    @HostListener('document:click', ['$event'])
+    public onDocumentClick(event) {
+        const trojkaDiv = $('.main__preview-threeRed');
+        if (!trojkaDiv.is(event.target) && !trojkaDiv.has(event.target).length) {
+            this.showTrojka = false;
+        } else {
+            this.showTrojka = true;
+        }
     }
 }

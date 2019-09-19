@@ -22,12 +22,18 @@ export class SharesItemsComponent {
 
     public uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
 
-    constructor() { }
+    constructor() {
+        moment.locale('ru');
+    }
 
     public countDown(finishDate) {
         const createdDateVal = moment(Date.now());
         const finishDateVal = moment(finishDate);
         const duration = moment.duration(createdDateVal.diff(finishDateVal));
         return Math.ceil(duration.asDays() * -1);
+    }
+
+    public parseCreatedAtDate(date) {
+        return moment(date).format('LL').slice(0, -3);
     }
 }

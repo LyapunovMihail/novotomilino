@@ -67,8 +67,8 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
             // создание новой карты с опциями
             let myMap = new ymaps.Map('map', {
                 center: [55.656513, 37.921365],
-                zoom: 17,
-                controls: []
+                zoom: 12,
+                controls: ['zoomControl']
             }, {
                 minZoom: 11,
                 maxZoom: 18
@@ -179,6 +179,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                                 strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
                                 strokeWidth: 5,
                                 zIndex: 10,
+                                openBalloonOnClick: false
                             });
                             // во временное хранилище к нужному маркеру добавляем объект с созданным маршрутом
                             that.markers[index]['route'] = route;

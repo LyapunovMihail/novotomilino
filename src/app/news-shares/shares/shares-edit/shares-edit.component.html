@@ -16,15 +16,23 @@
             <input type="text"
                 class="shares-edit-form__input shares-edit-form__input_title"
                 [formControlName]="'name'"
-                [ngClass]="{'invalid-value': form.get('name').invalid && form.get('name').touched}">
+                [ngClass]="{'invalid-value': form.get('name').invalid && form.get('name').touched}"
+                [placeholder]="'Максимум 60 символов'">
         </div>
         <div class="shares-edit-form__path-wrap">
             <p class="shares-edit-form__typografy-subtitle">Текст</p>
             <ghm-textarea [formControlName]="'text'"
                 class="shares-edit-form__input shares-edit-form__input_text"
                 [ngClass]="{'invalid-value': form.get('text').invalid && form.get('text').dirty}"
-                [placeholder]="'Дополнительный текст'"
-                [whitePlaceholder]="true">
+                [placeholder]="'Дополнительный текст'">
+            </ghm-textarea>
+        </div>
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Текст для превью</p>
+            <ghm-textarea [formControlName]="'textPreview'"
+                class="shares-edit-form__input shares-edit-form__input_text"
+                [ngClass]="{'invalid-value': form.get('textPreview').invalid && form.get('textPreview').dirty}"
+                [placeholder]="'Максимум 60 символов'">
             </ghm-textarea>
         </div>
         <div class="shares-edit-form__path-wrap shares-edit-form__path-wrap_time">

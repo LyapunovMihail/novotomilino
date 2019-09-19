@@ -99,7 +99,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font: 500 14px/20px "Museo Sans Cyrl";
+                font: 500 14px/20px "Museo Sans Cyrl", sans-serif;
                 @include font-smoothing;
                 color: #0070c9;
             }

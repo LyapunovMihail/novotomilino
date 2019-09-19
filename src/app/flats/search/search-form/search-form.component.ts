@@ -1,6 +1,6 @@
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
@@ -14,21 +14,26 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public formEvents: any;
     public form: FormGroup;
-    public moreFilter: boolean;
-    public showCorpus: boolean;
+    public moreFilter: boolean = false;
+    public showCorpus: boolean = false;
 
+    @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 
     constructor(
         public formBuilder: FormBuilder,
         public router: Router,
-        public activatedRoute: ActivatedRoute
+        public activatedRoute: ActivatedRoute,
     ) {}
 
     public ngOnInit() {
+        this.activatedRoute.queryParams.subscribe((queryParams) => {
+            console.log('QUERYPARAMS: ', queryParams);
+            this.buildForm(queryParams);
+        });
+    }
 
-        const params = this.activatedRoute.snapshot.queryParams;
-
+    public buildForm(params) {
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,
@@ -36,29 +41,30 @@ export class SearchFormComponent implements OnInit, OnDestroy {
              * if index is exist, then true
              * otherwise pass an array of false
              */
-            const arr = [false, false, false, false];
+            const arr = [false, false, false, false, false];
             if (params.rooms) {
                 const result = parseQueryParams(params.rooms);
-                const test = result.every((item) => (/^[0|1|2|3]$/).exec((item).toString()) ? true : false);
+                const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === 0) ? 3 : item - 1] = true);
+                    result.forEach((item) => arr[(item === '0') ? 4 : Number(item) - 1] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));
         })());
 
+        console.log('params: ', params);
         this.form = this.formBuilder.group({
             space: {
-                min: params.spaceMin || this.config.space.min,
-                max: params.spaceMax || this.config.space.max
+                min: Number(params.spaceMin) || this.config.space.min,
+                max: Number(params.spaceMax) || this.config.space.max
             },
             floor: {
-                min: params.floorMin || this.config.floor.min,
-                max: params.floorMax || this.config.floor.max
+                min: Number(params.floorMin) || this.config.floor.min,
+                max: Number(params.floorMax) || this.config.floor.max
             },
             price: {
-                min: params.priceMin || this.config.price.min,
-                max: params.priceMax || this.config.price.max
+                min: Number(params.priceMin) || this.config.price.min,
+                max: Number(params.priceMax) || this.config.price.max
             },
             type: [((type) => {
                 if (type && type.split(',').every((item) => this.config.typeList.some((i) => item === i.value))) {
@@ -74,36 +80,39 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.decoration)],
             sort: params.sort || this.config.sort,
             rooms: this.formBuilder.array(roomsFormArray) as FormArray,
-            sections: [((sections) => {
+            houses: [((houses) => {
                 /**
-                 * if there are sections in the url's params,
+                 * if there are houses in the url's params,
                  * then split them into an array,
                  * otherwise pass an empty array
                  */
-                if (sections) {
-                    const result = parseQueryParams(sections);
-                    const test = result.every((item) => (/^[1|2|3|4|5|6]$/).exec((item).toString()) ? true : false);
+                if (houses) {
+                    const result = parseQueryParams(houses);
+                    const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
                     return (test) ? result : [];
                 }
                 return [];
-            })(params.sections)]
+            })(params.houses)]
         });
 
+        console.log('this.form formComp : ', this.form.value);
         this.formChange.emit(this.form.value);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
             this.formChange.emit(form);
         });
 
-        function parseQueryParams(val: string): number[] {
+        function parseQueryParams(val: string): string[] {
             return val.replace(/[^,0-9]/gim, '')
-            .split(',')
-            .map((item) => Number(item));
+                .split(',');
         }
+    }
+
+    public formReset() {
+        this.buildForm({});
     }
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
     }
-
 }

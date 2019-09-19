@@ -1,4 +1,5 @@
 import { Subject, Subscription } from 'rxjs';
+import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { SharesService } from '../shares.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
@@ -20,6 +21,7 @@ export function createDynamicNewsObj(): Share {
     return ({
         name: '',
         text: '',
+        textPreview: '',
         mainImage: null,
         mainThumbnail: null,
         countdown: false,
@@ -69,12 +71,14 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         private activeRoute: ActivatedRoute,
         private sharesService: SharesService,
         private sharesObserverService: SharesObserverService,
+        private flatsDiscountService: FlatsDiscountService,
         private router: Router
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
         this.form  = new FormGroup({
-            name: new FormControl('', Validators.required),
+            name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
             text: new FormControl('', Validators.required),
+            textPreview: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
             mainImage: new FormControl(null, Validators.required),
             mainThumbnail: new FormControl(null, Validators.required),
             show_on_main: new FormControl(false, Validators.required),
@@ -198,13 +202,12 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                         console.log(response);
                         this.close.emit();
                         this.snippetsChange.emit(response);
+                        this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
                         console.log('Ошибка', err);
                     });
-
-                this.router.navigate(['/shares/list/1']);
             } else {
                 this.sharesService.updateShare(this.redactId, form.value as Share)
                     .subscribe(
@@ -212,6 +215,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                             console.log(response);
                             this.close.emit();
                             this.snippetsChange.emit(response);
+                            this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
                         },
                         (err) => {
                             alert('Что-то пошло не так!');

@@ -108,7 +108,6 @@ export class FavoritesComponent implements OnInit, OnDestroy {
                 .subscribe((flatsData) => this.flats = flatsData,
                     (error) => {
                     console.log(error);
-                    this.flats = mockFlats;
                     });
         } else {
             this.flats = [];

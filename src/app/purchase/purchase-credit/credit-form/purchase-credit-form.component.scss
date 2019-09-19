@@ -31,6 +31,7 @@
             color: $col-black;
             opacity: .6;
             margin: 0 0 10px;
+            border-top: 1px solid #fff;
         }
         &-size {
             font: 500 18px/24px $font-mus;
@@ -132,9 +133,8 @@
 }
 
 @media (max-width: 1279px) {
-    .purchase__filter,
-    .purchase__result {
-        width: 50%;
+    :host { width: 50%; }
+    .purchase__filter {
         box-sizing: border-box;
         padding: 0 15px 0 0;
     }
@@ -156,6 +156,9 @@
                 background-size: 77%;
             }
         }
-        &-item:not(:last-child) { margin: 0 0 38px; }
+        &-item {
+            width: calc(100% - 15px);
+            &:not(:last-child) { margin: 0 0 38px; }
+        }
     }
 }

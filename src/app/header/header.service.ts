@@ -18,7 +18,7 @@ export class HeaderService {
         return this.http.get('/api/dynamic/last/link');
     }
 
-    public links(data) {
+    public links(data): IHeaderLink[] {
         let date = new Date();
         let year = (data.year) ? data.year : date.getFullYear();
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );

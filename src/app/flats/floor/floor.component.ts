@@ -1,5 +1,7 @@
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { animate } from '@angular/animations';
+import { FlatsDiscountService } from '../../commons/flats-discount.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { FloorCount } from './floor-count';
 import { HttpClient } from '@angular/common/http';
 import { PlatformDetectService } from './../../platform-detect.service';
@@ -13,6 +15,7 @@ import { Observable } from 'rxjs';
     templateUrl: './floor.component.html',
     styleUrls: ['./floor.component.scss', '../flats.component.scss'],
     providers: [
+        WindowScrollLocker,
         FloorService
     ],
     encapsulation: ViewEncapsulation.None,
@@ -25,18 +28,23 @@ export class FloorComponent implements OnInit, OnDestroy {
     public floorCount = FloorCount;
     public floorSvg: string = '';
     public routerEvents: any;
+    public houseNumber: number;
     public sectionNumber: number;
     public floorNumber: number;
-    public dottedListMenu: any[] = [];
-    public infoWindow: IAddressItemFlat;
+    public infoWindow: IFlatWithDiscount;
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
+    public floorFlats: IFlatWithDiscount[];
 
     constructor(
+        public windowScrollLocker: WindowScrollLocker,
         public router: Router,
         public activatedRoute: ActivatedRoute,
         public elRef: ElementRef,
         public platform: PlatformDetectService,
         public http: HttpClient,
-        public floorService: FloorService
+        public floorService: FloorService,
+        private flatsDiscountService: FlatsDiscountService
     ) {}
 
     public ngOnInit() {
@@ -46,45 +54,29 @@ export class FloorComponent implements OnInit, OnDestroy {
     public routerChange() {
         return this.activatedRoute.params
         .subscribe((params: any) => {
-            // проверка на соответствие секции и этажа из конфига ./floor-count.ts
-            if ( Object.keys(this.floorCount).some((i) => params['section'] === i)
-                && this.floorCount[params['section']].some((i) => Number(params['floor']) === i) ) {
-                this.sectionNumber = Number(params['section']);
-                this.floorNumber = Number(params['floor']);
-                this.floorSelector = this.floorCount[this.sectionNumber];
-                this.getFloorSvg(`/assets/floor-plans/section_${this.sectionNumber}/floor_${this.floorNumber}/sect_${this.sectionNumber}_fl_${this.floorNumber}.svg`)
+            // проверка на соответствие дома, секции и этажа из конфига ./floor-count.ts
+            console.log('params: ', params);
+            if (this.floorCount[params.house] && this.floorCount[params.house][params.section]
+                && this.floorCount[params.house][params.section].some((floor) => floor === Number(params.floor))) {
+                this.houseNumber = Number(params.house);
+                this.sectionNumber = Number(params.section);
+                this.floorNumber = Number(params.floor);
+                this.floorSelector = this.floorCount[this.houseNumber][this.sectionNumber];
+                this.getFloorSvg(`/assets/floor-plans/house_${this.houseNumber}/section_${this.sectionNumber}/floor_${this.floorNumber}/sect_${this.sectionNumber}_fl_${this.floorNumber}.svg`)  // добавить дом
                 .subscribe(
                     (data: string) => {
                         this.floorSvg = data;
                         this.floorService.getObjects({
+                            houses: this.houseNumber + '',
                             sections: this.sectionNumber + '',
                             floor: this.floorNumber + ''
                         }).subscribe(
                             (flats: IAddressItemFlat[]) => {
+                                console.log('flats: ', flats);
+                                const discountizatedFlats = flats.map((flat: IFlatWithDiscount) => {flat.discount = this.flatsDiscountService.getDiscount(flat); return flat; });
                                 if ( this.platform.isBrowser ) {
-                                    const modList = [{
-                                        name: 'Студии',
-                                        mod: 'studio',
-                                        count: 0
-                                    }, {
-                                        name: 'Однокомнатные',
-                                        mod: 'one-room',
-                                        count: 0
-                                    }, {
-                                        name: 'Двухкомнатные',
-                                        mod: 'two-room',
-                                        count: 0
-                                    }, {
-                                        name: 'Трехкомнатные',
-                                        mod: 'three-room',
-                                        count: 0
-                                    }];
-                                    flats.forEach((item) => {
-                                        modList[Number(item.rooms)].count += 1;
-                                    });
-                                    this.dottedListMenu = modList.filter((item) => item.count > 0);
-                                    this.floorService.flatsHover(flats, {
-                                        click: (flat) => this.router.navigate([`/flats/section/${flat.section}/floor/${flat.floor}/apartment/${flat.flat}`]),
+                                    this.floorService.flatsHover(discountizatedFlats, {
+                                        click: (i) => this.openApartmentModal(i, discountizatedFlats),
                                         hover: (flat) => this.infoWindow = flat
                                     });
                                 }
@@ -113,10 +105,10 @@ export class FloorComponent implements OnInit, OnDestroy {
         return this.http.get<string>(url, { responseType: 'text' as 'json' });
     }
 
-    public svgRouterLink(section) {
-        const floor = (this.floorCount[section].some((i) => Number(this.floorNumber) === i))
-            ? this.floorNumber
-            : this.floorCount[section][this.floorCount[section].length - 1];
-        this.router.navigate([`/flats/section/${section}/floor/${floor}`]);
+    public openApartmentModal(index, floorFlats) {
+        this.selectedFlatIndex = index;
+        this.floorFlats = floorFlats;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
+import { FlatsDiscountService } from './commons/flats-discount.service';
 
 export const ROOT_SELECTOR = 'app-root';
-declare let $: any;
 
 @Component({
   selector: ROOT_SELECTOR,
@@ -26,24 +27,37 @@ declare let $: any;
       <app-overlay></app-overlay>
       <app-img-modal></app-img-modal>
       <app-video-modal></app-video-modal>
-  `
+  `,
+    providers: []
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    public appState: AppState
-  ) {}
+    public previousUrl: string;
+    public currentUrl: string;
 
-  public ngOnInit() {
-      console.log('Initial App State', this.appState.state);
-  }
+    constructor(
+    public appState: AppState,
+    private router: Router,
+    public flatsDiscountService: FlatsDiscountService
+    ) {}
 
+    public ngOnInit() {
+        console.log('Initial App State', this.appState.state);
+
+        // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
+        this.router.events.subscribe((event) => {
+            if (!(event instanceof NavigationEnd)) {
+              return;
+            }
+            this.previousUrl = this.currentUrl;
+            this.currentUrl = this.router.url;
+            if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
+                return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
+            }
+            window.scrollTo(0, 0);
+        });
+
+        // Загружаем акции для дальнейшего вычисления скидки по квартирам
+        this.flatsDiscountService.getShares();
+    }
 }
-
-/**
- * Please review the https://github.com/AngularClass/angular-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */

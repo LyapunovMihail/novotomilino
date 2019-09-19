@@ -36,7 +36,7 @@
             </app-dynamic-admin-create>
         
         
-            <app-dynamic-month-switcher
+            <app-dynamic-month-switcher *ngIf="objectsArray.length"
                 (monthChange)="monthChange($event)"
                 [month]="currentMonth"
                 [year]="currentYear"

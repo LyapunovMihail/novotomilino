@@ -4,62 +4,40 @@
 
 .search {
     width: 100%;
-    height: 100vh;
+    height: calc(100% - 19px);
     background: #ffffff;
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 21;
     transition: top .5s ease;
 
-    &_open { top: calc(0% + 70px); }
+    &_slide-top { top: calc(0% + 70px); }
 
     &__main {
         width: 100%;
-        height: 100%;
         display: flex;
-        justify-content: center;
-        box-sizing: border-box;
-    }
-    &__show-btn {
-        width: 248px;
-        height: 50px;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        font: 500 16px/23px $font-mus;
-        @include font-smoothing;
-        color: #fff;
-        position: absolute;
-        top: -70px;
-        left: calc(50% - 124px);
-        border-radius: 4px;
-        background-color: $col-orange;
-        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-        transition: background-color $transition, color $transition, top .5s ease;
-        &:hover {
-            background-color: #fff;
-            color: $col-orange;
-            svg g g { stroke: $col-orange; }
-        }
-        svg { transform: rotate(-90deg); }
+        box-sizing: border-box;
+        padding-bottom: 210px;
 
-        &_active {
-            top: -40px;
-            background-color: #fff;
-            color: $col-orange;
-            flex-flow: column-reverse;
-            &:hover {
-                background-color: $col-orange;;
-                color: #fff;
-                svg g g { stroke: #fff; }
-            }
-
-            svg {
-                transform: rotate(90deg);
-                g g { stroke: $col-orange; }
-            }
+        &-more {
+            width: 177px;
+            height: 50px;
+            background: #fff;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            margin: -60px auto 60px;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            border: solid 1px #e7490f;
+            font: 500 18px/24px "Museo Sans Cyrl", sans-serif;
+            @include font-smoothing();
+            color: #e7490f;
         }
     }
 }
@@ -72,18 +50,29 @@
 
     &__container {
         width: 100%;
+        height: 127px;
         box-sizing: border-box;
-        padding: 30px 0 40px;
+        padding: 19px 0 29px;
         display: flex;
         justify-content: center;
         background-color: #fafaf2;
+        z-index: 100;
+        transition: 0.2s linear;
+
+        &--fixed {
+            position: fixed;
+            bottom: 50px;
+        }
+        &--slide {
+            height: 190px;
+        }
     }
     &__wrap {
         display: flex;
         align-items: flex-end;
 
         &-item {
-            margin: 0 30px 0 0;
+            margin: 0 30px 15px 0;
             &:last-child { margin: 0; }
             
             &_corpus {
@@ -91,13 +80,24 @@
                 cursor: pointer;
             }
         }
-        &_decoration { justify-content: space-between; }
+        &_decoration {
+            justify-content: space-between;
+            opacity: 0;
+            transition: 0.2s linear;
+            &--show {
+                opacity: 1;
+            }
+        }
     }
     &__subtitle {
         @include fw14-20(rgba(0, 1, 5, .6));
         margin: 0 0 10px;
     }
-    &__text { @include fw18-24; }
+    &__text {
+        @include fw18-24;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     &__rooms {
         display: flex;
         list-style: none;
@@ -112,6 +112,7 @@
             &:nth-child(2) { transform: translateX(-1px); }
             &:nth-child(3) { transform: translateX(-2px); }
             &:nth-child(4) { transform: translateX(-3px); }
+            &:nth-child(5) { transform: translateX(-4px); }
         }
         &-checkbox {
 
@@ -167,7 +168,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            padding: 0 43px 0 15px;
+            padding: 0 38px 0 15px;
             box-sizing: border-box;
             overflow: hidden;
             &:before {
@@ -186,8 +187,8 @@
     &__corpus {
         // opacity: 0;
         position: absolute;
-        width: 394px;
-        height: 338px;
+        width: 182px;
+        height: 213px;
         background: #fff;
         right: 0;
         top: calc(100% + 10px);
@@ -199,71 +200,37 @@
         transition: .2s linear;
         cursor: default;
 
-        &-check {
-            display: flex;
-            margin: 0 0 14px;
-
-            input {
-                display: none;
-                &:checked + .search-form__corpus-checkbox {
-                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
-                    border-color: #e7490f;
-                }
-            }
-        }
-        &-text,
-        &-checkbox {
-            transition: color $transition, border-color $transition;
-            cursor: pointer;
-        }
-        &-text { @include fw18-24(); }
-
-        &-img {
-            cursor: pointer;
-            transition: $transition;
-            &:hover { fill: rgba(231, 73, 15, .8); }
+        &--position-top {
+            top: calc(100% - 269px);
         }
     }
     &__btn {
         width: 182px;
         height: 46px;
+        margin-bottom: 15px;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
         border: solid 1px #e7490f;
         @include fw18-24($col-orange);
     }
-
-    &__decoration {
-        display: flex;
-        margin: 40px 0 0;
-
-        &-item {
-            margin: 0 30px 0 0;
-            display: flex;
-            &:hover .search-form__decoration-checkbox,
-            &:hover .search-form__decoration-text {
-                border-color: $col-orange;
-                color: $col-orange;
-            }
-            input {
-                display: none;
-                &:checked + .search-form__decoration-checkbox {
-                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
-                    border-color: #e7490f;
-                }
-            }
-        }
-        &-text,
-        &-checkbox {
-            transition: color $transition, border-color $transition;
-            cursor: pointer;
-        }
-        &-text { @include f16-24(rgba(0, 1, 5, 0.8)); }
-        &-checkbox { background-color: #fff; }
-    }
     &__reset-filter {
         background: transparent;
         @include f16-24(rgba(0, 1, 5, 0.8));
     }
+}
+
+.more {
+    width: 177px;
+    height: 50px;
+    font: bold 18px 'Montserrat';
+    color: #3a3a39;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #cda571;
+    border-radius: 5px;
+    margin: -60px auto 60px;
+    user-select: none;
 }

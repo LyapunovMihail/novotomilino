@@ -24,11 +24,21 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
-    public isAuthorizated: boolean = false ;
+    public isAuthorizated = false ;
     public AuthorizationEvent;
     public allSnippets: any[] = [];
-    public newsUploadsPath: string = `/${NEWS_UPLOADS_PATH}`;
-    public sharesUploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
+    public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
+
+    // открытие формы создания
+    public isNewsCreateForm = false ;
+
+    // открытие форм редактирования
+    public redactId: any ;
+    public isNewsRedactForm = false ;
+    public isNewsDeleteForm = false ;
+    public isSharesCreateRedactForm = false ;
+    public isSharesDeleteForm = false ;
 
     // открытие формы создания
     public isNewsCreateForm: boolean = false ;
@@ -49,8 +59,9 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
-
         if ( !this.platform.isBrowser ) { return false; }
+
+        moment.locale('ru');
 
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
@@ -140,5 +151,9 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     // вызывается после создания, удаления, редактирования
     public snippetsChange() {
         this.getAllSnippets();
+    }
+
+    public parseCreatedAtDate(date) {
+        return moment(date).format('LL').slice(0, -3);
     }
 }

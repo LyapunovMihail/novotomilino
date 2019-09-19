@@ -4,7 +4,7 @@
     width: 100%;
     height: 50px;
     border-top: 1px solid rgba(0, 1, 5, 0.1);
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
@@ -13,14 +13,15 @@
     box-sizing: border-box;
     padding: 0 40px;
     background: #fff;
+    z-index: 100;
 
     &--hidden {
-        visibility: hidden;
+        display: none;
     }
 
     &__dev-logo-link {
         display: block;
-        width: 144px;
+        width: 204px;
 
         img {
             width: 100%;
@@ -59,10 +60,15 @@
             margin: 0 10px 0 0;
             display: flex;
             align-items: center;
-
-            &:last-child {
-                margin: 0 0 0 26px;
+            &:last-child { margin: 0 0 0 26px; }
+            &:hover {
+                path {
+                    fill: $col-orange;
+                    opacity: 1;
+                }
             }
+
+            svg { path { transition: $transition; } }
         }
     }
 

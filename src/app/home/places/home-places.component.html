@@ -18,8 +18,9 @@
         <div class="main__place-slider-wrap">
             <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="main__place-slider-list">
                 <li *ngFor="let item of gallerySlides; let i = index" class="main__place-slider-item" [ngClass]="{'main__place-slider-item--active' : currentSlide === i}">
-
-                    <img class="main__place-slider-img" [src]="uploadsPath + item.thumbnail" alt="">
+                    <div class="main__place-slider-img">
+                        <img [src]="uploadsPath + item.image" alt="">
+                    </div>
 
                     <div class="main__place-slider-descr">
                         <h1 *ngIf="!isAuthorizated" class="main__place-slider-title">{{item.name}}</h1>

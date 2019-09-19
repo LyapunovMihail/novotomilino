@@ -9,8 +9,8 @@
         </div>
         <div class="news__snippets-descr">
             <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
-            <p *ngIf="snippet.description" class="news__snippets-descr-text" [innerHTML]="snippet.description | lineBreakPipe"></p>
-            <p class="news__snippets-descr-date">{{snippet.created_at | date: 'd.M.yyyy' }}</p>
+            <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
+            <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
         </div>
     </a>
     <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">

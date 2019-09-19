@@ -1,4 +1,4 @@
-<div *ngIf="(isForm && isAuthorizated)" class="admin-controll create-form__modal g-modal-bg">
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll g-modal-bg">
 
     <div class="admin-news_modal-close-bgr" (click)="close.emit()" ></div>
 
@@ -16,33 +16,13 @@
             <div (click)="close.emit()" class="create-form__cls-btn"></div>
 
             <h1 class="create-form__form-title">Добавить новость</h1>
-            <p class="create-form__form-date">29 марта 2019</p>
-
-                <!-- <div class="admin-news_form_news-type">
-
-                    <label class="admin-news_checkbox">
-                        <input [formControl]="form.controls['category']" name="category" [value]="enumCategory.NEW" type="radio" class="admin-news_checkbox_content">
-                        <div class="admin-news_checkbox_for-click"
-                            [ngClass]="{'invalid-input-value' : (!form.controls['category'].valid)}">
-                        </div>
-                        <span class="admin-news_checkbox_text admin-news_form_text">новость</span>
-                    </label>
-                    
-                </div> -->
-
-            <!-- <div class="admin-news_form_wrap">
-                <span class="admin-news_form_text admin-news_form_name">Дата</span>
-                <input [value]="form.controls['created_at'].value | date: 'd.M.yyyy'" disabled="true" class="admin-news_form_field" type="text">
-                <input [formControl]="form.controls['last_modifyed']" hidden="true" type="text">
-                <input [formControl]="form.controls['created_at']" hidden="true" type="text">
-            </div> -->
-
-
+            <p class="create-form__form-date">{{dateNow}}</p>
 
             <div class="create-form__form-wrap">
                 <p class="create-form__form-subtitle">Заголовок</p>
                 <textarea class="create-form__form-area create-form__form-area_title"
-                    name="title" 
+                    name="title"
+                    placeholder="Максимум 60 символов"
                     [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
                     [formControl]="form.controls['title']">
                 </textarea>
@@ -50,7 +30,19 @@
             
             <div class="create-form__form-wrap">    
                 <p class="create-form__form-subtitle">Текст</p>
-                <textarea [formControl]="form.controls['description']" class="create-form__form-area create-form__form-area_text"></textarea>
+                <textarea class="create-form__form-area create-form__form-area_text"
+                    placeholder="Дополнительный текст"
+                    [formControl]="form.controls['description']">
+                </textarea>
+            </div>
+
+            <div class="create-form__form-wrap">
+                <p class="create-form__form-subtitle">Текст для превью</p>
+                <textarea class="create-form__form-area create-form__form-area_text"
+                    placeholder="Максимум 60 символов"
+                    [ngClass]="{'invalid-input-value' : (!form.controls['descrPreview'].valid)}"
+                    [formControl]="form.controls['descrPreview']">
+                </textarea>
             </div>
 
             <div class="create-form__form-wrap">
@@ -80,31 +72,6 @@
                     <p class="create-form__form-checkbox-text">Показать новость на главной</p>
                 </label>
             </div>
-
-            <!-- Оставил поле "Показать новость на главной" как она была раньше, если мой чекбок верен - удалить -->
-            <!-- <div class="admin-news_form_wrap admin-news_form_wrap--margin-40">
-
-                    <span class="admin-news_form_text">Показывать</span>
-
-                    <div class="admin-news_form_news-order">
-
-                        <ng-container *ngFor="let item of showOnMainModifycators">
-                            <label class="admin-news_checkbox">
-                                <input class="admin-news_checkbox_content"
-                                    [formControl]="form.controls['show_on_main']"
-                                    [value]="item.value" 
-                                    type="radio" name="show_on_main">
-                                <div class="admin-news_checkbox_for-click"
-                                    [ngClass]="{'invalid-input-value' : (!form.controls['show_on_main'].valid)}">
-                                </div>
-                                <span class="admin-news_checkbox_text admin-news_form_text">{{ item.description }}</span>
-                            </label>
-                        </ng-container>
-
-                    </div>
-
-            </div> -->
-
 
             <button type="submit" class="create-form__form-submit"
                 [ngClass]="{'create-form__form-submit_disabled' : !form.valid}"

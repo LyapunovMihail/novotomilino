@@ -20,7 +20,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    font: 16px/28px "Museo Sans Cyrl";
+    font: 16px/28px "Museo Sans Cyrl", sans-serif;
     @include font-smoothing;
     color: #000105;
     cursor: pointer;

@@ -1,4 +1,4 @@
-<div *ngIf="(isForm && isAuthorizated)" class="admin-controll create-form__modal g-modal-bg">
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll g-modal-bg">
     
         <div class="admin-news_modal-close-bgr" (click)="close.emit()" disabled="true"></div>
     
@@ -18,12 +18,13 @@
                 <div (click)="close.emit()" class="create-form__cls-btn"></div>
     
                 <h1 class="create-form__form-title">Редактировать</h1>
-                <p class="create-form__form-date">29 марта 2019</p>
+                <p class="create-form__form-date">{{dateNow}}</p>
 
                 <div class="create-form__form-wrap">
                     <p class="create-form__form-subtitle">Заголовок</p>
                     <textarea class="create-form__form-area create-form__form-area_title"
-                        name="title" 
+                        name="title"
+                        placeholder="Максимум 60 символов"
                         [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
                         [formControl]="form.controls['title']">
                     </textarea>
@@ -31,7 +32,19 @@
                 
                 <div class="create-form__form-wrap">    
                     <p class="create-form__form-subtitle">Текст</p>
-                    <textarea [formControl]="form.controls['description']" class="create-form__form-area create-form__form-area_text"></textarea>
+                    <textarea class="create-form__form-area create-form__form-area_text"
+                        placeholder="Дополнительный текст"
+                        [formControl]="form.controls['description']" >
+                    </textarea>
+                </div>
+
+                <div class="create-form__form-wrap">
+                    <p class="create-form__form-subtitle">Текст для превью</p>
+                    <textarea class="create-form__form-area create-form__form-area_text"
+                        placeholder="Максимум 60 символов"
+                        [ngClass]="{'invalid-input-value' : (!form.controls['descrPreview'].valid)}"
+                        [formControl]="form.controls['descrPreview']">
+                    </textarea>
                 </div>
     
                 <div class="create-form__form-wrap">
