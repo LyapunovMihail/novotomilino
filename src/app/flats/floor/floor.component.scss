@@ -65,6 +65,7 @@
         width: $w1600;
         height: calc(100vh - (146px) - (60px + 94px));
         display: flex;
+        justify-content: space-between;
     }
 
     &__description {
