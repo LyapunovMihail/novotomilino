@@ -9,6 +9,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
+        position: relative;
 
         &-title {
             width: 100%;
@@ -17,6 +18,7 @@
             top: 40px;
             left: 50%;
             transform: translateX(-50%);
+            color: #fff
         }
         &_scrll,
         &-img {
@@ -28,6 +30,62 @@
                 height: 100%;
                 object-fit: cover;
             }
+        }
+    }
+}
+
+.markers {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &__item {
+        width: 40px;
+        height: 46px;
+        position: absolute;
+        z-index: 10;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        &_kinder {
+            left: 22%;
+            top: 28%;
+            &:after { background: url(/assets/img/about/plan/kinder.svg) 0 0 no-repeat; }
+            .markers__item-tooltip { border: 1px solid #ffcb0d; }
+            &:last-child {
+                left: 75%;
+                top: 4%;
+            }
+        }
+        &_school {
+            left: 61%;
+            top: 28%;
+            &:after { background: url(/assets/img/about/plan/school.svg) 0 0 no-repeat; }
+            .markers__item-tooltip { border: 1px solid #ae6bf8; }
+        }
+
+
+        &-tooltip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 40px;
+            height: 38px;
+            padding: 0 15px 0 50px;
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            white-space: nowrap;
+            border-radius: 20px;
+            z-index: -1;
         }
     }
 }

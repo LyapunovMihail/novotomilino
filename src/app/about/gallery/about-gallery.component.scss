@@ -115,14 +115,14 @@
         &-item {
             display: inline-block;
             position: relative;
-            height: 460px;
+            height: 560px;
             width: $w1600;
             vertical-align: middle;
             transition: 1s ease-in-out;
             margin-right: 30px;
 
             &--active {
-                height: 500px;
+                height: 600px;
             }
         }
         &-img {

@@ -40,16 +40,6 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     public isSharesCreateRedactForm = false ;
     public isSharesDeleteForm = false ;
 
-    // открытие формы создания
-    public isNewsCreateForm: boolean = false ;
-
-    // открытие формы редактирования
-    public redactId: any ;
-    public isNewsRedactForm: boolean = false ;
-    public isNewsDeleteForm: boolean = false ;
-    public isSharesCreateRedactForm: boolean = false ;
-    public isSharesDeleteForm: boolean = false ;
-
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
