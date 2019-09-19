@@ -144,7 +144,7 @@ export let navList = [
         content: 'Детские сады'
     }, {
         type: 'hospital',
-        content: 'Больницы и поликлиники'
+        content: 'Поликлиники'
     }, {
         type: 'sport',
         content: 'Спортивные учреждения'
