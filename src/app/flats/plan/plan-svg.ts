@@ -1,6 +1,7 @@
 export interface IHousePlanItem {
     houseNumber: string;
     svgPath: string;
+    transform: string;
     freeFlats: number;
     rooms: IRoomsMinPrices[];
 }
