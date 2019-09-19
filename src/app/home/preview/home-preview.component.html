@@ -33,18 +33,34 @@
             </div>
         </ng-container>
 
-        <div class="main__preview-content" >
+        <div class="main__preview-content">
             <div class="preview-content__wrap">
-                <a class="preview-content__stock" [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]" *ngIf="shareSnippet && shareSnippet.show_on_main">
-                    <h1 class="preview-content__stock-title">{{shareSnippet.name}}</h1>
-                    <p class="g-link_white">{{shareSnippet.textPreview}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__stock-paragraf">Акция закончилась</p>
-                </a>
-                <a class="preview-content__news" [routerLink]="['/news-shares/news/list/' + newsSnippet._id]" *ngIf="newsSnippet">
-                    <h1 class="preview-content__news-title">{{newsSnippet.title}}</h1>
-                    <p class="g-link_white">{{newsSnippet.descrPreview}}</p>
-                </a>
+                <div class="preview-content__shares-container" *ngIf="shareSnippets">
+                    <ng-container *ngFor="let shareSnippet of shareSnippets; let i = index">
+                        <a class="preview-content__share"
+                           [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]"
+                           [class.preview-content__share--active]="i === activeShare">
+                            <div class="preview-content__share-row">
+                                <span class="preview-content__share-icon"></span><h6 class="preview-content__share-title">{{shareSnippet.name}}</h6>
+                            </div>
+                            <p class="g-link_white preview-content__share-text-preview">{{shareSnippet.textPreview}}</p>
+                            <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="preview-content__share-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
+                            <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="preview-content__share-paragraf">Акция закончилась</p>
+                        </a>
+                    </ng-container>
+                </div>
+                <div class="preview-content__news-container"  *ngIf="newsSnippets">
+                    <ng-container *ngFor="let newsSnippet of newsSnippets; let i = index">
+                        <a class="preview-content__news"
+                           [routerLink]="['/news-shares/news/list/' + newsSnippet._id]"
+                           [class.preview-content__news--active]="i === activeNews">
+                            <div class="preview-content__news-row">
+                                <span class="preview-content__news-icon"></span><h6 class="preview-content__news-title">{{newsSnippet.title}}</h6>
+                            </div>
+                            <p class="g-link_white preview-content__news-text-preview">{{newsSnippet.descrPreview}}</p>
+                        </a>
+                    </ng-container>
+                </div>
             </div>
         </div>
 

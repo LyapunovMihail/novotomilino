@@ -46,7 +46,6 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
         this.newsService.getSnippet().subscribe(
             (data) => {
                 this.snippetsArray = data;
-                console.log('this.snippetsArray: ', this.snippetsArray);
                 this.ref.detectChanges();
             },
             (err) => console.error(err)

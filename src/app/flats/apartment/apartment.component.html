@@ -20,10 +20,18 @@
         <div class="apartment__info">
             <nav class="apartment__info-nav">
                 <ul class="apartment__info-nav-list">
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Общий вид</li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Корпус {{flatData.house}}</li>
-                    <li class="apartment__info-nav-item">Секция {{flatData.section}}</li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">Этаж {{flatData.floor}}</li>
+                    <li class="apartment__info-nav-item">
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/plan'" (click)="close.emit(false)">Общий вид</a>
+                    </li>
+                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
+                    </li>
+                    <li class="apartment__info-nav-item">
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Секция {{flatData.section}}</a>
+                    </li>
+                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
+                    </li>
                     <li class="apartment__info-nav-item">Квартира №{{flatData.flat}}</li>
                 </ul>
             </nav>
@@ -44,6 +52,9 @@
                     <p class="apartment__info-subtitle">Ипотека от</p>
                     <p class="apartment__info-descr-value">100 000 &#8381;</p>
                 </div>
+            </div>
+            <div class="apartment__info-delivery">
+                Срок сдачи {{flatData.deliveryDate}}
             </div>
             <div class="apartment__info-price">
                 <p class="apartment__info-subtitle">Стоимость</p>
@@ -68,14 +79,16 @@
         <div class="apartment__plan">
             <div class="apartment__plan-link">
                 <!-- <a class="g-link_red apartment__plan-link-dwnld" [href]="pdfLink" target="_blank">План квартиры.pdf</a> -->
-                <!-- <div (click)="toFavorite()" 
+                <!-- <div (click)="toFavorite()"
                      [ngClass]="{'apartment__plan-link-favorite_active': inFavorite}" 
                      class="g-link_red apartment__plan-link-favorite">
                     Добавить в избранное
                 </div> -->
             </div>
             <div class="apartment__plan-img">
-                <img class="apartment_item_scheme" [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'"> <!-- добавить квартиру новот -->
+                <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
+                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
+                <div *ngIf="img.style.display === 'none'" class="apartment__plan-img-error">Изображение не доступно</div>
             </div>
         </div>
 

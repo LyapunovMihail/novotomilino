@@ -23,8 +23,7 @@ export class HouseMinimapComponent implements OnChanges {
         // Даём время прогрузиться компонентам поиска по параметрам чтобы они успели подписаться на событие смены queryparams и учли корпус выбранный при загрузке страницы дома
         setTimeout(() => {
             this.houseNavigate(this.houseNumber);
-
-        }, 0);
+        }, 100);
     }
 
     public houseNavigate(num) {

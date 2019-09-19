@@ -1,3 +1,6 @@
+import * as moment from 'moment';
+import _date = moment.unitOfTime._date;
+
 export const ADDRESSES_COLLECTION_NAME = 'addresses';
 
 /**
@@ -53,6 +56,7 @@ export interface IAddressItemFlat {
     twolevel: boolean;
     space: number;
     price: number;
+    deliveryDate: string;
     _id?: any;
 }
 

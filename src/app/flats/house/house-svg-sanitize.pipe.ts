@@ -7,9 +7,9 @@ import { DomSanitizer, SafeStyle, SafeHtml } from '@angular/platform-browser';
 
 export class HouseSVGSanitizePipe implements PipeTransform  {
 
-    constructor(private sanitizer: DomSanitizer){}  
+    constructor(private sanitizer: DomSanitizer) {}
 
-    transform(v: any) : SafeHtml {
+    transform(v: any): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(v);
     }
 }

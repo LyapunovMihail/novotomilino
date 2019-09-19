@@ -28,7 +28,6 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     public ngOnInit() {
-        console.log('floorSelector: ', this.floorSelector);
         this.selectedFloor$
         .pipe(debounceTime(300), takeUntil(this._ngUnsubscribe))
         .subscribe((floor) => {
@@ -38,7 +37,6 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
 
 
     public ngOnChanges() {
-        console.log('floorSelector: ', this.floorSelector);
     }
 
     public ngOnDestroy() {

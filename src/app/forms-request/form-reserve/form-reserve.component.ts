@@ -23,7 +23,7 @@ export class FormReserveComponent implements OnChanges {
         price: '',
         number: '',
         type: '',
-        mail: '',
+        mail: ['', Validators.compose([Validators.required, Validators.email])],
         phone: ['', Validators.compose([Validators.required, Validators.maxLength(18), Validators.minLength(18)])],
         time: '',
         wait_for_call: 'now',

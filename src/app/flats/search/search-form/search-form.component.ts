@@ -16,9 +16,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public form: FormGroup;
     public moreFilter: boolean = false;
     public showCorpus: boolean = false;
+    public sort: string;
 
     @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
+    @Output() public sortChange: EventEmitter<any> = new EventEmitter();
 
     constructor(
         public formBuilder: FormBuilder,
@@ -28,7 +30,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.activatedRoute.queryParams.subscribe((queryParams) => {
-            console.log('QUERYPARAMS: ', queryParams);
             this.buildForm(queryParams);
         });
     }
@@ -52,7 +53,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             return arr.map((item) => (new FormControl(item)));
         })());
 
-        console.log('params: ', params);
         this.form = this.formBuilder.group({
             space: {
                 min: Number(params.spaceMin) || this.config.space.min,
@@ -78,7 +78,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.decoration)],
-            sort: params.sort || this.config.sort,
             rooms: this.formBuilder.array(roomsFormArray) as FormArray,
             houses: [((houses) => {
                 /**
@@ -95,7 +94,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.houses)]
         });
 
-        console.log('this.form formComp : ', this.form.value);
         this.formChange.emit(this.form.value);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
@@ -110,6 +108,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public formReset() {
         this.buildForm({});
+        setTimeout(() => {
+            this.sort = this.config.sort;
+            this.sortChange.emit(this.sort);
+        }, 100);
     }
 
     public ngOnDestroy() {

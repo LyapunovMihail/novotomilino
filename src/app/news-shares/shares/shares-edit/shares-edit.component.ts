@@ -206,7 +206,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
-                        console.log('Ошибка', err);
                     });
             } else {
                 this.sharesService.updateShare(this.redactId, form.value as Share)
@@ -219,7 +218,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                         },
                         (err) => {
                             alert('Что-то пошло не так!');
-                            console.log('Ошибка', err);
                         }
                     );
             }

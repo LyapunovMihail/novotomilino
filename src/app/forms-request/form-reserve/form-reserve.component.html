@@ -27,7 +27,8 @@
         
         <div class="form-request__wrap form-request__wrap_last">
             <p class="form-request__subtitle">Эл. почта</p>
-            <input class="form-request__field" type="text">
+            <input [formControl]="form.controls['mail']" class="form-request__field"
+                   [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}" type="email">
         </div>
 
         <div class="form-request__wrap">

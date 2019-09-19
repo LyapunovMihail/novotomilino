@@ -110,7 +110,6 @@ export class HouseComponent implements OnInit, OnDestroy {
             floor.sort();
         });
 
-        console.log('this.sectionData: ', this.sectionData);
         if (this.searchFlats) {
             this.searchFlatsSelection();
         }
@@ -125,10 +124,6 @@ export class HouseComponent implements OnInit, OnDestroy {
                         && searchFlat.section === Number(this.sectionNumber)
                         && searchFlat.flat === flat.flat ) {
                         flat.disabled = false;
-                        if (flat.rooms !== searchFlat.rooms) {
-                            console.log('houseFlat: ', flat);
-                            console.log('searchFlat: ', searchFlat);
-                        }
                     }
                 });
             });

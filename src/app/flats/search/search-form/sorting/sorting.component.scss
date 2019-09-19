@@ -12,6 +12,7 @@ $font: 15px/28px 'abrade-book', sans-serif;
     z-index: 1;
 
     &-control {
+        position: absolute;
         @include fw18-24(rgba(0, 1, 5, .7));
         margin: 0 30px 0 0;
         cursor: pointer;
@@ -19,7 +20,6 @@ $font: 15px/28px 'abrade-book', sans-serif;
         &:hover { color: $col-black; }
 
         &_active {
-            position: relative;
             padding: 0 20px 0 0;
             color: $col-black;
             &:before {
@@ -38,7 +38,6 @@ $font: 15px/28px 'abrade-book', sans-serif;
             }
         }
         &_turn {
-            position: relative;
             padding: 0 20px 0 0;
             color: $col-black;
             &:before {
@@ -53,6 +52,19 @@ $font: 15px/28px 'abrade-book', sans-serif;
                 transition: top $transition, transform $transition;
                 transform: rotate(180deg);
             }
+        }
+
+        &--price {
+            left: 1084px;
+        }
+        &--space {
+            left: 406px;
+        }
+        &--floor {
+            left: 558px;
+        }
+        &--delivery {
+            left: 895px;
         }
     }
 }

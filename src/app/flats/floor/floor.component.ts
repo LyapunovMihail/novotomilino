@@ -55,7 +55,6 @@ export class FloorComponent implements OnInit, OnDestroy {
         return this.activatedRoute.params
         .subscribe((params: any) => {
             // проверка на соответствие дома, секции и этажа из конфига ./floor-count.ts
-            console.log('params: ', params);
             if (this.floorCount[params.house] && this.floorCount[params.house][params.section]
                 && this.floorCount[params.house][params.section].some((floor) => floor === Number(params.floor))) {
                 this.houseNumber = Number(params.house);
@@ -66,13 +65,14 @@ export class FloorComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (data: string) => {
                         this.floorSvg = data;
+                        this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
+
                         this.floorService.getObjects({
                             houses: this.houseNumber + '',
                             sections: this.sectionNumber + '',
                             floor: this.floorNumber + ''
                         }).subscribe(
                             (flats: IAddressItemFlat[]) => {
-                                console.log('flats: ', flats);
                                 const discountizatedFlats = flats.map((flat: IFlatWithDiscount) => {flat.discount = this.flatsDiscountService.getDiscount(flat); return flat; });
                                 if ( this.platform.isBrowser ) {
                                     this.floorService.flatsHover(discountizatedFlats, {
@@ -87,7 +87,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                         );
                     },
                     (err) => {
-                        this.floorSvg = `<div class="floor-plan-error-description">Для этого этажа изображение отсутствует</div>`;
+                        this.floorSvg = '';
                         console.log(err);
                     }
                 );

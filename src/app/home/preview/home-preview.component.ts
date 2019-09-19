@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
@@ -25,7 +25,7 @@ declare let $: any;
     ]
 })
 
-export class HomePreviewComponent implements OnInit {
+export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
 
@@ -43,11 +43,16 @@ export class HomePreviewComponent implements OnInit {
 
     public gallerySlides: IGallerySnippet[];
 
+    public activeNews= 0;
+
+    public activeShare = 0;
+
+    private newsTimer;
+
+    private sharesTimer;
+
     @Input() public newsSnippets: INewsSnippet[];
     @Input() public shareSnippets: Share[];
-
-    public newsSnippet: INewsSnippet;
-    public shareSnippet: Share;
 
     constructor(
         public platform: PlatformDetectService,
@@ -64,16 +69,7 @@ export class HomePreviewComponent implements OnInit {
             this.isAuthorizated = val;
         });
 
-        this.newsSnippet = this.newsSnippets[0];
-
-        this.shareSnippets.reverse();
-
-        this.shareSnippets.forEach((share) => {
-            if (share.show_on_main) {
-                this.shareSnippet = share;
-                this.shareSnippet.finish_date = this.countDown(share.finish_date) + '';
-            }
-        });
+        this.prepareMainNewsSnippets();
 
         this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
             (data: IGallerySnippet[]) => {
@@ -81,13 +77,6 @@ export class HomePreviewComponent implements OnInit {
             },
             (err) => console.log(err)
         );
-    }
-
-    public countDown(finishDate) {
-        let createdDateVal = moment(Date.now());
-        let finishDateVal = moment(finishDate);
-        let duration = moment.duration(createdDateVal.diff(finishDateVal));
-        return Math.ceil(duration.asDays() * -1);
     }
 
     public nextBtn() {
@@ -110,6 +99,82 @@ export class HomePreviewComponent implements OnInit {
             (data: IGallerySnippet[]) => this.gallerySlides = data,
             (err) => console.log(err)
         );
+    }
+
+    prepareMainNewsSnippets() {
+        this.newsSnippets.reverse();
+        this.newsSnippets = this.newsSnippets.filter((news: INewsSnippet) => {
+            return news.show_on_main;
+        });
+
+        if (this.newsSnippets) {
+            this.newsSnippets.forEach((news) => {
+                if (news.title) {
+                    news.title = news.title.length < 41 ? news.title : news.title.slice(0, 38) + '...';
+                }
+                if (news.descrPreview) {
+                    news.descrPreview = news.descrPreview.length < 32 ? news.descrPreview : news.descrPreview.slice(0, 29) + '...';
+                }
+            });
+            this.newsSlider(this.newsSnippets);
+        }
+
+        this.shareSnippets.reverse();
+        this.shareSnippets = this.shareSnippets.filter((share: Share) => {
+            if (share.show_on_main) {
+                share.finish_date = this.countDown(share.finish_date) + '';
+                return true;
+            }
+        });
+
+        if (this.shareSnippets) {
+            this.shareSnippets.forEach((share) => {
+                if (share.name) {
+                    share.name = share.name.length < 41 ? share.name : share.name.slice(0, 38) + '...';
+                }
+                if (share.textPreview) {
+                    share.textPreview = share.textPreview.length < 32 ? share.textPreview : share.textPreview.slice(0, 29) + '...';
+                }
+            });
+            this.sharesSlider(this.shareSnippets);
+        }
+    }
+
+    public countDown(finishDate) {
+        let createdDateVal = moment(Date.now());
+        let finishDateVal = moment(finishDate);
+        let duration = moment.duration(createdDateVal.diff(finishDateVal));
+        return Math.ceil(duration.asDays() * -1);
+    }
+
+    public newsSlider(newsList) {
+        if ( !this.platform.isBrowser ) { return false; }
+        if (newsList.length > 1) {
+            this.newsTimer = setInterval(() => {
+                this.activeNews = this.activeNews < newsList.length - 1 ? this.activeNews + 1 : 0;
+            }, 6000);
+        }
+    }
+
+    public sharesSlider(sharesList) {
+        if ( !this.platform.isBrowser ) { return false; }
+        if (sharesList.length > 1) {
+            this.sharesTimer = setInterval(() => {
+                this.activeShare = this.activeShare < sharesList.length - 1 ? this.activeShare + 1 : 0;
+            }, 6000);
+        }
+    }
+
+    ngOnDestroy() {
+        if ( !this.platform.isBrowser ) { return false; }
+        this.AuthorizationEvent.unsubscribe();
+
+        if (this.newsTimer) {
+            clearInterval(this.newsTimer);
+        }
+        if (this.sharesTimer) {
+            clearInterval(this.sharesTimer);
+        }
     }
 
     @HostListener('document:click', ['$event'])

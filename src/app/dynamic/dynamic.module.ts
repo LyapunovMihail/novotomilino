@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicAdminCreateComponent } from './dynamic-admin-create/dynamic-admin-create.component';
 import { DynamicService } from './dynamic.service';
 import { DynamicLinkListComponent } from './dynamic-link-list/dynamic-link-list.component';
-import { DynamicMonthSwitcher } from './dynamic-month-switcher/dynamic-month-switcher.component';
+import { DynamicMonthSwitcherComponent } from './dynamic-month-switcher/dynamic-month-switcher.component';
 import { DynamicObjectComponent } from './dynamic-object/dynamic-object.component';
 import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
 import { RouterModule } from '@angular/router';
@@ -18,7 +18,7 @@ const DynamicComponents = [
     DynamicComponent,
     DynamicDateComponent,
     DynamicObjectComponent,
-    DynamicMonthSwitcher,
+    DynamicMonthSwitcherComponent,
     DynamicLinkListComponent,
     DynamicAdminCreateComponent,
     LineBreakPipe,

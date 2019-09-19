@@ -16,7 +16,6 @@ export class AddressesModel {
     }
 
     public async getObjects(query) {
-        console.log('query: ', query);
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
     }
@@ -89,10 +88,10 @@ export class AddressesModel {
             parameters['sort'] = { floor : 1 };
         } else if ('sort' in query && query.sort === 'floor_0') {
             parameters['sort'] = { floor : -1 };
-        } else if ('sort' in query && query.sort === 'section_1') {
-            parameters['sort'] = { section : 1 };
-        } else if ('sort' in query && query.sort === 'section_0') {
-            parameters['sort'] = { section : -1 };
+        } else if ('sort' in query && query.sort === 'delivery_1') {
+            parameters['sort'] = { deliveryDate : 1 };
+        } else if ('sort' in query && query.sort === 'delivery_0') {
+            parameters['sort'] = { deliveryDate : -1 };
         }
 
         if ('flats' in query) {

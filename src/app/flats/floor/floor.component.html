@@ -8,7 +8,9 @@
             <li class="floor__nav-item">
                 <a [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionNumber" class="floor__nav-item-link">Корпус {{houseNumber}}</a>
             </li>
-            <li class="floor__nav-item">Секция {{sectionNumber}}</li>
+            <li class="floor__nav-item">
+                <a [routerLink]="'/flats/house/' + houseNumber + '/section/' + sectionNumber" class="floor__nav-item-link">Секция {{sectionNumber}}</a>
+            </li>
             <li class="floor__nav-item">Этаж {{floorNumber}}</li>
         </ul>
     </div>
@@ -22,7 +24,8 @@
         </app-house-selector>
 
         <div class="floor__description">
-            <div [innerHTML]="floorSvg | houseSVGSanitizePipe"  class="floor__description-scheme"></div>
+            <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="floor__description-scheme" *ngIf="floorSvg"></div>
+            <div class="floor-plan-error-description" *ngIf="!floorSvg">Изображение не доступно</div>
         </div>
 
         <app-floor-selector

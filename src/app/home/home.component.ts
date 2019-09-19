@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
+    public mainNews: INewsSnippet[] = [];
+    public mainShares: Share[] = [];
     public newsLoaded = false;
 
     constructor(
@@ -33,22 +35,25 @@ export class HomeComponent implements OnInit {
 
         combineLatest(
             this.homeService.getShares(),
-            this.homeService.getMainNews()
+            this.homeService.getNews()
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
                 this.shareSnippets = shares.sharesList;
-                console.log('this.shareSnippets: ', this.shareSnippets);
-                console.log('this.newsSnippets: ', this.newsSnippets);
+                this.mainNews = this.makeArrayCopy(this.newsSnippets);
+                this.mainShares = this.makeArrayCopy(this.shareSnippets);
                 return [...shares.sharesList, ...news];
             })
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                console.log('this.allSnippets', this.allSnippets);
                 this.newsLoaded = true;
             },
             (err) => console.log(err)
         );
+    }
+
+    public makeArrayCopy(snippetArr) {
+        return JSON.parse(JSON.stringify(snippetArr));
     }
 
 }

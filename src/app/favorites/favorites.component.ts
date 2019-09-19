@@ -98,8 +98,6 @@ export class FavoritesComponent implements OnInit, OnDestroy {
 
     public initFavoriteFlats(): void {
         const flats = this.favoritesService.favoriteFlatsString;
-        console.log("flats: ", flats);
-        console.log("flats: ", !!flats);
         if (flats) {
             const options = {
                 flats

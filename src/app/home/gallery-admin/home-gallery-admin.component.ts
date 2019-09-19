@@ -49,7 +49,6 @@ export class HomeGalleryAdminComponent {
             this.progressCurrent = val;
         });
         this.galleryAdminService.imageUpload(fileList, this.type).then((arr: IGallerySnippet[]) => {
-            console.log('data: ', arr);
             this.progressCount = 0;
             this.progressLoaded = false;
             this.galleryChange.emit(arr);

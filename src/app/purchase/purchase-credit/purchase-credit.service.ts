@@ -42,7 +42,6 @@ export class PurchaseCreditService {
 
         snippets.forEach((bank) => {
             const rate = bank.percent / (100 * 12);
-            console.log('rate: ', rate);
             bank.monthPay = (leftSum * rate) / (1 - Math.pow((1 + rate), -(params.deadline * 12))); // Формула для подсчета ежемесячного платежа
             bank.monthPay = Math.round(bank.monthPay);
         });

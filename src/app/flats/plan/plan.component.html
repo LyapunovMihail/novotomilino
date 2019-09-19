@@ -1,51 +1,50 @@
 <div class="plan flats_main">
     <div class="plan_house-select flats_wrapper">
 
-        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/1_korpus.jpg">
+        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/plan.jpg">
 
-        <a *ngFor="let link of links"
-            class="plan_house-select_link plan_house-select_link--section-{{link}}"
-            (mouseenter)="activeLink = link" 
-            (mouseleave)="activeLink = ''" 
-            [ngClass]="{'plan_house-select_link--active' : link === activeLink }"
-            [routerLink]="[ '/flats/house/' + link ]">
+        <a *ngFor="let house of houses"
+            class="plan_house-select_link plan_house-select_link--house-{{house.houseNumber}}"
+            [ngClass]="{'plan_house-select_link--active' : house.houseNumber === activeLink,
+                        'plan_house-select_link--z-index-off' : showSearchWindow}"
+            (mouseenter)="activeLink = house.houseNumber"
+            (mouseleave)="activeLink = ''"
+            [routerLink]="[ '/flats/house/' + house.houseNumber + '/section/1']">
 
-            Секции {{link === '1' ? '1-3' : '4-6'}} 
+            №{{house.houseNumber}} {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
 
-            <span class="plan_house-select_link_floors">{{ link === '1' ? '25 этажей' : '14-18 этажей'}}</span>
-            <!-- <span class="plan_house-select_link_in-sale">Квартир в продаже: 1236</span> -->
+            <div class="plan_house-select_info plan_house-select_info--house-{{house.houseNumber}}">
+                <h5 class="plan_house-select_info_title">Дом №{{house.houseNumber}}</h5>
+                <p class="plan_house-select_info_row" *ngFor="let rooms of house.rooms">
+                    <span class="plan_house-select_info_rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
+                    <span class="plan_house-select_info_min-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
+                </p>
+            </div>
         </a>
 
-        <svg class="plan_house-select_svg flats_svg" viewBox="0 0 2560 1440" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
+            class="plan_house-select_svg flats_svg">
 
-            <ng-container *ngFor="let plan of housesPlanSvg; let i = index">
-
+            <ng-container *ngFor="let plan of houses">
                 <a (click)="svgRouterLink($event, ( '/flats/house/' + plan.houseNumber + '/section/1'))"
                         [attr.xlink:href]=" '/flats/house/' + plan.houseNumber + '/section/1'">
-    
-                    <path class="plan_house-select_svg_section"
-                        [attr.style]="('opacity:' + ( activeLink == plan.houseNumber ? '1' : '0' )) | stylePipe"
-                        (mouseenter)="activeLink = plan.houseNumber" 
-                        (mouseleave)="activeLink = ''" 
-                        [attr.d]="plan.svgPath"
-                        id="k-{{plan.houseNumber}}"/>
-                </a>
 
+                    <path class="plan_house-select_svg_house"
+                        [attr.transform]="plan.transform"
+                        [attr.style]="('opacity:' + ( activeLink === plan.houseNumber ? '1' : '0' )) | stylePipe"
+                        (mouseenter)="activeLink = plan.houseNumber"
+                        (mouseleave)="activeLink = ''"
+                        [attr.d]="plan.svgPath"
+                          id="k-{{plan.houseNumber}}">
+                    </path>
+                </a>
             </ng-container>
 
         </svg>
-    
+
     </div>
     <!-- <a href="https://exporealty.ru/visit/registration/" class="link__banner"></a> -->
 
-    <div class="flats_main__quantity flats_main__quantity--left">
-        <div class="flats_main__quantity__number">{{houseOneFreeFlats}}</div>
-        <div class="flats_main__quantity__text">квартир<br> в продаже</div>
-    </div>
-    <div class="flats_main__quantity flats_main__quantity--right">
-        <div class="flats_main__quantity__number">{{houseTwoFreeFlats}}</div>
-        <div class="flats_main__quantity__text">квартир<br> в продаже</div>
-    </div>
 </div>
 
 <button class="search__show-btn" [ngClass]="{'search__show-btn_active': showSearchWindow}" (click)="showSearchWindow = !showSearchWindow">

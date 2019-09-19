@@ -12,8 +12,8 @@ export class HomeService {
 
     constructor( private http: HttpClient ) { }
 
-    public getMainNews(): Observable<INewsSnippet[]> {
-        return this.http.get<INewsSnippet[]>('/api/news/main');
+    public getNews(): Observable<INewsSnippet[]> {
+        return this.http.get<INewsSnippet[]>('/api/news/all');
     }
 
     public getShares(): Observable<{length: number, sharesList: Share[]}> {

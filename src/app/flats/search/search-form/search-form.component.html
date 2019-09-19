@@ -4,7 +4,9 @@
     <form [formGroup]="form" class="search-form">
 
         <app-search-sorting
-            [formControl]="form.controls['sort']">
+            [(ngModel)]="sort"
+            [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="sortChange.emit(sort)">
         </app-search-sorting>
 
         <div class="search-form__wrap">

@@ -38,10 +38,10 @@ export class FavoritesService {
       }]));
       this._favoriteFlatsCounter.next(1);
     } else {
-      const thisSectionIndex = favoriteFlats.findIndex((flatData) => flatData.section === apartment.section);
+      const thisSectionIndex = favoriteFlats.findIndex((flatData) => flatData.section === apartment.section.toString());
 
       if (thisSectionIndex > -1) {
-        const thisFlatIndex = favoriteFlats[thisSectionIndex].flats.findIndex((flat) => flat === apartment.flat);
+        const thisFlatIndex = favoriteFlats[thisSectionIndex].flats.findIndex((flat) => flat === apartment.flat.toString());
 
         if (thisFlatIndex > -1) {
           favoriteFlats[thisSectionIndex].flats.splice(thisFlatIndex, 1);
@@ -50,12 +50,12 @@ export class FavoritesService {
             favoriteFlats.splice(thisSectionIndex, 1);
           }
         } else {
-          favoriteFlats[thisSectionIndex].flats.push(apartment.flat);
+          favoriteFlats[thisSectionIndex].flats.push(apartment.flat.toString());
         }
       } else {
         favoriteFlats.push({
-          section: apartment.section,
-          flats: [apartment.flat]
+          section: apartment.section.toString(),
+          flats: [apartment.flat.toString()]
         });
       }
 
@@ -75,10 +75,10 @@ export class FavoritesService {
     if (!favoriteFlats) {
       return false;
     } else {
-      const thisSectionIndex = favoriteFlats.findIndex((flatData) => flatData.section === apartment.section);
+      const thisSectionIndex = favoriteFlats.findIndex((flatData) => flatData.section === apartment.section.toString());
 
       if (thisSectionIndex > -1) {
-        const thisFlatIndex = favoriteFlats[thisSectionIndex].flats.findIndex((flat) => flat === apartment.flat);
+        const thisFlatIndex = favoriteFlats[thisSectionIndex].flats.findIndex((flat) => flat === apartment.flat.toString());
 
         if (thisFlatIndex > -1) {
           return true;

@@ -98,6 +98,7 @@ export class DbCronUpdate {
             twolevel: (object['2level'] === '1'),
             space: Number(object.Quantity),
             price: Number(object.Sum),
+            deliveryDate: object.DeliveryPeriodDate
         };
         this.counter++;
         return itemflat;
