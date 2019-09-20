@@ -5,27 +5,27 @@ export const markerConfig = [{
     coords: [55.716239, 37.389512]
 },{
 
-    icon_marker: '/assets/img/school.svg',
+    icon_marker: '/assets/img/school-ic.svg',
     title: 'Детский сад',
     coords: [55.717414, 37.389029]
 },{
 
-    icon_marker: '/assets/img/school.svg',
+    icon_marker: '/assets/img/school-ic.svg',
     title: 'Детский сад',
     coords: [55.718389, 37.388525]
 },{
 
-    icon_marker: '/assets/img/school.svg',
+    icon_marker: '/assets/img/school-ic.svg',
     title: 'Общеобразовательная школа',
     coords: [55.718455, 37.394222]
 },{
 
-    icon_marker: '/assets/img/school.svg',
+    icon_marker: '/assets/img/school-ic.svg',
     title: 'Общеобразовательная школа',
     coords: [55.719485, 37.398009]
 },{
 
-    icon_marker: '/assets/img/school.svg',
+    icon_marker: '/assets/img/school-ic.svg',
     title: 'Детский сад',
     coords: [55.720417, 37.399294]
 },{

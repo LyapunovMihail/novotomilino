@@ -102,7 +102,7 @@ export class MapService {
 
                 iconLayout: 'default#imageWithContent',
                 iconImageSize: [86, 72],
-                iconImageHref: '/assets/img/school.svg'
+                iconImageHref: '/assets/img/school-ic.svg'
             });
 
             myMap.geoObjects.add(skolkovo);

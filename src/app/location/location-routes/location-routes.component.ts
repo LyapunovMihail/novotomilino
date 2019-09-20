@@ -173,7 +173,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
 
                         // созддаем на карте маршруты для каждого маркера
                         ymaps.route([
-                            item['route'].origin, destination
+                            ...item['route'].origin, destination
                         ]).then( (route) => {
                             route.getPaths().options.set({
                                 strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
@@ -223,7 +223,6 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
             that.ref.detectChanges();
         });
 
-        
     }
 
     // вызывается при клике на все маркеры кроме главного
