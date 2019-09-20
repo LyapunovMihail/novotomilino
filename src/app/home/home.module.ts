@@ -10,6 +10,7 @@ import { HomeNewsComponent } from './news/home-news.component';
 import { HomeService } from './home.service';
 import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
+import { HomeTriggerComponent } from './trigger/home-trigger.component';
 
 @NgModule({
   exports : [
@@ -18,6 +19,7 @@ import { LineBreakPipe } from './line-break.pipe';
   declarations : [
       HomeComponent,
       HomePreviewComponent,
+      HomeTriggerComponent,
       HomeDescriptionComponent,
       HomePlacesComponent,
       HomeGalleryAdminComponent,
