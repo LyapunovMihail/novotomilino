@@ -252,16 +252,6 @@
 
                 &_active {
 
-                    &.location__infrastructure-list-item_school       { border-color: #ae6bf8; }
-                    &.location__infrastructure-list-item_kindergarten { border-color: #ffcb0d; }
-                    &.location__infrastructure-list-item_shop         { border-color: #2095d2; }
-                    &.location__infrastructure-list-item_cafe         { border-color: #f2883d; }
-                    &.location__infrastructure-list-item_hospital     { border-color: #fa9191; }
-                    &.location__infrastructure-list-item_pharmacy     { border-color: #ec1f27; }
-                    &.location__infrastructure-list-item_sport        { border-color: #1da600; }
-                    &.location__infrastructure-list-item_recreation   { border-color: #aaab22; }
-                    &.location__infrastructure-list-item_transport    { border-color: #297acc; }
-
                     .location__infrastructure-checkbox {
                         background-image: url(/assets/img/check.svg);
                         background-position: center;

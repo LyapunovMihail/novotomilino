@@ -15,12 +15,12 @@ declare let $: any;
 export class LocationInfrastructureComponent implements OnInit {
 
     // кнопки боковой навигации
-    navList = navList;
-
+    public navList = navList;
+    public firstNavClick = true;
     // массив для временного хранения маркеров
     // чтобы можно было их находить при необходимости давать z-index
     // при выборе определенного типа
-    markers = [];
+    public markers = [];
 
     constructor(
         private platform: PlatformDetectService,
@@ -35,6 +35,19 @@ export class LocationInfrastructureComponent implements OnInit {
         if ( !this.platform.isBrowser ) { return false; }
 
         // кнопки бокового меню
+        if (this.firstNavClick) {
+            this.markers.forEach((marker) => {
+                if (marker.type !== type) {
+                    $(`.location__infrastructure-list-item_${marker.type}`).removeClass('location__infrastructure-list-item_active');
+                    marker.marker.options.set({
+                        visible: false
+                    });
+                }
+            });
+            this.firstNavClick = false;
+            return;
+        }
+
         const item = $(`.location__infrastructure-list-item_${type}`);
 
         item.toggleClass('location__infrastructure-list-item_active');
