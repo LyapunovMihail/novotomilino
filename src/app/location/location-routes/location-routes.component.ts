@@ -22,6 +22,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
     // номер активного маркера для подсветки нужных маршрутов и ссылок бокового меню
     // берется из config.content
     public linkActive: number = 1;
+    public asideTypeActive: string;
 
     public map: any;
 
@@ -73,18 +74,6 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                 minZoom: 11,
                 maxZoom: 18
             });
-
-            // создание наземное наложение плана
-            let polygon = new ymaps.Polygon([
-                    [ [55.683600, 37.895600], [55.685350, 37.895600], [55.685350, 37.898540], [55.683600, 37.898540] ]
-                ], {}, {
-                    fillImageHref: '/assets/img/office/plan.png',
-                    fillMethod: 'stretch',
-                    stroke: false
-                }
-            );
-            // добавление плана на карту
-            myMap.geoObjects.add(polygon);
 
             markersConfig.forEach( ( item: any, index ) => {
                 that.markers[index] = {};
@@ -211,11 +200,16 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                         });
                     }
 
-                    // на все маркеры (кроме главного) вешается клик для изменения активного маршрута
+                    // на все маркеры (кроме главного) вешается клик для изменения активного маршрута и тултипа
                     that.markers[index]['marker'].events.add('click', () => {
                         that.changeRoute(that.markers[index]);
                     });
                 }
+            });
+
+            // на главный маркер вешается клик для изменения активного тултипа
+            that.markers[that.markers.length - 1]['marker'].events.add('click', () => {
+                that.changeRoute(that.markers[that.markers.length - 1]);
             });
 
             // после инициализации надо обновить состояние компонента принудительно
@@ -228,7 +222,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
     // вызывается при клике на все маркеры кроме главного
     // и при клике на ссылки боковой панели навигации
     // меняет активный маршрут
-    changeRoute ( val ) {
+    changeRoute( val ) {
         if ( !this.platform.isBrowser ) { return false; }
 
         let markerContent = $('.marker-content');
@@ -254,7 +248,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
         if ( val.config.type === 'polyline' && 'polyline' in val ) {
             // то для линии добавляется активное состояние
             val.polyline.options.set('strokeOpacity', 1).set('zIndex', 100);
-        } else {
+        } else if ('route' in val) {
             // иначе для переданного аргумента(маркера)
             // добавляем актив к его маршруту
             val['route'].getPaths().options.set({
@@ -265,7 +259,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
 
         // так же активному маркеру добавляется активный класс для тултипов
         markerContentArr.forEach( ( elem ) => {
-            let elemInnerText = elem.querySelector('.marker-content__text').innerText;
+            const elemInnerText = elem.querySelector('.marker-content__text').innerText;
             if ( Number(elemInnerText) === val.config.content ) {
                 elem.classList.add('marker-content_active');
             } else {
