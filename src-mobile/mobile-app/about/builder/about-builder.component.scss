@@ -7,83 +7,6 @@
     color: $col-black;
 }
 
-
-.genplan {
-    margin: 67px 0 0;
-    width: 100%;
-    height: calc(62.94vw - 51px);
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    &__title {
-        @include title-mobile;
-        color: $col-black;
-        position: absolute;
-        left: 15px;
-        top: 30px;
-    }
-    &_scrll {
-        width: 100%;
-        height: calc(100% + 20px);
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
-    &__img {
-        width: 100vw;
-        min-width: 768px;
-        height: calc(100% - 20px);
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-}
-
-.about-project {
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-
-    &__head {
-        width: calc(100% - 30px);
-
-        &-title {
-            @include title-mobile();
-            margin: 70px 0 20px;
-        }
-        &-subtitle {
-            @include fw18-24;
-            margin: 0 0 5px;
-        }
-    }
-    &__content{
-        width: calc(100% - 30px);
-
-        &-descr {
-            @include f16-24;
-            color: rgba(0, 1, 5, 0.8);
-            margin: 0 0 30px;
-        }
-        &-item {
-            margin: 0 0 20px;
-        }
-        &-title {
-            font: 500 16px/23px $font-mus;
-            @include font-smoothing;
-            margin: 0 0 6px;
-        }
-        &-subtitle {
-            font: 500 20px/24px $font-mus;
-            @include font-smoothing;
-            color: $col-orange;
-        }
-    }
-}
-
 .gallery {
     display: flex;
     flex-flow: column nowrap;
@@ -156,26 +79,34 @@
 
     &__head {
         width: calc(100% - 30px);
+        max-width: 1280px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
 
         &-title {
             @include title-mobile();
-            margin: 120px 0 30px;
+            margin: 0 0 30px;
+            white-space: nowrap;
+            @media(min-width: 767px) { max-width: 615px; }
         }
         &-subtitle {
             font: 500 18px/24px $font-mus;
             @include font-smoothing;
             color: $col-black;
             margin: 0 0 5px;
+            @media(min-width: 767px) { max-width: 615px; }
         }
         &-text {
             @include f16-24;
             color: rgba(0, 1, 5, 0.8);
             margin: 0 0 10px;
             &:Last-child { margin: 0 0 40px; }
+            @media(min-width: 767px) { max-width: 615px; }
         }
     }
     &__project {
         width: calc(100% - 30px);
+        max-width: 1280px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
 
         &-title {
             font: 500 20px/24px $font-mus;
@@ -195,6 +126,10 @@
             overflow: hidden;
             will-change: transform;
             margin: 0 0 10px;
+            @media(min-width: 767px) {
+                height: 440px;
+                margin: 0 0 20px;
+            }
             &:before {
                 content: '';
                 position: absolute;

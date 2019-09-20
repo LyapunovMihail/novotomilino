@@ -1,5 +1,5 @@
 import { from, fromEvent } from 'rxjs';
-import { BUILDER_MARKERS, IBuilderMarker, ABOUT_PROJECT, IAboutProject, PROJECT_SNIPPET, IProjectSnippet } from './about-builder.markers';
+import { PROJECT_MARKERS, IProjectItem } from './../about.markers';
 import { PlatformDetectService } from './../../platform-detect.service';
 import { Component, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -40,11 +40,7 @@ export class AboutBuilderComponent implements OnInit, AfterViewInit {
 
     public markersInnerOpacityState: string = 'inactive';
 
-    public markers: IBuilderMarker[] = BUILDER_MARKERS;
-
-    public abouts: IAboutProject[] = ABOUT_PROJECT;
-
-    public snippets: IProjectSnippet[] = PROJECT_SNIPPET;
+    public snippets: IProjectItem[] = PROJECT_MARKERS;
 
     public readMore = false;
 
