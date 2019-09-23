@@ -4,7 +4,7 @@ import { SharesService } from '../shares/shares.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlatformDetectService } from '../../platform-detect.service';
-import { NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import * as moment from 'moment';

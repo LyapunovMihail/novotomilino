@@ -16,6 +16,24 @@ export interface IAboutMarker {
     subtitle: string;
 }
 
+export interface IGenplanMarker {
+    title: string;
+    mod: string;
+}
+
+export let GENPLAN_MARKERS: IGenplanMarker[] = [
+    {
+        title: 'Детский сад',
+        mod: 'kinder'
+    }, {
+        title: 'Школа',
+        mod: 'school'
+    }, {
+        title: 'Детский сад',
+        mod: 'kinder'
+    }
+];
+
 export let ABOUT_MARKERS: IAboutMarker[] = [
     {
         title: 'Общая площадь ЖК',
@@ -49,7 +67,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'ЖК Облака',
         subtitle: 'Квартиры от 2,3 млн. руб.',
-        background: '/assets/img/about/builder/oblaka.jpg',
+        background: '/assets/img/about/project/oblaka.jpg',
         mod: '',
         classIndex: 'grid-item_one'
     }, {
@@ -59,7 +77,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'ЖК Новокрасково',
         subtitle: 'Квартиры от 2,2 млн. руб.',
-        background: '/assets/img/about/builder/nk.jpg',
+        background: '/assets/img/about/project/novokras.jpg',
         mod: '',
         classIndex: ''
     }, {
@@ -69,7 +87,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: false,
         title: 'Дом на Барвихинской',
         subtitle: 'Квартиры от 6,3 млн. руб.',
-        background: '/assets/img/about/builder/barviha.jpg',
+        background: '/assets/img/about/project/barviha.jpg',
         mod: 'grid-item__location-city_barviha',
         classIndex: ''
     }, {

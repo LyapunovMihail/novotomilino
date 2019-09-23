@@ -11,20 +11,19 @@
         width: calc(100% - 30px);
         display: flex;
         flex-flow: row wrap;
-        @media (min-width: 768px) { width: calc(100% - 60px); }
+        @media (min-width: 768px) {
+            width: 100%;
+            max-width: 707px;
+        }
         
         &-item {
             width: 100%;
             margin: 0 0 40px;
             &_link { display: block; }
             @media (min-width: 768px) {
-                width: calc(50% - 15.5px);
+                width: 338px;
                 margin: 0 31px 50px 0;
-                &:nth-child(3n) { margin: 0 0 50px; }
-                &:nth-child(3n + 1) {
-                    width: 100%;
-                    margin: 0 0 50px;
-                }
+                &:nth-child(2n) { margin: 0 0 50px; }
             }
         }
         &-img {
@@ -48,7 +47,7 @@
                 height: 100%;
                 object-fit: cover;
             }
-            @media (min-width: 768px) { height: 383px; }
+            @media (min-width: 768px) { height: 254px; }
         }
         &-descr {
             &-title {

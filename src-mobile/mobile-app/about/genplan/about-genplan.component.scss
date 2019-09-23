@@ -1,0 +1,119 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.genplan {
+    margin: 67px 0 0;
+    width: 100%;
+    height: calc(62.94vw - 51px);
+    min-height: 430px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &__head {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+
+        &-title {
+            width: calc(100% - 30px);
+            font: 42px/48px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            position: absolute;
+            left: 15px;
+            top: 30px;
+        }
+
+        &_scrll {
+            width: 100%;
+            height: calc(100% + 20px);
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        &-img {
+            width: 100vw;
+            min-width: 768px;
+            height: calc(100% - 20px);
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+    
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+.markers {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &__item {
+        width: 40px;
+        height: 46px;
+        position: absolute;
+        z-index: 10;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        &_kinder {
+            left: 18.6%;
+            bottom: 65%;
+            &:after { background: url(/assets/img/about/plan/kinder.svg) 0 0 no-repeat; }
+            .markers__item-tooltip_span { border: 1px solid #ffcb0d; }
+            &:last-child {
+                left: 75%;
+                bottom: 86%;
+            }
+        }
+        &_school {
+            left: 61%;
+            bottom: 65%;
+            &:after { background: url(/assets/img/about/plan/school.svg) 0 0 no-repeat; }
+            .markers__item-tooltip_span { border: 1px solid #ae6bf8; }
+        }
+
+
+        &-tooltip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 40px;
+            height: 38px;
+            white-space: nowrap;
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: -1;
+
+            &_span {
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                padding: 0 15px 0 50px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                transform: translateX(-100%);
+                transition: transform .2s linear;
+            }
+            &_active {
+                transform: translateX(0%);
+            }
+        }
+    }
+}
