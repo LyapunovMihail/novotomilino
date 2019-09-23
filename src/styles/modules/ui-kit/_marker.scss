@@ -53,7 +53,7 @@
                 @include font-smoothing;
                 color: $col-black;
             }
-            &-text { font: 500 14px/20px $font-mus; }
+            &-text { font: 500 14px/20px $font-mus; white-space: nowrap }
 
             &_main {
                 border-radius: 28px;
@@ -122,6 +122,11 @@
             border-radius: 50%;
             background: url(/assets/img/location/office_marker.svg) center no-repeat #a9aa23;
             box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .marker-content__tooltip-content_main {
+            border: 1px solid #aaab22;
         }
     }
 

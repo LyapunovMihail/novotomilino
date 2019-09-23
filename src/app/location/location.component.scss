@@ -3,38 +3,122 @@
 .location {
     width: 100%;
     height: calc(100vh - 146px - 51px);
-    @media (max-width: 1279px) { height: calc(100vh - 67px - 51px); }
 
-    &__way {
-        position: fixed;
-        left: calc(50% - (290px / 2));
-        bottom: 70px;
-        width: 290px;
-        height: 50px;
-        border-radius: 4px;
-        background-color: $col-orange;
-        display: none;
+    &_aside {
+        position: absolute;
+        background: #ffffff;
+        box-sizing: border-box;
+        width: 400px;
+        top: 212px;
+        left: 10px;
+        padding: 11px 23px;
         z-index: 1;
-        justify-content: center;
-        align-items: center;
-        @media (max-width: 1279px) { display: flex; }
-        
-        &-text {
-            font: 500 16px/20px $font-mus;
-            @include font-smoothing;
-            color: #fff;
-            text-transform: uppercase;
-            padding-left: 34px;
-            position: relative;
-            &:before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 24px;
-                height: 20px;
-                background: url(/assets/img/location/how-to-get.svg) no-repeat;
-                background-size: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.1);
+
+        &_list {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+
+            &_block {
+                border-bottom: 1px solid #d8d8d8;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            &_title {
+                @include fw18-24();
+                position: relative;
+                padding: 12px 0 12px 33px;
+                cursor: pointer;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 12px;
+                    width: 26px;
+                    height: 24px;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    bottom: -1px;
+                    top: 0;
+                    margin: auto;
+                    background: url('/assets/img/location/routes/aside/caret-down.svg') center no-repeat;
+                    width: 18px;
+                    height: 10px;
+                }
+
+                &--open {
+                    &:after {
+                        background: url('/assets/img/location/routes/aside/caret-up.svg') center no-repeat;
+                    }
+                }
+
+                &--auto {
+                    &:before {
+                        background: url('/assets/img/location/routes/aside/auto-ic.svg') center no-repeat;
+                    }
+                }
+                &--railway {
+                    &:before {
+                        background: url('/assets/img/location/routes/aside/railway-ic.svg') center no-repeat;
+                    }
+
+                }
+                &--bus {
+                    &:before {
+                        background: url('/assets/img/location/routes/aside/bus-ic.svg') center no-repeat;
+                    }
+
+                }
+                &--metro {
+                    &:before {
+                        background: url('/assets/img/location/routes/aside/metro-ic.svg') center no-repeat;
+                    }
+
+                }
+            }
+
+            &_item {
+                font: 14px/21px 'abrade-book', sans-serif;
+                color: rgba(136,138,161,.7);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                cursor: pointer;
+                position: relative;
+                margin-bottom: 8px;
+                transition: .2s linear;
+
+                &:hover:not(.location_aside_list_item--active) {
+                    color: #888aa1;
+                }
+
+                &:last-child {
+                    margin-bottom: 12px;
+                }
+
+                &--active {
+                    color: #888aa1;
+                }
+
+                &_name {
+                    @include fw14-20();
+                }
+
+                &_info {
+                    font: 500 12px/18px 'Museo Sans Cyrl', sans-serif;
+                    @include font-smoothing;
+                    color: #000105;
+                    opacity: 0.6;
+                }
             }
         }
     }
@@ -46,7 +130,6 @@
         justify-content: center;
         border-bottom: 1px solid #dcddde;
         position: relative;
-        @media (max-width: 1279px) { display: none; }
 
         &-title {
             font: 42px/46px 'Leksa';
@@ -54,22 +137,26 @@
             margin: 60px 0 30px;
         }
         &-wrap {
-            width: calc(1240px / 2);
+            width: calc(1240px - 941px);
             position: relative;
             box-sizing: border-box;
             &:nth-child(2) {
                 display: flex;
-                padding: 60px 0 30px;
                 flex-flow: row nowrap;
                 justify-content: flex-start;
                 align-items: flex-end;
+                width: 817px;
+                margin-left: 124px;
+                padding: 56px 0 0;
             }
 
-            img {
+            svg {
                 margin: 0 0 5px;
                 position: absolute;
-                bottom: 15px + 30px;
+                bottom: 10px;
                 left: 0;
+                font-weight: 500;
+                font-family: $font-mus;
             }
         }
         &-nav {
@@ -100,39 +187,11 @@
                 }
             }
         }
-        &-text-wrap {
-            height: 89px;
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: space-between;
-            align-items: center;
-            &:nth-child(1) { margin: 0 0 0 41px; }
-            &:nth-child(2) { margin: 0 0 0 31px; }
-            &:nth-child(3) { margin: 0 0 0 95px; }
-            &:nth-child(4) { margin: 0 0 0 108px; }
-        }
-        &-text {
-            font: 500 36px/40px $font-mus;
-            @include font-smoothing;
-            color: #000105;
-
-            span {
-                font-size: 14px;
-                line-height: 20px;
-                margin: 0 0 0 3px;
-            }
-        }
-        &-subtitle {
-            font: 500 12px/18px $font-mus;
-            @include font-smoothing;
-            color: rgba(0, 1, 5, 0.6);
-        }
     }
 
     &__map {
         width: 100%;
         height: calc(100% - 202px);
-        @media (max-width: 1279px) { height: 100%; }
 
         &--routes {
             width: 100%;
@@ -149,19 +208,6 @@
         width: 100%;
         height: 100%;
         position: relative;
-
-        .location_aside_link--routes {
-            order: 1;
-        }
-
-        .location_aside_list {
-            order: 2;
-            margin-bottom: 20px;
-        }
-
-        .location_aside_link--infrastructure {
-            order: 3;
-        }
     }
 
     &__infrastructure {
@@ -321,76 +367,5 @@
             color: $col-black;
         }
         span { white-space: nowrap; }
-    }
-
-    @media (max-width: 1279px) {
-        height: 154px;
-        flex-flow: column;
-        justify-content: flex-start;
-        align-items: center;
-
-        &-wrap {
-            width: 708px;
-            padding: 30px 0 0;
-            &:nth-child(2) { padding: 0; }
-        }
-        &-title {
-            font-size: 30px;
-            line-height: 34px;
-            margin: 0 0 10px;
-        }
-    }
-}
-// Стили для офиса продаж
-
-// --> Иметь ввиду, Высота блока с картой настроена таким образом, что = 100%(высота экрана) - 202px(высота блока .location__head)
-// --> у блока .office__head высота = 152px, следовательно для стр офиса продаж нужно будет поменять высоту карты (100% - 152px)
-
-.office__head {
-    width: 100%;
-    height: 152px;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #dcddde;
-    position: relative;
-
-    &-wrap {
-        width: calc(1240px / 2);
-        box-sizing: border-box;
-        padding: 50px 0 0;
-        &:nth-child(2) { padding: 60px 0 0; }
-    }
-    &-title {
-        font: 42px/46px 'Leksa';
-        @include font-smoothing;
-        color: $col-black;
-    }
-    &-text {
-        @include f16-24;
-        color: rgba(0, 1, 5, 0.8);
-
-        &_bold {
-            font-weight: 500;
-            color: $col-black;
-        }
-        span { white-space: nowrap; }
-    }
-
-    @media (max-width: 1279px) {
-        height: 154px;
-        flex-flow: column;
-        justify-content: flex-start;
-        align-items: center;
-
-        &-wrap {
-            width: 708px;
-            padding: 30px 0 0;
-            &:nth-child(2) { padding: 0; }
-        }
-        &-title {
-            font-size: 30px;
-            line-height: 34px;
-            margin: 0 0 10px;
-        }
     }
 }
