@@ -55,6 +55,7 @@
             }
             &-text { font: 500 14px/20px $font-mus; white-space: nowrap }
 
+            &-hint {}
             &_main {
                 border-radius: 28px;
                 border: 1px solid $col-orange;
@@ -86,7 +87,7 @@
         &_auto {
             min-height: 32px;
             border-radius: 16px;
-            left: 5px;
+            left: 7px;
         }
     }
 

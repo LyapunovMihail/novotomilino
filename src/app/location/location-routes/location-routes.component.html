@@ -143,7 +143,7 @@
 
             <!-- собираются маркеры с типом 'railway' -->
             <div  class="location_aside_list_block">
-                <h5 class="location_aside_list_title location_aside_list_title--railway" [class.location_aside_list_title--open]="asideTypeActive === 'railway'" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'">Ж/Д</h5>
+                <h5 class="location_aside_list_title location_aside_list_title--railway" [class.location_aside_list_title--open]="asideTypeActive === 'railway'" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'">Электричка</h5>
                 <ng-container *ngFor="let link of markers">
                     <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.asideType == 'railway' && asideTypeActive === 'railway'" class="location_aside_list_item">
                         <p class="location_aside_list_item_name">{{link.config.text}}</p>
@@ -165,7 +165,7 @@
 
             <!-- собираются маркеры с типом 'metro' -->
             <div class="location_aside_list_block">
-                <h5 class="location_aside_list_title location_aside_list_title--metro" [class.location_aside_list_title--open]="asideTypeActive === 'metro'" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'">Метро</h5>
+                <h5 class="location_aside_list_title location_aside_list_title--metro" [class.location_aside_list_title--open]="asideTypeActive === 'metro'" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'">Общественный транспорт</h5>
                 <ng-container *ngFor="let link of markers">
                     <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.asideType == 'metro' && asideTypeActive === 'metro'" class="location_aside_list_item">
                         <p class="location_aside_list_item_name">{{link.config.text}}</p>
