@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
 
-    @Input() public showSearchWindow = false;
+    @Input() public showSearchWindow: boolean;
     @Input() public parentPlan: boolean;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
 

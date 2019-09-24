@@ -1,17 +1,8 @@
-import {
-    Router
-} from '@angular/router';
-import {
-    PLAN_SVG,
-    IHousePlanItem
-} from './plan-svg';
-import {
-    PlanService
-} from './plan.service';
-import {
-    Component,
-    OnInit
-} from '@angular/core';
+import { Router } from '@angular/router';
+import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
+import { PLAN_SVG, IHousePlanItem } from './plan-svg';
+import { PlanService } from './plan.service';
+import { Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
@@ -32,10 +23,15 @@ export class PlanComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private planService: PlanService
+        private planService: PlanService,
+        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
     ) {}
 
     ngOnInit() {
+        this.searchFlatsLinkHandlerService.getShowSearchPanel().subscribe((show) => {
+            this.showSearchWindow = show;
+        });
+
         combineLatest(
             this.planService.getHouse(1),
             this.planService.getHouse(2),

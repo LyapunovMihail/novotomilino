@@ -15,6 +15,7 @@ import { AuthorizationObserverService } from './authorization/authorization.obse
 import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -56,7 +57,8 @@ const APP_PROVIDERS = [
     AuthorizationObserverService,
     FavoritesService,
     PlatformDetectService,
-    FlatsDiscountService
+    FlatsDiscountService,
+    SearchFlatsLinkHandlerService
 ];
 
 const APP_MODULES = [

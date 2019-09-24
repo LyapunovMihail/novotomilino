@@ -36,9 +36,9 @@ export class AppComponent implements OnInit {
     public currentUrl: string;
 
     constructor(
-    public appState: AppState,
-    private router: Router,
-    public flatsDiscountService: FlatsDiscountService
+        public appState: AppState,
+        private router: Router,
+        public flatsDiscountService: FlatsDiscountService
     ) {}
 
     public ngOnInit() {
