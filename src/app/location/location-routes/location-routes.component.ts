@@ -243,7 +243,10 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                 // на линию так же ставится не активное состояние
                 marker.polyline.options.set('strokeOpacity', .6).set('zIndex', 10);
             }
+            marker['marker'].options.set({zIndex: 10}); // прячем неактивные маркеры под активными чтобы не перекрывали тултипы активных маркеров
         });
+
+        val['marker'].options.set({zIndex: 110}); // ставим активные маркеры над неактивными чтобы закрывать тултипами неактивные
 
         // если в аргументах передано значение маркера с линией
         if ( val.config.type === 'polyline' && 'polyline' in val ) {
