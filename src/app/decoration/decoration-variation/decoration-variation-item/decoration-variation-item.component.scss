@@ -1,8 +1,8 @@
 @import "../../../../styles/modules/mixins/mixin";
 
 :host {
-    width: calc(100% / 5);
-    min-width: calc((100% - 960px) / 4);
+    width: calc(100% / 4);
+    min-width: calc((100% - 960px) / 3);
     height: 100%;
     transition: min-width .3s linear .1s, width .3s linear .1s;
 }
