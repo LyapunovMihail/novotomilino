@@ -88,14 +88,11 @@
             }
 
             &_item {
-                font: 14px/21px 'abrade-book', sans-serif;
-                color: rgba(136,138,161,.7);
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
                 cursor: pointer;
                 position: relative;
-                margin-bottom: 8px;
+                margin-bottom: 16px;
                 transition: .2s linear;
+
 
                 &:hover:not(.location_aside_list_item--active) {
                     color: #888aa1;
@@ -110,14 +107,42 @@
                 }
 
                 &_name {
-                    @include fw14-20();
+                    font: 500 16px/23px 'Museo Sans Cyrl', sans-serif;
+                    @include font-smoothing;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
                 }
 
-                &_info {
-                    font: 500 12px/18px 'Museo Sans Cyrl', sans-serif;
-                    @include font-smoothing;
-                    color: #000105;
+                &_hint {
                     opacity: 0.6;
+                }
+
+                &_subtext {
+
+                    &--bus:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 1px;
+                        margin: auto;
+                        background: url('/assets/img/location/routes/aside/bus-ic.svg') center no-repeat;
+                        width: 13px;
+                        height: 16px;
+                    }
+
+                    &_name {
+                        @include fw14-20();
+                        position: relative;
+                        margin-top: 8px;
+                        padding-left: 22px;
+                    }
+                    &_hint {
+                        opacity: 0.6;
+
+
+                    }
                 }
             }
         }

@@ -65,16 +65,19 @@
                 align-items: flex-start;
                 justify-content: center;
             }
-            &_bus,
+
+            &_railway,
+            &_metro,
             &_auto {
                 border-radius: 16px;
                 padding: 0 20px 0 48px;
                 display: flex;
                 align-items: center;
-                border: 1px solid #297acc;
+                border: 1px solid #5a31c5;
                 .marker-content__tooltip-content-title { display: none; }
             }
-            &_auto { border-color: #5a31c5; }
+            &_railway { border-color: #cd1f26 }
+            &_metro { border-color: #ff0114 }
         }
 
         &_main {
@@ -83,7 +86,8 @@
             border-radius: 28px;
             left: 0;
         }
-        &_bus,
+        &_railway,
+        &_metro,
         &_auto {
             min-height: 32px;
             border-radius: 16px;
@@ -132,6 +136,8 @@
     }
 
     &__auto,
+    &__railway,
+    &__metro,
     &__bus,
     &__shop,
     &__school,
@@ -151,7 +157,8 @@
             top: 0;
         }
     }
-    &__bus:after  { background: url(/assets/img/location/routes/bus-ic.svg) center no-repeat; }
+    &__railway:after  { background: url(/assets/img/location/routes/railway-ic.svg) center no-repeat; }
+    &__metro:after  { background: url(/assets/img/location/routes/metro-ic.svg) center no-repeat; }
     &__auto:after { background: url(/assets/img/location/routes/auto-ic.svg) center no-repeat; }
 
     // Инфраструктура

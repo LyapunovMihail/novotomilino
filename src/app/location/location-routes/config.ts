@@ -48,24 +48,24 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.715153, 37.804425]], // Начало линии откуда простраивается путь
-            color: 'rgba(131,112,165,.6)',
-            activeColor: 'rgb(131,112,165)'
+            color: 'rgba(46,46,46,.6)',
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 0' // первая цифра - длина штриха, вторая - длина пробела
         },
         text: 'МКАД 8-й км через Октябрьский пр. (8 км, 20 мин)',
         aside: {
-            text: 'МКАД 8-й км через Октябрьский пр.',
-            hint: '',
+            text: '1. МКАД 8-й км через Октябрьский пр.',
+            hint: '(8 км, 20 мин)',
             subText: [
                 {
-                    text: '8 км',
-                    hint: '(20 мин)'
+                    text: '',
+                    hint: ''
                 }
             ]
         },
-        type: 'auto',
-        asideType: 'auto'
+        type: 'auto'
     }, {
-        coords: [55.698452, 37.801486], // Координаты отметки местоположения маркера
+        coords: [55.698452, 37.801486],
         size: [30, 46],
         offset: [0, -20],
         zIndex: 0,
@@ -73,108 +73,172 @@ export let markersConfig = [
         content: 3,
         tooltip: '',
         route: {
-            origin: [[55.698452, 37.801486]], // Начало линии откуда простраивается путь
-            color: 'rgba(131,112,165,.6)',
-            activeColor: 'rgb(131,112,165)'
+            origin: [[55.698452, 37.801486]],
+            color: 'rgba(46,46,46,.6)',
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 0'
         },
         text: 'МКАД 10-й км через Новорязанское ш. (13 км, 25 мин)',
         aside: {
-            text: 'МКАД 10-й км через Новорязанское ш.',
-            hint: '',
+            text: '2. МКАД 10-й км через Новорязанское ш.',
+            hint: '(13 км, 25 мин)',
             subText: [
                 {
-                    text: '13 км',
-                    hint: '(25 мин)'
+                    text: '',
+                    hint: ''
                 }
             ]
         },
-        type: 'auto',
-        asideType: 'auto'
+        type: 'auto'
     }, {
         coords: [55.668612, 37.923497],
         size: [30, 46],
         offset: [0, -16],
         zIndex: 0,
-        class: 'marker-content marker-content__bus',
+        class: 'marker-content marker-content__railway',
         content: 4,
         tooltip: '',
         route: {
             origin: [[55.668612, 37.923497]],
             color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)'
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 2'
         },
         text: 'ж/д ст. Панки (пешком 1,9 км, 20 мин)',
         aside: {
-            text: 'ж/д ст. Панки',
+            text: '1. ж/д ст. Панки',
             hint: '(1,9 км, 20 мин)',
             subText: [
                 {
-                    text: 'до Казанского вокзала',
+                    text: 'До Казанского вокзала',
                     hint: '(38 мин)'
                 },
                 {
-                    text: 'до м. Выхино',
+                    text: 'До м. Выхино',
                     hint: '(12 мин)'
                 }
             ]
         },
-        type: 'bus',
-        asideType: 'metro'
-    }, {
-        coords: [55.700748, 37.852449],
-        size: [30, 46],
-        offset: [0, -16],
-        zIndex: 0,
-        class: 'marker-content marker-content__bus',
-        content: 5,
-        tooltip: '',
-        route: {
-            origin: [[55.700658, 37.852339]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)'
-        },
-        text: 'ост. м. Лермонтовский проспект (16 мин. на автобусе: 323, 463 или на маршрутке: 393к, 534к)',
-        type: 'bus',
-        asideType: 'metro'
-    }, {
-        coords: [55.703089, 37.927246],
-        size: [30, 46],
-        offset: [0, -16],
-        zIndex: 0,
-        class: 'marker-content marker-content__bus',
-        content: 6,
-        tooltip: '',
-        route: {
-            origin: [[55.703089, 37.927246]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)'
-        },
-        text: 'ост. м. Некрасовка (20 мин. на автобусе: 22, 25, 41 или на маршрутке: 23, 32, 33к, 75к)',
-        type: 'bus',
-        asideType: 'metro'
+        type: 'railway'
     }, {
         coords: [55.655328, 37.954140],
         size: [30, 46],
         offset: [0, -16],
         zIndex: 0,
-        class: 'marker-content marker-content__bus',
+        class: 'marker-content marker-content__railway',
+        content: 5,
+        tooltip: '',
+        route: {
+            origin: [[55.655328, 37.954140]],
+            color: 'rgba(46,46,46,.6)',
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 2'
+        },
+        text: 'ж/д ст. Томилино (пешком 2,4 км, 25 мин)',
+        aside: {
+            text: '2. ж/д ст. Томилино',
+            hint: '(2,4 км, 25 мин)',
+            subText: [
+                {
+                    text: 'До Казанского вокзала',
+                    hint: '(40 мин)'
+                },
+                {
+                    text: 'До м.Выхино',
+                    hint: '(14 мин)'
+                }
+            ]
+        },
+        type: 'railway'
+    }, {
+        coords: [55.675476, 37.857931],
+        size: [30, 46],
+        offset: [0, -16],
+        zIndex: 0,
+        class: 'marker-content marker-content__metro',
+        content: 6,
+        tooltip: '',
+        route: {
+            origin: [[55.675476, 37.857931]],
+            color: 'rgba(46,46,46,.6)',
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 0'
+        },
+        text: 'м. Котельники (на автобусе 9 км, 15 мин)',
+        aside: {
+            text: '1. м. Котельники',
+            hint: '(9 км, 15 мин)',
+            subText: [
+                {
+                    text: 'Маршрутки 13, 44, 45',
+                    hint: '(15 мин)'
+                }
+            ]
+        },
+        type: 'metro'
+    }, {
+        coords: [55.700276, 37.853829],
+        size: [30, 46],
+        offset: [0, -16],
+        zIndex: 0,
+        class: 'marker-content marker-content__metro',
         content: 7,
         tooltip: '',
         route: {
-            origin: [[55.655328, 37.954140], [55.659205, 37.928199]],
+            origin: [[55.700276, 37.853829]],
             color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)'
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 0'
         },
-        text: 'ост. ж/д ст. Томилино (7 минут на маршрутке 50к, 25 минут пешком)',
-        type: 'bus',
-        asideType: 'railway'
+        text: 'м. Лермонтовский проспект (на автобусе 10 км, 15 мин)',
+        aside: {
+            text: '2. м. Лермонтовский проспект',
+            hint: '(10 км, 16 мин)',
+            subText: [
+                {
+                    text: 'Маршрутки 50к, 393к, 534к, 546к',
+                    hint: '(16 мин)'
+                },
+                {
+                    text: 'Автобусы 323, 346, 463',
+                    hint: '(16 мин)'
+                }
+            ]
+        },
+        type: 'metro'
+    }, {
+        coords: [55.703966, 37.925754],
+        size: [30, 46],
+        offset: [0, -16],
+        zIndex: 0,
+        class: 'marker-content marker-content__metro',
+        content: 8,
+        tooltip: '',
+        route: {
+            origin: [[55.703966, 37.925754]],
+            color: 'rgba(46,46,46,.6)',
+            activeColor: 'rgb(46,46,46)',
+            strokeStyle: '1 0'
+        },
+        text: 'м. Некрасовка (на маршрутке 10 км, 20 мин)',
+        aside: {
+            text: '3. м. Некрасовка',
+            hint: '(10 км, 20 мин)',
+            subText: [
+                {
+                    text: 'Маршрутки 1149, 1230к, пересадка: автобусы 22, 25, маршрутки 23, 32, 33к, 75к',
+                    hint: '(20 мин)'
+                }
+            ]
+        },
+        type: 'metro'
     }, {
         coords: [55.656355158866056, 37.9214221574383],
         size: [50, 74],
         offset: [-20, -20],
         zIndex: 0,
         class: 'marker-content marker-content__main-marker',
-        content: 8,
+        content: 9,
         tooltip: '',
         title: 'ЖК Новотомилино',
         text: 'Люберцы городской округ, Томилино пгт',

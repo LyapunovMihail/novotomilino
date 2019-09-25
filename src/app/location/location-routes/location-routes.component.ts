@@ -167,7 +167,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                             route.getPaths().options.set({
                                 strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
                                 strokeWidth: 5,
-                                // strokeStyle: '1 5' первая цифра - длина штриха, вторая - длина пробела
+                                strokeStyle: item['route'].strokeStyle,
                                 zIndex: 10,
                                 openBalloonOnClick: false
                             });
