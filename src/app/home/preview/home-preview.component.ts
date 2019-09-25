@@ -110,10 +110,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         if (this.newsSnippets) {
             this.newsSnippets.forEach((news) => {
                 if (news.title) {
-                    news.title = news.title.length < 41 ? news.title : news.title.slice(0, 38) + '...';
-                }
-                if (news.descrPreview) {
-                    news.descrPreview = news.descrPreview.length < 32 ? news.descrPreview : news.descrPreview.slice(0, 29) + '...';
+                    news.title = news.title.length < 53 ? news.title : news.title.slice(0, 50) + '...';
                 }
             });
             this.newsSlider(this.newsSnippets);
@@ -130,10 +127,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         if (this.shareSnippets) {
             this.shareSnippets.forEach((share) => {
                 if (share.name) {
-                    share.name = share.name.length < 41 ? share.name : share.name.slice(0, 38) + '...';
-                }
-                if (share.textPreview) {
-                    share.textPreview = share.textPreview.length < 32 ? share.textPreview : share.textPreview.slice(0, 29) + '...';
+                    share.name = share.name.length < 53 ? share.name : share.name.slice(0, 50) + '...';
                 }
             });
             this.sharesSlider(this.shareSnippets);

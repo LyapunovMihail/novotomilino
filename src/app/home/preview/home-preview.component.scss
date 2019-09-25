@@ -208,7 +208,7 @@
             position: absolute;
             width: (1240px / 2);
             max-width: $w1600;
-            left: 48%;
+            right: 20px;
             bottom: 60px;
             display: flex;
             justify-content: flex-end;
@@ -231,13 +231,13 @@
 
 
                 .preview-content__shares-container {
-                    width: 280px + 70px;
+                    width: 290px + 70px;
                     height: 80px;
                     box-sizing: border-box;
                 }
                 .preview-content__share {
                     position: absolute;
-                    width: 280px + 70px;
+                    width: 290px + 70px;
                     display: block;
                     box-sizing: border-box;
                     padding: 0 45px 0 0;
@@ -298,13 +298,13 @@
                 }
 
                 .preview-content__news-container {
-                    width: 321px;
+                    width: 331px;
                     height: 80px;
                     box-sizing: border-box;
                 }
                 .preview-content__news {
                     position: absolute;
-                    width: 321px;
+                    width: 331px;
                     display: block;
                     z-index: 0;
 
