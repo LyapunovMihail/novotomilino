@@ -10,6 +10,7 @@ export class HouseService {
     constructor(private http: HttpClient) { }
 
     public getObjects(options): Observable<IAddressItemFlat[]> {
+        console.log('options: ', options);
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
 }

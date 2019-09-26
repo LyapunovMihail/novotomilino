@@ -10,6 +10,7 @@
     padding: 65px 0 0;
     box-sizing: border-box;
     z-index: 100;
+    overflow: hidden;
 
     &__sections {
         width: $w1600;
@@ -51,46 +52,43 @@
         }
 
         &-plan {
+            position: relative;
             display: flex;
+            transition: .2s linear;
+        }
 
-            &_wrap { 
-                width: 874px;
-                overflow: hidden;
-                margin: 0 auto;
-            }
-            &-btn {
-                position: relative;
-                width: 90px;
+        &-btn {
+
+            &_prev,
+            &_next {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                width: 40px;
                 height: 40px;
-                display: flex;
-                justify-content: space-between;
-
-                &_prev,
-                &_next {
-                    position: absolute;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-                    background: url(/assets/img/btn_next_or.svg) 50% no-repeat;
-                    transition: background-position $transition;
-                    &:hover { background-position: calc(50% - 3px); }
-                }
-                &_next {
-                    right: 0;
-                    transform: rotate(180deg);
-                }
+                border-radius: 50%;
+                box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+                background: url(/assets/img/btn_next_or.svg) 50% no-repeat;
+                transition: background-position $transition;
+                background-color: #e74911;
+                &:hover { background-position: calc(50% - 3px); }
             }
-
+            &_prev {
+                left: 40px;
+            }
+            &_next {
+                right: 40px;
+                transform: rotate(180deg);
+            }
         }
 
         &-chess {
-            display: flex;
-            justify-content: center;
+            margin-right: 65px;
 
             &_section {
                 position: relative;
-                padding: 20px;
+                padding: 10px 0 10px 10px;
                 border: solid 1px #999a9b;
 
                 &_floor {
@@ -104,12 +102,12 @@
 
                     &-button {
                         position: absolute;
-                        right: -52px;
-                        width: 42px;
-                        height: 30px;
+                        right: -35px;
+                        width: 24px;
+                        height: 18px;
                         border-radius: 2px;
-                        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                        font: 500 18px/30px 'Museo Sans Cyrl', sans-serif;
+                        box-shadow: 0 1px 1px 1px rgba(0,0,0,.1);
+                        font: 500 14px/18px 'Museo Sans Cyrl',sans-serif;
                         color: #e7490f;
                         text-align: center;
                     }
@@ -119,17 +117,14 @@
                 }
 
                 &_flat {
-                    width: 30px;
-                    height: 30px;
-                    font: 500 18px/30px 'Museo Sans Cyrl', sans-serif;
+                    width: 18px;
+                    height: 18px;
+                    font: 500 14px/19px 'Museo Sans Cyrl', sans-serif;
                     text-align: center;
-                    border-radius: 2px;
+                    border-radius: 1px;
                     box-sizing: border-box;
                     transition: 0.2s linear;
-
-                    &:not(:last-child) {
-                        margin-right: 10px;
-                    }
+                    margin-right: 10px;
 
                     &--free {
                         background-color: rgba(0,1,5,0.1);
