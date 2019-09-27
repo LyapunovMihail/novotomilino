@@ -58,7 +58,7 @@
             bottom: 66%;
             &:after { background: url(/assets/img/about/plan/kinder.svg) 0 0 no-repeat; }
             .markers__item-tooltip { border: 1px solid #ffcb0d; }
-            &:last-child {
+            &:nth-child(4) {
                 left: 72%;
                 bottom: 89.5%;
             }
@@ -68,6 +68,35 @@
             bottom: 66%;
             &:after { background: url(/assets/img/about/plan/school.svg) 0 0 no-repeat; }
             .markers__item-tooltip { border: 1px solid #ae6bf8; }
+        }
+        &_shop {
+            left: 4%;
+            bottom: 48%;
+            &:after { background: url(/assets/img/about/plan/shop.svg) 0 0 no-repeat; }
+            .markers__item-tooltip { 
+                border: 1px solid #2095d2;
+                height: 36px;
+            }
+        }
+        &_stop {
+            left: 70%;
+            bottom: 59%;
+            &:after { background: url(/assets/img/about/plan/stop.svg) 0 0 no-repeat; }
+            .markers__item-tooltip {
+                border: 1px solid #297acc;
+                height: 36px;
+                left: 2px;
+                top: 1px;
+            }
+        }
+        &_sport {
+            left: 61%;
+            bottom: 82%;
+            &:after { background: url(/assets/img/about/plan/sport.svg) 0 0 no-repeat; }
+            .markers__item-tooltip {
+                border: 1px solid #1da600;
+                height: 36px;
+            }
         }
 
 

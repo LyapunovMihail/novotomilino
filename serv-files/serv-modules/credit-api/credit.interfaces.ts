@@ -10,9 +10,9 @@ export interface ICreditSnippet {
     percent: number;
     initial: number;
     deadline: number;
-    military: boolean;
-    maternal: boolean;
-    nationality: boolean;
+    // military: boolean;
+    // maternal: boolean;
+    // nationality: boolean;
     active: boolean;
     created_at: string;
 }

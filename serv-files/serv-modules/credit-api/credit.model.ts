@@ -28,9 +28,9 @@ export class CreditModel {
                 active: true,
                 initial: {$lte: params.initial},
                 deadline: {$gte: params.deadline},
-                military: params.military,
-                maternal: params.maternal,
-                nationality: params.nationality
+                // military: params.military,
+                // maternal: params.maternal,
+                // nationality: params.nationality
             })
             .sort({created_at: -1}).toArray();
 
@@ -50,9 +50,9 @@ export class CreditModel {
                 percent: 0,
                 initial: 0,
                 deadline: 0,
-                military: false,
-                maternal: false,
-                nationality: false,
+                // military: false,
+                // maternal: false,
+                // nationality: false,
                 active: true,
                 created_at,
             };
@@ -78,9 +78,9 @@ export class CreditModel {
             case 'percent':
             case 'initial':
             case 'deadline':
-            case 'military':
-            case 'maternal':
-            case 'nationality':
+            // case 'military':
+            // case 'maternal':
+            // case 'nationality':
             case 'active':
 
                 // если key - правильный но нет его значения, отдается ошибка

@@ -16,9 +16,9 @@ export interface FormParams {
         min: any;
         max: any;
     };
-    military: boolean;
-    maternal: boolean;
-    nationality: boolean;
+    // military: boolean;
+    // maternal: boolean;
+    // nationality: boolean;
 }
 
 @Injectable()
@@ -28,7 +28,7 @@ export class PurchaseCreditFormService {
     constructor() { }
 
     public values( form: FormParams ): FormParams {
-        const values: FormParams = {price: {val: '', min: '', max: ''}, firstpay: {val: '', min: '', max: ''}, deadline: {val: '', min: '', max: ''}, military: false, maternal: false, nationality: false} ;
+        const values: FormParams = {price: {val: '', min: '', max: ''}, firstpay: {val: '', min: '', max: ''}, deadline: {val: '', min: '', max: ''}, /*military: false, maternal: false, nationality: false*/} ;
         // all form key's values parse to number
         for ( const i in form ) {
             values[i] = form[i];

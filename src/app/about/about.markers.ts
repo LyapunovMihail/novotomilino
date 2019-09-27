@@ -15,6 +15,32 @@ export interface IAboutMarker {
     title: string;
     subtitle: string;
 }
+export interface IGenplanMarker {
+    title: string;
+    mod: string;
+}
+
+export let GENPLAN_MARKERS: IGenplanMarker[] = [
+    {
+        title: 'Детский сад',
+        mod: 'kinder'
+    }, {
+        title: 'Школа',
+        mod: 'school'
+    }, {
+        title: 'Детский сад',
+        mod: 'kinder-two'
+    }, {
+        title: 'Остановка птицефабрика',
+        mod: 'stop'
+    }, {
+        title: 'Торговый центр',
+        mod: 'shop'
+    }, {
+        title: 'Стадион урожай',
+        mod: 'sport'
+    },
+]
 
 export let ABOUT_MARKERS: IAboutMarker[] = [
     {

@@ -80,14 +80,19 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
             firstpay: form.firstpay.val,
             initial: (Math.round((form.firstpay.val / form.price.val) * 100)), // Подсчет минимального взноса в % (первый платёж поделённый на цену квартиры)
             deadline: form.deadline.val,
-            military: form.military,
-            maternal: form.maternal,
-            nationality: form.nationality
+            // military: form.military,
+            // maternal: form.maternal,
+            // nationality: form.nationality
         };
         this.params = params;
 
         if (!this.isAuthorizated) {
-            this.getActiveSnippetWithParams();
+
+            if (form.price.val === form.price.min && form.firstpay.val === form.firstpay.min && form.deadline.val === form.deadline.min ) {
+                this.getActiveSnippet();
+            } else {
+                this.getActiveSnippetWithParams();
+            }
         }
     }
 
