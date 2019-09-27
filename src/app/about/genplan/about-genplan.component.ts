@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./about-genplan.component.scss', './../about.component.scss']
 })
 
-export class AboutGenplanComponent {}
+export class AboutGenplanComponent {
+
+
+}

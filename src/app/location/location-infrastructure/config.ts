@@ -6,7 +6,7 @@ export let markersConfig = [
     }, {
         type: 'shop',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Кондитерская</p></div></div>',
-        coord: [55.682528, 37.899911]
+        coord: [55.659751, 37.927597]
     }, {
         type: 'shop',
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Цветы и подарки</p></div></div>',

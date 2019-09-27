@@ -27,9 +27,9 @@ export class PurchaseCreditFormComponent implements OnInit {
             min : 1,
             max : 30
         },
-        maternal: false,
-        military: false,
-        nationality: false
+        // maternal: false,
+        // military: false,
+        // nationality: false
     };
 
     @Input() public isAuthorizated;
