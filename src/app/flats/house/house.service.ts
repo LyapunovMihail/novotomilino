@@ -13,4 +13,8 @@ export class HouseService {
         console.log('options: ', options);
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
+
+    public showFlatBubble() {
+
+    }
 }

@@ -21,10 +21,10 @@
             [sectionNumber]="sectionNumber">
         </app-house-minimap> -->
 
-        <div *ngIf="sectionsData" class="house__sections-plan" [ngStyle]="{'transform' : 'translateX(-' + scrollCount * scrollStep + 'px)'}" #chess>
+        <div *ngIf="sectionsData" class="house__sections-plan" [ngStyle]="{'transform' : 'translateX(-' + scroll + 'px)'}" #chess>
             <ng-container *ngFor="let section of sectionsData">
                 <div class="house__sections-chess">
-                    <ul class="house__sections-chess_section">
+                    <ul class="house__sections-chess_section" #sectionContainer>
                         <ng-container *ngFor="let floor of section">
                             <li *ngIf="floor" class="house__sections-chess_section_floor">
                                 <ul>
@@ -36,7 +36,7 @@
                                                     'house__sections-chess_section_flat--disabled' : flat.disabled}">
                                         <a class="house__sections-chess_section_flat_link"
                                             (click)="openApartmentModal(i, floor)"
-                                            (mouseenter)="showFlatBubble($event, flat)"
+                                            (mouseenter)="showFlatBubble($event, flat, sectionContainer)"
                                             (mouseleave)="showBubble = false">
                                             {{flat.status !== '4' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
                                         </a>
@@ -55,9 +55,9 @@
             </ng-container>
         </div>
 
-        <button class="house__sections-btn_prev" (click)="scrollPrev()">
+        <button class="house__sections-btn_prev" (click)="scrollPrev()" *ngIf="scroll !== 0">
         </button>
-        <button class="house__sections-btn_next" (click)="scrollNext()">
+        <button class="house__sections-btn_next" (click)="scrollNext()" *ngIf="scroll !== chessMaxScroll">
         </button>
 
     </div>

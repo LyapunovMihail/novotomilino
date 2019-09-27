@@ -39,8 +39,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public floorCount = FloorCount;
     public searchFlats: IFlatWithDiscount[];
     // переменные для реализации скролла секций
-    public scrollCount = 0;
-    public maxScrollCount: number;
+    public scroll = 0;
+    public chessMaxScroll: number;
     public scrollStep = 340;
     public lastScrollStep: number;
 
@@ -67,37 +67,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public ngOnInit() {
         this.routerEvent = this.routerChange();
 
-    }
-
-    public ngAfterViewInit() {
-        setTimeout(() => {
-            console.log('this.chess.nativeElement.width: ', this.chess.nativeElement.clientWidth);
-            const pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            const doubleContainerMargin = (pageWidth - this.chessContainer.nativeElement.clientWidth);
-            const chessVisibleWidth = pageWidth - doubleContainerMargin;
-            const chessInvisibleWidth = this.chess.nativeElement.clientWidth - chessVisibleWidth;
-
-            if (chessInvisibleWidth > 0 ) {
-                this.maxScrollCount = Math.ceil((chessInvisibleWidth) / this.scrollStep);
-                this.lastScrollStep = (chessInvisibleWidth) % this.scrollStep;
-                console.log('this.maxScrollCount: ', this.maxScrollCount);
-                console.log('this.lastScrollStep: ', this.lastScrollStep);
-            } else {
-                this.maxScrollCount = 0;
-            }
-            console.log('this.maxScrollCount: ', this.maxScrollCount);
-        }, 800); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
-    }
-
-    public scrollPrev() {
-        this.scrollCount = this.scrollCount > 0 ? this.scrollCount - 1 : this.scrollCount;
-    }
-
-    public scrollNext() {
-        if (this.scrollCount === this.maxScrollCount - 1) {
-            this.scrollStep = this.lastScrollStep;
-        }
-        this.scrollCount = this.scrollCount < this.maxScrollCount ? this.scrollCount + 1 : this.scrollCount;
     }
 
     public routerChange() {
@@ -169,11 +138,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    public ngOnDestroy() {
-        // отписка от событий роута
-        this.routerEvent.unsubscribe();
-    }
-
     public openApartmentModal(index, floorFlats) {
         this.selectedFlatIndex = index;
         this.floorFlats = floorFlats;
@@ -181,13 +145,46 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showApartmentWindow = true;
     }
 
-    public showFlatBubble(event, flat) {
-        const houseElem = document.querySelector('.house');
-        const distanceToBottom = houseElem.clientHeight + 30 - (event.target.offsetTop + 125);
+    public showFlatBubble(event, flat, sectionContainer) {
+        const distanceToBottom = sectionContainer.clientHeight - (event.target.offsetTop);
+        console.log('flat offsetTop: ', event.target.offsetTop);
+        console.log('distanceToBottom: ', distanceToBottom);
+        console.log('flat offsetBottom', event);
         const bubbleHeight = flat.discount ? 312 : 288;
         this.bubbleCoords.top = (distanceToBottom > bubbleHeight) ? event.target.getBoundingClientRect().top : event.target.getBoundingClientRect().top - bubbleHeight + 30;
         this.bubbleCoords.left = event.target.getBoundingClientRect().left + 40;
         this.bubbleData = flat;
         this.showBubble = true;
+    }
+
+    public ngAfterViewInit() {
+        setTimeout(() => {
+            this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
+            if (this.chessMaxScroll > 0 ) {
+                this.lastScrollStep = (this.chessMaxScroll) % this.scrollStep;
+            } else {
+                this.chessMaxScroll = 0;
+            }
+        }, 800); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
+    }
+
+    public scrollPrev() {
+        this.scroll -= this.scrollStep;
+        if (this.scroll < 0) {
+            this.scroll = 0;
+        }
+    }
+
+    public scrollNext() {
+        if (this.chessMaxScroll - this.scroll === this.lastScrollStep) {
+            this.scroll += this.lastScrollStep;
+        } else {
+            this.scroll += this.scrollStep;
+        }
+    }
+
+    public ngOnDestroy() {
+        // отписка от событий роута
+        this.routerEvent.unsubscribe();
     }
 }
