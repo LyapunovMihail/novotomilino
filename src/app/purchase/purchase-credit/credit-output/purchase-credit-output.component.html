@@ -1,6 +1,6 @@
 <div class="purchase__result">
-    <h1 class="purchase__result-title purchase__result-title_not-login" *ngIf="!isAuthorizated">Вам подходит {{bankList.length}} программ</h1>
-    <h1 class="purchase__result-title purchase__result-title_login" *ngIf="isAuthorizated">Список всех банков для калькулятора ипотеки:</h1>
+    <!-- <h1 class="purchase__result-title purchase__result-title_not-login" *ngIf="!isAuthorizated">Вам подходит {{bankList.length}} программ</h1>
+    <h1 class="purchase__result-title purchase__result-title_login" *ngIf="isAuthorizated">Список всех банков для калькулятора ипотеки:</h1> -->
 
     <button class="admin-credit__set-snippet"
             *ngIf="isAuthorizated"
@@ -65,7 +65,10 @@
                     </div>
                     <div class="credit-list__item-descr-info-item credit-list__item-descr-payment">
                         <p class="credit-list__item-descr-text_s">Платеж в месяц</p>
-                        <p class="credit-list__item-descr-text_b">{{isAuthorizated ? '—' : (snippet.monthPay | installmentNumberPipe)}}</p>
+                        <p class="credit-list__item-descr-text_b">
+                            <!-- {{isAuthorizated ? '—' : (snippet.monthPay | installmentNumberPipe)}} -->
+                            —
+                        </p>
                     </div>
                 </div>
 
