@@ -57,7 +57,7 @@ export class FormReserveComponent implements OnChanges {
 
     public timeFocus() {
         if (this.platform.isBrowser) {
-            $('.form_item_field--time').focus();
+            $('.form-request__field_time').focus();
         }
     }
 

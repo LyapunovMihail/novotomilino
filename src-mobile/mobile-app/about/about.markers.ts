@@ -31,6 +31,15 @@ export let GENPLAN_MARKERS: IGenplanMarker[] = [
     }, {
         title: 'Детский сад',
         mod: 'kinder'
+    }, {
+        title: 'Остановка «Птицефабрика»',
+        mod: 'stop'
+    }, {
+        title: 'Торговый центр',
+        mod: 'shop'
+    }, {
+        title: 'Стадион урожай',
+        mod: 'sport'
     }
 ];
 

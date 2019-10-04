@@ -1,6 +1,6 @@
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public form: FormGroup;
     public showCorpus: boolean = false;
 
+    @Input() public showFilter: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 
     constructor (
@@ -35,12 +36,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
              * if index is exist, then true
              * otherwise pass an array of false
              */
-            let arr = [false, false, false, false];
+            let arr = [false, false, false, false, false];
             if (params.rooms) {
                 let result = parseQueryParams(params.rooms);
                 let test = result.every((item) => (/^[0|1|2|3]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === 0) ? 3 : item - 1] = true);
+                    result.forEach((item) => arr[(item === 0) ? 4 : item - 1] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));

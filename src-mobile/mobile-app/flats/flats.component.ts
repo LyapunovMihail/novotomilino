@@ -3,6 +3,7 @@ import { IAddressItemFlat, IFlatResponse } from '../../../serv-files/serv-module
 import { Router } from '@angular/router';
 import { Component, OnInit, Inject, HostListener, ElementRef } from '@angular/core';
 import { FlatsService } from './flats.service';
+import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { DOCUMENT } from '@angular/common';
 declare let $: any;
 
@@ -11,7 +12,8 @@ declare let $: any;
     templateUrl: './flats.component.html',
     styleUrls: ['./flats.component.scss'],
     providers: [
-        FlatsService
+        FlatsService,
+        WindowScrollLocker
     ]
 })
 
@@ -25,11 +27,14 @@ export class FlatsComponent implements OnInit {
     public isVisible: boolean = false;
     public counter: number = 0;
 
+    public showFilter: boolean = false;
+
     constructor(
         public router: Router,
         public searchService: FlatsService,
         public platform: PlatformDetectService,
-        public elRef: ElementRef
+        public elRef: ElementRef,
+        public windowScrollLocker: WindowScrollLocker
     ) {}
 
     public ngOnInit() {
@@ -42,6 +47,12 @@ export class FlatsComponent implements OnInit {
                 this.isReturnLink = false;
             }
         }
+    }
+
+    public openFilter() {
+
+        this.showFilter = !this.showFilter;
+        this.showFilter === true ? this.windowScrollLocker.block() : this.windowScrollLocker.unblock();
     }
 
     @HostListener('window:scroll', [])
