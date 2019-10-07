@@ -28,7 +28,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public houseNumber: number;
     public sectionNumber: number;
     public sectionNumbers: string[] = [];
-    public sectionData: IFLatDisabled[][] = null;
     public sectionsData: IFLatDisabled[][][] = [];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
@@ -60,7 +59,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         public service: HouseService,
         private flatsDiscountService: FlatsDiscountService,
         public windowScrollLocker: WindowScrollLocker,
-        private platform: PlatformDetectService,
+        private platform: PlatformDetectService
     ) {
     }
 
@@ -71,22 +70,26 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
-            if (this.floorCount[params.house] && this.floorCount[params.house][params.section]) {
+            if (this.floorCount[params.house]) {
                 this.houseNumber = params.house;
+                this.sectionsData = [];
                 this.sectionNumbers = Object.keys(this.floorCount[this.houseNumber]); // создаём массив из номеров секций по выбранному дому.
                 if (this.platform.isBrowser) {
                     // получение квартир для нужных секций
                     this.sectionNumbers.forEach((sectionNumber) => {
                         this.getFlats(sectionNumber).subscribe(
                             (flats) => {
-                                console.log('flats: ', flats);
                                 this.buildSectionData(flats, sectionNumber);
                             },
                             (err) => console.log(err)
                         );
                         if (this.searchFlats) {
-                            this.searchFlatsSelection();
+                            setTimeout(() => {
+                                this.searchFlatsSelection();
+
+                            }, 100);
                         }
+                        this.scrollCalculate();
                     });
                 }
             } else {
@@ -98,7 +101,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private buildSectionData(flats, sectionNumber) {
-        this.sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
+        const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
             }
@@ -106,13 +109,13 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             return section;
         }, []);
 
-        this.sectionData.reverse();
+        sectionData.reverse();
 
-        this.sectionData.map((floor: IFLatDisabled[]) => {
+        sectionData.map((floor: IFLatDisabled[]) => {
             floor.sort();
         });
 
-        this.sectionsData[sectionNumber - 1] = this.sectionData;
+        this.sectionsData[sectionNumber - 1] = sectionData;
     }
 
     public searchFlatsSelection() {
@@ -147,9 +150,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public showFlatBubble(event, flat, sectionContainer) {
         const distanceToBottom = sectionContainer.clientHeight - (event.target.offsetTop);
-        console.log('flat offsetTop: ', event.target.offsetTop);
-        console.log('distanceToBottom: ', distanceToBottom);
-        console.log('flat offsetBottom', event);
         const bubbleHeight = flat.discount ? 312 : 288;
         this.bubbleCoords.top = (distanceToBottom > bubbleHeight) ? event.target.getBoundingClientRect().top : event.target.getBoundingClientRect().top - bubbleHeight + 30;
         this.bubbleCoords.left = event.target.getBoundingClientRect().left + 40;
@@ -158,14 +158,19 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public ngAfterViewInit() {
+        this.scrollCalculate();
+    }
+
+    public scrollCalculate() {
         setTimeout(() => {
+            this.scroll = 0;
             this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
             if (this.chessMaxScroll > 0 ) {
-                this.lastScrollStep = (this.chessMaxScroll) % this.scrollStep;
+                this.lastScrollStep = this.chessMaxScroll % this.scrollStep;
             } else {
                 this.chessMaxScroll = 0;
             }
-        }, 800); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
+        }, 400); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
     }
 
     public scrollPrev() {

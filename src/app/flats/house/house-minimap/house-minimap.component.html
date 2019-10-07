@@ -1,7 +1,27 @@
 <aside class="house__sections-aside">
-    <div class="house__sections-aside-plan">
+    <div class="house__sections-notice">
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_free">3</span>Свободно
+        </p>
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_sale">1</span>Скидка
+        </p>
+        <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_reserve"></span>Забронировано
+        </p>
+    </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="143" height="361" viewBox="0 0 143 361">
+    <div class="house__sections-aside-plan">
+        <ul class="house__sections-aside-plan_list">
+            <li *ngFor="let house of houseNumbers"
+                class="house__sections-aside-plan_item"
+                [class.house__sections-aside-plan_item--active]="houseNumber === house"
+                (click)="houseNavigate(house)">
+                {{house}}
+            </li>
+        </ul>
+
+      <!--  <svg xmlns="http://www.w3.org/2000/svg" width="143" height="361" viewBox="0 0 143 361">
             <g fill="none" fill-rule="evenodd">
 
                 <path class="house__sections-aside-plan_corpus"
@@ -69,7 +89,7 @@
                     <tspan x="38.987" y="20.073">С</tspan>
                 </text>
             </g>
-        </svg>
+        </svg> -->
 
     </div>
 </aside>
