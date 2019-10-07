@@ -10,8 +10,12 @@
     background: rgba(0, 0, 0, .7);
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 22;
+    align-items: flex-start;
+    padding: 60px 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 101;
 
     &-contain {
         width: 1088px;
@@ -84,7 +88,6 @@
                 }
 
                 &_sber {
-
                     &:before {
                         top: -8px;
                         height: 46px;
@@ -93,7 +96,6 @@
                     }
                 }
                 &_alfa {
-
                     &:before {
                         height: 49px;
                         top: -5px;
@@ -102,7 +104,6 @@
                     }
                 }
                 &_vtb {
-
                     &:before {
                         height: 31px;
                         top: 0;
@@ -111,7 +112,6 @@
                     }
                 }
                 &_raif {
-
                     &:before {
                         height: 50px;
                         top: -10px;
@@ -120,7 +120,6 @@
                     }
                 }
                 &_ural {
-
                     &:before {
                         height: 49px;
                         top: -5px;
@@ -194,6 +193,54 @@
                         background: url('/assets/img/purchase/credit/ross_logo.svg') no-repeat;
                         background-size: 50px 50px;
                     }
+                }
+                &_rossBank:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/rossBank_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_capital:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/capital_logo_bage.svg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_psb:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/psb_logo_bage.svg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_absolute:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/absolute_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_gasprom:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/gasprom_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_sovcom:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/sovcom_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_svazBank:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/svazBank_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_bankRussia:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/bankRussia_logo_bage.jpg') no-repeat;
+                    background-size: 50px 50px;
                 }
             }
         }

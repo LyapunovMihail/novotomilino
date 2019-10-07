@@ -4,6 +4,16 @@
     width: 100%;
     height: calc(100vh - 146px);
 
+    &__title {
+        width: 100%;
+        max-width: $w1600;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+    }
+    
     &_house-select {
 
         &_svg {
