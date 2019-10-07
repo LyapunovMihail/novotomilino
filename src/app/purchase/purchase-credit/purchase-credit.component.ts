@@ -27,7 +27,7 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
     public params: any;
 
     constructor(
-        private windowScrollLocker: WindowScrollLocker,
+        public windowScrollLocker: WindowScrollLocker,
         private authorization: AuthorizationObserverService,
         private creditService: PurchaseCreditService
     ) { }
@@ -39,7 +39,8 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
                 if (this.isAuthorizated) {
                     this.getActiveSnippet();
                 } else {
-                    this.getActiveSnippetWithParams();
+                    // this.getActiveSnippetWithParams();
+                    this.getActiveSnippet();
                 }
             });
 
