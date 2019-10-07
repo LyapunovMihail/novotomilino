@@ -18,7 +18,7 @@
             <ng-container *ngFor="let section of sectionsData">
                 <div class="house__sections-chess">
                     <ul class="house__sections-chess_section" #sectionContainer>
-                        <p class="house__sections-chess_section_title">Cекция {{section[0][0].section}}</p>
+                        <p class="house__sections-chess_section_title" *ngIf="section">Cекция {{section[0][0].section}}</p>
                         <ng-container *ngFor="let floor of section">
                             <li *ngIf="floor" class="house__sections-chess_section_floor">
                                 <ul>
