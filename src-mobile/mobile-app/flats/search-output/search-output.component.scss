@@ -5,12 +5,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px 0 60px; 
+    padding: 0 0 60px;
+}
 
-    @media(max-width: 599px) {
-        box-sizing: border-box;
-        padding: 20px 10px 60px;
-    }
+.result-gradient {
+    width: 100%;
+    height: 93px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), #ffffff);
+    position: sticky;
+    bottom: 0;
+    pointer-events: none;
 }
 
 .to-favorites {
@@ -29,91 +33,66 @@
 
     &__item {
         width: 100%;
-        height: 90px;
+        height: 80px;
         display: flex;
         position: relative;
         align-items: center;
         box-sizing: border-box;
         border-bottom: 1px solid #d8d8d8;
-        &:first-child { border-top: 1px solid #d8d8d8; }
 
         &-wrap {
-            width: calc(100% - 48px);
+            width: 100%;
             height: 100%;
             display: flex;
+            flex-flow: row wrap;
             align-items: center;
             padding: 10px 30px;
             box-sizing: border-box;
             @media (max-width: 767px) {
-                width: 100%;
-                padding: 10px 15px;
+                padding: 15px;
                 justify-content: space-between;
             }
         }
     }
 
     &__text {
-        font: 500 16px/24px $font-mus;
+        font: 500 14px/24px $font-mus;
         @include font-smoothing;
         color: $col-black;
         white-space: nowrap;
 
         &_floor,
-        &_corpus { color: rgba(0, 1, 5, 0.8); }
-        &_room { color: $col-orange; }
-
-        &_room { 
-            width: 24%;
-            min-width: 132px;
-        }
+        &_flat,
         &_corpus {
-            width: 22%;
-            min-width: 70px;
+            font-weight: 300;
+            color: rgba(0, 1, 5, 0.8);
         }
-        &_floor {
-            width: 41%;
-            min-width: 87px;
-        }
+        &_floor,
+        &_flat { margin-right: 8px; }
 
-        &_space {
-            width: 33%;
-            min-width: 92px;
-        }
-
-        &_space,
-        &_price {
-           @media (max-width: 768px) { text-align: right; }
-
-           &-sale {
-                color: $col-orange;
-                position: relative;
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 24px;
-                    height: 12px;
-                    top: calc(50% - 7px);
-                    left: -27px;
-                    background: url(/assets/img/stock-ic.svg) no-repeat;
-                    background-size: 24px 12px;
-                }
-           }
-           &-not-sale {
-                color: #999a9b;
-                text-decoration: line-through;
-           }
-        }
+        &_room,
+        &_price-sale { color: $col-orange; }
     }
+
     &__wrap {
-        width: 100%;
+        width: calc(100% - 92px);
         height: 100%;
-        display: flex;
-        align-items: center;
-        @media (max-width: 768px) { 
-            width: 20%;
-            flex-flow: column;
-            align-items: flex-start
+        @media (max-width: 767px) { width: calc( 100% - 58px); }
+        
+        &_head {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: space-between;
+            &-bottom { align-items: flex-end; }
         }
+        &_info,
+        &_space {
+            width: auto;
+            display: flex;
+            align-items: flex-end;
+        }
+        &_space { justify-content: flex-end; }
 
         &_scheme {
             width: 70px;
@@ -124,8 +103,9 @@
             justify-content: flex-start;
             align-items: center;
             @media (max-width: 767px) {
-                width: 65px;
-                margin-right: 10px;
+                width: 50px;
+                min-width: 50px;
+                margin-right: 8px;
             }
 
             img {
@@ -152,6 +132,27 @@
         position: absolute;
         right: 20px;
         top: 5px;
+    }
+
+    &__scheme {
+
+        &-content {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        &-error {
+            width: 100%;
+            height: 100%;
+            font: 500 10px/12px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, .6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url(/assets/img/flats/error-img.svg) center no-repeat #fafafa;
+        }
     }
 }
 

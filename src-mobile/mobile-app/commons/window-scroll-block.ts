@@ -32,6 +32,7 @@ export class WindowScrollLocker {
             WindowScrollLocker.isBlocked = true;
             let body = this.document.querySelector('body');
             let html = this.document.querySelector('html');
+            body.style.width = '100%';
             body.style.height = '100%';
             html.style.height = '100%';
             body.style.minHeight = '100%';
@@ -51,6 +52,7 @@ export class WindowScrollLocker {
                 styleBody = body.getAttribute('style').replace(/min-height[^;]+;?/g, '')
                 .replace(/position[^;]+;?/g, '')
                 .replace(/height[^;]+;?/g, '')
+                .replace(/width[^;]+;?/g, '')
                 .replace(/overflow[^;]+;?/g, '')
                 .replace(/top[^;]+;?/g, '');
                 body.setAttribute('style' , styleBody );

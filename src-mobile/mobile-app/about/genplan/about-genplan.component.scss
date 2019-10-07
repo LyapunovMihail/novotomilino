@@ -3,8 +3,8 @@
 .genplan {
     margin: 67px 0 0;
     width: 100%;
-    height: calc(62.94vw - 51px);
-    min-height: 430px;
+    height: calc(53.94vw - 51px);
+    min-height: 360px;
     display: flex;
     justify-content: center;
     position: relative;
@@ -69,22 +69,54 @@
             width: 100%;
             height: 100%;
         }
+        &_active {
+            z-index: 11;
+            .markers__item-tooltip_span { transform: translateX(0%) !important; }
+        }
 
         &_kinder {
-            left: 18.6%;
-            bottom: 65%;
+            left: 20.6%;
+            bottom: 63.6%;
             &:after { background: url(/assets/img/about/plan/kinder.svg) 0 0 no-repeat; }
             .markers__item-tooltip_span { border: 1px solid #ffcb0d; }
-            &:last-child {
-                left: 75%;
+            &:nth-child(4) {
+                left: 72%;
                 bottom: 86%;
             }
         }
         &_school {
-            left: 61%;
-            bottom: 65%;
+            left: 58%;
+            bottom: 69.5%;
             &:after { background: url(/assets/img/about/plan/school.svg) 0 0 no-repeat; }
             .markers__item-tooltip_span { border: 1px solid #ae6bf8; }
+        }
+        &_stop {
+            left: 69.4%;
+            bottom: 61%;
+            &:after { background: url(/assets/img/about/plan/stop.svg) no-repeat; }
+            .markers__item-tooltip {
+                right: 2px;
+                left: auto;
+                top: 1px;
+            }
+            .markers__item-tooltip_span {
+                border: 1px solid #297acc;
+                transform: translateX(100%);
+                padding: 0 50px 0 15px;
+                height: 36px;
+            }
+        }
+        &_shop {
+            left: 3.5%;
+            bottom: 46%;
+            &:after { background: url(/assets/img/about/plan/shop.svg) 0 0 no-repeat; }
+            .markers__item-tooltip_span { border: 1px solid #2095d2; }
+        }
+        &_sport {
+            left: 56%;
+            bottom: 84%;
+            &:after { background: url(/assets/img/about/plan/sport.svg) 0 0 no-repeat; }
+            .markers__item-tooltip_span { border: 1px solid #1da600; }
         }
 
 
@@ -98,6 +130,7 @@
             border-radius: 20px;
             overflow: hidden;
             z-index: -1;
+            pointer-events: none;
 
             &_span {
                 width: 100%;
@@ -110,9 +143,6 @@
                 background-color: #fff;
                 transform: translateX(-100%);
                 transition: transform .2s linear;
-            }
-            &_active {
-                transform: translateX(0%);
             }
         }
     }

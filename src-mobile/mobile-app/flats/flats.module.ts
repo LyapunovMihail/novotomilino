@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchBitNumberPipe } from './search-output/search-bit-number.pipe';
 import { FormsRequestModule } from '../forms-request/forms-request.module';
+import { ModalApartamentComponent } from './modal-apartament/apartament.component';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -18,6 +19,7 @@ const FlatsComponents = [
     SearchOutputComponent,
     SectionsSelectComponent,
     CheckboxListComponent,
+    ModalApartamentComponent,
     SearchBitNumberPipe,
     SearchOutputPipe
 ];

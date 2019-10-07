@@ -151,7 +151,7 @@ export let markersConfig = [
         },
         type: 'railway'
     }, {
-        coords: [55.675476, 37.857931],
+        coords: [55.673638, 37.861333],
         size: [30, 46],
         offset: [0, -16],
         zIndex: 0,
@@ -159,7 +159,7 @@ export let markersConfig = [
         content: 6,
         tooltip: '',
         route: {
-            origin: [[55.675476, 37.857931]],
+            origin: [[55.673638, 37.861333]],
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)',
             strokeStyle: '1 0'
@@ -177,7 +177,7 @@ export let markersConfig = [
         },
         type: 'metro'
     }, {
-        coords: [55.700276, 37.853829],
+        coords: [55.700874, 37.852222],
         size: [30, 46],
         offset: [0, -16],
         zIndex: 0,
@@ -185,7 +185,7 @@ export let markersConfig = [
         content: 7,
         tooltip: '',
         route: {
-            origin: [[55.700276, 37.853829]],
+            origin: [[55.700874, 37.852222]],
             color: 'rgba(46,46,46,.6)',
             activeColor: 'rgb(46,46,46)',
             strokeStyle: '1 0'
