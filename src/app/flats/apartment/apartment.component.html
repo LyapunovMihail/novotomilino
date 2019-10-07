@@ -24,10 +24,10 @@
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/plan'" (click)="close.emit(false)">Общий вид</a>
                     </li>
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
                     </li>
                     <li class="apartment__info-nav-item">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section" (click)="close.emit(false)">Секция {{flatData.section}}</a>
+                        Секция {{flatData.section}}
                     </li>
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
