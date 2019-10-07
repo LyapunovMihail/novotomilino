@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ContactsController } from './contacts-api/contacts.controller';
 import { MongoConnectionService } from './mongo-connection.service';
 import { AuthorizationController } from './authorization-api/authorization.controller';
 import { NewsController } from './news-api/news.controller';
@@ -30,7 +31,8 @@ import { GalleryController } from './gallery-api/gallery.controller';
         DocumentaionController,
         SharesController,
         TriggerController,
-        GalleryController
+        GalleryController,
+        ContactsController
     ],
     providers: [
         MongoConnectionService,

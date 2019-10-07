@@ -33,7 +33,6 @@ export class EmailerModel {
         console.log('sending mail to: ' + mails);
 
         const time = data.wait_for_call === 'now' ? 'ожидает сейчас' : data.time;
-        const type = data.type === 'КВ' ? 'квартиры' : data.type === 'КЛ' ? 'кладовой' : 'машиноместа';
         let config = {
             mails,
             subject: 'Заявка на ипотеку.',
@@ -42,8 +41,8 @@ export class EmailerModel {
                 <b>Телефон :</b> ${data.phone},<br>
                 <b>Эл. почта :</b> ${data.mail},<br>
                 <b>Время для звонка :</b> ${time},<br>
-                <b>Номер ${type} :</b> ${data.number},<br>
-                <b>Стоимость ${type} :</b> ${data.price},<br>
+                <b>Номер квартиры :</b> ${data.number},<br>
+                <b>Стоимость квартиры :</b> ${data.price},<br>
                 <b>Первый взнос :</b> ${data.first_pay},<br>
                 <b>Срок выплат :</b> ${data.period_pay}`
         };
@@ -56,7 +55,6 @@ export class EmailerModel {
         console.log('sending mail to: ' + mails);
 
         const time = data.wait_for_call === 'now' ? 'ожидает сейчас' : data.time;
-        const type = data.type === 'КВ' ? 'квартиры' : data.type === 'КЛ' ? 'кладовой' : 'машиноместа';
         let config = {
             mails,
             subject: 'Заявка на бронирование.',
@@ -64,8 +62,8 @@ export class EmailerModel {
                 <b>Имя :</b> ${data.name},<br>
                 <b>Телефон :</b> ${data.phone},<br>
                 <b>Время для звонка :</b> ${time},<br>
-                <b>Номер ${type} :</b> ${data.number},<br>
-                <b>Стоимость ${type} :</b> ${data.price},<br>`
+                <b>Номер квартиры :</b> ${data.number},<br>
+                <b>Стоимость квартиры :</b> ${data.price},<br>`
         };
         this.sendMail(config);
         return ({message: 'ok'});
@@ -73,10 +71,6 @@ export class EmailerModel {
 
     async mailsFind() {
         let mails = await this.collection.find({ type : 'mail', status: true }).toArray();
-        if (mails.length === 0) {
-            await this.collection.insert([{ type : 'mail', status: true, name: 'info@bsa-dom.ru' }]);
-            mails = await this.collection.find({ type : 'mail', status: true }).toArray();
-        }
         return mails.map((i) => i.name).join(', ');
     }
 
@@ -91,14 +85,14 @@ export class EmailerModel {
             port: 465,
             secure: true, // secure:true for port 465, secure:false for port 587
             auth: {
-                user: 'info@barvihadom.ru',
-                pass: '3red1986'
+                user: 'novotomilino@3-capital.ru',
+                pass: 'qwe91x'
             }
         });
 
         // setup email data with unicode symbols
         let mailOptions = {
-            from: 'info@barvihadom.ru', // sender address
+            from: 'novotomilino@3-capital.ru', // sender address
             to: config.mails, // list of receivers
             subject: config.subject, // Subject line
             // text: config.text, // plain text body

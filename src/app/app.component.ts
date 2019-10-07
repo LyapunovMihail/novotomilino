@@ -13,6 +13,7 @@ export const ROOT_SELECTOR = 'app-root';
   ],
   template: `
       <app-authorization></app-authorization>
+      <app-admin-contacts></app-admin-contacts>
 
       <section>
 

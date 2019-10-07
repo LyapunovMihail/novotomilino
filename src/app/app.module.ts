@@ -16,6 +16,7 @@ import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
+import { PhoneObserverService } from './admin-contacts/phone.observer.service';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { FlatsModule } from './flats/flats.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { ParkingModule } from './parking/parking.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
+import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -58,7 +60,8 @@ const APP_PROVIDERS = [
     FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
-    SearchFlatsLinkHandlerService
+    SearchFlatsLinkHandlerService,
+    PhoneObserverService
 ];
 
 const APP_MODULES = [
@@ -77,6 +80,7 @@ const APP_MODULES = [
     FavoritesModule,
     ParkingModule,
     StoreroomsModule,
+    AdminContactsModule,
 
   BrowserModule,
   BrowserAnimationsModule,
