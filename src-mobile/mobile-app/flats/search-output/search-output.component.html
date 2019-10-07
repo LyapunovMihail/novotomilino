@@ -1,52 +1,43 @@
 <ul class="result">
 
-    <li *ngFor="let flat of flatsList" class="result__item">
+    <li *ngFor="let flat of flatsList; let i = index" class="result__item">
 
-        <a class="result__item-wrap">
+        <a class="result__item-wrap" (click)="openApartmentModal(i)">
             <span class="result__wrap result__wrap_scheme">
-                <img class="result__scheme-content" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
+                <img class="result__scheme-content" 
+                    [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
+                    (error)="img.style.display = 'none'" #img>
+                    
+                <div class="result__scheme-error" *ngIf="img.style.display === 'none'"></div>
             </span>
             <div class="result__wrap">
-                <span class="result__text result__text_room">{{(flat.rooms < '1') ? 'Студия' : flat.rooms + ' комнатная'}}</span>
-                <span class="result__text result__text_corpus">Корпус</span>
-                <span class="result__text result__text_floor">Этаж</span>
-            </div>
-            <div class="result__wrap result__wrap_second">
-                <span class="result__text result__text_space">{{flat.space}} м&#178;</span>
-                <div class="result__wrap-price">
-                    <!-- Класс result__text_price-not-sale когда есть цена со скидкой -->
+
+                <div class="result__wrap result__wrap_head">
+                    <span class="result__text result__text_room">{{(flat.rooms < '1') ? 'Студия' : flat.rooms + ' комнатная'}}</span>
+                    <!-- Класс result__text_price-sale когда есть цена со скидкой -->
                     <p class="result__text result__text_price">{{flat.price | myBitNumberPipe}} &#8381;</p>
-                    <!-- <p class="result__text result__text_price result__text_price-sale">{{flat.price | myBitNumberPipe}} &#8381;</p> -->
+                </div>
+                <div class="result__wrap result__wrap_head result__wrap_head-bottom">
+                    <div class="result__wrap result__wrap_info">
+                        <span class="result__text result__text_flat">№{{flat.flat}}</span>
+                        <span class="result__text result__text_floor">Этаж {{flat.floor}}</span>
+                        <span class="result__text result__text_corpus">Дом {{flat.house}}</span>
+                    </div>
+                    <div class="result__wrap result__wrap_space">
+                        <span class="result__text result__text_space">{{flat.space}} м&#178;</span>
+                    </div>
                 </div>
             </div>
         </a>
-
-        <div class="to-favorites" (click)="toFavorite(flat)" [ngClass]="{'to-favorites_active': inFavorite(flat)}"></div>
-
-        <!-- <ul [ngClass]="{'result__request_active': showBtns === flat._id}" class="result__request">
-            <li (click)="flatDataForModalForm = flat; isReserveFormOpen = true; scrollLocker.block()" class="result__request-item">Забронировать</li>
-            <li (click)="flatDataForModalForm = flat; isCreditFormOpen = true; scrollLocker.block()" class="result__request-item">Заявка на ипотеку</li>
-            <li (click)="isCallFormOpen = true; scrollLocker.block()" class="result__request-item">Заказать звонок</li>
-        </ul> -->
-
-        <!-- <div (click)="showBtns = (showBtns === flat._id) ? '' : flat._id" class="result__btn"></div> -->
     </li>
 
 </ul>
 
-<!-- <app-form-call
-    (close)="isCallFormOpen = $event; scrollLocker.unblock()"
-    [isOpen]="isCallFormOpen">
-</app-form-call> -->
-<app-form-credit *ngIf="flatDataForModalForm"
-    (close)="isCreditFormOpen = $event; flatDataForModalForm = null; scrollLocker.unblock()"
-    [isOpen]="isCreditFormOpen"
-    [apartmentPrice]="flatDataForModalForm.price"
-    [apartmentNumber]="flatDataForModalForm.flat">
-</app-form-credit>
-<app-form-reserve *ngIf="flatDataForModalForm"
-    (close)="isReserveFormOpen = $event; flatDataForModalForm = null; scrollLocker.unblock()"
-    [isOpen]="isReserveFormOpen"
-    [apartmentPrice]="flatDataForModalForm.price"
-    [apartmentNumber]="flatDataForModalForm.flat">
-</app-form-reserve>
+<div class="result-gradient"></div>
+
+<app-modal-apartament *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="flatsList"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; scrollLocker.unblock()">
+</app-modal-apartament>

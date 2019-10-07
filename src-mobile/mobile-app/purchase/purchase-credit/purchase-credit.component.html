@@ -2,7 +2,7 @@
 
     <div class="credit__filter">
         <!-- Range input -->
-        
+<!--         
         <div class="credit__filter-checkbox">
             <div class="credit__filter-checkbox-item credit__filter-checkbox-war">
                 <input type="checkbox" name="type" id="war">
@@ -19,7 +19,7 @@
                 <label for="nation" class="g-checkbox"></label>
                 <label for="nation" class="credit__filter-checkbox-text">Гражданство РФ</label>
             </div>
-        </div>
+        </div> -->
 
         <button class="credit__filter-result" (click)="showBankList = true">
             <p class="credit__filter-result-text">Вам подходит 5 программ</p>
@@ -89,13 +89,13 @@
                             </div>
                             <div class="list-snippet__item-descr-info-item list-snippet__item-descr-payment">
                                 <p class="list-snippet__item-descr-text_s">Платеж в месяц</p>
-                                <p class="list-snippet__item-descr-text_b">—</p> <!-- Я так понял тут должно автоматом рассчитываться -->
+                                <p class="list-snippet__item-descr-text_b">—</p>
                             </div>
                         </div>
             
                     </div>
         
-                    <div class="admin-credit__check">
+                    <!-- <div class="admin-credit__check">
                         <label class="admin-credit__check-wrap" *ngIf="isAuthorizated">
                             <input class="admin-credit__check-checkbox"
                                 [checked]="(snippet.category == 'military')" 
@@ -107,7 +107,7 @@
                                 Военная ипотека
                             </div>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -20,6 +20,8 @@ export class SearchOutputComponent {
     public isReserveFormOpen: boolean = false;
     public showBtns: string;
     public flatDataForModalForm: IAddressItemFlat;
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
 
     public selectFlat = {
         house: '0',
@@ -49,5 +51,11 @@ export class SearchOutputComponent {
 
     public inFavorite(flat: IAddressItemFlat): boolean {
         return this.favoritesService.inFavorite(flat);
+    }
+
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.scrollLocker.block();
+        this.showApartmentWindow = true;
     }
 }
