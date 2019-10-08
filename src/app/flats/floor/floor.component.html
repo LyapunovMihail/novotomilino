@@ -27,7 +27,7 @@
 
         <div class="floor__description">
             <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="floor__description-scheme" *ngIf="floorSvg"></div>
-            <div class="floor-plan-error-description" *ngIf="!floorSvg">Изображение не доступно</div>
+            <div class="floor-plan-error-description" *ngIf="!floorSvg">Изображение недоступно</div>
         </div>
 
         <app-house-selector
