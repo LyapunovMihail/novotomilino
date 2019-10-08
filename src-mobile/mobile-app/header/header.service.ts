@@ -1,7 +1,5 @@
-import { adminHeaders } from './../commons/admin-headers.utilit';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 export interface IHeaderLink {
     name: string;
@@ -37,9 +35,6 @@ export class HeaderService {
             }, {
                 name: 'Новости',
                 url: '/news-shares'
-            }, {
-                name: 'Акции',
-                url: '/shares'
             }
         ];
     }
