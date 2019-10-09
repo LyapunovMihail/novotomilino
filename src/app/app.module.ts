@@ -82,14 +82,14 @@ const APP_MODULES = [
     StoreroomsModule,
     AdminContactsModule,
 
-  BrowserModule,
-  BrowserAnimationsModule,
-  FormsModule,
-  HttpClientModule,
-  RouterModule.forRoot(ROUTES, {
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES, {
     useHash: Boolean(history.pushState) === false,
     preloadingStrategy: PreloadAllModules
-  })
+    })
 ];
 
 interface StoreType {

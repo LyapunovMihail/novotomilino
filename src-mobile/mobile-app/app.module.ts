@@ -29,6 +29,7 @@ import { PurchaseModule } from './purchase/purchase.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { FlatsModule } from './flats/flats.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
+import { DecorationModule } from './decoration/decoration.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -63,6 +64,7 @@ const APP_MODULES = [
     NewsSharesModule,
     FavoritesModule,
     FlatsModule,
+    DecorationModule,
 
     BrowserModule,
     BrowserAnimationsModule,

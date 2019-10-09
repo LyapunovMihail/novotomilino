@@ -5,6 +5,7 @@ export const ROUTES: Routes = [
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule' },
     { path: 'news-shares', loadChildren : './news-shares/news-shares.module#NewsSharesModule' },
+    { path: 'decoration', loadChildren: './decoration/decoration.module#DecorationModule' },
     { path: 'location/routes', loadChildren : './routes/routes.module#RoutesModule' },
     { path: 'flats/search', loadChildren : './flats/flats.module#FlatsModule' },
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
