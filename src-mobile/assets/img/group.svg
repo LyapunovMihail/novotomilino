@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
-    <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
-        <circle cx="28" cy="28" r="28" fill="#CDA571" stroke="#CDA571"/>
-        <g stroke="#FFF" stroke-linecap="round" stroke-width="2">
-            <path d="M28 18.068v18.91"/>
-            <path stroke-linejoin="round" d="M34 31.5l-6 6M22 31.5l6 6"/>
-        </g>
-    </g>
-</svg>

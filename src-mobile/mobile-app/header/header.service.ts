@@ -28,7 +28,10 @@ export class HeaderService {
                 url: '/about'
             }, {
                 name: 'Расположение',
-                url: `/location`
+                url: `/location/routes`
+            }, {
+                name: 'Инфраструктура',
+                url: `/location/infrastructure`
             }, {
                 name: 'Квартиры',
                 url: `/flats`

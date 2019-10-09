@@ -17,6 +17,10 @@
         z-index: 999;
         opacity: 1;
         transition: opacity 0.7s;
+
+        .overlay_exit {
+            pointer-events: all;
+        }
     }
 }
 
@@ -26,6 +30,7 @@
     top: 25px;
     right: 25px;
     cursor: pointer;
+    pointer-events: none;
 }
 
 .overlay-nav {

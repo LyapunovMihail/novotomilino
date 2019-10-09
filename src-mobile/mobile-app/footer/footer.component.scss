@@ -1,88 +1,89 @@
-.footer {
+@import "../../styles/modules/mixins/mixin.scss";
 
-    position: absolute;
-    bottom: 0;
-    box-sizing: border-box;
-    padding: 0 25px;
+.footer {
     width: 100%;
     height: 50px;
-    background: #1c1c1c;
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    z-index: 100;
-
-    @media (max-width: 599px) {
-        padding: 0 20px;
-    }
-}
-
-.footer__developer {
-
-    display: block;
-    background: url('/assets/img/footer/troika.svg') no-repeat;
-    width: 208px;
-    height: 30px;
-    background-size: 100% 100%;
-}
-
-.footer__camera {
-
-    position: relative;
-    padding-left: 58px;
-    cursor: pointer;
-}
-
-.footer__camera:before {
-
-    content: '';
-    display: block;
-    width: 28px;
-    height: 33px;
+    border-top: 1px solid rgba(0, 1, 5, 0.1);
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 0;
     left: 0;
-    background: url('/assets/img/about/main/play.svg') no-repeat;
-    background-size: 100% 100%;
-    transition: 0.2s linear;
-}
-
-.footer__camera:hover:before {
-
-    background: url('/assets/img/about/main/play-hover.svg') no-repeat;
-    background-size: 100% 100%;
-}
-
-.footer__networks {
-
-    font-size: 16px;
-    line-height: 26px;
-    color: #fff;
     display: flex;
     justify-content: space-between;
-}
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 40px;
+    background: #fff;
 
-.footer__developers__topfloat {
+    &__dev-logo-link {
+        display: block;
+        width: 144px;
 
-    width: 102px;
-    height: 20px;
-    display: block;
-    background: url('/assets/img/footer/bg.png') no-repeat;
-    background-size: 100% 100%;
-    cursor: pointer;
-}
+        img {
+            width: 100%;
+        }
+    }
+    &__web {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        height: 30px;
+        transform: translate(-50%);
 
-@media (max-width: 599px) {
+        &-img {
+            margin: 0 10px 0 0;
+            backface-visibility: hidden;
+        }
+        &-link {
+            font: 500 16px/26px $font-mus;
+            @include font-smoothing;
+            backface-visibility: hidden;
+        }
+    }
+    &__social-list {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        font: 500 16px/11px $font-mus;
+        @include font-smoothing;
 
-    .footer__camera {
+        &-item {
+            margin: 0 10px 0 0;
+            display: flex;
+            align-items: center;
 
-        display: none;
+            &:last-child {
+                margin: 0 0 0 26px;
+            }
+        }
     }
 
-    .footer__developers__topfloat {
-        width: 20.8px;
-        margin-left: 15px;
-        background: url('/assets/img/footer/bg-small.svg') no-repeat;
+    @media (max-width: 1279px) {
+        padding: 0 30px;
+
+        .footer__web-link {
+            display: none;
+        }
+        .footer__social-list-item {
+            margin: 0 20px 0 0;
+
+            &:first-child {
+                display: none;
+            }
+            &:last-child {
+                margin: 0 0 0 16px;
+            }
+        }
+    }
+    @media(max-width: 767px) {
+        padding: 0 15px;
+
+        .footer__web {
+            display: none;
+        }
+        .footer__social-list-item:not(:last-child) {
+            display: none;
+        }
     }
 }

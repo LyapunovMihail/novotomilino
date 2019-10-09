@@ -22,7 +22,6 @@ import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
-import { RoutesModule } from './routes/routes.module';
 import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
@@ -30,6 +29,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { FlatsModule } from './flats/flats.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
 import { DecorationModule } from './decoration/decoration.module';
+import { LocationModule } from './location/location.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -55,7 +55,7 @@ const APP_MODULES = [
     //  ErrorPageModule,
     AuthorizationModule,
     HomeModule,
-    RoutesModule,
+    LocationModule,
     FooterModule,
     HeaderModule,
     DynamicModule,
