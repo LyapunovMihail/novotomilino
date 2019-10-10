@@ -6,7 +6,6 @@ import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, HostList
     styleUrls: ['./ghm-range-number.component.scss'],
     template: `
         <div class="ghm-range-number">
-            <span class="ghm-range-number-text">{{ min | ghmNumberPipe }}</span>
             <div class="ghm-slider ghm-range-number-slider">
                 <div [style.left]="newLeft + 'px'" (mousedown)="mouseDown($event)" class="ghm-runner ghm-range-number-runner"></div>
             </div>
