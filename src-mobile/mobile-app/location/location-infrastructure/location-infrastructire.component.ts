@@ -47,10 +47,10 @@ export class LocationInfrastructureComponent implements OnInit {
             // из маркер-конфига собираем массив маркеров
             markersConfig.forEach( ( item, index ) => {
                 that.markers[index] = {};
-                that.markers[index].click = true;
+                that.markers[index].click = false;
                 that.markers[index].type = item.type;
                 that.markers[index].marker = new ymaps.Placemark(item.coord, {
-                    iconContent: `<div id="marker-${index}" class="marker-content marker-content_active marker-content__${item.type}">${item.content}</div>`
+                    iconContent: `<div id="marker-${index}" class="marker-content marker-content__${item.type}">${item.content}</div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',
