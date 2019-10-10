@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 
 export const ROOT_SELECTOR = 'app-root';
-declare let $: any;
 
 @Component({
     selector: ROOT_SELECTOR,
@@ -29,19 +29,24 @@ declare let $: any;
 })
 export class AppComponent implements OnInit {
 
+    public previousUrl: string;
+    public currentUrl: string;
+
     constructor(
-        public appState: AppState
+        public appState: AppState,
+        private router: Router,
     ) {}
 
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);
+
+        this.router.events.subscribe((event) => {
+            if (!(event instanceof NavigationEnd)) {
+                return;
+            }
+            this.previousUrl = this.currentUrl;
+            this.currentUrl = this.router.url;
+            window.scrollTo(0, 0);
+        });
     }
 }
-
-/**
- * Please review the https://github.com/AngularClass/angular-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */

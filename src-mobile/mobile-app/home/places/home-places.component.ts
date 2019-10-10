@@ -47,18 +47,4 @@ export class HomePlacesComponent implements OnInit {
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
     }
-
-    public changeDescription(id, description) {
-        this.homeService.changeDescription(id, description).subscribe(
-            (data: IGallerySnippet[]) => this.gallerySlides = data,
-            (err) => console.log(err)
-        );
-    }
-
-    public changeName(id, name) {
-        this.homeService.changeName(id, name).subscribe(
-            (data: IGallerySnippet[]) => this.gallerySlides = data,
-            (err) => console.log(err)
-        );
-    }
 }

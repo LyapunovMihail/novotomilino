@@ -3,26 +3,30 @@
         <h1 class="main__place-title g-title-path">Места поблизости</h1>
     </div>
 
-    <div class="main__place-slider">
-        <div class="main__place-btn">
-            <button class="main__place-btn-prev" (click)="prevBtn()"></button>
-            <button class="main__place-btn-next" (click)="nextBtn()"></button>
-        </div>
+    <div class="gallery_content">
 
-        <div class="main__place-slider-wrap">
-            <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="main__place-slider-list">
-                <li *ngFor="let item of gallerySlides; let i = index" class="main__place-slider-item" [ngClass]="{'main__place-slider-item--active' : currentSlide === i}">
-                    <div class="main__place-slider-img">
-                        <img [src]="uploadsPath + item.image" alt="">
+        <div class="gallery_scroll-wrap">
+
+            <ul class="gallery_content_list">
+
+                <li *ngFor="let item of gallerySlides; let i = index"
+                    class="gallery_content_list_item">
+
+                    <img class="gallery_content_list_item_img" [src]="uploadsPath + item.thumbnail">
+
+                    <div class="gallery_content_list_item-descr">
+                        <div class="gallery_content_list_item-descr-group">
+                            <h1 class="gallery_content_list_item-title">{{item.name}}</h1>
+                            <p class="gallery_content_list_item-count">{{i + 1 < 10 ? '0' : ''}}{{i + 1}}/{{i + 1 < 10 ? '0' : ''}}{{gallerySlides.length}}</p>
+                        </div>
+                        <p class="gallery_content_list_item-text">{{item.description}}</p>
                     </div>
 
-                    <div class="main__place-slider-descr">
-                        <h1 class="main__place-slider-title">{{item.name}}</h1>
-                        <p class="main__place-slider-text">{{item.description}}</p>
-                        <p class="main__place-slider-count">{{i + 1 < 10 ? '0' : ''}}{{i + 1}}/{{i + 1 < 10 ? '0' : ''}}{{gallerySlides.length}}</p>
-                    </div>
                 </li>
+
             </ul>
+
         </div>
+
     </div>
 </section>
