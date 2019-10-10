@@ -1,14 +1,11 @@
-$font: 18px/31px 'Montserrat', sans-serif;
-$font2: 15px/19px 'Montserrat', sans-serif;
-$color: #2e2e2e;
-$color2: #1c1c1c;
-$color3: #cda571;
 @import "../../styles/modules/mixins/mixin.scss";
 
 .disabled-opacity {
     opacity: .3;
     pointer-events: none;
 }
+.span-block { display: block; }
+.span-black { color: $col-black }
 
 .purchase {
     width: 100%;
@@ -22,7 +19,7 @@ $color3: #cda571;
 
     &__container {
         width: calc(100% - 30px);
-        max-width: 768px;
+        max-width: 768px - 60px;
     }
     &__title {
         font: 30px/34px 'Leksa';
@@ -76,7 +73,7 @@ $color3: #cda571;
 
     &__filter {
         width: calc(100% - 30px);
-        max-width: 768px;
+        max-width: 768px - 60px;
         margin: 0 0 50px;
 
         &-checkbox {
@@ -140,7 +137,7 @@ $color3: #cda571;
 
         &-head {
             width: calc(100% - 30px);
-            max-width: 768px;
+            max-width: 768px - 60px;
             position: relative;
             margin: 30px 0;
 
@@ -165,7 +162,7 @@ $color3: #cda571;
         }
         &-snippet {
             width: calc(100% - 30px);
-            max-width: 768px;
+            max-width: 768px - 60px;
             overflow: hidden;
             &_scrll {
                 width: calc(100% + 20px);
@@ -284,31 +281,135 @@ $color3: #cda571;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    @media (min-width: 768px) {
+        width: 768px - 60px;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
 
     &__calculator {
         width: calc(100% - 30px);
-        max-width: 768px;
+        max-width: 768px - 60px;
+        @media (min-width: 768px) { width: 290px; }
 
         &-item {
+            width: 100%;
             margin: 0 0 40px;
+            box-sizing: border-box;
+
+            &_field {
+                display: flex;
+                justify-content: space-between;
+            }
         }
-        &-text {
+        &-text,
+        &-hint {
             @include fw14-20;
             color: rgba(0, 1, 5, 0.6);
+        }
+        &-field {
+            width: 100%;
+            @include fw18-24;
+            margin-bottom: 5px;
+            border: none;
+
+            &_percent {
+                text-align: right;
+                color: $col-black-6;
+            }
+        }
+
+        &-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+
+            &_field {
+                height: auto;
+                align-items: flex-start;
+            }
+        }
+        &-type { margin: 0 0 40px; }
+        &-select {
+            width: 290px;
+            height: 52px;
+            border-radius: 2px;
+            box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            padding: 0 34px 0 15px;
+            position: relative;
+            margin: 0 0 14px;
+            user-select: none;
+            cursor: pointer;
+            input {
+                @include fw18-24;
+                width: 100%;
+                height: 100%;
+                border: none;
+                padding: 0;
+                box-sizing: border-box;
+                pointer-events: none;
+                color: $col-black;
+            }
+            &:before {
+                content: '';
+                width: 20px;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 10px;
+                background: url(/assets/img/purchase/arrow.svg) center no-repeat;
+            }
+        }
+        &-tooltip {
+            width: 100%;
+            height: 130px;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            box-sizing: border-box;
+            padding: 16px;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            z-index: 1;
+            &_cls-area {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                z-index: -1;
+            }
+            p {
+                @include fw18-24;
+                transition: color .2s linear;
+                cursor: pointer;
+                &:hover { color: $col-orange; }
+            }
+            &_active { color: $col-orange !important; }
         }
     }
     &__result {
         width: 100%;
         padding: 20px 0 0;
         box-sizing: border-box;
-        border-top: 1px solid #999a9b;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
+        @media (min-width: 768px) {
+            width: 369px;
+            border-top: none;
+            border-left: 1px solid #999a9b;
+            padding: 0 0 0 30px;
+        }
 
         &-item {
             width: calc(100% - 30px);
-            max-width: 768px;
+            max-width: 768px - 60px;
             margin: 0 0 40px;
         }
         &-title {
@@ -321,75 +422,6 @@ $color3: #cda571;
             font: 500 36px/40px $font-mus;
             @include font-smoothing;
             color: $col-orange;
-        }
-    }
-}
-
-.credit_list {
-    display: flex;
-    flex-wrap: wrap;
-    width: 250px;
-
-    @media(min-width: 600px) {
-        width: 524px;
-    }
-
-    &_item {
-        width: 250px;
-        margin-bottom: 30px;
-        cursor: pointer;
-        transition: .2s linear;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        box-sizing: border-box;
-        position: relative;
-
-        @media(min-width: 600px) {
-
-            &:nth-child(2n-1) {
-                margin-right: 30px;
-            }
-        }
-
-        &_logo_wrap {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        &_logo {
-            height: 35px;
-        }
-
-        &_content {
-            font: $font2;
-            color: $color2;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-
-            &--margin {
-                margin-top: 6px;
-            }
-
-
-            &--military {
-                position: relative;
-                box-sizing: border-box;
-                margin-top: 7px;
-                padding-left: 27px;
-
-                &:before {
-                    content: '';
-                    width: 22px;
-                    height: 20.2px;
-                    position: absolute;
-                    left: 0;
-                    background: url('/assets/img/purchase/credit/star.svg') no-repeat;
-                    background-size: 100%; 
-                }
-            }
         }
     }
 }

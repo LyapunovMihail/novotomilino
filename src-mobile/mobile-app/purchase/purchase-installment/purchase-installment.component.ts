@@ -20,6 +20,13 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     public isFullPay: boolean = false;
 
+    public typeOne: string = 'Бесплатная рассрочка';
+    public typeTwo: string = 'Платная рассрочка';
+    public typeThree: string = '100% оплата';
+
+    public changeType = this.typeOne;
+    public showTypeInstallment: boolean = false;
+
     public form: FormParams = {
         price: {
             val : 2000000,
@@ -50,6 +57,16 @@ export class PurchaseInstallmentComponent implements OnInit {
     public formConvert ( ) {
         let values = this.srvc.values(this.form);
 
+        if (this.changeType === this.typeTwo) {
+            this.form.month.min = 7;
+            this.form.month.max = 24;
+            this.form.month.val <= this.form.month.min ? this.form.month.val = this.form.month.min : this.form.month.val = this.form.month.val;
+        } else {
+            this.form.month.val <= this.form.month.min ? this.form.month.val = this.form.month.min : this.form.month.val = this.form.month.val
+            this.form.month.min = 1;
+            this.form.month.max >= 6 ? this.form.month.max = 6 : this.form.month.max = this.form.month.max;
+        }
+
         // price
         if ( values.price.val < values.price.min ) {
             this.form.price.val = values.price.min;
@@ -71,6 +88,16 @@ export class PurchaseInstallmentComponent implements OnInit {
         this.form.firstpay.min = values.price.val / 2;
         this.form.firstpay.max = values.price.val;
 
+        // month
+        if (values.month.val < values.month.min) {
+            this.form.month.val = values.month.min;
+        } else {
+            this.form.month.val = values.month.val;
+        }
+        if (values.month.val > values.month.max) {
+            this.form.month.val = values.month.max;
+        }
+
         this.percent = this.srvc.getPercent( values.month.val );
 
         this.monthPay = this.getEveryMonth().toFixed(0);
@@ -85,7 +112,7 @@ export class PurchaseInstallmentComponent implements OnInit {
         let monthPrice;
         if ( this.percent > 0 ) {
             monthPrice = this.excelPMT(this.percent / (100 * 12), this.form.month.val, leftSum);
-        }else {
+        } else {
             monthPrice = leftSum / this.form.month.val;
         }
 
@@ -128,5 +155,20 @@ export class PurchaseInstallmentComponent implements OnInit {
             value = value.replace(rep, '');
             e.target.value = value;
         }
+    }
+
+    public acceptChange() {
+
+        this.formConvert();
+        this.showTypeInstallment = !this.showTypeInstallment;
+    }
+
+    public saleFullPay(num) {
+        const sale = num / 100 * 3;
+        return sale;
+    }
+    public firstpayPercent(payment, price) {
+        let percentPayment = (payment / price) * 100;
+        return percentPayment;
     }
 }

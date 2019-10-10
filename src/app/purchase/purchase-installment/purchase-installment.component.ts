@@ -19,6 +19,12 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     public isFullPay = false;
 
+    public typeInstallment: string = '';
+
+    public freeInstallment: string = 'Бесплатная рассрочка';
+    public payInstallment: string = 'Платная рассрочка';
+    public fullPay: string = '100% оплата';
+
     public form: FormParams = {
         price: {
             val : 2000000,
@@ -48,6 +54,16 @@ export class PurchaseInstallmentComponent implements OnInit {
 
     public formConvert( ) {
         const values = this.srvc.values(this.form);
+
+        if (this.typeInstallment === this.payInstallment) {
+            this.form.month.val <= this.form.month.min ? this.form.month.val = this.form.month.min : this.form.month.val = this.form.month.val;
+            this.form.month.min = 7;
+            this.form.month.max = 24;
+        } else {
+            this.form.month.val <= this.form.month.min ? this.form.month.val = this.form.month.min : this.form.month.val = this.form.month.val
+            this.form.month.min = 1;
+            this.form.month.max >= 6 ? this.form.month.max = 6 : this.form.month.max = this.form.month.max;
+        }
 
         // price
         if ( values.price.val < values.price.min ) {
@@ -130,5 +146,17 @@ export class PurchaseInstallmentComponent implements OnInit {
             value = value.replace(rep, '');
             e.target.value = value;
         }
+    }
+
+    public fullPaySale(price) {
+        return ((price / 100) * 3);
+    }
+    public fullPayPrice(price) {
+        let sale = ((price / 100) * 3);
+        return (price - sale);
+    }
+    public firstpayPercent(payment, price) {
+        let percentPayment = (payment / price) * 100;
+        return percentPayment;
     }
 }

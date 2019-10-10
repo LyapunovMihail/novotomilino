@@ -49,10 +49,16 @@ export class PurchaseInstallmentService {
     public getPercent(months) {
         if (months < 7 ) {
             return 0;
-        } else if (months >= 7 && months <= 10) {
-            return 11;
-        } else if (months >= 11 && months <= 14) {
-            return 13;
-        }
+        } else if (months >= 7 && months <= 9) {
+            return 6;
+        } else if (months >= 10 && months <= 12) {
+            return 7;
+        } else if (months >= 13 && months <= 15) {
+            return 8;
+        } else if (months >= 16 && months <= 18) {
+            return 9;
+        } else if (months >= 19 && months <= 21) {
+            return 10;
+        } else { return 11; }
     }
 }
