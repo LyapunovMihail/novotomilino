@@ -4,8 +4,9 @@
     box-sizing: border-box;
     position: relative;
     display: flex;
+    flex-flow: column nowrap;
 }
 
 .element-active {
-    min-width: 960px;
+    min-height: 85%;
 }

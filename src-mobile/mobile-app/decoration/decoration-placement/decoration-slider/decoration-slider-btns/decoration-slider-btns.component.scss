@@ -7,6 +7,12 @@
     bottom: 30px;
     right: 40px;
     z-index: 2;
+    @media (max-width: 767px) {
+        width: calc(100% - 30px);
+        justify-content: space-between;
+        right: 15px;
+        bottom: 18px;
+    }
 
     &-counter {
         font: 54px/58px $font-mus;
@@ -16,7 +22,7 @@
 
         span:last-child { font: 18px/21px $font-mus; }
     }
-
+    &-wrap { display: flex; }
     &-item {
         width: 40px;
         height: 40px;
