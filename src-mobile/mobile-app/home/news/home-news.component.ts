@@ -26,7 +26,7 @@ export class HomeNewsComponent implements OnInit {
 
     public currentSlide: number = 0;
 
-    public isShowModalAdmin: boolean = false;
+    public slideWidth: number;
 
     public mainSnippets: any[];
 
@@ -42,18 +42,22 @@ export class HomeNewsComponent implements OnInit {
 
     public ngOnInit() {
         this.mainSnippets = this.allSnippets;
+
+        if (document.documentElement.clientWidth < 340 || window.innerWidth < 340) {
+            this.slideWidth = document.documentElement.clientWidth - 20 || window.innerWidth - 20;
+        } else {
+            this.slideWidth = 320;
+        }
     }
 
     public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 3 ) ? this.currentSlide + 1 : this.mainSnippets.length - 3;
+        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ? this.currentSlide + 1 : this.mainSnippets.length - 1;
         const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
-        this.setSlidesOpacity(snippets);
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
         const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
-        this.setSlidesOpacity(snippets);
     }
 
     // установка опасити для анимации слайдов
@@ -72,7 +76,6 @@ export class HomeNewsComponent implements OnInit {
         this.activeSnippets = activeSnippets;
         this.currentSlide = 0;
 
-        this.setSlidesOpacity(snippets);
     }
 
     public parseDate(createdAt) {

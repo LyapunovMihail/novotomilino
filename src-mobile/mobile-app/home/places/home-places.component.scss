@@ -19,6 +19,10 @@
             @include font-smoothing;
             color: $col-black;
             margin: 120px 0 40px;
+
+            @media(min-width: 767px) {
+                width: calc(100% - 60px);
+            }
         }
     }
 }
@@ -27,14 +31,14 @@
 
     &_content {
         width: 100%;
-        height: calc(50.7vw + 60px);
-        max-height: 364px;
+        height: calc(50.7vw);
+        max-height: 333px;
         overflow: hidden;
 
         &_list {
             display: inline-block;
             box-sizing: border-box;
-            height: calc(50.7vw + 60px);
+            height: calc(50.7vw + 147px);
             max-height: 333px;
             white-space: nowrap;
             letter-spacing: -.36em;
@@ -50,7 +54,7 @@
             &_item {
                 display: inline-block;
                 width: 90vw;
-                max-width: 540px;
+                max-width: 615px;
                 height: 100%;
                 position: relative;
                 letter-spacing: normal;
@@ -68,7 +72,7 @@
                 }
 
                 &_img {
-                    height: calc(100% - 60px);
+                    height: calc(100%);
                     width: 100%;
                     object-fit: cover;
                 }
@@ -84,11 +88,12 @@
                 &-descr {
                     display: flex;
                     flex-direction: row;
-                    margin: 20px 0 0;
+                    margin: 20px 30px 0;
                     justify-content: space-between;
 
                     @media(max-width: 767px) {
                         flex-direction: column;
+                        margin: 20px 15px 0;
                     }
 
                     &-group {

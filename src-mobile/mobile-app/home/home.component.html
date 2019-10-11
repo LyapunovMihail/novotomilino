@@ -46,6 +46,12 @@
 
     <app-home-places></app-home-places>
 
+    <app-home-news *ngIf="newsLoaded"
+        [newsSnippets]="newsSnippets"
+        [shareSnippets]="shareSnippets"
+        [allSnippets]="allSnippets">
+    </app-home-news>
+
     <section class="home__news">
         <div class="home__news-wrap">
             <h1 class="home__news-title g-title-path">Новости</h1>

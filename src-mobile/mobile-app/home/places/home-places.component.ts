@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EnumGallerySnippet, GALLERY_UPLOADS_PATH, IGallerySnippet } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { HomeService } from '../home.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import set = Reflect.set;
 
 @Component({
     selector: 'app-home-places',
@@ -14,13 +15,20 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
     ]
 })
 
-export class HomePlacesComponent implements OnInit {
+export class HomePlacesComponent implements OnInit, AfterViewInit {
 
     public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
 
-    public currentSlide: number = 0;
-
     public gallerySlides: IGallerySnippet[];
+
+    public slide = 1;
+
+    public imgWidth: number;
+
+    public marginRight: number;
+
+    @ViewChild('img')
+    public img: ElementRef;
 
     constructor(
         public platform: PlatformDetectService,
@@ -40,11 +48,15 @@ export class HomePlacesComponent implements OnInit {
         );
     }
 
-    public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.gallerySlides.length - 1 ) ? this.currentSlide + 1 : this.gallerySlides.length - 1;
+    public ngAfterViewInit() {
+        setTimeout(() => {
+            this.imgWidth = this.img.nativeElement.clientWidth;
+            this.marginRight = Number(getComputedStyle(this.img.nativeElement).marginRight.slice(0, -2));
+        }, 300);
     }
 
-    public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
+    public scroll(event) {
+        const scrollLeft = event.target.scrollLeft;
+        this.slide = Math.ceil((scrollLeft - (this.imgWidth + this.marginRight) / 2.5) / (this.imgWidth + this.marginRight)) + 1; // рассчитываем кол-во проскроленных слайдов
     }
 }
