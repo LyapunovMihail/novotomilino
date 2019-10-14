@@ -9,7 +9,6 @@ import { PlatformDetectService } from '../platform-detect.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['home.component.scss'],
     providers: [
         PlatformDetectService,
         HomeService

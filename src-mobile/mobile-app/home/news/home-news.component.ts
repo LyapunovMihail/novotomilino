@@ -1,7 +1,6 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import {Share, SHARES_UPLOADS_PATH} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-declare let $: any;
 import * as moment from 'moment';
 
 @Component({
@@ -19,10 +18,6 @@ export class HomeNewsComponent implements OnInit {
     public newsUploadsPath: string = `/${NEWS_UPLOADS_PATH}`;
 
     public sharesUploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
-
-    public isAuthorizated: boolean = false ;
-
-    public AuthorizationEvent;
 
     public currentSlide: number = 0;
 
@@ -43,32 +38,21 @@ export class HomeNewsComponent implements OnInit {
     public ngOnInit() {
         this.mainSnippets = this.allSnippets;
 
-        if (document.documentElement.clientWidth < 340 || window.innerWidth < 340) {
-            this.slideWidth = document.documentElement.clientWidth - 20 || window.innerWidth - 20;
+        if (document.documentElement.clientWidth < 370 || window.innerWidth < 370) {
+            this.slideWidth = document.documentElement.clientWidth - 15 || window.innerWidth - 15;
+        } else if (document.documentElement.clientWidth < 767 || window.innerWidth < 767) {
+            this.slideWidth = 340 + 15;
         } else {
-            this.slideWidth = 320;
+            this.slideWidth = 340 + 30;
         }
     }
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ? this.currentSlide + 1 : this.mainSnippets.length - 1;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
-        const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
-    }
-
-    // установка опасити для анимации слайдов
-    private setSlidesOpacity(snippets) {
-        snippets.forEach((item, index) => {
-            if (index < this.currentSlide || index > this.currentSlide + 2) {
-                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events'] : 'none'});
-            } else {
-                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events'] : 'unset'});
-            }
-        });
     }
 
     public changeSnippets(snippets, activeSnippets) {

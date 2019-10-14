@@ -1,44 +1,9 @@
 <section class="home">
 
-    <section class="home__preview">
-        <div class="home__preview-wrap home__preview-wrap_slider">
-
-            <div class="home__preview-controls">
-                <p class="home__preview-count">
-                    <span>01</span>/<span class="home__preview-count_span">04</span>
-                </p>
-
-                <div class="home__preview-btns">
-                    <button class="home__preview-btn home__preview-btn_prev"></button>
-                    <button class="home__preview-btn home__preview-btn_next"></button>
-                </div>
-            </div>
-
-            <!-- <div class="home__preview-slider"></div> -->
-
-            <div class="home__preview-slider-descr">
-                <h1 class="home__preview-slider-title g-title-path">Далеко-далеко за словесными горами</h1>
-                <p class="home__preview-slider-text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Rem rerum fugit, consectetur esse ipsam perspiciatis laudantium assumenda.
-                </p>
-            </div>
-        </div>
-
-        <div class="home__preview-wrap home__preview-wrap_news">
-
-            <div class="home__preview-stock">
-                <h1 class="home__preview-stock-title">Акция</h1>
-                <a class="g-link_white" href="#">Рассрочка от застройщика</a>
-                <p class="home__preview-stock-paragraf">До конца акции 60 дней</p>
-            </div>
-            <div class="home__preview-news">
-                <h1 class="home__preview-news-title">Новость</h1>
-                <a class="g-link_white" href="#">Получено разрешение на ввод <span>по 4 дому!</span></a>
-            </div>
-        </div>
-
-    </section>
+    <app-home-preview *ngIf="newsLoaded"
+        [newsSnippets]="mainNews"
+        [shareSnippets]="mainShares">
+    </app-home-preview>
 
     <app-home-trigger></app-home-trigger>
 
@@ -52,22 +17,6 @@
         [allSnippets]="allSnippets">
     </app-home-news>
 
-    <section class="home__news">
-        <div class="home__news-wrap">
-            <h1 class="home__news-title g-title-path">Новости</h1>
-            <div class="home__news-nav">
-                <ul class="home__news-list">
-                    <li class="home__news-list-item home__news-list-item_active">Все</li>
-                    <li class="home__news-list-item">Новости</li>
-                    <li class="home__news-list-item">Акции</li>
-                </ul>
-                <div class="home__news-btn">
-                    <button class="home__news-btn-item home__news-prev"></button>
-                    <button class="home__news-btn-item home__news-next"></button>
-                </div>
-            </div>
-        </div>
-    </section>
 </section>
 
 <!-- <app-scroll-up></app-scroll-up> -->

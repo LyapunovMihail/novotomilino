@@ -1,6 +1,6 @@
 <section class="main__news" *ngIf="allSnippets.length">
 
-    <div class="main__container">
+    <div class="main__news-wrap">
         <h1 class="main__news-title g-title-path">Новости</h1>
         <div class="main__news-nav">
             <ul class="main__news-list">
@@ -18,7 +18,7 @@
     <div class="main__news-slider">
 
         <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'all'">
-            <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( this.slideWidth + 30 ) ) + 'px)') }">
+            <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * this.slideWidth ) + 'px)') }">
                 <li class="main__news-slider-item" *ngFor="let item of allSnippets; let i = index" id="slider-item-{{i}}">
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id" *ngIf="item.thumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail">

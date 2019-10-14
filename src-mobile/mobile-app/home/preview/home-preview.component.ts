@@ -3,8 +3,7 @@ import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.
 import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
 import {
-    EnumGallerySnippet,
-    GALLERY_UPLOADS_PATH,
+    EnumGallerySnippet, GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { HomeService } from '../home.service';
@@ -72,21 +71,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
     }
 
     public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
-    }
-
-    public changeDescription(id, description) {
-        this.homeService.changeDescription(id, description).subscribe(
-            (data: IGallerySnippet[]) => this.gallerySlides = data,
-            (err) => console.log(err)
-        );
-    }
-
-    public changeName(id, name) {
-        this.homeService.changeName(id, name).subscribe(
-            (data: IGallerySnippet[]) => this.gallerySlides = data,
-            (err) => console.log(err)
-        );
+        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
     }
 
     prepareMainNewsSnippets() {
@@ -120,6 +105,8 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             });
             this.sharesSlider(this.shareSnippets);
         }
+
+        console.log('this.newsSnippets: ', this.newsSnippets);
     }
 
     public countDown(finishDate) {
