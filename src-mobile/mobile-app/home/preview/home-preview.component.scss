@@ -215,6 +215,7 @@
 
             @media (max-width: 767px) {
                 padding: 5px 0 0 33px;
+                width: 97%;
             }
 
             &--active {
@@ -252,7 +253,7 @@
                 @media(max-width: 767px) {
                     color: $col-black;
                     &:not(.home__preview-news-title) {
-                        width: 30%;
+                        width: 27%;
                         order: 1;
                     }
                 }
@@ -275,7 +276,7 @@
                     color: $col-black;
                     &:not(.home__preview-news-paragraf) {
                         text-align: right;
-                        width: 64%;
+                        width: 70%;
                         order: 2;
                     }
                 }
