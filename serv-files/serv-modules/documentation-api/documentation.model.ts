@@ -66,9 +66,11 @@ export class DocumentationModel {
         let _id = req.headers.id;
         let path = FILEUPLOADS_UPLOADS_PATH;
         let fileName: any = await fileSaver(req, path);
+        const date = new Date();
         let snippet: IDocumentationUploadItem = {
             name: fileName,
-            originalName: req.files['file'].originalFilename
+            originalName: req.files['file'].originalFilename,
+            created_at: date
         };
         await this.collection.updateOne({_id: ObjectId(_id)}, {$push: {uploads: snippet}});
         return await this.getObjects();

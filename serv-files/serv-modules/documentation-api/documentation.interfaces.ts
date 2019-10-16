@@ -9,6 +9,7 @@ export interface IDocumentationItem {
 export interface IDocumentationUploadItem {
     name: string;
     originalName: string;
+    created_at: any;
 }
 
 export interface IDocumentationDescription {

@@ -1,9 +1,8 @@
 import { AboutDocumentationService } from './about-documentation.service';
 import { FILEUPLOADS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/fileuploads-api/fileuploads.interfaces';
 import { IDocumentationItem, IDocumentationDescription } from '../../../../serv-files/serv-modules/documentation-api/documentation.interfaces';
-import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
-import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-about-documentation',
@@ -15,21 +14,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutDocumentationComponent implements OnInit {
 
-    public AuthorizationEvent: Subscription;
-    public isAuthorizated: boolean;
     public objectsList;
     public uploadsPath: string = FILEUPLOADS_UPLOADS_PATH;
     public description: string;
 
     constructor(
-        private authorization: AuthorizationObserverService,
         private docsService: AboutDocumentationService
     ) { }
 
     public ngOnInit() {
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
-            this.isAuthorizated = val;
-        });
+        moment.locale('ru');
         this.getObjects();
         this.getHeaderDescription();
     }
@@ -46,6 +40,10 @@ export class AboutDocumentationComponent implements OnInit {
         }, (err) => {
             console.log(err);
         });
+    }
+
+    public parseDate(createdAt) {
+        return moment(createdAt).format('L');
     }
 
 }

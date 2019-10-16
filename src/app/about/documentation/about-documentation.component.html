@@ -61,17 +61,16 @@
                             *ngIf="isAuthorizated"
                             (click)="deleteFile(object._id, file)"> Удалить
                         </div>
-                        <!-- При стабильной версии исправить ссылку -->
                         <div class="documentation__object-link">
                             <a class="g-link_red documentation__object-name-file"
                                [ngClass]="{'documentation__object-link_admin': isAuthorizated}"
                                target="_blank"
-                               
+
                                [href]="'/' + uploadsPath + file.name"
                                [attr.download]="file.originName">
                                 {{file.originalName}}
                             </a>
-                            <p class="documentation__object-date">21.12.2019</p> <!-- Тут должна выставляться дата загрузки документа -->
+                            <p class="documentation__object-date">{{parseDate(file.created_at)}}</p> <!-- Тут должна выставляться дата загрузки документа -->
                         </div>
                     </li>
                 </ul>

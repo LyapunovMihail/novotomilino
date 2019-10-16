@@ -5,6 +5,7 @@ import { IDocumentationItem, IDocumentationDescription } from '../../../../serv-
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-about-documentation',
@@ -36,6 +37,7 @@ export class AboutDocumentationComponent implements OnInit {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
+        moment.locale('ru');
         this.getObjects();
         this.getHeaderDescription();
     }
@@ -104,9 +106,14 @@ export class AboutDocumentationComponent implements OnInit {
     private getObjects() {
         this.docsService.getObjects.subscribe((data: IDocumentationItem[]) => {
             this.objectsList = data;
+            console.log('this.objectsList: ', this.objectsList);
         }, (err) => {
             console.log(err);
         });
+    }
+
+    public parseDate(createdAt) {
+        return moment(createdAt).format('L');
     }
 
 }
