@@ -10,6 +10,6 @@ export class PurchaseCreditService {
     constructor( private http: HttpClient ) { }
 
     public getSnippet(): Observable<ICreditSnippet[]> {
-        return this.http.get<ICreditSnippet[]>('/api/credit');
+        return this.http.get<ICreditSnippet[]>('/api/credit/active');
     }
 }

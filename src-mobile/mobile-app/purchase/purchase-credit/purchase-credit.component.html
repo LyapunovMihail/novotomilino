@@ -2,7 +2,7 @@
 
     <div class="credit__filter">
         <!-- Range input -->
-<!--         
+<!--
         <div class="credit__filter-checkbox">
             <div class="credit__filter-checkbox-item credit__filter-checkbox-war">
                 <input type="checkbox" name="type" id="war">
@@ -35,56 +35,39 @@
         </div>
         <div class="credit__list-snippet">
             <div class="credit__list-snippet_scrll">
-                <div *ngFor="let snippet of snippetArray" class="list-snippet__item list-snippet__item_sber">
+                <div *ngFor="let snippet of snippetArray" class="list-snippet__item list-snippet__item_{{snippet.cssclass}}">
         
                     <div class="list-snippet__item-wrap">
                         <div class="list-snippet__item-logo">
                             <img class="list-snippet__item-logo-img" 
                                 *ngIf="snippet.image.length > 0"
-                                 [src]="uploadsPath + snippet.image"
+                                 [src]="snippet.image"
                             /> <!-- Картинка должна подгружаться в зависимости от выбранного банка из списка -->
                         </div>
-                        <p class="list-snippet__item-logo-text">Сбербанк</p> <!-- Название банка должно будет подгружаться -->
+                        <p class="list-snippet__item-logo-text">{{snippet.name}}</p> <!-- Название банка должно будет подгружаться -->
                     </div>
     
                     <div class="list-snippet__item-descr">
                         <div class="list-snippet__item-descr-name">
-                            <p class="list-snippet__item-descr-text_b">Минимальный взнос 
-                                <span [ngClass]="{'list-snippet__item-descr_input' : isAuthorizated}">
-                                    <span [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
-                                        [attr.contenteditable]="isAuthorizated"
-                                        (blur)="updateSnippet(snippet._id, 'initial', $event.target.innerHTML)">
-                                        {{snippet.initial}}
-                                    </span>
-                                    <span>%</span>
-                                </span>
+                            <p class="list-snippet__item-descr-text_b">Минимальный взнос от
+                                <span>{{snippet.initial}} %</span>
                             </p>
                         </div>
                         <div class="list-snippet__item-descr-info">
-                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-ante"
-                                 [ngClass]="{'admin-credit__input-area' : isAuthorizated}">
+                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-ante">
                                 <p class="list-snippet__item-descr-text_s">Ставка</p>
                                 <p class="list-snippet__item-descr-text_b">
-                                    <span class="list-snippet__item-descr_ante-input"
-                                        [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
-                                        [attr.contenteditable]="isAuthorizated"
-                                        (blur)="updateSnippet(snippet._id, 'percent', $event.target.innerHTML)">
-                                        {{snippet.percent}}
+                                    <span class="list-snippet__item-descr_ante-input">
+                                        {{snippet.percent}} %
                                     </span>
-                                    <span>%</span>
                                 </p>
                             </div>
-                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-date"
-                                 [ngClass]="{'admin-credit__input-area' : isAuthorizated}">
+                            <div class="list-snippet__item-descr-info-item list-snippet__item-descr-date">
                                 <p class="list-snippet__item-descr-text_s">Срок до</p>
                                 <p class="list-snippet__item-descr-text_b">
-                                    <span class="list-snippet__item-descr_date-input"
-                                        [ngClass]="{'admin-credit__input-text' : isAuthorizated}"
-                                        [attr.contenteditable]="isAuthorizated"
-                                        (blur)="updateSnippet(snippet._id, 'percent', $event.target.innerHTML)">
-                                        {{snippet.percent}}
+                                    <span class="list-snippet__item-descr_date-input">
+                                        {{snippet.deadline}} %
                                     </span>
-                                    <span> %</span>
                                 </p>
                             </div>
                             <div class="list-snippet__item-descr-info-item list-snippet__item-descr-payment">
@@ -94,20 +77,6 @@
                         </div>
             
                     </div>
-        
-                    <!-- <div class="admin-credit__check">
-                        <label class="admin-credit__check-wrap" *ngIf="isAuthorizated">
-                            <input class="admin-credit__check-checkbox"
-                                [checked]="(snippet.category == 'military')" 
-                                type="checkbox" 
-                                (change)="updateSnippet(snippet._id, 'category', ((snippet.category == 'military')?'base':'military'))"
-                            />
-                            <div class="g-checkbox"></div>
-                            <div class="admin-credit__check-text">
-                                Военная ипотека
-                            </div>
-                        </label>
-                    </div> -->
                 </div>
             </div>
         </div>

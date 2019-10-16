@@ -1,7 +1,6 @@
 import { ICreditSnippet, CREDIT_UPLOADS_PATH } from '../../../../serv-files/serv-modules/credit-api/credit.interfaces';
 import { PurchaseCreditService } from './purchase-credit.service';
-import { AuthorizationObserverService } from './../../authorization/authorization.observer.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-purchase-credit',
@@ -12,34 +11,24 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
     ]
 })
 
-export class PurchaseCreditComponent implements OnInit, OnDestroy {
-
-    public isAuthorizated: boolean = false;
+export class PurchaseCreditComponent implements OnInit {
 
     public snippetArray: ICreditSnippet[] = [];
 
     public uploadsPath: string = `/${CREDIT_UPLOADS_PATH}`;
 
-    public AuthorizationEvent;
-
     public showBankList: boolean = false;
 
     constructor(
-        private authorization: AuthorizationObserverService,
-        private service: PurchaseCreditService
+        private creditService: PurchaseCreditService
     ) { }
 
     public ngOnInit() {
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => this.isAuthorizated = val );
-        this.service.getSnippet().subscribe(
+        this.creditService.getSnippet().subscribe(
             (data) => this.snippetArray = data,
             (error) => {
                 console.error(error);
             }
         );
-    }
-
-    public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
     }
 }

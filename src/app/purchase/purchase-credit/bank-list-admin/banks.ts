@@ -5,11 +5,6 @@ export const BANKS: Banks[] = [
         image: '/assets/img/purchase/credit/sberb_logo_bage.svg'
     },
     {
-        name: 'Альфа-Банк',
-        cssclass: 'alfa',
-        image: '/assets/img/purchase/credit/alfa_logo_bage.svg'
-    },
-    {
         name: 'ВТБ',
         cssclass: 'vtb',
         image: '/assets/img/purchase/credit/vtb_logo_bage.svg'
@@ -20,11 +15,6 @@ export const BANKS: Banks[] = [
         image: '/assets/img/purchase/credit/raif_logo_bage.svg'
     },
     {
-        name: 'Почта Банк',
-        cssclass: 'pocht',
-        image: '/assets/img/purchase/credit/pocht_logo_bage.jpg'
-    },
-    {
         name: 'ВОЗРОЖДЕНИЕ БАНК',
         cssclass: 'ress',
         image: '/assets/img/purchase/credit/ress_logo_bage.jpg'
@@ -33,11 +23,6 @@ export const BANKS: Banks[] = [
         name: 'УРАЛСИБ БАНК',
         cssclass: 'ural',
         image: '/assets/img/purchase/credit/ural_logo_bage.svg'
-    },
-    {
-        name: 'Тинькофф',
-        cssclass: 'tink',
-        image: '/assets/img/purchase/credit/tink_logo_bage.jpg'
     },
     {
         name: 'Открытие',
@@ -57,7 +42,7 @@ export const BANKS: Banks[] = [
     {
         name: 'БАНК ЗЕНИТ',
         cssclass: 'zenit',
-        image: '/assets/img/purchase/credit/zenit_logo_bage.jpg'
+        image: '/assets/img/purchase/credit/zenit_logo_bage.svg'
     },
     {
         name: 'РоссельхозБанк',
@@ -72,12 +57,12 @@ export const BANKS: Banks[] = [
     {
         name: 'ТрансКапиталБанк',
         cssclass: 'capital',
-        image: '/assets/img/purchase/credit/capital_logo_bage.jpg'
+        image: '/assets/img/purchase/credit/capital_logo_bage.svg'
     },
     {
         name: 'ПСБ',
         cssclass: 'psb',
-        image: '/assets/img/purchase/credit/psb_logo_bage.jpg'
+        image: '/assets/img/purchase/credit/psb_logo_bage.svg'
     },
     {
         name: 'Абсолют Банк',

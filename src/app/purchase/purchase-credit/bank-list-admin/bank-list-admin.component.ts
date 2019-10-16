@@ -27,21 +27,9 @@ export class BankListAdminComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.creditService.getAllSnippet().subscribe(
-            (data) => {
-                this.snippetArray = data;
-
-                if (this.snippetArray.length) {
-                    return;
-                }
-                this.creditService.setSnippet(this.banks).subscribe(
-                    (snippets) => this.snippetArray = snippets,
-                    (error) => console.error(error)
-                );
-            },
-            (error) => {
-                console.error(error);
-            }
+        this.creditService.setSnippet(this.banks).subscribe(
+            (snippets) => this.snippetArray = snippets,
+            (error) => console.error(error)
         );
     }
 

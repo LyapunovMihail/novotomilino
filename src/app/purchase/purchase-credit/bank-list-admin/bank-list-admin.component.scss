@@ -87,159 +87,133 @@
                     justify-content: center;
                 }
 
-                &_sber {
-                    &:before {
-                        top: -8px;
-                        height: 46px;
-                        background: url('/assets/img/purchase/credit/sberb_logo.svg') no-repeat;
-                        background-size: 49px 46px;
-                    }
+                &_sber:before {
+                    top: -8px;
+                    height: 46px;
+                    background: url('/assets/img/purchase/credit/sberb_logo.svg') no-repeat;
+                    background-size: 49px 46px;
                 }
-                &_alfa {
-                    &:before {
-                        height: 49px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/alfa_logo.svg') no-repeat;
-                        background-size: 49px 50px;
-                    }
+                &_alfa:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/alfa_logo.svg') no-repeat;
+                    background-size: 49px 50px;
                 }
-                &_vtb {
-                    &:before {
-                        height: 31px;
-                        top: 0;
-                        background: url('/assets/img/purchase/credit/vtb_logo.svg') no-repeat;
-                        background-size: 49px 31px;
-                    }
+                &_vtb:before {
+                    height: 31px;
+                    top: 0;
+                    background: url('/assets/img/purchase/credit/vtb_logo.svg') no-repeat;
+                    background-size: 49px 31px;
                 }
-                &_raif {
-                    &:before {
-                        height: 50px;
-                        top: -10px;
-                        background: url('/assets/img/purchase/credit/raif_logo.svg') no-repeat;
-                        background-size: 50px 50px;
-                    }
+                &_raif:before {
+                    height: 50px;
+                    top: -10px;
+                    background: url('/assets/img/purchase/credit/raif_logo.svg') no-repeat;
+                    background-size: 50px 50px;
                 }
-                &_ural {
-                    &:before {
-                        height: 49px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/ural_logo.svg') no-repeat;
-                        background-size: 49px 50px;
-                    }
+                &_ural:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/ural_logo.svg') no-repeat;
+                    background-size: 49px 50px;
                 }
-                &_pocht {
-                    &:before {
-                        height: 24px;
-                        top: 5px;
-                        background: url('/assets/img/purchase/credit/pocht_logo.svg') no-repeat;
-                        background-size: 100%;
-                    }
+                &_pocht:before {
+                    height: 24px;
+                    top: 5px;
+                    background: url('/assets/img/purchase/credit/pocht_logo.svg') no-repeat;
+                    background-size: 100%;
                 }
-                &_ress {
-                    &:before {
-                        height: 50px;
-                        top: -8px;
-                        background: url('/assets/img/purchase/credit/ress_logo.svg') no-repeat;
-                        background-size: 50px;
-                    }
+                &_ress:before {
+                    height: 50px;
+                    top: -8px;
+                    background: url('/assets/img/purchase/credit/ress_logo.svg') no-repeat;
+                    background-size: 50px;
                 }
-                &_tink {
-                    &:before {
-                        height: 45px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/tink_logo.svg') no-repeat;
-                        background-size: 45px 50px;
-                    }
+                &_tink:before {
+                    height: 45px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/tink_logo.svg') no-repeat;
+                    background-size: 45px 50px;
                 }
-                &_open {
-                    &:before {
-                        height: 50px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/open_logo.svg') no-repeat;
-                        background-size: 50px;
-                    }
+                &_open:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/open_logo.svg') no-repeat;
+                    background-size: 50px;
                 }
-                &_dom {
-                    &:before {
-                        height: 49px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/dom_logo.svg') no-repeat;
-                        background-size: 49px 50px;
-                    }
+                &_dom:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/dom_logo.svg') no-repeat;
+                    background-size: 49px 50px;
                 }
-                &_iron {
-                    &:before {
-                        height: 49px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/iron_logo.svg') no-repeat;
-                        background-size: 49px 50px;
-                    }
+                &_iron:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/iron_logo.svg') no-repeat;
+                    background-size: 49px 50px;
                 }
-                &_zenit {
-                    &:before {
+                &_zenit:before {
                         width: 38px;
-                        height: 58px;
-                        left: 17px;
-                        right: auto;
-                        bottom: -10px;
-                        background: url('/assets/img/purchase/credit/zenit_logo.svg') no-repeat;
-                        background-size: 33px 58px;
-                    }
+                    height: 58px;
+                    left: 17px;
+                    right: auto;
+                    bottom: -10px;
+                    background: url('/assets/img/purchase/credit/zenit_logo.png') no-repeat;
+                    background-size: 33px 58px;
                 }
-                &_ross {
-                    &:before {
-                        height: 50px;
-                        top: -5px;
-                        background: url('/assets/img/purchase/credit/ross_logo.svg') no-repeat;
-                        background-size: 50px 50px;
-                    }
+                &_ross:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/ross_logo.svg') no-repeat;
+                    background-size: 50px 50px;
                 }
                 &_rossBank:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/rossBank_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/rossBank_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_capital:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/capital_logo_bage.svg') no-repeat;
+                    background: url('/assets/img/purchase/credit/capital_logo.png') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_psb:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/psb_logo_bage.svg') no-repeat;
+                    background: url('/assets/img/purchase/credit/psb_logo.png') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_absolute:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/absolute_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/absolute_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_gasprom:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/gasprom_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/gasprom_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_sovcom:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/sovcom_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/sovcom_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_svazBank:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/svazBank_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/svazBank_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
                 &_bankRussia:before {
                     height: 50px;
                     top: -5px;
-                    background: url('/assets/img/purchase/credit/bankRussia_logo_bage.jpg') no-repeat;
+                    background: url('/assets/img/purchase/credit/bankRussia_logo.jpg') no-repeat;
                     background-size: 50px 50px;
                 }
             }

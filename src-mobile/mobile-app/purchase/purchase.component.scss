@@ -30,6 +30,14 @@
     &__descr {
         @include fw18-24;
         margin: 0 0 40px;
+
+        :last-child {
+            @include f16-24;
+            margin-top: 5px;
+            @media(max-width: 767px) {
+                display: none;
+            }
+        }
     }
 
     &__links {
@@ -183,18 +191,24 @@
                 margin: 0 0 10px;
                 &:last-child { margin: 0 0 50px;}
 
-                &_sber { background: #1a9f29; }
-                &_raif { background: #ffed00; }
-                &_alfa { background: #e52713; }
-                &_vtb  { background: #009fdf; }
-                &_urls { background: #475493; }
-                &_tink { background: #ffe900; }
-                &_pocht{  }
-                &_ress {  }
-                &_open { background: #00bee8; }
-                &_dom  { background: #2e444e; }
-                &_iron { background: #00337f; }
-                &_zenit{  }
+                &_sber       { background: #1a9f29; }
+                &_raif       { background: #ffed00; color: #000000 }
+                &_vtb        { background: #009fdf; }
+                &_ural       { background: #475493; }
+                &_ress       { background: #13366D; }
+                &_open       { background: #00bee8; }
+                &_dom        { background: #2e444e; }
+                &_iron       { background: #00337f; }
+                &_zenit      { background: #008fb4; }
+                &_ross       { background: #34643A; }
+                &_rossBank   { background: #c2002a; }
+                &_capital    { background: #00afa9; }
+                &_psb        { background: #ea5614; }
+                &_absolute   { background: #ff5a01; }
+                &_gasprom    { background: #0c356c; }
+                &_sovcom     { background: #004890; }
+                &_svazBank   { background: #0064a4; }
+                &_bankRussia { background: #012757; }
 
                 &-wrap {
                     width: 100%;

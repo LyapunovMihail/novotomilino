@@ -54,19 +54,24 @@
         margin: 0 30px 30px 0;
         &:nth-child(2n) { margin: 0 0 30px 0; }
 
-        &_sber { background: #1a9f29; }
-        &_raif { background: #ffed00; color: #000000 }
-        &_alfa { background: #e52713; }
-        &_vtb  { background: #009fdf; }
-        &_ural { background: #475493; }
-        &_tink { background: #ffe900; color: #000000 }
-        &_pocht{ background: #05138A; }
-        &_ress { background: #13366D; }
-        &_open { background: #00bee8; }
-        &_dom  { background: #2e444e; }
-        &_iron { background: #00337f; }
-        &_zenit{ background: #62B7AF; }
-        &_ross { background: #34643A; }
+        &_sber       { background: #1a9f29; }
+        &_raif       { background: #ffed00; color: #000000 }
+        &_vtb        { background: #009fdf; }
+        &_ural       { background: #475493; }
+        &_ress       { background: #13366D; }
+        &_open       { background: #00bee8; }
+        &_dom        { background: #2e444e; }
+        &_iron       { background: #00337f; }
+        &_zenit      { background: #008fb4; }
+        &_ross       { background: #34643A; }
+        &_rossBank   { background: #c2002a; }
+        &_capital    { background: #00afa9; }
+        &_psb        { background: #ea5614; }
+        &_absolute   { background: #ff5a01; }
+        &_gasprom    { background: #0c356c; }
+        &_sovcom     { background: #004890; }
+        &_svazBank   { background: #0064a4; }
+        &_bankRussia { background: #012757; }
 
         &-wrap {
             width: calc(100% - (100% - 75px));

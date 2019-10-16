@@ -39,7 +39,7 @@ export class CreditModel {
 
     async setSnippet(banks) {
         const date = new Date();
-
+        await this.collection.remove({});
         const banksSnippets = [];
         banks.forEach((bank) => {
             const created_at = dateFormat(date, 'yyyy-mm-ddTHH:MM:ssZ');
@@ -59,8 +59,7 @@ export class CreditModel {
             banksSnippets.push(snippet);
         });
 
-        this.collection.insertMany(banksSnippets);
-
+        await this.collection.insertMany(banksSnippets);
         return await this.getAllSnippet();
     }
 
