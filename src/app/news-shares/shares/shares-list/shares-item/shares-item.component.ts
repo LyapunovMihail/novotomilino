@@ -1,11 +1,9 @@
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
-import {filter, map} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-shares-item',
@@ -15,24 +13,23 @@ import {Subscription} from 'rxjs';
         WindowScrollLocker
     ]
 })
-export class SharesItemComponent implements OnInit, OnDestroy {
+export class SharesItemComponent implements OnInit {
 
-    public isReserveFormOpen: boolean = false;
-    public isCallFormOpen: boolean = false;
+    public isReserveFormOpen = false;
+    public isCallFormOpen = false;
 
-    // public share: Share;
-    public share;
+    public share: Share;
 
-    public uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     public shareFlatDiscountType = ShareFlatDiscountType;
 
     public indexNum: number;
 
-    public prevId: string = '';
-    public nextId: string = '';
+    public sharesList: Share[];
 
-    public routerEvents: Subscription;
+    public prevId = '';
+    public nextId = '';
 
     public selectFlat = {
         house: '0',
@@ -45,50 +42,52 @@ export class SharesItemComponent implements OnInit, OnDestroy {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private sharesService: SharesService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router
+        private activatedRoute: ActivatedRoute
     ) {}
 
     public ngOnInit() {
         const id = this.activatedRoute.snapshot.params.id;
         this.indexNum = Number(this.activatedRoute.snapshot.params.index);
-
-        this.routerEvents = this.router.events
-            .pipe(filter((router) => (router instanceof NavigationEnd)), map((router: NavigationEnd) => router.url))
-            .subscribe((router) => {
-                const newId = this.activatedRoute.snapshot.params.id;
-                this.indexNum = this.activatedRoute.snapshot.params.index;
-                this.getSnippet(newId);
-            });
-        this.getSnippet(id);
+        this.getSnippets(id);
     }
 
-    public ngOnDestroy() {
-        this.routerEvents.unsubscribe();
+
+    public changeIdSubscribe() {
+        this.activatedRoute.params.subscribe((params) => {
+            const newId = params.id;
+            this.indexNum = params.index;
+            this.getSnippet(newId);
+        });
+    }
+
+    public getSnippets(id) {
+        this.sharesService.getShares(1000, 0).subscribe(
+            (data) => {
+                this.sharesList = data.sharesList;
+                this.getSnippet(id);
+                this.changeIdSubscribe();
+            },
+            (err) => console.error(err)
+        );
     }
 
     public getSnippet(id) {
         this.sharesService.getShareById(id)
             .subscribe((share: Share[]) => {
                 this.share = share[0];
-                this.getSnippets();
+                this.checkPrevAndNext(id);
             }, (err) => {
                 console.error(err);
             });
     }
 
-    public getSnippets() {
-        this.sharesService.getShares(1000, 0).subscribe(
-            (data) => {
-                data.sharesList.forEach((item, i) => {
-                    if (item._id === this.share._id) {
-                        this.prevId = i !== 0 ? data.sharesList[i - 1]._id : '';
-                        this.nextId = i !== data.sharesList.length - 1 ? data.sharesList[i + 1]._id : '';
-                    }
-                });
-            },
-            (err) => console.error(err)
-        );
+    public checkPrevAndNext(id) {
+        this.sharesList.forEach((item, i, data) => {
+            if (item._id === id) {
+                this.prevId = i !== 0 ? data[i - 1]._id : '';
+                this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
+            }
+        });
     }
 
     public countDown(finishDate) {

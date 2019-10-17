@@ -67,6 +67,10 @@
                 background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
                 transform: rotate(180deg);
             }
+            &-inactive {
+                visibility: hidden;
+                pointer-events: none;
+            }
         }
         &-img {
             width: 100%;

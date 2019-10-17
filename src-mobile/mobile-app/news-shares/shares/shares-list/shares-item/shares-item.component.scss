@@ -74,6 +74,11 @@
             background: url(/assets/img/btn_next_or.svg) center no-repeat #fff;
             position: absolute;
             top: calc(50% - 20px);
+
+            &-inactive {
+                visibility: hidden;
+                pointer-events: none;
+            }
         }
         &-prev {
             left: -15px;

@@ -17,8 +17,6 @@ export class PurchaseCreditComponent implements OnInit {
 
     public uploadsPath: string = `/${CREDIT_UPLOADS_PATH}`;
 
-    public showBankList: boolean = false;
-
     constructor(
         private creditService: PurchaseCreditService
     ) { }

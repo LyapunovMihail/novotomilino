@@ -1,9 +1,7 @@
-import {NEWS_UPLOADS_PATH} from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { NewsService } from './../news.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {filter, map} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-news-view',
@@ -13,19 +11,18 @@ import {Subscription} from 'rxjs';
 
 export class NewsViewComponent implements OnInit {
 
-    public title: string = '';
+    public title = '';
 
-    public description: string = '';
+    public description = '';
 
-    public image: string = '';
+    public image = '';
 
-    public created_at: string = '';
+    public created_at = '';
 
-    public _id: string = '';
-    public prevId: string = '';
-    public nextId: string = '';
+    public newsList: INewsSnippet[];
 
-    public routerEvents: Subscription;
+    public prevId = '';
+    public nextId = '';
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -35,13 +32,25 @@ export class NewsViewComponent implements OnInit {
 
     public ngOnInit() {
         const id = this.activatedRoute.snapshot.params.id;
-        this.routerEvents = this.router.events
-            .pipe(filter((router) => (router instanceof NavigationEnd)), map((router: NavigationEnd) => router.url))
-            .subscribe((router) => {
-                const newId = this.activatedRoute.snapshot.params.id;
-                this.getSnippet(newId);
-            });
-        this.getSnippet(id);
+        this.getSnippets(id);
+    }
+
+    public changeIdSubscribe() {
+        this.activatedRoute.params.subscribe((params) => {
+            const newId = params.id;
+            this.getSnippet(newId);
+        });
+    }
+
+    public getSnippets(id) {
+        this.newsService.getSnippet().subscribe(
+            (data) => {
+                this.newsList = data;
+                this.getSnippet(id);
+                this.changeIdSubscribe();
+            },
+            (err) => console.error(err)
+        );
     }
 
     public getSnippet(id) {
@@ -52,8 +61,7 @@ export class NewsViewComponent implements OnInit {
                     this.description = data[0].description;
                     this.image = `/${NEWS_UPLOADS_PATH}${data[0].image}`;
                     this.created_at = data[0].created_at;
-                    this._id = data[0]._id;
-                    this.getSnippets();
+                    this.checkPrevAndNext(id);
                 } else {
                     this.router.navigate(['/error-404'], { skipLocationChange: true });
                 }
@@ -65,18 +73,13 @@ export class NewsViewComponent implements OnInit {
         );
     }
 
-    public getSnippets() {
-        this.newsService.getSnippet().subscribe(
-            (data) => {
-                data.forEach((item, i) => {
-                    if (item._id === this._id) {
-                        this.prevId = i !== 0 ? data[i - 1]._id : '';
-                        this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
-                    }
-                });
-            },
-            (err) => console.error(err)
-        );
+    public checkPrevAndNext(id) {
+        this.newsList.forEach((item, i, data) => {
+            if (item._id === id) {
+                this.prevId = i !== 0 ? data[i - 1]._id : '';
+                this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
+            }
+        });
     }
 
 }

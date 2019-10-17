@@ -14,7 +14,7 @@ export class SharesService {
         return this.http.get<{length: number, sharesList: Share[]}>(`/api/shares/list?limit=${limit}&skip=${skip}`);
     }
 
-    public getShareById(id): Observable<Share> {
-        return this.http.get<Share>(`/api/shares/id/${id}`);
+    public getShareById(id): Observable<Share[]> {
+        return this.http.get<Share[]>(`/api/shares/id/${id}`);
     }
 }

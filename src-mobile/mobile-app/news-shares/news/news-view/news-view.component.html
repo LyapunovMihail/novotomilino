@@ -7,8 +7,8 @@
     <div class="news-view__content">
         <div class="news-view__wrap">
             <div class="news-view__content-btn">
-                <button class="news-view__content-btn-prev"></button>
-                <button class="news-view__content-btn-next"></button>
+                <button class="news-view__content-btn-prev" [class.news-view__content-btn-inactive]="!prevId" [routerLink]="['/news-shares/news/list/' + prevId]"></button>
+                <button class="news-view__content-btn-next" [class.news-view__content-btn-inactive]="!nextId" [routerLink]="['/news-shares/news/list/' + nextId]"></button>
             </div>
             <div class="news-view__content-img">
                 <img *ngIf="image.length > 0" class="news-view__content-img-item" [src]="image">

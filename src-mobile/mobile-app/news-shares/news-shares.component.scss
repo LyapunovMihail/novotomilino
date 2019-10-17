@@ -1,8 +1,11 @@
 @import "../../styles/modules/mixins/mixin.scss";
 
 .news {
-    min-height: calc(100vh - 67px - 51px);
     padding: 67px 0 100px;
+
+    @media(max-width: 767px) {
+       // min-height: calc(100vh - 67px - 51px);
+    }
 
     &__head {
         width: calc(100% - 30px);

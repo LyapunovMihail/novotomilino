@@ -1,4 +1,4 @@
-import { NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { NewsService } from '../news.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -11,25 +11,48 @@ import { Component, OnInit } from '@angular/core';
 
 export class NewsViewComponent implements OnInit {
 
-    public category: string = '';
+    public category = '';
 
-    public createdAt: string = '';
+    public createdAt = '';
 
-    public title: string = '';
+    public title = '';
 
-    public description: string = '';
+    public description = '';
 
-    public image: string = '';
+    public image = '';
 
-    constructor (
+    public newsList: INewsSnippet[];
+
+    public prevId = '';
+    public nextId = '';
+
+    constructor(
         private activatedRoute: ActivatedRoute,
         private newsService: NewsService,
         private router: Router
     ) { }
 
     public ngOnInit() {
-        let id = this.activatedRoute.snapshot.params.id;
-        this.getSnippet(id);
+        const id = this.activatedRoute.snapshot.params.id;
+        this.getSnippets(id);
+    }
+
+    public changeIdSubscribe() {
+        this.activatedRoute.params.subscribe((params) => {
+            const newId = params.id;
+            this.getSnippet(newId);
+        });
+    }
+
+    public getSnippets(id) {
+        this.newsService.getSnippet().subscribe(
+            (data) => {
+                this.newsList = data;
+                this.getSnippet(id);
+                this.changeIdSubscribe();
+            },
+            (err) => console.error(err)
+        );
     }
 
     public getSnippet(id) {
@@ -41,6 +64,7 @@ export class NewsViewComponent implements OnInit {
                     this.title = data[0].title;
                     this.description = data[0].description;
                     this.image = `/${NEWS_UPLOADS_PATH}${data[0].image}`;
+                    this.checkPrevAndNext(id);
                 } else {
                     this.router.navigate(['/error-404'], { skipLocationChange: true });
                 }
@@ -52,4 +76,12 @@ export class NewsViewComponent implements OnInit {
         );
     }
 
+    public checkPrevAndNext(id) {
+        this.newsList.forEach((item, i, data) => {
+            if (item._id === id) {
+                this.prevId = i !== 0 ? data[i - 1]._id : '';
+                this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
+            }
+        });
+    }
 }

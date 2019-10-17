@@ -15,17 +15,21 @@ import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 })
 export class SharesItemComponent implements OnInit {
 
-    public isReserveFormOpen: boolean = false;
-    public isCallFormOpen: boolean = false;
+    public isReserveFormOpen = false;
+    public isCallFormOpen = false;
 
-    // public share: Share;
-    public share;
+    public share: Share;
 
-    public shareId: string;
-
-    public uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     public shareFlatDiscountType = ShareFlatDiscountType;
+
+    public indexNum: number;
+
+    public sharesList: Share[];
+
+    public prevId = '';
+    public nextId = '';
 
     public selectFlat = {
         house: '0',
@@ -40,22 +44,56 @@ export class SharesItemComponent implements OnInit {
         private sharesService: SharesService,
         private activatedRoute: ActivatedRoute
     ) {
-        this.shareId = this.activatedRoute.snapshot.params['id'];
     }
 
     public ngOnInit() {
-        this.sharesService.getShareById(this.shareId)
-            .subscribe((share: Share) => {
+        const id = this.activatedRoute.snapshot.params.id;
+        this.indexNum = Number(this.activatedRoute.snapshot.params.index);
+        this.getSnippets(id);
+    }
+
+    public changeIdSubscribe() {
+        this.activatedRoute.params.subscribe((params) => {
+            const newId = params.id;
+            this.indexNum = params.index;
+            this.getSnippet(newId);
+        });
+    }
+
+    public getSnippets(id) {
+        this.sharesService.getShares(1000, 0).subscribe(
+            (data) => {
+                this.sharesList = data.sharesList;
+                this.getSnippet(id);
+                this.changeIdSubscribe();
+            },
+            (err) => console.error(err)
+        );
+    }
+
+    public getSnippet(id) {
+        this.sharesService.getShareById(id)
+            .subscribe((share: Share[]) => {
                 this.share = share[0];
+                this.checkPrevAndNext(id);
             }, (err) => {
                 console.error(err);
             });
     }
 
+    public checkPrevAndNext(id) {
+        this.sharesList.forEach((item, i, data) => {
+            if (item._id === id) {
+                this.prevId = i !== 0 ? data[i - 1]._id : '';
+                this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
+            }
+        });
+    }
+
     public countDown(finishDate) {
-        let createdDateVal = moment(Date.now());
-        let finishDateVal = moment(finishDate);
-        let duration = moment.duration(createdDateVal.diff(finishDateVal));
+        const createdDateVal = moment(Date.now());
+        const finishDateVal = moment(finishDate);
+        const duration = moment.duration(createdDateVal.diff(finishDateVal));
         return Math.ceil(duration.asDays() * -1);
     }
 

@@ -19,6 +19,7 @@
         &-item {
             width: 100%;
             margin: 0 0 40px;
+            &:last-child { margin: 0; }
             &_link { display: block; }
             @media (min-width: 768px) {
                 width: 338px;
@@ -78,8 +79,7 @@
             align-items: center;
             padding: 0 0 0 32px;
             color: #fff;
-            background-color: $col-orange;
-            opacity: .4;
+            background-color: rgba(231,73,15,0.4);
             position: absolute;
             top: 50%;
             left: 50%;
