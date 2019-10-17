@@ -4,11 +4,11 @@
 .flats {
     width: 100%;
     min-height: 100vh;
-    padding: (67px + 30px) 0 50px; // Где 30 это отступ от хедера
+    padding: 50px 0 50px; // Где 30 это отступ от хедера
     display: flex;
     flex-flow: column;
     align-items: center;
-    @media (max-width: 767px) { padding: (69px + 30px) 0 50px; }
+    @media (max-width: 767px) { padding: 30px 0 50px; }
 
     &__title {
         width: calc(100% - 60px);

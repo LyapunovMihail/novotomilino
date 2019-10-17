@@ -118,7 +118,6 @@
         position: absolute;
         width: calc(100vw - 30px);
         max-width: 394px;
-        height: 338px;
         background: #fff;
         right: 0;
         top: calc(100% + 10px);
@@ -129,13 +128,6 @@
         padding: 22px 20px 15px;
         transition: .2s linear;
         cursor: default;
-        @media (max-width: 767px) {
-            height: auto;
-            
-            &-wrap svg {
-                display: none;
-            }
-        }
 
         &-check {
             display: flex;
