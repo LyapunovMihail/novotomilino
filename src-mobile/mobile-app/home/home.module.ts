@@ -9,6 +9,7 @@ import { HomeNewsComponent } from './news/home-news.component';
 import { HomeService } from './home.service';
 import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
+import { ScrollUpComponent } from './scroll-up/scroll-up.component';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HomeTriggerComponent } from './trigger/home-trigger.component';
         HomePlacesComponent,
         HomeNewsComponent,
         SharesDayPipe,
-        LineBreakPipe
+        LineBreakPipe,
+        ScrollUpComponent
     ],
     imports : [
         CommonModule,
