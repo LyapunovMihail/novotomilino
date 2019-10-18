@@ -1,11 +1,9 @@
 import { PlatformDetectService } from './../platform-detect.service';
 import { IAddressItemFlat, IFlatResponse } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { Component, OnInit, Inject, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlatsService } from './flats.service';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
-import { DOCUMENT } from '@angular/common';
-declare let $: any;
 
 @Component({
     selector: 'app-flats',
@@ -21,7 +19,7 @@ export class FlatsComponent implements OnInit {
 
     public previousUrl = '';
     public isReturnLink = false;
-    public params: any;
+    public params: any = {};
     public flatsList: IAddressItemFlat[] = [];
     public isLoadMoreBtn = false;
     public isVisible: boolean = false;
@@ -33,7 +31,6 @@ export class FlatsComponent implements OnInit {
         public router: Router,
         public searchService: FlatsService,
         public platform: PlatformDetectService,
-        public elRef: ElementRef,
         public windowScrollLocker: WindowScrollLocker
     ) {}
 
@@ -55,12 +52,13 @@ export class FlatsComponent implements OnInit {
         this.showFilter === true ? this.windowScrollLocker.block() : this.windowScrollLocker.unblock();
     }
 
+    /*
     @HostListener('window:scroll', [])
     public windowScroll() {
         const num = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const form = this.elRef.nativeElement.querySelector('.search').offsetHeight;
+        const form = this.elRef.nativeElement.querySelector('.search-form').offsetHeight;
 
-        this.isVisible = (num >= form - 100)
+        this.isVisible = (num >= 500)
             ? true
             : false;
     }
@@ -70,6 +68,7 @@ export class FlatsComponent implements OnInit {
 
         $('html, body').animate({scrollTop: 0 }, 200);
     }
+    */
 
     public formChange(form) {
         const params = {
@@ -79,7 +78,7 @@ export class FlatsComponent implements OnInit {
             priceMax: form.price.max,
             floorMin: form.floor.min,
             floorMax: form.floor.max,
-            sort: form.sort,
+            sort: this.params.sort || form.sort,
         };
 
         if (form.type.length > 0) {
@@ -91,13 +90,14 @@ export class FlatsComponent implements OnInit {
         }
 
         if ( 'rooms' in form && form['rooms'].some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 3) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
+            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
         }
 
-        if ( 'sections' in form && form['sections'].length > 0 ) {
-            params['sections'] = (form.sections).join(',');
+        if ( 'houses' in form && form['houses'].length > 0 ) {
+            params['houses'] = (form.houses).join(',');
         }
 
+        console.log('params: ', params);
         this.params = params;
         this.params.skip = 0;
         this.params.limit = 10;
@@ -107,16 +107,19 @@ export class FlatsComponent implements OnInit {
 
     public loadMore() {
         this.params.skip += 10;
+        console.log('this.params2: ', this.params);
         this.getFlats();
     }
 
     public getFlats() {
+        console.log('this.params: ', this.params);
         this.router.navigate(['/flats/search'], {queryParams: this.params});
         this.searchService.getObjects(this.params).subscribe(
             (data: IFlatResponse) => {
                 this.counter = data.count;
                 this.responseParse(data.flats);
                 this.flatsList = data.flats;
+                console.log('data: ', data);
             },
             (err) => {
                 console.log(err);

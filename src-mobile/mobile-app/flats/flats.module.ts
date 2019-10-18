@@ -1,3 +1,4 @@
+import { SearchFormPipe } from './search-form/search-form.pipe';
 import { SearchOutputPipe } from './search-output/search-output.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { SectionsSelectComponent } from './search-form/sections-select/sections-select.component';
@@ -11,7 +12,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchBitNumberPipe } from './search-output/search-bit-number.pipe';
 import { FormsRequestModule } from '../forms-request/forms-request.module';
-import { ModalApartamentComponent } from './modal-apartament/apartament.component';
+import { ModalApartamentComponent } from './modal-apartament/modal-apartament.component';
+import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -21,7 +23,9 @@ const FlatsComponents = [
     CheckboxListComponent,
     ModalApartamentComponent,
     SearchBitNumberPipe,
-    SearchOutputPipe
+    SearchOutputPipe,
+    SearchFormPipe,
+    SearchSortingComponent
 ];
 
 @NgModule({

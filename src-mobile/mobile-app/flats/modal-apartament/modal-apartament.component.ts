@@ -5,7 +5,7 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Component({
-    selector: 'app-modal-apartament',
+    selector: 'app-modal-apartment',
     templateUrl: 'modal-apartament.component.html',
     styleUrls: ['modal-apartament.component.scss'],
     providers: [

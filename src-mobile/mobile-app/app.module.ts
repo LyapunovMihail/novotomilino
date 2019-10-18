@@ -13,6 +13,7 @@ import { WindowEventsService } from './commons/window-events.observer.service';
 import { AuthorizationObserverService } from './authorization/authorization.observer.service';
 import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
+import { FlatsDiscountService } from './commons/flats-discount.service';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { ImgModalService } from './modal/img-modal/img-modal.service';
@@ -48,7 +49,8 @@ const APP_PROVIDERS = [
     WindowEventsService,
     AuthorizationObserverService,
     FavoritesService,
-    PlatformDetectService
+    PlatformDetectService,
+    FlatsDiscountService
 ];
 
 const APP_MODULES = [

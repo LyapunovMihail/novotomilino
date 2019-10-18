@@ -57,7 +57,16 @@
         flex-flow: row wrap;
     }
 
-    &__form-text { @include fw18-24; }
+    &__form-text {
+        @include fw18-24;
+
+        &_corpus {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
     &__section-name {
         font: 500 14px/20px $font-mus;
         @include font-smoothing();
@@ -162,6 +171,8 @@
         position: relative;
 
         &_corpus {
+            padding-right: 35px;
+
             &:before {
                 content: '';
                 width: 14px;

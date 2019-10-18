@@ -1,5 +1,6 @@
 <section class="flats">
 
+    <!--
     <div class="up"
         [ngClass]="{'up_active': isVisible}"
         (click)="scrollToTop()">
@@ -10,26 +11,19 @@
             </g>
         </svg>
     </div>
-
+    -->
     <button class="flats__show-filter"
             (click)="openFilter()"
             [class.flats__show-filter_active]="showFilter"></button>
     
     <h1 class="flats__title">Подбор квартиры <span>по параметрам</span></h1>
 
-    <div class="flats__filter">
-        <p *ngIf="counter > 0" class="flats__filter-find">Найдено {{counter}} квартир</p>
-        <p *ngIf="counter === 0" class="flats__filter-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
+    <app-search-sorting class="flats__sorting"
+        [counter]="counter"
+        [(ngModel)]="params.sort"
+        (ngModelChange)="params.skip = 0; getFlats()">
+    </app-search-sorting>
 
-        <div class="flats__filter-wrap">
-            <p class="flats__filter-item flats__filter-item_active">По цене</p>
-            <p class="flats__filter-item">По площади</p>
-            <p class="flats__filter-item">По этажу</p>
-            <p class="flats__filter-item">По сроку сдачи</p>
-        </div>
-    </div>
-    
-    
     <app-search-form (formChange)="formChange($event)" [showFilter]="showFilter"></app-search-form>
     
     <app-search-output [flatsList]="flatsList"></app-search-output>

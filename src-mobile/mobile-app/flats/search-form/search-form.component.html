@@ -21,36 +21,15 @@
             <p class="search-form__section-name">Номер корпуса</p>
     
             <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                <p class="search-form__form-text">Все корпуса</p>
+                <p class="search-form__form-text search-form__form-text_corpus">{{form.controls['houses'].value | mySearchFormPipe}}</p>
             </div>
-    
+
             <div class="search-form__corpus" *ngIf="showCorpus">
                 <div class="search-form__corpus-wrap">
-                    <div class="search-form__corpus-check">
-                        <input type="checkbox" name="corpus" id="corpusAll">
-                        <label for="corpusAll" class="g-checkbox search-form__corpus-checkbox"></label>
-                        <label for="corpusAll" class="search-form__corpus-text">Все корпуса</label>
-                    </div>
-                    <div class="search-form__corpus-check">
-                        <input type="checkbox" name="corpus" id="corpusOne">
-                        <label for="corpusOne" class="g-checkbox search-form__corpus-checkbox"></label>
-                        <label for="corpusOne" class="search-form__corpus-text">Корпус 1</label>
-                    </div>
-                    <div class="search-form__corpus-check">
-                        <input type="checkbox" name="corpus" id="corpusTwo">
-                        <label for="corpusTwo" class="g-checkbox search-form__corpus-checkbox"></label>
-                        <label for="corpusTwo" class="search-form__corpus-text">Корпус 2</label>
-                    </div>
-                    <div class="search-form__corpus-check">
-                        <input type="checkbox" name="corpus" id="corpusThree">
-                        <label for="corpusThree" class="g-checkbox search-form__corpus-checkbox"></label>
-                        <label for="corpusThree" class="search-form__corpus-text">Корпус 3</label>
-                    </div>
-                    <div class="search-form__corpus-check">
-                        <input type="checkbox" name="corpus" id="corpusFour">
-                        <label for="corpusFour" class="g-checkbox search-form__corpus-checkbox"></label>
-                        <label for="corpusFour" class="search-form__corpus-text">Корпус 4</label>
-                    </div>
+                    <app-search-checkbox-list
+                        [btnList]="config.housesList"
+                        [formControl]="form.controls['houses']">
+                    </app-search-checkbox-list>
                 </div>
             </div>
         </div>
@@ -119,7 +98,7 @@
     
         </div>
     
-        <button class="search-form__reset-btn">Сбросить фильтры</button>
+        <button class="search-form__reset-btn" (click)="formReset()">Сбросить фильтры</button>
     </div>
     
 
