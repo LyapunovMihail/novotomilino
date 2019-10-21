@@ -54,7 +54,6 @@ export class FormCallComponent implements OnChanges {
         this.service.sendCallForm(form).subscribe(
             (data) => {
                 this.isSubmited = true;
-                console.log(data);
             },
             (error) => {
                 alert('Что-то пошло не так! Ошибка при отправке формы!');

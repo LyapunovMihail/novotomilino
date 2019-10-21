@@ -23,7 +23,6 @@ import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
-import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { FavoritesModule } from './favorites/favorites.module';
@@ -60,7 +59,6 @@ const APP_MODULES = [
     LocationModule,
     FooterModule,
     HeaderModule,
-    DynamicModule,
     AboutModule,
     PurchaseModule,
     NewsSharesModule,

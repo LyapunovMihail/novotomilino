@@ -106,7 +106,6 @@ export class AboutDocumentationComponent implements OnInit {
     private getObjects() {
         this.docsService.getObjects.subscribe((data: IDocumentationItem[]) => {
             this.objectsList = data;
-            console.log('this.objectsList: ', this.objectsList);
         }, (err) => {
             console.log(err);
         });

@@ -4,7 +4,7 @@
             <div class="header__head-sell">
                 <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
             </div>
-            <div class="header__head-logo" routerLink="/"></div>
+            <div class="header__head-logo" routerLink="/" (click)="closeNav()"></div>
             <div class="header__head-phone">
                 <a href="tel: +74951374012" class="head-phone__paragraf">+7 (495) 137-40-12</a>
                 <a href="#" class="g-link_red">Заказать звонок</a>
@@ -17,13 +17,13 @@
         <nav class="header__nav" [class.header__nav--active]="active">
             <ul class="header__nav-list">
                 <li class="header__nav-list-item" *ngFor="let link of links">
-                    <a [routerLink]="link.url" (click)="toggleNav()">{{link.name}}</a>
+                    <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
                 </li>
             </ul>
 
             <div class="header__nav-footer">
                 <div class="header__nav-footer-sell">
-                    <a href="#" class="g-link_red">Отдел продаж</a>
+                    <a routerLink="/location/office" (click)="closeNav()" class="g-link_red">Отдел продаж</a>
                     <a href="tel: +74951374012" class="header__nav-footer-phone">+7 (495) 137-40-12</a>
                 </div>
                 <div class="header__nav-footer-link">
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                     </ul>
-                    <a href="#" class="header__nav-footer-descr">Полная версия сайта</a>
+                    <a (click)="showFullVersion()" class="header__nav-footer-descr">Полная версия сайта</a>
                 </div>
             </div>
         </nav>

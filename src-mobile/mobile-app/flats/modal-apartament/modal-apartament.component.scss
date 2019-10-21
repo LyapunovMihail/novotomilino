@@ -137,6 +137,27 @@
         &_price {
             font-size: 36px;
             line-height: 40px;
+
+            &_sale {
+              position: relative;
+              color: $col-orange;
+              padding: 0 0 0 32px;
+              margin-top: 4px;
+              &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 12px;
+                width: 27px;
+                height: 15px;
+                background: url(/assets/img/stock-ic.svg) no-repeat;
+                background-size: 100%;
+              }
+            }
+            &_not-sale {
+              text-decoration: line-through;
+              color: #999a9b;
+            }
         }
     }
     &__favorite {
@@ -194,6 +215,10 @@
         width: calc(100% - 30px);
         max-width: 768px;
         height: 238px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         @media (min-width: 768px) {
             width: calc(100% - 60px);
             height: 500px;

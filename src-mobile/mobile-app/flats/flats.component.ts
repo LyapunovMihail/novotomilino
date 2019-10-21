@@ -97,7 +97,6 @@ export class FlatsComponent implements OnInit {
             params['houses'] = (form.houses).join(',');
         }
 
-        console.log('params: ', params);
         this.params = params;
         this.params.skip = 0;
         this.params.limit = 10;
@@ -107,19 +106,16 @@ export class FlatsComponent implements OnInit {
 
     public loadMore() {
         this.params.skip += 10;
-        console.log('this.params2: ', this.params);
         this.getFlats();
     }
 
     public getFlats() {
-        console.log('this.params: ', this.params);
         this.router.navigate(['/flats/search'], {queryParams: this.params});
         this.searchService.getObjects(this.params).subscribe(
             (data: IFlatResponse) => {
                 this.counter = data.count;
                 this.responseParse(data.flats);
                 this.flatsList = data.flats;
-                console.log('data: ', data);
             },
             (err) => {
                 console.log(err);

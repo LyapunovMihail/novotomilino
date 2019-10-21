@@ -25,9 +25,10 @@
     
         <div class="flat__wrap flat__wrap_price">
             <p class="flat__subtitle">Стоимость</p>
-            <p class="flat__text flat__text_price">{{flatData.price | myBitNumberPipe}} &#8381;</p>
+            <p class="flat__text flat__text_price"
+                [class.flat__text_price_not-sale]="flatData.discount">{{flatData.price | myBitNumberPipe}} &#8381;</p>
             <p *ngIf="flatData.discount"
-                class="apartment__info-price-value apartment__info-price-value_sale">
+                class="flat__text flat__text_price flat__text_price_sale">
                 {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
             </p>
         </div>

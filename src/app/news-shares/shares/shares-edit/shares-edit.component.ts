@@ -199,7 +199,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             if (this.redactId === SHARES_CREATE_ID) {
                 this.sharesService.createShare(form.value).subscribe(
                     (response) => {
-                        console.log(response);
                         this.close.emit();
                         this.snippetsChange.emit(response);
                         this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
@@ -211,7 +210,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 this.sharesService.updateShare(this.redactId, form.value as Share)
                     .subscribe(
                         (response) => {
-                            console.log(response);
                             this.close.emit();
                             this.snippetsChange.emit(response);
                             this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям

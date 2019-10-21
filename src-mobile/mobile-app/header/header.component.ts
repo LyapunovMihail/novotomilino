@@ -59,4 +59,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (this.active) { this.windowScrollLocker.block(); }
         if (!this.active) { this.windowScrollLocker.unblock(); }
     }
+
+    public closeNav() {
+      this.active = false;
+      this.windowScrollLocker.unblock();
+    }
+
+    public showFullVersion() {
+        this.headerService.writeSessionForFullVersion().pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+          (data) => document.location.reload(true),
+          (error) => console.log(error)
+        );
+    }
 }

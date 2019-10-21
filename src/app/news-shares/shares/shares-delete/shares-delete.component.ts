@@ -48,7 +48,6 @@ export class SharesDeleteComponent implements OnInit, OnDestroy {
         this.close.emit();
         this.sharesService.deleteShare(this.redactId).subscribe(
             (response) => {
-                console.log(response);
                 this.close.emit();
                 this.snippetsChange.emit();
             },

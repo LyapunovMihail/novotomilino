@@ -105,8 +105,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             });
             this.sharesSlider(this.shareSnippets);
         }
-
-        console.log('this.newsSnippets: ', this.newsSnippets);
     }
 
     public countDown(finishDate) {

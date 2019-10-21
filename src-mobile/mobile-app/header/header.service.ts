@@ -14,6 +14,10 @@ export class HeaderService {
         private http: HttpClient
     ) { }
 
+    public writeSessionForFullVersion() {
+        return this.http.get('/api/agent/desktop');
+    }
+
     public getDynamicLink() {
         return this.http.get('/api/dynamic/last/link');
     }

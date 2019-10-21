@@ -8,17 +8,13 @@ import {
     Response,
 } from 'express';
 
-interface RequestWithSession extends Request {
-    session: any;
+export function ShouldSendMobileVersion(req, session) {
+    return !(session && session.onlyDesktop) && (new mobileDetect(req.headers['user-agent'])).mobile();
 }
 
-export function ShouldSendMobileVersion(req: RequestWithSession) {
-    return !(req.session && req.session.onlyDesktop) && (new mobileDetect(req.headers['user-agent'])).mobile();
-}
-
-export function clientRender(req: RequestWithSession, res: Response, status: number) {
+export function clientRender(req: Request, res: Response, status: number, session) {
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
-        if (ShouldSendMobileVersion(req)) {
+        if (ShouldSendMobileVersion(req, session)) {
             res.status(status).sendFile(
               join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'index-mobile.html'),
             );
