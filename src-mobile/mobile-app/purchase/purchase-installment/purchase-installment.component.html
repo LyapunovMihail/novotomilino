@@ -3,47 +3,9 @@
     <ul class="installment__calculator">
 
         <li class="installment__calculator-type" >
-            <div class="installment__calculator-select">
-                <div class="installment__calculator-wrap" (click)="acceptChange()">
-                    <input type="text" 
-                        placeholder="Выберите тип рассрочки"
-                        value="{{ changeType }}">
-                </div>
-                
-                <div class="installment__calculator-tooltip" *ngIf="showTypeInstallment">
-                    <div class="installment__calculator-tooltip_cls-area" (click)="acceptChange()"></div>
-                    <p [class.installment__calculator-tooltip_active]="changeType === typeOne" 
-                       (click)="changeType = typeOne; acceptChange()">
-                        Бесплатная рассрочка
-                    </p>
-                    <p [class.installment__calculator-tooltip_active]="changeType === typeTwo" 
-                       (click)="changeType = typeTwo; acceptChange()">
-                        Платная рассрочка
-                    </p>
-                    <p [class.installment__calculator-tooltip_active]="changeType === typeThree" 
-                       (click)="changeType = typeThree; acceptChange()">
-                        100% оплата
-                    </p>
-                </div>
-            </div>
-
-            <p class="installment__calculator-hint " *ngIf="changeType === typeOne">
-                <span class="span-block span-black">Бесплатная рассрочка сроком <span class="g-text_nowrap">до 6 месяцев</span></span>
-                Первоначальный взнос — не менее 50% от прайсовой цены. 
-                Погашение задолжности по рассрочке осуществляется 
-                <span class="span-black">равными</span> ежемесячными платежами.
-            </p>
-            <p class="installment__calculator-hint " *ngIf="changeType === typeTwo">
-                <span class="span-block span-black">Платная рассрочка сроком от 7 до 24 месяцев</span>
-                Первоначальный взнос — не менее 50% от прайсовой цены. 
-                Погашение задолжности по рассрочке осуществляется ежемесячными 
-                <span class="span-black">аннуительными</span> платежами
-            </p>
-            <p class="installment__calculator-hint " *ngIf="changeType === typeThree">
-                <span class="span-block span-black">100% оплата</span>
-                При 100% оплате предоставляется скидка в размере 3% 
-                от стоимости квартиры, указанной в прайс-листе
-            </p>
+            <app-installment-types
+                (typeChanges)="changeType = $event; formConvert()">
+            </app-installment-types>
         </li>
 
         <li class="installment__calculator-item">
@@ -104,31 +66,10 @@
         </li>
     </ul>
 
-    <div class="installment__result">
-        <div class="installment__result-item">
-            <p class="installment__result-title">Сумма</p>
-            <p class="installment__result-result">{{ form.price.val | installmentNumberPipe }} &#8381;</p>
-        </div>
-        <div class="installment__result-item" *ngIf="changeType !== typeThree">
-            <p class="installment__result-title">Ставка</p>
-            <p class="installment__result-result">{{ percent }}% годовых</p>
-        </div>
-        <div class="installment__result-item" *ngIf="changeType !== typeThree">
-            <p class="installment__result-title">Размер ежемесячных выплат</p>
-            <p class="installment__result-result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
-        </div>
-
-        <div class="installment__result-item" *ngIf="changeType === typeThree">
-            <p class="installment__result-title g-nav-title">Размер скидки</p>
-            <p class="installment__result-result g-title_three">
-                {{ saleFullPay(form.price.val) | installmentNumberPipe }} &#8381;
-            </p>
-        </div>
-        <div class="installment__result-item" *ngIf="changeType === typeThree">
-            <p class="installment__result-title g-nav-title">Итоговая стоимость</p>
-            <p class="installment__result-result g-title_three">
-                {{ (form.price.val - saleFullPay(form.price.val)) | installmentNumberPipe }}
-            </p>
-        </div>
-    </div>
+    <app-installment-result class="installment__result"
+        [percent]="percent"
+        [monthPay]="monthPay"
+        [changeType]="changeType"
+        [price]="form.price.val">
+    </app-installment-result>
 </div>

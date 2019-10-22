@@ -1,4 +1,3 @@
-import { PurchaseInstallmentNumberPipe } from './purchase-installment.pipe';
 import { Injectable } from '@angular/core';
 
 export interface FormParams {

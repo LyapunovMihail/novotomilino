@@ -8,12 +8,16 @@ import { PurchaseComponent } from './purchase.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { InstallmentTypesComponent } from './purchase-installment/installment-types/installment-types.component';
+import { InstallmentResultComponent } from './purchase-installment/installment-result/installment-result.component';
 
 const PurchaseComponents = [
     PurchaseComponent,
     PurchaseCreditComponent,
     PurchaseInstallmentComponent,
-    PurchaseInstallmentNumberPipe
+    PurchaseInstallmentNumberPipe,
+    InstallmentTypesComponent,
+    InstallmentResultComponent
 ];
 
 @NgModule({
