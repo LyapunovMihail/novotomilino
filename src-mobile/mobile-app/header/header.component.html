@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="header__container">
+    <div class="header__container" [ngClass]="{'header__container--fixed': isFixed, 'header__container--hidden': isHidden}">
         <section class="header__head">
             <div class="header__head-sell">
                 <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>

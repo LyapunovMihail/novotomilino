@@ -64,6 +64,7 @@ export class LocationInfrastructureComponent implements OnInit {
                 // Если клик по маркеру - показываем. Если повторный клик по маркеру - убираем.
                 that.markers[index].marker.events.add('click', () => {
                     that.markers[index].click = !that.markers[index].click;
+                    $('.marker-content').removeClass('marker-content_active');
                     if (that.markers[index].click) {
                         $(`#marker-${index}`).addClass('marker-content_active');
                     } else {

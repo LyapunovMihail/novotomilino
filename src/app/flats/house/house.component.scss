@@ -124,6 +124,11 @@
                         font: 500 14px/18px 'Museo Sans Cyrl',sans-serif;
                         color: #e7490f;
                         text-align: center;
+                        transition: color .2s linear, background-color .2s linear;
+                        &:hover {
+                            background-color: $col-orange;
+                            color: #fff
+                        }
                     }
                     &-link {
                         display: block;
@@ -137,8 +142,11 @@
                     text-align: center;
                     border-radius: 1px;
                     box-sizing: border-box;
-                    transition: 0.2s linear;
+                    transition: background-color 0.2s linear;
                     margin-right: 10px;
+                    &:hover {
+                        background-color: $col-orange;
+                    }
 
                     &--free {
                         background-color: rgba(0,1,5,0.1);
