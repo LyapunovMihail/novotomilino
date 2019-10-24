@@ -48,8 +48,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.715153, 37.804425]], // Начало линии откуда простраивается путь
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(90,49,197,.6)',
+            activeColor: 'rgb(90,49,197)',
             strokeStyle: '1 0' // первая цифра - длина штриха, вторая - длина пробела
         },
         text: 'МКАД 8-й км через Октябрьский пр. (8 км, 20 мин)',
@@ -74,8 +74,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.698452, 37.801486]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(90,49,197,.6)',
+            activeColor: 'rgb(90,49,197)',
             strokeStyle: '1 0'
         },
         text: 'МКАД 10-й км через Новорязанское ш. (13 км, 25 мин)',
@@ -100,8 +100,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.668612, 37.923497]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(205,31,38,.6)',
+            activeColor: 'rgb(205,31,38)',
             strokeStyle: '1 2'
         },
         text: 'ж/д ст. Панки (пешком 1,9 км, 20 мин)',
@@ -130,8 +130,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.655328, 37.954140]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(205,31,38,.6)',
+            activeColor: 'rgb(205,31,38)',
             strokeStyle: '1 2'
         },
         text: 'ж/д ст. Томилино (пешком 2,4 км, 25 мин)',
@@ -160,8 +160,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.673638, 37.861333]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(255,0,19,.6)',
+            activeColor: 'rgb(255,0,19)',
             strokeStyle: '1 0'
         },
         text: 'м. Котельники (на автобусе 9 км, 15 мин)',
@@ -186,8 +186,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.700874, 37.852222]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(255,0,19,.6)',
+            activeColor: 'rgb(255,0,19)',
             strokeStyle: '1 0'
         },
         text: 'м. Лермонтовский проспект (на автобусе 10 км, 15 мин)',
@@ -216,8 +216,8 @@ export let markersConfig = [
         tooltip: '',
         route: {
             origin: [[55.703966, 37.925754]],
-            color: 'rgba(46,46,46,.6)',
-            activeColor: 'rgb(46,46,46)',
+            color: 'rgba(255,0,19,.6)',
+            activeColor: 'rgb(255,0,19)',
             strokeStyle: '1 0'
         },
         text: 'м. Некрасовка (на маршрутке 10 км, 20 мин)',

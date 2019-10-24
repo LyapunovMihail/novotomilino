@@ -108,11 +108,11 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         });
 
         if (this.newsSnippets) {
-            this.newsSnippets.forEach((news) => {
-                if (news.title) {
-                    news.title = news.title.length < 53 ? news.title : news.title.slice(0, 50) + '...';
-                }
-            });
+            // this.newsSnippets.forEach((news) => {
+            //     if (news.title) {
+            //         news.title = news.title.length < 53 ? news.title : news.title.slice(0, 50) + '...';
+            //     }
+            // });
             this.newsSlider(this.newsSnippets);
         }
 
@@ -125,11 +125,11 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         });
 
         if (this.shareSnippets) {
-            this.shareSnippets.forEach((share) => {
-                if (share.name) {
-                    share.name = share.name.length < 53 ? share.name : share.name.slice(0, 50) + '...';
-                }
-            });
+            // this.shareSnippets.forEach((share) => {
+            //     if (share.name) {
+            //         share.name = share.name.length < 53 ? share.name : share.name.slice(0, 50) + '...';
+            //     }
+            // });
             this.sharesSlider(this.shareSnippets);
         }
     }

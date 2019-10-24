@@ -1,7 +1,7 @@
 @import "../../../../styles/modules/mixins/mixin.scss";
 
 .ghm-range-number {
-    padding-top: 10px;
+    margin-top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -9,6 +9,7 @@
     overflow: hidden;
     user-select: none;
     box-sizing: border-box;
+    position: relative;
 
     &-text {
         font: 500 18px/24px $font-mus;
@@ -31,8 +32,7 @@
         height: 22px;
         position: absolute;
         left: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        top: calc(50% - 11px);
         border-radius: 50%; 
         background: $col-orange;
         cursor: pointer;

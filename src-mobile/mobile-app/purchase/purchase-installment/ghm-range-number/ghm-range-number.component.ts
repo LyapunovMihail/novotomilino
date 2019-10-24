@@ -6,9 +6,8 @@ import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, HostList
     styleUrls: ['./ghm-range-number.component.scss'],
     template: `
         <div class="ghm-range-number">
-            <div class="ghm-slider ghm-range-number-slider">
-                <div [style.left]="newLeft + 'px'" (touchstart)="mouseDown($event)" class="ghm-runner ghm-range-number-runner"></div>
-            </div>
+            <div class="ghm-slider ghm-range-number-slider"></div>
+            <div [style.left]="newLeft + 'px'" (touchstart)="mouseDown($event)" class="ghm-runner ghm-range-number-runner"></div>
         </div>
     `,
     providers: [
