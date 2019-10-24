@@ -7,11 +7,23 @@
     &__title {
         width: 100%;
         max-width: $w1600;
+        font: 54px/58px 'Leksa', sans-serif;
+        @include font-smoothing;
         position: absolute;
         top: 40px;
         left: 50%;
         transform: translateX(-50%);
         color: #fff;
+    }
+    &__rose {
+        width: 85px;
+        height: 85px;
+        position: absolute;
+        top: 34px;
+        left: calc(100vw - 15px);
+        background: url(/assets/img/flats/plan/wind_rose.svg) no-repeat center;
+        background-size: 80px 80px;
+        transform: rotate(120deg);
     }
     
     &_house-select {
