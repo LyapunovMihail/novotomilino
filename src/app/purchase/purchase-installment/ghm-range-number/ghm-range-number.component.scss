@@ -26,9 +26,10 @@
     }
 
     &-runner {
-        left: 0;
         position: absolute;
-        top: 50%;
+        top: 0;
+        bottom: 0;
+        margin: 0;
         transform: translateY(-50%);
         border-radius: 50%; 
         width: 15px;

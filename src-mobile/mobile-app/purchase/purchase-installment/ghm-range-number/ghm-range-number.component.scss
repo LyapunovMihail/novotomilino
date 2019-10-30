@@ -24,18 +24,20 @@
         position: relative;
         height: 1px;
         background: #d4d4d4;
-        margin: 11px 0;
+        margin: 22px 0;
     }
 
     &-runner {
         width: 22px;
         height: 22px;
         position: absolute;
-        left: 0;
-        top: calc(50% - 11px);
+        top: 0;
+        bottom: 0;
+        margin: 0;
         border-radius: 50%; 
         background: $col-orange;
         cursor: pointer;
+        transform: translateY(11px);
 
         &:before {
             content: '';
@@ -46,6 +48,22 @@
             height: 1px;
             width: 1150px;
             background: $col-orange;
+        }
+
+        &-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            color: transparent;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: 0;
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
         }
     }
 }

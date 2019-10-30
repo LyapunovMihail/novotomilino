@@ -93,11 +93,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.isFixed = false;
             }
 
-            if (winScrollTopPrev < winScrollTop) {
-                this.isHidden = true;
-            } else {
-                this.isHidden = winScrollTop < headerHeight - 46; // 46 - высота header__nav
-            }
+            this.isHidden = winScrollTopPrev < winScrollTop;
 
             winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         }));

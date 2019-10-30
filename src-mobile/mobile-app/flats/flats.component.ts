@@ -101,6 +101,8 @@ export class FlatsComponent implements OnInit {
         this.params.skip = 0;
         this.params.limit = 10;
 
+        this.router.navigate(['/flats/search'], {queryParams: this.params});
+
         this.getFlats();
     }
 
@@ -110,12 +112,10 @@ export class FlatsComponent implements OnInit {
     }
 
     public getFlats() {
-        this.router.navigate(['/flats/search'], {queryParams: this.params});
         this.searchService.getObjects(this.params).subscribe(
             (data: IFlatResponse) => {
                 this.counter = data.count;
                 this.responseParse(data.flats);
-                this.flatsList = data.flats;
             },
             (err) => {
                 console.log(err);
@@ -124,6 +124,11 @@ export class FlatsComponent implements OnInit {
     }
 
     public responseParse(response) {
+        if ( this.params.skip === 0 ) {
+            this.flatsList = response;
+        } else {
+            this.flatsList = this.flatsList.concat(response);
+        }
         this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
     }
 }
