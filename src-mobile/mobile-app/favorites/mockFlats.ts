@@ -1,6 +1,7 @@
 export const mockFlats = [{
     "_id": "5cb3590a2a7b06248ad6dcf4",
     "type": "КВ",
+    "house": "1",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-01-767",
@@ -15,6 +16,7 @@ export const mockFlats = [{
 }, {
     "_id": "5cb3590a2a7b06248ad6dcf5",
     "type": "КВ",
+    "house": "2",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-02-768",
@@ -29,6 +31,7 @@ export const mockFlats = [{
 }, {
     "_id": "5cb3590a2a7b06248ad6dcf6",
     "type": "КВ",
+    "house": "2",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-03-769",
@@ -43,6 +46,7 @@ export const mockFlats = [{
 }, {
     "_id": "5cb3590a2a7b06248ad6dcf8",
     "type": "КВ",
+    "house": "2",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-09-775",
@@ -57,6 +61,7 @@ export const mockFlats = [{
 }, {
     "_id": "5cb3590a2a7b06248ad6dcf9",
     "type": "КВ",
+    "house": "3",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-12-778",
@@ -71,6 +76,7 @@ export const mockFlats = [{
 }, {
     "_id": "5cb3590a2a7b06248ad6dcfa",
     "type": "КВ",
+    "house": "6",
     "section": "3",
     "floor": 19,
     "article": "ОБ-КВ-03-19-13-779",
