@@ -285,9 +285,9 @@
                         width: 100%;
                         max-width: 411px;
                         display: flex;
-                        justify-content: space-between;
+                        // justify-content: space-between;
 
-                        &-item { margin: 0; }
+                        &-item { margin-right: 50px; }
                     }
                 }
             }

@@ -1,100 +1,93 @@
 <section class="favorites">
-    <div class="favorites__header">
-        <h1 class="favorites__title">Избранное</h1>
+    <div class="favorites__head" *ngIf="flats.length > 0">
+        <h1 class="favorites__head-title">Избранное</h1>
         <!-- <div class="favorites__form-btn" (click)="formIsOpen = true">Отправить pdf избранных квартир мне на почту</div> -->
+
+        <div class="favorites__head-filter favotites-filter">
+            <div class="favotites-filter__container">
+                <h1 class="favotites-filter__title">{{ flats.length }} квартир</h1>
+
+                <div (click)="sort('price')"
+                    [ngClass]="{
+                        'favotites-filter__controls_active': sortType === 'price',
+                        'favotites-filter__controls_turn': sortType === 'price' && directionSort
+                    }"
+                    class="favotites-filter__controls favotites-filter__controls-price">
+                    По цене
+                </div>
+                <div (click)="sort('space')"
+                    [ngClass]="{
+                        'favotites-filter__controls_active': sortType === 'space',
+                        'favotites-filter__controls_turn': sortType === 'space' && directionSort
+                    }"
+                    class="favotites-filter__controls favotites-filter__controls-space">
+                    По площади
+                </div>
+                <div (click)="sort('floor')"
+                    [ngClass]="{
+                        'favotites-filter__controls_active': sortType === 'floor',
+                        'favotites-filter__controls_turn': sortType === 'floor' && directionSort
+                    }"
+                    class="favotites-filter__controls favotites-filter__controls-floor">
+                    По этажу
+                </div>
+                <div (click)="sort('section')"
+                    [ngClass]="{
+                        'favotites-filter__controls_active': sortType === 'section',
+                        'favotites-filter__controls_turn': sortType === 'section' && directionSort
+                    }"
+                    class="favotites-filter__controls favotites-filter__controls-section">
+                    По сроку сдачи
+                </div>
+            </div>
+            
+        </div>
     </div>
-    <!-- <div class="search_form_output-sorting">
-        
-        <div (click)="sort('price')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'price',
-                'search_form_output-sorting_control--turn': sortType === 'price' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--price">
-        </div>
-        <div (click)="sort('space')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'space',
-                'search_form_output-sorting_control--turn': sortType === 'space' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--space">
-        </div>
-        <div (click)="sort('floor')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'floor',
-                'search_form_output-sorting_control--turn': sortType === 'floor' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--floor">
-        </div>
-        <div (click)="sort('section')"
-            [ngClass]="{
-                'search_form_output-sorting_control--active': sortType === 'section',
-                'search_form_output-sorting_control--turn': sortType === 'section' && directionSort
-            }"
-            class="search_form_output-sorting_control search_form_output-sorting_control--section">
-        </div>
-        
-    </div> -->
-    <ul class="result">
+    <ul class="favorites__result favorites-result" *ngIf="flats.length > 0">
 
-            <li *ngFor="let flat of flats" class="result__item">
-        
-                <div class="result__data">
-                    <div class="to-favorites to-favorites_active" (click)="removeFromFavorite(flat)"></div>
-                    <span class="result__data-number">№{{flat.flat}}</span>
-                    <span class="result__data-location">Секция {{flat.section}}<span class="dot"></span>Этаж {{flat.floor}} из {{flat.section}}</span>
-                </div>
-        
-                <ul class="result__description">
-        
-                    <li class="wrapper">
-                        <span class="result__description-name">Тип</span>
-                        <div class="result__description-border"></div>
-                        <span class="result__description-value">{{flat.type}}</span>
-                    </li>
-        
-                    <li class="wrapper">
-                        <span class="result__description-name">Комнат</span>
-                        <div class="result__description-border"></div>
-                        <span class="result__description-value">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комн.'}}</span>
-                    </li>
-        
-                    <li class="wrapper">
-                        <span class="result__description-name">Общая площадь</span>
-                        <div class="result__description-border"></div>
-                        <span class="result__description-value result__description-value_bold">{{flat.space}} м&#178;</span>
-                    </li>
-        
-                    <li class="wrapper">
-                        <span class="result__description-name">Отделка</span>
-                        <div class="result__description-border"></div>
-                        <span class="result__description-value">{{flat.decorationName}}</span>
-                    </li>
-        
-                    <li class="wrapper">
-                        <span class="result__description-name">Стоимость</span>
-                        <div class="result__description-border"></div>
-                        <span class="result__description-value result__description-value_bold">{{flat.price | priceNumber}} &#8381;</span>
-                    </li>
-                </ul>
-        
-                <div class="result__scheme">
-                    <img class="result__scheme-content" [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'">
-                    <!-- <a class="result__pdf" href="">Скачать pdf</a> -->
+        <li *ngFor="let flat of flats; let i = index" class="favorites-result__item">
+
+            <div class="favorites-result__item-container" (click)="openApartmentModal(i)">
+
+                <div class="favorites-result__item-image">
+                    <img [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
+                         alt="flat-image" (error)="img.style.display = 'none'" #img>
+                    <div class="error-image" *ngIf="img.style.display === 'none'"></div>
                 </div>
 
-                <ul [ngClass]="{'result__request_active': showBtns === flat._id}" class="result__request">
-                    <li (click)="flatDataForModalForm = flat; isReserveFormOpen = true; scrollLocker.block()" class="result__request-item">Забронировать</li>
-                    <li (click)="flatDataForModalForm = flat; isCreditFormOpen = true; scrollLocker.block()" class="result__request-item">Заявка на ипотеку</li>
-                    <!-- <li (click)="isCallFormOpen = true; scrollLocker.block()" class="result__request-item">Заказать звонок</li> -->
-                </ul>
+                <div class="favorites-result__item-wrap">
+                    <div class="favorites-result__item-wrap favorites-result__item-wrap_secnd-lvl">
+                        <p class="favorites-result__item-text favorites-result__item-text_room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комнатная'}}</p>
+                        <p class="favorites-result__item-text favorites-result__item-text_price"
+                            [class.favorites-result__item-text_sale]="flat.discount">{{flat.price | priceNumber}} &#8381;</p>
+                    </div>
+                    <div class="favorites-result__item-wrap favorites-result__item-wrap_secnd-lvl">
+                        <div class="favorites-result__item-wrap favorites-result__item-wrap_info">
+                            <p class="favorites-result__item-text favorites-result__item-text_number">№{{flat.flat}}</p>
+                            <p class="favorites-result__item-text favorites-result__item-text_floor">{{flat.floor}} этаж</p>
+                            <p class="favorites-result__item-text favorites-result__item-text_house">Дом {{flat.house}}</p>
+                        </div>
+                        <p class="favorites-result__item-text favorites-result__item-text_space">{{flat.space}} м&#178;</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-                <div (click)="showBtns = (showBtns === flat._id) ? '' : flat._id" class="result__btn"></div>
-        
-            </li>
-        
-        </ul>
+    <div class="favorites__empty" *ngIf="flats.length <= 0">
+        <h1 class="favorites__empty-title">Интересующие вас квартиры вы можете добавлять в этот раздел</h1>
+        <button class="favorites__empty-btn" [routerLink]="['/flats']">Выбрать квартиру</button>
+    </div>
+
 </section>
 
-<app-favorites-form [pdfUrls]="pdfUrls" [isOpen]="formIsOpen" (close)="formIsOpen = false">
-</app-favorites-form>
+<!-- <app-favorites-form [pdfUrls]="pdfUrls" [isOpen]="formIsOpen" (close)="formIsOpen = false">
+</app-favorites-form> -->
+
+
+<app-modal-apartment *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="flats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-modal-apartment>

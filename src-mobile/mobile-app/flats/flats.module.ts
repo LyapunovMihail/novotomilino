@@ -1,42 +1,41 @@
 import { SearchFormPipe } from './search-form/search-form.pipe';
-import { SearchOutputPipe } from './search-output/search-output.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { SectionsSelectComponent } from './search-form/sections-select/sections-select.component';
 import { GHMRangeNumberModule } from './search-form/ghm-range-number/ghm-range-number.module';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { SearchOutputComponent } from './search-output/search-output.component';
 import { FlatsComponent } from './flats.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SearchBitNumberPipe } from './search-output/search-bit-number.pipe';
 import { FormsRequestModule } from '../forms-request/forms-request.module';
-import { ModalApartamentComponent } from './modal-apartament/modal-apartament.component';
+import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
 import { SearchSortingComponent } from './search-sorting/search-sorting.component';
+import { SearchOutputModule } from './search-output/search-output.module';
+import { SearchOutputComponent } from './search-output/search-output.component';
 
 const FlatsComponents = [
     FlatsComponent,
     SearchFormComponent,
-    SearchOutputComponent,
     SectionsSelectComponent,
     CheckboxListComponent,
-    ModalApartamentComponent,
-    SearchBitNumberPipe,
-    SearchOutputPipe,
     SearchFormPipe,
     SearchSortingComponent
 ];
 
 @NgModule({
     exports: [
-        ...FlatsComponents
+        ...FlatsComponents,
+        SearchOutputComponent
+
     ],
     declarations: [
         ...FlatsComponents
     ],
     imports: [
         FormsRequestModule,
+        ModalApartamenModule,
+        SearchOutputModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,

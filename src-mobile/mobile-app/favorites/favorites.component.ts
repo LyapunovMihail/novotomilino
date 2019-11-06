@@ -1,38 +1,39 @@
-import {
-    FavoritesService
-} from './../commons/favorites.service';
-import {
-    Router
-} from '@angular/router';
-import {
-    Component,
-    OnInit
-} from '@angular/core';
-import {
-    IAddressItemFlat
-} from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FavoritesService } from './../commons/favorites.service';
+import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { mockFlats } from './mockFlats';
+import { WindowScrollLocker } from '../commons/window-scroll-block';
 
 @Component({
     selector: 'app-favorites',
     templateUrl: './favorites.component.html',
-    styleUrls: ['./favorites.component.scss']
+    styleUrls: ['./favorites.component.scss'],
+    providers: [
+        WindowScrollLocker
+    ]
 })
 export class FavoritesComponent implements OnInit {
 
     public flats: IAddressItemFlat[] = [];
+    public testFlats = mockFlats;
     public directionSort = false;
     public sortType = '';
 
     public formIsOpen = false;
 
+    public selectedFlatIndex: number;
+    public showApartmentWindow = false;
+
     constructor(
+        public windowScrollLocker: WindowScrollLocker,
         private favoritesService: FavoritesService,
         private router: Router
     ) {}
 
     public ngOnInit() {
         this.initFavoriteFlats();
+        console.log(this.testFlats);
     }
 
     public getDecorationText(dec: string): string {
@@ -126,5 +127,11 @@ export class FavoritesComponent implements OnInit {
 
     get pdfUrls() {
         return this.flats.map((flat) => `https://oblakadom.ru/api/pdf?id=${flat._id}`);
+    }
+
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 }

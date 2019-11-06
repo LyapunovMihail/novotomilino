@@ -80,11 +80,11 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
     }
 
     public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.gallerySlides.length - 1 ) ? this.currentSlide + 1 : this.gallerySlides.length - 1;
+        this.currentSlide = (this.currentSlide < this.gallerySlides.length - 1 ) ? this.currentSlide + 1 : 0;
     }
 
     public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
+        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.gallerySlides.length - 1 ;
     }
 
     public changeDescription(id, description) {
