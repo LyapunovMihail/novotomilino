@@ -1,22 +1,28 @@
 <ul class="form-flats-list">
-    <li class="form-flats-list__item" *ngFor="let item of conf.blockFlats; index as i">
+    <li class="form-flats-list__item">
         <div class="share-view__select-wrap">
             <div class="share-view__select-item share-view__select-corpus">
                 <!-- Тут должен быть выбор корпуса -->
+                <select [(ngModel)]="shareFlat.house"
+                        (ngModelChange)="changeSectionAndHouse({section: shareFlat.section, house: $event})"
+                        class="share-view__select-list">
+                    <option *ngFor="let house of housesOptions"
+                            [value]="house">Корпус {{house}}</option>
+                </select>
             </div>
             <div class="share-view__select-item share-view__select-house">
-                <select [(ngModel)]="conf.blockFlats[i].section"
-                    (ngModelChange)="changeSection($event, i)"
+                <select [(ngModel)]="shareFlat.section"
+                    (ngModelChange)="changeSectionAndHouse({section: $event, house: shareFlat.house})"
                     class="share-view__select-list">
                     <option *ngFor="let section of sectionsOptions"
                         [value]="section">Секция {{section}}</option>
                 </select>
             </div>
             <div class="share-view__select-item share-view__select_flat">
-                <select [(ngModel)]="conf.blockFlats[i].number"
-                    (ngModelChange)="changeFlat($event, i)"
+                <select [(ngModel)]="shareFlat.number"
+                    (ngModelChange)="changeFlat($event)"
                     class="share-view__select-list">
-                    <option *ngFor="let flat of flatsOptions[i]"
+                    <option *ngFor="let flat of flatsOptions"
                         [value]="flat">Квартира {{flat}}</option>
                 </select>
             </div>
@@ -24,30 +30,30 @@
 
         <div class="share-view__sale-wrap">
             <label class="share-view__sale-item share-view__sale-item_procent">
-                <input [(ngModel)]="conf.blockFlats[i].discountType"
+                <input [(ngModel)]="shareFlat.discountType"
                     class="share-view__sale-item-input"
                     type="radio"
-                    [name]="'discountType' + i"
+                    [name]="'discountType'"
                     [value]="shareFlatDiscountType.PERCENT">
                 <div class="share-view__sale-item-check">Процент</div>
             </label>
             <label class="share-view__sale-item share-view__sale-item_sum">
-                <input [(ngModel)]="conf.blockFlats[i].discountType"
+                <input [(ngModel)]="shareFlat.discountType"
                     class="share-view__sale-item-input"
                     type="radio"
-                    [name]="'discountType' + i"
+                    [name]="'discountType'"
                     [value]="shareFlatDiscountType.SUM">
                 <div class="share-view__sale-item-check">Сумма</div>
             </label>
         </div>
 
         <div class="share-view__footer-wrap">
-            <input [(ngModel)]="conf.blockFlats[i].discount"
+            <input [(ngModel)]="shareFlat.discount"
                 (input)="changeText()"
                 type="text"
                 class="share-view__footer-result">
     
-            <button class="share-view__footer-delete" (click)="removeItem(i)">Удалить</button>
+            <button class="share-view__footer-delete" (click)="removeItem()">Удалить</button>
         </div>
     </li>
 </ul>

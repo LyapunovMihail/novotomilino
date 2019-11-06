@@ -47,21 +47,21 @@
             </div>
         </div>
 
-       <!-- <div class="shares-edit-form__path-wrap">
+        <div class="shares-edit-form__path-wrap">
             <p class="shares-edit-form__typografy-subtitle">Квартиры по акции</p>
             <button class="shares-edit-form__add-flat" (click)="addFlats()">
                 <span>Добавить квартиру</span>
             </button>
 
-            <div formArrayName="body">
-                <div *ngFor="let block of body.controls; index as i">
+            <div formArrayName="shareFlats">
+                <div *ngFor="let flat of shareFlats.controls; index as i">
                     <app-shares-edit-flats
                         [formControlName]="i"
                         (remove)="removeBlock(i)">
                     </app-shares-edit-flats>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="shares-edit-form__path-wrap">
             <p class="shares-edit-form__typografy-subtitle">Обложка</p>

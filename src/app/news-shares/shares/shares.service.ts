@@ -36,8 +36,8 @@ export class SharesService {
         return this.http.post('/api/admin/shares/delete', {id}, adminHeaders());
     }
 
-    public getFlatsBySectionNum(num) {
-        return this.http.get(`/api/search?sections=${num}`);
+    public getFlatsBySectionAndHouse(params) {
+        return this.http.get(`/api/search?houses=${params.house}&sections=${params.section}`);
     }
 
     public imageUpload(file) {

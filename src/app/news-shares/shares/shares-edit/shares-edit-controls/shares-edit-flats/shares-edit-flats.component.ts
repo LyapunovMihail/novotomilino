@@ -1,6 +1,6 @@
+import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SharesService } from '../../../shares.service';
 import {
-    ShareBodyBlock,
     ShareFlat,
     ShareFlatRoomEnum,
     ShareFlatDecorationEnum,
@@ -31,15 +31,15 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     public sectionsOptions = ['1', '2', '3', '4'];
 
+    public housesOptions = ['1', '2', '3', '9'];
+
     public flats = [];
 
     public flatsOptions = [];
 
-    public roomSelectOpen: number;
-
     public shareFlatDiscountType = ShareFlatDiscountType;
 
-    public conf: ShareBodyBlock;
+    public shareFlat: ShareFlat;
 
     uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
 
@@ -48,11 +48,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     ) {}
 
     writeValue(value: any) {
-        this.conf = value;
-        if (this.conf.blockFlats.length > 0) {
-            this.conf.blockFlats.forEach((flat: ShareFlat, i: number) => {
-                this.changeSection(flat.section, i);
-            });
+        this.shareFlat = JSON.parse(JSON.stringify(value));
+        if (this.shareFlat) {
+            this.changeSectionAndHouse({section: this.shareFlat.section, house: this.shareFlat.house});
         }
     }
 
@@ -65,19 +63,11 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     registerOnTouched() {}
 
     changeText() {
-        this.propagateChange(this.conf);
+        this.propagateChange(this.shareFlat);
     }
 
-    public removeItem(i) {
-        if (this.conf.blockFlats.length > 1) {
-            if (confirm('Удалить квартиру?')) {
-                this.conf.blockFlats.splice(i, 1);
-                this.flats.splice(i, 1);
-                this.flatsOptions.splice(i, 1);
-            }
-        } else {
-            this.remove.next();
-        }
+    public removeItem() {
+        this.remove.next();
     }
 
     addFlat() {
@@ -94,82 +84,85 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
             discount: null,
             discountType: ShareFlatDiscountType.SUM
         };
-        this.conf.blockFlats.push(flat);
+       // this.shareFlats.push(flat);
     }
 
-    changeSection(e, i) {
-        this.sharesService.getFlatsBySectionNum(e)
-            .subscribe((data) => {
-                this.flats.splice(i, 0, data);
-                this.initFlatsOptions(i);
+    changeSectionAndHouse(params) {
+        this.sharesService.getFlatsBySectionAndHouse(params)
+            .subscribe((data: IAddressItemFlat[]) => {
+                this.flats = data;
+                this.initFlatsOptions();
             });
     }
 
-    changeFlat(e, i) {
-        const flat = this.flats[i].find((flatItem) => flatItem.flat === Number(e));
+    changeFlat(e) {
+        const flat = this.flats.find((flatItem) => flatItem.flat === Number(e));
         if (flat == null) {
             return;
         }
-        this.conf.blockFlats[i].house = flat.house;
-        this.conf.blockFlats[i].floor = flat.floor;
-        this.conf.blockFlats[i].space = flat.space;
+        this.shareFlat.house = flat.house;
+        this.shareFlat.section = flat.section;
+        this.shareFlat.floor = flat.floor;
+        this.shareFlat.space = flat.space;
         switch (flat.rooms) {
             case 0:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.STUDIO;
+                this.shareFlat.room = ShareFlatRoomEnum.STUDIO;
                 break;
             case 1:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.ONE_ROOM;
+                this.shareFlat.room = ShareFlatRoomEnum.ONE_ROOM;
                 break;
             case 2:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.TWO_ROOM;
+                this.shareFlat.room = ShareFlatRoomEnum.TWO_ROOM;
                 break;
             case 3:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.THREE_ROOM;
+                this.shareFlat.room = ShareFlatRoomEnum.THREE_ROOM;
                 break;
             default:
-                this.conf.blockFlats[i].room = null;
+                this.shareFlat.room = null;
         }
         switch (flat.decoration) {
             case '00':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.WITHOUT;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.WITHOUT;
                 break;
             case '01':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.ROUGHING;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.ROUGHING;
                 break;
             case '02':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
                 break;
             case '03':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.CLEAN;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.CLEAN;
                 break;
             case '04':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.LIGHT;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.LIGHT;
                 break;
             case '05':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.DARK;
+                this.shareFlat.decoration = ShareFlatDecorationEnum.DARK;
                 break;
             default:
-                this.conf.blockFlats[i].decoration = null;
+                this.shareFlat.decoration = null;
         }
-        this.conf.blockFlats[i].scheme = `/assets/floor-plans/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
-        this.conf.blockFlats[i].price = flat.price;
+        this.shareFlat.scheme = `/assets/floor-plans/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
+        this.shareFlat.price = flat.price;
     }
 
-    initFlatsOptions(i) {
-        if (this.flats[i] == null || this.flats[i].length === 0) {
+    initFlatsOptions() {
+        console.log('flats: ', this.flats);
+        if (this.flats.length === 0) {
             return;
         }
 
-        this.flatsOptions.splice(i, 0, this.flats[i].map((flat) => {
+        console.log('flats: ', this.flats);
+        this.flatsOptions = this.flats.map((flat) => {
             return flat.flat;
-        }));
+        });
     }
 
-    getDiscount(i): number {
-        if (this.conf.blockFlats[i].discountType === ShareFlatDiscountType.PERCENT) {
-            const discount = +this.conf.blockFlats[i].price * (+this.conf.blockFlats[i].discount / 100);
+    getDiscount(): number {
+        if (this.shareFlat.discountType === ShareFlatDiscountType.PERCENT) {
+            const discount = +this.shareFlat.price * (+this.shareFlat.discount / 100);
             return +discount.toFixed(2);
         }
-        return +this.conf.blockFlats[i].discount;
+        return +this.shareFlat.discount;
     }
 }

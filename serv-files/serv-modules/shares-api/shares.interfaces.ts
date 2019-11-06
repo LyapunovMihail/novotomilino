@@ -9,13 +9,6 @@ export enum ShareFlatDiscountType {
     SUM = 'sum'
 }
 
-export enum ShareBodyEnum {
-    DESCRIPTION = 'description',
-    LIST = 'list',
-    IMAGE = 'image',
-    FLATS = 'flats'
-}
-
 export enum ShareFlatRoomEnum {
     STUDIO = 'Студия',
     ONE_ROOM = '1-комн.',
@@ -47,18 +40,6 @@ export interface ShareFlat {
     discount: string;
 }
 
-export interface ShareBodyBlock {
-    blockType: ShareBodyEnum;
-    blockOrderNumber: number;
-    blockDescription?: string;
-    blockList?: string[];
-    blockImg?: {
-        image: string;
-        thumbnail: string;
-    };
-    blockFlats?: ShareFlat[];
-}
-
 export interface Share {
     _id?: any;
     name: string;
@@ -71,5 +52,5 @@ export interface Share {
     finish_date: string;
     requestBtn: boolean;
     show_on_main: boolean;
-    body: ShareBodyBlock[];
+    shareFlats: ShareFlat[];
 }

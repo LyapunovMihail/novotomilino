@@ -23,7 +23,7 @@
                 <textarea class="create-form__form-area create-form__form-area_title"
                     name="title"
                     placeholder="Максимум 60 символов"
-                    [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
+                    [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid && form.controls['title'].touched)}"
                     [formControl]="form.controls['title']">
                 </textarea>
             </div>

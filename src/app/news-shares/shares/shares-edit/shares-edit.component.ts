@@ -7,7 +7,6 @@ import {
     Share,
     SHARES_CREATE_ID,
     SHARES_UPLOADS_PATH,
-    ShareBodyBlock,
     ShareFlat,
     ShareFlatDiscountType
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
@@ -28,7 +27,7 @@ export function createDynamicNewsObj(): Share {
         show_on_main: false,
         created_at: new Date().toISOString(),
         finish_date: new Date().toISOString(),
-        body: [],
+        shareFlats: [],
         requestBtn: false
     });
 }
@@ -86,7 +85,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             countdown: new FormControl(false, Validators.required),
             requestBtn: new FormControl(false, Validators.required),
             finish_date: new FormControl('', Validators.required),
-            body: new FormArray([])
+            shareFlats: new FormArray([])
         });
 
         this.days = 0;
@@ -126,35 +125,36 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.unsubscribe();
     }
 
-    public get body(): FormArray { return this.form.get('body') as FormArray; }
+    public get shareFlats(): FormArray { return this.form.get('shareFlats') as FormArray; }
 
-    public addFlats(order?: number, value?: ShareFlat[]) {
-        this.body.push(new FormControl({
-            blockType: 'flats',
-            blockOrderNumber: order ? order : this.body.controls.length,
-            blockFlats: value
-                ? value
-                : [
-                    {
-                        house: null,
-                        number: null,
-                        section: null,
-                        floor: null,
-                        space: null,
-                        room: null,
-                        decoration: null,
-                        scheme: null,
-                        price: null,
-                        discount: null,
-                        discountType: ShareFlatDiscountType.SUM
-                    }
-                ]
-        }));
+    public addFlats(value?: ShareFlat[]) {
+        if (value) {
+            console.log('values: ', value);
+            value.forEach((flat: ShareFlat) => {
+                this.shareFlats.push(new FormControl(flat));
+            });
+        } else {
+            this.shareFlats.push(new FormControl(
+                {
+                    house: null,
+                    number: null,
+                    section: null,
+                    floor: null,
+                    space: null,
+                    room: null,
+                    decoration: null,
+                    scheme: null,
+                    price: null,
+                    discount: null,
+                    discountType: null
+                }
+            ));
+        }
     }
 
     public removeBlock(cnt) {
-        if (confirm('Удалить секцию?')) {
-            this.body.removeAt(cnt);
+        if (confirm('Удалить квартиру?')) {
+            this.shareFlats.removeAt(cnt);
         }
     }
 
@@ -184,11 +184,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
             this.finishDate = data[0].finish_date;
-            (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
-                if (body.blockType === 'flats') {
-                    this.addFlats(body.blockOrderNumber, body.blockFlats);
-                }
-            });
+            this.addFlats(data[0].shareFlats);
             this.countDown();
         });
     }
