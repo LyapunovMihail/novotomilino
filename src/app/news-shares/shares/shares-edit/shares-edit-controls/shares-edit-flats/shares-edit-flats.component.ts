@@ -7,7 +7,7 @@ import {
     ShareFlatDiscountType,
     SHARES_UPLOADS_PATH
 } from '../../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Output, EventEmitter, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -29,6 +29,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
 
+    @Input() formControlName: any;
+
     public sectionsOptions = ['1', '2', '3', '4'];
 
     public housesOptions = ['1', '2', '3', '9'];
@@ -48,7 +50,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     ) {}
 
     writeValue(value: any) {
-        this.shareFlat = JSON.parse(JSON.stringify(value));
+        this.shareFlat = value;
         if (this.shareFlat) {
             this.changeSectionAndHouse({section: this.shareFlat.section, house: this.shareFlat.house});
         }
@@ -68,23 +70,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     public removeItem() {
         this.remove.next();
-    }
-
-    addFlat() {
-        const flat = {
-            house: null,
-            number: null,
-            section: null,
-            floor: null,
-            space: null,
-            room: null,
-            decoration: null,
-            scheme: null,
-            price: null,
-            discount: null,
-            discountType: ShareFlatDiscountType.SUM
-        };
-       // this.shareFlats.push(flat);
     }
 
     changeSectionAndHouse(params) {
@@ -147,12 +132,10 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     }
 
     initFlatsOptions() {
-        console.log('flats: ', this.flats);
         if (this.flats.length === 0) {
             return;
         }
 
-        console.log('flats: ', this.flats);
         this.flatsOptions = this.flats.map((flat) => {
             return flat.flat;
         });

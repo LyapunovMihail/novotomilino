@@ -1,4 +1,4 @@
-import { Share, ShareBodyBlock, ShareFlat, ShareFlatDiscountType } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Share, ShareFlat, ShareFlatDiscountType } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -15,11 +15,7 @@ export class FlatsDiscountService {
         this.http.get<{ length: number, sharesList: Share[] }>(`/api/shares/list?limit=${100}&skip=${0}`)
             .subscribe((data: { length: number, sharesList: Share[] }) => {
                 data.sharesList.forEach((share: Share) => {
-                    share.body.forEach((block: ShareBodyBlock) => {
-                        if (block.blockType === 'flats') {
-                            this.shareFLats = [...this.shareFLats, ...block.blockFlats];
-                        }
-                    });
+                    this.shareFLats = [...this.shareFLats, ...share.shareFlats];
                 });
             }, (err) => {
                 console.log(err);

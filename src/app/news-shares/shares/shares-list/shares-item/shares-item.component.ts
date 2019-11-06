@@ -15,9 +15,6 @@ import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 })
 export class SharesItemComponent implements OnInit {
 
-    public isReserveFormOpen = false;
-    public isCallFormOpen = false;
-
     public share: Share;
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
@@ -38,6 +35,9 @@ export class SharesItemComponent implements OnInit {
         room: '0',
         price: 0
     };
+
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -113,5 +113,11 @@ export class SharesItemComponent implements OnInit {
             return +discount.toFixed(2);
         }
         return +flat.discount;
+    }
+
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 }

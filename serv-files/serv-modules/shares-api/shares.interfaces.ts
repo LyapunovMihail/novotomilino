@@ -11,9 +11,9 @@ export enum ShareFlatDiscountType {
 
 export enum ShareFlatRoomEnum {
     STUDIO = 'Студия',
-    ONE_ROOM = '1-комн.',
-    TWO_ROOM = '2-комн.',
-    THREE_ROOM = '3-комн.'
+    ONE_ROOM = '1-комнатная',
+    TWO_ROOM = '2-комнатная',
+    THREE_ROOM = '3-комнатная'
 }
 
 export enum ShareFlatDecorationEnum {

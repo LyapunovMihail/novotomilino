@@ -3,20 +3,17 @@
 :host,
 .form-flats-list {
     width: 100%;
-}
-
-.form-flats-list {
     display: flex;
     flex-wrap: wrap;
     margin: 10px 0 0;
-    
-    &__item {
-        width: 760px;
-        box-sizing: border-box;
-        border: 1px solid #999a9b;
-        padding: 20px;
-        &:not(:first-child) { margin: 10px 0 0; }
-    }
+}
+
+.form-flats-list__item {
+    width: 760px;
+    box-sizing: border-box;
+    border: 1px solid #999a9b;
+    padding: 20px;
+    &:not(:first-child) { margin: 10px 0 0; }
 }
 
 .share-view {

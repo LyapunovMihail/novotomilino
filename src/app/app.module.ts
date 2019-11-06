@@ -104,7 +104,8 @@ interface StoreType {
       AppComponent,
       VideoModalComponent,
       ImgModalComponent,
-      OverlayComponent
+      OverlayComponent,
+
   ],
   imports: [
     ...APP_MODULES

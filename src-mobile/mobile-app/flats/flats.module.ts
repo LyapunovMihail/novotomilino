@@ -12,7 +12,6 @@ import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
 import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 import { SearchOutputModule } from './search-output/search-output.module';
-import { SearchOutputComponent } from './search-output/search-output.component';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -25,8 +24,7 @@ const FlatsComponents = [
 
 @NgModule({
     exports: [
-        ...FlatsComponents,
-        SearchOutputComponent
+        ...FlatsComponents
 
     ],
     declarations: [

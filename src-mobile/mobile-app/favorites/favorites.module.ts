@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { PriceNumberModule } from '../price-number/price-number.module';
 import { FavoritesFormComponent } from './favorites-form/favorites-form.component';
 import { ModalApartamenModule } from '../flats/modal-apartament/modal-apartament.module';
-import { ModalApartamentComponent } from '../flats/modal-apartament/modal-apartament.component';
 
 @NgModule({
     imports: [
@@ -27,8 +26,7 @@ import { ModalApartamentComponent } from '../flats/modal-apartament/modal-aparta
     ],
     exports: [
         FavoritesComponent,
-        FavoritesFormComponent,
-        ModalApartamentComponent
+        FavoritesFormComponent
     ]
 })
 export class FavoritesModule {}

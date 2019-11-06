@@ -7,13 +7,11 @@ import {
     Share,
     SHARES_CREATE_ID,
     SHARES_UPLOADS_PATH,
-    ShareFlat,
-    ShareFlatDiscountType
+    ShareFlat
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { SharesObserverService } from '../shares-observer.service';
-import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 
 export function createDynamicNewsObj(): Share {
@@ -52,7 +50,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public paginatorCount;
 
-    @Input() isForm: boolean = false ;
+    @Input() isForm = false ;
 
     @Input() redactId: any ;
 
@@ -64,14 +62,13 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     private subs: Subscription[] = [];
     private _ngUnsubscribe: Subject<any> = new Subject();
 
-    public formLoading: boolean = true;
+    public formLoading = true;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private sharesService: SharesService,
         private sharesObserverService: SharesObserverService,
-        private flatsDiscountService: FlatsDiscountService,
-        private router: Router
+        private flatsDiscountService: FlatsDiscountService
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
         this.form  = new FormGroup({
@@ -103,7 +100,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         } else {
             this.getObjectById();
         }
-        this.finishDate = this.form.value['finish_date'];
+        this.finishDate = this.form.value.finish_date;
 
         this.countDown();
 
