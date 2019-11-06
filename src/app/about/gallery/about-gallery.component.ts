@@ -86,11 +86,11 @@ export class AboutGalleryComponent implements OnInit, OnDestroy {
     }
 
     public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ? this.currentSlide + 1 : this.mainSnippets.length - 1;
+        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ? this.currentSlide + 1 : 0 ;
     }
 
     public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
+        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.mainSnippets.length - 1 ;
     }
 
     public toggleSnippets(snippets, activeSnippets) {
