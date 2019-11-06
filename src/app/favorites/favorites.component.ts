@@ -1,16 +1,7 @@
-import {
-    FavoritesService
-} from './../commons/favorites.service';
-import {
-    Router
-} from '@angular/router';
-import {
-    Component, OnDestroy,
-    OnInit
-} from '@angular/core';
-import {
-    IAddressItemFlat
-} from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FavoritesService } from './../commons/favorites.service';
+import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { mockFlats } from './mockFlats';
 
 
@@ -22,6 +13,7 @@ import { mockFlats } from './mockFlats';
 export class FavoritesComponent implements OnInit, OnDestroy {
 
     public flats: IAddressItemFlat[] = [];
+    public testFlats = mockFlats;
     public directionSort = false;
     public sortType = '';
 
@@ -129,5 +121,10 @@ export class FavoritesComponent implements OnInit, OnDestroy {
 
     get pdfUrls() {
         return this.flats.map((flat) => `https://oblakadom.ru/api/pdf?id=${flat._id}`);
+    }
+
+    public flatDeclension(number, titles) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return number + ' ' + titles[ (number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5] ];  
     }
 }
