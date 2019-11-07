@@ -28,6 +28,14 @@ export class AddressesModel {
         };
     }
 
+    public async getObjectsByIds(body) {
+        console.log('body: ', body);
+        const ids = body.flatIds.map(id => ObjectId(id));
+        const result =  await this.collection.find({_id: {$in: ids}}).toArray();
+        console.log('result: ', result);
+        return await this.collection.find({_id: {$in: ids}}).toArray();
+    }
+
     public async getSearchConfig() {
         let config = await this.db.collection('flats-search-config').find({}).toArray();
         return config;

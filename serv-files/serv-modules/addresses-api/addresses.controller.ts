@@ -30,6 +30,9 @@ export class AddressesController extends AddressesModel {
         this.router.get('/search-config', responseHandler(async(req) => {
             return await this.getSearchConfig();
         }));
+        this.router.post('/search/by_ids', responseHandler(async(req) => {
+            return await this. getObjectsByIds(req.body);
+        }));
 
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);

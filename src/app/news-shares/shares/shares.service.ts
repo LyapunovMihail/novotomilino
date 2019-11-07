@@ -40,6 +40,10 @@ export class SharesService {
         return this.http.get(`/api/search?houses=${params.house}&sections=${params.section}`);
     }
 
+    public getFlatsByIds(flatIds) {
+        return this.http.post('/api/search/by_ids', {flatIds});
+    }
+
     public imageUpload(file) {
 
         return new Promise((resolve, reject) => {

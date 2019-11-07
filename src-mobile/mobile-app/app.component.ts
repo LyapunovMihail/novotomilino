@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
+import { FlatsDiscountService } from './commons/flats-discount.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -11,7 +12,6 @@ export const ROOT_SELECTOR = 'app-root';
         './app.component.css'
     ],
     template: `
-        <!-- <app-authorization></app-authorization> -->
 
         <section>
 
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
     constructor(
         public appState: AppState,
         private router: Router,
+        public flatsDiscountService: FlatsDiscountService
     ) {}
 
     public ngOnInit() {
@@ -48,5 +49,8 @@ export class AppComponent implements OnInit {
             this.currentUrl = this.router.url;
             window.scrollTo(0, 0);
         });
+
+        // Загружаем акции для дальнейшего вычисления скидки по квартирам
+        this.flatsDiscountService.getShares();
     }
 }

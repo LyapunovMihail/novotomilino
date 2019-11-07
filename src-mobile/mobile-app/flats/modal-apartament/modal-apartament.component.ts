@@ -7,10 +7,7 @@ import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses
 @Component({
     selector: 'app-modal-apartment',
     templateUrl: 'modal-apartament.component.html',
-    styleUrls: ['modal-apartament.component.scss'],
-    providers: [
-        FlatsDiscountService
-    ]
+    styleUrls: ['modal-apartament.component.scss']
 })
 
 export class ModalApartamentComponent implements OnInit {
@@ -33,6 +30,7 @@ export class ModalApartamentComponent implements OnInit {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        console.log('this.flatData: ', this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
     }
 

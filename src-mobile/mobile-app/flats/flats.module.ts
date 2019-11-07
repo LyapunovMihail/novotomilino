@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
 import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 import { SearchOutputModule } from './search-output/search-output.module';
@@ -31,7 +30,6 @@ const FlatsComponents = [
         ...FlatsComponents
     ],
     imports: [
-        FormsRequestModule,
         ModalApartamenModule,
         SearchOutputModule,
         CommonModule,

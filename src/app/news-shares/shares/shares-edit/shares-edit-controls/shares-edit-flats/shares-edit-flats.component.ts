@@ -2,8 +2,6 @@ import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/a
 import { SharesService } from '../../../shares.service';
 import {
     ShareFlat,
-    ShareFlatRoomEnum,
-    ShareFlatDecorationEnum,
     ShareFlatDiscountType,
     SHARES_UPLOADS_PATH
 } from '../../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
@@ -85,50 +83,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         if (flat == null) {
             return;
         }
-        this.shareFlat.house = flat.house;
-        this.shareFlat.section = flat.section;
-        this.shareFlat.floor = flat.floor;
-        this.shareFlat.space = flat.space;
-        switch (flat.rooms) {
-            case 0:
-                this.shareFlat.room = ShareFlatRoomEnum.STUDIO;
-                break;
-            case 1:
-                this.shareFlat.room = ShareFlatRoomEnum.ONE_ROOM;
-                break;
-            case 2:
-                this.shareFlat.room = ShareFlatRoomEnum.TWO_ROOM;
-                break;
-            case 3:
-                this.shareFlat.room = ShareFlatRoomEnum.THREE_ROOM;
-                break;
-            default:
-                this.shareFlat.room = null;
-        }
-        switch (flat.decoration) {
-            case '00':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.WITHOUT;
-                break;
-            case '01':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.ROUGHING;
-                break;
-            case '02':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
-                break;
-            case '03':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.CLEAN;
-                break;
-            case '04':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.LIGHT;
-                break;
-            case '05':
-                this.shareFlat.decoration = ShareFlatDecorationEnum.DARK;
-                break;
-            default:
-                this.shareFlat.decoration = null;
-        }
-        this.shareFlat.scheme = `/assets/floor-plans/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
-        this.shareFlat.price = flat.price;
+        this.shareFlat = {discountType: this.shareFlat.discountType, discountValue: this.shareFlat.discountValue, ...flat};
     }
 
     initFlatsOptions() {
@@ -139,13 +94,5 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.flatsOptions = this.flats.map((flat) => {
             return flat.flat;
         });
-    }
-
-    getDiscount(): number {
-        if (this.shareFlat.discountType === ShareFlatDiscountType.PERCENT) {
-            const discount = +this.shareFlat.price * (+this.shareFlat.discount / 100);
-            return +discount.toFixed(2);
-        }
-        return +this.shareFlat.discount;
     }
 }

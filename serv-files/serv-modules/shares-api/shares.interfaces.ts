@@ -1,3 +1,5 @@
+import { IAddressItemFlat } from '../addresses-api/addresses.interfaces';
+
 export const SHARES_COLLECTION_NAME = 'shares';
 
 export const SHARES_UPLOADS_PATH = 'uploads/shares/';
@@ -9,35 +11,9 @@ export enum ShareFlatDiscountType {
     SUM = 'sum'
 }
 
-export enum ShareFlatRoomEnum {
-    STUDIO = 'Студия',
-    ONE_ROOM = '1-комнатная',
-    TWO_ROOM = '2-комнатная',
-    THREE_ROOM = '3-комнатная'
-}
-
-export enum ShareFlatDecorationEnum {
-    WITHOUT = 'Без отделки',
-    ROUGHING = 'Черновая отделка',
-    WITHOUT_WITH_WALLS = 'Б/о с перегородками',
-    CLEAN = 'Чистовая',
-    FINISH = 'Финишная отделка',
-    LIGHT = 'Светлая',
-    DARK = 'Темная'
-}
-
-export interface ShareFlat {
-    house: string;
-    number: string;
-    section: string;
-    floor: string;
-    space: string;
-    room: ShareFlatRoomEnum;
-    decoration: ShareFlatDecorationEnum;
-    scheme: string;
-    price: string;
+export interface ShareFlat extends IAddressItemFlat {
     discountType: ShareFlatDiscountType;
-    discount: string;
+    discountValue: number;
 }
 
 export interface Share {

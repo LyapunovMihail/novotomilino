@@ -18,7 +18,7 @@
             </select>
         </div>
         <div class="share-view__select-item share-view__select_flat">
-            <select [(ngModel)]="shareFlat.number"
+            <select [(ngModel)]="shareFlat.flat"
                 (ngModelChange)="changeFlat($event)"
                 class="share-view__select-list">
                 <option *ngFor="let flat of flatsOptions"
@@ -47,7 +47,7 @@
     </div>
 
     <div class="share-view__footer-wrap">
-        <input [(ngModel)]="shareFlat.discount"
+        <input [(ngModel)]="shareFlat.discountValue"
             (input)="changeText()"
             type="text"
             class="share-view__footer-result">

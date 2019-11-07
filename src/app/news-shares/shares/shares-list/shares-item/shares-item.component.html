@@ -38,14 +38,13 @@
                     <div *ngIf="img.style.display === 'none'" class="client-share__flats-image-error">Изображение недоступно</div>
                 </div>
                 <!-- Нужно убрать сокращение у Кол-ва комнат -->
-                <div class="client-share__flats-house client-share__flats-room">{{flat.room}}</div>
+                <div class="client-share__flats-house client-share__flats-room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
                 <div class="client-share__flats-house client-share__flats-space">{{flat.space}} м²</div>
                 <div class="client-share__flats-house client-share__flats-floor">Этаж {{flat.floor}}</div>
                 <div class="client-share__flats-house client-share__flats-corpus">Корпус {{flat.house}}</div>
-                <div class="client-share__flats-house client-share__flats-decoration">{{flat.decoration}}</div>
+                <div class="client-share__flats-house client-share__flats-decoration">{{flat.decorationName}}</div>
                 <div class="client-share__flats-price">
-                    <p class="client-share__flats-price_new">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
-                    <!-- flat.price почему-то не делает пробелов после млн, тыс, сот -->
+                    <p class="client-share__flats-price_new">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
                     <p class="client-share__flats-price_old">{{flat.price | bitNumber}} &#8381;</p>
                 </div>
             </a>

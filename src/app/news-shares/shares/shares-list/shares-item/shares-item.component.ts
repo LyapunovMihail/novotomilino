@@ -1,5 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
@@ -19,22 +20,12 @@ export class SharesItemComponent implements OnInit {
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
-    public shareFlatDiscountType = ShareFlatDiscountType;
-
     public indexNum: number;
 
     public sharesList: Share[];
 
     public prevId = '';
     public nextId = '';
-
-    public selectFlat = {
-        house: '0',
-        number: '0',
-        space: '0',
-        room: '0',
-        price: 0
-    };
 
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
@@ -72,13 +63,9 @@ export class SharesItemComponent implements OnInit {
     }
 
     public getSnippet(id) {
-        this.sharesService.getShareById(id)
-            .subscribe((share: Share[]) => {
-                this.share = share[0];
-                this.checkPrevAndNext(id);
-            }, (err) => {
-                console.error(err);
-            });
+        this.share = this.sharesList.find((share) => share._id === id);
+        this.refreshShareFlats();
+        this.checkPrevAndNext(id);
     }
 
     public checkPrevAndNext(id) {
@@ -97,22 +84,33 @@ export class SharesItemComponent implements OnInit {
         return Math.ceil(duration.asDays() * -1);
     }
 
-    public setFlatData(flat) {
-        this.selectFlat = {
-            house: flat.house,
-            number: flat.number,
-            space: flat.space,
-            room: (flat.room === 'Студия') ? '0' : (flat.room === 'Однокомнатная') ? '1' : (flat.room === 'Двухкомнатная') ? '2' : '3',
-            price: +flat.price - +flat.discount
-        };
-    }
-
     public getDiscount(flat): number {
         if (flat.discountType === ShareFlatDiscountType.PERCENT) {
-            const discount = +flat.price * (+flat.discount / 100);
+            const discount = flat.price * (flat.discountValue / 100);
             return +discount.toFixed(2);
         }
-        return +flat.discount;
+        return flat.discountValue;
+    }
+
+    refreshShareFlats() {
+        const flatsData = this.share.shareFlats.map((flat) => flat._id);
+        this.sharesService.getFlatsByIds(flatsData)
+            .subscribe((refreshFlats: IAddressItemFlat[]) => {
+                    this.share.shareFlats.forEach((flat: ShareFlat) => {
+                        this.updateFlat(flat, refreshFlats);
+                    });
+                },
+                (err) => console.error(err)
+            );
+    }
+
+    updateFlat(shareFlat: ShareFlat, refreshFlats: IAddressItemFlat[]) {
+        const refreshFlat: IAddressItemFlat = refreshFlats.find((freshFlat) => shareFlat._id === freshFlat._id);
+        if (refreshFlat == null) {
+            return;
+        }
+
+        shareFlat = {discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat};
     }
 
     public openApartmentModal(index) {

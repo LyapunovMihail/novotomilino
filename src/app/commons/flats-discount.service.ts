@@ -23,14 +23,14 @@ export class FlatsDiscountService {
     }
 
     public getDiscount(flat): number {
-        const shareFlat = this.shareFLats.find((sFlat) => +sFlat.number === flat.flat);
+        const shareFlat = this.shareFLats.find((sFlat) => sFlat.flat === flat.flat && sFlat.house === flat.house);
 
         if (shareFlat) {
             if (shareFlat.discountType === ShareFlatDiscountType.PERCENT) {
-                const discount = +shareFlat.price * (+shareFlat.discount / 100);
+                const discount = shareFlat.price * (shareFlat.discountValue / 100);
                 return +discount.toFixed(2);
             }
-            return +shareFlat.discount;
+            return shareFlat.discountValue;
         }
         return null;
     }
