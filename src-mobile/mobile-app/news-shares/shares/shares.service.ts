@@ -14,8 +14,8 @@ export class SharesService {
         return this.http.get<{length: number, sharesList: Share[]}>(`/api/shares/list?limit=${limit}&skip=${skip}`);
     }
 
-    public getFlatsByIds(flatIds) {
-        return this.http.post('/api/search/by_ids', {flatIds});
+    public getFlatsByHousesAndNumbers(flatsData) {
+        return this.http.post('/api/search/by_houses_and_numbers', {flatsData});
     }
 
     public getShareById(id): Observable<Share[]> {

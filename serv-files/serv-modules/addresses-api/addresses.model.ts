@@ -28,12 +28,8 @@ export class AddressesModel {
         };
     }
 
-    public async getObjectsByIds(body) {
-        console.log('body: ', body);
-        const ids = body.flatIds.map(id => ObjectId(id));
-        const result =  await this.collection.find({_id: {$in: ids}}).toArray();
-        console.log('result: ', result);
-        return await this.collection.find({_id: {$in: ids}}).toArray();
+    public async getObjectsByHousesAndNumbers(body) {
+        return await this.collection.find({house: {$in: body.flatsData.houses}, flat: {$in: body.flatsData.numbers}}).toArray();
     }
 
     public async getSearchConfig() {

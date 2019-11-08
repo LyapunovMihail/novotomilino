@@ -48,6 +48,14 @@ export class ApartmentComponent implements OnInit {
         return this.flatsDiscountService.getDiscount(flat);
     }
 
+    public minCredit(price) {
+        let minPrice = (price / 100 * 5);
+        if (this.flatData.discount) {
+            minPrice = (price - this.flatData.discount) / 100 * 5;
+        }
+        return minPrice;
+    }
+
     public toFavorite(): void {
         this.favoritesService.toFavorite(this.flatData);
     }

@@ -32,16 +32,14 @@
                 <li *ngFor="let flat of share.shareFlats; let i = index" class="flat-list__item flat-list__item_info">
                     <a (click)="openApartmentModal(i)" class="flat-list__item_link">
                         <div class="flat-list__item-img">
-                            <!-- Изображение не работает -->
-                           <!-- <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image"> -->
-                            <img class="client-share__flats-image-item" (error)="img.style.display = 'none'"
+                            <img (error)="img.style.display = 'none'"
                                  [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-                            <div *ngIf="img.style.display === 'none'" class="client-share__flats-image-error">Изображение недоступно</div>
+                            <div *ngIf="img.style.display === 'none'" class="flat-list__item-img-error"></div>
                         </div>
     
                         <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div> <!-- Должна быть "комнатная" а не "комн." -->
-                            <div class="flat-list__item-text flat-list__item-text_corpus">Корпус {{flat.house}}</div> <!-- Должен быть корпус -->
+                            <div class="flat-list__item-text flat-list__item-text_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
+                            <div class="flat-list__item-text flat-list__item-text_corpus">Корпус {{flat.house}}</div>
                             <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
                         </div>
                         <div class="flat-list__item-wrap">
@@ -52,16 +50,13 @@
                             </div>
                         </div>
                     </a>
-                    <div class="flat-list__item-favorite"></div>
+                   <!-- <div class="flat-list__item-favorite"></div> -->
                 </li>
             </ul>
         </li>
     </ul>
 </div>
 
-<!-- 
-    TODO: Должны быть модалки квартиры и соответственно ипотека/забронировать (08.08.19)
- -->
 <app-modal-apartment *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"
     [flatsList]="share.shareFlats"

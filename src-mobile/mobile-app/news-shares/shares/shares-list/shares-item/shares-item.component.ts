@@ -93,8 +93,11 @@ export class SharesItemComponent implements OnInit {
     }
 
     refreshShareFlats() {
-        const flatsData = this.share.shareFlats.map((flat) => flat._id);
-        this.sharesService.getFlatsByIds(flatsData)
+        const flatsData: {houses: number[], numbers: number[]} = {houses: [], numbers: []};
+        flatsData.houses = this.share.shareFlats.map((flat) => flat.house);
+        flatsData.numbers = this.share.shareFlats.map((flat) => flat.flat);
+
+        this.sharesService.getFlatsByHousesAndNumbers(flatsData)
             .subscribe((refreshFlats: IAddressItemFlat[]) => {
                     this.share.shareFlats.forEach((flat: ShareFlat) => {
                         this.updateFlat(flat, refreshFlats);
@@ -105,7 +108,7 @@ export class SharesItemComponent implements OnInit {
     }
 
     updateFlat(shareFlat: ShareFlat, refreshFlats: IAddressItemFlat[]) {
-        const refreshFlat: IAddressItemFlat = refreshFlats.find((freshFlat) => shareFlat._id === freshFlat._id);
+        const refreshFlat: IAddressItemFlat = refreshFlats.find((freshFlat) => shareFlat.house === freshFlat.house && shareFlat.flat === freshFlat.flat);
         if (refreshFlat == null) {
             return;
         }
