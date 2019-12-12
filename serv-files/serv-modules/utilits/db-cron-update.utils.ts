@@ -78,7 +78,7 @@ export class DbCronUpdate {
     }
 
     public transformFlatItem(object: DbJsonObject) {
-        if (('Article' in object) && !object.Article.startsWith('ТОМ')) {
+        if (('Article' in object) && !object.Article.startsWith('НТМ')) {
             return;
         }
         const {house, section, floor, flat} = this.parseArticle(object.Article);

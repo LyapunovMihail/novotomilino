@@ -96,7 +96,7 @@
             line-height: 30px;
             position: relative;
             user-select: none;
-            &:before {
+           /* &:before {
                 content: '';
                 position: absolute;
                 top: 6px;
@@ -109,11 +109,11 @@
                 opacity: 1 !important;
                 transform: translateY(0px) !important;
                 pointer-events: all !important;
-            }
+            } */
         }
     }
 
-    &-tooltip {
+    /* &-tooltip {
         width: 253px;
         height: 285px;
         position: absolute;
@@ -142,5 +142,5 @@
             }
         }
         &-image { margin: 0 0 15px; }
-    }
+    } */
 }
