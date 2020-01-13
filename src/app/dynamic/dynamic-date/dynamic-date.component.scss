@@ -56,7 +56,7 @@
     &-item {
         transition: $transition;
         cursor: pointer;
-        &:not(:last-child) { margin-left: 20px; }
+        &+ .dynamic-header__years-item { margin-left: 20px; }
         &:hover {
             color: #e7490f;
             @media (max-width: 767px) { color: $col-black; }
