@@ -121,8 +121,8 @@
         }
 
         &-list {
-            width: 100%;
-            max-width: 675px;
+            // width: 100%;
+            // max-width: 675px;
             // max-width: 777px;
             // сделал ширину меньше пока нет "Избранного", если добавиться - удалить "max-width: 675px" и раскомментировать "max-width: 777px"
             display: flex;
@@ -139,8 +139,8 @@
                 position: relative;
                 cursor: pointer;
 
-                &:not(:last-child) {
-                    margin: 13px 20px 13px 0;
+                &+ .header__nav-list-item {
+                    margin-left: 20px;
                 }
                 &:before {
                     content: '';
