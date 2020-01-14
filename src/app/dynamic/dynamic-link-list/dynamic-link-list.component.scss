@@ -50,4 +50,7 @@
 .ready-segments {
     cursor: pointer;
 }
-.not-ready { pointer-events: none; }
+.not-ready {
+  pointer-events: none;
+  opacity: 0;
+}
