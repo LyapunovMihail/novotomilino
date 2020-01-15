@@ -37,6 +37,7 @@
         align-items: center;
         border-bottom: 1px solid #dcddde;
         box-sizing: border-box;
+        position: relative;
 
         &-sell {
             .g-link_red {
@@ -77,11 +78,16 @@
             background: url('/assets/img/header/logo_desk.svg') no-repeat;
             background-size: 100%;
             outline: none;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
         &-phone {
             text-align: right;
 
             .head-phone__paragraf {
+                display: block;
                 margin: 0;
                 font: 500 16px/24px $font-mus;
                 @include font-smoothing;
@@ -89,6 +95,7 @@
                 color: $col-black;
             }
             .g-link_red {
+                display: block;
                 text-decoration: none;
                 position: relative;
 
@@ -122,8 +129,6 @@
         transition: top $transition;
 
         &-list {
-            width: 100%;
-            max-width: 777px;
             display: flex;
             margin: 0;
             padding: 0;
@@ -133,19 +138,19 @@
             color: $col-black;
 
             &-item {
-                margin: 13px 0;
+                padding: 13px 0;
                 white-space: nowrap;
                 position: relative;
                 cursor: pointer;
 
-                &:not(:last-child) {
-                    margin: 13px 20px 13px 0;
+                &+ .header__nav-list-item {
+                    margin-left: 20px;
                 }
                 &:before {
                     content: '';
                     position: absolute;
                     left: 0;
-                    bottom: -13px;
+                    bottom: 0;
                     width: 0%;
                     height: 2px;
                     background: $col-orange;
@@ -184,6 +189,8 @@
                 height: 48px;
                 background: url('/assets/img/header/logo_tablet.svg') no-repeat;
                 background-size: 100%;
+                top: 50%;
+                transform: translate(-50%, -50%);
             }
             &-menu {
 
@@ -256,6 +263,7 @@
             max-width: none;
             height: calc(100vh - 67px);
             min-height: calc(568px);
+            justify-content: flex-start;
             position: fixed;
             left: 0;
             top: 67px;
@@ -276,10 +284,9 @@
 
                 &-item {
                     margin: 0;
+                    padding: 0;
 
-                    &:not(:last-child) {
-                        margin: 0 0 20px;
-                    }
+                    &+ .header__nav-list-item { margin: 20px 0 0; }
                 }
             }
             &-footer {
@@ -351,11 +358,11 @@
         }
     }
     @media (max-width: 767px) {
-        &__container {
-            align-items: flex-end;
-        }
+        // &__container {
+        //     align-items: flex-end;
+        // }
         &__head {
-            width: calc(50% + (168px / 2)); // Где 168рх это ширина логотипа
+            justify-content: flex-end;
             padding: 0 15px 0 0;
 
             &-logo {
@@ -364,6 +371,7 @@
                 background: url('/assets/img/header/logo_desk.svg') no-repeat;
                 background-size: 100%;
             }
+            &-menu { margin: 0; }
         }
         &__nav {
             padding: 0 0 0 15px;
@@ -374,9 +382,7 @@
                 &-item {
                     margin: 0;
 
-                    &:not(:last-child) {
-                        margin: 0 0 15px;
-                    }
+                    &+ .header__nav-list-item { margin: 15px 0 0; }
                 }
             }
 

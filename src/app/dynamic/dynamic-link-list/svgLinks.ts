@@ -1,5 +1,5 @@
 export const SVGLINKS = [
-    /*{
+    {
         path: 'M16,28 L16,45 L0,45 L0,12 L16,12 L23,12 L23,0 L39,0 L39,12 L39.0391979,12 L39.0391979,28 L23,28 L16,28 Z',
         transform: 'translate(77.000000, 51.000000)',
         dasharray: '2',
@@ -13,7 +13,7 @@ export const SVGLINKS = [
             value: '0',
             transform: 'translate(97.500000, 21.500000) rotate(-90.000000) translate(-97.500000, -21.500000) translate(76.500000, 1.500000)'
         }
-    },*/
+    },
     {
         path: 'M15,160.687274 L70,160.687274 L70,175.687274 L9.09494702e-13,175.687274 L9.09494702e-13,160.687274 L9.09494702e-13,125.687274 L15,125.687274 L15,160.687274 Z',
         transform: 'translate(0, 45)',
@@ -56,7 +56,7 @@ export const SVGLINKS = [
             transform: 'translate(196.000000, 263.000000) rotate(-90.000000) translate(-202.000000, -263.000000) translate(181.000000, 243.000000)'
         }
     },
-    /*{
+    {
         path: 'M0,0 L16,0 L16,68 L0,68 L0,0 Z',
         transform: 'translate(244.000000, 60.000000)',
         dasharray: '2',
@@ -130,22 +130,23 @@ export const SVGLINKS = [
             value: '0',
             transform: 'translate(448.500000, 129.500000) rotate(-90.000000) translate(-448.500000, -129.500000) translate(427.500000, 109.500000)'
         }
-    },*/
+    },
+    // Этот корпус я передвигал(корпус 9), ниже преписал старые значения
     {
         path: 'M0,0 L48,0 L48,16 L0,16 L0,0 Z',
-        transform: 'translate(416.000000, 205.000000)',
+        transform: 'translate(316.000000, 205.000000)', // translate(416.000000, 205.000000)
         name: {
             value: '9',
-            transform: 'translate(440.000000, 231.500000) rotate(-90.000000) translate(-440.000000, -231.500000) ',
+            transform: 'translate(340.000000, 231.500000) rotate(-90.000000) translate(-440.000000, -231.500000) ', // translate(340.000000, 231.500000) 
             x: '435.5',
             y: '234.5'
         },
         ready: {
             value: '0',
-            transform: 'translate(439.500000, 263.000000) rotate(-90.000000) translate(-439.500000, -263.000000) translate(418.500000, 243.000000)'
+            transform: 'translate(339.500000, 263.000000) rotate(-90.000000) translate(-439.500000, -263.000000) translate(418.500000, 243.000000)' // translate(439.500000, 263.000000)
         }
     },
-    /*{
+    {
         path: 'M0,0 L112,0 L112,16 L0,16 L0,0 Z',
         transform: 'translate(296.000000, 112.000000)',
         dasharray: '2',
@@ -189,5 +190,5 @@ export const SVGLINKS = [
             value: '0',
             transform: 'translate(460.500000, 21.500000) rotate(-90.000000) translate(-460.500000, -21.500000) translate(439.500000, 1.500000)'
         }
-    }*/
-]
+    }
+];

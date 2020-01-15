@@ -5,7 +5,7 @@
                 <g id="план-комплекса" transform="translate(260.000000, 409.000000) rotate(90.000000) translate(-260.000000, -409.000000) translate(2.000000, 267.000000)">
 
                     <ng-container *ngFor="let link of linksArray; let i = index">
-
+                        <!-- Класс .not-ready скрывает корпуса у которых есть link.dasharray -->
                         <g (click)="scrollLink(link._id, link.year, link.month)" style="cursor: pointer" [ngClass]="{'not-ready': link.dasharray }">
                             <path [attr.d]="link.path" id="Combined-Shape"
                                   [attr.transform]="link.transform"

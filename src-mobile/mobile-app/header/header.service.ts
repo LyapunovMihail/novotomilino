@@ -42,10 +42,10 @@ export class HeaderService {
             },*/{
                 name: 'Отделка',
                 url: '/decoration'
-            }, {
+            }, /*{
                 name: 'Условия покупки',
                 url: '/purchase'
-            }, {
+            },*/ {
                 name: 'Новости',
                 url: '/news-shares'
             }
