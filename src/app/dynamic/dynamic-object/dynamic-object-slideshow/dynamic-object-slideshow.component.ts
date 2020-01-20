@@ -1,10 +1,14 @@
 import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, LOCALE_ID } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-dynamic-object-slideshow',
     templateUrl: './dynamic-object-slideshow.component.html',
-    styleUrls: ['./dynamic-object-slideshow.component.scss']
+    styleUrls: ['./dynamic-object-slideshow.component.scss'],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'ru-RU' }
+    ]
 })
 
 export class DynamicObjectSlideshowComponent implements OnChanges {
@@ -19,12 +23,20 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
     public uploadsPath: string = `/${DYNAMIC_UPLOADS_PATH}`;
 
     public slides = [];
+    public object = [];
+
+    constructor() { moment.locale('ru'); }
 
     ngOnChanges() {
         if ( this.isSlideShow ) {
             this.slides = this.objectsArray.filter((i) => {
                 return i._id === this.slideShowId;
             })[0]['images'];
+            this.object = this.objectsArray.filter((i) => {
+                return i._id === this.slideShowId;
+            });
+            console.log(this.object);
+            console.log(this.slides);
         }
     }
 
@@ -47,6 +59,8 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
     }
 
     next() {
+        console.log(this.objectsArray);
+        console.log('id: ', this.slideShowId);
         if(this.slideShowCurrent < this.slides.length - 1){
             this.slideShowCurrent ++ ;
         } else {
@@ -64,4 +78,7 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
         }
     }
 
+    public parseDate(date) {
+        return moment(date).format('MMMM YYYY');
+    }
 }

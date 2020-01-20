@@ -93,6 +93,9 @@
         bottom: -44px;
 
         &-title { left: 0; }
-        &-month { right: 0; }
+        &-month {
+            right: 0;
+            text-transform: capitalize;
+        }
     }
 }
