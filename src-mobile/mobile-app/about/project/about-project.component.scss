@@ -60,6 +60,15 @@
             @include font-smoothing;
             color: $col-black;
             margin: 0 0 6px;
+
+            &--path {
+                width: 100%;
+                font: 500 36px/40px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                margin: 0 0 20px;
+                @media(max-width: 767px) { font: 500 28px/32px $font-mus; }
+            }
         }
         &-subtitle {
             font: 500 20px/24px $font-mus;

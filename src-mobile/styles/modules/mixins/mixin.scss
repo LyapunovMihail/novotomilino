@@ -1,6 +1,8 @@
 $font-mus: 'Museo Sans Cyrl', 'sans-serif';
 $font-leksa: 'Leksa', 'sans-serif';
+
 $col-black: #000105;
+$col-white: #fff;
 $col-black-8: rgba(0, 1, 5, 0.8);
 $col-black-7: rgba(0, 1, 5, 0.7);
 $col-black-6: rgba(0, 1, 5, 0.6);
@@ -8,9 +10,11 @@ $col-orange: #e7490f;
 $col-32: #323232;
 $col-97: #979797;
 $col-blue: #0070c9;
+
 $w1600: 1600px - (180px * 2);
 $w1280: 1240px;
 $w768: calc(100% - 30px);
+
 $transition: .2s linear;
 $trans-link: .6s ease;
 $trans-img: transform .7s linear;

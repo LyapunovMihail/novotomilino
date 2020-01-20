@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const ROUTES: Routes = [
     { path: '', loadChildren : './home/home.module#HomeModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
+    { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule' },
     // { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule' },
     { path: 'news-shares', loadChildren : './news-shares/news-shares.module#NewsSharesModule' },
     { path: 'decoration', loadChildren: './decoration/decoration.module#DecorationModule' },
