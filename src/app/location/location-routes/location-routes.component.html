@@ -116,9 +116,9 @@
     <!-- Блок для офиса продаж -->
 
     <div class="office__head" *ngIf="page === 'office'">
-        <div class="office__head-wrap office__head-wrap--for-title">
+        <!-- <div class="office__head-wrap office__head-wrap--for-title">
             <h1 class="office__head-title">Офис продаж</h1>
-        </div>
+        </div> -->
         <!-- <div class="office__head-wrap">
             <p class="office__head-text">Отдел продаж расположен на объекте, на улице Гоголя, 13, Москва</p>
             <p class="office__head-text">График работы <span>9:00-21:00 без выходных</span></p>
@@ -126,7 +126,7 @@
         </div> -->
     </div>
 
-    <div class="location_aside">
+    <div class="location_aside" [class.location_aside--office]="page === 'office'">
 
         <ul class="location_aside_list">
 
