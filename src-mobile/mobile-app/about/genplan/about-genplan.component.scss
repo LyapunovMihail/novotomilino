@@ -56,6 +56,35 @@
     top: 0;
     left: 0;
 
+    &__num {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-white;
+        background-color: $col-orange;
+        padding: 5px 15px;
+        border-radius: 15px;
+        position: absolute;
+        top: 50%;
+        z-index: 10;
+
+        &--item-1 {
+            top: 73%;
+            left: 14%;
+        }
+        &--item-2 {
+            top: 52%;
+            left: 42%;
+        }
+        &--item-3 {
+            top: 42%;
+            left: 57%;
+        }
+        &--item-4 {
+            top: 17%;
+            left: 88%;
+        }
+    }
+
     &__item {
         width: 40px;
         height: 46px;
@@ -117,6 +146,12 @@
             bottom: 84%;
             &:after { background: url(/assets/img/about/plan/sport.svg) 0 0 no-repeat; }
             .markers__item-tooltip_span { border: 1px solid #1da600; }
+        }
+        &_pharmacy {
+            left: 75%;
+            bottom: 75%;
+            &:after { background: url(/assets/img/about/plan/pharmacy.svg) 0 0 no-repeat; }
+            .markers__item-tooltip_span { border: 1px solid #fa9191; }
         }
 
 

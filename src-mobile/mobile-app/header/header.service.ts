@@ -48,6 +48,9 @@ export class HeaderService {
             },*/ {
                 name: 'Новости',
                 url: '/news-shares'
+            }, {
+                name: 'Документация',
+                url: '/documentation'
             }
         ];
     }

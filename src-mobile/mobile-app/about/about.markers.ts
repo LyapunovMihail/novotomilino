@@ -40,6 +40,9 @@ export let GENPLAN_MARKERS: IGenplanMarker[] = [
     }, {
         title: 'Стадион урожай',
         mod: 'sport'
+    }, {
+        title: 'Поликлиника',
+        mod: 'pharmacy'
     }
 ];
 
@@ -54,7 +57,7 @@ export let ABOUT_MARKERS: IAboutMarker[] = [
         title: 'Общая площадь квартир',
         subtitle: '78 873 м²'
     }, {
-        title: 'Окончание строительства 1 очереди',
+        title: 'Окончание строительства',
         subtitle: '2022 г.'
     }, {
         title: 'Количество квартир',
@@ -110,7 +113,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         mod: '',
         classIndex: ''
     }, {
-        link: '#',
+        link: 'https://3-red.com/%D0%B2%D0%B8%D0%B4%D0%BD%D1%8B%D0%B9-%D0%B1%D0%B5%D1%80%D0%B5%D0%B3-2',
         city: 'г. Видное',
         distance: '7,5 км от МКАД',
         addDistance: true,
