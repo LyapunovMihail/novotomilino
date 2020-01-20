@@ -15,9 +15,8 @@
         <div (click)="prev()" class="dynamic-modal__btn dynamic-modal__btn_left"></div>
         <div (click)="next()" class="dynamic-modal__btn dynamic-modal__btn_right"></div>
 
-        <!-- Сюда должны подгружаться Заголовок и месяц с годом -->
-        <p class="dynamic-modal__text dynamic-modal__text-title">Корпус 1</p>
-        <p class="dynamic-modal__text dynamic-modal__text-month">Апрель 2019</p>
+        <p class="dynamic-modal__text dynamic-modal__text-title">{{object[0].title}}</p>
+        <p class="dynamic-modal__text dynamic-modal__text-month">{{ parseDate(object[0].created_at) }}</p>
     </div>
 
 </div>

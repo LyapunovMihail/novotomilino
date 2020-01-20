@@ -3,37 +3,20 @@
         <div class="genplan__head_scrll">
             <div class="genplan__head-img">
                 <img src="/assets/img/about/plan/group-11.jpg" alt="Генплан">
-                
-                <div class="markers__item markers__item_kinder">
-                    <div class="markers__item-tooltip">
-                        Детский сад
+
+                <ng-container *ngFor="let marker of markers">
+
+                    <div class="markers__places markers__places_{{marker.mod}}">
+                        <div class="markers__places-tooltip">
+                            {{marker.title}}
+                        </div>
                     </div>
-                </div>
-                <div class="markers__item markers__item_school">
-                    <div class="markers__item-tooltip">
-                        Школа
-                    </div>
-                </div>
-                <div class="markers__item markers__item_kinder">
-                    <div class="markers__item-tooltip">
-                        Детский сад
-                    </div>
-                </div>
-                <div class="markers__item markers__item_stop">
-                    <div class="markers__item-tooltip">
-                        Остановка «Птицефабрика»
-                    </div>
-                </div>
-                <div class="markers__item markers__item_shop">
-                    <div class="markers__item-tooltip">
-                        Торговый центр
-                    </div>
-                </div>
-                <div class="markers__item markers__item_sport">
-                    <div class="markers__item-tooltip">
-                        Стадион урожай
-                    </div>
-                </div>
+                </ng-container>
+
+                <ng-container *ngFor="let num of ['№1', '№2', '№3', '№9']; let i = index">
+
+                    <div class="markers__num markers__num--item-{{i + 1}}">{{num}}</div>
+                </ng-container>
             
             </div>
         </div>

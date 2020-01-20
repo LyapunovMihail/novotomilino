@@ -39,7 +39,36 @@
 
 .markers {
 
-    &__item {
+    &__num {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-white;
+        background-color: $col-orange;
+        padding: 5px 15px;
+        border-radius: 15px;
+        position: absolute;
+        top: 50%;
+        z-index: 10;
+
+        &--item-1 {
+            top: 73%;
+            left: 14%;
+        }
+        &--item-2 {
+            top: 53%;
+            left: 42%;
+        }
+        &--item-3 {
+            top: 44%;
+            left: 57%;
+        }
+        &--item-4 {
+            top: 20%;
+            left: 88%;
+        }
+    }
+
+    &__places {
         width: 40px;
         height: 46px;
         position: absolute;
@@ -57,7 +86,7 @@
             left: 23%;
             bottom: 66%;
             &:after { background: url(/assets/img/about/plan/kinder.svg) 0 0 no-repeat; }
-            .markers__item-tooltip { border: 1px solid #ffcb0d; }
+            .markers__places-tooltip { border: 1px solid #ffcb0d; }
             &:nth-child(4) {
                 left: 72%;
                 bottom: 89.5%;
@@ -67,13 +96,13 @@
             left: 61%;
             bottom: 66%;
             &:after { background: url(/assets/img/about/plan/school.svg) 0 0 no-repeat; }
-            .markers__item-tooltip { border: 1px solid #ae6bf8; }
+            .markers__places-tooltip { border: 1px solid #ae6bf8; }
         }
         &_shop {
             left: 4%;
             bottom: 48%;
             &:after { background: url(/assets/img/about/plan/shop.svg) 0 0 no-repeat; }
-            .markers__item-tooltip { 
+            .markers__places-tooltip { 
                 border: 1px solid #2095d2;
                 height: 36px;
             }
@@ -82,7 +111,7 @@
             left: 70%;
             bottom: 59%;
             &:after { background: url(/assets/img/about/plan/stop.svg) 0 0 no-repeat; }
-            .markers__item-tooltip {
+            .markers__places-tooltip {
                 border: 1px solid #297acc;
                 height: 36px;
                 left: 2px;
@@ -93,8 +122,17 @@
             left: 61%;
             bottom: 82%;
             &:after { background: url(/assets/img/about/plan/sport.svg) 0 0 no-repeat; }
-            .markers__item-tooltip {
+            .markers__places-tooltip {
                 border: 1px solid #1da600;
+                height: 36px;
+            }
+        }
+        &_pharmacy {
+            left: 75%;
+            top: 18%;
+            &:after { background: url(/assets/img/about/plan/pharmacy.svg) 0 0 no-repeat; }
+            .markers__places-tooltip {
+                border: 1px solid #fa9191;
                 height: 36px;
             }
         }

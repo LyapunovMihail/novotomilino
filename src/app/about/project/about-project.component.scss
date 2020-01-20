@@ -29,6 +29,7 @@
         }
     }
     &__content {
+
         &-descr {
             font: 16px/24px $font-mus;
             @include font-smoothing;
@@ -51,6 +52,14 @@
             @include font-smoothing;
             color: $col-black;
             margin: 0 0 6px;
+
+            &--path {
+                width: 100%;
+                font: 24px/32px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                margin: 0 0 15px;
+            }
         }
         &-subtitle {
             font: 500 20px/24px $font-mus;

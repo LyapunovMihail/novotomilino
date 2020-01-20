@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GENPLAN_MARKERS } from '../about.markers';
 
 @Component({
     selector: 'app-about-genplan',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
 
 export class AboutGenplanComponent {
 
-
+    public markers = GENPLAN_MARKERS;
 }

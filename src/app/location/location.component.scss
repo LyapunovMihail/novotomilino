@@ -378,6 +378,11 @@
         box-sizing: border-box;
         padding: 50px 0 0;
         &:nth-child(2) { padding: 60px 0 0; }
+
+        &--for-title {
+            width: 100%;
+            max-width: 1240px;
+        }
     }
     &-title {
         font: 42px/46px 'Leksa';

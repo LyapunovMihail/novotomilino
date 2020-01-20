@@ -29,7 +29,7 @@ export class HeaderService {
             }, {
                 name: 'Расположение',
                 url: `/location`
-            },/* {
+            }, /*{
                 name: 'Квартиры',
                 url: `/flats`
             },*/ {
@@ -38,12 +38,15 @@ export class HeaderService {
             }, {
                 name: 'Ход строительства',
                 url: `/dynamic/${year}/${month}`
-            },/* {
+            }, /*{
                 name: 'Условия покупки',
                 url: '/purchase'
             },*/ {
                 name: 'Новости',
                 url: '/news-shares'
+            }, {
+                name: 'Документация',
+                url: '/documentation'
             } /*, {
                 name: 'Избранное',
                 url: '/favorites'
