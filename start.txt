@@ -1,9 +1,9 @@
 npm run build:prod
 cd ./serv-files
 npm run build:prod
-scp -rp  ~/Public/novotomilino/dist/* nk:/var/www/novotomilino/dist
-scp -rp  ~/Public/novotomilino/serv-files/dist/* nk:/var/www/novotomilino/dist/server
-cd /var/www/novotomilino.ru/dist/server
+scp -rp  ~/Public/novotomilino/dist/* root@95.142.35.16:/var/www/novotomilino/dist
+scp -rp  ~/Public/novotomilino/serv-files/dist/* root@95.142.35.16:/var/www/novotomilino/dist/server
+cd /var/www/novotomilino/dist/server
 nvm use 10.15.3
 yarn --production --modules-folder '../node_modules'
 cd /var/www/novotomilino/dist
