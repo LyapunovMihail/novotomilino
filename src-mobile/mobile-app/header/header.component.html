@@ -1,14 +1,14 @@
 <header class="header">
     <div class="header__container" [ngClass]="{'header__container--fixed': isFixed, 'header__container--hidden': isHidden}">
         <section class="header__head">
-            <div class="header__head-sell">
+            <!-- <div class="header__head-sell">
                 <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
-            </div>
+            </div> -->
             <div class="header__head-logo" routerLink="/" (click)="closeNav()"></div>
-            <div class="header__head-phone">
+            <!-- <div class="header__head-phone">
                 <a href="tel: +74951374012" class="head-phone__paragraf">+7 (495) 137-40-12</a>
                 <a href="#" class="g-link_red">Заказать звонок</a>
-            </div>
+            </div> -->
             <div class="header__head-menu" [class.header__head-menu--active]="active"
                 (click)="toggleNav()">
                 <span></span>
