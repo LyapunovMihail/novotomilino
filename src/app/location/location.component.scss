@@ -159,11 +159,7 @@
         border-bottom: 1px solid #dcddde;
         position: relative;
 
-        &-title {
-            font: 42px/46px 'Leksa';
-            @include font-smoothing;
-            margin: 60px 0 30px;
-        }
+        &-title { margin: 60px 0 30px; }
         &-wrap {
             width: calc(1240px - 941px);
             position: relative;
