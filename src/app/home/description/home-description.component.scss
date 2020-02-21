@@ -34,7 +34,8 @@
         }
 
         &-img {
-            width: $w1600;
+            width: 100%;
+            max-width: $w1600;
             position: absolute;
             bottom: 7px;
             display: flex;

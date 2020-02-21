@@ -29,14 +29,9 @@
         display: flex;
 
         &-content,
-        &-text {
-            @include font-smoothing();
-        }
-
+        &-text { @include font-smoothing(); }
         &-content {
             width: 50%;
-            font: 54px/58px 'Leksa';
-            color: $col-black;
             margin-bottom: 20px;
         }
 
