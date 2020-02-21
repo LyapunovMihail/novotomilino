@@ -15,12 +15,16 @@
         position: relative;
 
         &-paragraf {
-            font: 46px/1.52 'Leksa';
+            font: 46px/1.52 $font-leksa;
             @include font-smoothing;
             color: #000105;
             max-width: $w1600;
             margin: 155px 0;
             text-align: center;
+            @media (max-width: 1370px) {
+                font: 36px/1.4 $font-leksa;
+                margin: 130px 0;
+            }
 
             .g-link_red {
                 font: inherit;
