@@ -15,7 +15,7 @@
         position: relative;
 
         &-paragraf {
-            font: 46px/1.52 'Leksa';
+            font: 36px/1.52 'Leksa';
             @include font-smoothing;
             color: #000105;
             max-width: $w1600;
@@ -42,7 +42,7 @@
         }
     }
 }
-/*
+
 @media (max-width: 1279px) {
 
     .main__descr-paragraf {
@@ -56,4 +56,3 @@
         max-width: none;
     }
 }
-*/

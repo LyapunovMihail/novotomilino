@@ -77,7 +77,6 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
-
             },
             (err) => console.log(err)
         );

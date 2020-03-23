@@ -9,8 +9,6 @@ import * as moment from 'moment';
     templateUrl: './home-news.component.html',
     styleUrls: [
         './home-news.component.scss'
-    ],
-    providers: [
     ]
 })
 
@@ -68,7 +66,7 @@ export class HomeNewsComponent implements OnInit {
     }
 
     public changeSnippets(snippets, activeSnippets) {
-        this.mainSnippets = snippets;
+        this.mainSnippets = snippets; // mainSnippets нужны только для изъятия кол-ва элементов в массиве для кнопок слайд вперёд - слайд назад
         this.activeSnippets = activeSnippets;
         this.currentSlide = 0;
 

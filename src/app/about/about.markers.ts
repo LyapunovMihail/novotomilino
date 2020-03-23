@@ -48,7 +48,7 @@ export let GENPLAN_MARKERS: IGenplanMarker[] = [
 export let ABOUT_MARKERS: IAboutMarker[] = [
     {
         title: 'Общая площадь ЖК',
-        subtitle: '115 825 м²'
+        subtitle: '113 815 м²'
     }, /* {
         title: 'Количество мест в школе №19',
         subtitle: '550'

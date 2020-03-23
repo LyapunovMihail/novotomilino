@@ -14,7 +14,7 @@
         width: 100%;
         max-width: $w1600;
         box-sizing: border-box;
-        padding-top: 120px;
+        padding-top: 60px;
     }
 
     &__header {
@@ -35,9 +35,12 @@
 
         &-content {
             width: 50%;
-            font: 54px/58px 'Leksa';
+            font: 44px/58px 'Leksa';
             color: $col-black;
             margin-bottom: 20px;
+            @media (max-width: 1279px) {
+              font-size: 39px;
+            }
         }
 
         &-text {
