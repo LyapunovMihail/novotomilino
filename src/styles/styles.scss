@@ -63,10 +63,10 @@ label {
 }
 
 .g-title-path {
-    font: 44px/58px 'Leksa';
+    font: 44px/58px $font-leksa;
     @include font-smoothing;
     @media (max-width: 1279px) {
-      font-size: 39px;
+      font-size: 40px/44px;
     }
 }
 .g-title_h2 {
