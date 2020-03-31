@@ -1,10 +1,8 @@
-import { DynamicAdminUpload } from './dynamic-admin.uload';
 import { adminHeaders } from './../../commons/admin-headers.utilit';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { Uploader } from 'angular2-http-file-upload';
 import { SEGMENTSCOLOR } from './segments-color';
 declare let $: any;
 
@@ -28,8 +26,7 @@ export class DynamicObjectService {
     };
 
     constructor (
-        private http: HttpClient,
-        @Inject(forwardRef(() => Uploader)) private uploaderService: Uploader
+        private http: HttpClient
     ) { }
 
     public setCurrentLoadedImage(val: number) {
@@ -63,38 +60,6 @@ export class DynamicObjectService {
     public setVideo(id, origin): Observable<any> {
         const message = JSON.stringify({id, origin});
         return this.http.post('/api/admin/dynamic/video/set', message, adminHeaders());
-    }
-
-    // Рекурсивная загрузка изображений
-    public imageUpload(id, fileList: FileList) {
-        return new Promise((resolve, reject) => {
-            let index = 0;
-            let url = '/api/admin/dynamic/image/set';
-
-            let upload = (i) => {
-                this.setCurrentLoadedImage(i + 1);
-                let myUploadItem = new DynamicAdminUpload(id, url, fileList[i]);
-                myUploadItem.formData = { FormDataKey: 'Form Data Value' };
-                this.uploaderService.upload(myUploadItem);
-            };
-
-            upload(index);
-
-            this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
-                if (index < fileList.length - 1) {
-                    index ++ ;
-                    upload(index);
-                } else {
-                    resolve(response);
-                }
-            };
-
-            this.uploaderService.onErrorUpload = (item, response, status, headers) => {
-                reject(response);
-            };
-            // this.uploaderService.onCompleteUpload = (item, response, status, headers) => {};
-            // this.uploaderService.onProgressUpload = (item, percentComplete) => {};
-        });
     }
 
     public fillReadySegments(objectArray, isMinimap: boolean) {

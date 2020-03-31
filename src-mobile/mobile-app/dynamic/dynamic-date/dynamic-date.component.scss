@@ -19,12 +19,12 @@
         position: relative;
         &::after {
             content: '';
-            width: 7px;
-            height: 16px;
+            width: 19px;
+            height: 25px;
             position: absolute;
-            right: 15px; top: 21px;
-            background: url(/assets/img/btn_next_grey.svg) center no-repeat;
-            background-size: 100%;
+            top: 15px; right: 7px;
+            background: url(/assets/img/btn_next_grey.svg) center no-repeat #fff;
+            background-size: 7px 16px;
             transform: rotate(-90deg);
         }
     }
@@ -33,6 +33,8 @@
         width: 100%;
         height: 100%;
         font: 18px/24px $font-mus;
+        background-color: $col-white;
+        border: 0;
         color: $col-black;
         outline: none;
         &::before {

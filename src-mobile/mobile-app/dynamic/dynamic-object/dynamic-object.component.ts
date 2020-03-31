@@ -1,6 +1,5 @@
 import { WindowScrollLocker } from './../../commons/window-scroll-block';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Uploader } from 'angular2-http-file-upload';
 import { DynamicObjectService } from './dynamic-object.service';
 import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
 import {
@@ -22,8 +21,7 @@ import {
     styleUrls: ['./dynamic-object.component.scss'],
     providers: [
         WindowScrollLocker,
-        DynamicObjectService,
-        Uploader
+        DynamicObjectService
     ]
 })
 
@@ -155,15 +153,6 @@ export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit,
         this.progressLoaded = true;
         this.progressEvent = this.dynamicObjectService.getCurrentLoadedImage().subscribe((val) => {
             this.progressCurrent = val;
-        });
-        this.dynamicObjectService.imageUpload(id, fileList).then((data: IDynamicObject[]) => {
-            this.progressCount = 0;
-            this.progressLoaded = false;
-            this.changeObjectsArray.emit(data);
-            this.progressEvent.unsubscribe();
-        }).catch((err) => {
-            console.error(err);
-            alert('Что-то пошло не так!');
         });
     }
 
