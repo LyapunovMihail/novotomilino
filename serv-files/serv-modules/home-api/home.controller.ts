@@ -8,7 +8,7 @@ import { Controller } from '@nestjs/common';
 
 @Controller('/api')
 export class HomeController extends HomeModel {
-    
+
     public router = express.Router();
 
     constructor(
@@ -28,7 +28,7 @@ export class HomeController extends HomeModel {
             console.log('step-3');
             return await this.updateHeaderDescription(req.body.description);
         }));
-        
+
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);
     }
