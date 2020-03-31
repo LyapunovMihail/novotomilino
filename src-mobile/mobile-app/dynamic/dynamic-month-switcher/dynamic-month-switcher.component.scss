@@ -1,0 +1,39 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.dynamic-month__switch {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &--disabled { 
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        &:hover {
+            .btn-slider {
+                background-color: $col-red;
+                span::before,
+                span::after { background-color: $col-white; }
+            }
+        }
+
+        .btn-slider_prev { margin-right: 24px; }
+        .btn-slider_next { margin-left: 24px; }
+    }
+}
+
+@media (max-width: 760px) {
+    
+    .dynamic-month__switch-item {
+        font: $font-16;
+
+        .btn-slider_prev { margin-right: 8px; }
+        .btn-slider_next { margin-left: 8px; }
+    }
+}

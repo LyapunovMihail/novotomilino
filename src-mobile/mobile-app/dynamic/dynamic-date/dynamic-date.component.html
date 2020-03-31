@@ -1,0 +1,27 @@
+<div class="dynamic-header">
+
+    <p class="dynamic-header__title">Выберите дату</p>
+
+    <div class="dynamic-header__wrap">
+
+        <select class="dynamic-header__select"
+        (change)="test($event)">
+        
+            <ng-container *ngFor="let yearItem of yearsArray">
+        
+                <ng-container *ngFor="let monthItem of monthArray; let i = index">
+        
+                    <option
+                        [attr.disabled]="testMonth(monthItem.value, yearItem) ? true : null"
+                        [attr.selected]="(yearItem === year && month === monthItem.value) ? true : null"
+                        (change)="changeDate((i + 1), yearItem)"
+                        [value]="monthItem.value + ';' + yearItem"
+                        class="dynamic-header__tooltip-item">
+                        {{monthItem.name + ', ' + yearItem}}
+                    </option>
+                </ng-container>
+            </ng-container>
+        </select>
+    </div>
+</div>
+

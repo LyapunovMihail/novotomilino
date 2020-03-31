@@ -1,0 +1,17 @@
+<ul class="dynamic-month__switch">
+        
+    <li class="dynamic-month__switch-item dynamic-month__switch-item_prev"
+        [class.dynamic-month__switch-item--disabled]="!isValidPrevMonth"
+        (click)="toPrevMonth()">
+        <div class="btn-slider btn-slider_white btn-slider_prev"><span></span></div>
+        <span>{{prevBtn}}</span>
+    </li>
+
+    <li class="dynamic-month__switch-item dynamic-month__switch-item_next"
+        [class.dynamic-month__switch-item--disabled]="!isValidNextMonth"
+        (click)="toNextMonth()">
+        <span>{{nextBtn}}</span>
+        <div class="btn-slider btn-slider_white btn-slider_next"><span></span></div>
+    </li>
+    
+</ul>
