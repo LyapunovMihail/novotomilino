@@ -26,6 +26,13 @@
                 margin: 130px 0;
             }
 
+            &--input {
+                width: 100%;
+                max-width: $w1600;
+                border: 2px dashed #000105;
+                padding: 5px 10px;
+            }
+
             .g-link_red {
                 font: inherit;
                 position: relative;

@@ -1,10 +1,15 @@
-<section class="main__descr">
+<section class="main__descr" *ngIf="description && description.length > 0 || isAuthorizated">
     <div class="main__container">
-        <p class="main__descr-paragraf">
-            <!--<a class="g-link_red" href="#">-->Квартиры в жилом комплексе<!--</a>🏠🛋--> переменной этажности 4-17 этажей,
+        <!-- <p class="main__descr-paragraf" *ngIf="!isAuthorizated">
+            Квартиры в жилом комплексе переменной этажности 4-17 этажей,
             со встроенными коммерческими помещениями 🏬, детским садом, школой и благоустроенной территорией 🚴‍🌳.
             Периметральная застройка обеспечивает безопасность 👮‍👍 для детей и жителей квартала.🌿
-        </p>
+        </p> -->
+        <p class="main__descr-paragraf" *ngIf="!isAuthorizated">{{description}}</p>
+        <ghm-textarea *ngIf="isAuthorizated"
+            class="main__descr-paragraf main__descr-paragraf--input"
+            [value]="description"
+            (change)="updateDescription($event.target.value)"></ghm-textarea>
         <div class="main__descr-img">
             <img src="/assets/img/cat.png" alt="cat">
         </div>

@@ -11,6 +11,7 @@ import { HomeService } from './home.service';
 import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 
 @NgModule({
   exports : [
@@ -29,6 +30,7 @@ import { HomeTriggerComponent } from './trigger/home-trigger.component';
   ],
   imports : [
     CommonModule,
+    GHMTextAreaModule,
     RouterModule.forChild([
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ])
