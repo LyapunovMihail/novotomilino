@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { HeaderService } from './header.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isFixed: boolean;
     public isHidden: boolean;
 
+    public headerHide = false;
+    public quarantineLinkHide = false;
+
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -31,13 +35,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(
         private windowEventsService: WindowEventsService,
         public  windowScrollLocker: WindowScrollLocker,
-        private headerService: HeaderService
+        private headerService: HeaderService,
+        private router: Router,
     ) {
     }
 
     public ngOnInit() {
 
-        this.fixedHeader();
+        // this.fixedHeader();
         this.headerService.getDynamicLink()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
@@ -50,6 +55,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
                     this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
                 }
             );
+
+        this.router.events.subscribe((event) => {
+            if (!(event instanceof NavigationEnd)) {
+                return;
+            }
+
+            this.quarantineLinkHide = (this.router.url !== '/') ? true : false;
+            this.headerHide = (this.router.url === '/quarantine') ? true : false;
+            this.fixedHeader();
+        });
     }
 
     public ngOnDestroy() {

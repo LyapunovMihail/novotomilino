@@ -1,4 +1,9 @@
-<header class="header">
+<header class="header" *ngIf="!headerHide" [class.header--no-quarentine-link]="quarantineLinkHide">
+
+    <a routerLink="/quarantine" class="header__quarantine" *ngIf="!quarantineLinkHide">
+        <span>Купите квартиру не выходя из дома</span>
+    </a>
+
     <div class="header__container" [ngClass]="{'header__container--fixed': isFixed, 'header__container--hidden': isHidden}">
         <section class="header__head">
             <!-- <div class="header__head-sell">
