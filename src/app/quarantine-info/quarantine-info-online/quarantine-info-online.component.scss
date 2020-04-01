@@ -1,0 +1,36 @@
+@import '../var.scss';
+
+.quarantine-online {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 104px;
+
+    &__container {
+        width: $container;
+        max-width: $container--max;
+    }
+
+    &__title {
+        font: $font-tag;
+        color: $col-black;
+        margin: 0 0 48px;
+    }
+
+    &__variant { display: flex; }
+    &__option {
+        width: 352px;
+        margin-right: 40px;
+
+        &-image { margin: 0 0 24px; }
+        &-title {
+            font: $font-24;
+            color: $col-black;
+            margin: 0 0 8px;
+        }
+        &-text {
+            font: $font-18;
+            color: $col-grey;
+        }
+    }
+}
