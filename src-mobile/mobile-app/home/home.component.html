@@ -2,12 +2,14 @@
 
     <app-home-preview *ngIf="newsLoaded"
         [newsSnippets]="mainNews"
-        [shareSnippets]="mainShares">
+        [shareSnippets]="mainShares"
+        [isDescription]="isDescription">
     </app-home-preview>
 
     <!--<app-home-trigger></app-home-trigger>-->
 
-    <app-home-description></app-home-description>
+    <app-home-description
+        (isDescription)="isDescription = $event"></app-home-description>
 
     <app-home-places></app-home-places>
 

@@ -5,6 +5,7 @@ import { INewsSnippet } from '../../../serv-files/serv-modules/news-api/news.int
 import { Share } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { adminHeaders } from '../commons/admin-headers.utilit';
 import { IGallerySnippet } from '../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
+import { IHomeDescription } from '../../../serv-files/serv-modules/home-api/home.interfaces';
 
 @Injectable()
 
@@ -31,6 +32,14 @@ export class HomeService {
     public changeName(id, name) {
         let message = JSON.stringify({ id, name });
         return this.http.post('/api/admin/gallery/update/name', message, adminHeaders());
+    }
+
+    public getHeaderDescription(): Observable<IHomeDescription> {
+        return this.http.get<IHomeDescription>('/api/home/header');
+    }
+
+    public updateHeaderDescription(description) {
+        return this.http.post<IHomeDescription>('/api/admin/home/header/update', {description}, adminHeaders());
     }
 
 }

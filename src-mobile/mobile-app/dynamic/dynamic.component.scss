@@ -1,0 +1,34 @@
+@import '../../styles/modules/mixins/mixin';
+
+.dynamic {
+    width: 100%;
+    min-height: calc(100vh - 77px - 80px);
+    box-sizing: border-box;
+    padding: 66px 0 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    @media (max-width: 760px) { padding: 32px 0 64px; }
+
+    &__header {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        margin-bottom: 50px;
+        position: relative;
+
+        &-title {
+            font: 30px/34px $font-leksa;
+            margin-bottom: 40px;
+            @media (max-width: 760px) {
+                font-size: 28px;
+                line-height: 28px;
+            }
+        }
+    }
+
+    &__main {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+    }
+}

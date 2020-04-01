@@ -42,6 +42,9 @@ export class HeaderService {
             },*/{
                 name: 'Отделка',
                 url: '/decoration'
+            }, {
+                name: 'Ход строительства',
+                url: `/dynamic/${year}/${month}`
             }, /*{
                 name: 'Условия покупки',
                 url: '/purchase'

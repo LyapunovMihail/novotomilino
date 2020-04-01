@@ -34,6 +34,7 @@ import { DocumentationModule } from './documentation/documentation.module';
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { DynamicModule } from './dynamic/dynamic.module';
 
 import '../styles/styles.scss';
 
@@ -55,6 +56,7 @@ const APP_MODULES = [
     HomeModule,
     LocationModule,
     FooterModule,
+    DynamicModule,
     HeaderModule,
     AboutModule,
     PurchaseModule,

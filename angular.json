@@ -136,7 +136,8 @@
                 "src-mobile/styles/styles.scss"
             ],
             "scripts": [
-                "src-mobile/assets/js/jquery-3.3.1.js"
+                "src-mobile/assets/js/jquery-3.3.1.js",
+                "src-mobile/assets/js/swiper.min.js"
             ],
             "es5BrowserSupport": true
           },

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HomeService } from '../home.service';
 
 @Component({
     selector: 'app-home-description',
@@ -10,9 +11,21 @@ import { Component } from '@angular/core';
     ]
 })
 
-export class HomeDescriptionComponent  {
+export class HomeDescriptionComponent implements OnInit  {
 
-    constructor(
-    ) {}
+    public description;
+    @Output() public isDescription = new EventEmitter<any>();
 
+    constructor(private homeService: HomeService) {}
+
+    ngOnInit() {
+
+        this.homeService.getHeaderDescription().subscribe(
+            data => {
+                this.description = data.description;
+                (this.description && this.description.length > 0) ? this.isDescription.emit(true) : this.isDescription.emit(false);
+            },
+            error => console.log(error)
+            );
+    }
 }

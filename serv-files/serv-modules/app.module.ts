@@ -15,6 +15,7 @@ import { FileUploadsController } from './fileuploads-api/fileuploads.controller'
 import { SharesController } from './shares-api/shares.controller';
 import { TriggerController } from './trigger-api/trigger.controller';
 import { GalleryController } from './gallery-api/gallery.controller';
+import { HomeController } from './home-api/home.controller';
 
 @Module({
     imports: [],
@@ -32,7 +33,8 @@ import { GalleryController } from './gallery-api/gallery.controller';
         SharesController,
         TriggerController,
         GalleryController,
-        ContactsController
+        ContactsController,
+        HomeController,
     ],
     providers: [
         MongoConnectionService,

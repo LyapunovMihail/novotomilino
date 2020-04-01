@@ -1,0 +1,31 @@
+<section class="dynamic">
+    
+    <div class="dynamic__header">
+        <h1 class="dynamic__header-title">Ход строительства</h1>
+
+        <app-dynamic-date
+            (dateChange)="dateChange($event)"
+            [month]="currentMonth"
+            [year]="currentYear"
+            [objectsArray]="objectsArray">
+        </app-dynamic-date>
+    </div>
+
+    <div class="dynamic__main">
+        <app-dynamic-object *ngIf="objectsArray.length"
+            [month]="currentMonth"
+            [year]="currentYear"
+            [objectsArray]="objectsArray"
+            (changeObjectsArray)="objectsArray = $event">
+        </app-dynamic-object>
+
+        <!-- <app-dynamic-month-switcher *ngIf="objectsArray.length"
+            (monthChange)="monthChange($event)"
+            (yearChange)="yearChange($event)"
+            [month]="currentMonth"
+            [year]="currentYear"
+            [objectsArray]="objectsArray">
+        </app-dynamic-month-switcher> -->
+    </div>
+
+</section>

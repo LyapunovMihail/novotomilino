@@ -1,0 +1,30 @@
+
+<div *ngIf="isSlideShow" class="dynamic-modal g-modal-bg">
+
+    <div class="dynamic-modal__cls-area" (click)="close.emit(false)"></div>
+
+    <div class="dynamic-modal__wrap swiper-dynamic">
+        <button (click)="close.emit(false)" class="dynamic-modal__cls-btn btn-cls"><span></span></button>
+
+        <div class="swiper-wrapper dynamic-modal__wrap--for-slide-list" [class.dynamic-modal__wrap--open]="visibleSlider">
+
+            <ng-container *ngFor="let slide of slides; let i = index">
+                <div class="dynamic-modal__img swiper-slide">
+                    <img *ngIf="slide.type === 'IMAGE'"
+                        class="dynamic-modal__img"
+                        [src]="uploadsPath + slide.origin"
+                        [ngClass]="{'dynamic-slider-current': i === slideShowCurrent}"/>
+
+                        <p class="dynamic-modal__text dynamic-modal__text-title">{{ currentObject.title }}</p>
+                        <p class="dynamic-modal__text dynamic-modal__text-month">{{ monthArray[currentObject.month - 1].name}} {{ currentObject.year}}</p>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="dynamic-modal__btn dynamic-modal__btn_left btn-slider btn-slider_prev btn-slider_white"><span></span></div>
+        <div class="dynamic-modal__btn dynamic-modal__btn_right btn-slider btn-slider_next btn-slider_white"><span></span></div>
+
+        <!-- Сюда должны подгружаться Заголовок и месяц с годом -->
+    </div>
+
+</div>
