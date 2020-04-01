@@ -4,7 +4,7 @@
 
     &__preview {
         width: 100%;
-        height: calc(100vh - 146px);
+        height: calc(100vh - (146px + 48px + 50px));
         max-height: 760px;
         min-height: 510px;
         background: #fff;
