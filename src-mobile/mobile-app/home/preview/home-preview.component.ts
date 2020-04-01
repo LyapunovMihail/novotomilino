@@ -45,6 +45,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     @Input() public newsSnippets: INewsSnippet[];
     @Input() public shareSnippets: Share[];
+    @Input() public isDescription = true;
 
     constructor(
         public platform: PlatformDetectService,
