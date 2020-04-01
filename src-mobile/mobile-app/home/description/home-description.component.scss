@@ -23,6 +23,7 @@
         @include font-smoothing;
         color: #000105;
         margin: 100px 0;
+        white-space: pre-line;
 
         &_link { font: inherit; }
     }

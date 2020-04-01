@@ -15,12 +15,13 @@
         position: relative;
 
         &-paragraf {
-            font: 36px/1.52 $font-leksa;
+            font: 34px/1.52 $font-leksa;
             @include font-smoothing;
             color: #000105;
             max-width: $w1600;
             margin: 155px 0;
             text-align: center;
+            white-space: pre-line;
             @media (max-width: 1370px) {
                 font: 31px/1.4 $font-leksa;
                 margin: 130px 0;
