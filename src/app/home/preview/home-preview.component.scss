@@ -4,9 +4,10 @@
 
     &__preview {
         width: 100%;
-        height: calc(100vh - (146px + 48px + 50px));
-        max-height: 760px;
-        min-height: 510px;
+        // height: calc(100vh - 146px);
+        height: calc(100vh - (46px + 50px + 48px));
+        // max-height: 760px;
+        // min-height: 510px;
         background: #fff;
         background-size: cover;
         position: relative;
@@ -176,6 +177,7 @@
             }
             &-title {
                 max-width: 500px;
+                line-height: 50px;
                 color: #fff;
                 margin: 0 0 20px;
 
@@ -206,9 +208,10 @@
         }
         &-content {
             position: absolute;
-            width: (1240px / 2);
+            width: 691px;
             max-width: $w1600;
-            right: 20px;
+            right: 50%;
+            transform: translateX(100%);
             bottom: 60px;
             display: flex;
             justify-content: flex-end;
