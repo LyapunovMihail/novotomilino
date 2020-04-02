@@ -11,18 +11,21 @@
             </div>
         </section> -->
         <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
-            <a routerLink="/" class="header__nav-img">
-                <img src="/assets/img/header/fixed-logo.svg" alt="logo">
-            </a>
-            <ul class="header__nav-list">
-                <li [class.header__nav-list-item_active]="checkLink(link.url)"
-                    class="header__nav-list-item" *ngFor="let link of links">
-                    <a [routerLink]="link.url">{{link.name}}</a>
-                </li>
-            </ul>
-            <p class="header__nav-tel">+7 (495) 120-00-80</p>
+            <div class="header__nav-container">
 
-            <div class="header__nav-footer">
+                <a routerLink="/" class="header__nav-img">
+                    <img src="/assets/img/header/fixed-logo.svg" alt="logo">
+                </a>
+                <ul class="header__nav-list">
+                    <li [class.header__nav-list-item_active]="checkLink(link.url)"
+                        class="header__nav-list-item" *ngFor="let link of links">
+                        <a [routerLink]="link.url">{{link.name}}</a>
+                    </li>
+                </ul>
+                <p class="header__nav-tel">+7 (495) 120-00-80</p>
+            </div>
+
+            <!-- <div class="header__nav-footer">
                 <div class="header__nav-footer-sell">
                     <a href="#" class="g-link_red">Отдел продаж</a>
                     <p class="header__nav-footer-phone">+7 (495) 120-00-80</p>
@@ -47,7 +50,7 @@
                     </ul>
                     <a href="#" class="header__nav-footer-descr">Полная версия сайта</a>
                 </div>
-            </div>
+            </div> -->
         </nav>
     </div>
 </header>
