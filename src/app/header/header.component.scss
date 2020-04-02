@@ -140,8 +140,8 @@
         width: 100%;
         background-color: #fff;
         display: flex;
-        // justify-content: center;
-        justify-content: space-between;
+        justify-content: center;
+        // justify-content: space-between;
         z-index: 1;
         transition: top $transition;
         align-items: center;
@@ -151,11 +151,20 @@
 
         &--fixed {
             position: fixed;
-            justify-content: space-between;
+            justify-content: center;
+            // justify-content: space-between;
             z-index: 99;
         }
         &--hidden {
             top: -46px;
+        }
+
+        &-container {
+            width: 100%;
+            max-width: 1240px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         &-list {
