@@ -30,6 +30,9 @@ export class FooterComponent implements OnInit {
                     if (this.router.url === '/quarantine') {
                         this.isHidden = true;
                         document.body.style.background = '#f5f5f5';
+                    } else {
+                        this.isHidden = true;
+                        document.body.style.background = '';
                     }
                 }
             });
