@@ -5,6 +5,12 @@
     font-style: normal;
     font-weight: normal;
 }
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+}
   
 $container: calc(100% - (72px * 2));
 $container--tablet: calc(100% - (32px * 2));

@@ -13,6 +13,7 @@
     &__title {
         max-width: 646px;
         font: $font-tag;
+        @include font-smoothing;
         color: $col-black;
         margin: 0 0 48px;
     }
@@ -20,7 +21,8 @@
     &__list {
         max-width: 646px;
         
-        font: $font-24;
+        font: 24px/32px $font-proba;
+        @include font-smoothing;
         color: $col-black;
         padding: 0;
         margin: 0 0 104px;
@@ -39,6 +41,7 @@
     &__info {
         max-width: 646px;
         font: $font-24;
+        @include font-smoothing;
         color: $col-grey;
         margin: 0 0 64px;
 
@@ -49,6 +52,7 @@
 
         &-tag {
             font: $font-tag;
+            @include font-smoothing;
             color: $col-black;
             span:first-child {
                 color: $col-red;
@@ -57,7 +61,8 @@
     }
 
     &__link {
-        font: 12px/24px $font-proba;
+        font: 17px/24px $font-proba;
+        @include font-smoothing;
         color: $col-red;
     }
 }

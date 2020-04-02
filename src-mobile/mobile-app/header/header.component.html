@@ -1,6 +1,6 @@
 <header class="header" *ngIf="!headerHide" [class.header--no-quarentine-link]="quarantineLinkHide">
 
-    <a routerLink="/quarantine" class="header__quarantine" *ngIf="!quarantineLinkHide">
+    <a routerLink="/quarantine" class="header__quarantine" *ngIf="!quarantineLinkHide && !active">
         <span>Купите квартиру не выходя из дома</span>
     </a>
 

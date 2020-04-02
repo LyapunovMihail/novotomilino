@@ -29,6 +29,7 @@ export class FooterComponent implements OnInit {
                 if (event instanceof NavigationEnd) {
                     if (this.router.url === '/quarantine') {
                         this.isHidden = true;
+                        document.body.style.background = '#f5f5f5';
                     }
                 }
             });

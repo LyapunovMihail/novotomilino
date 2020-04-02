@@ -13,6 +13,7 @@
 
     &__title {
         font: $font-tag;
+        @include font-smoothing;
         color: $col-black;
         margin: 0 0 48px;
     }
@@ -25,11 +26,13 @@
         &-image { margin: 0 0 24px; }
         &-title {
             font: $font-24;
+            @include font-smoothing;
             color: $col-black;
             margin: 0 0 8px;
         }
         &-text {
             font: $font-18;
+            @include font-smoothing;
             color: $col-grey;
         }
     }
