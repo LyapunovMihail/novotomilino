@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
             if (winScrollTop > headerScrollTop + 46) { // 46 - высота header__nav
                 this.isFixed = true;
-            } else if (winScrollTop < headerHeight - 46) { // 46 - высота header__nav
+            } else if (winScrollTop < headerHeight) { // 46 - высота header__nav
                 this.isFixed = false;
             }
 
