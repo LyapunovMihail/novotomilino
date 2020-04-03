@@ -59,6 +59,10 @@
 
     @media (max-width: 760px) {
 
+        &__container {
+            width: $container--mobile
+        }
+
         &__title {
             font-size: 28px;
             line-height: 32px;
