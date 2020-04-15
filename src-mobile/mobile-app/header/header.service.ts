@@ -36,19 +36,19 @@ export class HeaderService {
             }, {
                 name: 'Инфраструктура',
                 url: `/location/infrastructure`
-            }, /*{
+            }, {
                 name: 'Квартиры',
                 url: `/flats`
-            },*/{
+            }, {
                 name: 'Отделка',
                 url: '/decoration'
             }, {
                 name: 'Ход строительства',
                 url: `/dynamic/${year}/${month}`
-            }, /*{
+            }, {
                 name: 'Условия покупки',
                 url: '/purchase'
-            },*/ {
+            }, {
                 name: 'Новости',
                 url: '/news-shares'
             }, {
