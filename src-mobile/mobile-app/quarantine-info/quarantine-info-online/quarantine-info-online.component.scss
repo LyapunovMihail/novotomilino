@@ -1,0 +1,63 @@
+@import '../var.scss';
+
+.quarantine-online {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 104px;
+
+    &__container {
+        width: $container--tablet;
+        max-width: $container--max-tablet;
+    }
+
+    &__title {
+        font: $font-tag;
+        color: $col-black;
+        margin: 0 0 48px;
+    }
+
+    &__option {
+        display: flex;
+        margin: 0 0 64px;
+        &:last-child { margin: 0; }
+
+        &-image { margin-right: 40px; }
+        &-title {
+            font: $font-24;
+            color: $col-black;
+            margin: 0 0 8px;
+        }
+        &-text {
+            font: $font-18;
+            color: $col-grey;
+        }
+    }
+    @media (max-width: 760px) {
+        margin: 0 0 80px;
+
+        &__container {
+            width: $container--mobile
+        }
+
+        &__title {
+            font-size: 28px;
+            line-height: 32px;
+            margin: 0 0 40px;
+        }
+        &__option {
+            display: block;
+            margin: 0 0 48px;
+
+            &-image { margin: 0 0 24px; }
+            &-title {
+                font-size: 20px;
+                line-height: 26px;
+            }
+            &-text {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+    }
+}

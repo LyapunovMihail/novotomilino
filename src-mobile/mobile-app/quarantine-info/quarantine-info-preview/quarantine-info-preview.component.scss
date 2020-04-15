@@ -1,0 +1,77 @@
+@import '../var.scss';
+
+.quarantine-preivew {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 104px;
+    overflow: hidden;
+
+    &__container {
+        width: $container--tablet;
+        max-width: $container--max-tablet;
+        position: relative;
+    }
+
+    &__head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 40px;
+        
+        &-link {
+            display: block;
+            font: 17px/24px $font-proba;
+            color: $col-red;
+        }
+        // &-logo { margin: 0 0 96px; }
+    }
+
+    &__image {
+        width: 100%;
+        margin: 0 0 64px;
+        img { width: 100%; }
+    }
+
+    &__text {
+        font: $font-24;
+        color: $col-grey;
+        &> span {
+            display: block;
+            &:nth-child(2) { margin: 16px 0; }
+        }
+        &-tag {
+            font: $font-tag;
+            color: $col-black;
+            span:first-child {
+                color: $col-red;
+            }
+        }
+    }
+
+    @media (max-width: 760px) {
+        margin: 0 0 80px;
+
+        &__container {
+            width: $container--mobile
+        }
+
+        &__head {
+            margin: 0 0 56px;
+
+            &-logo {
+                width: 132px;
+                height: 32px;
+                img { width: 100%; }
+            }
+        }
+        &__text {
+            font-size: 20px;
+            line-height: 26px;
+            &-tag {
+                font-size: 28px;
+                line-height: 32px;
+            }
+        }
+    }
+}

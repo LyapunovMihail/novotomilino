@@ -1,0 +1,87 @@
+@import '../var.scss';
+
+.quarantine-call {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__container {
+        width: $container--tablet;
+        max-width: $container--max-tablet;
+    }
+
+    &__title {
+        font: $font-tag;
+        color: $col-black;
+        margin: 0 0 48px;
+    }
+
+    &__list {
+        font: $font-24;
+        color: $col-black;
+        padding: 0;
+        margin: 0 0 104px;
+
+        a {
+            color: $col-red;
+            text-decoration: underline;
+        }
+
+        &-item {
+            margin: 0 0 24px;
+            &:last-child { margin: 0; }
+        }
+    }
+
+    &__info {
+        font: $font-24;
+        color: $col-grey;
+        margin: 0 0 64px;
+
+        &> span {
+            display: block;
+            &:nth-child(2) { margin: 24px 0; }
+        }
+
+        &-tag {
+            font: $font-tag;
+            color: $col-black;
+            span:first-child {
+                color: $col-red;
+            }
+        }
+    }
+
+    &__link {
+        font: 17px/24px $font-proba;
+        color: $col-red;
+    }
+
+    @media (max-width: 760px) {
+
+        &__container {
+            width: $container--mobile
+        }
+
+        &__title {
+            font-size: 28px;
+            line-height: 32px;
+            margin: 0 0 40px;
+        }
+        &__list {
+            font-size: 20px;
+            line-height: 26px;
+            margin: 0 0 80px;
+        }
+
+        &__info {
+            font-size: 20px;
+            line-height: 26px;
+            margin: 0 0 48px;
+            &-tag {
+                font-size: 28px;
+                line-height: 32px;
+            }
+        }
+    }
+}

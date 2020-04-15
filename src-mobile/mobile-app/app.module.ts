@@ -37,6 +37,7 @@ import { AppState, InternalStateType } from './app.service';
 import { DynamicModule } from './dynamic/dynamic.module';
 
 import '../styles/styles.scss';
+import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 
 
 // Application wide providers
@@ -65,6 +66,7 @@ const APP_MODULES = [
     FlatsModule,
     DecorationModule,
     DocumentationModule,
+    QuarantineInfoModule,
 
     BrowserModule,
     BrowserAnimationsModule,

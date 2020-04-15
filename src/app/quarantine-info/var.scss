@@ -1,0 +1,28 @@
+
+@font-face {
+    font-family: 'ProbaPro';
+    src: url('/assets/fonts/ProbaProRegular.otf');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+}
+  
+$container: calc(100% - (72px * 2));
+$container--tablet: calc(100% - (32px * 2));
+$container--mobile: calc(100% - (16px * 2));
+$container--max: (1920px - (392px * 2));
+$container--max-tablet: 1024px;
+
+$col-red: #EE4237;
+$col-grey: rgba(0,0,0, .5);
+$col-black: #000;
+
+$font-proba: 'ProbaPro', sans-serif, Arial;
+$font-24: 24px/28px $font-proba;
+$font-18: 18px/24px $font-proba;
+$font-tag: 36px/44px $font-proba;

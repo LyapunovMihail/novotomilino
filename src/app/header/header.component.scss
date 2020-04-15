@@ -3,11 +3,46 @@
 .header {
     width: 100%;
     // height: 146px;
-    height: 46px;
+    height: 46px + 48px;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     z-index: 20;
 
+    &--no-quarentine-link { height: 46px; }
+
+    &__quarantine {
+        width: 100%;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #90aa3b;
+        &> p {
+            font: 15px/24px $font-mus;
+            color: $col-white;
+            position: relative;
+            padding-left: 34px;
+            margin-right: 20px;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 24px;
+                height: 100%;
+                background: url(/assets/img/quarantine/notice.svg) center no-repeat;
+            }
+        }
+        &> a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $col-white;
+            font: 16px/24px $font-mus;
+            border-radius: 4px;
+            color: $col-white;
+            padding: 4px 12px;
+        }
+    }
 
     &__container {
         width: 100%;
@@ -126,10 +161,12 @@
 
         &-container {
             width: 100%;
+            height: 46px;
             max-width: 1240px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         &-list {
@@ -140,6 +177,9 @@
             font: 500 14px/20px $font-mus;
             @include font-smoothing;
             color: $col-black;
+            position: absolute;
+            left: 50%; top: 0;
+            transform: translate(-50%);
 
             &-item {
                 margin: 13px 0;

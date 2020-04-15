@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isFixed: boolean;
     public isHidden: boolean;
     public links = [];
+    public quarantineLinkHide = false;
+    public headerHide = false;
 
     // подписка на скролл страницы HomePage
     // для фиксации хедера
@@ -50,6 +52,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                         this.isFixed = false;
                         this.isHidden = false;
                     }
+                    this.quarantineLinkHide = (this.router.url !== '/') ? true : false;
+                    this.headerHide = (this.router.url === '/quarantine') ? true : false;
                 }
             });
 

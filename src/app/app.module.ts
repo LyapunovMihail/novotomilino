@@ -48,6 +48,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
+import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -83,6 +84,7 @@ const APP_MODULES = [
     StoreroomsModule,
     AdminContactsModule,
     DocumentationModule,
+    QuarantineInfoModule,
 
     BrowserModule,
     BrowserAnimationsModule,

@@ -1,0 +1,48 @@
+@import '../var.scss';
+
+.quarantine-preivew {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 40px;
+
+    &__container {
+        width: $container;
+        max-width: $container--max;
+        position: relative;
+        &::after {
+            content: url(/assets/img/quarantine/family-preview.png);
+            position: absolute;
+            top: 0; left: 548px + 40px;
+        }
+    }
+
+    &__link {
+        display: block;
+        font: 17px/24px $font-proba;
+        @include font-smoothing;
+        color: $col-red;
+        margin: 0 0 48px;
+    }
+
+    &__logo { margin: 0 0 96px; }
+    &__text {
+        max-width: 548px;
+        font: $font-24;
+        @include font-smoothing;
+        color: $col-grey;
+        margin: 0 0 112px;
+        &> span {
+            display: block;
+            &:nth-child(2) { margin: 16px 0; }
+        }
+        &-tag {
+            font: $font-tag;
+            @include font-smoothing;
+            color: $col-black;
+            span:first-child {
+                color: $col-red;
+            }
+        }
+    }
+}

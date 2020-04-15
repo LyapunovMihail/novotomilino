@@ -5,6 +5,7 @@ export const ROUTES: Routes = [
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule' },
     // { path: 'purchase', loadChildren: './purchase/purchase.module#PurchaseModule' },
+    { path: 'quarantine', loadChildren: './quarantine-info/quarantine-info.module#QuarantineInfoModule' },
     { path: 'news-shares', loadChildren : './news-shares/news-shares.module#NewsSharesModule' },
     { path: 'decoration', loadChildren: './decoration/decoration.module#DecorationModule' },
     { path: 'location', loadChildren: './location/location.module#LocationModule' },
