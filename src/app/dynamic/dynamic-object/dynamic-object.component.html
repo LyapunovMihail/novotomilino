@@ -40,6 +40,16 @@
                 <label class="dynamic-object__file" *ngIf="isAuthorizated">Загрузить фото
                     <input style='display: none;' type="file" (change)="setSlides(object._id, $event)" multiple placeholder="Upload file" accept=".jpg" multiple>
                 </label>
+
+                <div class="dynamic-object__description">
+
+                    <p *ngIf="!isAuthorizated" class="dynamic-object__description-text">{{object.description}}</p>
+                    <ghm-textarea class="dynamic-object__description-area"
+                        *ngIf="isAuthorizated"
+                        [value]="object.description"
+                        (change)="changeDescription(object._id, $event)">
+                    </ghm-textarea>
+                </div>
     
                 <div class="dynamic-object__del-object" *ngIf="isAuthorizated" (click)="deleteObject(object._id)"></div>
             </div>

@@ -1,5 +1,154 @@
 @import '../../../styles/modules/mixins/mixin';
 
+.home-preview {
+    width: 100%;
+    height: calc(100vh - (46px + 50px + 48px));
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    &__bgr {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        z-index: 0;
+        &::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            max-height: 338px;
+            position: absolute;
+            bottom: 0; left: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, #000000 100%);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__container {
+        width: 100%;
+        max-width: $w1600;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 0 0 48px;
+        position: relative;
+        z-index: 1;
+    }
+    &__content {
+        width: 100%;
+        max-width: 818px;
+
+        &-title {
+            font: 54px/1 $font-leksa;
+            @include font-smoothing;
+            color: $col-white;
+            margin: 0 0 32px;
+            white-space: pre-wrap;
+
+            &--admin {
+                width: 100%;
+                padding: 5px 10px;
+                border: 2px dashed;
+            }
+        }
+        &-descr {
+            font: 24px/32px $font-mus;
+            @include font-smoothing;
+            color: $col-white;
+            white-space: pre-wrap;
+
+            &--admin {
+                width: 100%;
+                padding: 5px 10px;
+                border: 2px dashed;
+            }
+        }
+    }
+    &__news {
+        width: 331px;
+        position: relative;
+
+        &-item {
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: -100px; left: 0;
+            padding-left: 33px;
+            transition: opacity .4s linear;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+                .home-preview__news-timeline::after { animation: timeline 6s linear forwards; }
+            }
+            &::before {
+                content: '';
+                width: 28px;
+                height: 25px;
+                position: absolute;
+                top: 3px; left: 0;
+                background: url(/assets/img/news-ic.svg) no-repeat;
+                background-size: 100%;
+            }
+            &--shares::before {
+                height: 15px;
+                background: url(/assets/img/stock-ic.svg) no-repeat;
+                top: 8px;
+            }
+
+        }
+        &-title {
+            font: 24px/30px $font-mus;
+            @include font-smoothing;
+            color: $col-white;
+            margin: 0 0 10px;
+        }
+        &-text {
+            display: inline;
+            font: 16px/22px $font-mus;
+            @include font-smoothing;
+            color: $col-white;
+            border-bottom: 1px solid;
+        }
+        &-end {
+            font: 12px/18px $font-mus;
+            color: rgba($color: $col-white, $alpha: .7);
+            letter-spacing: .4px;
+        }
+        &-timeline {
+            width: calc(100% - 33px);
+            height: 1px;
+            position: absolute;
+            top: calc(100% + 16px);
+            left: 33px;
+            background-color: rgba($color: $col-white, $alpha: .3);
+            &::after {
+                content: '';
+                width: 0%;
+                height: 100%;
+                position: absolute;
+                top: 0; left: 0;
+                background-color: $col-orange;
+            }
+        }
+    }
+}
+
+@keyframes timeline {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
 .main {
 
     &__preview {

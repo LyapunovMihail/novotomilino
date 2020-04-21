@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DynamicComponent } from './dynamic.component';
 import { NgModule } from '@angular/core';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 
 const DynamicComponents = [
     DynamicComponent,
@@ -38,6 +39,7 @@ const DynamicComponents = [
         CommonModule,
         RouterModule,
         FormsModule,
+        GHMTextAreaModule,
         ReactiveFormsModule,
         RouterModule.forChild([
             { path: 'dynamic/:year/:month', component: DynamicComponent, pathMatch: 'full' }

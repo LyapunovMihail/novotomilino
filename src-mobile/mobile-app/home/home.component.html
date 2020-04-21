@@ -1,8 +1,7 @@
 <section class="home">
 
     <app-home-preview *ngIf="newsLoaded"
-        [newsSnippets]="mainNews"
-        [shareSnippets]="mainShares"
+        [newsShares]="allSnippets"
         [isDescription]="isDescription">
     </app-home-preview>
 

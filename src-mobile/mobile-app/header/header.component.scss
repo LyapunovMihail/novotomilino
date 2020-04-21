@@ -16,6 +16,9 @@
         justify-content: center;
         align-items: center;
         background-color: #90aa3b;
+        position: fixed;
+        top: 0; left: 0;
+        z-index: 99;
         &> span {
             font: 15px/24px $font-mus;
             color: $col-white;
@@ -50,6 +53,7 @@
         &--hidden {
             top: -75px;
         }
+        &.main-page { top: 34px; }
     }
 
     &__head {
