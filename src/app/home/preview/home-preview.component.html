@@ -92,7 +92,7 @@
                     <p *ngIf="news.countdown && +news.finish_date < 0"  
                         class="home-preview__news-end">Акция закончилась</p>
 
-                    <div class="home-preview__news-timeline"></div>
+                    <div *ngIf="newsShares.length > 1" class="home-preview__news-timeline"></div>
                 </a>
             </ng-container>
         </div>
