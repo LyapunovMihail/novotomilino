@@ -16,7 +16,7 @@
                 <a href="#" class="g-link_red">Заказать звонок</a>
             </div>
         </section> -->
-        <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
+        <nav class="header__nav header__nav--fixed" [ngClass]="{'main-page': !quarantineLinkHide}">
             <div class="header__nav-container">
 
                 <a routerLink="/" class="header__nav-img">

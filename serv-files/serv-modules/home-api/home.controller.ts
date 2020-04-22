@@ -25,8 +25,14 @@ export class HomeController extends HomeModel {
         }));
 
         this.router.post('/admin/home/header/update', responseHandler(async(req) => {
-            console.log('step-3');
             return await this.updateHeaderDescription(req.body.description);
+        }));
+
+        this.router.get('/home/preview', responseHandler(async(req) => {
+            return await this.getHomePreview();
+        }));
+        this.router.post('/admin/home/preview/update', responseHandler(async(req) => {
+            return await this.updateHomePreview(req.body.object);
         }));
 
         const app: Express = this.expressAppService.getApp();

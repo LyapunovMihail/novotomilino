@@ -1,58 +1,49 @@
-<section class="home__preview" *ngIf="gallerySlides" [class.home__preview--no-margin]="!isDescription">
-    <div class="home__preview-wrap home__preview-wrap_slider">
+<section class="home__preview home-preview" [class.home__preview--no-margin]="!isDescription">
+    
+    <div class="home-preview__bgr">
+        <img src="/assets/img/home-preview.jpg" alt="home-preview">
+    </div>
 
-        <div class="home__preview-controls">
-            <p class="home__preview-count">
-                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="home__preview-count_span">{{gallerySlides.length < 10 ? '0' : ''}}{{gallerySlides.length}}</span>
+    <div class="home-preview__container">
+
+        <div class="home-preview__content">
+            <h1 class="home-preview__content-title" *ngIf="homePreview">{{homePreview.title}}</h1>
+            <p class="home-preview__content-descr" *ngIf="homePreview">
+                {{homePreview.description}}
             </p>
-
-            <div class="home__preview-btns">
-                <button class="home__preview-btn home__preview-btn_prev" (click)="prevBtn()"></button>
-                <button class="home__preview-btn home__preview-btn_next" (click)="nextBtn()"></button>
-            </div>
         </div>
+        <div class="home-preview__news">
+            <ng-container *ngFor="let news of newsShares; let i = index">
 
-        <div class="home__preview-slider-wrap">
-            <ul class="home__preview-slider-list"  [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * this.slideWidth ) + 'px)') }">
-                <li  *ngFor="let item of gallerySlides; let i = index" class="home__preview-slider-item">
-                    <div class="home__preview-slider-item-img">
-                        <img alt="" [src]="uploadsPath + item.image">
-                    </div>
-                </li>
-            </ul>
+                <a class="home-preview__news-item" 
+                        [ngClass]="{'home-preview__news-item--shares': news.mainThumbnail, 'active': i === activeNews}"
+                        routerLink="{{news.mainThumbnail ? ('/news-shares/shares/list/1/' + news._id) : ('/news-shares/news/list/' + news._id)}}">
+                    <h6 class="home-preview__news-title">{{!news.mainThumbnail ? 'Новости' : 'Акции'}}</h6>
+                    <p class="home-preview__news-text">{{!news.mainThumbnail ? news.title : news.name}}</p>
+
+                    <p *ngIf="news.countdown && +news.finish_date >= 0" 
+                        class="home-preview__news-end">До конца акции {{news.finish_date | sharesDayPipe}}</p>
+                    <p *ngIf="news.countdown && +news.finish_date < 0"  
+                        class="home-preview__news-end">Акция закончилась</p>
+
+                    <div class="home-preview__news-timeline"></div>
+                </a>
+            </ng-container>
         </div>
-
-        <ng-container *ngFor="let item of gallerySlides; let i = index">
-            <div class="home__preview-slider-descr" *ngIf="currentSlide === i">
-                <h1 class="home__preview-slider-title g-title-path">{{item.name}}</h1>
-                <p class="home__preview-slider-text">{{item.description}}</p>
-            </div>
-        </ng-container>
     </div>
-
-   <div class="home__preview-wrap home__preview-wrap_news">
-       <div class="home__preview-stock-container" *ngIf="shareSnippets">
-           <ng-container *ngFor="let shareSnippet of shareSnippets; let i = index">
-                <div class="home__preview-stock"
-                     [class.home__preview-stock--active]="i === activeShare"
-                     [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]">
-                    <h1 class="home__preview-stock-title">Акция</h1>
-                    <p class="g-link_white home__preview-stock-text">{{shareSnippet.name}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="home__preview-stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="home__preview-stock-paragraf">Акция закончилась</p>
-                </div>
-           </ng-container>
-       </div>
-       <div class="home__preview-news-container" *ngIf="newsSnippets">
-           <ng-container *ngFor="let newsSnippet of newsSnippets; let i = index">
-                <div class="home__preview-news"
-                     [class.home__preview-news--active]="i === activeNews"
-                     [routerLink]="['/news-shares/news/list/' + newsSnippet._id]">
-                    <h1 class="home__preview-news-title">Новость</h1>
-                    <p class="g-link_white home__preview-news-text">{{newsSnippet.title}}</p>
-                </div>
-           </ng-container>
-       </div>
-    </div>
-
 </section>
+
+<div class="home-preview__threeRed">
+
+    <div class="home-preview__threeRed-container">
+
+        <div class="home-preview__threeRed-title">
+            <img alt="logo-red" src="/assets/img/3-red_logo.svg">
+        </div>
+        <p class="home-preview__threeRed-text">
+            Тройка РЭД — одна из ведущих девелоперских компаний полного цикла, входящая
+            в ТОП-10 крупнейших застройщиков Московской области.
+        </p>
+        <a class="home-preview__threeRed-link g-link_red" href="https://3-red.com/" target="_blank">3-red.com</a>
+    </div>
+</div>

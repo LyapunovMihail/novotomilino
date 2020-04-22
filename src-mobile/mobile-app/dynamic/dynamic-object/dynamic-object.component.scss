@@ -26,16 +26,10 @@
     }
     &__description {
         width: 100%;
-        margin: 0 0 16px;
 
-        &-area {
-            width: 728px;
-            height: 80px;
-            background-color: $col-white;
-            border: 1px solid #979797;
-            box-sizing: border-box;
-            padding: 8px 16px;
-            font: $font-18;
+        &-text {
+            font: $font-16;
+            white-space: pre-wrap;
         }
     }
 

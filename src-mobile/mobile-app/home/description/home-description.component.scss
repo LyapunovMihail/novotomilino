@@ -1,30 +1,47 @@
 @import '../../../styles/modules/mixins/mixin';
 
-.home__descr {
+.home-descr {
     width: 100%;
-    background: rgba(170, 171, 34, 0.1);
+    background: rgba(170, 171, 34, .1);
     position: relative;
     display: flex;
     justify-content: center;
-    &:before {
-        content: '';
-        position: absolute;
-        right: 15px;
-        bottom: 7px;
-        width: 80px;
-        height: 78px;
-        background: url('/assets/img/cat.png') no-repeat;
-        background-size: 100%;
-    }
-    &-paragraf {
-        width: calc(100% - 30px);
-        max-width: 767px;
-        font: 30px/1.47 'Leksa';
-        @include font-smoothing;
-        color: #000105;
-        margin: 100px 0;
-        white-space: pre-line;
+    padding: 80px 0;
 
-        &_link { font: inherit; }
+    &__container {
+        width: calc(100% - 60px);
+        max-width: $tabletContainer;
+    }
+
+    &__item {
+        max-width: 564px;
+        padding-left: 124px;
+        box-sizing: border-box;
+        font: 24px/32px $font-mus;
+        @include font-smoothing;
+        color: #2e2e2e;
+        margin: 0 0 56px;
+        &:last-child { margin: 0; }
+
+        &:nth-child(1) { background: url(/assets/img/item-1.svg) top left no-repeat; }
+        &:nth-child(2) { background: url(/assets/img/item-2.svg) top left no-repeat; }
+        &:nth-child(3) { background: url(/assets/img/item-3.svg) top left no-repeat; }
+        &:nth-child(4) { background: url(/assets/img/item-4.svg) top left no-repeat; }
+        &:nth-child(5) { background: url(/assets/img/item-5.svg) top left no-repeat; }
+    }
+}
+@media (max-width: 760px) {
+
+    .home-descr {
+        padding: 56px 0;
+
+        &__container {
+            width: calc(100% - 30px);
+        }
+        &__item {
+            font: 16px/24px $font-mus;
+            padding: 100px 0 0 0;
+            margin: 0 0 48px;
+        }
     }
 }
