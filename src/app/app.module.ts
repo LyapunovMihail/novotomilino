@@ -49,6 +49,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
+import { RedPopupComponent } from './3red-popup/3red-popup.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -109,7 +110,7 @@ interface StoreType {
       VideoModalComponent,
       ImgModalComponent,
       OverlayComponent,
-
+      RedPopupComponent
   ],
   imports: [
     ...APP_MODULES
