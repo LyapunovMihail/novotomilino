@@ -3,7 +3,7 @@
 .header {
     width: 100%;
     // height: 146px;
-    height: 46px + 48px;
+    height: 46px;
     background-color: #ffffff;
     z-index: 20;
 
@@ -161,7 +161,7 @@
         &--hidden {
             top: -46px;
         }
-        &.main-page { top: 48px; }
+        // &.main-page { top: 48px; }
 
         &-container {
             width: 100%;

@@ -21,6 +21,8 @@ export const ROOT_SELECTOR = 'app-root';
 
             <app-footer></app-footer>
 
+            <app-3red-popup></app-3red-popup>
+
         </section>
 
         <app-overlay></app-overlay>

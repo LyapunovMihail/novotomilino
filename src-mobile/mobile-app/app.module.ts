@@ -38,6 +38,7 @@ import { DynamicModule } from './dynamic/dynamic.module';
 
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
+import { RedPopupComponent } from './3red-popup/3red-popup.component';
 
 
 // Application wide providers
@@ -90,6 +91,7 @@ interface StoreType {
         AppComponent,
         ImgModalComponent,
         OverlayComponent,
+        RedPopupComponent,
     ],
     imports: [
         ...APP_MODULES
