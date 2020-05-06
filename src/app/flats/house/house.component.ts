@@ -192,4 +192,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         // отписка от событий роута
         this.routerEvent.unsubscribe();
     }
+
+    callConsoleLog(object) {
+        console.log('callConsoleLog: ->', object);
+        return object;
+    }
 }
