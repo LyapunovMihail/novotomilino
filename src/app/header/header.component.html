@@ -1,9 +1,9 @@
 <header class="header"  *ngIf="!headerHide" [class.header--no-quarentine-link]="quarantineLinkHide">
 
-    <div class="header__quarantine" *ngIf="!quarantineLinkHide">
+    <!-- <div class="header__quarantine" *ngIf="!quarantineLinkHide">
         <p>Купите квартиру не выходя из дома</p>
         <a routerLink="/quarantine">Узнать больше</a>
-    </div>
+    </div> -->
     
     <div class="header__container">
         <!-- <section class="header__head">
@@ -16,7 +16,7 @@
                 <a href="#" class="g-link_red">Заказать звонок</a>
             </div>
         </section> -->
-        <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
+        <nav class="header__nav header__nav--fixed" [ngClass]="{'main-page': !quarantineLinkHide}">
             <div class="header__nav-container">
 
                 <a routerLink="/" class="header__nav-img">

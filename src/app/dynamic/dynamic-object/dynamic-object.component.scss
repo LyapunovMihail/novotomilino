@@ -25,6 +25,7 @@
 
     &__title-wrap {
         display: flex;
+        flex-flow: row wrap;
         position: relative;
         margin: 0 0 30px;
     }
@@ -91,6 +92,24 @@
             box-sizing: border-box;
             text-align: center;
             margin: 0;
+        }
+    }
+    &__description {
+        width: 100%;
+        margin: 15px 0 0;
+
+        &-text {
+            width: 500px;
+            @include fw18-24();
+            white-space: pre-wrap;
+        }
+        &-area {
+            display: block;
+            width: 500px;
+            @include fw18-24();
+            border: 1px dashed $col-black-6;
+            box-sizing: border-box;
+            padding: 5px 10px;
         }
     }
 

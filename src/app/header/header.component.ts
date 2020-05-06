@@ -42,16 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
 
-                    if (this.router.url === '/' || this.router.url === '/about') {
-                        this.fixedHeader();
-                        this.isFixed = false;
-                    } else {
-                        this.subscriptions.forEach((sub) => {
-                            sub.unsubscribe();
-                        });
-                        this.isFixed = false;
-                        this.isHidden = false;
-                    }
+                    this.fixedHeader();
                     this.quarantineLinkHide = (this.router.url !== '/') ? true : false;
                     this.headerHide = (this.router.url === '/quarantine') ? true : false;
                 }
@@ -83,23 +74,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // хедер фиксируется
     public fixedHeader() {
 
-        let winScrollTopPrev = 0;
-
         this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
 
             const headerHeight = document.querySelector('.header').clientHeight;
             const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const headerScrollTop = winScrollTop + document.querySelector('.header__nav').getBoundingClientRect().top;
 
-            if (winScrollTop > headerScrollTop + 46) { // 46 - высота header__nav
+            if (!this.quarantineLinkHide) {
+                this.isFixed = winScrollTop > 48 ? true : false;
+            } else if (this.quarantineLinkHide) {
                 this.isFixed = true;
-            } else if (winScrollTop < headerHeight) { // 46 - высота header__nav
-                this.isFixed = false;
             }
-
-            this.isHidden = winScrollTopPrev < winScrollTop;
-
-            winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         }));
     }
 

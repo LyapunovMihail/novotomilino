@@ -1,0 +1,61 @@
+@import '../../styles/modules/mixins/mixin';
+
+$font: $font-mus;
+$bg-col: rgba($color: #000000, $alpha: .5);
+
+.threeRed-popup {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0; top: 0;
+    background-color: rgba($color: #000000, $alpha: .5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 48px 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    &__container {
+        width: 100%;
+        max-width: 890px;
+        background-color: $col-white;
+        box-sizing: border-box;
+        position: relative;
+        padding: 64px 80px;
+    }
+
+    &__btn-close {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        right: -60px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        background: url(/assets/img/cls_white.svg) 49% 49% no-repeat;
+        background-size: 20px;
+        transition: border-color $transition;
+        &:hover { border-color: #fff; }
+    }
+
+    &__title {
+        font: 40px/1 $font-leksa;
+        color: $col-black;
+        margin: 0 0 40px;
+    }
+    &__text {
+        font: 24px/32px $font;
+
+        &--grey {
+            color: rgba($color: #2e2e2e, $alpha: .8);
+            &+ .threeRed-popup__text--grey { margin: 32px 0 0; }
+        }
+        &--black {
+            color: #000;
+            &:last-child { margin: 64px 0 0; }
+        }
+    }
+}

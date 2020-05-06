@@ -68,6 +68,7 @@ export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit,
     ) { }
 
     ngOnInit() {
+        console.log('COCAAAA!!!', this.objectsArray);
         // подписка на авторизацию
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
