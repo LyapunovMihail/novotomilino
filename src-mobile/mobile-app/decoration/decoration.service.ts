@@ -17,19 +17,23 @@ export class DecorationService {
             name: 'Жилые комнаты',
             mod: 'living-rooms',
             url: '/decoration/living-rooms',
-            preview: '/assets/img/decoration/bedroom_classic.jpg',
+            preview: '/assets/img/decoration/living-room/bedroom_classic.jpg',
             images: [
                 '/assets/img/decoration/living-room/bedroom_classic.jpg',
+                '/assets/img/decoration/living-room/var_2_bedroom_classic.jpg',
                 '/assets/img/decoration/living-room/bedroom_modern.jpg',
+                '/assets/img/decoration/living-room/var_2_bedroom_modern.jpg',
             ]
         }, {
             name: 'Кухня',
             mod: 'kitchen',
             url: '/decoration/kitchen',
-            preview: '/assets/img/decoration/kitchen_classic.jpg',
+            preview: '/assets/img/decoration/kitchen/kitchen_classic.jpg',
             images: [
                 '/assets/img/decoration/kitchen/kitchen_classic.jpg',
+                '/assets/img/decoration/kitchen/var_2_kitchen_classic.jpg',
                 '/assets/img/decoration/kitchen/kitchen_modern.jpg',
+                '/assets/img/decoration/kitchen/var_2_kitchen_modern.jpg',
             ]
         }, {
             name: 'Санузел',
@@ -44,7 +48,7 @@ export class DecorationService {
             name: 'Прихожая',
             mod: 'hallway',
             url: '/decoration/hallway',
-            preview: '/assets/img/decoration/hall_classic.jpg',
+            preview: '/assets/img/decoration/hallway/hall_classic.jpg',
             images: [
                 '/assets/img/decoration/hallway/hall_classic.jpg',
                 '/assets/img/decoration/hallway/hall_modern.jpg',
