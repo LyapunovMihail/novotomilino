@@ -15,7 +15,7 @@
         </div>
 
         <div *ngIf="sectionsData" class="house__sections-plan" [ngStyle]="{'transform' : 'translateX(-' + scroll + 'px)'}" #chess>
-            <ng-container *ngFor="let section of callConsoleLog(sectionsData)">
+            <ng-container *ngFor="let section of sectionsData">
                 <div class="house__sections-chess" *ngIf="section && section.length > 0">
                     <ul class="house__sections-chess_section" #sectionContainer>
                         <p class="house__sections-chess_section_title" *ngIf="section && section.length > 0">Cекция {{section[0][0].section}}</p>
