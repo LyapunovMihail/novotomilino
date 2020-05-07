@@ -3,11 +3,13 @@ import { FavoritesService } from '../../commons/favorites.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { SearchService } from '../search/search.service';
 
 @Component({
     selector: 'app-flats-apartment-modal',
     templateUrl: './apartment.component.html',
-    styleUrls: ['./apartment.component.scss', '../flats.component.scss']
+    styleUrls: ['./apartment.component.scss', '../flats.component.scss'],
+    providers: [ SearchService ]
 })
 
 export class ApartmentComponent implements OnInit {
@@ -26,6 +28,7 @@ export class ApartmentComponent implements OnInit {
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
+        public searchService: SearchService,
     ) {}
 
     public ngOnInit() {
@@ -42,6 +45,13 @@ export class ApartmentComponent implements OnInit {
     public nextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+    }
+
+    public routePDF() {
+        // this.searchService.getPDF(this.flatData['_id']).subscribe(
+        //     data => console.log('PDF', data)
+        // );
+        this.router.navigate(['/pdf'], { queryParams: { id: this.flatData['_id'] } });
     }
 
     public getDiscount(flat): number {

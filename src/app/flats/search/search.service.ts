@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { adminHeaders } from '../../commons/admin-headers.utilit';
 
 @Injectable()
 
@@ -17,6 +18,11 @@ export class SearchService {
 
     public getConfig() {
         return this.http.get('/api/search-config');
+    }
+
+    public getPDF(id) {
+        let message = JSON.stringify({ id });
+        return this.http.post('/api/pdf', message);
     }
 
     public getOutputFlatsChanged() {

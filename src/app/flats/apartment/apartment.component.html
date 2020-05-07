@@ -78,7 +78,7 @@
 
         <div class="apartment__plan">
             <div class="apartment__plan-link">
-                <a class="g-link_red apartment__plan-link-dwnld" [href]="pdfLink" target="_blank">План квартиры.pdf</a>
+                <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" >План квартиры.pdf</a>
                 <!-- <div (click)="toFavorite()"
                      [ngClass]="{'apartment__plan-link-favorite_active': inFavorite}" 
                      class="g-link_red apartment__plan-link-favorite">
