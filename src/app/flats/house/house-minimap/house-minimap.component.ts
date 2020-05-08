@@ -20,6 +20,7 @@ export class HouseMinimapComponent implements OnInit, OnChanges {
     ) { }
 
     public ngOnInit() {
+        console.log(this.houseNumber)
         this.houseNumbers = Object.keys(this.floorCount);
     }
 

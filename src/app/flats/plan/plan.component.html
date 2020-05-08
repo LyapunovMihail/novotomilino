@@ -5,8 +5,6 @@
 
     <div class="plan_house-select flats_wrapper">
 
-
-
         <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/plan.jpg">
 
         <a *ngFor="let house of houses"
@@ -15,7 +13,8 @@
                         'plan_house-select_link--z-index-off' : showSearchWindow}"
             (mouseenter)="activeLink = house.houseNumber"
             (mouseleave)="activeLink = ''"
-            [routerLink]="[ '/flats/house/' + house.houseNumber]">
+            [routerLink]="[ '/flats/house/' + house.houseNumber]"
+            [style.pointer-events]="house.freeFlats ? 'all' : 'none'">
 
             №{{house.houseNumber}} {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
 
@@ -33,7 +32,8 @@
 
             <ng-container *ngFor="let plan of houses">
                 <a (click)="svgRouterLink($event, ('/flats/house/' + plan.houseNumber))"
-                        [attr.xlink:href]="'/flats/house/' + plan.houseNumber">
+                        [attr.xlink:href]="'/flats/house/' + plan.houseNumber"
+                        [style.pointer-events]="plan.freeFlats ? 'all' : 'none'">
 
                     <path class="plan_house-select_svg_house"
                         [attr.transform]="plan.transform"
