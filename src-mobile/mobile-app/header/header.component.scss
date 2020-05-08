@@ -208,6 +208,7 @@
             border: none;
             padding: 0 30px;
             height: 67px;
+            z-index: 10000;
 
             &-sell,
             &-phone {
@@ -290,19 +291,30 @@
             display: none;
             width: 100%;
             max-width: none;
-            height: calc(100vh - 67px);
             min-height: 460px;
             justify-content: flex-start;
             position: fixed;
             left: 0;
-            top: 67px;
+            top: 0;
+            bottom: 0;
             background: #fff;
-            padding: 0 0 0 30px;
             box-sizing: border-box;
+            padding: 67px 0 0 30px;
             z-index: 9999;
+            overflow-x: hidden;
+            overflow-y: scroll;
 
             &--active {
                 display: flex;
+            }
+
+            &-container {
+                width: 100%;
+                height: 100%;
+                min-height: 550px;
+                display: flex;
+                justify-content: flex-start;
+                position: relative;
             }
 
             &-list {
@@ -354,7 +366,7 @@
                     font: 500 20px/26px $font-mus;
                     @include font-smoothing;
                     color: $col-black;
-                    margin: 10px 0 0;
+                    margin: 0 0 20px;
                 }
 
                 &-link {
@@ -403,7 +415,7 @@
             &-menu { margin: 0; }
         }
         &__nav {
-            padding: 0 0 0 15px;
+            padding: 67px 0 0 15px;
 
             &-list {
                 margin: 17px 0 0;
