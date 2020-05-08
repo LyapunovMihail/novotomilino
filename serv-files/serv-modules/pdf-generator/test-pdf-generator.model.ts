@@ -1,4 +1,6 @@
 import { resolve } from 'path';
+import { rejects } from 'assert';
+import { async } from 'rxjs/internal/scheduler/async';
 const fs         = require('fs');
 const fileExists = require('file-exists');
 const pdf        = require('html-pdf');
@@ -18,6 +20,7 @@ const options = {
     quality: '100',
     phantomPath:  process.env.PHANTOM_PATH || null ,
 };
+const PDF_UPLOADS_PATH = 'uploads/pdf';
 
 export class PDFGeneratorModel {
 
@@ -27,131 +30,102 @@ export class PDFGeneratorModel {
         this.collection = db.collection('addresses');
     }
 
-    public async convert (html) {
-        return new Promise((resolve, reject) => {
-            pdf.create(html, options).toFile(`pdf/businesscard.pdf`, (err, file) => {
-                if (err) { reject(err); }
-                resolve(file); // { filename: '/app/businesscard.pdf' }
-            });
-        });
+    public async convert(html) {
+        return await pdf.create(html, options).toFile(`/${PDF_UPLOADS_PATH}/businesscard.pdf`, (err, file) => console.log(file.filename) );
+    }
+
+    public forSelectFloor(pathSVG, info) {
+
+        if (fileExists.sync(pathSVG)) {
+            let svgFloor;
+            let id;
+            id =  `_${info.flat}`;
+            svgFloor = fs.readFileSync(pathSVG, 'utf8').replace(/cls|st(?=\d)/g, "floorst").replace(
+                `id="${id}"`,
+                `id="${id}" class="active-flat" `
+            );
+            return svgFloor;
+        }
+    }
+    public forSelectFlat(pathSVG) {
+        if (fileExists.sync(pathSVG)) {
+            let svgFlat;
+            return svgFlat = fs.readFileSync(pathSVG, 'utf8').replace(/cls|st(?=\d)/g, "roomst");
+        }
+    }
+    public async getPhoneNumber() {
+
+        let phoneCollection = this.db.collection('contacts');
+        let val = await phoneCollection.findOne({_id : 'phone'});
+        return await val.phone;
+    }
+    public async getFlat(id) {
+
+        let flatCollection = this.db.collection('addresses');
+        let flat = await flatCollection.findOne({_id : id});
+        return await flat;
     }
 
     public async create(req, res) {
 
         console.log(customPath);
-        
-        let collection = this.collection;
-        // console.log('FLAT', this.collection.findOne({ _id: req.params.id}));
-        
-        return await this.collection.findOne({ _id: ObjectId(req.params.id)}, (err, result) => {
-            // if (err) { return res.status(500).json({ error: err }); }
-            console.log(result);
-            if (result) {
-                let flatInfo = {
-                    section: result.section,
-                    decoration: result.decorationName,
-                    floor: result.floor,
-                    flat: result.flat,
-                    price: String(result.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '),
-                    space: String(result.space),
-                    rooms: (result.rooms == '0')
-                        ? 'Квартира-студия'
-                        : (result.rooms == '1') ? '1-комн. квартира'
-                        : (result.rooms == '2') ? '2-комн. квартира'
-                        : '3-комн. квартира'
-                };
 
-                let pathSVGFloor = `${rootPath}/assets/floor-plans/section_${result.section}/floor_${result.floor}/sect_${result.section}_fl_${result.floor}.svg`;
-                let pathSVGFlat = `${rootPath}/assets/floor-plans/section_${result.section}/floor_${result.floor}/${result.floor}floor_${result.flat}flat.svg`;
+        return await (async () => {
+            const flat = await this.getFlat(ObjectId(req.params.id));
+            const phoneNumber = await this.getPhoneNumber();
 
-                let svgFloor = '';
-                let svgFlat = '';
+            const flatInfo = {
+                section: flat.section,
+                decoration: flat.decorationName,
+                house: flat.house,
+                floor: flat.floor,
+                flat: flat.flat,
+                price: String(flat.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '),
+                space: String(flat.space),
+                rooms: (flat.rooms == '0')
+                    ? 'Квартира-студия'
+                    : (flat.rooms == '1') ? '1-комн. квартира'
+                    : (flat.rooms == '2') ? '2-комн. квартира'
+                    : '3-комн. квартира',
+            };
 
-                fileExists(pathSVGFloor, (err, exists) => {
-                    // if (err) { return res.status(500).json({err: err}); }
-                    console.log('2');
+            let pathSVGFloor = `${customPath}/src/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/sect_${flat.section}_fl_${flat.floor}.svg`;
+            let pathSVGFlat = `${customPath}/src/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
 
-                    if (exists) {
-                        let id ;
-                        id =  `_${flatInfo.flat}`;
-                        svgFloor = fs.readFileSync(pathSVGFloor, 'utf8').replace(/cls|st(?=\d)/g, "floorst").replace(
-                            `id="${id}"`,
-                            `id="${id}" class="active-flat" `
-                        );
-                    }
+            const svgFloor = await this.forSelectFloor(pathSVGFloor, flatInfo);
+            const svgFlat = await this.forSelectFlat(pathSVGFlat);
+            const html = await this.htmlRender(svgFloor, svgFlat, phoneNumber, flatInfo);
+            const result = await this.convert(html);
+            const way = `/${PDF_UPLOADS_PATH}/businesscard.pdf`;
 
-                    fileExists(pathSVGFlat, (err, exist) => {
-                        // if (err) { return res.status(500).json({err: err}); }
-                        console.log('3');
-
-                        if (exist) {
-                            svgFlat = fs.readFileSync(pathSVGFlat, 'utf8').replace(/cls|st(?=\d)/g, "roomst");
-                        }
-
-                        let phoneCollection = this.db.collection('contacts');
-                        phoneCollection.findOne({_id : 'phone'}, (err, result) => {
-
-                            // if (err) { return res.status(500).json({ error: err }); }
-
-                            let phoneNumber = result.phone;
-
-                            let html = this.htmlRender(svgFloor, svgFlat, phoneNumber, flatInfo);
-                            console.log((new Date()), 'pdf request', flatInfo);
-                            this.convert(html).then((file: any) => {
-                                console.log(file.filename);
-                                fs.open( file.filename , (err, data) => {
-                                    // res.contentType('application/pdf');
-                                    // res.send(data);
-                                    if (err) {
-                                        console.error(err)
-                                        return
-                                      }
-                                      console.log(data)
-                                });
-                            }).catch((err) => {
-                                console.log(err);
-                                // res.status(500).json({err});
-                            });
-                        });
-                    });
-
-                });
-            } else {
-                console.log('0');
-                // return res.status(404).json({message: 'page not found'})
-            }
-        });
+            return way;
+        })();
     }
 
     public style = `
         @font-face {
             font-family: "abrade-book";
-            src: url("file:///${rootPath}/assets/fonts/abrade-book/abrade-book.eot");
-            src: url("file:///${rootPath}/assets/fonts/abrade-book/abrade-book.eot") format('embedded-opentype'),
-                url("file:///${rootPath}/assets/fonts/abrade-book/abrade-book.ttf") format("truetype"),
-                url("file:///${rootPath}/assets/fonts/abrade-book/abrade-book.woff") format("woff"),
-                url("file:///${rootPath}/assets/fonts/abrade-book/abrade-book.woff2") format("woff2");
-            font-style: normal;
+            src: url("file:///${customPath}/src/assets/fonts/MuseoSansCyrl_300.otf');
+            src: local('Museo'), local('Museo'),
+            url('/assets/fonts/MuseoSansCyrl_300.otf');
             font-weight: normal;
+            font-style: normal;
         }
-        
+
         @font-face {
             font-family: 'LeksaSans';
-            src: url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.eot');
-            src: url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.eot') format('embedded-opentype'),
-                url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.woff2') format('woff2'),
-                url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.woff') format('woff'),
-                url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.ttf') format('truetype'),
-                url('file:///${rootPath}/assets/fonts/leksa-sans/LeksaSans.svg#LeksaSans') format('svg');
-            font-style: normal;
+            src: url('file:///${customPath}/src/assets/fonts/Leksa.otf');
+            src: local('Leksa'), local('Leksa'),
+            url('/assets/fonts/Leksa.otf');
             font-weight: normal;
+            font-style: normal;
         }
 
         body {
             margin: 0;
             padding: 0;
         }
-        
+
         .pdf-generate__page{
             height:157.3mm;
             width:222.7mm;
