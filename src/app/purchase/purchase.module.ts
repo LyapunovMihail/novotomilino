@@ -33,7 +33,7 @@ const PurchaseComponents = [
         RouterModule.forChild([
             { path: 'purchase', component: PurchaseComponent,
                 children: [
-                    { path: '', redirectTo: 'credit', pathMatch: 'full' },
+                    { path: '', redirectTo: 'installment', pathMatch: 'full' },
                     { path: 'credit', component: PurchaseCreditComponent },
                     { path: 'installment', component: PurchaseInstallmentComponent }
                 ]}
