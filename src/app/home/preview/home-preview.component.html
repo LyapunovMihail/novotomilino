@@ -1,12 +1,5 @@
-<section class="main__preview" *ngIf="gallerySlides">
-    <div class="main__preview-slider">
-        <div class="main__preview-btn">
-            <p class="main__preview-btn-count">
-                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="main__preview-btn-count_span">{{gallerySlides.length < 10 ? '0' : ''}}{{gallerySlides.length}}</span>
-            </p>
-            <button (click)="prevBtn()" class="main__preview-btn-item main__preview-btn-prev"></button>
-            <button (click)="nextBtn()" class="main__preview-btn-item main__preview-btn-next"></button>
-        </div>
+<section class="main__preview home-preview">
+    <!-- <div class="main__preview-slider">
 
         <div class="main__preview__admin-open-btn"
              *ngIf="isAuthorizated"
@@ -64,6 +57,45 @@
             </div>
         </div>
 
+    </div> -->
+
+    <div class="home-preview__bgr">
+        <img src="/assets/img/home-preview.jpg" alt="home-preview">
+    </div>
+
+    <div class="home-preview__container">
+
+        <div class="home-preview__content">
+            <h1 class="home-preview__content-title" *ngIf="!isAuthorizated && homePreview">{{homePreview.title}}</h1>
+            <p class="home-preview__content-descr" #description *ngIf="!isAuthorizated && homePreview">
+                {{homePreview.description}}
+            </p>
+            <ghm-textarea (change)="changeTitle($event.target.value)" 
+                *ngIf="isAuthorizated" class="home-preview__content-title home-preview__content-title--admin" 
+                [value]="homePreview.title"></ghm-textarea>
+            <ghm-textarea (change)="changeDescr($event.target.value)" 
+                *ngIf="isAuthorizated" class="home-preview__content-descr home-preview__content-descr--admin" 
+                [value]="homePreview.description"></ghm-textarea>
+        </div>
+        <div class="home-preview__news">
+            <ng-container *ngFor="let news of newsShares; let i = index">
+
+                <a class="home-preview__news-item" 
+                        [ngClass]="{'home-preview__news-item--shares': news.mainThumbnail, 'active': i === activeNews}"
+                        [style.top.px]="description && description.clientHeight > 90 ? (description.clientHeight + 4) * (-1) : null"
+                        routerLink="{{news.mainThumbnail ? ('/news-shares/shares/list/1/' + news._id) : ('/news-shares/news/list/' + news._id)}}">
+                    <h6 class="home-preview__news-title">{{!news.mainThumbnail ? 'Новости' : 'Акции'}}</h6>
+                    <p class="home-preview__news-text">{{!news.mainThumbnail ? news.title : news.name}}</p>
+
+                    <p *ngIf="news.countdown && +news.finish_date >= 0" 
+                        class="home-preview__news-end">До конца акции {{news.finish_date | sharesDayPipe}}</p>
+                    <p *ngIf="news.countdown && +news.finish_date < 0"  
+                        class="home-preview__news-end">Акция закончилась</p>
+
+                    <div *ngIf="newsShares.length > 1" class="home-preview__news-timeline"></div>
+                </a>
+            </ng-container>
+        </div>
     </div>
 
     <div class="main__preview-threeRed" [class.main__preview-threeRed_active]="showTrojka">

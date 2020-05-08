@@ -35,7 +35,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public gallerySlides: IGallerySnippet[];
 
-    public activeNews= 0;
+    public activeNews = 0;
 
     public activeShare = 0;
 
@@ -43,8 +43,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     private sharesTimer;
 
-    @Input() public newsSnippets: INewsSnippet[];
-    @Input() public shareSnippets: Share[];
+    public homePreview;
+
+    @Input() public newsShares;
     @Input() public isDescription = true;
 
     constructor(
@@ -57,54 +58,35 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
         if ( !this.platform.isBrowser ) { return false; }
 
-        this.prepareMainNewsSnippets();
-
-        this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
-            (data: IGallerySnippet[]) => {
-                this.gallerySlides = data;
-            },
-            (err) => console.log(err)
+        this.homeService.getHomePreview().subscribe(
+            data => this.homePreview = data,
+            error => console.log(error)
         );
-    }
 
-    public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.gallerySlides.length - 1 ) ? this.currentSlide + 1 : this.gallerySlides.length - 1;
-    }
-
-    public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
+        this.prepareMainNewsSnippets();
+        setTimeout( () => {
+            this.newsSlider(this.newsShares);
+        }, 1000);
     }
 
     prepareMainNewsSnippets() {
-        this.newsSnippets.reverse();
-        this.newsSnippets = this.newsSnippets.filter((news: INewsSnippet) => {
+        // this.newsShares.reverse();
+        this.newsShares = this.newsShares.filter((news) => {
             return news.show_on_main;
         });
 
-        if (this.newsSnippets) {
-            this.newsSnippets.forEach((news) => {
-                if (news.title) {
-                    news.title = news.title.length < 53 ? news.title : news.title.slice(0, 50) + '...';
+        if (this.newsShares) {
+            this.newsShares.forEach((snippet) => {
+                if (snippet.finish_date) {
+                    snippet.finish_date = this.countDown(snippet.finish_date) + '';
+                }
+                if (snippet.title) {
+                    snippet.title = snippet.title.length < 53 ? snippet.title : snippet.title.slice(0, 50) + '...';
+                }
+                if (snippet.name) {
+                    snippet.name = snippet.name.length < 53 ? snippet.name : snippet.name.slice(0, 50) + '...';
                 }
             });
-            this.newsSlider(this.newsSnippets);
-        }
-
-        this.shareSnippets.reverse();
-        this.shareSnippets = this.shareSnippets.filter((share: Share) => {
-            if (share.show_on_main) {
-                share.finish_date = this.countDown(share.finish_date) + '';
-                return true;
-            }
-        });
-
-        if (this.shareSnippets) {
-            this.shareSnippets.forEach((share) => {
-                if (share.name) {
-                    share.name = share.name.length < 53 ? share.name : share.name.slice(0, 50) + '...';
-                }
-            });
-            this.sharesSlider(this.shareSnippets);
         }
     }
 
@@ -120,15 +102,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         if (newsList.length > 1) {
             this.newsTimer = setInterval(() => {
                 this.activeNews = this.activeNews < newsList.length - 1 ? this.activeNews + 1 : 0;
-            }, 6000);
-        }
-    }
-
-    public sharesSlider(sharesList) {
-        if ( !this.platform.isBrowser ) { return false; }
-        if (sharesList.length > 1) {
-            this.sharesTimer = setInterval(() => {
-                this.activeShare = this.activeShare < sharesList.length - 1 ? this.activeShare + 1 : 0;
             }, 6000);
         }
     }

@@ -1,4 +1,4 @@
-import { HOME_COLLECTION_NAME, IHomeDescription } from './home.interfaces';
+import { HOME_COLLECTION_NAME, IHomeDescription, IHomePreview } from './home.interfaces';
 import * as mongodb from 'mongodb';
 
 export class HomeModel {
@@ -8,6 +8,7 @@ export class HomeModel {
     private collection: any;
 
     private mainObjectId = 'header';
+    private homeObjectId = 'preview';
     
     constructor ( public db: any ) {
         this.collection = db.collection(this.collectionName);
@@ -28,6 +29,28 @@ export class HomeModel {
         };
         if (headerDescription) {
             await this.collection.updateOne({_id: this.mainObjectId}, {$set: {description}});
+        } else {
+            await this.collection.insert(options);
+        }
+        return options;
+    }
+
+    async getHomePreview() {
+        let previewObj = await this.collection.findOne({_id: this.homeObjectId});
+        return (previewObj ? previewObj : {
+            title: '',
+            description: '',
+        });
+    }
+    async updateHomePreview(val) {
+        let headerDescription = await this.collection.findOne({_id: this.homeObjectId});
+        let options: IHomePreview = {
+            _id: this.homeObjectId,
+            title: val.title,
+            description: val.description,
+        };
+        if (headerDescription) {
+            await this.collection.updateOne({_id: this.homeObjectId}, {$set: val} );
         } else {
             await this.collection.insert(options);
         }

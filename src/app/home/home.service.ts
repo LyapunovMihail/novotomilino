@@ -5,7 +5,7 @@ import { INewsSnippet } from '../../../serv-files/serv-modules/news-api/news.int
 import { Share } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { adminHeaders } from '../commons/admin-headers.utilit';
 import { IGallerySnippet } from '../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
-import { IHomeDescription } from '../../../serv-files/serv-modules/home-api/home.interfaces';
+import { IHomeDescription, IHomePreview } from '../../../serv-files/serv-modules/home-api/home.interfaces';
 
 @Injectable()
 
@@ -42,4 +42,11 @@ export class HomeService {
         return this.http.post<IHomeDescription>('/api/admin/home/header/update', {description}, adminHeaders());
     }
 
+    public getHomePreview(): Observable<IHomePreview> {
+        return this.http.get<IHomePreview>('/api/home/preview');
+    }
+
+    public updateHomePreview(object) {
+        return this.http.post<IHomePreview>('/api/admin/home/preview/update', {object}, adminHeaders());
+    }
 }

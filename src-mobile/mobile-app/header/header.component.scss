@@ -2,7 +2,7 @@
 
 .header {
     width: 100%;
-    height: 146px + 34px;
+    height: 146px;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     z-index: 20;
@@ -16,6 +16,9 @@
         justify-content: center;
         align-items: center;
         background-color: #90aa3b;
+        position: fixed;
+        top: 0; left: 0;
+        z-index: 99;
         &> span {
             font: 15px/24px $font-mus;
             color: $col-white;
@@ -50,6 +53,7 @@
         &--hidden {
             top: -75px;
         }
+        // &.main-page { top: 34px; }
     }
 
     &__head {
@@ -197,7 +201,7 @@
     }
 
     @media (max-width: 1279px) {
-        height: 67px + 34px;
+        height: 67px;
         &--no-quarentine-link { height: 67px; }
 
         &__head {
