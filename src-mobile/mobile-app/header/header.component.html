@@ -20,36 +20,42 @@
             </div>
         </section>
         <nav class="header__nav" [class.header__nav--active]="active">
-            <ul class="header__nav-list">
-                <li class="header__nav-list-item" *ngFor="let link of links">
-                    <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
-                </li>
-            </ul>
 
-            <div class="header__nav-footer">
-                <!-- <div class="header__nav-footer-sell">
-                    <a routerLink="/location/office" (click)="closeNav()" class="g-link_red">Отдел продаж</a>
-                    <a href="tel: +74951374012" class="header__nav-footer-phone">+7 (495) 137-40-12</a>
-                </div> -->
-                <div class="header__nav-footer-link">
-                    <ul class="header__nav-footer-list">
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/insta_media.svg" alt="i">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/vk_media.svg" alt="vk">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/fb_media.svg" alt="f">
-                            </a>
-                        </li>
-                    </ul>
-                    <a (click)="showFullVersion()" class="header__nav-footer-descr">Полная версия сайта</a>
+            <div class="header__nav-container">
+
+                <ul class="header__nav-list">
+                    <li class="header__nav-list-item" *ngFor="let link of links">
+                        <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
+                    </li>
+                </ul>
+    
+                <div class="header__nav-footer">
+                    <div class="header__nav-footer-sell">
+                        <!-- <a routerLink="/location/office" (click)="closeNav()" class="g-link_red">Отдел продаж</a> -->
+                        <a href="tel:+74991109372" class="header__nav-footer-phone">
+                            <span>+7 (499) 110-93-72</span>
+                        </a>
+                    </div>
+                    <div class="header__nav-footer-link">
+                        <!-- <ul class="header__nav-footer-list">
+                            <li class="header__nav-footer-list-item">
+                                <a href="#">
+                                    <img src="/assets/img/header/insta_media.svg" alt="i">
+                                </a>
+                            </li>
+                            <li class="header__nav-footer-list-item">
+                                <a href="#">
+                                    <img src="/assets/img/header/vk_media.svg" alt="vk">
+                                </a>
+                            </li>
+                            <li class="header__nav-footer-list-item">
+                                <a href="#">
+                                    <img src="/assets/img/header/fb_media.svg" alt="f">
+                                </a>
+                            </li>
+                        </ul> -->
+                        <a (click)="showFullVersion()" class="header__nav-footer-descr">Полная версия сайта</a>
+                    </div>
                 </div>
             </div>
         </nav>
