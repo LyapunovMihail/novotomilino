@@ -36,10 +36,12 @@ export class HeaderService {
             }, {
                 name: 'Инфраструктура',
                 url: `/location/infrastructure`
-            }, {
-                name: 'Квартиры',
-                url: `/flats`
-            }, {
+            },
+            // {
+            //     name: 'Квартиры',
+            //     url: `/flats`
+            // },
+            {
                 name: 'Отделка',
                 url: '/decoration'
             }, {
