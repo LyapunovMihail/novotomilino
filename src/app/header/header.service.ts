@@ -30,10 +30,10 @@ export class HeaderService {
                 name: 'Расположение',
                 url: `/location`
             },
-            // {
-            //     name: 'Квартиры',
-            //     url: `/flats`
-            // },
+            {
+                name: 'Квартиры',
+                url: `/flats`
+            },
             {
                 name: 'Отделка',
                 url: '/decoration'
@@ -41,10 +41,10 @@ export class HeaderService {
                 name: 'Ход строительства',
                 url: `/dynamic/${year}/${month}`
             },
-            // {
-            //     name: 'Условия покупки',
-            //     url: '/purchase'
-            // },
+            {
+                name: 'Условия покупки',
+                url: '/purchase'
+            },
             {
                 name: 'Новости',
                 url: '/news-shares'
