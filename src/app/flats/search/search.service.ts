@@ -20,8 +20,8 @@ export class SearchService {
         return this.http.get('/api/search-config');
     }
 
-    public getPDF(id) {
-        return this.http.get(`/api/pdf/${id}`);
+    public getPDF(id, mod) {
+        return this.http.get(`/api/pdf/${id}/${mod}`);
     }
 
     public getOutputFlatsChanged() {

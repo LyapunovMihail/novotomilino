@@ -16,8 +16,7 @@ import { SharesController } from './shares-api/shares.controller';
 import { TriggerController } from './trigger-api/trigger.controller';
 import { GalleryController } from './gallery-api/gallery.controller';
 import { HomeController } from './home-api/home.controller';
-import { PDFGeneratorController } from './pdf-generator/pdf-generator.controller';
-import { PDFController } from './pdf-generator/test-pdf-generator.controller';
+import { PDFController } from './pdf-generator/pdf-generator.controller';
 
 @Module({
     imports: [],
@@ -38,7 +37,6 @@ import { PDFController } from './pdf-generator/test-pdf-generator.controller';
         ContactsController,
         HomeController,
         PDFController,
-        // PDFGeneratorController,
     ],
     providers: [
         MongoConnectionService,

@@ -51,6 +51,7 @@ export class ApartmentComponent implements OnInit {
 
     public routePDF() {
         this.clickedPdf = true;
+        let modeIndex = window.location.href;
 
         if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
             this.clickedPdf = false;
@@ -59,7 +60,7 @@ export class ApartmentComponent implements OnInit {
         }
         this.changeFlatData = this.flatData;
 
-        return this.searchService.getPDF(this.flatData['_id']).subscribe(
+        return this.searchService.getPDF(this.flatData['_id'], modeIndex.indexOf('localhost')).subscribe(
             data => {
                 console.log(data);
                 this.pdfLink = data.toString();

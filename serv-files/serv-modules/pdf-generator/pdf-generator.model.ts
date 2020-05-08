@@ -7,24 +7,43 @@ const pdf        = require('html-pdf');
 const path       = require("path");
 const ObjectId   = require('mongodb').ObjectID;
 
-const rootPath = (process.env.NODE_ENV === 'development')
-? resolve(__dirname, '..', '..')
+const rootPath = (process.env && process.env.IS_DEVELOPMENT)
+? resolve(__dirname, '..', '..', '..')
 : __dirname;
-const customPath = resolve(__dirname, '..', '..', '..');
+const customPath = resolve(__dirname, '..', '..', '..', 'src');
+const devModPath = resolve(__dirname, '..', '..', '..', 'src');
+const prodModPath = __dirname;
 
 const options = {
     format: 'A4',
     orientation: 'landscape',
-    base: `${customPath}/src`,
-    script: `${customPath}/src/assets/html-pdf/pdf_a4_portrait.js`,
+    base: `${customPath}/`,
+    script: `${customPath}/assets/html-pdf/pdf_a4_portrait.js`,
     quality: '100',
     phantomPath:  process.env.PHANTOM_PATH || null ,
 };
 const PDF_UPLOADS_PATH = 'uploads/pdf';
 
+function getHref() {
+    let href = document.location.href;
+    let isDev = resolve(__dirname, '..', '..', '..');
+    let isProd = resolve(__dirname, '..');
+
+    return (href.indexOf('localhost') > 0) ? isDev : isProd;
+}
+
 export class PDFGeneratorModel {
 
     collection: any;
+    params: any;
+    options = {
+        format: 'A4',
+        orientation: 'landscape',
+        base: `${(this.params >= 0 || this.params !== '-1') ? devModPath : prodModPath}/`,
+        script: `${(this.params >= 0 || this.params !== '-1') ? devModPath : prodModPath}/assets/html-pdf/pdf_a4_portrait.js`,
+        quality: '100',
+        phantomPath:  process.env.PHANTOM_PATH || null ,
+    };
 
     constructor(public db: any) {
         this.collection = db.collection('addresses');
@@ -32,7 +51,7 @@ export class PDFGeneratorModel {
 
     public convert(html) {
         return new Promise( (res, rej) => {
-            pdf.create(html, options).toFile(`./${PDF_UPLOADS_PATH}/businesscard.pdf`, (err, file) => {
+            pdf.create(html, this.options).toFile(`./${PDF_UPLOADS_PATH}/businesscard.pdf`, (err, file) => {
                 console.log('in pdf Create', file.filename);
                 res(file.filename);
             });
@@ -58,15 +77,6 @@ export class PDFGeneratorModel {
             return svgFlat = fs.readFileSync(pathSVG, 'utf8').replace(/cls|st(?=\d)/g, "roomst");
         }
     }
-    public async getPhoneNumber() {
-
-        return new Promise( (res, rej) => {
-            let phoneCollection = this.db.collection('contacts');
-            phoneCollection.findOne({_id : 'phone'}, (err, number) => {
-                res(number.phone);
-            });
-        });
-    }
     public getFlat(id) {
 
         return new Promise( (res, rej) => {
@@ -77,13 +87,18 @@ export class PDFGeneratorModel {
         });
     }
 
-    public async create(req, res) {
+    public async create(req) {
 
-        console.log(customPath);
+        this.params = req.params.mod
+        let customPath;
+        customPath = (req.params.mod >= 0 || req.params.mod !== '-1') ? devModPath : prodModPath;
+
+        console.log('customPath -> ', customPath);
+        console.log('this.params[0] -> ', this.params[0]);
 
         return await (async () => {
             const flat: any = await this.getFlat(ObjectId(req.params.id));
-            const phoneNumber = await this.getPhoneNumber();
+            const phoneNumber = '+7-499-350-75-48';
 
             const flatInfo = {
                 section: flat.section,
@@ -100,8 +115,8 @@ export class PDFGeneratorModel {
                     : '3-комн. квартира',
             };
 
-            let pathSVGFloor = `${customPath}/src/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/sect_${flat.section}_fl_${flat.floor}.svg`;
-            let pathSVGFlat = `${customPath}/src/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
+            let pathSVGFloor = `${customPath}/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/sect_${flat.section}_fl_${flat.floor}.svg`;
+            let pathSVGFlat = `${customPath}/assets/floor-plans/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
 
             const svgFloor = await this.forSelectFloor(pathSVGFloor, flatInfo);
             const svgFlat = await this.forSelectFlat(pathSVGFlat);
@@ -118,7 +133,7 @@ export class PDFGeneratorModel {
     public style = `
         @font-face {
             font-family: "abrade-book";
-            src: url("file:///${customPath}/src/assets/fonts/MuseoSansCyrl_300.otf');
+            src: url("file:///${customPath}/assets/fonts/MuseoSansCyrl_300.otf');
             src: local('Museo'), local('Museo'),
             url('/assets/fonts/MuseoSansCyrl_300.otf');
             font-weight: normal;
@@ -127,7 +142,7 @@ export class PDFGeneratorModel {
 
         @font-face {
             font-family: 'LeksaSans';
-            src: url('file:///${customPath}/src/assets/fonts/Leksa.otf');
+            src: url('file:///${customPath}/assets/fonts/Leksa.otf');
             src: local('Leksa'), local('Leksa'),
             url('/assets/fonts/Leksa.otf');
             font-weight: normal;
