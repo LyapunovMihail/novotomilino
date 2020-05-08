@@ -45,10 +45,12 @@ export class HeaderService {
             }, {
                 name: 'Ход строительства',
                 url: `/dynamic/${year}/${month}`
-            }, {
-                name: 'Условия покупки',
-                url: '/purchase'
-            }, {
+            },
+            // {
+            //     name: 'Условия покупки',
+            //     url: '/purchase'
+            // },
+            {
                 name: 'Новости',
                 url: '/news-shares'
             }, {
