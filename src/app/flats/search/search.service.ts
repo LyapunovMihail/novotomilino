@@ -21,8 +21,7 @@ export class SearchService {
     }
 
     public getPDF(id) {
-        let message = JSON.stringify({ id });
-        return this.http.post('/api/pdf', message);
+        return this.http.get(`/api/pdf/${id}`);
     }
 
     public getOutputFlatsChanged() {

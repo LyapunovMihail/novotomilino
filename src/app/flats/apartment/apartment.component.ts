@@ -18,6 +18,8 @@ export class ApartmentComponent implements OnInit {
     public isReserveFormOpen: boolean = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
+    public clickedPdf = false;
+    public changeFlatData;
 
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
@@ -34,7 +36,7 @@ export class ApartmentComponent implements OnInit {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        // this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
     }
 
     public prevFlat() {
@@ -48,10 +50,28 @@ export class ApartmentComponent implements OnInit {
     }
 
     public routePDF() {
-        // this.searchService.getPDF(this.flatData['_id']).subscribe(
-        //     data => console.log('PDF', data)
-        // );
-        this.router.navigate(['/pdf'], { queryParams: { id: this.flatData['_id'] } });
+        this.clickedPdf = true;
+
+        if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
+            this.clickedPdf = false;
+            window.open(this.pdfLink);
+            return 'javascript:void(0)';
+        }
+        this.changeFlatData = this.flatData;
+
+        return this.searchService.getPDF(this.flatData['_id']).subscribe(
+            data => {
+                console.log(data);
+                this.pdfLink = data.toString();
+                window.open(data.toString());
+                this.clickedPdf = false;
+                return 'javascript:void(0)';
+            },
+            err => {
+                this.clickedPdf = false;
+                return 'javascript:void(0)';
+            }
+        );
     }
 
     public getDiscount(flat): number {
