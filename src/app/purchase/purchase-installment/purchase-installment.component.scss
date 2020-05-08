@@ -7,11 +7,12 @@
         width: 100%;
         max-width: 922px;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         margin: 0 0 40px;
     
         &-item {
             width: 287px;
+            margin-right: 30px;
             cursor: pointer;
         }
         &-box {
