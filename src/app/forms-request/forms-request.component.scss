@@ -92,7 +92,7 @@
         &_time {
             width: 78px;
             position: absolute;
-            top: 30px;
+            top: 45px;
             left: 30px;
             pointer-events: none;
             padding: 0 15px;
@@ -154,6 +154,7 @@
             color: $col-black;
 
             &_remark {
+                max-width: 240px;
                 display: block;
                 color: rgba(0, 1, 5, 0.39);
             }
