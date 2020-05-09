@@ -42,7 +42,7 @@
         align-items: center;
         background-color: #ffffff;
         transition: top .3s ease;
-
+        
         &--fixed {
             position: fixed;
             top: 0;
@@ -50,9 +50,8 @@
             z-index: 99;
             box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
         }
-        &--hidden {
-            top: -75px;
-        }
+        &--hidden { top: -75px; }
+        &.main-page { top: 34px; }
         // &.main-page { top: 34px; }
     }
 
@@ -201,7 +200,7 @@
     }
 
     @media (max-width: 1279px) {
-        height: 67px;
+        height: 67px + 34px;
         &--no-quarentine-link { height: 67px; }
 
         &__head {

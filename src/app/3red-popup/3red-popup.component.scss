@@ -55,7 +55,8 @@ $bg-col: rgba($color: #000000, $alpha: .5);
         }
         &--black {
             color: #000;
-            &:last-child { margin: 64px 0 0; }
+            &:nth-last-child(2) { margin: 64px 0 0; }
+            &:last-child { margin: 25px 0 0; }
         }
     }
 }
