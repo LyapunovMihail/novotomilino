@@ -26,7 +26,9 @@ export class FormCreditComponent implements OnChanges {
         type: '',
         mail: '',
         name: '',
-        phone: ['', Validators.compose([Validators.required, Validators.maxLength(18), Validators.minLength(18)])],
+        lastName: '',
+        middleName: '',
+        phone: ['', Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11)])],
         time: '',
         wait_for_call: 'now',
         agreement: true

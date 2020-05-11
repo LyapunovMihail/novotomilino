@@ -86,7 +86,7 @@ export class DbCronUpdate {
             house,
             section,
             floor,
-            rooms: Number(object.Rooms),
+            rooms: object.IsEuro === '1' ? 1 : Number(object.Rooms),
             flat,
             status: object.StatusCode,
             statusName: object.StatusCodeName,

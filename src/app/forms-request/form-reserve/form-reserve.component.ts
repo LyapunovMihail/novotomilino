@@ -20,6 +20,8 @@ export class FormReserveComponent implements OnChanges {
 
     public form: FormGroup = this.formBuilder.group({
         name: '',
+        lastName: '',
+        middleName: '',
         price: '',
         number: '',
         type: '',

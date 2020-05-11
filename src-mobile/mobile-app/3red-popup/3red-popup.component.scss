@@ -19,7 +19,7 @@ $bg-col: rgba($color: #000000, $alpha: .5);
 
     &__container {
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         background-color: $col-white;
         box-sizing: border-box;
         position: relative;
@@ -50,6 +50,7 @@ $bg-col: rgba($color: #000000, $alpha: .5);
         }
         &--black {
             color: #000;
+            &:nth-last-child(2) { margin: 64px 0 0; }
             &:last-child { margin: 32px 0 0; }
         }
     }
@@ -102,7 +103,8 @@ $bg-col: rgba($color: #000000, $alpha: .5);
             line-height: 24px;
             &--grey + .threeRed-popup__text--grey { margin: 8px 0 0; }
             &--black {
-                &:last-child { margin: 32px 0 0; }
+                &:nth-last-child(2) { margin: 32px 0 0; }
+                &:last-child { margin: 8px 0 0; }
             }
         }
     }
