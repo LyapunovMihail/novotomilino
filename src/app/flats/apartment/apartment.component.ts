@@ -51,7 +51,8 @@ export class ApartmentComponent implements OnInit {
 
     public routePDF() {
         this.clickedPdf = true;
-        let modeIndex = window.location.href;
+        let location = window.location.href;
+        let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
 
         if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
             this.clickedPdf = false;
@@ -60,7 +61,7 @@ export class ApartmentComponent implements OnInit {
         }
         this.changeFlatData = this.flatData;
 
-        return this.searchService.getPDF(this.flatData['_id'], modeIndex.indexOf('localhost')).subscribe(
+        return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
             data => {
                 console.log(data);
                 this.pdfLink = data.toString();
@@ -70,6 +71,8 @@ export class ApartmentComponent implements OnInit {
             },
             err => {
                 this.clickedPdf = false;
+                console.log('getPDF');
+                console.log('getPDF: ->', err);
                 return 'javascript:void(0)';
             }
         );

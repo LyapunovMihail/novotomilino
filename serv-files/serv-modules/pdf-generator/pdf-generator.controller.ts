@@ -22,7 +22,6 @@ export class PDFController extends PDFGeneratorModel {
     routing() {
 
         this.router.get('/pdf/:id/:mod', responseHandler(async (req) => {
-            // console.log('RES', req.res);
             return await this.create(req);
         }));
 
