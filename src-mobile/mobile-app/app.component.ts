@@ -21,7 +21,7 @@ export const ROOT_SELECTOR = 'app-root';
 
             <app-footer></app-footer>
 
-            <app-3red-popup></app-3red-popup>
+            <app-3red-popup *ngIf="showPopup"></app-3red-popup>
 
         </section>
 
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
     public previousUrl: string;
     public currentUrl: string;
+    public showPopup;
 
     constructor(
         public appState: AppState,
@@ -43,6 +44,10 @@ export class AppComponent implements OnInit {
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);
 
+        if (!localStorage.popup) {
+            localStorage.setItem('popup', 'true');
+        }
+
         this.router.events.subscribe((event) => {
             if (!(event instanceof NavigationEnd)) {
                 return;
@@ -52,7 +57,16 @@ export class AppComponent implements OnInit {
             window.scrollTo(0, 0);
         });
 
+        this.showOnePopup();
         // Загружаем акции для дальнейшего вычисления скидки по квартирам
         this.flatsDiscountService.getShares();
+    }
+
+    public showOnePopup() {
+
+        if (localStorage.popup === 'true') {
+            localStorage.popup = 'false';
+            this.showPopup = true;
+        }
     }
 }
