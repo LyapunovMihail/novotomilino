@@ -30,9 +30,13 @@
             
             <div class="create-form__form-wrap">    
                 <p class="create-form__form-subtitle">Текст</p>
+                <p class="textarea__add-link"
+                 [class.textarea__add-link_show]="showLink" (click)="showModalFunc({textArea: area}, form.get('description'))">Вставить ссылку</p>
                 <textarea class="create-form__form-area create-form__form-area_text"
                     placeholder="Дополнительный текст"
-                    [formControl]="form.controls['description']">
+                    (focus)="showLink = true"
+                    [formControl]="form.controls['description']"
+                    #area>
                 </textarea>
             </div>
 
@@ -83,3 +87,8 @@
     </div>
 
 </div>
+
+<app-news-edit-anchor *ngIf="showModal"
+    [data]="modalAnchorData"
+    (close)="showModal = false">
+</app-news-edit-anchor>

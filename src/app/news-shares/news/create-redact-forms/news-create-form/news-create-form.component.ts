@@ -74,6 +74,10 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
 
     public dateNow: string;
 
+    public showLink = false;
+    public showModal = false;
+    public modalAnchorData;
+
     constructor(
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
@@ -156,6 +160,12 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             this.form.controls['last_modifyed'].setValue(date);
             this.form.controls['icon_mod'].setValue('1');
         }
+    }
+
+    showModalFunc(obj, control) {
+        this.showModal = true;
+        obj.formControl = control;
+        this.modalAnchorData = obj;
     }
 
     onSubmit(form) {

@@ -1,4 +1,5 @@
 import { NewsCreateFormComponent } from './news-create-form/news-create-form.component';
+import { NewsEditAnchorComponent } from './news-edit-anchor/news-edit-anchor.component';
 import { NewsRedactFormComponent } from './news-redact-form/news-redact-form.component';
 import { NewsDeleteFormComponent } from './news-delete-form/news-delete-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,12 +10,14 @@ import { NgModule } from '@angular/core';
     exports: [
         NewsCreateFormComponent,
         NewsRedactFormComponent,
-        NewsDeleteFormComponent
+        NewsDeleteFormComponent,
+        NewsEditAnchorComponent
     ],
     declarations: [
         NewsCreateFormComponent,
         NewsRedactFormComponent,
-        NewsDeleteFormComponent
+        NewsDeleteFormComponent,
+        NewsEditAnchorComponent
     ],
     imports: [
         FormsModule,
