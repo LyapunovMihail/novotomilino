@@ -18,6 +18,7 @@ export interface IAddressItemFlat {
     space: number;
     price: number;
     deliveryDate: string;
+    article: string;
     _id?: any;
 }
 
