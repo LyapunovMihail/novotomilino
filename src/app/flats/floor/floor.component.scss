@@ -8,7 +8,7 @@
 
 .floor {
     width: 100%;
-    height: calc(100vh - 146px - 51px);
+    height: calc(100vh - 46px - 51px);
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -89,13 +89,12 @@
     cursor: pointer;
     opacity: 0.1;
 
-    &:hover {
-        opacity: .3;
-    }
+    &:hover { opacity: .3; }
+    &--free { fill: rgb(170, 171, 34) !important; }
 }
 
 .flat-mod--free path, .flat-mod--free polygon, .flat-mod--free polyline, .flat-mod--free rect {
-    fill: rgb(170, 171, 34);
+    fill: rgb(170, 171, 34) !important;
 }
 
 .flat-mod--out-of-stock path, .flat-mod--out-of-stock polygon, .flat-mod--out-of-stock polyline, .flat-mod--out-of-stock rect {

@@ -5,12 +5,8 @@ import { FormsRequestModule } from '../../forms-request/forms-request.module';
 import { ApartmentComponent } from './apartment.component';
 
 @NgModule({
-    exports: [
-        ApartmentComponent
-    ],
-    declarations: [
-        ApartmentComponent
-    ],
+    exports: [ ApartmentComponent ],
+    declarations: [ ApartmentComponent ],
     imports: [
         CommonModule,
         FormsRequestModule,

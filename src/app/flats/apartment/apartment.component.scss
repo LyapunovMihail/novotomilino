@@ -1,5 +1,10 @@
 @import "../../../styles/modules/mixins/mixin";
 
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .apartment {
     width: 1088px;
     height: 606px;
@@ -230,6 +235,9 @@
         background: rgba(170, 171, 34, 0.2);
 
         &-link {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
             margin: 0 0 30px;
 
             &-dwnld,
@@ -252,6 +260,23 @@
                 &:before {
                     background: url(/assets/img/pdf.svg) no-repeat;
                     background-size: 22px 22px;
+                }
+                &.clicked {
+                    opacity: .5;
+                    pointer-events: none;
+                    &::after {
+                        content: '';
+                        width: 20px;
+                        height: 20px;
+                        box-sizing: border-box;
+                        position: absolute;
+                        top: calc(50% - 10px);
+                        left: calc(100% + 10px);
+                        border-radius: 50%;
+                        border: 2px solid $col-orange;
+                        border-top-color: transparent;
+                        animation: rotate .5s linear infinite;
+                    }
                 }
             }
             &-favorite {
