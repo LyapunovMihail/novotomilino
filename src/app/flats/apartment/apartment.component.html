@@ -102,12 +102,14 @@
     [isOpen]="isCreditFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
-    [type]="flatData.type">
+    [type]="flatData.type"
+    [article]="flatData.article">
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
     [isOpen]="isReserveFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
-    [type]="flatData.type">
+    [type]="flatData.type"
+    [article]="flatData.article">
 </app-form-reserve>

@@ -1,7 +1,7 @@
 import { PlatformDetectService } from './../../platform-detect.service';
 import { FormsRequestService } from './../forms-request.service';
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare let $: any;
 
 @Component({
@@ -15,6 +15,7 @@ export class FormCreditComponent implements OnChanges {
     @Input() public isOpen: boolean = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
+    @Input() public article: string;
     @Input() public type: string;
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
@@ -31,7 +32,8 @@ export class FormCreditComponent implements OnChanges {
         phone: ['', Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11)])],
         time: '',
         wait_for_call: 'now',
-        agreement: true
+        agreement: true,
+        article: ''
     });
 
     public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -57,6 +59,7 @@ export class FormCreditComponent implements OnChanges {
             this.form.controls['price'].setValue(this.apartmentPrice);
             this.form.controls['number'].setValue(this.apartmentNumber);
             this.form.controls['type'].setValue(this.type);
+            this.form.controls['article'].setValue(this.article);
             this.isSubmited = false;
         }
     }

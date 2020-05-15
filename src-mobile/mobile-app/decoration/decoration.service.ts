@@ -48,10 +48,10 @@ export class DecorationService {
             name: 'Прихожая',
             mod: 'hallway',
             url: '/decoration/hallway',
-            preview: '/assets/img/decoration/hallway/hall_classic.jpg',
+            preview: '/assets/img/decoration/hallway/hall_modern.jpg',
             images: [
-                '/assets/img/decoration/hallway/hall_classic.jpg',
                 '/assets/img/decoration/hallway/hall_modern.jpg',
+                '/assets/img/decoration/hallway/hall_classic.jpg',
             ]
         }
         // {

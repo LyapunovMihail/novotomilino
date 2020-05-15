@@ -20,6 +20,8 @@ $transition: .2s linear;
 $trans-link: .6s ease;
 $trans-img: transform .7s linear;
 
+$font-proba: 'ProbaPro', sans-serif, Arial;
+
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

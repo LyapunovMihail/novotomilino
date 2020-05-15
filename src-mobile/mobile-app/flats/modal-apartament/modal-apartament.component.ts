@@ -30,7 +30,6 @@ export class ModalApartamentComponent implements OnInit {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        console.log('this.flatData: ', this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
     }
 

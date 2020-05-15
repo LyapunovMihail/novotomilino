@@ -77,6 +77,10 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
 
     public dateNow: string;
 
+    public showLink = false;
+    public showModal = false;
+    public modalAnchorData;
+
     constructor(
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
@@ -162,6 +166,12 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
                 this.isForm = false;
             }
         }
+    }
+
+    showModalFunc(obj, control) {
+        this.showModal = true;
+        obj.formControl = control;
+        this.modalAnchorData = obj;
     }
 
     onSubmit(form) {

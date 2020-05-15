@@ -520,6 +520,7 @@ $required-input : #ffb3b3;
         &-wrap {
             width: 100%;
             margin: 0 0 30px;
+            position: relative;
         }
         &-date,
         &-subtitle {
@@ -684,4 +685,18 @@ $required-input : #ffb3b3;
             margin: 0 0 0 20px;
         }
     }
+}
+
+.textarea__add-link {
+    display: none;
+    font: 14px/18px 'ProbaPro', 'sans-serif', 'Arial';
+    color: #ee4237;
+    text-decoration: underline;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.textarea__add-link_show {
+    display: block;
 }

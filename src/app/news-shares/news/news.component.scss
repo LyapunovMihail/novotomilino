@@ -224,6 +224,11 @@
             color: rgba(0, 1, 5, 0.8);
             margin: 0 0 10px;
 
+            &-link {
+                color: #ee4237;
+                text-decoration: underline;
+            }
+
             &_date {
                 font: 12px/18px $font-mus;
                 @include font-smoothing;
