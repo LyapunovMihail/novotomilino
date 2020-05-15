@@ -39,6 +39,7 @@ import { DynamicModule } from './dynamic/dynamic.module';
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
+import { MetaService } from './commons/meta.service';
 
 
 // Application wide providers
@@ -50,7 +51,8 @@ const APP_PROVIDERS = [
     WindowEventsService,
     FavoritesService,
     PlatformDetectService,
-    FlatsDiscountService
+    FlatsDiscountService,
+    MetaService
 ];
 
 const APP_MODULES = [

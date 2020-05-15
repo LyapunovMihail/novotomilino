@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
     { path: '', loadChildren : './home/home.module#HomeModule' },
-    { path: 'seo', loadChildren: './seo/seo.module#SeoModule' },
     { path: 'location', loadChildren: './location/location.module#LocationModule' },
     { path: 'dynamic/:year/:month', loadChildren: './dynamic/dynamic.module#DynamicModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { MetaService } from './commons/meta.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -30,7 +31,7 @@ export const ROOT_SELECTOR = 'app-root';
       <app-overlay></app-overlay>
       <app-img-modal></app-img-modal>
   `,
-    providers: [ ]
+    providers: [ MetaService ]
 })
 export class AppComponent implements OnInit {
 
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
         public appState: AppState,
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
+        public metaService: MetaService
     ) {}
 
     public ngOnInit() {
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit {
             }
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;
+            this.metaService.changeMetaTag(this.router.url);
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }
