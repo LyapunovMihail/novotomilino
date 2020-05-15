@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
@@ -54,6 +54,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
     public homePreview;
 
     @Input() public newsShares;
+    @Output() public showVideo = new EventEmitter<any>();
+    public showVideoAdmin = false;
+    public videoContent;
 
     constructor(
         public platform: PlatformDetectService,
@@ -69,6 +72,13 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
+        this.homeService.getPreviewVideo().subscribe(
+            data => {
+                console.log(data);
+                this.videoContent = data;
+            },
+            err => console.log(err)
+        );
 
         this.prepareMainNewsSnippets();
 

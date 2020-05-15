@@ -30,6 +30,9 @@
                 </a>
             </ng-container>
         </div>
+        <div class="home-preview__video" *ngIf="videoContent && videoContent.show">
+            <button class="home-preview__video-btn" (click)="showVideo = true">{{videoContent.name}}</button>
+        </div>
     </div>
 </section>
 
@@ -47,3 +50,8 @@
         <a class="home-preview__threeRed-link g-link_red" href="https://3-red.com/" target="_blank">3-red.com</a>
     </div>
 </div>
+
+<app-video
+    *ngIf="showVideo"
+    (close)="showVideo = $event">
+</app-video>

@@ -45,6 +45,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public homePreview;
 
+    public showVideo = false;
+    public videoContent;
+
     @Input() public newsShares;
     @Input() public isDescription = true;
 
@@ -61,6 +64,11 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         this.homeService.getHomePreview().subscribe(
             data => this.homePreview = data,
             error => console.log(error)
+        );
+
+        this.homeService.getPreviewVideo().subscribe(
+            data => this.videoContent = data,
+            err => console.log(err)
         );
 
         this.prepareMainNewsSnippets();

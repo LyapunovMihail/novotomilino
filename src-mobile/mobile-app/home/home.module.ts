@@ -11,6 +11,7 @@ import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
 import { ScrollUpComponent } from './scroll-up/scroll-up.component';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
     exports : [
@@ -25,7 +26,8 @@ import { HomeTriggerComponent } from './trigger/home-trigger.component';
         HomeNewsComponent,
         SharesDayPipe,
         LineBreakPipe,
-        ScrollUpComponent
+        ScrollUpComponent,
+        VideoComponent
     ],
     imports : [
         CommonModule,

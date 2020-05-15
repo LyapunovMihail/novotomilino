@@ -12,10 +12,15 @@ import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
 import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
+import { VideoComponent } from './video/video.component';
+import { VideoAdminComponent } from './video/video-admin/video-admin.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports : [
-    HomeComponent
+    HomeComponent,
+    VideoComponent,
+    VideoAdminComponent
   ],
   declarations : [
       HomeComponent,
@@ -26,11 +31,14 @@ import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
       HomeGalleryAdminComponent,
       HomeNewsComponent,
       SharesDayPipe,
-      LineBreakPipe
+      LineBreakPipe,
+      VideoComponent,
+      VideoAdminComponent
   ],
   imports : [
     CommonModule,
     GHMTextAreaModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ])

@@ -42,6 +42,36 @@
         position: relative;
         z-index: 1;
     }
+    &__video {
+        position: absolute;
+        // top: (150px - 67px);
+        top: (150px - (67px + 34px));
+        right: 0;
+
+        &-btn {
+            min-height: 58px;
+            border-radius: 4px;
+            background-color: #AAAB22;
+            padding: 0 12px 0 82px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            font: 18px/20px $font-mus;
+            @include font-smoothing();
+            color: $col-white;
+            text-align: left;
+            white-space: pre-wrap;
+            &::after {
+                content: '';
+                width: 96px;
+                height: 72px;
+                position: absolute;
+                bottom: 5px; left: -18px;
+                background: url(/assets/img/show-video.svg) no-repeat;
+            }
+        }
+    }
+
     &__content {
         width: 100%;
         max-width: 818px;
@@ -180,6 +210,10 @@
 
             &-title { margin: 0 0 10px; }
             &-descr { font: 14px/18px $font-mus; }
+        }
+        &__video {
+            // top: (139px - 67px);
+            top: (139px - (67px + 34px));
         }
         &__news {
             top: calc(100% + 15px);

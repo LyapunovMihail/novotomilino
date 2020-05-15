@@ -34,6 +34,13 @@ export class HomeController extends HomeModel {
         this.router.post('/admin/home/preview/update', responseHandler(async(req) => {
             return await this.updateHomePreview(req.body.object);
         }));
+        
+        this.router.get('/home/video', responseHandler(async(req) => {
+            return await this.getPreviewVideo();
+        }));
+        this.router.post('/admin/home/video/update', responseHandler(async(req) => {
+            return await this.updatePreviewVideo(req.body.object);
+        }));
 
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);

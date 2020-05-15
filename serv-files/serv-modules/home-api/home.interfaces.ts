@@ -9,3 +9,10 @@ export interface IHomeDescription {
     _id: any;
     description: string;
 }
+
+export interface IHomeVideo {
+    _id: any;
+    name: string;
+    link: string;
+    show: boolean;
+}

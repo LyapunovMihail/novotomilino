@@ -1,0 +1,94 @@
+@import '../../../../styles/modules/mixins/mixin';
+
+.video-admin {
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    background-color: rgba($color: $col-black, $alpha: .6);
+    z-index: 1000;
+
+    &__container {
+        width: 1088px;
+        height: 516px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 32px 35px 34px;
+        background-color: $col-white;
+    }
+
+    &__btn-close {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        right: -60px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        background: url(/assets/img/cls_white.svg) 49% 49% no-repeat;
+        background-size: 20px;
+        transition: border-color $transition;
+        &:hover { border-color: #fff; }
+    }
+    &__btn-save {
+        width: 161px;
+        height: 50px;
+        background-color: $col-blue;
+        font: 20px/28px $font-mus;
+        @include font-smoothing;
+        color: $col-white;
+    }
+
+    &__title {
+        font: 40px/54px $font-leksa;
+        @include font-smoothing();
+        color: $col-black;
+        margin: 0 0 50px;
+    }
+    &__notice {
+        font: 16px/21px $font-mus;
+        @include font-smoothing;
+        color: $col-32;
+        margin: 0 0 7px;
+    }
+
+    &__wrap {
+
+        &--input {
+            width: 100%;
+            margin: 0 0 40px;
+        }
+        &--checkbox {
+            display: flex;
+            justify-content: flex-start;
+            margin: 0 0 36px;
+        }
+    }
+
+    &__textarea {
+        display: block;
+        width: 100%;
+        min-height: 48px;
+        padding: 10px 15px;
+        border: 1px solid #979797;
+        box-sizing: border-box;
+        font: 20px/28px $font-mus;
+        @include font-smoothing();
+        color: $col-black;
+    }
+    &__checkbox {
+        display: flex;
+        align-items: center;
+
+        &> input:checked + div {
+            background: url(/assets/img/check.svg) center no-repeat #e7490f;
+            border-color: #e7490f;
+        }
+        &> p {
+            font: 20px/28px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+}
