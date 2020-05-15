@@ -1,7 +1,8 @@
 <main class="main">
 
     <app-home-preview *ngIf="newsLoaded"
-        [newsShares]="allSnippets">
+        [newsShares]="allSnippets"
+        (showVideo)="showVideo = $event">
     </app-home-preview>
 
     <app-home-trigger></app-home-trigger>
@@ -15,5 +16,10 @@
         [shareSnippets]="shareSnippets"
         [allSnippets]="allSnippets">
     </app-home-news>
+
+    <app-video 
+        *ngIf="showVideo"
+        (close)="showVideo = $event">
+    </app-video>
 
 </main>

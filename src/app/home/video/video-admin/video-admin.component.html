@@ -1,0 +1,29 @@
+
+<section class="video-admin">
+
+    <form [formGroup]="videoForm" class="video-admin__container" *ngIf="content" (ngSubmit)="save(videoForm)">
+
+        <button class="video-admin__btn-close" (click)="close.emit(false)"></button>
+
+        <h1 class="video-admin__title">Редактировать кнопку</h1>
+
+        <div class="video-admin__wrap video-admin__wrap--input">
+            <p class="video-admin__notice">Текст кнопки</p>
+            <ghm-textarea class="video-admin__textarea" [formControlName]="'name'"></ghm-textarea>
+        </div>
+        <div class="video-admin__wrap video-admin__wrap--input">
+            <p class="video-admin__notice">Ссылка на видео</p>
+            <ghm-textarea class="video-admin__textarea" [formControlName]="'link'"></ghm-textarea>
+        </div>
+        <div class="video-admin__wrap video-admin__wrap--checkbox">
+            <label class="video-admin__checkbox">
+                <input type="checkbox" [style.display]="'none'" 
+                    [formControl]="videoForm.controls['show']">
+                <div class="g-checkbox"></div>
+                <p>Показывать кнопку</p>
+            </label>
+        </div>
+
+        <button type="submit" class="video-admin__btn-save">Сохранить</button>
+    </form>
+</section>

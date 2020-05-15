@@ -30,7 +30,7 @@ export const ROOT_SELECTOR = 'app-root';
       <app-overlay></app-overlay>
       <app-img-modal></app-img-modal>
   `,
-    providers: []
+    providers: [ ]
 })
 export class AppComponent implements OnInit {
 
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     constructor(
         public appState: AppState,
         private router: Router,
-        public flatsDiscountService: FlatsDiscountService
+        public flatsDiscountService: FlatsDiscountService,
     ) {}
 
     public ngOnInit() {

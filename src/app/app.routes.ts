@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
     { path: '', loadChildren : './home/home.module#HomeModule' },
+    { path: 'seo', loadChildren: './seo/seo.module#SeoModule' },
     { path: 'location', loadChildren: './location/location.module#LocationModule' },
     { path: 'dynamic/:year/:month', loadChildren: './dynamic/dynamic.module#DynamicModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
@@ -14,7 +15,6 @@ export const ROUTES: Routes = [
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
     { path: 'parking', loadChildren: './parking/parking.module#ParkingModule' },
     { path: 'storerooms', loadChildren: './storerooms/storerooms.module#StoreroomsModule' },
-    { path: 'pdf', loadChildren: './apartment-pdf/apartment-pdf.module#ApartmentPdfModule' },
 
     { path: 'error-404', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' },
     { path: '**', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' }

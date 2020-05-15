@@ -50,7 +50,6 @@ import { AppState, InternalStateType } from './app.service';
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
-import { ApartmentPdfModule } from './apartment-pdf/apartment-pdf.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -65,7 +64,7 @@ const APP_PROVIDERS = [
     PlatformDetectService,
     FlatsDiscountService,
     SearchFlatsLinkHandlerService,
-    PhoneObserverService
+    PhoneObserverService,
 ];
 
 const APP_MODULES = [
@@ -87,7 +86,6 @@ const APP_MODULES = [
     AdminContactsModule,
     DocumentationModule,
     QuarantineInfoModule,
-    ApartmentPdfModule,
 
     BrowserModule,
     BrowserAnimationsModule,

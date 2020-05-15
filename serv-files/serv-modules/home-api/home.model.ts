@@ -1,4 +1,4 @@
-import { HOME_COLLECTION_NAME, IHomeDescription, IHomePreview } from './home.interfaces';
+import { HOME_COLLECTION_NAME, IHomeDescription, IHomePreview, IHomeVideo } from './home.interfaces';
 import * as mongodb from 'mongodb';
 
 export class HomeModel {
@@ -9,6 +9,7 @@ export class HomeModel {
 
     private mainObjectId = 'header';
     private homeObjectId = 'preview';
+    private VideoObjectId = 'previewVideo';
     
     constructor ( public db: any ) {
         this.collection = db.collection(this.collectionName);
@@ -51,6 +52,30 @@ export class HomeModel {
         };
         if (headerDescription) {
             await this.collection.updateOne({_id: this.homeObjectId}, {$set: val} );
+        } else {
+            await this.collection.insert(options);
+        }
+        return options;
+    }
+
+    async getPreviewVideo() {
+        let videoObj = await this.collection.findOne({_id: this.VideoObjectId});
+        return (videoObj ? videoObj : {
+            name: '',
+            link: '',
+            show: false,
+        });
+    }
+    async updatePreviewVideo(val) {
+        let videoObj = await this.collection.findOne({_id: this.VideoObjectId});
+        let options: IHomeVideo = {
+            _id: this.VideoObjectId,
+            name: val.name,
+            link: val.link,
+            show: val.show,
+        };
+        if (videoObj) {
+            await this.collection.updateOne({_id: this.VideoObjectId}, {$set: val} );
         } else {
             await this.collection.insert(options);
         }
