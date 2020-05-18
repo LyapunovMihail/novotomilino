@@ -9,7 +9,7 @@
     <div *ngFor="let tag of tagsArray" class="meta_wrapper2">
         <div class="meta_wrapper2__field">
 
-            <label class="meta_wrapper2__field_label"><a (click)="navigate(tag.url, tag.flatsSearchParams)" [ngClass]="{'meta_wrapper2__field_link--with-flats-search-params' : tag.flatsSearchParams, 'meta_wrapper2__field_link--with-no-params' : !tag.flatsSearchParams}">Url</a>
+            <label class="meta_wrapper2__field_label"><a href="javascript:void(0)" (click)="navigate(tag.url, tag.flatsSearchParams)" [ngClass]="{'meta_wrapper2__field_link--with-flats-search-params' : tag.flatsSearchParams, 'meta_wrapper2__field_link--with-no-params' : !tag.flatsSearchParams}">Url</a>
                 <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: $event, title: tag.title, h1: tag.h1}, 'url')" type="text" [value]="tag.url" class="meta_wrapper2__field_item">
             </label>
             <label class="meta_wrapper2__field_label">Title
