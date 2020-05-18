@@ -31,6 +31,14 @@ export class SearchFlatsLinkHandlerService {
         }, 550);
     }
 
+    public seoLinkHandle(show, url) {
+        this.router.navigate([url]); // Сначала переходим в компонент плана
+
+        setTimeout(() => {  // Затем инициируем открытие панели поиска
+            this.showSearchPanel.next(show);
+        }, 0);
+    }
+
     public getShowSearchPanel() {
         return this.showSearchPanel.asObservable();
     }

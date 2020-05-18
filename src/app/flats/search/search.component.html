@@ -1,5 +1,7 @@
 <div class="search" [ngClass]="{'search_slide-top': parentPlan && showSearchWindow}">
 
+    <a *ngIf="isAuthorizated && parentPlan && showSearchWindow" (click)="isSeoPageModalOpen = true; windowScrollLocker.block()" class="search_meta-open">Добавить страницу продвижения</a>
+
     <app-search-form
         [parentPlan]="parentPlan"
         (formChange)="formChange($event)"
@@ -19,3 +21,7 @@
 
 </div>
 
+<app-seo-page *ngIf="isAuthorizated && isSeoPageModalOpen && parentPlan && showSearchWindow"
+    (modalClose)="isSeoPageModalOpen = $event; windowScrollLocker.unblock()"
+    [searchParams]="seoPageParams">
+</app-seo-page>

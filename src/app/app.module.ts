@@ -17,6 +17,8 @@ import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
 import { PhoneObserverService } from './admin-contacts/phone.observer.service';
+import { MetaService } from './commons/meta.service';
+import { MetaTagsRenderService } from './seo/meta-tags-render.service';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -38,6 +40,7 @@ import { DecorationModule } from './decoration/decoration.module';
 import { FlatsModule } from './flats/flats.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { ParkingModule } from './parking/parking.module';
+import { SeoModule } from './seo/seo.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { DocumentationModule } from './documentation/documentation.module';
@@ -50,7 +53,6 @@ import { AppState, InternalStateType } from './app.service';
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
-import { MetaService } from './commons/meta.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -67,6 +69,7 @@ const APP_PROVIDERS = [
     SearchFlatsLinkHandlerService,
     PhoneObserverService,
     MetaService,
+    MetaTagsRenderService
 ];
 
 const APP_MODULES = [
@@ -88,6 +91,7 @@ const APP_MODULES = [
     AdminContactsModule,
     DocumentationModule,
     QuarantineInfoModule,
+    SeoModule,
 
     BrowserModule,
     BrowserAnimationsModule,

@@ -33,7 +33,7 @@ export class FooterComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
-                    if (this.router.url === '/flats/plan' || this.router.url === '/flats/house' || this.router.url === '/quarantine') {
+                    if (this.router.url === '/flats/plan' || this.router.url.startsWith('/flats/_search') || this.router.url === '/flats/house' || this.router.url === '/quarantine') {
                         this.isHidden = true;
                         document.body.style.padding = '0';
                     } else {

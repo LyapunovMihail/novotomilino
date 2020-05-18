@@ -4,8 +4,9 @@ import { Uploader } from 'angular2-http-file-upload';
 import { IDocumentationItem, IDocumentationDescription } from '../../../serv-files/serv-modules/documentation-api/documentation.interfaces';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { MetaTagsRenderService } from '../seo/meta-tags-render.service';
 
 @Component({
     selector: 'app-documentation',
@@ -17,7 +18,7 @@ import * as moment from 'moment';
     ]
 })
 
-export class DocumentationComponent implements OnInit {
+export class DocumentationComponent implements OnInit, OnDestroy {
 
     public AuthorizationEvent: Subscription;
     public isAuthorizated: boolean;
@@ -28,19 +29,30 @@ export class DocumentationComponent implements OnInit {
     public progressLoaded: boolean = false;
     public uploadsPath: string = FILEUPLOADS_UPLOADS_PATH;
     public description: string;
+    public title = 'Документация';
+    public titleEvent;
 
     constructor(
         private authorization: AuthorizationObserverService,
-        private docsService: AboutDocumentationService
+        private docsService: AboutDocumentationService,
+        private metaTagsRenderService: MetaTagsRenderService
     ) { }
 
     public ngOnInit() {
+        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
+            this.title = updatedTitle;
+        });
+
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
         moment.locale('ru');
         this.getObjects();
         this.getHeaderDescription();
+    }
+
+    public ngOnDestroy() {
+        this.titleEvent.unsubscribe();
     }
 
     public createObject() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { TagInterface } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
 import { adminHeaders } from '../../commons/admin-headers.utilit';
 
 @Injectable()
@@ -65,5 +66,9 @@ export class SearchService {
                 }
             });
         }
+    }
+
+    public getMetaTags(): Observable<TagInterface[]> {
+        return this.http.get<TagInterface[]>('/api/meta_get_flats-search-tag');
     }
 }

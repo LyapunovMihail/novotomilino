@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MetaTagsRenderService } from '../seo/meta-tags-render.service';
 
 @Component({
     selector: 'app-purchase',
@@ -6,7 +7,24 @@ import { Component } from '@angular/core';
     styleUrls: ['./purchase.component.scss']
 })
 
-export class PurchaseComponent {
+export class PurchaseComponent implements OnInit, OnDestroy {
     public showDetails = false;
-    constructor() {}
+
+    public title = 'Условия покупки';
+    public titleEvent;
+
+    constructor(
+        private metaTagsRenderService: MetaTagsRenderService
+    ) {}
+
+    ngOnInit() {
+        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
+            this.title = updatedTitle;
+        });
+
+    }
+
+    ngOnDestroy() {
+        this.titleEvent.unsubscribe();
+    }
 }

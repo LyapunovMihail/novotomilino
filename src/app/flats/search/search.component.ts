@@ -1,6 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IFlatsSearchParams } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
+import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -18,6 +21,9 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
+    public isAuthorizated = false;
+    public authorizationEvent;
+
     public outputFlatsList: IAddressItemFlat[] = [];
     public searchFlats: IAddressItemFlat[] = [];
     public count: number;
@@ -27,26 +33,38 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
 
+    public seoPageParams: IFlatsSearchParams;
+    public isSeoPageModalOpen = false;
+
     @Input() public showSearchWindow: boolean;
     @Input() public parentPlan: boolean;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
 
     constructor(
         public router: Router,
+        private authorization: AuthorizationObserverService,
         public searchService: SearchService,
         public platform: PlatformDetectService,
-        public windowScrollLocker: WindowScrollLocker
+        public windowScrollLocker: WindowScrollLocker,
+        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
     ) {}
 
     public ngOnInit() {
         if (this.platform.isBrowser) {
+            this.authorizationEvent = this.authorization.getAuthorization()
+                .subscribe((val) => {
+                    this.isAuthorizated = val;
+                });
+
             if (!this.showSearchWindow) {return; }
         }
     }
 
-    public formChange(form) {
-        this.form = form;
+    public formChange(changedForm) {
+        this.form = changedForm.value;
         if (!this.showSearchWindow) {return; }
+
+        const { value: form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
 
         const params = {
             spaceMin: form.space.min,
@@ -73,16 +91,20 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             params['houses'] = (form.houses).join(',');
         }
 
-        this.params = params;
         this.skip = 0;
         this.outputFlatsList = [];
+
+        this.seoPageParams = params;
+
+        if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        }
 
         this.getFlats(params);
     }
 
     public getFlats(params) {
 
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.count = data.length;
@@ -110,7 +132,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public ngOnChanges() {
         if (this.showSearchWindow) {
             setTimeout(() => {
-                this.formChange(this.form);
+                // this.formChange(this.form);
+                this.formChange({ value: this.form, isSeoPageParamsLoaded: false, isEmptySeoPageParams: true });
                 this.windowScrollLocker.unblock();
             }, 500); // таймаут чтобы анимация открытия окна отработала без тормозов
 
@@ -138,5 +161,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public ngOnDestroy() {
         this.windowScrollLocker.unblock();
+        this.authorizationEvent.unsubscribe();
     }
 }

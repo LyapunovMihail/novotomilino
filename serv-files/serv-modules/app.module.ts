@@ -7,6 +7,7 @@ import { AddressesController } from './addresses-api/addresses.controller';
 import { EmailerController } from './emailer-api/emailer.controller';
 import { ExpressAppService } from './express-app.service';
 import { PagesController } from './pages/pages.controller';
+import { SeoController } from './seo-api/seo.controller';
 import { UploadsController } from './uploads/uploads.controller';
 import { CreditController } from './credit-api/credit.controller';
 import { DynamicController } from './dynamic-api/dynamic.controller';
@@ -36,7 +37,8 @@ import { PDFController } from './pdf-generator/pdf-generator.controller';
         GalleryController,
         ContactsController,
         HomeController,
-        PDFController,
+        SeoController,
+        // PDFController,
     ],
     providers: [
         MongoConnectionService,

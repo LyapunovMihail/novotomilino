@@ -1,3 +1,4 @@
+import { MetaTagsRenderService } from '../seo/meta-tags-render.service';
 import { PlatformDetectService } from './../platform-detect.service';
 import { AuthorizationObserverService } from './../authorization/authorization.observer.service';
 import { IDynamicObject } from '../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
@@ -23,16 +24,23 @@ export class DynamicComponent implements OnInit, OnDestroy {
     public isAuthorizated: boolean = false;
     public showModalAdmin: boolean = false;
 
+    public title = 'Динамика строительства';
+    public titleEvent;
+
     constructor(
         private router: Router,
         private authorization: AuthorizationObserverService,
         public activatedRoute: ActivatedRoute,
         public dynamicService: DynamicService,
-        public platform: PlatformDetectService
+        public platform: PlatformDetectService,
+        private metaTagsRenderService: MetaTagsRenderService
     ) { }
 
     ngOnInit() {
         if ( this.platform.isBrowser ) {
+            this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
+                this.title = updatedTitle;
+            });
             // подписка на авторизацию
             this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
                 this.isAuthorizated = val;
@@ -53,6 +61,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
         if ( this.platform.isBrowser ) {
             this.AuthorizationEvent.unsubscribe();
             this.routerEvent.unsubscribe();
+            this.titleEvent.unsubscribe();
         }
     }
 

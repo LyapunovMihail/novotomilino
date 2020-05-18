@@ -11,6 +11,29 @@
     left: 0;
     transition: top .5s ease;
 
+    &_meta-open {
+        position: absolute;
+        top: 160px;
+        right: 75px;
+        height: 44px;
+        padding: 0 30px;
+        border-radius: 50px;
+        background: #1A1A1A;
+        font: 15px/44px 'big-city';
+        -webkit-font-smoothing: antialiased;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: .2s;
+        z-index: 10;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 17px rgba(0,0,0,.2);
+        }
+    }
+
     &_slide-top { top: calc(0% + 70px); }
 
     &__main {

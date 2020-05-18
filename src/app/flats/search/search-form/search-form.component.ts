@@ -1,3 +1,6 @@
+import { IFlatsSearchParams, TagInterface } from '../../../../../serv-files/serv-modules/seo-api/seo.interfaces';
+import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
+import { SearchService } from '../search.service';
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
@@ -18,6 +21,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public showCorpus: boolean = false;
     public sort: string;
 
+
+    public title = 'Подбор по параметрам';
+    public titleEvent;
+    public seoPageParams: IFlatsSearchParams;
+    public isSeoPageParamsLoaded = false;
+    public seoPageEvent: any;
+    public metaTags: TagInterface[];
+    public showPopularCategory = false;
+
     @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
@@ -26,15 +38,36 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public formBuilder: FormBuilder,
         public router: Router,
         public activatedRoute: ActivatedRoute,
+        private metaTagsRenderService: MetaTagsRenderService,
+        private searchService: SearchService
     ) {}
 
     public ngOnInit() {
         this.activatedRoute.queryParams.subscribe((queryParams) => {
+
+            this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
+                this.title = updatedTitle;
+            });
+
+            this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
+                .subscribe((params: IFlatsSearchParams) => {
+                    this.seoPageParams = params;
+                    this.isSeoPageParamsLoaded = true;
+                    this.buildForm(this.seoPageParams);
+                });
+
             this.buildForm(queryParams);
+
+            this.searchService.getMetaTags()
+                .subscribe((tags) => {
+                        this.metaTags = tags;
+                    },
+                    (err) => console.log(err));
         });
     }
 
     public buildForm(params) {
+
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,
@@ -94,10 +127,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.houses)]
         });
 
-        this.formChange.emit(this.form.value);
+        this.formChange.emit({ value: this.form.value, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
-            this.formChange.emit(form);
+            this.formChange.emit({ value: form, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
         });
 
         function parseQueryParams(val: string): string[] {

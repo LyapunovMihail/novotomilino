@@ -1,3 +1,4 @@
+import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
 import { NewsService } from '../news.service';
 import { AuthorizationObserverService } from '../../../authorization/authorization.observer.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
@@ -31,14 +32,22 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     public isRedactForm: boolean = false ;
     public isDeleteForm: boolean = false ;
 
+    public title = 'Новости';
+    public titleEvent;
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
         private newsService: NewsService,
-        private ref: ChangeDetectorRef
+        private ref: ChangeDetectorRef,
+        private metaTagsRenderService: MetaTagsRenderService
     ) { }
 
     public ngOnInit(): void {
+        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
+            this.title = updatedTitle;
+        });
+
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
         });
@@ -54,6 +63,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.AuthorizationEvent.unsubscribe();
+        this.titleEvent.unsubscribe();
     }
 
     public createSnippet() {
