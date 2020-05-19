@@ -17,8 +17,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public formEvents: any;
     public form: FormGroup;
-    public moreFilter: boolean = false;
-    public showCorpus: boolean = false;
+    public moreFilter = false;
+    public showCorpus = false;
     public sort: string;
 
 
@@ -143,5 +143,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
+        this.seoPageEvent.unsubscribe();
     }
 }

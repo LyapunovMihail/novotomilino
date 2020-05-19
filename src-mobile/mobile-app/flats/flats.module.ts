@@ -39,7 +39,8 @@ const FlatsComponents = [
         GHMRangeNumberModule,
         RouterModule.forChild([
             { path: 'flats', redirectTo: '/flats/search', pathMatch: 'full' },
-            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' }
+            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
+            { path: 'flats/_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
         ])
     ]
 })

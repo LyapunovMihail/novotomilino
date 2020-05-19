@@ -1,9 +1,7 @@
-import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentModule } from './apartment/apartment.module';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
-import { SearchComponent } from './search/search.component';
 import { GHMRangeNumberModule } from './search/search-form/ghm-range-number/ghm-range-number.module';
 import { FlatsComponent } from './flats.component';
 import { RouterModule } from '@angular/router';

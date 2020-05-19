@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
         public flatsDiscountService: FlatsDiscountService,
         private metaTagsRenderService: MetaTagsRenderService,
         public renderer: Renderer2
-    ) {}
+    ) {
+        this.metaTagsRenderService.renderer = this.renderer;
+    }
 
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);

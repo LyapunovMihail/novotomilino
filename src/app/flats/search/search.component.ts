@@ -59,12 +59,12 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public formChange(changedForm) {
-        this.form = changedForm.value;
+        this.form = changedForm.form;
         if (!this.showSearchWindow) {return; }
 
         const { form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
 
-        const params = {
+        const params: any = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
             priceMin: form.price.min,
@@ -73,11 +73,11 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             floorMax: form.floor.max,
         };
 
-        if (form.type.length > 0) {
+        if (form['type'].length > 0) {
             params['type'] = (form.type).join(',');
         }
 
-        if (form.decoration.length > 0) {
+        if (form['decoration'].length > 0) {
             params['decoration'] = (form.decoration).join(',');
         }
 

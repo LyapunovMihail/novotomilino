@@ -1,6 +1,6 @@
 import { IFlatsSearchParams, TagInterface } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
-import { SearchService } from '../../../../src/app/flats/search/search.service';
 import { MetaTagsRenderService } from '../../commons/meta-tags-render.service';
+import { FlatsService } from '../flats.service';
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
@@ -32,7 +32,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public router: Router,
         public activatedRoute: ActivatedRoute,
         private metaTagsRenderService: MetaTagsRenderService,
-        private searchService: SearchService
+        private searchService: FlatsService
     ) { }
 
     public ngOnInit() {
@@ -131,6 +131,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
+        this.seoPageEvent.unsubscribe();
     }
 
 }

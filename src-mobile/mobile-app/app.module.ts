@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MetaTagsRenderService } from '../../src/app/seo/meta-tags-render.service';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -39,7 +40,6 @@ import { DynamicModule } from './dynamic/dynamic.module';
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
-import { MetaService } from './commons/meta.service';
 
 
 // Application wide providers
@@ -52,7 +52,7 @@ const APP_PROVIDERS = [
     FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
-    MetaService
+    MetaTagsRenderService
 ];
 
 const APP_MODULES = [
