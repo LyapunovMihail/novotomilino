@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { IFlatsSearchParams } from '../../../serv-files/serv-modules/seo-api/seo.interfaces';
 
@@ -11,7 +11,7 @@ export class MetaTagsRenderService {
 
     public h1: HTMLHeadingElement;
     public flatsSearchParams = new Subject<IFlatsSearchParams>();
-    public renderer;
+    public renderer: Renderer2;
 
     constructor(
         private http: HttpClient,
