@@ -70,7 +70,9 @@ export class FlatsComponent implements OnInit {
     }
     */
 
-    public formChange(form) {
+    public formChange(changedForm) {
+        const { form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
+
         const params = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
@@ -101,7 +103,9 @@ export class FlatsComponent implements OnInit {
         this.params.skip = 0;
         this.params.limit = 10;
 
-        this.router.navigate(['/flats/search'], {queryParams: this.params});
+        if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        }
 
         this.getFlats();
     }

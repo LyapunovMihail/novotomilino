@@ -17,35 +17,35 @@ import { VideoAdminComponent } from './video/video-admin/video-admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  exports : [
-    HomeComponent,
-    VideoComponent,
-    VideoAdminComponent
-  ],
-  declarations : [
-      HomeComponent,
-      HomePreviewComponent,
-      HomeTriggerComponent,
-      HomeDescriptionComponent,
-      HomePlacesComponent,
-      HomeGalleryAdminComponent,
-      HomeNewsComponent,
-      SharesDayPipe,
-      LineBreakPipe,
-      VideoComponent,
-      VideoAdminComponent
-  ],
-  imports : [
-    CommonModule,
-    GHMTextAreaModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
-    ])
-  ],
-  providers : [
-      HomeService
-  ]
+    exports: [
+        HomeComponent,
+        VideoComponent,
+        VideoAdminComponent
+    ],
+    declarations: [
+        HomeComponent,
+        HomePreviewComponent,
+        HomeTriggerComponent,
+        HomeDescriptionComponent,
+        HomePlacesComponent,
+        HomeGalleryAdminComponent,
+        HomeNewsComponent,
+        SharesDayPipe,
+        LineBreakPipe,
+        VideoComponent,
+        VideoAdminComponent
+    ],
+    imports: [
+        CommonModule,
+        GHMTextAreaModule,
+        ReactiveFormsModule,
+        RouterModule.forChild([
+            {path: '', component: HomeComponent, pathMatch: 'full'}
+        ])
+    ],
+    providers: [
+        HomeService
+    ]
 })
 
 export class HomeModule {

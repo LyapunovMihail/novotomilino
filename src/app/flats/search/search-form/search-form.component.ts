@@ -22,8 +22,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public sort: string;
 
 
-    public title = 'Подбор по параметрам';
-    public titleEvent;
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageParamsLoaded = false;
     public seoPageEvent: any;
@@ -44,10 +42,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.activatedRoute.queryParams.subscribe((queryParams) => {
-
-            this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
-                this.title = updatedTitle;
-            });
 
             this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
                 .subscribe((params: IFlatsSearchParams) => {
@@ -127,10 +121,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             })(params.houses)]
         });
 
-        this.formChange.emit({ value: this.form.value, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
+        this.formChange.emit({ form: this.form.value, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
-            this.formChange.emit({ value: form, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
+            this.formChange.emit({ form, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
         });
 
         function parseQueryParams(val: string): string[] {

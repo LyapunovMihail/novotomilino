@@ -7,7 +7,7 @@
     <div class="home-preview__container">
 
         <div class="home-preview__content">
-            <h1 class="home-preview__content-title" *ngIf="!isAuthorizated && homePreview">{{homePreview.title}}</h1>
+            <h2 class="home-preview__content-title" *ngIf="!isAuthorizated && homePreview">{{homePreview.title}}</h2>
             <p class="home-preview__content-descr" #description *ngIf="!isAuthorizated && homePreview">
                 {{homePreview.description}}
             </p>

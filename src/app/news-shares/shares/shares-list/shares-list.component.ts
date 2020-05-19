@@ -2,7 +2,6 @@ import { SHARES_CREATE_ID, Share, SHARES_UPLOADS_PATH } from '../../../../../ser
 import { Subject, Subscription } from 'rxjs';
 import { AuthorizationObserverService } from '../../../authorization/authorization.observer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
 import { SharesService } from '../shares.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PlatformDetectService } from '../../../platform-detect.service';
@@ -45,9 +44,6 @@ export class SharesListComponent implements OnInit, OnDestroy {
 
     public isDeleteForm: boolean = false ;
 
-    public title = 'Новости';
-    public titleEvent;
-
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
@@ -55,17 +51,13 @@ export class SharesListComponent implements OnInit, OnDestroy {
         private router: Router,
         private platform: PlatformDetectService,
         private sharesObserverService: SharesObserverService,
-        private activatedRoute: ActivatedRoute,
-        private metaTagsRenderService: MetaTagsRenderService
+        private activatedRoute: ActivatedRoute
     ) {
         this.isAuth = false;
         this.indexNum = Number(this.activatedRoute.snapshot.params.index);
     }
 
     public ngOnInit() {
-        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
-            this.title = updatedTitle;
-        });
 
         this.subs.push(this.activatedRoute.params
             .pipe(takeUntil(this._ngUnsubscribe))
@@ -86,7 +78,6 @@ export class SharesListComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.unsubscribe();
         this.sharesObserverService.changePageCount(this.indexNum);
-        this.titleEvent.unsubscribe();
     }
 
     public getShares(skip) {

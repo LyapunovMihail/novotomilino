@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } 
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { IFlatsSearchParams } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
-import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -45,8 +44,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         private authorization: AuthorizationObserverService,
         public searchService: SearchService,
         public platform: PlatformDetectService,
-        public windowScrollLocker: WindowScrollLocker,
-        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
+        public windowScrollLocker: WindowScrollLocker
     ) {}
 
     public ngOnInit() {
@@ -64,7 +62,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.form = changedForm.value;
         if (!this.showSearchWindow) {return; }
 
-        const { value: form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
+        const { form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
 
         const params = {
             spaceMin: form.space.min,

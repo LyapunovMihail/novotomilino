@@ -4,9 +4,8 @@ import { Uploader } from 'angular2-http-file-upload';
 import { IDocumentationItem, IDocumentationDescription } from '../../../serv-files/serv-modules/documentation-api/documentation.interfaces';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
 import { Subscription } from 'rxjs';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { MetaTagsRenderService } from '../seo/meta-tags-render.service';
 
 @Component({
     selector: 'app-documentation',
@@ -18,7 +17,7 @@ import { MetaTagsRenderService } from '../seo/meta-tags-render.service';
     ]
 })
 
-export class DocumentationComponent implements OnInit, OnDestroy {
+export class DocumentationComponent implements OnInit {
 
     public AuthorizationEvent: Subscription;
     public isAuthorizated: boolean;
@@ -29,19 +28,13 @@ export class DocumentationComponent implements OnInit, OnDestroy {
     public progressLoaded: boolean = false;
     public uploadsPath: string = FILEUPLOADS_UPLOADS_PATH;
     public description: string;
-    public title = 'Документация';
-    public titleEvent;
 
     constructor(
         private authorization: AuthorizationObserverService,
-        private docsService: AboutDocumentationService,
-        private metaTagsRenderService: MetaTagsRenderService
+        private docsService: AboutDocumentationService
     ) { }
 
     public ngOnInit() {
-        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
-            this.title = updatedTitle;
-        });
 
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
@@ -49,10 +42,6 @@ export class DocumentationComponent implements OnInit, OnDestroy {
         moment.locale('ru');
         this.getObjects();
         this.getHeaderDescription();
-    }
-
-    public ngOnDestroy() {
-        this.titleEvent.unsubscribe();
     }
 
     public createObject() {

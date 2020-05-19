@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { MetaTagsRenderService } from '../../src/app/seo/meta-tags-render.service';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
-import { MetaService } from './commons/meta.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -14,7 +14,7 @@ export const ROOT_SELECTOR = 'app-root';
     ],
     template: `
 
-        <section>
+        <section #container>
 
             <app-header></app-header>
 
@@ -28,10 +28,12 @@ export const ROOT_SELECTOR = 'app-root';
 
         <app-overlay></app-overlay>
         <app-img-modal></app-img-modal>
-    `,
-    providers: [ MetaService ]
+    `
 })
 export class AppComponent implements OnInit {
+
+    @ViewChild('container')
+    public container: ElementRef;
 
     public previousUrl: string;
     public currentUrl: string;
@@ -41,7 +43,8 @@ export class AppComponent implements OnInit {
         public appState: AppState,
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
-        public metaService: MetaService,
+        private metaTagsRenderService: MetaTagsRenderService,
+        public renderer: Renderer2
     ) {}
 
     public ngOnInit() {
@@ -55,7 +58,8 @@ export class AppComponent implements OnInit {
             if (!(event instanceof NavigationEnd)) {
                 return;
             }
-            this.metaService.changeMetaTag(this.router.url);
+            this.metaTagsRenderService.render(this.router.url, this.container);
+
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;
             window.scrollTo(0, 0);

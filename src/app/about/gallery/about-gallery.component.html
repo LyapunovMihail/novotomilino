@@ -1,6 +1,6 @@
 <section class="gallery">
     <div class="main__container main__container_col">
-        <h1 class="gallery__title g-title-path">Галерея</h1>
+        <h2 class="gallery__title g-title-path">Галерея</h2>
 
         <div class="gallery__admin-open-btn"
              *ngIf="isAuthorizated"
@@ -30,7 +30,7 @@
                     <img class="gallery__slider-img" [src]="uploadsPath + item.image" alt="">
 
                     <div class="gallery__slider-descr">
-                        <h1 class="gallery__slider-title" *ngIf="!isAuthorizated">{{item.name}}</h1>
+                        <h2 class="gallery__slider-title" *ngIf="!isAuthorizated">{{item.name}}</h2>
                         <textarea (change)="changeName(item._id, $event.target.value)" *ngIf="isAuthorizated" class="gallery__slider-title gallery__slider_title--edit" [value]="item.name"></textarea>
 
                         <p class="gallery__slider-text" *ngIf="!isAuthorizated">{{item.description}}</p>

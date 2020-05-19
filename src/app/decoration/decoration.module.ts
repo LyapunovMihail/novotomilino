@@ -10,7 +10,7 @@ import { DecorationSliderListComponent } from './decoration-placement/decoration
 import { DecorationSliderListItemComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list-item/decoration-slider-list-item.component';
 import { DecorationSliderBtnsComponent } from './decoration-placement/decoration-slider/decoration-slider-btns/decoration-slider-btns.component';
 
-let DecorationComponents = [
+const DecorationComponents = [
     DecorationComponent,
     DecorationVariationComponent,
     DecorationVariationItemComponent,

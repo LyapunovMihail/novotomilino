@@ -7,7 +7,6 @@ import { HomeService } from '../home.service';
     styleUrls: ['./video.component.scss'],
     template: `
         <div class="video">
-
             <div class="video__container">
                 <button class="video__btn-close" (click)="close.emit(false); this.scrollLock.unblock()"></button>
             </div>

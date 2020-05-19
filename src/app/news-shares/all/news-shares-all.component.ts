@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MetaTagsRenderService } from '../../seo/meta-tags-render.service';
 import { NewsService } from '../news/news.service';
 import { SharesService } from '../shares/shares.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlatformDetectService } from '../../platform-detect.service';
-import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import * as moment from 'moment';
@@ -41,24 +40,17 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     public isSharesCreateRedactForm = false ;
     public isSharesDeleteForm = false ;
 
-    public title = 'Новости';
-    public titleEvent;
-
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
         public platform: PlatformDetectService,
         public newsService: NewsService,
-        public sharesService: SharesService,
-        private metaTagsRenderService: MetaTagsRenderService
+        public sharesService: SharesService
     ) { }
 
     public ngOnInit() {
         if ( !this.platform.isBrowser ) { return false; }
 
-        this.titleEvent = this.metaTagsRenderService.getH1().subscribe((updatedTitle) => {
-            this.title = updatedTitle;
-        });
 
         moment.locale('ru');
 
@@ -71,7 +63,6 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.AuthorizationEvent.unsubscribe();
-        this.titleEvent.unsubscribe();
     }
 
     public getAllSnippets() {

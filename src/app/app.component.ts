@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
@@ -16,7 +16,7 @@ export const ROOT_SELECTOR = 'app-root';
       <app-authorization></app-authorization>
       <app-admin-contacts></app-admin-contacts>
 
-      <section>
+      <section #container>
 
           <app-header></app-header>
 
@@ -35,6 +35,9 @@ export const ROOT_SELECTOR = 'app-root';
 })
 export class AppComponent implements OnInit {
 
+    @ViewChild('container')
+    public container: ElementRef;
+
     public previousUrl: string;
     public currentUrl: string;
     public showPopup;
@@ -44,7 +47,10 @@ export class AppComponent implements OnInit {
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
         private metaTagsRenderService: MetaTagsRenderService,
-    ) {}
+        public renderer: Renderer2
+    ) {
+        this.metaTagsRenderService.renderer = this.renderer;
+    }
 
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);
@@ -58,10 +64,11 @@ export class AppComponent implements OnInit {
             if (!(event instanceof NavigationEnd)) {
               return;
             }
+            this.metaTagsRenderService.render(this.router.url, this.container);
+
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;
-            // this.metaService.changeMetaTag(this.router.url);
-            this.metaTagsRenderService.render(this.router.url);
+
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }

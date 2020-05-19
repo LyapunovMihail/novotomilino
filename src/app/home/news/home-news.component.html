@@ -1,7 +1,7 @@
 <section class="main__news" *ngIf="allSnippets.length">
 
     <div class="main__container">
-        <h1 class="main__news-title g-title-path">Новости</h1>
+        <h2 class="main__news-title g-title-path">Новости</h2>
         <div class="main__news-nav">
             <ul class="main__news-list">
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'all'" (click)="changeSnippets(allSnippets, 'all')">Все</li>
@@ -26,8 +26,8 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
-                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
-                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <h2 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h2>
+                    <h2 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h2>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>
@@ -39,7 +39,7 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail" *ngIf="item.thumbnail">
                     </a>
-                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
+                    <h2 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h2>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
-                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <h2 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h2>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>
