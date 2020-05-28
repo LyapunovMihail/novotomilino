@@ -17,7 +17,6 @@ export class MetaTagsRenderService {
         private http: HttpClient,
         private seo: Meta,
         private title: Title,
-
     ) {}
 
     setFlatsSearchParams(val: IFlatsSearchParams) {

@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MetaTagsRenderService } from '../../src/app/seo/meta-tags-render.service';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { MetaTagsRenderService } from './commons/meta-tags-render.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -13,7 +13,6 @@ export const ROOT_SELECTOR = 'app-root';
         './app.component.css'
     ],
     template: `
-
         <section #container>
 
             <app-header></app-header>

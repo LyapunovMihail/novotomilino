@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MetaTagsRenderService } from '../../src/app/seo/meta-tags-render.service';
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ROUTES } from './app.routes';
+import { MetaTagsRenderService } from './commons/meta-tags-render.service';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
 import { FavoritesService } from './commons/favorites.service';
