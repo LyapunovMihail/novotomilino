@@ -2,8 +2,7 @@
 
 .home-preview {
     width: 100%;
-    // height: calc(100vh - (46px + 50px));
-    height: calc(100vh - (46px + 50px + 48px)); // 48px - ссылка на карантинную стр
+    height: calc(100vh - (46px + 50px));
     position: relative;
     display: flex;
     justify-content: center;

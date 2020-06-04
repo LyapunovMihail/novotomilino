@@ -24,9 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isFixed: boolean;
     public isHidden: boolean;
 
-    public headerHide = false;
-    public quarantineLinkHide = false;
-
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -61,8 +58,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 return;
             }
 
-            this.quarantineLinkHide = (this.router.url !== '/') ? true : false;
-            this.headerHide = (this.router.url === '/quarantine') ? true : false;
             this.fixedHeader();
         });
     }

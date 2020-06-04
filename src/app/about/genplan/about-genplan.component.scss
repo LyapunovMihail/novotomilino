@@ -2,7 +2,7 @@
 
 .genplan {
     width: 100%;
-    height: calc(100vh - 146px);
+    height: calc(100vh - (46px + 50px));
     position: relative;
 
     &__head {

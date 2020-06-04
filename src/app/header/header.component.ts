@@ -19,8 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isFixed: boolean;
     public isHidden: boolean;
     public links = [];
-    public quarantineLinkHide = false;
-    public headerHide = false;
 
     // подписка на скролл страницы HomePage
     // для фиксации хедера
@@ -36,17 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-
-        this.router.events
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-
-                    this.fixedHeader();
-                    this.quarantineLinkHide = (this.router.url !== '/') ? true : false;
-                    this.headerHide = (this.router.url === '/quarantine') ? true : false;
-                }
-            });
 
         this.headerService.getDynamicLink()
             .pipe(takeUntil(this.ngUnsubscribe))
@@ -68,23 +55,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach((sub) => {
             sub.unsubscribe();
         });
-    }
-
-    // если расстояние скрлла больше высоты хедера
-    // хедер фиксируется
-    public fixedHeader() {
-
-        this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
-
-            const headerHeight = document.querySelector('.header').clientHeight;
-            const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
-            if (!this.quarantineLinkHide) {
-                this.isFixed = winScrollTop > 48 ? true : false;
-            } else if (this.quarantineLinkHide) {
-                this.isFixed = true;
-            }
-        }));
     }
 
     public checkLink(linkUrl) {
