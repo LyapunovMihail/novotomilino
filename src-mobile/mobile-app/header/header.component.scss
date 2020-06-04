@@ -51,8 +51,6 @@
             box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
         }
         &--hidden { top: -75px; }
-        &.main-page { top: 34px; }
-        // &.main-page { top: 34px; }
     }
 
     &__head {
@@ -200,7 +198,7 @@
     }
 
     @media (max-width: 1279px) {
-        height: 67px + 34px;
+        height: 67px;
         &--no-quarentine-link { height: 67px; }
 
         &__head {
@@ -398,9 +396,7 @@
         }
     }
     @media (max-width: 767px) {
-        // &__container {
-        //     align-items: flex-end;
-        // }
+        
         &__head {
             justify-content: flex-end;
             padding: 0 15px 0 0;

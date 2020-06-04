@@ -15,13 +15,16 @@ export class RedPopupComponent implements OnInit {
     constructor( public scrollLock: WindowScrollLocker ) { }
 
     ngOnInit() {
+
         setTimeout( () => {
+
             this.isOpen = true;
             this.scrollLock.block();
         }, 6000);
     }
 
     close() {
+
         this.isOpen = false;
         this.scrollLock.unblock();
     }

@@ -24,8 +24,6 @@ export const ROOT_SELECTOR = 'app-root';
 
           <app-footer></app-footer>
 
-          <!--<app-3red-popup *ngIf="showPopup"></app-3red-popup>-->
-
       </section>
 
       <app-overlay></app-overlay>
@@ -55,9 +53,6 @@ export class AppComponent implements OnInit {
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);
 
-        // if (!localStorage.popup) {
-        //     localStorage.setItem('popup', 'true');
-        // }
 
         // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
         this.router.events.subscribe((event) => {
@@ -74,17 +69,8 @@ export class AppComponent implements OnInit {
             }
             window.scrollTo(0, 0);
         });
-
-        // this.showOnePopup();
+        
         // Загружаем акции для дальнейшего вычисления скидки по квартирам
         this.flatsDiscountService.getShares();
     }
-
-    // public showOnePopup() {
-    //
-    //     if (localStorage.popup === 'true') {
-    //         localStorage.popup = 'false';
-    //         this.showPopup = true;
-    //     }
-    // }
 }
