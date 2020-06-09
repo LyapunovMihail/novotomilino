@@ -36,9 +36,7 @@ export class MetaTagsRenderService {
         this.getMetaTags(url).subscribe(
             (metas) => {
                 if (metas.meta.length > 0) {
-                    metas.meta.forEach((item) => {
-                       this.seo.updateTag(item);
-                    });
+                    this.seo.addTags(metas.meta);
                 }
 
                 if (metas.title) {
@@ -50,7 +48,6 @@ export class MetaTagsRenderService {
                 this.setH1(metas.h1, container);
 
                 this.setFlatsSearchParams(metas.flatsSearchParams);
-
             },
             (err) => {
                 console.log(err);
@@ -68,7 +65,7 @@ export class MetaTagsRenderService {
                 if (!h1) {
                     h1 = this.renderer.createElement('h1');
                     this.renderer.setAttribute(h1, 'hidden', 'true');
-                    container.nativeElement.prepend(h1);
+                    this.renderer.appendChild(container.nativeElement, h1);
                     this.h1 = h1;
                 }
                 h1.textContent = heading;

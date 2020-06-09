@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { AppModule } from './app.module';
 import { MongoConnectionService } from './mongo-connection.service';
 import * as express from 'express';
@@ -9,6 +10,7 @@ import { join } from 'path';
 import * as bodyParser from 'body-parser';
 import { DbCronUpdate } from './utilits/db-cron-update.utils';
 import * as session from 'express-session';
+import { ngExpressEngine } from '@nguniversal/express-engine';
 
 async function bootstrap() {
     const appExpress: Express = express();
@@ -21,8 +23,22 @@ async function bootstrap() {
         resave: false,
         saveUninitialized: true
     }));
+
+    const { ServerAppModuleNgFactory, LAZY_MODULE_MAP } = require(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop' , 'server', 'main'));
+    // const { ServerAppModuleNgFactory } = require('../../dist/desktop/server/main');
+
+    app.engine('html', ngExpressEngine({
+        bootstrap: ServerAppModuleNgFactory,
+        providers: [
+            provideModuleMap(LAZY_MODULE_MAP)
+        ]
+    }));
+    app.set('view engine', 'html');
+    app.set('views', join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser'));
+
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile'), { index: false });
-    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop'), { index: false });
+    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser'), { index: false });
+
     setTimeout(() => {
         new DbCronUpdate(db.connection);
     });

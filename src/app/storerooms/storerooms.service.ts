@@ -20,7 +20,7 @@ export class StoreroomsService {
 
     public flatsHover(flats: IAddressItemFlat[], callbacks) {
         flats.forEach((item: IAddressItemFlat) => {
-            const flat = document.querySelector(`#_${item.flat}`);
+            const flat = document && document.querySelector(`#_${item.flat}`);
             // статус квартиры
             const status = true; // item.status === '4';
             if (flat) {

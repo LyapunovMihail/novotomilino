@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { PlatformDetectService } from '../../platform-detect.service';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class VideoComponent implements OnInit {
     @Output() public close = new EventEmitter<any>();
     public videoLink;
     constructor(
+        private platform: PlatformDetectService,
         public scrollLock: WindowScrollLocker,
         public homeService: HomeService,
         public renderer: Renderer2,
@@ -27,6 +29,8 @@ export class VideoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         this.scrollLock.block();
 
         this.homeService.getPreviewVideo().subscribe(

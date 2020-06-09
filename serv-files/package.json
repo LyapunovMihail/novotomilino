@@ -25,6 +25,7 @@
   "dependencies": {
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
+    "@nguniversal/express-engine": "^9.1.1",
     "@types/mongoose": "^5.3.26",
     "JSONStream": "^1.3.5",
     "bcryptjs": "^2.4.3",

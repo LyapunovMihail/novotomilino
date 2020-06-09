@@ -16,7 +16,7 @@ export class FloorService {
 
     public flatsHover(flats: IFlatWithDiscount[], callbacks) {
         flats.forEach((item: IFlatWithDiscount, i) => {
-            const flat = document.querySelector(`#_${item.flat}`);
+            const flat = document && document.querySelector(`#_${item.flat}`);
             if (flat) {
                 $(flat).off('mouseenter');
                 $(flat).off('mouseleave');

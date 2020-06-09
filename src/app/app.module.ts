@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { environment } from 'environments/environment';
+import { environment } from '../environments/environment';
 import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
@@ -44,6 +44,8 @@ import { SeoModule } from './seo/seo.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { DocumentationModule } from './documentation/documentation.module';
+import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
+import { RedPopupComponent } from './3red-popup/3red-popup.component';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -51,8 +53,6 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
-import { RedPopupComponent } from './3red-popup/3red-popup.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -98,8 +98,8 @@ const APP_MODULES = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
-    useHash: Boolean(history.pushState) === false,
-    preloadingStrategy: PreloadAllModules
+        // useHash: Boolean(history.pushState) === false,
+        preloadingStrategy: PreloadAllModules
     })
 ];
 

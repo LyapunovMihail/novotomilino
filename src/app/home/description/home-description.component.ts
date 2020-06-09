@@ -25,7 +25,6 @@ export class HomeDescriptionComponent implements OnInit {
 
     ngOnInit() {
         if ( !this.platform.isBrowser ) { return false; }
-
             this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
