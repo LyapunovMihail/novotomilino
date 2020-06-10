@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 import { SearchService } from '../../flats/search/search.service';
+import { PlatformDetectService } from '../../platform-detect.service';
 
 interface ITriggerSnippet {
     rooms: number;
@@ -23,6 +24,7 @@ export class HomeTriggerComponent implements OnInit {
     public triggersData: ITriggerSnippet[] = [];
 
     constructor(
+        private platform: PlatformDetectService,
         public searchService: SearchService,
         private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
     ) { }

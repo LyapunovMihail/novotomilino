@@ -1,8 +1,9 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
+import { PlatformDetectService } from '../platform-detect.service';
 import { HeaderService } from './header.service';
 
 declare let $: any;
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription[] = [];
 
     constructor(
+        private platformDetectService: PlatformDetectService,
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router
@@ -34,19 +36,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
+        if (this.platformDetectService.isBrowser) {
 
-        this.headerService.getDynamicLink()
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe(
-                (data) => {
-                    this.links = this.headerService.links(data);
-                },
-                (err) => {
-                    console.error(err);
-                    const date = new Date();
-                    this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
-                }
-            );
+            this.headerService.getDynamicLink()
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(
+                    (data) => {
+                        this.links = this.headerService.links(data);
+                    },
+                    (err) => {
+                        console.error(err);
+                        const date = new Date();
+                        this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
+                    }
+                );
+        }
     }
 
     public ngOnDestroy() {

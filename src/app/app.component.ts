@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation 
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { PlatformDetectService } from './platform-detect.service';
 import { MetaTagsRenderService } from './seo/meta-tags-render.service';
 
 export const ROOT_SELECTOR = 'app-root';
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
     public showPopup;
 
     constructor(
+        private platformDetectService: PlatformDetectService,
         public appState: AppState,
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
@@ -67,7 +69,10 @@ export class AppComponent implements OnInit {
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }
-            window.scrollTo(0, 0);
+
+            if (this.platformDetectService.isBrowser) {
+                window.scrollTo(0, 0);
+            }
         });
         
         // Загружаем акции для дальнейшего вычисления скидки по квартирам

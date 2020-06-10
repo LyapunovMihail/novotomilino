@@ -16,16 +16,20 @@ export function clientRender(req: Request, res: Response, status: number, sessio
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
             res.status(status).sendFile(
-              join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'index-mobile.html'),
+                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'index-mobile.html'),
             );
         } else {
-            res.status(status).sendFile(
-              join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'index.html'), {
-                  req,
-                  res,
-                  async: true,
-                  preboot: true,
-              },
+            res.render(
+                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser', 'index.html'), {
+                    req,
+                    res,
+                    async: true,
+                    preboot: true,
+                    providers: [{
+                        provide: 'serverUrl',
+                        useValue: `${req.protocol}://${req.get('host')}`
+                    }]
+                },
             );
         }
     } else {
