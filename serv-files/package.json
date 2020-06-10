@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build:prod": "rimraf dist && cpx yarn.lock dist && cpx package.json dist && npm run webpack",
+    "build": "rimraf dist && cpx yarn.lock dist && cpx package.json dist && tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "start:test": "BASE_NAME=dev_oblaka npm run start",
     "start": "ts-node -r tsconfig-paths/register serv-modules/main.ts",
@@ -25,7 +26,12 @@
   "dependencies": {
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
-    "@nguniversal/express-engine": "^9.1.1",
+    "@nguniversal/express-engine": "^7.1.1",
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/platform-browser": "^7.2.0",
+    "@angular/platform-browser-dynamic": "^7.2.0",
+    "@angular/platform-server": "^7.2.0",
     "@types/mongoose": "^5.3.26",
     "JSONStream": "^1.3.5",
     "bcryptjs": "^2.4.3",

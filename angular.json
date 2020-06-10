@@ -65,7 +65,8 @@
                     "options": {
                         "outputPath": "dist/desktop/server",
                         "main": "src/server.main.ts",
-                        "tsConfig": "src/server.tsconfig.app.json"
+                        "tsConfig": "src/server.tsconfig.app.json",
+                        "bundleDependencies": "none"
                     },
                     "configurations": {
                         "dev": {
@@ -78,8 +79,8 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
+                            "bundleDependencies": "none",
                             "optimization": true,
-                            "outputHashing": "none",
                             "sourceMap": false,
                             "namedChunks": false,
                             "extractLicenses": true,

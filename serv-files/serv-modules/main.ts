@@ -11,6 +11,7 @@ import * as bodyParser from 'body-parser';
 import { DbCronUpdate } from './utilits/db-cron-update.utils';
 import * as session from 'express-session';
 import { ngExpressEngine } from '@nguniversal/express-engine';
+import { ServerAppModuleNgFactory, LAZY_MODULE_MAP } from '../../dist/desktop/server/main';
 
 async function bootstrap() {
     const appExpress: Express = express();
@@ -24,8 +25,7 @@ async function bootstrap() {
         saveUninitialized: true
     }));
 
-    const { ServerAppModuleNgFactory, LAZY_MODULE_MAP } = require(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop' , 'server', 'main'));
-    // const { ServerAppModuleNgFactory } = require('../../dist/desktop/server/main');
+    // const { ServerAppModuleNgFactory, LAZY_MODULE_MAP } = require('../../dist/desktop/server/main');
 
     app.engine('html', ngExpressEngine({
         bootstrap: ServerAppModuleNgFactory,
