@@ -70,6 +70,12 @@
 </button>
 
 <app-flats-search
+    (showPopular)="showPopular = true"
     [showSearchWindow]="showSearchWindow"
     [parentPlan]="true">
 </app-flats-search>
+
+<app-popular
+    *ngIf="showPopular"
+    (close)="showPopular = false">
+</app-popular>

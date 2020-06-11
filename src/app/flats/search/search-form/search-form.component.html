@@ -107,7 +107,10 @@
                 [formControl]="form.controls['decoration']"
                 [name]="'decoration'">
             </app-search-checkbox-list>
-            <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
+            <div>
+                <button class="search-form__popular" (click)="showPopular.emit()">Популярные категории</button>
+                <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
+            </div>
         </div>
 
     </form>

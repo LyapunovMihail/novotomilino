@@ -32,12 +32,15 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
 
+    public preloaderFlats = false;
+
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageModalOpen = false;
 
     @Input() public showSearchWindow: boolean;
     @Input() public parentPlan: boolean;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
+    @Output() public showPopular = new EventEmitter<any>();
 
     constructor(
         public router: Router,
@@ -49,6 +52,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public ngOnInit() {
         if (this.platform.isBrowser) {
+            this.preloaderFlats = true;
             this.authorizationEvent = this.authorization.getAuthorization()
                 .subscribe((val) => {
                     this.isAuthorizated = val;
@@ -112,6 +116,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.flatsChanged.emit(this.searchFlats);
             },
             (err) => {
+                this.preloaderFlats = false;
                 console.log(err);
             }
         );

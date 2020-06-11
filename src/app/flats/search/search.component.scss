@@ -10,6 +10,7 @@
     top: 100%;
     left: 0;
     transition: top .5s ease;
+    z-index: 1;
 
     &_meta-open {
         position: absolute;
@@ -43,6 +44,7 @@
         align-items: center;
         box-sizing: border-box;
         padding-bottom: 210px;
+        position: relative;
 
         &-more {
             width: 177px;
@@ -240,6 +242,12 @@
     &__reset-filter {
         background: transparent;
         @include f16-24(rgba(0, 1, 5, 0.8));
+    }
+    &__popular {
+        background: transparent;
+        @include f16-24(#E7490F);
+        border-bottom: 1px dashed;
+        margin-right: 24px;
     }
 }
 

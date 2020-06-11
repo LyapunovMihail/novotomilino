@@ -1,6 +1,16 @@
 <div class="search-output with-scroll" *ngIf="flatsList">
 
-    <h2 class="search-output__title">Найдено {{flatsCount()}} квартир</h2>
+    <div class="search-output__head">
+        <h2 class="search-output__head-title">Найдено {{flatsCount()}} квартир</h2>
+
+        <div class="search-output__filter" *ngIf="!parentPlan">
+            <button class="search-output__filter-item search-output__filter-item--{{item.name}}" 
+                *ngFor="let item of sortList; let i = index" (click)="changeFilter(item, i)"
+                [ngClass]="{'active': activeSort === item.name,
+                    'minFromMax': activeSort === item.name && item.value,
+                    'maxFromMin': activeSort === item.name && !item.value}">{{item.text}}</button>
+        </div>
+    </div>
 
     <div class="search-output__result">
         <div class="search-output__empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
