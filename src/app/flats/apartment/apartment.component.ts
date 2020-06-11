@@ -3,6 +3,7 @@ import { FavoritesService } from '../../commons/favorites.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { PlatformDetectService } from '../../platform-detect.service';
 import { SearchService } from '../search/search.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class ApartmentComponent implements OnInit {
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
     constructor(
+        private platformDetectService: PlatformDetectService,
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
@@ -50,32 +52,34 @@ export class ApartmentComponent implements OnInit {
     }
 
     public routePDF() {
-        this.clickedPdf = true;
-        let location = window.location.href;
-        let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+        if (this.platformDetectService.isBrowser) {
+            this.clickedPdf = true;
+            let location = window.location.href;
+            let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
 
-        if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
-            this.clickedPdf = false;
-            window.open(this.pdfLink);
-            return 'javascript:void(0)';
-        }
-        this.changeFlatData = this.flatData;
-
-        return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
-            data => {
-                console.log(data);
-                this.pdfLink = data.toString();
-                window.open(data.toString());
+            if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
                 this.clickedPdf = false;
-                return 'javascript:void(0)';
-            },
-            err => {
-                this.clickedPdf = false;
-                console.log('getPDF');
-                console.log('getPDF: ->', err);
+                window.open(this.pdfLink);
                 return 'javascript:void(0)';
             }
-        );
+            this.changeFlatData = this.flatData;
+
+            return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
+                data => {
+                    console.log(data);
+                    this.pdfLink = data.toString();
+                    window.open(data.toString());
+                    this.clickedPdf = false;
+                    return 'javascript:void(0)';
+                },
+                err => {
+                    this.clickedPdf = false;
+                    console.log('getPDF');
+                    console.log('getPDF: ->', err);
+                    return 'javascript:void(0)';
+                }
+            );
+        }
     }
 
     public getDiscount(flat): number {

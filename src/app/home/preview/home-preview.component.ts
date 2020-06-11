@@ -39,7 +39,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public showTrojka: boolean = false;
 
-    public slideWidth = document.documentElement.clientWidth;
+    public slideWidth = document && document.documentElement.clientWidth;
 
     public gallerySlides: IGallerySnippet[];
 
@@ -91,7 +91,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             this.newsSlider(this.newsShares);
         });
     }
-    
+
     prepareMainNewsSnippets() {
         // this.newsShares.reverse();
         this.newsShares = this.newsShares.filter((news) => {

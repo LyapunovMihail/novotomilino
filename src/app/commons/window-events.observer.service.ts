@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { fromEvent } from 'rxjs';
+import { PlatformDetectService } from '../platform-detect.service';
 
 @Injectable()
 
@@ -12,8 +13,12 @@ export class WindowEventsService {
     private subjectResize = new Subject<any>();
     private subjectClick = new Subject<any>();
 
-    constructor() {
-        this.eventsInitListeners();
+    constructor(
+        private platformDetectService: PlatformDetectService
+    ) {
+        if (this.platformDetectService.isBrowser) {
+            this.eventsInitListeners();
+        }
     }
 
     public get onScroll(): Observable<any> {
