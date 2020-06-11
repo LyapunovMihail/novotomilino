@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 import { SearchService } from '../search/search.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
@@ -19,7 +21,9 @@ export class PopularComponent implements OnInit, OnDestroy {
 
     constructor(
         private searchService: SearchService,
-        public scrollLock: WindowScrollLocker
+        public scrollLock: WindowScrollLocker,
+        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -32,6 +36,16 @@ export class PopularComponent implements OnInit, OnDestroy {
             },
             (err) => console.log(err));
     }
+
+    public navigate(url, flatsParams) {
+        if (!flatsParams) {
+            this.router.navigate([url]);
+        } else {
+            this.searchFlatsLinkHandlerService.seoLinkHandle(true, url);
+        }
+        this.close.emit(false);
+    }
+
     ngOnDestroy() {
         this.scrollLock.unblock();
     }

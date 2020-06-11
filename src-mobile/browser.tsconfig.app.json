@@ -4,7 +4,7 @@
         "entryModule": "./mobile-app/browser.app.module#BrowserAppModule"
     },
     "compilerOptions": {
-        "outDir": "../out-tsc/app",
+        "outDir": "../out-tsc/mobile/browser",
         "baseUrl": "./",
         "module": "es2015",
         "types": []

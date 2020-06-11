@@ -52,34 +52,34 @@ export class ApartmentComponent implements OnInit {
     }
 
     public routePDF() {
-        if (this.platformDetectService.isBrowser) {
-            this.clickedPdf = true;
-            let location = window.location.href;
-            let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+        if (!this.platformDetectService.isBrowser) { return; }
 
-            if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
+        this.clickedPdf = true;
+        let location = window.location.href;
+        let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+
+        if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
+            this.clickedPdf = false;
+            window.open(this.pdfLink);
+            return 'javascript:void(0)';
+        }
+        this.changeFlatData = this.flatData;
+
+        return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
+            data => {
+                console.log(data);
+                this.pdfLink = data.toString();
+                window.open(data.toString());
                 this.clickedPdf = false;
-                window.open(this.pdfLink);
+                return 'javascript:void(0)';
+            },
+            err => {
+                this.clickedPdf = false;
+                console.log('getPDF');
+                console.log('getPDF: ->', err);
                 return 'javascript:void(0)';
             }
-            this.changeFlatData = this.flatData;
-
-            return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
-                data => {
-                    console.log(data);
-                    this.pdfLink = data.toString();
-                    window.open(data.toString());
-                    this.clickedPdf = false;
-                    return 'javascript:void(0)';
-                },
-                err => {
-                    this.clickedPdf = false;
-                    console.log('getPDF');
-                    console.log('getPDF: ->', err);
-                    return 'javascript:void(0)';
-                }
-            );
-        }
+        );
     }
 
     public getDiscount(flat): number {

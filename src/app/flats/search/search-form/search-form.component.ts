@@ -1,6 +1,5 @@
 import { IFlatsSearchParams, TagInterface } from '../../../../../serv-files/serv-modules/seo-api/seo.interfaces';
 import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
-import { SearchService } from '../search.service';
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
@@ -9,8 +8,7 @@ import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 @Component({
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
-    styleUrls: ['./../search.component.scss'],
-    providers: [ SearchService ]
+    styleUrls: ['./../search.component.scss']
 })
 
 export class SearchFormComponent implements OnInit, OnDestroy {
@@ -38,8 +36,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public formBuilder: FormBuilder,
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        private metaTagsRenderService: MetaTagsRenderService,
-        private searchService: SearchService
+        private metaTagsRenderService: MetaTagsRenderService
     ) {}
 
     public ngOnInit() {
@@ -53,12 +50,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 });
 
             this.buildForm(queryParams);
-
-            this.searchService.getMetaTags()
-                .subscribe((tags) => {
-                        this.metaTags = tags;
-                    },
-                    (err) => console.log(err));
         });
     }
 

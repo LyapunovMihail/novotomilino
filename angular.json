@@ -152,11 +152,11 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/mobile",
+                        "outputPath": "dist/mobile/browser",
                         "index": "src-mobile/index-mobile.html",
-                        "main": "src-mobile/main-mobile.ts",
+                        "main": "src-mobile/browser.main-mobile.ts",
                         "polyfills": "src-mobile/polyfills.ts",
-                        "tsConfig": "src-mobile/tsconfig.app.json",
+                        "tsConfig": "src-mobile/browser.tsconfig.app.json",
                         "assets": [
                             "src-mobile/assets"
                         ],
@@ -193,6 +193,34 @@
                                     "maximumError": "5mb"
                                 }
                             ]
+                        }
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/mobile/server",
+                        "main": "src-mobile/server.main-mobile.ts",
+                        "tsConfig": "src-mobile/server.tsconfig.app.json",
+                        "bundleDependencies": "none"
+                    },
+                    "configurations": {
+                        "dev": {
+                            "optimization": true
+                        },
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src-mobile/environments/environment.ts",
+                                    "with": "src-mobile/environments/environment.prod.ts"
+                                }
+                            ],
+                            "bundleDependencies": "none",
+                            "optimization": true,
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false
                         }
                     }
                 },

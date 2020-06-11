@@ -8,7 +8,7 @@
         <h1 class="popular-query__title">Популярные категории</h1>
 
         <ul class="popular-query__list">
-            <li *ngFor="let metaLink of metaTags"><a href="javascript:void(0)" [routerLink]="metaLink.url" target="_blank">{{metaLink.title}}</a></li>
+            <li *ngFor="let metaLink of metaTags"><a href="javascript:void(0)" (click)="navigate(metaLink.url, metaLink.flatsSearchParams)">{{metaLink.title}}</a></li>
         </ul>
     </div>
 </section>

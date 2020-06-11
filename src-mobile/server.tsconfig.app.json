@@ -1,12 +1,12 @@
 {
     "extends": "../tsconfig.json",
     "angularCompilerOptions": {
-        "entryModule": "./mobile-app/browser.app.module#BrowserAppModule"
+        "entryModule": "./mobile-app/server.app.module#ServerAppModule"
     },
     "compilerOptions": {
-        "outDir": "../out-tsc/app",
+        "outDir": "../out-tsc/mobile/server",
         "baseUrl": "./",
-        "module": "es2015",
+        "module": "commonjs",
         "types": []
     },
     "exclude": [

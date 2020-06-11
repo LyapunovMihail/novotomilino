@@ -33,8 +33,9 @@ async function bootstrap() {
     }));
     app.set('view engine', 'html');
     app.set('views', join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser'));
+    // app.set('views', join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'browser'));
 
-    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile'), { index: false });
+    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'browser'), { index: false });
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser'), { index: false });
 
     setTimeout(() => {

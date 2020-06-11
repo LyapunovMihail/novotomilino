@@ -51,15 +51,13 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        if (this.platform.isBrowser) {
-            this.preloaderFlats = true;
-            this.authorizationEvent = this.authorization.getAuthorization()
-                .subscribe((val) => {
-                    this.isAuthorizated = val;
-                });
+        this.preloaderFlats = true;
+        this.authorizationEvent = this.authorization.getAuthorization()
+            .subscribe((val) => {
+                this.isAuthorizated = val;
+            });
 
-            if (!this.showSearchWindow) {return; }
-        }
+        if (!this.showSearchWindow) {return; }
     }
 
     public formChange(changedForm) {
