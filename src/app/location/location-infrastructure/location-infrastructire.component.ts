@@ -37,7 +37,7 @@ export class LocationInfrastructureComponent implements OnInit {
         // кнопки бокового меню
         if (this.firstNavClick) {
             this.markers.forEach((marker) => {
-                if (marker.type !== type) {
+                if (marker.type !== type && marker.type !== 'main-marker') {
                     $(`.location__infrastructure-list-item_${marker.type}`).removeClass('location__infrastructure-list-item_active');
                     marker.marker.options.set({
                         visible: false

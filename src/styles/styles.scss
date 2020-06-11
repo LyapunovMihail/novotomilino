@@ -157,3 +157,71 @@ label {
     flex-flow: column nowrap;
     align-items: center;
 }
+
+// Стили прелоудера
+
+.data-preloader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    box-sizing: border-box;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__item {
+        background: $col-orange;
+        color: $col-orange; 
+        font-size: 11px;
+        text-indent: -99999em;
+        margin: 55px auto;
+        position: relative;
+        width: 10em;
+        height: 10em;
+        box-shadow: inset 0 0 0 1em;
+        transform: translateZ(0);
+        border-radius: 50%;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+        &::before {
+            width: 5.2em;
+            height: 10.2em;
+            background: white;
+            border-radius: 10.2em 0 0 10.2em;
+            top: -0.1em; left: -0.1em;
+            transform-origin: 5.2em 5.1em;
+            animation: load2 2s infinite ease 1.5s;
+        }
+        &::after {
+            width: 5.2em;
+            height: 10.2em;
+            background: white;
+            border-radius: 0 10.2em 10.2em 0;
+            top: -0.1em; left: 5.1em;
+            transform-origin: 0px 5.1em;
+            animation: load2 2s infinite ease;
+        }
+
+        &-circle {
+            height: 8em;
+            width: 8em;
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            top: 1em; left: 1em; 
+            box-sizing: border-box;
+            z-index: 1;
+        }
+    }
+}
+@keyframes load2 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

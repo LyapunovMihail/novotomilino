@@ -27,6 +27,7 @@ export class FloorComponent implements OnInit, OnDestroy {
     public floorSelector: number[] = [];
     public floorCount = FloorCount;
     public floorSvg: string = '';
+    public loadFloorSvg: boolean = false;
     public routerEvents: any;
     public houseNumber: number;
     public sectionNumber: number;
@@ -54,6 +55,8 @@ export class FloorComponent implements OnInit, OnDestroy {
     public routerChange() {
         return this.activatedRoute.params
         .subscribe((params: any) => {
+            this.loadFloorSvg = true;
+
             // проверка на соответствие дома, секции и этажа из конфига ./floor-count.ts
             if (this.floorCount[params.house] && this.floorCount[params.house][params.section]
                 && this.floorCount[params.house][params.section].some((floor) => floor === Number(params.floor))) {
@@ -66,6 +69,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                     (data: string) => {
                         this.floorSvg = data;
                         this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
+                        this.loadFloorSvg = false;
 
                         this.floorService.getObjects({
                             houses: this.houseNumber + '',
@@ -88,6 +92,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                     },
                     (err) => {
                         this.floorSvg = '';
+                        this.loadFloorSvg = false;
                         console.log(err);
                     }
                 );

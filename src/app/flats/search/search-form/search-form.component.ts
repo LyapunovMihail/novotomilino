@@ -9,7 +9,8 @@ import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 @Component({
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
-    styleUrls: ['./../search.component.scss']
+    styleUrls: ['./../search.component.scss'],
+    providers: [ SearchService ]
 })
 
 export class SearchFormComponent implements OnInit, OnDestroy {
@@ -31,6 +32,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
+    @Output() public showPopular: EventEmitter<any> = new EventEmitter();
 
     constructor(
         public formBuilder: FormBuilder,

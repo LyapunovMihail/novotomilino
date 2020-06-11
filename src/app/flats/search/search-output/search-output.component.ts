@@ -17,8 +17,33 @@ export class SearchOutputComponent implements OnInit {
 
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
+    @Input() public parentPlan: boolean;
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
+
+    public activeSort: string;
+    public sortList: any = [
+        {
+            name: 'price',
+            text: 'По цене',
+            value: false
+        },
+        {
+            name: 'space',
+            text: 'По площади',
+            value: false
+        },
+        {
+            name: 'floor',
+            text: 'По этажу',
+            value: false
+        },
+        // {
+        //     name: 'delivery',
+        //     text: 'По сроку сдачи',
+        //     value: false
+        // }
+    ];
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -49,5 +74,13 @@ export class SearchOutputComponent implements OnInit {
         this.selectedFlatIndex = index;
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
+    }
+
+    public changeFilter(item, i) {
+        this.sortList[i].value = this.activeSort === item.name ? !item.value : true;
+        this.sortList.push({ activeIndex: i });
+        this.activeSort = item.name;
+
+        this.searchService.setFilterValue(item);
     }
 }

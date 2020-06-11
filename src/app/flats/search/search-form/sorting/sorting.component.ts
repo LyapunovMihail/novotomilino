@@ -1,5 +1,6 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SearchService } from '../../search.service';
 
 @Component({
     selector: 'app-search-sorting',
@@ -14,7 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     ]
 })
 
-export class SearchSortingComponent {
+export class SearchSortingComponent implements OnInit {
 
     public activeSort: string;
 
@@ -41,7 +42,13 @@ export class SearchSortingComponent {
         // }
     ];
 
-    constructor() {}
+    constructor( private searchService: SearchService ) {}
+
+    ngOnInit() {
+        this.searchService.getFilterValue().subscribe( (obj) => {
+            this.sortChange(obj.name, obj.value);
+        });
+    }
 
     public sortChange(name, value) {
         let el = this.sortList.findIndex((item) => item.name === name);
