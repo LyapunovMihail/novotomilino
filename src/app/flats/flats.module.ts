@@ -13,9 +13,11 @@ import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PlanComponent } from './plan/plan.component';
 import { PlanComponents } from './plan/plan';
+import { PopularComponent } from './popular/popular.component';
 
 const FlatsComponents = [
     FlatsComponent,
+    PopularComponent,
 
     ...HouseComponents,
 

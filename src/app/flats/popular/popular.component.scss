@@ -1,0 +1,51 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.popular-query {
+    position: fixed;
+    width: 100%;
+    top: 0; left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 129px 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    &__container {
+        width: 100%;
+        max-width: 1088px;
+        background-color: $col-white;
+        box-sizing: border-box;
+        position: relative;
+        padding: 40px;
+    }
+
+    &__btn-close {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        right: -60px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        background: url(/assets/img/cls_white.svg) 49% 49% no-repeat;
+        background-size: 20px;
+        transition: border-color $transition;
+        &:hover { border-color: #fff; }
+    }
+
+    &__title {
+        font: 42px/46px $font-leksa;
+        color: $col-black;
+        margin: 0 0 40px;
+    }
+    &__list {
+        font: 18px/24px $font-mus;
+        color: $col-orange;
+        &> li + li { margin-top: 16px; }
+    }
+}

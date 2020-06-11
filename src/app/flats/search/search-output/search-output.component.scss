@@ -15,12 +15,59 @@ $font: 15px/18px 'Montserrat';
     margin: 0 0 120px;
 
     &__empty { @include f16-24(rgba(0, 1, 5, .8)); }
-    &__title {
-        font: 500 24px/29px $font-mus;
-        @include font-smoothing;
-        color: $col-black;
-        user-select: none;
+    
+    &__head {
+        position: relative;
         margin: 0 0 90px;
+        
+        &-title {
+            font: 500 24px/29px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            user-select: none;
+        }
+    }
+
+    &__filter {
+
+        &-item {
+            font: 500 18px/24px $font-mus;
+            color: rgba(0, 1, 5, .6);
+            background-color: transparent;
+            transition: color $transition;
+            position: absolute;
+            top: 11px;
+            border: 0;
+            &:hover {
+                color: rgba(0, 1, 5, .8);
+                &::after { top: 8px; }
+            }
+            &::after {
+                content: '';
+                width: 10px;
+                height: 16px;
+                position: absolute;
+                top: 5px; left: calc(100% + 5px);
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 100%;
+                transition: top .5s ease;
+                display: none;
+            }
+            &.active { color: $col-black; }
+            &.minFromMax::after { display: block; }
+            &.maxFromMin{
+                &::after {
+                    display: block;
+                    transform: rotate(180deg);
+                }
+                &:hover::after { top: 2px; }
+            }
+
+            &--space { left: 468px; }
+            &--floor { left: 646px; }
+            &--delivery { left: 885px; }
+            &--price { left: 1040px; }
+        }
     }
 
     &__result {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { TagInterface } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
 import { adminHeaders } from '../../commons/admin-headers.utilit';
@@ -9,6 +9,9 @@ import { adminHeaders } from '../../commons/admin-headers.utilit';
 
 export class SearchService {
 
+
+    private filter: Subject<any> = new Subject();
+    private seoModalShow: Subject<any> = new Subject();
     public outputFlatsChanged: Subject<IAddressItemFlat[]> = new Subject();
 
     constructor(private http: HttpClient) {}
@@ -70,5 +73,21 @@ export class SearchService {
 
     public getMetaTags(): Observable<TagInterface[]> {
         return this.http.get<TagInterface[]>('/api/meta_get_flats-search-tag');
+    }
+
+    setFilterValue(val) {
+        this.filter.next(val);
+    }
+    getFilterValue() {
+        return this.filter;
+    }
+
+    setSeoParams(val) {
+        console.log('setParams');
+        this.seoModalShow.next(val);
+    }
+    getSeoParams() {
+        console.log('getParams');
+        return this.seoModalShow;
     }
 }
