@@ -9,7 +9,7 @@ import { IFlatsSearchParams } from '../../../serv-files/serv-modules/seo-api/seo
 
 export class MetaTagsRenderService {
 
-    public h1: HTMLHeadingElement;
+    // public h1: HTMLHeadingElement;
     public flatsSearchParams = new Subject<IFlatsSearchParams>();
     public renderer: Renderer2;
 
@@ -56,19 +56,21 @@ export class MetaTagsRenderService {
     }
 
     private setH1(heading, container) {
-        if (this.h1) {
-            this.renderer.removeChild(container.nativeElement, this.h1);
-        }
+        // if (this.h1) {
+        //     this.renderer.removeChild(container.nativeElement, this.h1);
+        // }
         if (heading) {
             setTimeout(() => {
                 let h1 = container.nativeElement.querySelector('h1');
-                if (!h1) {
-                    h1 = this.renderer.createElement('h1');
-                    this.renderer.setAttribute(h1, 'hidden', 'true');
-                    this.renderer.appendChild(container.nativeElement, h1);
-                    this.h1 = h1;
+                // if (!h1) {
+                //     h1 = this.renderer.createElement('h1');
+                //     this.renderer.setAttribute(h1, 'hidden', 'true');
+                //     this.renderer.appendChild(container.nativeElement, h1);
+                //     this.h1 = h1;
+                // }
+                if (h1) {
+                    h1.textContent = heading;
                 }
-                h1.textContent = heading;
             });
         }
     }

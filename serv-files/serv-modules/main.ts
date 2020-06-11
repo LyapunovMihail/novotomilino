@@ -25,8 +25,6 @@ async function bootstrap() {
         saveUninitialized: true
     }));
 
-    // const { ServerAppModuleNgFactory, LAZY_MODULE_MAP } = require('../../dist/desktop/server/main');
-
     app.engine('html', ngExpressEngine({
         bootstrap: ServerAppModuleNgFactory,
         providers: [

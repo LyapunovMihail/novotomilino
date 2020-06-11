@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "es2015",
+        "module": "commonjs",
+        "target": "es6",
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -10,16 +10,11 @@
         "noEmitHelpers": true,
         "importHelpers": true,
         "strictNullChecks": false,
-        "lib": [
-            "es2015",
-            "dom"
-        ],
-        "baseUrl": "./serv-modules",
-        "typeRoots": ["node_modules/@types", "../node_modules/@types"]
+        "baseUrl": "./serv-modules"
     },
     "include": [
         "serv-modules/**/*",
-        "./../node_modules/angular2-http-file-upload/**/*"
+//        "./../node_modules/angular2-http-file-upload/**/*"
     ],
     "exclude": [
         "node_modules",
