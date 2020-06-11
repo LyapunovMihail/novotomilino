@@ -57,7 +57,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             this.searchService.getMetaTags()
                 .subscribe((tags) => {
                         this.metaTags = tags;
-                        console.log('metaTags', tags);
                     },
                     (err) => console.log(err));
         });

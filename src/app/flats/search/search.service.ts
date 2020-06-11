@@ -81,13 +81,4 @@ export class SearchService {
     getFilterValue() {
         return this.filter;
     }
-
-    setSeoParams(val) {
-        console.log('setParams');
-        this.seoModalShow.next(val);
-    }
-    getSeoParams() {
-        console.log('getParams');
-        return this.seoModalShow;
-    }
 }
