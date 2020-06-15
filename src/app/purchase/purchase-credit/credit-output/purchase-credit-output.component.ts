@@ -11,6 +11,7 @@ import {ICreditSnippet} from '../../../../../serv-files/serv-modules/credit-api/
 export class PurchaseCreditOutputComponent {
 
     @Input() public isAuthorizated;
+    @Input() public bankPreloader;
 
     @Input() public bankList: ICreditSnippet[] = [];
 

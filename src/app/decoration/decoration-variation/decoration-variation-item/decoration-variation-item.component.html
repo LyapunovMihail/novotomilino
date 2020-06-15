@@ -6,8 +6,8 @@
             <img class="variation__item-bgr" [src]="[item.preview]">
         </div>
 
-        <h1 class="variation__item-name variation__item-name_{{item.mod}}"
-            [innerHTML]="[item.name]"></h1>
+        <h2 class="variation__item-name variation__item-name_{{item.mod}}"
+            [innerHTML]="[item.name]"></h2>
     </a>
 
     <div [ngClass]="{ 'element-hidden': pageType !== item.mod,

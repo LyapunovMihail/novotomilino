@@ -114,8 +114,15 @@
 
         </li>
     </ul>
+    
+    <div class="data-preloader" *ngIf="bankPreloader" [style.height.px]="300">
+        <div class="data-preloader__item">
+            <div class="data-preloader__item-circle"></div>
+        </div>
+    </div>
 </div>
-<div class="purchase__not-found" *ngIf="!bankList.length"> <!-- Поставил инлайново для удобства -->
+
+<div class="purchase__not-found" *ngIf="!bankList.length && !bankPreloader">
     <img src="../../../assets/img/purchase/emoji.png" alt="oops">
     <p>По данным параметрам ничего не удалось подобрать</p>
 </div>
