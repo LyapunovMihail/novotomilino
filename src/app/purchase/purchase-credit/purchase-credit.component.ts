@@ -25,6 +25,8 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
     public showModalBankList = false;
 
     public params: any;
+    
+    public showLoader = false;
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -33,6 +35,7 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
+        this.showLoader = true;
         this.AuthorizationEvent = this.authorization.getAuthorization()
             .subscribe( (val) => {
                 this.isAuthorizated = val;
@@ -55,8 +58,10 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
         this.creditService.getActiveSnippet().subscribe(
             (data) => {
                 this.snippetArray = data;
+                this.showLoader = false;
             },
             (error) => {
+                this.showLoader = false;
                 console.error(error);
             }
         );

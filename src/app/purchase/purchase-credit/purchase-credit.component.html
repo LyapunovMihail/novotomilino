@@ -6,6 +6,7 @@
     </app-purchase-credit-form> -->
 
     <app-purchase-credit-output
+        [bankPreloader]="showLoader"
         [isAuthorizated]="isAuthorizated"
         [bankList]="snippetArray"
         (showModalBankList)="showModalBankList = true">
