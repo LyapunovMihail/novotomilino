@@ -69,6 +69,7 @@
     &__snippets {
         width: 100%;
         max-width: $w1600;
+        position: relative;
         @media (max-width: 1279px) {
             max-width: calc(100% - 60px);
         }

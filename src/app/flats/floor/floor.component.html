@@ -29,11 +29,9 @@
             <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="floor__description-scheme" *ngIf="floorSvg"></div>
             <div class="floor-plan-error-description" *ngIf="!floorSvg && !loadFloorSvg">Изображение недоступно</div>
 
-            <div class="data-preloader" *ngIf="loadFloorSvg && !floorSvg">
-                <div class="data-preloader__item">
-                    <div class="data-preloader__item-circle"></div>
-                </div>
-            </div>
+            <app-loader 
+                [loaderShow]="loadFloorSvg && !floorSvg">
+            </app-loader>
         </div>
 
         <app-house-selector

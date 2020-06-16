@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PlanComponent } from './plan/plan.component';
 import { PlanComponents } from './plan/plan';
 import { PopularComponent } from './popular/popular.component';
+import { LoaderModule } from '../UI/loader/loader.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -40,6 +41,7 @@ const FlatsComponents = [
         FormsModule,
         GHMRangeNumberModule,
         ApartmentModule,
+        LoaderModule,
 
         CommonModule,
         RouterModule,

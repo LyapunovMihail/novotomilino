@@ -40,6 +40,8 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     public isSharesCreateRedactForm = false ;
     public isSharesDeleteForm = false ;
 
+    public newsPreloader = false;
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
@@ -49,6 +51,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
+        this.newsPreloader = true;
         if ( !this.platform.isBrowser ) { return false; }
 
 
@@ -78,6 +81,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
+                this.newsPreloader = false;
             },
             (err) => console.log(err)
         );

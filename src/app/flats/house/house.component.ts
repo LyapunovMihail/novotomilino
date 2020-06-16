@@ -43,6 +43,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public scrollStep = 340;
     public lastScrollStep: number;
 
+    public preloader = false;
+
     public bubbleCoords: IFlatBubbleCoordinates = {
         left: 100,
         top: 100
@@ -65,11 +67,12 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public ngOnInit() {
         this.routerEvent = this.routerChange();
-
     }
 
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
+            this.preloader = true;
+
             if (this.floorCount[params.house]) {
                 this.houseNumber = params.house;
                 this.sectionsData = [];
@@ -80,13 +83,16 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                         this.getFlats(sectionNumber).subscribe(
                             (flats) => {
                                 this.buildSectionData(flats, sectionNumber);
+                                this.preloader = false;
                             },
-                            (err) => console.log(err)
+                            (err) => {
+                                console.log(err);
+                                this.preloader = false;
+                            }
                         );
                         if (this.searchFlats) {
                             setTimeout(() => {
                                 this.searchFlatsSelection();
-
                             }, 100);
                         }
                         this.scrollCalculate();

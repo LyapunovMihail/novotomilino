@@ -19,15 +19,23 @@
         </div>
     </div>
 
-    <!-- список новостей -->
-    <app-shares-items class="news__snippets-list"
-        (deleteSnippet)="deleteSharesSnippet($event)"
-        (redactSnippet)="redactSharesSnippet($event)"
-        [isAuthorizated]="isAuth"
-        [snippetsArray]="shares"
-        [indexNum]="indexNum">
-    </app-shares-items>
-    <!-- end : список новостей -->
+    <div class="news__snippets">
+
+        <!-- список новостей -->
+        <app-shares-items class="news__snippets-list"
+            (deleteSnippet)="deleteSharesSnippet($event)"
+            (redactSnippet)="redactSharesSnippet($event)"
+            [isAuthorizated]="isAuth"
+            [snippetsArray]="shares"
+            [indexNum]="indexNum">
+        </app-shares-items>
+        <!-- end : список новостей -->
+    
+        <app-loader 
+            [loaderHeight]="300"
+            [loaderShow]="newsPreloader">
+        </app-loader>
+    </div>
 
     <ul *ngIf="sharesLength > 10" class="shares-list__paginator">
         <ng-container *ngFor="let item of paginator; let i = index">

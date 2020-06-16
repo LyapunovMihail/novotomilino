@@ -23,6 +23,8 @@ export class DynamicComponent implements OnInit, OnDestroy {
     public isAuthorizated: boolean = false;
     public showModalAdmin: boolean = false;
 
+    public preloader = false;
+
     constructor(
         private router: Router,
         private authorization: AuthorizationObserverService,
@@ -32,6 +34,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.preloader = true;
         if ( this.platform.isBrowser ) {
             // подписка на авторизацию
             this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
@@ -43,7 +46,10 @@ export class DynamicComponent implements OnInit, OnDestroy {
             });
 
             this.dynamicService.getObjects().subscribe(
-                (data: IDynamicObject[]) => this.objectsArray = data,
+                (data: IDynamicObject[]) => {
+                    this.objectsArray = data;
+                    this.preloader = false;
+                },
                 (err) => console.error(err)
             );
         }

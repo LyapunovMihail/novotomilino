@@ -51,7 +51,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        this.preloaderFlats = true;
         this.authorizationEvent = this.authorization.getAuthorization()
             .subscribe((val) => {
                 this.isAuthorizated = val;
@@ -104,6 +103,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public getFlats(params) {
+        this.preloaderFlats = true;
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
@@ -112,6 +112,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.sortFlats();
                 this.loadMore();
                 this.flatsChanged.emit(this.searchFlats);
+                this.preloaderFlats = false;
             },
             (err) => {
                 this.preloaderFlats = false;

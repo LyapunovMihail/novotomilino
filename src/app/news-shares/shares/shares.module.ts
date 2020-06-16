@@ -19,6 +19,7 @@ import { Uploader } from 'angular2-http-file-upload';
 import { BitNumberPipe } from './bit-number.pipe';
 import { SharesDeleteComponent } from './shares-delete/shares-delete.component';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
+import { LoaderModule } from '../../UI/loader/loader.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -41,6 +42,7 @@ const SHARES_COMPONENTS = [
         GHMTextAreaModule,
         DatePickerModule,
         FormsModule,
+        LoaderModule,
         ApartmentModule,
         RouterModule.forChild([
             {
