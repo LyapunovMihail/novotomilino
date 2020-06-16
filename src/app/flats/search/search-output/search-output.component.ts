@@ -20,6 +20,7 @@ export class SearchOutputComponent implements OnInit {
     @Input() public parentPlan: boolean;
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
+    @Input() public preloader = false;
 
     public activeSort: string;
     public sortList: any = [
@@ -52,6 +53,7 @@ export class SearchOutputComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
+        this.preloader = true;
         this.searchService.getOutputFlatsChanged()
             .subscribe((flats: IFlatWithDiscount[]) => {
                 this.flatsList = flats;
@@ -59,6 +61,7 @@ export class SearchOutputComponent implements OnInit {
                     flat.discount = this.getDiscount(flat);
                     return flat;
                 });
+                this.preloader = false;
             });
     }
 

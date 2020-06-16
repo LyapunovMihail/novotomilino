@@ -31,6 +31,8 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     public isRedactForm: boolean = false ;
     public isDeleteForm: boolean = false ;
 
+    public newsPreloader = false;
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
@@ -39,6 +41,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit(): void {
+        this.newsPreloader = true;
 
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
@@ -47,6 +50,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
         this.newsService.getSnippet().subscribe(
             (data) => {
                 this.snippetsArray = data;
+                this.newsPreloader = false;
                 this.ref.detectChanges();
             },
             (err) => console.error(err)

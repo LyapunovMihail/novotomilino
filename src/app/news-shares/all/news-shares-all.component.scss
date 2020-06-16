@@ -5,6 +5,7 @@
 .shares__snippets {
     display: flex;
     flex-flow: row wrap;
+    position: relative;
 
     &-item {
         width: 393px;

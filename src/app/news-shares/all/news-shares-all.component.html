@@ -66,8 +66,14 @@
                     <button class="admin-controll admin__news-btn-delete" (click)="deleteSharesSnippet(snippet._id)">Удалить</button>
                 </div>
             </div>
-        
+
+            
         </ng-container>
+
+        <app-loader 
+            [loaderHeight]="300"
+            [loaderShow]="newsPreloader">
+        </app-loader>
     </div>
 </section>
 

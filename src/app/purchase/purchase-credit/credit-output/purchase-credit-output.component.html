@@ -114,12 +114,11 @@
 
         </li>
     </ul>
-    
-    <div class="data-preloader" *ngIf="bankPreloader" [style.height.px]="300">
-        <div class="data-preloader__item">
-            <div class="data-preloader__item-circle"></div>
-        </div>
-    </div>
+
+    <app-loader 
+        [loaderHeight]="300" 
+        [loaderShow]="bankPreloader">
+    </app-loader>
 </div>
 
 <div class="purchase__not-found" *ngIf="!bankList.length && !bankPreloader">

@@ -11,6 +11,7 @@ import { AboutGenplanComponent } from './genplan/about-genplan.component';
 import { AboutProjectComponent } from './project/about-project.component';
 import { AboutGalleryComponent } from './gallery/about-gallery.component';
 import { AboutGalleryAdminComponent } from './gallery/gallery-admin/about-gallery-admin.component';
+import { LoaderModule } from '../UI/loader/loader.module';
 
 const AboutComponents = [
     AboutComponent,
@@ -33,6 +34,7 @@ const AboutComponents = [
     imports: [
         RouterModule,
         CommonModule,
+        LoaderModule,
         GHMTextAreaModule,
         BrowserAnimationsModule,
         RouterModule.forChild([

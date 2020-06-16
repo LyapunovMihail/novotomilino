@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DynamicComponent } from './dynamic.component';
 import { NgModule } from '@angular/core';
 import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
+import { LoaderModule } from '../UI/loader/loader.module';
 
 const DynamicComponents = [
     DynamicComponent,
@@ -39,6 +40,7 @@ const DynamicComponents = [
         CommonModule,
         RouterModule,
         FormsModule,
+        LoaderModule,
         GHMTextAreaModule,
         ReactiveFormsModule,
         RouterModule.forChild([

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PurchaseCreditComponents } from './purchase-credit/credit';
+import { LoaderModule } from '../UI/loader/loader.module';
 
 const PurchaseComponents = [
     PurchaseComponent,
@@ -28,6 +29,7 @@ const PurchaseComponents = [
         ReactiveFormsModule,
         FormsModule,
         GHMRangetNumberModule,
+        LoaderModule,
         CommonModule,
         RouterModule,
         RouterModule.forChild([

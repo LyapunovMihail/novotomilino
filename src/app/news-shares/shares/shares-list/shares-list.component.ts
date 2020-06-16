@@ -44,6 +44,8 @@ export class SharesListComponent implements OnInit, OnDestroy {
 
     public isDeleteForm: boolean = false ;
 
+    public newsPreloader = false;
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
@@ -58,6 +60,7 @@ export class SharesListComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
+        this.newsPreloader = true;
 
         this.subs.push(this.activatedRoute.params
             .pipe(takeUntil(this._ngUnsubscribe))
@@ -84,6 +87,7 @@ export class SharesListComponent implements OnInit, OnDestroy {
         this.sharesService.getShares(10, Number(skip)).subscribe((data: {length: number, sharesList: Share[]}) => {
             this.shares = data.sharesList;
             this.sharesLength = data.length;
+            this.newsPreloader = false;
             this.createPaginator(data.length);
         }, (err) => {
             console.log(err);

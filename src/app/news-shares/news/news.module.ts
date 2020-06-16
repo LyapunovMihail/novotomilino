@@ -9,6 +9,7 @@ import { NewsComponent } from './news.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { LoaderModule } from '../../UI/loader/loader.module';
 
 const NewsComponents = [
     NewsComponent,
@@ -31,6 +32,7 @@ const NewsComponents = [
     ],
     imports: [
         CommonModule,
+        LoaderModule,
         CreateRedactFormsModule,
         RouterModule.forChild([
             { path: '', component: NewsComponent
