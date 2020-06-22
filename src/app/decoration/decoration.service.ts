@@ -39,10 +39,12 @@ export class DecorationService {
             name: 'Санузел',
             mod: 'bathroom',
             url: '/decoration/bathroom',
-            preview: '/assets/img/decoration/san_classic.jpg',
+            preview: '/assets/img/decoration/bathroom/san_classic_var1.jpg',
             images: [
-                '/assets/img/decoration/bathroom/san_classic.jpg',
-                '/assets/img/decoration/bathroom/san_modern.jpg',
+                '/assets/img/decoration/bathroom/san_classic_var1.jpg',
+                '/assets/img/decoration/bathroom/san_classic_var2.jpg',
+                '/assets/img/decoration/bathroom/san_modern_var1.jpg',
+                '/assets/img/decoration/bathroom/san_modern_var2.jpg',
             ]
         }, {
             name: 'Прихожая',
