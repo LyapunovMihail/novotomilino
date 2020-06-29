@@ -25,7 +25,7 @@ export class PurchaseCreditComponent implements OnInit, OnDestroy {
     public showModalBankList = false;
 
     public params: any;
-    
+
     public showLoader = false;
 
     constructor(

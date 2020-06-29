@@ -16,7 +16,7 @@
             [routerLink]="[ '/flats/house/' + house.houseNumber]"
             [style.pointer-events]="house.freeFlats ? 'all' : 'none'">
 
-            №{{house.houseNumber}} {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
+            №{{house.houseNumber}} <span></span> {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
 
             <div class="plan_house-select_info plan_house-select_info--house-{{house.houseNumber}}">
                 <h5 class="plan_house-select_info_title">Дом №{{house.houseNumber}}</h5>

@@ -24,9 +24,22 @@ export class BankListAdminComponent implements OnInit {
 
     constructor(
         private creditService: PurchaseCreditService
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
+        this.creditService.getAllSnippet().subscribe(
+            (snippets) => {
+                this.snippetArray = snippets;
+                if (!this.snippetArray.length) {
+                    this.setBanks();
+                }
+            },
+            (err) => console.error(err)
+        );
+    }
+
+    public setBanks() {
         this.creditService.setSnippet(this.banks).subscribe(
             (snippets) => this.snippetArray = snippets,
             (error) => console.error(error)
@@ -35,7 +48,8 @@ export class BankListAdminComponent implements OnInit {
 
     public updateSnippet(id, key, value) {
         this.creditService.updateSnippet(id, key, value).subscribe(
-            (data) => {},
+            (data) => {
+            },
             (error) => console.error(error)
         );
     }
