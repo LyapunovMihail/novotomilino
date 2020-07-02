@@ -31,11 +31,25 @@ export class BankListAdminComponent implements OnInit {
         this.creditService.getAllSnippet().subscribe(
             (snippets) => {
                 this.snippetArray = snippets;
-                if (!this.snippetArray.length) {
-                    this.setBanks();
-                }
+
+                // if (this.snippetArray.length < this.banks.length) { this.updateBank(this.snippetArray); }
+                if (!this.snippetArray.length || this.snippetArray.length < this.banks.length) { this.setBanks(); }
             },
             (err) => console.error(err)
+        );
+    }
+
+    public updateBank(arr) {
+        const snippetForUpdate = [];
+
+        this.banks.forEach( (bank) => {
+            if (arr.findIndex( item => bank.name === item.name) >= 0) { return; }
+
+            snippetForUpdate.push(bank);
+        });
+        this.creditService.setSnippet(snippetForUpdate).subscribe(
+            (snippets) => this.snippetArray = snippets,
+            (error) => console.error(error)
         );
     }
 

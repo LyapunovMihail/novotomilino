@@ -88,7 +88,22 @@ export const BANKS: Banks[] = [
         name: 'Банк Россия',
         cssclass: 'bankRussia',
         image: '/assets/img/purchase/credit/bankRussia_logo_bage.jpg'
-    }
+    },
+    {
+        name: 'Банк МКБ',
+        cssclass: 'mkb',
+        image: '/assets/img/purchase/credit/mkb.svg'
+    },
+    {
+        name: 'Банк СМП',
+        cssclass: 'smp',
+        image: '/assets/img/purchase/credit/smp.svg'
+    },
+    {
+        name: 'Банк Ак Барс',
+        cssclass: 'akbars',
+        image: '/assets/img/purchase/credit/akbars.svg'
+    },
 ];
 
 export interface Banks {

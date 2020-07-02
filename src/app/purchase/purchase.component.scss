@@ -49,14 +49,16 @@
     }
 
     &__links {
-        width: 188px;
+        // width: 188px;
+        width: 94px;
         height: 41px;
         display: flex;
         border-radius: 4px;
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
 
         &-item {
-            width: 50%;
+            // width: 50%;
+            width: 100%;
             font: 500 14px/20px "Museo Sans Cyrl", sans-serif;
             @include font-smoothing;
             box-sizing: border-box;
