@@ -10,8 +10,7 @@
         font: 54px/58px 'Leksa', sans-serif;
         @include font-smoothing;
         position: absolute;
-        top: 40px;
-        left: 85vh;
+        top: 40px; left: 50%;
         transform: translateX(-50%);
         color: #fff;
         z-index: 1;

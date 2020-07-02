@@ -17,10 +17,10 @@ import { Component } from '@angular/core';
                         перед дольщиком. Применение эскроу счетов регламентируется законом в ст. 860.7 ГК РФ.</p>
                 </div>
 
-                <!--<div class="purchase__links">-->
-                    <!--<a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/credit">Ипотека</a>-->
+                <div class="purchase__links">
+                    <a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/credit">Ипотека</a>
                     <!--<a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/installment">Рассрочка</a>-->
-                <!--</div>-->
+                </div>
             </div>
 
             <router-outlet></router-outlet>
