@@ -81,6 +81,9 @@ export class DbCronUpdate {
         if (('Article' in object) && !object.Article.startsWith('НТМ')) {
             return;
         }
+        if (object.StatusCode === '1') {
+            return;
+        }
         const {house, section, floor, flat} = this.parseArticle(object.Article);
         const itemflat: IAddressItemFlat = {
             house,
