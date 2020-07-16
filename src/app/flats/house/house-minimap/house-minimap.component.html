@@ -4,6 +4,9 @@
             <span class="house__sections-aside-text_free">3</span>Свободно
         </p>
         <p class="house__sections-aside-text">
+            <span class="house__sections-aside-text_not-sale">3</span>Скоро в продаже
+        </p>
+        <p class="house__sections-aside-text">
             <span class="house__sections-aside-text_sale">1</span>Скидка
         </p>
         <p class="house__sections-aside-text">
@@ -80,11 +83,13 @@
 
         </div>
         <ul class="house__sections-aside-plan_list">
-            <li *ngFor="let house of houseNumbers"
+            <li *ngFor="let house of houseList"
                 class="house__sections-aside-plan_item"
-                [class.house__sections-aside-plan_item--active]="houseNumber === house"
-                (click)="houseNavigate(house)">
-                {{house}}
+                [ngClass]="{
+                    'active': houseNumber === house.house,
+                    'disabled': house.disabled}"
+                (click)="houseNavigate(house.house)">
+                {{house.house}}
             </li>
         </ul>
     </div>

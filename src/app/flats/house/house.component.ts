@@ -37,6 +37,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public floorFlats: IFlatWithDiscount[];
     public floorCount = FloorCount;
     public searchFlats: IFlatWithDiscount[];
+    public flatOnFloorCounter;
     // переменные для реализации скролла секций
     public scroll = 0;
     public chessMaxScroll: number;
@@ -82,7 +83,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.sectionNumbers.forEach((sectionNumber) => {
                         this.getFlats(sectionNumber).subscribe(
                             (flats) => {
-                                this.buildSectionData(flats, sectionNumber);
+                                this.buildSectionData(flats, sectionNumber, this.houseNumber);
                                 this.preloader = false;
                             },
                             (err) => {
@@ -95,7 +96,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                                 this.searchFlatsSelection();
                             }, 100);
                         }
-                        this.scrollCalculate();
+                        setTimeout(() => this.scrollCalculate());
                     });
                 }
             } else {
@@ -106,7 +107,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    private buildSectionData(flats, sectionNumber) {
+    private buildSectionData(flats, sectionNumber, house) {
         const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
@@ -119,6 +120,27 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
         sectionData.map((floor: IFLatDisabled[]) => {
             floor.sort();
+        });
+
+        /* Формируем новый объект для подсчета максимального кол-ва квартир на этаже
+            это нужно для заполнения пустых мест в шахматке фейк-квартирами */
+        sectionData.forEach((floor) => {
+            if (!this.flatOnFloorCounter) {
+                this.flatOnFloorCounter = {
+                    [house]: {
+                        [sectionNumber]: [...floor]
+                    }
+                };
+            } else if (!this.flatOnFloorCounter[house]) {
+
+                this.flatOnFloorCounter[house] = {
+                    [sectionNumber]: [...floor]
+                };
+            } else if (!this.flatOnFloorCounter[house][sectionNumber]) {
+                this.flatOnFloorCounter[house][sectionNumber] = [...floor];
+            } else if (floor.length > this.flatOnFloorCounter[house][sectionNumber].length) {
+                this.flatOnFloorCounter[house][sectionNumber] = floor;
+            }
         });
 
         this.sectionsData[sectionNumber - 1] = sectionData;

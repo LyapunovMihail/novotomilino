@@ -34,7 +34,8 @@
 
             &_free,
             &_sale,
-            &_reserve {
+            &_reserve,
+            &_not-sale  {
                 width: 18px;
                 height: 18px;
                 display: flex;
@@ -45,6 +46,7 @@
                 box-sizing: border-box;
             }
             &_free { background-color: rgba(0, 1, 5, .1); }
+            &_not-sale { border: 1px solid rgba(0, 1, 5, .1); }
             &_sale {
                 color: $col-orange;
                 border: 1px solid $col-orange;
@@ -69,18 +71,18 @@
                 cursor: pointer;
                 background-color: #e5e5e6;
                 text-align: center;
-
-                &:not(:last-child) {
-                    margin-right: 5px;
-                }
-
+                &:not(:last-child) { margin-right: 5px; }
                 &:hover {
                     background-color: rgba(231, 73, 15, .8);
                     color: #ffffff;
                 }
-                &--active {
+                &.active {
                     background-color: rgba(231, 73, 15, 1);
                     color: #ffffff;
+                }
+                &.disabled {
+                    opacity: .5;
+                    pointer-events: none;
                 }
             }
         }
