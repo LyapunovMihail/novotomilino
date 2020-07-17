@@ -23,7 +23,7 @@
             {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
         </h1>
     
-        <div class="flat__wrap flat__wrap_price">
+        <div class="flat__wrap flat__wrap_price" [class.not-sale]="flatData.status === '1'">
             <p class="flat__subtitle">Стоимость</p>
             <p class="flat__text flat__text_price"
                 [class.flat__text_price_not-sale]="flatData.discount">{{flatData.price | myBitNumberPipe}} &#8381;</p>
@@ -32,6 +32,7 @@
                 {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
             </p>
         </div>
+        <p class="flat__subtitle flat__subtitle--not-sale" *ngIf="flatData.status === '1'">Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж</p>
     
         <div class="flat__wrap_image">
            <!-- <p class="flat__favorite g-link_red">Добавить в избранное</p> -->

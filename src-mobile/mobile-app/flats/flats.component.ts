@@ -87,6 +87,10 @@ export class FlatsComponent implements OnInit {
             params['type'] = (form.type).join(',');
         }
 
+        if (form['status'].length > 0) {
+            params['status'] = (form.status).join(',');
+        }
+
         if (form.decoration.length > 0) {
             params['decoration'] = (form.decoration).join(',');
         }

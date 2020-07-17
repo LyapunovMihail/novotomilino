@@ -83,7 +83,7 @@
                 <p class="search-form__subtitle">Номер корпуса</p>
 
                 <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                    <p class="search-form__text">{{form.controls['houses'].value | mySearchFormPipe}}</p>
+                    <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses || (form.controls['houses'].value).length === 0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
                 </div>
 
                 <div *ngIf="showCorpus"
@@ -102,11 +102,18 @@
         </div>
 
         <div class="search-form__wrap search-form__wrap_decoration" [class.search-form__wrap_decoration--show]="moreFilter">
-            <app-search-checkbox-list
-                [btnList]="config.decorationList"
-                [formControl]="form.controls['decoration']"
-                [name]="'decoration'">
-            </app-search-checkbox-list>
+            <div class="search-form__wrap">
+                <app-search-checkbox-list
+                    [btnList]="config.statusList"
+                    [formControl]="form.controls['status']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
+                <app-search-checkbox-list
+                    [btnList]="config.decorationList"
+                    [formControl]="form.controls['decoration']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
+            </div>
             <div>
                 <button class="search-form__popular" (click)="showPopular.emit()">Популярные категории</button>
                 <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>

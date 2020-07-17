@@ -4,11 +4,13 @@ import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { SearchService } from '../search.service';
 
 @Component({
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
-    styleUrls: ['./../search.component.scss']
+    styleUrls: ['./../search.component.scss'],
+    providers: [ SearchService ]
 })
 
 export class SearchFormComponent implements OnInit, OnDestroy {
@@ -20,12 +22,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public showCorpus = false;
     public sort: string;
 
-
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageParamsLoaded = false;
     public seoPageEvent: any;
     public metaTags: TagInterface[];
     public showPopularCategory = false;
+
+    public allHouses;
 
     @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
@@ -36,10 +39,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public formBuilder: FormBuilder,
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        private metaTagsRenderService: MetaTagsRenderService
+        private metaTagsRenderService: MetaTagsRenderService,
+        public searchService: SearchService,
     ) {}
 
     public ngOnInit() {
+        this.buildHouses(this.config);
         this.activatedRoute.queryParams.subscribe((queryParams) => {
 
             this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
@@ -92,6 +97,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.type)],
+            status: [((status) => {
+                if (status && status.split(',').every((item) => this.config.statusList.some((i) => item === i.value))) {
+                    return status.split(',');
+                }
+                return [];
+            })(params.status)],
             decoration: [((decoration) => {
                 if (decoration && decoration.split(',').every((item) => this.config.decorationList.some((i) => item === i.value))) {
                     return decoration.split(',');
@@ -137,5 +148,18 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
         this.seoPageEvent.unsubscribe();
+    }
+
+    public buildHouses(config) {
+
+        this.searchService.getObjects({}).subscribe( flats => {
+
+            this.config.housesList = config.housesList.map( house => {
+                if ( house.value === 'all') { return house; }
+                house.disabled = !flats.some(flat => flat.house === Number(house.value));
+                return house;
+            });
+            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+        });
     }
 }

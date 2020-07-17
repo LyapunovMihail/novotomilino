@@ -33,7 +33,8 @@ export class CheckboxListComponent {
     // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву чекбоксов-1, если равен, то возвращаем тру, если нет - фэлс.
     // Так как значение 'выбрать всё' не попадает в массив значений, сделать проверку на наличие этого значения в массиве не удастся
     public isCheckedAll(): boolean {
-        return this.activeList.length === this.btnList.length - 1;
+        return (this.activeList.length === this.btnList.filter( house => !house.disabled).length - 1);
+        // return this.activeList.length === this.btnList.length - 1;
     }
 
     public checkBtn(event) {
@@ -59,7 +60,7 @@ export class CheckboxListComponent {
     // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
     public checkAll(event) {
         this.btnList.forEach((item) => {
-            if (item.value !== 'all') {
+            if (item.value !== 'all' && !item.disabled) {
                 if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
                     this.activeList.push(item.value);
                 } else if (!event.target.checked) {

@@ -82,6 +82,10 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             params['decoration'] = (form.decoration).join(',');
         }
 
+        if (form['status'].length > 0) {
+            params['status'] = (form.status).join(',');
+        }
+
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
             params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
         }
@@ -104,6 +108,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public getFlats(params) {
         this.preloaderFlats = true;
+        console.log('params -> ',params);
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {

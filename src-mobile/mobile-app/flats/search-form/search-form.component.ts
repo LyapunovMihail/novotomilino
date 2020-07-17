@@ -27,6 +27,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     @Input() public showFilter: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 
+    public allHouses;
+
     constructor(
         public formBuilder: FormBuilder,
         public router: Router,
@@ -36,6 +38,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
+        this.buildHouses(this.config);
         this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
             .subscribe((params: IFlatsSearchParams) => {
                 this.seoPageParams = params;
@@ -90,6 +93,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.type)],
+            status: [((status) => {
+                if (status && status.split(',').every((item) => this.config.statusList.some((i) => item === i.value))) {
+                    return status.split(',');
+                }
+                return [];
+            })(params.status)],
             decoration: [((decoration) => {
                 if (decoration && decoration.split(',').every((item) => this.config.decorationList.some((i) => item === i.value))) {
                     return decoration.split(',');
@@ -134,4 +143,18 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.seoPageEvent.unsubscribe();
     }
 
+    public buildHouses(config) {
+
+        this.searchService.getObjects({}).subscribe( data => {
+
+            this.config.housesList = config.housesList.map( house => {
+                if ( house.value === 'all') { return house; }
+
+                house.disabled = !data.flats.some(flat => flat.house === Number(house.value));
+
+                return house;
+            });
+            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+        });
+    }
 }

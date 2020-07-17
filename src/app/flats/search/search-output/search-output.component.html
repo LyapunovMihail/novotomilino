@@ -20,7 +20,8 @@
         <div class="search-output__empty" *ngIf='flatsList.length === 0 && !preloader'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
         <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
-            <a (click)="openApartmentModal(i)" class="search-output__result-item">
+            <a (click)="openApartmentModal(i)" class="search-output__result-item"
+                [title]="flat.status === '1' ? 'Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж' : ''">
                 <div class="search-output__result-item-img">
                     <img class="search-output__result-item-scheme" (error)="img.style.display = 'none'"
                          [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
@@ -42,6 +43,9 @@
                     <span *ngIf="flat.discount"
                           class="search-output__result-item-content search-output__result-item-content_price-sale">
                           {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
+                    </span>
+                    <span *ngIf="flat.status === '1' && !flat.discount" class="search-output__result-item-content search-output__result-item-content_not-saled">
+                        Скоро в продаже
                     </span>
                 </span>
             </a>

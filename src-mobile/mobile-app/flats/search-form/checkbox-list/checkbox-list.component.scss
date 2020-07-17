@@ -1,6 +1,12 @@
 @import "../../../../styles/modules/mixins/mixin.scss";
 
 .search-form__list {
+    &.display-flex {
+        display: flex;
+        flex-flow: row wrap;
+        margin: 0 0 8px;
+    }
+
     &-item {
         margin-bottom: 20px;
         &:last-of-type { margin: 0; }
@@ -32,5 +38,26 @@
     &-text {
         @include fw18-24;
         white-space: nowrap;
+    }
+}
+
+.decoration-checkbox {
+    margin: 0 8px 8px 0;
+
+    &__item {
+        display: block;
+
+        &> input:checked + div {
+            background-color: $col-orange;
+            border-color: $col-orange;
+            color: $col-white;
+        }
+        &> div {
+            @include f16-24;
+            border: 1px solid #979797;
+            background-color: $col-white;
+            border-radius: 16px;
+            padding: 4px 12px;
+        }
     }
 }

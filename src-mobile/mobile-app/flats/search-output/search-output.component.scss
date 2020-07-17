@@ -39,6 +39,25 @@
         align-items: center;
         box-sizing: border-box;
         border-bottom: 1px solid #d8d8d8;
+        &.not-saled {
+            height: 88px;
+            .result__item-wrap {
+                padding: 25px 30px 10px;
+                @media (max-width: 767px) {
+                    padding: 25px 15px 10px;
+                }
+            }
+            .result__text_price {
+                position: relative;
+                &::after {
+                    content: 'Скоро в продаже';
+                    position: absolute;
+                    bottom: 100%; right: 0;
+                    font: 10px/12px $font-mus;
+                    @include font-smoothing;
+                }
+            }
+        }
 
         &-wrap {
             width: 100%;
@@ -71,7 +90,7 @@
         &_flat { margin-right: 8px; }
 
         &_room,
-        &_price-sale { color: $col-orange; }
+        &.price-sale { color: $col-orange; }
     }
 
     &__wrap {

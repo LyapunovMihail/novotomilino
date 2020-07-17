@@ -10,6 +10,7 @@
     &__list {
 
         &-item {
+            cursor: pointer;
 
             &--decoration {
                 display: flex;
@@ -48,5 +49,27 @@
             }
         }
         &-checkbox { background-color: #fff; }
+    }
+}
+
+.decoration-checkbox {
+    margin-right: 8px;
+    cursor: pointer;
+
+    &__item {
+        display: block;
+
+        &> input:checked + div {
+            background-color: $col-orange;
+            border-color: $col-orange;
+            color: $col-white;
+        }
+        &> div {
+            @include f16-24;
+            border: 1px solid #979797;
+            background-color: $col-white;
+            border-radius: 16px;
+            padding: 4px 12px;
+        }
     }
 }

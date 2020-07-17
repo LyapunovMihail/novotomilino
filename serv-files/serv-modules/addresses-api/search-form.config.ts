@@ -12,6 +12,15 @@ export const FormConfig = {
         max: 100
     },
     sort: 'floor_1',
+    statusList: [
+        {
+            name: 'В продаже',
+            value: '4'
+        }, {
+            name: 'Скоро в продаже',
+            value: '1'
+        }
+    ],
     typeList: [
         {
             name: 'квартиры',

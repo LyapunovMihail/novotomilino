@@ -41,7 +41,7 @@
                                     </ng-container>
                                     <li class="house__sections-chess_section_floor-button">
                                         <a class="house__sections-chess_section_floor-link"
-                                            [routerLink]="'/flats/house/' + houseNumber + '/section/' + floor[0].section + '/floor/' + floor[0].floor"> <!-- этаж и секция прописаны в любой квартире -->
+                                            [routerLink]="'/flats/house/' + section[0][0].house + '/section/' + floor[0].section + '/floor/' + floor[0].floor"> <!-- этаж и секция прописаны в любой квартире -->
                                             {{floor[0].floor}}
                                         </a>
                                     </li>

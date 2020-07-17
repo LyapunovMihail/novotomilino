@@ -5,7 +5,7 @@ import { FloorCount } from '../floor/floor-count';
 import { IFlatBubbleCoordinates } from './flat-bubble/flat-bubble.component';
 import { HouseService } from './house.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { PlatformDetectService } from './../../platform-detect.service';
 
 interface IFLatDisabled extends IFlatWithDiscount {
@@ -25,9 +25,10 @@ interface IFLatDisabled extends IFlatWithDiscount {
 
 export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    public houseNumber: number;
+    public houseNumber: any;
+    public defaultParams: any;
     public sectionNumber: number;
-    public sectionNumbers: string[] = [];
+    public sectionNumbers: any[] = [];
     public sectionsData: IFLatDisabled[][][] = [];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
@@ -62,7 +63,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         public service: HouseService,
         private flatsDiscountService: FlatsDiscountService,
         public windowScrollLocker: WindowScrollLocker,
-        private platform: PlatformDetectService
+        private platform: PlatformDetectService,
+        public ref: ChangeDetectorRef
     ) {
     }
 
@@ -71,32 +73,48 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public routerChange() {
-        return this.activatedRoute.params.subscribe((params) => {
-            this.preloader = true;
+        return this.activatedRoute.queryParams.subscribe((params) => {
+            // Если номера домов не менялись отменяем формирование схемы
+            if (this.defaultParams && this.defaultParams === params.houses) { return; }
 
-            if (this.floorCount[params.house]) {
-                this.houseNumber = params.house;
+            const houses = (params.houses).split(',');
+            this.defaultParams = params.houses;
+            this.preloader = true;
+            if (houses.every( house => this.floorCount[house] )) {
+
+                this.houseNumber = houses;
                 this.sectionsData = [];
-                this.sectionNumbers = Object.keys(this.floorCount[this.houseNumber]); // создаём массив из номеров секций по выбранному дому.
-                if (this.platform.isBrowser) {
-                    // получение квартир для нужных секций
-                    this.sectionNumbers.forEach((sectionNumber) => {
-                        this.getFlats(sectionNumber).subscribe(
-                            (flats) => {
-                                this.buildSectionData(flats, sectionNumber, this.houseNumber);
-                                this.preloader = false;
-                            },
-                            (err) => {
-                                console.log(err);
-                                this.preloader = false;
-                            }
-                        );
-                        if (this.searchFlats) {
-                            setTimeout(() => {
-                                this.searchFlatsSelection();
-                            }, 100);
+                this.sectionNumbers = [];
+                this.houseNumber.forEach( house => {
+                    this.sectionNumbers = [
+                        ...this.sectionNumbers,
+                        {
+                            house,
+                            sections: [ ...Object.keys(this.floorCount[Number(house)]) ] // создаём массив из номеров секций по выбранному дому.
                         }
-                        setTimeout(() => this.scrollCalculate());
+                    ];
+                });
+                if (this.platform.isBrowser) {
+                    this.sectionNumbers.forEach( obj => {
+                        // получение квартир для нужных секций
+                        obj.sections.forEach( section => {
+                            this.getFlats(section, obj.house).subscribe(
+                                (flats) => {
+                                    this.buildSectionData(flats, section, obj.house);
+                                    this.preloader = false;
+                                },
+                                (err) => {
+                                    console.log(err);
+                                    this.preloader = false;
+                                }
+                            );
+                            if (this.searchFlats) {
+                                setTimeout(() => {
+                                    this.searchFlatsSelection();
+                                }, 100);
+                            }
+                            setTimeout(() => this.scrollCalculate(), 1000);
+                        });
                     });
                 }
             } else {
@@ -122,6 +140,30 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             floor.sort();
         });
 
+        this.buildFakeFlats(sectionData, sectionNumber, house);
+
+        // Удаляем дубликаты, если есть
+        if (this.sectionsData.findIndex( item => item[0][0]._id === sectionData[0][0]._id) > -1) { return; }
+
+        this.sectionsData.push(sectionData);
+    }
+
+    public searchFlatsSelection() {
+        this.sectionsData.forEach((section: IFLatDisabled[][]) => {
+            section.forEach((floor: IFLatDisabled[]) => {
+                floor.forEach((flat: IFLatDisabled) => {
+                    flat.disabled = true;
+                    this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
+                        if (searchFlat.flat === flat.flat && searchFlat.house === flat.house ) {
+                            flat.disabled = false;
+                        }
+                    });
+                });
+            });
+        });
+    }
+
+    public buildFakeFlats(sectionData, sectionNumber, house) {
         /* Формируем новый объект для подсчета максимального кол-ва квартир на этаже
             это нужно для заполнения пустых мест в шахматке фейк-квартирами */
         sectionData.forEach((floor) => {
@@ -142,30 +184,12 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.flatOnFloorCounter[house][sectionNumber] = floor;
             }
         });
-
-        this.sectionsData[sectionNumber - 1] = sectionData;
     }
 
-    public searchFlatsSelection() {
-        this.sectionsData.forEach((section: IFLatDisabled[][]) => {
-            section.forEach((floor: IFLatDisabled[]) => {
-                floor.forEach((flat: IFLatDisabled) => {
-                    flat.disabled = true;
-                    this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
-                        if (searchFlat.house === Number(this.houseNumber)
-                            && searchFlat.flat === flat.flat ) {
-                            flat.disabled = false;
-                        }
-                    });
-                });
-            });
-        });
-    }
-
-    public getFlats(section) {
+    public getFlats(sections, houses) {
         return this.service.getObjects({
-            houses: this.houseNumber,
-            sections: section
+            houses,
+            sections
         });
     }
 
@@ -187,6 +211,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public ngAfterViewInit() {
         this.scrollCalculate();
+        this.ref.detectChanges();
     }
 
     public scrollCalculate() {
@@ -198,7 +223,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             } else {
                 this.chessMaxScroll = 0;
             }
-        }, 400); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
+        }, 1000); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
     }
 
     public scrollPrev() {

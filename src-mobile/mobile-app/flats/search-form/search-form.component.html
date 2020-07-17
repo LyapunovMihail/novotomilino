@@ -21,14 +21,15 @@
             <p class="search-form__section-name">Номер корпуса</p>
     
             <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                <p class="search-form__form-text search-form__form-text_corpus">{{form.controls['houses'].value | mySearchFormPipe}}</p>
+                <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses || (form.controls['houses'].value).length === 0 ? 'Все корпуса' : form.controls['houses'].value | mySearchFormPipe}}</p>
             </div>
 
             <div class="search-form__corpus" *ngIf="showCorpus">
                 <div class="search-form__corpus-wrap">
                     <app-search-checkbox-list
                         [btnList]="config.housesList"
-                        [formControl]="form.controls['houses']">
+                        [formControl]="form.controls['houses']"
+                        [name]="'houses'">
                     </app-search-checkbox-list>
                 </div>
             </div>
@@ -90,12 +91,19 @@
     
         <div class="search-form__container search-form__container_decor">
     
-            <app-search-checkbox-list
-                class="search-form__decoration"
-                [btnList]="config.decorationList"
-                [formControl]="form.controls['decoration']">
-            </app-search-checkbox-list>
-    
+            <div class="search-form__decoration">
+
+                <app-search-checkbox-list
+                    [btnList]="config.statusList"
+                    [formControl]="form.controls['status']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
+                <app-search-checkbox-list
+                    [btnList]="config.decorationList"
+                    [formControl]="form.controls['decoration']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
+            </div>
         </div>
     
         <button class="search-form__reset-btn" (click)="formReset()">Сбросить фильтры</button>

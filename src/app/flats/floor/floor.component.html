@@ -6,7 +6,7 @@
                 <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
             </li>
             <li class="floor__nav-item">
-                <a [routerLink]="'/flats/house/' + houseNumber" class="floor__nav-item-link">Корпус {{houseNumber}}</a>
+                <a [routerLink]="['/flats/house/']" [queryParams]="{ houses: houseNumber }" class="floor__nav-item-link">Корпус {{houseNumber}}</a>
             </li>
             <li class="floor__nav-item">
                 Секция {{sectionNumber}}

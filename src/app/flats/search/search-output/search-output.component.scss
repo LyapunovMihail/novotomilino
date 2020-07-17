@@ -142,6 +142,10 @@ $font: 15px/18px 'Montserrat';
                     color: #999a9b;
                     text-decoration: line-through;
                 }
+                &_price-saled {
+                    font-weight: 500;
+                    color: #999a9b;
+                }
                 &_price-sale {
                     font-weight: 500;
                     color: $col-orange;

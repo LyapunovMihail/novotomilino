@@ -67,6 +67,9 @@ export class AddressesModel {
         if ('type' in query && query.type.split(',').every((item) => FormConfig.typeList.some((i) => item === i.value))) {
             request.type = { $in: query.type.split(',')};
         }
+        if ('status' in query && query.status.split(',').every((item) => FormConfig.statusList.some((i) => item === i.value))) {
+            request.status = { $in: query.status.split(',')};
+        }
         if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
             request.decoration = { $in: query.decoration.split(',')};
         }

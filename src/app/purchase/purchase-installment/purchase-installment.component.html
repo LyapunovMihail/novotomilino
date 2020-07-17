@@ -19,7 +19,7 @@
                 <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
                 <div class="purchase-installment__type-radiobox"></div>
                 <p class="purchase-installment__type-text">
-                    <span class="span-block span-black">Платная рассрочка сроком <span class="span-nowrap">от 7 до 24 месяцев</span></span>
+                    <span class="span-block span-black">Платная рассрочка сроком <span class="span-nowrap">от 7 до 10 месяцев</span></span>
                     Первоначальный взнос — не менее 50% от прайсовой цены. 
                     Погашение задолженности по рассрочке осуществляется 
                     <span class="span-black">аннуитетными</span> ежемесячными платежами.
@@ -96,7 +96,7 @@
                     (moveend)="formChanges($event, 'month')"
                     [toFixed]="true"
                     [min]="typeInstallment === freeInstallment ? form.month.min : 7"
-                    [max]="typeInstallment === freeInstallment ? form.month.max : 24"
+                    [max]="typeInstallment === freeInstallment ? form.month.max : 10"
                     [start]="typeInstallment === freeInstallment ? form.month.val : 7">
                 </ghm-range-number>
             </div>
