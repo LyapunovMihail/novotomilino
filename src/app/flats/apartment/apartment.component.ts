@@ -1,8 +1,8 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
-import { FavoritesService } from '../../commons/favorites.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FavoritesService } from '../../favorites/favorites.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { SearchService } from '../search/search.service';
 
@@ -94,12 +94,9 @@ export class ApartmentComponent implements OnInit {
         return minPrice;
     }
 
-    public toFavorite(): void {
-        this.favoritesService.toFavorite(this.flatData);
-    }
-
-    get inFavorite(): boolean {
-        return this.favoritesService.inFavorite(this.flatData);
+    public setFavorite(): void {
+        this.flatData.inFavorite = !this.flatData.inFavorite;
+        this.favoritesService.setFavorite(this.flatData);
     }
 
 }

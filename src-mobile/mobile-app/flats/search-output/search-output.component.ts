@@ -1,9 +1,9 @@
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { FavoritesService } from '../../commons/favorites.service';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { FavoritesService } from '../../favorites/favorites.service';
 
 @Component({
     selector: 'app-search-output',
@@ -39,6 +39,7 @@ export class SearchOutputComponent implements OnChanges {
         if ('flatsList' in changes) {
             this.flatsList.map((flat) => {
                 flat.discount = this.getDiscount(flat);
+                flat.inFavorite = this.inFavorite(flat);
                 return flat;
             });
         }
@@ -54,16 +55,13 @@ export class SearchOutputComponent implements OnChanges {
         };
     }
 
-    public toFavorite(flat: IAddressItemFlat): void {
-        this.favoritesService.toFavorite(flat);
-    }
-
-    public inFavorite(flat: IAddressItemFlat): boolean {
-        return this.favoritesService.inFavorite(flat);
-    }
 
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
+    }
+
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 
     public openApartmentModal(index) {

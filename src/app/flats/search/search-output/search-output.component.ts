@@ -2,6 +2,7 @@ import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addres
 import { Component, Input, OnInit } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
+import { FavoritesService } from '../../../favorites/favorites.service';
 import { SearchService } from '../search.service';
 
 @Component({
@@ -49,7 +50,8 @@ export class SearchOutputComponent implements OnInit {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private flatsDiscountService: FlatsDiscountService,
-        private searchService: SearchService
+        private searchService: SearchService,
+        public favoritesService: FavoritesService,
     ) {}
 
     public ngOnInit() {
@@ -57,9 +59,9 @@ export class SearchOutputComponent implements OnInit {
         this.searchService.getOutputFlatsChanged()
             .subscribe((flats: IFlatWithDiscount[]) => {
                 this.flatsList = flats;
-                this.flatsList.map((flat) => {
+                this.flatsList.forEach((flat) => {
                     flat.discount = this.getDiscount(flat);
-                    return flat;
+                    flat.inFavorite = this.inFavorite(flat);
                 });
                 this.preloader = false;
             });
@@ -71,6 +73,10 @@ export class SearchOutputComponent implements OnInit {
 
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
+    }
+
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 
     public openApartmentModal(index) {

@@ -34,7 +34,8 @@
         </div>
     
         <div class="flat__wrap_image">
-           <!-- <p class="flat__favorite g-link_red">Добавить в избранное</p> -->
+            <p class="flat__favorite g-link_red" (click)="setFavorite()"
+               [class.flat__favorite_active]="flatData.inFavorite">Добавить в избранное</p>
             <div class="flat__img">
                 <img (error)="img.style.display = 'none'"
                      [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>

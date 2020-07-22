@@ -12,7 +12,7 @@ import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
 import { AuthorizationObserverService } from './authorization/authorization.observer.service';
-import { FavoritesService } from './commons/favorites.service';
+import { FavoritesService } from './favorites/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
@@ -63,13 +63,13 @@ const APP_PROVIDERS = [
     OverlayService,
     WindowEventsService,
     AuthorizationObserverService,
-    FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
     SearchFlatsLinkHandlerService,
     PhoneObserverService,
     MetaService,
-    MetaTagsRenderService
+    MetaTagsRenderService,
+    FavoritesService
 ];
 
 const APP_MODULES = [

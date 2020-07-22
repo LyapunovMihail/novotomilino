@@ -16,14 +16,14 @@ import { ServerAppModuleNgFactory, LAZY_MODULE_MAP } from '../../dist/desktop/se
 async function bootstrap() {
     const appExpress: Express = express();
     appExpress.use(bodyParser.json());
-    ExpressAppService.app = appExpress;
-    const db = await MongoConnectionService.connect();
-    const app = await NestFactory.create(AppModule, appExpress);
-    app.use(session({
+    appExpress.use(session({
         secret: 'novotomilino',
         resave: false,
         saveUninitialized: true
     }));
+    ExpressAppService.app = appExpress;
+    const db = await MongoConnectionService.connect();
+    const app = await NestFactory.create(AppModule, appExpress);
 
     app.engine('html', ngExpressEngine({
         bootstrap: ServerAppModuleNgFactory,

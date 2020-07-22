@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation 
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { FavoritesService } from './favorites/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { MetaTagsRenderService } from './seo/meta-tags-render.service';
 
@@ -47,7 +48,8 @@ export class AppComponent implements OnInit {
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
         private metaTagsRenderService: MetaTagsRenderService,
-        public renderer: Renderer2
+        public renderer: Renderer2,
+        public favoritesService: FavoritesService
     ) {
         this.metaTagsRenderService.renderer = this.renderer;
     }
@@ -55,11 +57,10 @@ export class AppComponent implements OnInit {
     public ngOnInit() {
         console.log('Initial App State', this.appState.state);
 
-
         // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
         this.router.events.subscribe((event) => {
             if (!(event instanceof NavigationEnd)) {
-              return;
+                return;
             }
             this.metaTagsRenderService.render(this.router.url, this.container);
 
@@ -74,8 +75,10 @@ export class AppComponent implements OnInit {
                 window.scrollTo(0, 0);
             }
         });
-        
+
         // Загружаем акции для дальнейшего вычисления скидки по квартирам
         this.flatsDiscountService.getShares();
+        // Загружаем избранные квартиры
+        this.favoritesService.getFavoriteFlats();
     }
 }
