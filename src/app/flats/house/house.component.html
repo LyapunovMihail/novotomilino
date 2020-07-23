@@ -4,15 +4,16 @@
         [houseNumber]="houseNumber">
     </app-house-minimap>
 
+    <div class="house__sections__nav">
+        <ul class="house__sections__nav-list">
+            <li class="house__sections__nav-item">
+                <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
+            </li>
+        </ul>
+    </div>
+
     <div class="house__sections" #chessContainer>
 
-        <div class="house__sections__nav">
-            <ul class="house__sections__nav-list">
-                <li class="house__sections__nav-item">
-                    <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
-                </li>
-            </ul>
-        </div>
 
         <div *ngIf="sectionsData" class="house__sections-plan" [ngStyle]="{'transform' : 'translateX(-' + scroll + 'px)'}" #chess>
             <ng-container *ngFor="let section of sectionsData">
@@ -32,7 +33,7 @@
                                                         'house__sections-chess_section_flat--disabled' : floor[i].disabled}">
                                             <a class="house__sections-chess_section_flat_link"
                                                 (click)="openApartmentModal(i, floor)"
-                                                (mouseenter)="showFlatBubble($event, floor[i], sectionContainer)"
+                                                (mouseenter)="showFlatBubble($event, floor[i], chessContainer)"
                                                 (mouseleave)="showBubble = false">
                                                 {{floor[i].status !== '4' && floor[i].status !== '1' ? '' : floor[i].rooms === 0 ? 'С' : floor[i].rooms}}
                                             </a>
@@ -54,7 +55,8 @@
         </div>
 
         <app-loader
-            [loaderShow]="preloader">
+            [loaderShow]="preloader"
+            [loaderHeight]="460">
         </app-loader>
 
         <button class="house__sections-btn_prev" (click)="scrollPrev()" *ngIf="scroll !== 0">

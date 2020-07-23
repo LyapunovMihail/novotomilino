@@ -47,15 +47,14 @@
             <input class="form-request__field" 
                 *ngIf="platform.isBrowser" 
                 [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
                 type="text">
+            <p class="form-request__notice">Например: 79991105522</p>
         </div>
 
         <div class="form-request__wrap form-request__wrap_last">
             <span class="form-request__subtitle">Эл. почта</span>
-            <input class="form-request__field"
-                [formControl]="form.controls['mail']"
-                type="text">
+            <input class="form-request__field" [formControl]="form.controls['mail']" type="text">
         </div>
 
         <div class="form-request__wrap">
@@ -94,20 +93,11 @@
             <p class="form-request__subtitle form-request__subtitle_checkbox">Я соглашаюсь на использование моих персональных данных.</p>
         </label>
 
-        <button *ngIf="!isSubmited"
+        <button
             [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
             [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
             class="form-request__btn">
             Отправить заявку
         </button>
-    
-        <!-- <div *ngIf="isSubmited" class="form_item_btn">
-            <span class="form_item_btn_text">Готово</span>
-            <svg class="form_item_svg" viewBox="0 0 20.6 17.3">
-                <polyline id="svg-figure" class="form_item_svg_figure" points="1.1,5.5 9.1,14.9 19.3,0.9 "/>
-            </svg>
-        </div> -->
-
     </form>
-
 </div>

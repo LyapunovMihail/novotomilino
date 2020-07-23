@@ -201,9 +201,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public showFlatBubble(event, flat, sectionContainer) {
-        const distanceToBottom = sectionContainer.clientHeight - (event.target.offsetTop);
         const bubbleHeight = flat.discount ? 312 : 288;
-        this.bubbleCoords.top = (distanceToBottom > bubbleHeight) ? event.target.getBoundingClientRect().top : event.target.getBoundingClientRect().top - bubbleHeight + 30;
+        const offsetTop = event.target.getBoundingClientRect().top - sectionContainer.getBoundingClientRect().top;
+        this.bubbleCoords.top = (bubbleHeight > (offsetTop + 100)) || (bubbleHeight > event.target.getBoundingClientRect().top) ? event.target.getBoundingClientRect().top : event.target.getBoundingClientRect().top - bubbleHeight + 30;
         this.bubbleCoords.left = event.target.getBoundingClientRect().left + 40;
         this.bubbleData = flat;
         this.showBubble = true;

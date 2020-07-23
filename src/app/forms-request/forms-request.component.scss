@@ -2,6 +2,7 @@
 
 .input-invalid {
     border: 1px solid red !important;
+    &+ p { color: red !important; }
 }
 
 .disabled-submit-btn {
@@ -62,6 +63,12 @@
         margin: 0 0 10px;
 
         &_checkbox { margin: 0; }
+    }
+    &__notice {
+        font: 500 12px/14px $font-mus;
+        color: rgba($color: #000105, $alpha: 0.4);
+        @include font-smoothing;
+        margin: 5px 0 0;
     }
 
     &__wrap {

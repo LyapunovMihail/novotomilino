@@ -217,6 +217,13 @@
                 letter-spacing: .5px;
                 text-transform: uppercase;
                 box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+                &.request-send {
+                    background-color: #eee !important;
+                    pointer-events: none !important;
+                    color: $col-black !important;
+                    box-shadow: none !important;
+                    border: 0 !important;
+                }
             }
             &-reserve {
                 color: #fff;

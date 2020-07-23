@@ -36,6 +36,7 @@
     }
 
     &_slide-top { top: calc(0% + 70px); }
+    &.schema-page { position: static; }
 
     &__main {
         width: 100%;

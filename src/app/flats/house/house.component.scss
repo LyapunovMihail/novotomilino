@@ -15,9 +15,10 @@
 
     &__sections {
         width: $w1600;
-       // height: 774px;
+        min-height: 300px;
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         &__nav {
             width: $w1600;
@@ -74,11 +75,9 @@
                 background-color: #e74911;
                 &:hover { background-position: calc(50% - 3px); }
             }
-            &_prev {
-                left: 40px;
-            }
+            &_prev { left: 0; }
             &_next {
-                right: 40px;
+                right: 0;
                 transform: rotate(180deg);
             }
         }

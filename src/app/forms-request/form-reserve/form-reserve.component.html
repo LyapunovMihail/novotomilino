@@ -33,14 +33,14 @@
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Телефон</p>
             <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
                 class="form-request__field" type="text">
+            <p class="form-request__notice">Например: 79991105522</p>
         </div>
         
         <div class="form-request__wrap form-request__wrap_last">
             <p class="form-request__subtitle">Эл. почта</p>
-            <input [formControl]="form.controls['mail']" class="form-request__field"
-                   [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}" type="email">
+            <input [formControl]="form.controls['mail']" class="form-request__field" type="email">
         </div>
 
         <div class="form-request__wrap">
@@ -79,7 +79,7 @@
             <span class="form-request__subtitle form-request__subtitle_checkbox">Даю согласие на обработку моих персональных данных</span>
         </label>
 
-        <button *ngIf="!isSubmited"
+        <button
             [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
             [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
             class="form-request__btn">

@@ -294,6 +294,13 @@
                 width: 256.5px;
                 margin: 0;
             }
+            &.request-send {
+                background-color: #eee !important;
+                pointer-events: none !important;
+                color: $col-black !important;
+                box-shadow: none !important;
+                border: 0 !important;
+            }
         }
         &-reserve {
             background: #e7490f;

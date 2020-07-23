@@ -108,12 +108,15 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public getFlats(params) {
         this.preloaderFlats = true;
-        console.log('params -> ',params);
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.count = data.length;
                 this.searchFlats = data;
+                if (params.rooms === '1' || params.rooms === '2') {
+                    this.searchFlats = this.filterFlats(params.rooms, data);
+                    this.count = this.searchFlats.length;
+                }
                 this.sortFlats();
                 this.loadMore();
                 this.flatsChanged.emit(this.searchFlats);
@@ -151,6 +154,25 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.windowScrollLocker.block();
             }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла
         }
+    }
+
+    public filterFlats(i, flats) {
+        let isFilterFlats;
+        if (i === '1') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41) { return; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        if (i === '2') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 1 && flat.space < 41.31) { return flat; }  // 1к кв площадь которых < 41м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41.31) { return flat; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        return isFilterFlats;
     }
 
     public sortChange(sort) {

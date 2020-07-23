@@ -124,6 +124,10 @@ export class FlatsComponent implements OnInit {
             (data: IFlatResponse) => {
                 this.counter = data.count;
                 this.responseParse(data.flats);
+                if (this.params.rooms === '1' || this.params.rooms === '2') {
+                    this.flatsList = this.filterFlats(this.params.rooms, data);
+                    this.counter = this.flatsList.length;
+                }
             },
             (err) => {
                 console.log(err);
@@ -138,5 +142,23 @@ export class FlatsComponent implements OnInit {
             this.flatsList = this.flatsList.concat(response);
         }
         this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
+    }
+    public filterFlats(i, flats) {
+        let isFilterFlats;
+        if (i === '1') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41) { return; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        if (i === '2') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 1 && flat.space < 41.31) { return flat; }  // 1к кв площадь которых < 41м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41.31) { return flat; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        return isFilterFlats;
     }
 }
