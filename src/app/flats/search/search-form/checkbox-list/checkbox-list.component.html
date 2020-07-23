@@ -1,5 +1,7 @@
 <ul [class.search-form--row]="name === 'decoration'">
 
+    <li class="close-area" (click)="close.emit(false)" *ngIf="name === 'houses'"></li>
+
     <ng-container *ngFor="let btn of btnList">
 
         <li *ngIf="name === 'houses' && !btn.disabled || btn.value === 'all'" class="search-form__list-item search-form__list-item--{{name}}">

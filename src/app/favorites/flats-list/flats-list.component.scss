@@ -124,10 +124,7 @@
             background: url(/assets/img/favorite.svg) no-repeat;
             background-size: 100%;
 
-            &_active {
-                background: url(/assets/img/favorite_active.svg) no-repeat;
-                background-size: 100%;
-            }
+            &.active { background-image: url(/assets/img/favorite-active.svg); }
         }
     }
 }

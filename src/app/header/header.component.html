@@ -6,59 +6,37 @@
     </div> -->
     
     <div class="header__container">
-        <!-- <section class="header__head">
-            <div class="header__head-sell">
-                <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
+        <section class="header__head">
+            <div class="header__head-container">
+                <div class="header__head-sell">
+                    <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
+                </div>
+                <a class="header__head-logo" routerLink="/"></a>
+                <div class="header__head-phone">
+                    <p class="head-phone__paragraf"><span>+7 (499) 110-93-72</span></p>
+                    <a href="tel:+74991109372" class="g-link_red">Заказать звонок</a>
+                </div>
             </div>
-            <a routerLink="/"><div class="header__head-logo"></div></a>
-            <div class="header__head-phone">
-                <p class="head-phone__paragraf">+7 (495) 120-00-80</p>
-                <a href="#" class="g-link_red">Заказать звонок</a>
-            </div>
-        </section> -->
-        <nav class="header__nav header__nav--fixed">
+        </section>
+        <nav class="header__nav" [class.header__nav--fixed]="isFixed">
             <div class="header__nav-container">
 
-                <a routerLink="/" class="header__nav-img">
-                    <img src="/assets/img/header/fixed-logo.svg" alt="logo">
+                <a routerLink="/" class="header__nav-img" [class.disabled]="!isFixed">
+                    <img src="/assets/img/header/fixed-logo_copy.svg" alt="logo">
                 </a>
                 <ul class="header__nav-list">
-                    <li [class.header__nav-list-item_active]="checkLink(link.url)"
+                    <li [class.active]="checkLink(link.url)"
                         class="header__nav-list-item" *ngFor="let link of links">
                         <a [routerLink]="link.url">{{link.name}}</a>
                     </li>
+                    <li class="header__nav-list-item" [class.active]="checkLink('/favorites')">
+                        <a [routerLink]="'/favorites'">Избранное <span *ngIf="favoriteCounter && favoriteCounter > 0">({{favoriteCounter}})</span></a>
+                    </li>
                 </ul>
-                <a href="tel:+74991109372" class="header__nav-tel">
+                <a href="tel:+74991109372" class="header__nav-tel" [class.disabled]="!isFixed">
                     <span>+7 (499) 110-93-72</span>
                 </a>
             </div>
-
-            <!-- <div class="header__nav-footer">
-                <div class="header__nav-footer-sell">
-                    <a href="#" class="g-link_red">Отдел продаж</a>
-                    <p class="header__nav-footer-phone">+7 (495) 120-00-80</p>
-                </div>
-                <div class="header__nav-footer-link">
-                    <ul class="header__nav-footer-list">
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/insta_media.svg" alt="i">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/vk_media.svg" alt="vk">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/fb_media.svg" alt="f">
-                            </a>
-                        </li>
-                    </ul>
-                    <a href="#" class="header__nav-footer-descr">Полная версия сайта</a>
-                </div>
-            </div> -->
         </nav>
     </div>
 </header>

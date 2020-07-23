@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, EventEmitter, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,6 +18,7 @@ export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
     @Input() public name: string;
+    @Output() close = new EventEmitter<boolean>();
 
     public activeList: any[] = [];
 

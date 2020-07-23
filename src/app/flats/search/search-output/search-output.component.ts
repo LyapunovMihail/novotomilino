@@ -75,6 +75,10 @@ export class SearchOutputComponent implements OnInit {
         return this.flatsDiscountService.getDiscount(flat);
     }
 
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
+    }
     public inFavorite(flat): boolean {
         return this.favoritesService.inFavorite(flat);
     }

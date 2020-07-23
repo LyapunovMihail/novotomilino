@@ -19,7 +19,7 @@
         </app-loader>
         <div class="search-output__empty" *ngIf='flatsList.length === 0 && !preloader'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
-        <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
+        <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap" [class.first]="i === 0">
             <a (click)="openApartmentModal(i)" class="search-output__result-item"
                 [title]="flat.status === '1' ? 'Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж' : ''">
                 <div class="search-output__result-item-img">
@@ -49,7 +49,7 @@
                     </span>
                 </span>
             </a>
-            <div class="search-output__result-item-favorite" *ngIf="flat.inFavorite"></div>
+            <div class="search-output__result-item-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
         </div>
     </div>
 

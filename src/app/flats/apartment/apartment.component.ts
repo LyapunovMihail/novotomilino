@@ -103,5 +103,4 @@ export class ApartmentComponent implements OnInit {
         this.flatData.inFavorite = !this.flatData.inFavorite;
         this.favoritesService.setFavorite(this.flatData);
     }
-
 }

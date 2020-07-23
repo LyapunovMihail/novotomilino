@@ -1,5 +1,4 @@
-<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan,
-                                                'search-form__container--slide' : moreFilter}">
+<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan }">
 
     <form [formGroup]="form" class="search-form">
 
@@ -90,6 +89,7 @@
                      class="search-form__corpus"
                      [class.search-form__corpus--position-top]="!parentPlan">
                     <app-search-checkbox-list
+                        (close)="showCorpus = false"
                         [btnList]="config.housesList"
                         [formControl]="form.controls['houses']"
                         [name]="'houses'">
@@ -97,11 +97,12 @@
                 </div>
             </div>
 
-            <button class="search-form__btn"
-                    (click)="moreFilter = !moreFilter">{{moreFilter ? 'Свернуть' : 'Еще параметры'}}</button>
+            <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
+            <!-- <button class="search-form__btn"
+                    (click)="moreFilter = !moreFilter">{{moreFilter ? 'Свернуть' : 'Еще параметры'}}</button> -->
         </div>
 
-        <div class="search-form__wrap search-form__wrap_decoration" [class.search-form__wrap_decoration--show]="moreFilter">
+        <div class="search-form__wrap search-form__wrap_decoration">
             <div class="search-form__wrap">
                 <app-search-checkbox-list
                     [btnList]="config.statusList"
@@ -114,10 +115,7 @@
                     [name]="'decoration'">
                 </app-search-checkbox-list>
             </div>
-            <div>
-                <button class="search-form__popular" (click)="showPopular.emit()">Популярные категории</button>
-                <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
-            </div>
+            <button class="search-form__popular" (click)="showPopular.emit()">Популярные категории</button>
         </div>
 
     </form>
