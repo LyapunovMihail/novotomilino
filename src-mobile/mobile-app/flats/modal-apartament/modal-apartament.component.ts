@@ -1,8 +1,8 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
-import { FavoritesService } from '../../commons/favorites.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { FavoritesService } from '../../favorites/favorites.service';
 
 @Component({
     selector: 'app-modal-apartment',
@@ -60,5 +60,10 @@ export class ModalApartamentComponent implements OnInit {
             minPrice = (price - this.flatData.discount) / 100 * 5;
         }
         return minPrice;
+    }
+
+    public setFavorite(): void {
+        this.flatData.inFavorite = !this.flatData.inFavorite;
+        this.favoritesService.setFavorite(this.flatData);
     }
 }

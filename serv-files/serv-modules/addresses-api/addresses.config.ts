@@ -19,6 +19,7 @@ export interface IAddressItemFlat {
     price: number;
     deliveryDate: string;
     article: string;
+    inFavorite?: boolean;
     _id?: any;
 }
 

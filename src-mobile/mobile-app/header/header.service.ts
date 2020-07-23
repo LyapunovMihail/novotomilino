@@ -58,6 +58,9 @@ export class HeaderService {
             }, {
                 name: 'Документация',
                 url: '/documentation'
+            }, {
+                name: 'Избранное',
+                url: '/favorites'
             }
         ];
     }

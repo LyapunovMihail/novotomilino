@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { MetaTagsRenderService } from './commons/meta-tags-render.service';
+import { FavoritesService } from './favorites/favorites.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit {
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
         private metaTagsRenderService: MetaTagsRenderService,
-        public renderer: Renderer2
+        public renderer: Renderer2,
+        public favoritesService: FavoritesService
     ) {
         this.metaTagsRenderService.renderer = this.renderer;
     }
@@ -65,5 +67,7 @@ export class AppComponent implements OnInit {
 
         // Загружаем акции для дальнейшего вычисления скидки по квартирам
         this.flatsDiscountService.getShares();
+        // Загружаем избранные квартиры
+        this.favoritesService.getFavoriteFlats();
     }
 }

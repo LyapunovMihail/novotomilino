@@ -84,11 +84,11 @@
             <div class="apartment__plan-link">
                 <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" target="_blank"
                     [class.clicked]="clickedPdf">План квартиры.pdf</a>
-                <!-- <div (click)="toFavorite()"
-                     [ngClass]="{'apartment__plan-link-favorite_active': inFavorite}" 
+                <div (click)="setFavorite()"
+                     [ngClass]="{'apartment__plan-link-favorite_active': flatData.inFavorite}"
                      class="g-link_red apartment__plan-link-favorite">
-                    Добавить в избранное
-                </div> -->
+                        Добавить в избранное
+                </div>
             </div>
             <div class="apartment__plan-img">
                 <img class="apartment_item_scheme" (error)="img.style.display = 'none'"

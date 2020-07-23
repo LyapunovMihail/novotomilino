@@ -11,7 +11,7 @@ import { ROUTES } from './app.routes';
 import { MetaTagsRenderService } from './commons/meta-tags-render.service';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
-import { FavoritesService } from './commons/favorites.service';
+import { FavoritesService } from './favorites/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 // App is our top level component
@@ -49,10 +49,10 @@ const APP_PROVIDERS = [
     ImgModalService,
     OverlayService,
     WindowEventsService,
-    FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
-    MetaTagsRenderService
+    MetaTagsRenderService,
+    FavoritesService
 ];
 
 const APP_MODULES = [
