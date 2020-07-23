@@ -2,19 +2,21 @@
     <div class="favorite__container">
 
         <div class="favorite__head">
-            <h1 class="favorite__head-title">Избранное</h1>
-            <p class="favorite__head-subtitle">
-                {{ favoritesService.favoriteFlats.length ? 
-                    'Добавлено ' + favoritesService.favoriteFlats.length + ' квартир'
-                    : 'На данный момент в избранное ничего не добавлено' }}
-            </p>
-        </div>
-    
-        <div class="favorite__objects">
-            <app-flats-list
-                [flatsList]="favoritesService.favoriteFlats">
-            </app-flats-list>
-        </div>
+            <p class="favorite__head-subtitle">{{ favoritesService.favoriteFlats.length ? 'В избранном ' + favoritesService.favoriteFlats.length + ' ' + parseText(favoritesService.favoriteFlats.length) : 'На данный момент в избранное ничего не добавлено' }}</p>
 
+            <div class="favorite__filter">
+                <button class="favorite__filter-item favorite__filter-item--{{item.name}}" 
+                    *ngFor="let item of sortList; let i = index" (click)="changeFilter(item, i)"
+                    [ngClass]="{'active': activeSort === item.name,
+                        'minFromMax': activeSort === item.name && item.value,
+                        'maxFromMin': activeSort === item.name && !item.value}">{{item.text}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="favorite__objects">
+        <app-flats-list
+            [sortParams]="sortValue"
+            [flatsList]="favoritesService.favoriteFlats">
+        </app-flats-list>
     </div>
 </section>

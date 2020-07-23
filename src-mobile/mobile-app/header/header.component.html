@@ -27,6 +27,9 @@
                     <li class="header__nav-list-item" *ngFor="let link of links">
                         <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
                     </li>
+                    <li class="header__nav-list-item">
+                        <a class="header__nav-list-item-link" [routerLink]="'/favorites'" (click)="closeNav()">Избранное <span *ngIf="favoriteCounter && favoriteCounter > 0">({{favoriteCounter}})</span></a>
+                    </li>
                 </ul>
     
                 <div class="header__nav-footer">
@@ -37,23 +40,23 @@
                         </a>
                     </div>
                     <div class="header__nav-footer-link">
-                        <!-- <ul class="header__nav-footer-list">
+                        <ul class="header__nav-footer-list">
                             <li class="header__nav-footer-list-item">
-                                <a href="#">
+                                <a href="//www.instagram.com/novotomilino/">
                                     <img src="/assets/img/header/insta_media.svg" alt="i">
                                 </a>
                             </li>
                             <li class="header__nav-footer-list-item">
-                                <a href="#">
+                                <a href="//vk.com/gk.novotomilino">
                                     <img src="/assets/img/header/vk_media.svg" alt="vk">
                                 </a>
                             </li>
                             <li class="header__nav-footer-list-item">
-                                <a href="#">
+                                <a href="//www.facebook.com/novotomilino">
                                     <img src="/assets/img/header/fb_media.svg" alt="f">
                                 </a>
                             </li>
-                        </ul> -->
+                        </ul>
                         <a (click)="showFullVersion()" class="header__nav-footer-descr">Полная версия сайта</a>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
@@ -10,9 +10,10 @@ import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses
         WindowScrollLocker
     ]
 })
-export class FlatsListComponent implements OnInit {
+export class FlatsListComponent implements OnInit, OnChanges {
 
     @Input() public flatsList: IFlatWithDiscount[] = [];
+    @Input() public sortParams: any;
 
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
@@ -29,5 +30,18 @@ export class FlatsListComponent implements OnInit {
         this.selectedFlatIndex = index;
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
+    }
+
+    ngOnChanges(obj: SimpleChanges) {
+        this.sortFlats();
+    }
+
+    public sortFlats() {
+        if (!this.sortParams) { return; }
+        const params = this.sortParams.split('_');
+
+        this.flatsList.sort( (a, b) => {
+            return (params[1] === '1' ? a[params[0]] - b[params[0]] : b[params[0]] - a[params[0]]);
+        });
     }
 }

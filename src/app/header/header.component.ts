@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
             this.favoritesService.getFavoriteCount().subscribe(count => {
                 this.favoriteCounter = count;
-            })
+            });
             this.headerService.getDynamicLink()
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(

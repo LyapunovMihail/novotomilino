@@ -41,9 +41,7 @@ export class FavoritesComponent implements OnInit {
         private searchService: SearchService,
     ) { }
 
-    ngOnInit() {
-        this.flatList = this.favoritesService.favoriteFlats;
-    }
+    ngOnInit() { }
 
     public changeFilter(item, i) {
         this.sortList[i].value = this.activeSort === item.name ? !item.value : true;

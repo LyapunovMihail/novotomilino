@@ -19,7 +19,46 @@
             font: 30px/34px 'Leksa';
             margin: 0 0 16px;
         }
-        &-subtitle { font: 24px/29px "Museo Sans Cyrl", "sans-serif"; }
+        &-subtitle {
+            font: 500 24px/29px $font-mus;
+            white-space: nowrap;
+            margin: 0 0 40px;
+        }
+    }
+    &__filter {
+        display: flex;
+        flex-flow: row wrap;
+        margin: 0 0 30px;
+
+        &-item {
+            font: 500 18px/24px $font-mus;
+            color: rgba(0, 1, 5, .6);
+            background-color: transparent;
+            transition: color $transition;
+            position: relative;
+            margin-right: 30px;
+            border: 0;
+            &::after {
+                content: '';
+                width: 10px;
+                height: 16px;
+                position: absolute;
+                top: 5px; left: calc(100% + 5px);
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 100%;
+                transition: top .5s ease;
+                display: none;
+            }
+            &.active { color: $col-black; }
+            &.minFromMax::after { display: block; }
+            &.maxFromMin{
+                &::after {
+                    display: block;
+                    transform: rotate(180deg);
+                }
+                &:hover::after { top: 2px; }
+            }
+        }
     }
 
     &__objects { width: 100%; }
@@ -28,13 +67,17 @@
         padding: 32px 0 0;
 
         &__head {
-            &-title {
-                font-size: 28px;
-                line-height: 28px;
-            }
             &-subtitle {
                 font-size: 20px;
                 line-height: 26px;
+                margin: 0 0 15px;
+            }
+        }
+        &__filter {
+
+            &-item {
+                margin-right: 20px;
+                padding: 15px 0 0;
             }
         }
     }

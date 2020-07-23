@@ -2,7 +2,7 @@
     <div class="favorites-container">
         <p class="favorites__subtitle">{{ favoritesService.favoriteFlats.length ? 'В избранном ' + favoritesService.favoriteFlats.length + ' ' + parseText(favoritesService.favoriteFlats.length) : 'На данный момент в избранное ничего не добавлено' }}</p>
 
-        <div class="favorites__filter" *ngIf="!parentPlan">
+        <div class="favorites__filter">
             <button class="favorites__filter-item favorites__filter-item--{{item.name}}" 
                 *ngFor="let item of sortList; let i = index" (click)="changeFilter(item, i)"
                 [ngClass]="{'active': activeSort === item.name,
