@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
             if (!(event instanceof NavigationEnd)) {
                 return;
             }
+            console.log('CHECKK');
             this.metaTagsRenderService.render(this.router.url, this.container);
 
             this.previousUrl = this.currentUrl;

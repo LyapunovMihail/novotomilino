@@ -17,7 +17,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public formEvents: any;
     public form: FormGroup;
-    public showCorpus: boolean = false;
+    public showCorpus = false;
 
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageParamsLoaded = false;
@@ -43,11 +43,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             .subscribe((params: IFlatsSearchParams) => {
                 this.seoPageParams = params;
                 this.isSeoPageParamsLoaded = true;
-                this.buildForm(this.seoPageParams);
+                this.buildForm();
+                // console.log('CHECK');
             });
 
-        console.log('queryParams', this.activatedRoute.snapshot);
-        this.buildForm(this.activatedRoute.snapshot.queryParams);
+        this.buildForm();
 
         this.searchService.getMetaTags()
             .subscribe((tags) => {
@@ -56,7 +56,16 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 (err) => console.log(err));
     }
 
-    public buildForm(params) {
+    public buildForm() {
+
+        let params;
+
+        if (this.seoPageParams) {
+            params = this.seoPageParams;
+        } else {
+            params = this.activatedRoute.snapshot.queryParams;
+        }
+
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,
@@ -136,7 +145,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     public formReset() {
-        this.buildForm({});
+        this.buildForm();
     }
 
     public ngOnDestroy() {

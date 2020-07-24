@@ -24,7 +24,6 @@ const FlatsComponents = [
 @NgModule({
     exports: [
         ...FlatsComponents
-
     ],
     declarations: [
         ...FlatsComponents
@@ -38,8 +37,8 @@ const FlatsComponents = [
         RouterModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
-            { path: 'flats', redirectTo: '/flats/search'},
-            { path: 'flats/search', component: FlatsComponent },
+            // { path: 'flats', redirectTo: '/flats/search'},
+            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
             { path: 'flats/_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
         ])
     ]
