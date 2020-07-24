@@ -75,6 +75,10 @@ export class SearchOutputComponent implements OnInit {
         return this.flatsDiscountService.getDiscount(flat);
     }
 
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
+    }
     public inFavorite(flat): boolean {
         return this.favoritesService.inFavorite(flat);
     }
@@ -91,5 +95,17 @@ export class SearchOutputComponent implements OnInit {
         this.activeSort = item.name;
 
         this.searchService.setFilterValue(item);
+    }
+
+    public parseText(num) {
+
+        num = Math.abs(num) % 100;
+        const words = ['квартира', 'квартиры', 'квартир'];
+        const sum = num % 10;
+
+        if (num > 10 && num < 20) { return words[2]; }
+        if (sum > 1 && sum < 5) { return words[1]; }
+        if (sum === 1) { return words[0]; }
+        return words[2];
     }
 }

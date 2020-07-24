@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, EventEmitter, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,8 +18,9 @@ export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
     @Input() public name: string;
+    @Output() close = new EventEmitter<boolean>();
 
-    public activeList: string[] = [];
+    public activeList: any[] = [];
 
     constructor() {}
 
@@ -33,7 +34,8 @@ export class CheckboxListComponent {
     // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву чекбоксов-1, если равен, то возвращаем тру, если нет - фэлс.
     // Так как значение 'выбрать всё' не попадает в массив значений, сделать проверку на наличие этого значения в массиве не удастся
     public isCheckedAll(): boolean {
-        return this.activeList.length === this.btnList.length - 1;
+        return (this.activeList.length === this.btnList.filter( house => !house.disabled).length - 1);
+        // return this.activeList.length === this.btnList.length - 1;
     }
 
     public checkBtn(event) {
@@ -48,23 +50,29 @@ export class CheckboxListComponent {
             this.activeList.push(value);
         } else {
             const index = this.activeList.findIndex((item) => item === value);
-            if (index >= 0) {
+            if (index === 0 && this.activeList.length === 1 && this.name === 'houses') { event.target.checked = true; }
+            if (index >= 0 && this.activeList.length > 1 && this.name === 'houses') {
+                this.activeList.splice(index, 1);
+            }
+            if (index >= 0 && this.name !== 'houses') {
                 this.activeList.splice(index, 1);
             }
         }
-
-        this.propagateChange(this.activeList);
+        /* Выставля задержку, что бы успеть приминить изменения если выбрали несколько корпусов */
+        setTimeout(() => {
+            this.propagateChange(this.activeList);
+        }, 1000);
     }
 
     // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
     public checkAll(event) {
         this.btnList.forEach((item) => {
-           if (item.value !== 'all') {
+           if (item.value !== 'all' && !item.disabled) {
                if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
                    this.activeList.push(item.value);
                } else if (!event.target.checked) {
                    const index = this.activeList.findIndex((value) => value === item.value);
-                   if (index >= 0) {
+                   if (index > 0) {
                        this.activeList.splice(index, 1);
                    }
                }

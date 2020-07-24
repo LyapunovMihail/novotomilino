@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { PlatformDetectService } from '../platform-detect.service';
 import { HeaderService } from './header.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 declare let $: any;
 
@@ -21,23 +22,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isHidden: boolean;
     public links = [];
 
+    public favoriteCounter;
+
+    public scrollEvent;
+
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
     private subscriptions: Subscription[] = [];
 
     constructor(
+        public favoritesService: FavoritesService,
         private platformDetectService: PlatformDetectService,
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router
-    ) {
-        this.isFixed = true;
-    }
+    ) { }
 
     public ngOnInit() {
         if (this.platformDetectService.isBrowser) {
 
+            this.favoritesService.getFavoriteCount().subscribe(count => {
+                this.favoriteCounter = count;
+            });
             this.headerService.getDynamicLink()
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(
@@ -50,6 +57,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                         this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
                     }
                 );
+            
+            this.fixedHeader();
         }
     }
 
@@ -63,5 +72,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     public checkLink(linkUrl) {
         return this.router.url.split('/')[1] === linkUrl.split('/')[1];
+    }
+
+    fixedHeader() {
+        let scrollTop = 0;
+        let scrollTopPrev = 0;
+        const headerHeight = 100;
+
+        this.scrollEvent = this.windowEventsService.onScroll.subscribe( () => {
+
+            scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+            if (scrollTop > scrollTopPrev) {
+
+                if (scrollTop > headerHeight) {
+                    this.isFixed = true;
+                }
+            } else if (scrollTop < scrollTopPrev) {
+                if (scrollTop <= headerHeight) {
+                    this.isFixed = false;
+                }
+            }
+
+            scrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        });
     }
 }

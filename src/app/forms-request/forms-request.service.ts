@@ -25,7 +25,7 @@ export class FormsRequestService {
     }
 
     public sendReserveForm(form) {
-        form = this.parseFormForCRM(form, 'credit');
+        form = this.parseFormForCRM(form, 'reserve');
         const message = JSON.stringify(form);
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

@@ -26,6 +26,8 @@ export class FlatsComponent implements OnInit {
     public counter: number = 0;
 
     public showFilter: boolean = false;
+    public skip = 0;
+    public outputFlatsList;
 
     constructor(
         public router: Router,
@@ -87,6 +89,10 @@ export class FlatsComponent implements OnInit {
             params['type'] = (form.type).join(',');
         }
 
+        if (form['status'].length > 0) {
+            params['status'] = (form.status).join(',');
+        }
+
         if (form.decoration.length > 0) {
             params['decoration'] = (form.decoration).join(',');
         }
@@ -100,27 +106,46 @@ export class FlatsComponent implements OnInit {
         }
 
         this.params = params;
-        this.params.skip = 0;
-        this.params.limit = 10;
+        // this.params.skip = 0;
+        // this.params.limit = 10;
+        this.skip = 0;
+        this.outputFlatsList = [];
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
             console.log('CHECK@');
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
+        console.log('params', params)
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.getFlats();
     }
 
     public loadMore() {
-        this.params.skip += 10;
-        this.getFlats();
+        // this.params.skip += 10;
+        // this.getFlats();
+        for (let i = 0; i < 10; i++) {
+            if (this.skip < this.flatsList.length) {
+                this.outputFlatsList.push(this.flatsList[this.skip++]);
+            }
+        }
+        this.isLoadMoreBtn = this.skip < this.flatsList.length;
     }
 
     public getFlats() {
-        this.searchService.getObjects(this.params).subscribe(
-            (data: IFlatResponse) => {
-                this.counter = data.count;
-                this.responseParse(data.flats);
+        this.skip = 0;
+        this.outputFlatsList = [];
+        console.log(this.params.sort);
+        this.searchService.getFlats(this.params).subscribe(
+            (data: IAddressItemFlat[]) => {
+                this.counter = data.length;
+                this.flatsList = data;
+                // this.responseParse(data.flats);
+                if (this.params.rooms === '1' || this.params.rooms === '2') {
+                    this.flatsList = this.filterFlats(this.params.rooms, data);
+                    this.counter = this.flatsList.length;
+                }
+                this.loadMore();
             },
             (err) => {
                 console.log(err);
@@ -135,5 +160,24 @@ export class FlatsComponent implements OnInit {
             this.flatsList = this.flatsList.concat(response);
         }
         this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
+    }
+    public filterFlats(i, flats) {
+        console.log(flats);
+        let isFilterFlats;
+        if (i === '1') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41) { return; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        if (i === '2') {
+            isFilterFlats = flats.filter( flat => {
+                if (flat.rooms === 1 && flat.space < 41.31) { return flat; }  // 1к кв площадь которых < 41м = 1комн и 2комн
+                if (flat.rooms === 1 && flat.space >= 41.31) { return flat; } // 1к кв площадь которых >= 41м = 2комн
+                if (flat.rooms === Number(i)) { return flat; }
+            });
+        }
+        return isFilterFlats;
     }
 }

@@ -48,7 +48,7 @@ export class PlanComponent implements OnInit {
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         this.houses[i].freeFlats = flats.length;
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
@@ -61,10 +61,10 @@ export class PlanComponent implements OnInit {
         }
     }
 
-    public svgRouterLink(event: Event, url) {
+    public svgRouterLink(event: Event, house) {
         if (event) {
             event.preventDefault();
         }
-        this.router.navigate([url]);
+        this.router.navigate(['/flats/house/'], {queryParams: {houses: house}});
     }
 }

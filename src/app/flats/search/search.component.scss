@@ -36,6 +36,7 @@
     }
 
     &_slide-top { top: calc(0% + 70px); }
+    &.schema-page { position: static; }
 
     &__main {
         width: 100%;
@@ -75,7 +76,7 @@
 
     &__container {
         width: 100%;
-        height: 127px;
+        height: 190px;
         box-sizing: border-box;
         padding: 19px 0 29px;
         display: flex;
@@ -87,9 +88,6 @@
         &--fixed {
             position: fixed;
             bottom: 50px;
-        }
-        &--slide {
-            height: 190px;
         }
     }
     &__wrap {
@@ -107,11 +105,7 @@
         }
         &_decoration {
             justify-content: space-between;
-            opacity: 0;
             transition: 0.2s linear;
-            &--show {
-                opacity: 1;
-            }
         }
     }
     &__subtitle {
@@ -213,7 +207,7 @@
         // opacity: 0;
         position: absolute;
         width: 182px;
-        height: 213px;
+        // height: 213px;
         background: #fff;
         right: 0;
         top: calc(100% + 10px);
@@ -226,7 +220,8 @@
         cursor: default;
 
         &--position-top {
-            top: calc(100% - 269px);
+            bottom: 56px;
+            top: auto;
         }
     }
     &__btn {
@@ -242,6 +237,7 @@
     &__reset-filter {
         background: transparent;
         @include f16-24(rgba(0, 1, 5, 0.8));
+        transform: translateY(-25px);
     }
     &__popular {
         background: transparent;

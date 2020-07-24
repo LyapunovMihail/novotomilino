@@ -5,6 +5,7 @@ import { Subject, Subscription } from 'rxjs';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { HeaderService } from './header.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { FavoritesService } from '../favorites/favorites.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public active = false;
     public isFixed: boolean;
     public isHidden: boolean;
+    public favoriteCounter;
 
     // подписка на скролл страницы HomePage
     // для фиксации хедера
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription[] = [];
 
     constructor(
+        public favoritesService: FavoritesService,
         private windowEventsService: WindowEventsService,
         public  windowScrollLocker: WindowScrollLocker,
         private headerService: HeaderService,
@@ -38,6 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
+
+        this.favoritesService.getFavoriteCount().subscribe(count => {
+            this.favoriteCounter = count;
+        });
 
         // this.fixedHeader();
         this.headerService.getDynamicLink()

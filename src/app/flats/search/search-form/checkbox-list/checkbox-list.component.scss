@@ -1,5 +1,12 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
+.close-area {
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: 1;
+}
+
 .search-form {
 
     &--row {
@@ -10,6 +17,9 @@
     &__list {
 
         &-item {
+            position: relative;
+            cursor: pointer;
+            z-index: 2;
 
             &--decoration {
                 display: flex;
@@ -45,8 +55,31 @@
             }
             &--houses {
                 @include fw18-24();
+                cursor: pointer;
             }
         }
         &-checkbox { background-color: #fff; }
+    }
+}
+
+.decoration-checkbox {
+    margin-right: 8px;
+    cursor: pointer;
+
+    &__item {
+        display: block;
+
+        &> input:checked + div {
+            background-color: $col-orange;
+            border-color: $col-orange;
+            color: $col-white;
+        }
+        &> div {
+            @include f16-24;
+            border: 1px solid #979797;
+            background-color: $col-white;
+            border-radius: 16px;
+            padding: 4px 12px;
+        }
     }
 }

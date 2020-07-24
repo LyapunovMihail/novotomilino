@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { FavoritesService } from '../favorites.service';
 
 @Component({
     selector: 'app-flats-list',
@@ -18,7 +19,8 @@ export class FlatsListComponent implements OnInit {
     public selectedFlatIndex: number;
 
     constructor(
-        public windowScrollLocker: WindowScrollLocker
+        public windowScrollLocker: WindowScrollLocker,
+        public favoritesService: FavoritesService
     ) {
     }
 
@@ -29,5 +31,9 @@ export class FlatsListComponent implements OnInit {
         this.selectedFlatIndex = index;
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
+    }
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
     }
 }

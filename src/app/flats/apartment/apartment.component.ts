@@ -22,6 +22,9 @@ export class ApartmentComponent implements OnInit {
     public clickedPdf = false;
     public changeFlatData;
 
+    public isCreditFormSubmit = false;
+    public isReserveFormSubmit = false;
+
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
     @Input() public flatsList: IFlatWithDiscount[];
@@ -44,11 +47,15 @@ export class ApartmentComponent implements OnInit {
     public prevFlat() {
         this.flatData = this.flatsList[--this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.isCreditFormSubmit = false;
+        this.isReserveFormSubmit = false;
     }
 
     public nextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.isCreditFormSubmit = false;
+        this.isReserveFormSubmit = false;
     }
 
     public routePDF() {
@@ -75,8 +82,6 @@ export class ApartmentComponent implements OnInit {
             },
             err => {
                 this.clickedPdf = false;
-                console.log('getPDF');
-                console.log('getPDF: ->', err);
                 return 'javascript:void(0)';
             }
         );
@@ -98,5 +103,4 @@ export class ApartmentComponent implements OnInit {
         this.flatData.inFavorite = !this.flatData.inFavorite;
         this.favoritesService.setFavorite(this.flatData);
     }
-
 }

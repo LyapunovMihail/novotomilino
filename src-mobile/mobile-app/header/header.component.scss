@@ -288,7 +288,7 @@
             display: none;
             width: 100%;
             max-width: none;
-            min-height: 460px;
+            min-height: 660px;
             justify-content: flex-start;
             position: fixed;
             left: 0;
@@ -363,7 +363,7 @@
                     font: 500 20px/26px $font-mus;
                     @include font-smoothing;
                     color: $col-black;
-                    margin: 0 0 20px;
+                    // margin: 0 0 20px;
                 }
 
                 &-link {
@@ -423,8 +423,8 @@
             }
 
             &-footer {
-                width: calc(100% - 30px);
-                left: 15px;
+                width: calc(100% - 15px);
+                left: 0;
                 flex-flow: column nowrap;
 
                 &-link {

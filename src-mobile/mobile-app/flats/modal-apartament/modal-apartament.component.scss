@@ -128,6 +128,12 @@
         @include font-smoothing;
         color: $col-black-6;
         margin: 0 0 5px;
+
+        &--not-sale {
+            width: calc(100% - 30px);
+            max-width: 768px;
+            margin: 0 0 20px;
+        }
     }
     &__text {
         font: 500 20px/24px $font-mus;
@@ -188,6 +194,7 @@
 
         &_price {
             margin: 0 0 30px;
+            &.not-sale { margin: 0 0 20px; }
         }
         &_image {
             width: 100%;
@@ -286,6 +293,13 @@
             @media (min-width: 768px) {
                 width: 256.5px;
                 margin: 0;
+            }
+            &.request-send {
+                background-color: #eee !important;
+                pointer-events: none !important;
+                color: $col-black !important;
+                box-shadow: none !important;
+                border: 0 !important;
             }
         }
         &-reserve {

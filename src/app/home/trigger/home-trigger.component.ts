@@ -40,7 +40,13 @@ export class HomeTriggerComponent implements OnInit {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
         if (flats.length) {
             for (let i = 0; i < 4; i++) {
-                const filteredFlats = flats.filter((flat) => flat.rooms === i);
+                const filteredFlats = flats.filter((flat) => {
+                    if ((i === 1 || i === 2) && flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
+                    if (i === 2 && flat.rooms === 2 && flat.space > 34) { return flat; }              // 2к кв площадь которых > 34м = 2комн
+                    if ((i === 1 || i === 2) && flat.rooms === 1 && flat.space < 41) { return flat; } // 1к кв площадь которых < 41м = 1комн и 2комн
+                    if (i === 2 && flat.rooms === 1 && flat.space >= 41) { return flat; }             // 1к кв площадь которых >= 41м = 2комн
+                    if (flat.rooms === i) { return flat; }
+                });
                 this.triggersData[i] = {rooms: i, space: '', price: 0};
                 this.triggersData[i].price = filteredFlats.reduce((minPrice, flat) => {
                         return flat.price < minPrice ? flat.price : minPrice;

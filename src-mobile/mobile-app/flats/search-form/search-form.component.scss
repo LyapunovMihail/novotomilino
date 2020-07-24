@@ -188,9 +188,8 @@
     }
 
     &__decoration {
-        .search_list_item {
-            margin-bottom: 84px;
-        }
+        display: flex;
+        flex-flow: row wrap;
     }
 
     &__reset-btn {

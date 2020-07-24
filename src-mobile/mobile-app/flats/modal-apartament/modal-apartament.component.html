@@ -23,7 +23,7 @@
             {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
         </h1>
     
-        <div class="flat__wrap flat__wrap_price">
+        <div class="flat__wrap flat__wrap_price" [class.not-sale]="flatData.status === '1'">
             <p class="flat__subtitle">Стоимость</p>
             <p class="flat__text flat__text_price"
                 [class.flat__text_price_not-sale]="flatData.discount">{{flatData.price | myBitNumberPipe}} &#8381;</p>
@@ -32,6 +32,7 @@
                 {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
             </p>
         </div>
+        <p class="flat__subtitle flat__subtitle--not-sale" *ngIf="flatData.status === '1'">Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж</p>
     
         <div class="flat__wrap_image">
             <p class="flat__favorite g-link_red" (click)="setFavorite()"
@@ -62,8 +63,12 @@
         <p class="flat__delivery">Срок сдачи {{flatData.deliveryDate}}</p>
     
         <div class="flat__btn">
-            <button (click)="isReserveFormOpen = true" class="flat__btn-reserve">Забронировать</button>
-            <button (click)="isCreditFormOpen = true" class="flat__btn-credit">Заявка на ипотеку</button>
+            <button (click)="isReserveFormOpen = true;" class="flat__btn-reserve" [class.request-send]="isReserveFormSubmit">
+                {{ !isReserveFormSubmit ? 'Забронировать' : 'Заявка отправлена' }}
+            </button>
+            <button (click)="isCreditFormOpen = true;" class="flat__btn-credit" [class.request-send]="isCreditFormSubmit">
+                {{ !isCreditFormSubmit ? 'Заявка на ипотеку' : 'Заявка отправлена' }}
+            </button>
         </div>
     </div>
 
@@ -71,6 +76,7 @@
 
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
+    (isSubmited)="isCreditFormSubmit = $event"
     [isOpen]="isCreditFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
@@ -79,6 +85,7 @@
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
+    (isSubmited)="isReserveFormSubmit = $event"
     [isOpen]="isReserveFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"

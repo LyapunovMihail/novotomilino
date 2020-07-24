@@ -47,6 +47,13 @@ export class AddressesModel {
             request.house = { $in: query.houses.split(',').map(Number) };
         }
         if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
+             // если выбраны 1к/2к квартиры, то добавляем 2к/1к квартиры, что бы отфильтровать в дальнейшем по площади
+            if ((/[1]/).exec(query.rooms)) {
+                query.rooms = query.rooms + ',2';
+            }
+            if ((/[2]/).exec(query.rooms)) {
+                query.rooms = query.rooms + ',1';
+            }
             request.rooms = { $in: query.rooms.split(',').map(Number) };
         }
         if ( 'priceMin' in query && 'priceMax' in query ) {
@@ -66,6 +73,9 @@ export class AddressesModel {
         }
         if ('type' in query && query.type.split(',').every((item) => FormConfig.typeList.some((i) => item === i.value))) {
             request.type = { $in: query.type.split(',')};
+        }
+        if ('status' in query && query.status.split(',').every((item) => FormConfig.statusList.some((i) => item === i.value))) {
+            request.status = { $in: query.status.split(',')};
         }
         if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
             request.decoration = { $in: query.decoration.split(',')};

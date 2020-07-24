@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 
                 <div class="purchase__links">
                     <a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/credit">Ипотека</a>
-                    <!--<a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/installment">Рассрочка</a>-->
+                    <a class="purchase__links-item" [routerLinkActive]="['purchase__links-item_active']" routerLink="/purchase/installment">Рассрочка</a>
                 </div>
             </div>
 

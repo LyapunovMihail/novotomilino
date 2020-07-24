@@ -26,7 +26,7 @@
 
     <app-search-form (formChange)="formChange($event)" [showFilter]="showFilter"></app-search-form>
     
-    <app-search-output [flatsList]="flatsList"></app-search-output>
+    <app-search-output [flatsList]="outputFlatsList"></app-search-output>
     
     <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>
     

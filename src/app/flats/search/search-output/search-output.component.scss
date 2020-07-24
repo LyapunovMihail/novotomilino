@@ -18,7 +18,7 @@ $font: 15px/18px 'Montserrat';
     
     &__head {
         position: relative;
-        margin: 0 0 90px;
+        margin: 0 0 15px;
         
         &-title {
             font: 500 24px/29px $font-mus;
@@ -83,7 +83,7 @@ $font: 15px/18px 'Montserrat';
             align-items: center;
             border-bottom: 1px solid rgba(0, 1, 5, 0.3);
             transition: background-color $transition;
-            &:first-child { border-top: 1px solid rgba(0, 1, 5, 0.3); }
+            &.first { border-top: 1px solid rgba(0, 1, 5, 0.3); }
             &:hover { background-color: rgba(231, 73, 15, 0.03); }
         }
 
@@ -142,6 +142,10 @@ $font: 15px/18px 'Montserrat';
                     color: #999a9b;
                     text-decoration: line-through;
                 }
+                &_price-saled {
+                    font-weight: 500;
+                    color: #999a9b;
+                }
                 &_price-sale {
                     font-weight: 500;
                     color: $col-orange;
@@ -183,10 +187,7 @@ $font: 15px/18px 'Montserrat';
                 background: url(/assets/img/favorite.svg) no-repeat;
                 background-size: 100%;
 
-                &_active {
-                    background: url(/assets/img/favorite_active.svg) no-repeat;
-                    background-size: 100%;
-                }
+                &.active { background-image: url(/assets/img/favorite-active.svg); }
             }
         }
     }

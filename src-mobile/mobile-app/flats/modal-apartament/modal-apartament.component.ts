@@ -16,6 +16,9 @@ export class ModalApartamentComponent implements OnInit {
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
 
+    public isCreditFormSubmit = false;
+    public isReserveFormSubmit = false;
+
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
     @Input() public flatsList: IFlatWithDiscount[];
@@ -36,11 +39,15 @@ export class ModalApartamentComponent implements OnInit {
     public prevFlat() {
         this.flatData = this.flatsList[--this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.isCreditFormSubmit = false;
+        this.isReserveFormSubmit = false;
     }
 
     public nextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.isCreditFormSubmit = false;
+        this.isReserveFormSubmit = false;
     }
 
     public getDiscount(flat): number {

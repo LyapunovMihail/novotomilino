@@ -67,12 +67,16 @@
                     {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
                 </p>
             </div>
-            <!-- <p class="apartment__info-text">
-                При покупке квартиры в ипотеку или при 100% оплате действует скидка 3%. 
-            </p> -->
+            <p class="apartment__info-text" *ngIf="flatData.status === '1'">
+                Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж
+            </p>
             <div class="apartment__info-btn">
-                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve">Забронировать</button>
-                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit">Заявка на ипотеку</button>
+                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve" [class.request-send]="isReserveFormSubmit">
+                    {{ !isReserveFormSubmit ? 'Забронировать' : 'Заявка отправлена' }}
+                </button>
+                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit" [class.request-send]="isCreditFormSubmit">
+                    {{ !isCreditFormSubmit ? 'Заявка на ипотеку' : 'Заявка отправлена' }}
+                </button>
             </div>
         </div>
 
@@ -100,6 +104,7 @@
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
     [isOpen]="isCreditFormOpen"
+    (isSubmited)="isCreditFormSubmit = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
@@ -108,6 +113,7 @@
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
     [isOpen]="isReserveFormOpen"
+    (isSubmited)="isReserveFormSubmit = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"

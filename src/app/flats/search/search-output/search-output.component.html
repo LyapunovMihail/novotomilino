@@ -1,7 +1,7 @@
 <div class="search-output with-scroll" *ngIf="flatsList">
 
     <div class="search-output__head">
-        <h2 class="search-output__head-title">Найдено {{flatsCount()}} квартир</h2>
+        <h2 class="search-output__head-title">Найдено {{flatsCount()}} {{ parseText( flatsCount() ) }}</h2>
 
         <div class="search-output__filter" *ngIf="!parentPlan">
             <button class="search-output__filter-item search-output__filter-item--{{item.name}}" 
@@ -19,8 +19,9 @@
         </app-loader>
         <div class="search-output__empty" *ngIf='flatsList.length === 0 && !preloader'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
-        <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
-            <a (click)="openApartmentModal(i)" class="search-output__result-item">
+        <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap" [class.first]="i === 0">
+            <a (click)="openApartmentModal(i)" class="search-output__result-item"
+                [title]="flat.status === '1' ? 'Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж' : ''">
                 <div class="search-output__result-item-img">
                     <img class="search-output__result-item-scheme" (error)="img.style.display = 'none'"
                          [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
@@ -43,9 +44,12 @@
                           class="search-output__result-item-content search-output__result-item-content_price-sale">
                           {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
                     </span>
+                    <span *ngIf="flat.status === '1' && !flat.discount" class="search-output__result-item-content search-output__result-item-content_not-saled">
+                        Скоро в продаже
+                    </span>
                 </span>
             </a>
-            <div class="search-output__result-item-favorite" *ngIf="flat.inFavorite"></div>
+            <div class="search-output__result-item-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
         </div>
     </div>
 

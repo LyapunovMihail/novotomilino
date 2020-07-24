@@ -1,4 +1,7 @@
-<div class="search" [ngClass]="{'search_slide-top': parentPlan && showSearchWindow}">
+<div class="search" [ngClass]="{
+    'search_slide-top': parentPlan && showSearchWindow,
+    'schema-page': !parentPlan
+}">
 
     <a *ngIf="isAuthorizated && parentPlan && showSearchWindow" (click)="isSeoPageModalOpen = true; windowScrollLocker.block()" class="search_meta-open">Добавить страницу продвижения</a>
 
