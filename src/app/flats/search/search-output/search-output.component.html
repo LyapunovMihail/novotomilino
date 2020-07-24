@@ -1,7 +1,7 @@
 <div class="search-output with-scroll" *ngIf="flatsList">
 
     <div class="search-output__head">
-        <h2 class="search-output__head-title">Найдено {{flatsCount()}} квартир</h2>
+        <h2 class="search-output__head-title">Найдено {{flatsCount()}} {{ parseText( flatsCount() ) }}</h2>
 
         <div class="search-output__filter" *ngIf="!parentPlan">
             <button class="search-output__filter-item search-output__filter-item--{{item.name}}" 

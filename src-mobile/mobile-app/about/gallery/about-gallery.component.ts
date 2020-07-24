@@ -40,6 +40,8 @@ export class AboutGalleryComponent implements OnInit, AfterViewInit {
 
     @ViewChild('img')
     public img: ElementRef;
+    @ViewChild('container')
+    public container: ElementRef;
 
     constructor(
         public platform: PlatformDetectService,
@@ -78,7 +80,7 @@ export class AboutGalleryComponent implements OnInit, AfterViewInit {
             this.imgWidth = this.img.nativeElement.clientWidth;
             this.marginRight = Number(getComputedStyle(this.img.nativeElement).marginRight.slice(0, -2));
             this.scrollWidth = this.imgWidth + this.marginRight;
-        }, 300);
+        }, 1000);
     }
 
     public nextBtn() {

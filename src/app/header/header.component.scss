@@ -84,8 +84,6 @@
                 margin: 0;
                 font: 500 16px/24px $font-mus;
                 @include font-smoothing;
-                opacity: .8;
-                color: $col-black;
             }
             .g-link_red {
                 text-decoration: none;

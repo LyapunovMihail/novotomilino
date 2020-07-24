@@ -180,7 +180,7 @@
     background-color: $col-orange;
     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
     transition: background-color $transition, color $transition, top .5s ease;
-    z-index: 100;
+    z-index: 98;
     &:hover {
         background-color: #fff;
         color: $col-orange;
