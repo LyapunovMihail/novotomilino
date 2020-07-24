@@ -104,6 +104,7 @@ export class FlatsComponent implements OnInit {
         this.params.limit = 10;
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
+            console.log('CHECK@');
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
 

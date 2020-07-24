@@ -39,7 +39,7 @@ export class HeaderService {
             },
             {
                 name: 'Квартиры',
-                url: `/flats`
+                url: `/flats/search`
             },
             {
                 name: 'Отделка',
