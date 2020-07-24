@@ -59,9 +59,9 @@
                 (move)="form.month.val = $event"
                 (moveend)="formChanges($event, 'month')"
                 [toFixed]="true"
-                [min]="form.month.min"
-                [max]="form.month.max"
-                [start]="form.month.val">
+                [min]="changeType === typeOne ? form.month.min : 7"
+                [max]="changeType === typeOne ? form.month.max : 10"
+                [start]="changeType === typeOne ? form.month.val : 7">
             </ghm-range-number>
         </li>
     </ul>

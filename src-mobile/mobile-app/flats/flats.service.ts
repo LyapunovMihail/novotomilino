@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IFlatResponse } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IFlatResponse, IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Observable } from 'rxjs';
 import { TagInterface } from '../../../serv-files/serv-modules/seo-api/seo.interfaces';
 
@@ -16,5 +16,8 @@ export class FlatsService {
 
     public getMetaTags(): Observable<TagInterface[]> {
         return this.http.get<TagInterface[]>('/api/meta_get_flats-search-tag');
+    }
+    public getFlats(options): Observable<IAddressItemFlat[]> {
+        return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
 }

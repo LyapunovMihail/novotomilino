@@ -26,6 +26,8 @@ export class FlatsComponent implements OnInit {
     public counter: number = 0;
 
     public showFilter: boolean = false;
+    public skip = 0;
+    public outputFlatsList;
 
     constructor(
         public router: Router,
@@ -104,30 +106,45 @@ export class FlatsComponent implements OnInit {
         }
 
         this.params = params;
-        this.params.skip = 0;
-        this.params.limit = 10;
+        // this.params.skip = 0;
+        // this.params.limit = 10;
+        this.skip = 0;
+        this.outputFlatsList = [];
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
+        console.log('params', params)
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.getFlats();
     }
 
     public loadMore() {
-        this.params.skip += 10;
-        this.getFlats();
+        // this.params.skip += 10;
+        // this.getFlats();
+        for (let i = 0; i < 10; i++) {
+            if (this.skip < this.flatsList.length) {
+                this.outputFlatsList.push(this.flatsList[this.skip++]);
+            }
+        }
+        this.isLoadMoreBtn = this.skip < this.flatsList.length;
     }
 
     public getFlats() {
-        this.searchService.getObjects(this.params).subscribe(
-            (data: IFlatResponse) => {
-                this.counter = data.count;
-                this.responseParse(data.flats);
+        this.skip = 0;
+        this.outputFlatsList = [];
+        console.log(this.params.sort);
+        this.searchService.getFlats(this.params).subscribe(
+            (data: IAddressItemFlat[]) => {
+                this.counter = data.length;
+                this.flatsList = data;
+                // this.responseParse(data.flats);
                 if (this.params.rooms === '1' || this.params.rooms === '2') {
                     this.flatsList = this.filterFlats(this.params.rooms, data);
                     this.counter = this.flatsList.length;
                 }
+                this.loadMore();
             },
             (err) => {
                 console.log(err);
@@ -144,6 +161,7 @@ export class FlatsComponent implements OnInit {
         this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
     }
     public filterFlats(i, flats) {
+        console.log(flats);
         let isFilterFlats;
         if (i === '1') {
             isFilterFlats = flats.filter( flat => {

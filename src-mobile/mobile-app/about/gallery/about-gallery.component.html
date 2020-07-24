@@ -18,7 +18,7 @@
     </div>
     <div class="gallery__slider">
         <div class="gallery__slider-wrap">
-            <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * scrollWidth ) + 'px)') }" class="gallery__slider-list">
+            <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * img.clientWidth + 30 ) + 'px)') }" class="gallery__slider-list">
                 <li *ngFor="let item of mainSnippets; let i = index" class="gallery__slider-item" [ngClass]="{'gallery__slider-item--active' : currentSlide === i}" #img>
                     <img class="gallery__slider-img" [src]="uploadsPath + item.image" alt="">
 

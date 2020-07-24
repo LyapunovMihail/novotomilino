@@ -15,10 +15,10 @@
            (click)="changeType = typeTwo; acceptChange()">
             Платная рассрочка
         </p>
-        <p [class.installment__calculator-tooltip_active]="changeType === typeThree"
+        <!-- <p [class.installment__calculator-tooltip_active]="changeType === typeThree"
            (click)="changeType = typeThree; acceptChange()">
             100% оплата
-        </p>
+        </p> -->
     </div>
 </div>
 
@@ -34,8 +34,8 @@
     Погашение задолжности по рассрочке осуществляется ежемесячными
     <span class="span-black">аннуительными</span> платежами
 </p>
-<p class="installment__calculator-hint " *ngIf="changeType === typeThree">
+<!-- <p class="installment__calculator-hint " *ngIf="changeType === typeThree">
     <span class="span-block span-black">100% оплата</span>
     При 100% оплате предоставляется скидка в размере 3%
     от стоимости квартиры, указанной в прайс-листе
-</p>
+</p> -->

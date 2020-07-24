@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { INewsSnippet } from '../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Share } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { adminHeaders } from '../commons/admin-headers.utilit';
@@ -9,7 +9,9 @@ import { IHomeDescription, IHomePreview, IHomeVideo } from '../../../serv-files/
 
 @Injectable()
 
-export class HomeService {
+export class HomeService { 
+
+    private subject = new BehaviorSubject<boolean>( true );
 
     constructor( private http: HttpClient ) { }
 
@@ -44,5 +46,12 @@ export class HomeService {
 
     public getPreviewVideo(): Observable<IHomeVideo> {
         return this.http.get<IHomeVideo>('/api/home/video');
+    }
+
+    public setHouse(val) {
+        this.subject.next( val );
+    }
+    public getHouse() {
+        return this.subject.asObservable( );
     }
 }

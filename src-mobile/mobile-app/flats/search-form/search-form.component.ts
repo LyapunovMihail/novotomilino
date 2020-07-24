@@ -46,6 +46,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 this.buildForm(this.seoPageParams);
             });
 
+        console.log('queryParams', this.activatedRoute.snapshot);
         this.buildForm(this.activatedRoute.snapshot.queryParams);
 
         this.searchService.getMetaTags()
