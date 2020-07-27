@@ -8,7 +8,7 @@ const path       = require("path");
 const ObjectId   = require('mongodb').ObjectID;
 
 const devModPath = resolve(__dirname, '..', '..', '..', 'src');
-const prodModPath = resolve(__dirname, '..', 'desktop');
+const prodModPath = resolve(__dirname, '..', 'desktop', 'browser');
 
 const PDF_UPLOADS_PATH = 'uploads/pdf';
 
