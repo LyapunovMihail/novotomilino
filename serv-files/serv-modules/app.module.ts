@@ -38,7 +38,7 @@ import { PDFController } from './pdf-generator/pdf-generator.controller';
         ContactsController,
         HomeController,
         SeoController,
-        // PDFController,
+        PDFController,
     ],
     providers: [
         MongoConnectionService,
