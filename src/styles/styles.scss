@@ -5,11 +5,12 @@
 
 body {
     width: 100%;
-    margin: 0;
-    padding: 0 0 51px;
+    min-height: 100vh;
     font-family: 'Museo Sans Cyrl', sans-serif;
+    box-sizing: border-box;
     position: relative;
-    min-height: calc(100vh - 51px);
+    padding: 64px 0 51px;
+    margin: 0;
 }
 
 a {

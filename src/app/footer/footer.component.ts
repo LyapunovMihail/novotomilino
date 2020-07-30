@@ -40,7 +40,7 @@ export class FooterComponent implements OnInit, OnDestroy {
                             document.body.style.padding = '0';
                         } else {
                             this.isHidden = false;
-                            document.body.style.padding = '0 0 51px';
+                            document.body.style.padding = '';
                         }
                     }
                 });

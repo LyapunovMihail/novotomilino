@@ -1,0 +1,37 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.about-nav {
+    width: 100%;
+    height: 56px;
+    position: fixed;
+    top: 64px; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #aaab22;
+    z-index: 99;
+
+    &__list {
+        display: flex;
+        font: 16px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-white;
+
+        &> li + li { margin-left: 21px; }
+        &-item {
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            &::after {
+                content: '';
+                width: 100%;
+                height: 1px;
+                position: absolute;
+                top: 100%; left: 0;
+                background-color: $col-white;
+                transition: opacity $transition;
+            }
+            &.active::after { opacity: 0; }
+        }
+    }
+}

@@ -1,4 +1,13 @@
 
+export const navMenu = [
+    { name: 'Генплан', anchor: 'genplan', offsetTop: 0 },
+    { name: 'Технико-экономические показатели', anchor: 'project', offsetTop: 0 },
+    { name: 'Галлерея', anchor: 'gallery', offsetTop: 0 },
+    { name: 'О застройщике', anchor: 'builder', offsetTop: 0 },
+    { name: 'Участники проекта', anchor: 'members', offsetTop: 0 },
+    { name: 'Документация', anchor: 'documents', offsetTop: 0 }
+];
+
 export interface IProjectItem {
     link: string;
     city: string;

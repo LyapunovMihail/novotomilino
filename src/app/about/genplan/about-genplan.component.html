@@ -1,24 +1,22 @@
 <section class="genplan">
     <div class="genplan__head">
-        <div class="genplan__head_scrll">
-            <div class="genplan__head-img">
-                <img src="/assets/img/about/plan/group-11.jpg" alt="Генплан">
+        <div class="genplan__head-img">
+            <img src="/assets/img/about/plan/group-11.jpg" alt="Генплан">
 
-                <ng-container *ngFor="let marker of markers">
+            <ng-container *ngFor="let marker of markers">
 
-                    <div class="markers__places markers__places_{{marker.mod}}">
-                        <div class="markers__places-tooltip">
-                            {{marker.title}}
-                        </div>
+                <div class="markers__places markers__places_{{marker.mod}}">
+                    <div class="markers__places-tooltip">
+                        {{marker.title}}
                     </div>
-                </ng-container>
+                </div>
+            </ng-container>
 
-                <ng-container *ngFor="let num of ['№1', '№2', '№3', '№9']; let i = index">
+            <ng-container *ngFor="let num of ['№1', '№2', '№3', '№9']; let i = index">
 
-                    <div class="markers__num markers__num--item-{{i + 1}}">{{num}}</div>
-                </ng-container>
-            
-            </div>
+                <div class="markers__num markers__num--item-{{i + 1}}">{{num}}</div>
+            </ng-container>
+           
         </div>
         <h2 class="genplan__head-title g-title-path">Генплан</h2>
     </div>

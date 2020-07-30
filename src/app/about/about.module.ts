@@ -12,6 +12,7 @@ import { AboutProjectComponent } from './project/about-project.component';
 import { AboutGalleryComponent } from './gallery/about-gallery.component';
 import { AboutGalleryAdminComponent } from './gallery/gallery-admin/about-gallery-admin.component';
 import { LoaderModule } from '../UI/loader/loader.module';
+import { AboutNavMenuComponent } from './nav-menu/nav-menu.component';
 
 const AboutComponents = [
     AboutComponent,
@@ -21,7 +22,8 @@ const AboutComponents = [
     AboutGalleryAdminComponent,
     AboutBuilderComponent,
     AboutMembersComponent,
-    AboutDocumentationComponent
+    AboutDocumentationComponent,
+    AboutNavMenuComponent,
 ];
 
 @NgModule({
