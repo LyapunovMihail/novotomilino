@@ -1,6 +1,6 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SearchService } from '../../search.service';
+import { FlatsDiscountService } from '../../../../commons/flats-discount.service';
 
 @Component({
     selector: 'app-search-sorting',
@@ -42,10 +42,10 @@ export class SearchSortingComponent implements OnInit {
         // }
     ];
 
-    constructor( private searchService: SearchService ) {}
+    constructor( public flatsDiscountService: FlatsDiscountService ) {}
 
     ngOnInit() {
-        this.searchService.getFilterValue().subscribe( (obj) => {
+        this.flatsDiscountService.getFilterValue().subscribe( (obj) => {
             this.sortChange(obj.name, obj.value);
         });
     }

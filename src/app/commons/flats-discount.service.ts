@@ -1,4 +1,5 @@
 import { Share, ShareFlat, ShareFlatDiscountType } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class FlatsDiscountService {
 
     public shareFLats: ShareFlat[] = [];
+    private filter: Subject<any> = new Subject();
 
     constructor(
         private http: HttpClient,
@@ -37,5 +39,11 @@ export class FlatsDiscountService {
             return shareFlat.discountValue;
         }
         return null;
+    }
+    setFilterValue(val) {
+        this.filter.next(val);
+    }
+    getFilterValue(): Observable<any> {
+        return this.filter.asObservable();
     }
 }

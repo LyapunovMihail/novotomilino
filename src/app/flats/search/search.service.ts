@@ -74,11 +74,4 @@ export class SearchService {
     public getMetaTags(): Observable<TagInterface[]> {
         return this.http.get<TagInterface[]>('/api/meta_get_flats-search-tag');
     }
-
-    setFilterValue(val) {
-        this.filter.next(val);
-    }
-    getFilterValue() {
-        return this.filter;
-    }
 }

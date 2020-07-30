@@ -70,7 +70,7 @@ export class AboutNavMenuComponent implements OnDestroy, AfterViewInit {
         });
     }
     public scrollToAnchor(item) {
-        const margin = item.offsetTop !== 0 ? (64 + 50) : 0;
+        const margin = item.offsetTop !== 0 ? 30 : 0;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         this.scrollToClick = true;
         this.activePoint = item.anchor;
