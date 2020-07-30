@@ -94,7 +94,7 @@ export class SearchOutputComponent implements OnInit {
         this.sortList.push({ activeIndex: i });
         this.activeSort = item.name;
 
-        this.searchService.setFilterValue(item);
+        this.flatsDiscountService.setFilterValue(item);
     }
 
     public parseText(num) {
