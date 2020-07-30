@@ -74,6 +74,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                 minZoom: 11,
                 maxZoom: 18
             });
+            myMap.behaviors.disable(['scrollZoom']);
 
             markersConfig.forEach( ( item: any, index ) => {
                 that.markers[index] = {};

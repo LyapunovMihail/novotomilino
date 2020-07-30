@@ -77,6 +77,7 @@ export class LocationInfrastructureComponent implements OnInit {
                 minZoom: 11,
                 maxZoom: 18
             });
+            myMap.behaviors.disable(['scrollZoom']);
 
             // создание наземное наложение плана
             const polygon = new ymaps.Polygon([

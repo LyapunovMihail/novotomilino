@@ -1,0 +1,10 @@
+
+<section class="about-nav">
+
+    <ul class="about-nav__list">
+        <li class="about-nav__list-item" *ngFor="let point of points" 
+          (click)="scrollToAnchor(point)" [class.active]="activePoint === point.anchor">
+            {{point.name}}
+        </li>
+    </ul>
+</section>

@@ -2,8 +2,7 @@
 
 .location {
     width: 100%;
-    // height: calc(100vh - 46px - 51px);
-    height: calc(100vh - 146px - 51px);
+    height: calc(100vh - (64px + 51px));
 
     &_aside {
         position: absolute;
@@ -11,7 +10,7 @@
         box-sizing: border-box;
         width: 400px;
         top: 212px;
-        left: 10px;
+        left: 50px;
         padding: 11px 23px;
         z-index: 1;
         display: flex;
@@ -226,8 +225,8 @@
 
         &--office {
             width: 100%;
-            height: 100%;
-            // height: calc(100% - 152px);
+            height: calc(100% - 152px);
+            min-height: 600px;
         }
     }
 
@@ -361,14 +360,11 @@
         }
     }
 }
+
 // Стили для офиса продаж
-
-// --> Иметь ввиду, Высота блока с картой настроена таким образом, что = 100%(высота экрана) - 202px(высота блока .location__head)
-// --> у блока .office__head высота = 152px, следовательно для стр офиса продаж нужно будет поменять высоту карты (100% - 152px)
-
 .office__head {
     width: 100%;
-    // height: 152px;
+    height: 152px;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #dcddde;
@@ -379,16 +375,6 @@
         box-sizing: border-box;
         padding: 50px 0 0;
         &:nth-child(2) { padding: 60px 0 0; }
-
-        &--for-title {
-            width: 100%;
-            max-width: 1240px;
-        }
-    }
-    &-title {
-        font: 42px/46px 'Leksa';
-        @include font-smoothing;
-        color: $col-black;
     }
     &-text {
         @include f16-24;
