@@ -1,6 +1,6 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -13,7 +13,7 @@ import { SearchService } from '../search/search.service';
     providers: [ SearchService ]
 })
 
-export class ApartmentComponent implements OnInit {
+export class ApartmentComponent implements OnInit, OnDestroy {
 
     public isCreditFormOpen: boolean = false;
     public isReserveFormOpen: boolean = false;
@@ -42,6 +42,23 @@ export class ApartmentComponent implements OnInit {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
         // this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        this.hideHeader(true);
+    }
+    ngOnDestroy() {
+        this.hideHeader(false);
+    }
+
+    public hideHeader(val) {
+        if (this.router.url.startsWith('/flats/house')) { return; }
+        const header = (document.querySelector('.header') as HTMLElement);
+        const showFilterBtn = (document.querySelector('.search__show-btn') as HTMLElement) || null;
+        if (val) {
+            header.style.zIndex = '0';
+            if (showFilterBtn !== null) { showFilterBtn.style.zIndex = '0'; }
+        } else {
+            header.style.zIndex = '';
+            if (showFilterBtn !== null) { showFilterBtn.style.zIndex = ''; }
+        }
     }
 
     public prevFlat() {
