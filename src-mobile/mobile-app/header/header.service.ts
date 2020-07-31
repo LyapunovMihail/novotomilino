@@ -53,7 +53,7 @@ export class HeaderService {
                 url: '/purchase'
             },
             {
-                name: 'Новости',
+                name: 'Новости и акции',
                 url: '/news-shares'
             }, {
                 name: 'Документация',

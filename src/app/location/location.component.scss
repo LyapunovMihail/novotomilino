@@ -1,5 +1,10 @@
 @import "../../styles/modules/mixins/mixin";
 
+:host {
+    min-height: calc(100vh - (64px + 51px));
+    display: block;
+}
+
 .location {
     width: 100%;
     min-height: calc(100vh - (64px + 51px));
@@ -216,17 +221,12 @@
 
     &__map {
         width: 100%;
-        height: calc(100% - 202px);
-
-        &--routes {
-            width: 100%;
-            height: calc(100% - 202px);
-        }
+        height: calc(100vh - 202px - (64px + 51px));
+        min-height: 600px;
 
         &--office {
             width: 100%;
-            height: calc(100% - 152px);
-            min-height: 600px;
+            height: calc(100vh - 152px - (64px + 51px));
         }
     }
 
