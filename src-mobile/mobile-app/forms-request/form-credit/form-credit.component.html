@@ -48,7 +48,7 @@
                 *ngIf="platform.isBrowser" 
                 [formControl]="form.controls['phone']"
                 [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
-                type="text">
+                type="text" maxlength="11">
             <p class="form-request__notice">Например: 79991105522</p>
         </div>
 
