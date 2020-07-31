@@ -20,7 +20,7 @@
     }
 
     &__container {
-        width: calc(100% - 80px);
+        width: calc(100% - 40px);
         max-width: 1600px - 80px;
         display: flex;
         align-items: center;
@@ -37,7 +37,7 @@
     &__menu {
         position: absolute;
         top: 50%; left: 50%;
-        transform: translate(-47%, -50%);
+        transform: translate(-46.5%, -50%);
 
         &-list {
             display: flex;
