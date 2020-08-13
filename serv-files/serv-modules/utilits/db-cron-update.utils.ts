@@ -15,6 +15,7 @@ const CronJob = cron.CronJob;
 export class DbCronUpdate {
 
     public counter: number;
+    public decorations: [];
 
     constructor(public db: any) {
         this.counter = 0;

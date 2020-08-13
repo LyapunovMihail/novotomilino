@@ -52,7 +52,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     this.seoPageParams = params;
                     this.isSeoPageParamsLoaded = true;
                     this.buildForm(this.seoPageParams);
-                    console.log('CHECK');
                 });
 
             this.buildForm(queryParams);

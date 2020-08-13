@@ -1,4 +1,4 @@
-import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
+import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
 const ObjectId = require('mongodb').ObjectID;
@@ -78,7 +78,11 @@ export class AddressesModel {
             request.status = { $in: query.status.split(',')};
         }
         if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
-            request.decoration = { $in: query.decoration.split(',')};
+            const decMas = query.decoration.split(',');
+            if (decMas.some((item) => item === '03')) { // Если в отделке присутствует чистовая, в её же состав входят и многие другие отделки, подключаем их к поиску
+                decMas.push(...FormConfig.extraDecorationList.map((item) => item.value));
+            }
+            request.decoration = { $in: decMas};
         }
 
         let parameters = {};
