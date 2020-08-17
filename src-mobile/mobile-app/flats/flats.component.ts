@@ -112,10 +112,10 @@ export class FlatsComponent implements OnInit {
         this.outputFlatsList = [];
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
-            console.log('CHECK@');
+            // console.log('CHECK@');
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
-        console.log('params', params)
+        // console.log('params', params)
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.getFlats();
@@ -135,7 +135,7 @@ export class FlatsComponent implements OnInit {
     public getFlats() {
         this.skip = 0;
         this.outputFlatsList = [];
-        console.log(this.params.sort);
+        // console.log(this.params.sort);
         this.searchService.getFlats(this.params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.counter = data.length;
@@ -162,7 +162,7 @@ export class FlatsComponent implements OnInit {
         this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
     }
     public filterFlats(i, flats) {
-        console.log(flats);
+        // console.log(flats);
         let isFilterFlats;
         if (i === '1') {
             isFilterFlats = flats.filter( flat => {

@@ -145,6 +145,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 // this.formChange(this.form);
                 this.formChange({ form: this.form, isSeoPageParamsLoaded: false, isEmptySeoPageParams: true });
                 this.windowScrollLocker.unblock();
+                document.body.style.padding = '0';
             }, 500); // таймаут чтобы анимация открытия окна отработала без тормозов
 
         } else {

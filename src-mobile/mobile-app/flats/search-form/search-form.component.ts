@@ -56,14 +56,16 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 (err) => console.log(err));
     }
 
-    public buildForm() {
+    public buildForm(reset?) {
 
         let params;
 
         if (this.seoPageParams) {
             params = this.seoPageParams;
-        } else {
+        } else if (!reset) {
             params = this.activatedRoute.snapshot.queryParams;
+        } else {
+            params = this.config;
         }
 
         const roomsFormArray = ((() => {
@@ -74,7 +76,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
              * otherwise pass an array of false
              */
             const arr = [false, false, false, false, false];
-            if (params.rooms) {
+            if (params && params.rooms) {
                 const result = parseQueryParams(params.rooms);
                 const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
@@ -145,7 +147,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     public formReset() {
-        this.buildForm();
+        this.buildForm(true);
     }
 
     public ngOnDestroy() {

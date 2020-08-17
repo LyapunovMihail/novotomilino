@@ -19,13 +19,12 @@
         display: none;
     }
 
-    &__dev-logo-link {
-        display: block;
+    &__dev-logo {
+        display: flex;
         width: 204px;
+        height: 30px;
 
-        img {
-            width: 100%;
-        }
+        &> a:last-child { margin-left: 10px; }
     }
 
     &__web {
