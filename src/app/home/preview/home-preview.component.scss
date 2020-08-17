@@ -216,8 +216,12 @@
     }
     &_active {
         width: 500px;
+        height: 310px;
         cursor: default;
-        &:hover { width: 500px; }
+        &:hover {
+            width: 500px;
+            height: 310px;
+        }
         
         .main__preview-threeRed-title_transform {
             opacity: 0;
@@ -232,13 +236,17 @@
         }
     }
 
-    &-title_transform {
-        opacity: 1;
-        position: absolute;
-        top: 25px;
-        left: 15px;
-        transition: .15s ease;
-        transition-delay: opacity .05s;
+    &-title {
+        transform: translate(-25px, -16px);
+        
+        &_transform {
+            opacity: 1;
+            position: absolute;
+            top: -10px; left: 0;
+            transition: .15s ease;
+            transition-delay: opacity .05s;
+            transform: none;
+        }
     }
     &-title,
     &-text,
@@ -256,14 +264,14 @@
         font: 500 16px/24px $font-mus;
         @include font-smoothing;
         color: $col-black;
-        margin: 20px 0 44px;
+        margin: 0 0 15px;
     }
     &-link {
         display: inline-block;
-        min-width: 70px;
         font: 500 16px/22px $font-mus;
         @include font-smoothing;
         border-bottom: 1px solid;
         color: $col-orange;
+        margin-right: 15px;
     }
 }

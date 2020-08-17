@@ -70,6 +70,6 @@ export class HomeTriggerComponent implements OnInit {
     }
 
     public navigate(rooms) {
-        this.searchFlatsLinkHandlerService.linkHandle(true, {rooms});
+        this.searchFlatsLinkHandlerService.linkHandle(true, { rooms, status: '4' });
     }
 }

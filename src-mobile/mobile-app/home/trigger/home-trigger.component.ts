@@ -69,7 +69,7 @@ export class HomeTriggerComponent implements OnInit {
 
     navigate(rooms) {
         let navigationExtras: NavigationExtras = {
-            queryParams: {rooms:rooms}
+            queryParams: {rooms:rooms, status: '4'}
         };
 
         this.router.navigate(['/flats/search'], navigationExtras);

@@ -2,7 +2,7 @@
 
 .home-preview {
     width: 100%;
-    height: calc(100vh - 67px);
+    height: calc(100vh - 67px - 50px);
     position: relative;
     display: flex;
     justify-content: center;
@@ -178,7 +178,8 @@
         &-title {
             width: 189px;
             height: 30px;
-            margin: 0 0 20px;
+            margin: 0 0 10px;
+            transform: translate(-17px, -10px);
             img { width: 100%; }
         }
         &-text {
@@ -187,9 +188,7 @@
             color: $col-black;
             margin: 0 0 10px;
         }
-        &-link {
-
-        }
+        &-link { margin-right: 15px; }
     }
 }
 @media (max-width: 760px) {

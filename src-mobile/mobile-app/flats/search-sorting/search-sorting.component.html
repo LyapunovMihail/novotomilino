@@ -1,4 +1,4 @@
-<p *ngIf="counter > 0" class="flats__sorting-find">Найдено {{counter}} квартир</p>
+<p *ngIf="counter > 0" class="flats__sorting-find">Найдено {{counter}} {{parseText(counter)}}</p>
 <p *ngIf="counter === 0" class="flats__sorting-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
 
 <div class="flats__sorting-wrap">
