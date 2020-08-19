@@ -72,8 +72,10 @@
                 background: url('/assets/img/btn_next_or.svg') 50% 50% no-repeat #fff;
                 transition: $transition;
 
-                &:hover {
-                    background-position-x: calc(50% - 3px);
+                &:hover { background-position-x: calc(50% - 3px); }
+                &:disabled {
+                    opacity: .5;
+                    pointer-events: none;
                 }
             }
         }

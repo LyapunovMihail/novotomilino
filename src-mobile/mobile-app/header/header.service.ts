@@ -31,6 +31,9 @@ export class HeaderService {
                 name: 'О ЖК',
                 url: '/about'
             }, {
+                name: 'Офис продаж',
+                url: `/location/office`
+            }, {
                 name: 'Расположение',
                 url: `/location/routes`
             }, {
