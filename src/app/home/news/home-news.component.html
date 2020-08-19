@@ -9,8 +9,8 @@
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'shares'" (click)="changeSnippets(shareSnippets, 'shares')">Акции</li>
             </ul>
             <div class="main__news-btn">
-                <button class="main__news-btn-item main__news-prev" (click)="prevBtn()"></button>
-                <button class="main__news-btn-item main__news-next" (click)="nextBtn()"></button>
+                <button [disabled]="this.currentSlide === 0" class="main__news-btn-item main__news-prev" (click)="prevBtn()"></button>
+                <button [disabled]="this.currentSlide === (mainSnippets.length - 3)" class="main__news-btn-item main__news-next" (click)="nextBtn()"></button>
             </div>
         </div>
     </div>

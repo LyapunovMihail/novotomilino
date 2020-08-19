@@ -6,6 +6,7 @@ import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { HeaderService } from './header.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { FavoritesService } from '../favorites/favorites.service';
+declare let $: any;
 
 
 @Component({
@@ -77,8 +78,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     public toggleNav() {
         this.active = !this.active;
-        if (this.active) { this.windowScrollLocker.block(); }
-        if (!this.active) { this.windowScrollLocker.unblock(); }
+        if (this.active) {
+            $('.ch-spot').hide();
+            this.windowScrollLocker.block();
+        }
+        if (!this.active) {
+            $('.ch-spot').show();
+            this.windowScrollLocker.unblock();
+        }
     }
 
     public closeNav() {
