@@ -15,7 +15,11 @@
         margin-bottom: 60px;
         position: relative;
 
-        &-title {
+        &-title { margin-bottom: 20px; }
+        &-text {
+            font: 16px/24px $font-mus;
+            color: #000105;
+            opacity: .8;
             margin-bottom: 72px;
         }
     }

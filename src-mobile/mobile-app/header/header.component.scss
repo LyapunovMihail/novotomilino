@@ -2,12 +2,12 @@
 
 .header {
     width: 100%;
-    height: 146px;
+    height: 67px;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     z-index: 20;
 
-    &--no-quarentine-link { height: 146px; }
+    &--no-quarentine-link { height: 67px; }
 
     &__quarantine {
         width: 100%;
@@ -104,10 +104,6 @@
             background: url('/assets/img/header/logo_desk.svg') no-repeat;
             background-size: 100%;
             outline: none;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
         }
         &-phone {
             text-align: right;
@@ -208,26 +204,23 @@
             height: 67px;
             z-index: 10000;
             background-color: $col-white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            &-sell,
-            &-phone {
-                display: none;
-            }
             &-logo {
-                width: 303px;
-                height: 48px;
-                background: url('/assets/img/header/logo_tablet.svg') no-repeat;
+                width: 285px;
+                height: 40px;
+                background: url('/assets/img/header/ilike_new-logo.svg') no-repeat;
                 background-size: 100%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+                transform: translateY(-7.5px);
             }
-            &-menu {
 
+            &-menu {
                 width: 20px;
                 height: 15px;
                 display: inline-block;
                 position: relative;
-                margin-right: 25px;
                 background-size: 100% 100%;
                 cursor: pointer;
                 z-index: 1;
@@ -402,16 +395,14 @@
     @media (max-width: 767px) {
         
         &__head {
-            justify-content: flex-end;
-            padding: 0 15px 0 0;
+            padding: 0 15px;
 
             &-logo {
-                width: 168px;
-                height: 50px;
-                background: url('/assets/img/header/logo_desk.svg') no-repeat;
+                width: 200px;
+                height: 28px;
+                background: url('/assets/img/header/ilike_new-logo.svg') no-repeat;
                 background-size: 100%;
             }
-            &-menu { margin: 0; }
         }
         &__nav {
             padding: 67px 0 0 15px;
