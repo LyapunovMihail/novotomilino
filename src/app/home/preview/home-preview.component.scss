@@ -237,15 +237,17 @@
     }
 
     &-title {
-        transform: translate(-25px, -16px);
+        min-width: 452px;
+        margin: 0 0 20px;
         
         &_transform {
             opacity: 1;
             position: absolute;
-            top: -10px; left: 0;
+            top: 30px; left: 13px;
             transition: .15s ease;
             transition-delay: opacity .05s;
             transform: none;
+            margin: 0;
         }
     }
     &-title,
@@ -255,10 +257,7 @@
         pointer-events: none;
         transition: .15s ease;
     }
-            
-    &-title {
-        min-width: 452px;
-    }
+
     &-text {
         min-width: 455px;
         font: 500 16px/24px $font-mus;

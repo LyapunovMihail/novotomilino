@@ -28,9 +28,10 @@
     }
 
     &__logo {
-        width: 218px;
+        // width: 218px;
+        width: 228px;
         height: 34px;
-        transform: translateY(-2px);
+        transform: translateY(-7.5px);
         &> img { width: 100%; }
     }
 
