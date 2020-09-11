@@ -20,9 +20,10 @@
     }
 
     &__dev-logo {
-        display: flex;
         width: 204px;
         height: 30px;
+        display: flex;
+        align-items: flex-end;
 
         &> a:last-child { margin-left: 10px; }
     }
