@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 declare let ymaps: any;
 
 @Component({
@@ -13,13 +14,16 @@ export class LocationRoutesComponent implements OnInit {
 
     public marker: string;
     public page: string;
+    public phone;
 
     constructor(
+        private http: HttpClient,
         private platform: PlatformDetectService,
         private router: Router
     ) {}
 
     ngOnInit() {
+        this.getPhone().subscribe(data => this.phone = data['phone']);
         if (this.router.url === '/location/routes') {
             this.marker = `<div class="main_map_marker"></div>`;
             this.page = 'routes';
@@ -56,5 +60,8 @@ export class LocationRoutesComponent implements OnInit {
             myMap.geoObjects.add(marker);
         });
 
+    }
+    public getPhone() {
+        return this.http.get('/api/contacts/phone');
     }
 }

@@ -21,9 +21,7 @@
 
         <div class="header__info">
             <a routerLink="/location/office" class="header__info-office g-link_red">Отдел продаж</a>
-            <span class="head-phone__paragraf header__info-tel header__nav-tel header__nav-footer-phone">
-                <a href="tel:+74991109372">+7 (499) 110-93-72</a>
-            </span>
+            <a class="header__info-number" href="tel:{{phone ? phone : '+74991109372'}}">{{phone ? phone : '+7 (499) 110-93-72'}}</a>
         </div>
     </div>
 </header>

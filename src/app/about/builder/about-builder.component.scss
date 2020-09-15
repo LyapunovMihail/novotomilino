@@ -159,6 +159,13 @@ $font: 18px/31px 'Montserrat', sans-serif;
                         @include font-smoothing;
                         color: #fff;
                     }
+                    &-ilike {
+                        width: 66px;
+                        height: 24px;
+                        position: absolute;
+                        top: -12px - 24px;
+                        left: 0;
+                    }
                 }
             }
             .grid-item_one {

@@ -18,6 +18,7 @@ export interface IProjectItem {
     background: string;
     mod: string;
     classIndex: string;
+    ilike: boolean;
 }
 
 export interface IAboutMarker {
@@ -90,7 +91,8 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         subtitle: 'Квартиры от 2,3 млн. руб.',
         background: '/assets/img/about/builder/oblaka.jpg',
         mod: '',
-        classIndex: 'grid-item_one'
+        classIndex: 'grid-item_one',
+        ilike: true,
     }, {
         link: 'https://novokraskovo.ru/',
         city: 'Люберецкий р-н, пос. Красково',
@@ -100,7 +102,8 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         subtitle: 'Квартиры от 2,2 млн. руб.',
         background: '/assets/img/about/builder/nk.jpg',
         mod: '',
-        classIndex: ''
+        classIndex: '',
+        ilike: true,
     }, {
         link: 'https://barvihadom.ru/',
         city: 'г. Москва, Барвихинская улица, вл. 6',
@@ -110,7 +113,8 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         subtitle: 'Квартиры от 6,3 млн. руб.',
         background: '/assets/img/about/builder/barviha.jpg',
         mod: 'grid-item__location-city_barviha',
-        classIndex: ''
+        classIndex: '',
+        ilike: true,
     }, {
         link: 'https://residence.gorodmay.ru/',
         city: 'Ленинский р-н, пос. Горки Ленинские',
@@ -118,19 +122,21 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'Резиденция Май',
         subtitle: 'Квартиры от 3,8 млн. руб.',
-        background: '/assets/img/about/project/residence.jpg',
+        background: '/assets/img/about/builder/may.jpg',
         mod: '',
-        classIndex: ''
+        classIndex: '',
+        ilike: true,
     }, {
-        link: 'https://3-red.com/%D0%B2%D0%B8%D0%B4%D0%BD%D1%8B%D0%B9-%D0%B1%D0%B5%D1%80%D0%B5%D0%B3-2',
+        link: 'https://vbdom2.ru/',
         city: 'г. Видное',
         distance: '7,5 км от МКАД',
         addDistance: true,
         title: 'Видный Берег 2',
         subtitle: 'Скоро в продаже',
-        background: '/assets/img/about/project/vb2.jpg',
+        background: '/assets/img/about/builder/vb2.jpg',
         mod: '',
-        classIndex: 'grid-item_five'
+        classIndex: 'grid-item_five',
+        ilike: true,
     }, {
         link: 'https://vbdom.ru/',
         city: 'Московская обл., Ленинский р-н, восточнее дер. Ермолино',
@@ -138,8 +144,9 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         addDistance: true,
         title: 'Видный Берег',
         subtitle: 'Квартиры от 3,2 млн. руб.',
-        background: '/assets/img/about/project/vb.jpg',
+        background: '/assets/img/about/builder/vb.jpg',
         mod: '',
-        classIndex: ''
+        classIndex: '',
+        ilike: false,
     }
 ];

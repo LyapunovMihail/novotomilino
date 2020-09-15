@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public links = [];
 
     public favoriteCounter;
+    public phone;
 
     public scrollEvent;
 
@@ -45,6 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.favoritesService.getFavoriteCount().subscribe(count => {
                 this.favoriteCounter = count;
             });
+            this.headerService.getPhone().subscribe( data => this.phone = data['phone'] );
             this.headerService.getDynamicLink()
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(

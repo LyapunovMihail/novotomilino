@@ -21,6 +21,9 @@ export class HeaderService {
     public getDynamicLink() {
         return this.http.get('/api/dynamic/last/link');
     }
+    public getPhone() {
+        return this.http.get('/api/contacts/phone');
+    }
 
     public links(data) {
         let date = new Date();

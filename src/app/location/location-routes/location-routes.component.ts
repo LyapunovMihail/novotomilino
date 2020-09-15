@@ -3,6 +3,7 @@ import { PlatformDetectService } from './../../platform-detect.service';
 import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 declare let ymaps: any;
 declare let $: any;
 
@@ -23,6 +24,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
     // берется из config.content
     public linkActive: number = 1;
     public asideTypeActive: string;
+    public phone;
 
     public map: any;
 
@@ -34,12 +36,14 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
+        private http: HttpClient,
         private platform: PlatformDetectService,
         private ref: ChangeDetectorRef,
         private router: Router
     ) { }
 
     ngOnInit() {
+        this.getPhone().subscribe( data => this.phone = data['phone']);
         // если страница офиса, то удаляем главный маркер роутов, если страница роутов, то удаляем главный маркер офиса
         if (this.router.url === '/location/routes') {
             markersConfig[markersConfig.length - 1].title = 'ЖК Новотомилино';
@@ -277,5 +281,9 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
 
         // и детектим изменения в компоненте принудительно
         this.ref.detectChanges();
+    }
+
+    public getPhone() {
+        return this.http.get('/api/contacts/phone');
     }
 }

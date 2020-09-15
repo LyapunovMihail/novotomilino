@@ -7,18 +7,20 @@
         </p>
         <p class="developer__head-text">
             Компания реализует функции застройщика, технического заказчика, 
-            генерального подрядчика и эксплуатации. Это позволяет управлять
-            проектами «под ключ»: от идеи до передачи готовых объектов
+            генерального подрядчика и эксплуатации. Это позволяет управлять 
+            проектами «под ключ»: от идеи до передачи готовых объектов 
             недвижимости собственникам и их последующей эксплуатации.
         </p>
         <p class="developer__head-text">
-            Мы не просто строим красивые жилые дома, мы создаем благоприятную
-            среду обитания, включая школы, детские сады, поликлиники, торговые
-            центры, парковки, благоустроенные дворы и зеленые зоны.
+            Проект реализован с применением принципов проектирования типового 
+            квартала I LIKE. Мы придерживаемся определенных стандартов качества 
+            проектирования жилых кварталов, по которым наши проекты выгодно 
+            отличаются от прочих на рынке. Подробнее: 
+            <a class="g-link_red" href="//ilike.ru" target="_blank">www.ilike.ru</a>
         </p>
     </div>
     <div class="developer__project">
-        <p class="developer__project-title">Другие проекты <a href="//3-red.com" target="_blank" class="g-link_red">Тройки РЭД</a></p>
+        <p class="developer__project-title">Другие проекты <a href="//3-red.com/objects" target="_blank" class="g-link_red">Тройки РЭД</a></p>
         
         <a *ngFor="let snippet of snippets" href="{{snippet.link}}" target="_blank" class="developer__project-snippet {{snippet.classIndex}}">
             <div class="snippet__location">
@@ -26,6 +28,16 @@
                 <div class="snippet__location-distance" *ngIf="snippet.addDistance === true">{{snippet.distance}}</div>
             </div>
             <div class="snippet__name">
+                <div class="snippet__name-ilike" *ngIf="snippet.ilike">
+                    <svg width="66" height="24" viewBox="0 0 66 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M66 14.021V0H0V24H55.0963L66 14.021Z" fill="#E42222"/>
+                        <path d="M9.32398 5.55262H5.81592V17.8464H9.32398V5.55262Z" fill="white"/>
+                        <path d="M24.9889 14.6261V17.8464H15.9077V5.55262H19.4158V14.6261H24.9889Z" fill="white"/>
+                        <path d="M29.7632 5.55262H26.2551V17.8464H29.7632V5.55262Z" fill="white"/>
+                        <path d="M44.8457 17.8464H40.614L36.7308 12.6824H35.5174V17.8464H32.0049V5.55262H35.5174V10.2351L36.6426 10.2395L40.1683 5.55262H44.5545L39.8726 11.4057L44.8457 17.8464Z" fill="white"/>
+                        <path d="M49.3819 8.77294V10.2351H52.7972V12.9872H49.3819V14.6261H54.0593V17.8464H45.8694V5.55262H54.0593V8.77294H49.3819Z" fill="white"/>
+                    </svg>
+                </div>
                 <p class="snippet__name-title">{{snippet.title}}</p>
                 <p class="snippet__name-subtitle">{{snippet.subtitle}}</p>
             </div>

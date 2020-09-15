@@ -27,6 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public isHidden: boolean;
     public favoriteCounter;
 
+    public phone;
+
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -48,6 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
 
         // this.fixedHeader();
+        this.headerService.getPhone().subscribe(data => this.phone = data['phone']);
         this.headerService.getDynamicLink()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
