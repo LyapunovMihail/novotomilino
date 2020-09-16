@@ -68,6 +68,7 @@
             color: $col-black;
             margin: 0 0 10px;
         }
+        &-info,
         &-text {
             @include f16-24;
             color: rgba(0, 1, 5, 0.8);
