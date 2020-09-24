@@ -39,7 +39,7 @@ export class DecorationService {
             name: 'Санузел',
             mod: 'bathroom',
             url: '/decoration/bathroom',
-            preview: '/assets/img/decoration/bathroom/san_classic_var1.jpg',
+            preview: '/assets/img/decoration/bathroom/san_classic_var-1.jpeg',
             images: [
                 '/assets/img/decoration/bathroom/san_classic_var-1.jpeg',
                 '/assets/img/decoration/bathroom/san_classic_var-2.jpeg',
