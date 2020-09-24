@@ -41,8 +41,8 @@ export class DecorationService {
             url: '/decoration/bathroom',
             preview: '/assets/img/decoration/bathroom/san_classic_var1.jpg',
             images: [
-                '/assets/img/decoration/bathroom/san_classic_var1.jpg',
-                '/assets/img/decoration/bathroom/san_classic_var2.jpg',
+                '/assets/img/decoration/bathroom/san_classic_var-1.jpeg',
+                '/assets/img/decoration/bathroom/san_classic_var-2.jpeg',
                 '/assets/img/decoration/bathroom/san_modern_var1.jpg',
                 '/assets/img/decoration/bathroom/san_modern_var2.jpg',
             ]
