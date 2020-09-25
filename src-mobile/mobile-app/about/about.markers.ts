@@ -74,7 +74,7 @@ export let ABOUT_MARKERS: IAboutMarker[] = [
 
 export let PROJECT_MARKERS: IProjectItem[] = [
     {
-        link: 'https://oblakadom.ru',
+        link: 'https://oblaka.ilike.ru/',
         city: 'г. Люберцы',
         distance: '5 км от МКАД',
         addDistance: true,
@@ -85,7 +85,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         classIndex: 'grid-item_one',
         ilike: true,
     }, {
-        link: 'https://novokraskovo.ru/',
+        link: 'https://nk.ilike.ru/',
         city: 'Люберецкий р-н, пос. Красково',
         distance: '13 км от МКАД',
         addDistance: true,
@@ -118,7 +118,7 @@ export let PROJECT_MARKERS: IProjectItem[] = [
         classIndex: '',
         ilike: true,
     }, {
-        link: 'https://vbdom2.ru/',
+        link: 'https://vb2.ilike.ru/',
         city: 'г. Видное',
         distance: '7,5 км от МКАД',
         addDistance: true,

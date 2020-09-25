@@ -28,7 +28,7 @@ export let BUILDER_MARKERS: IBuilderMarker[] = [
     {
         title: 'ЖК «Облака»',
         description: 'Жилой комплекс комфорт-класса в<br>г. Люберецы',
-        link: 'https://oblakadom.ru',
+        link: 'https://oblaka.ilike.ru/',
         logo: '/assets/img/about/builder/oblaka-logo.svg',
         image: '/assets/img/about/builder/oblaka-dom.jpg',
         mod: 'oblaka',
@@ -36,7 +36,7 @@ export let BUILDER_MARKERS: IBuilderMarker[] = [
     }, {
         title: 'ЖК «Новокрасково»',
         description: 'Жилой комплекс на берегу озера в Люберецком районе',
-        link: 'https://novokraskovo.ru/',
+        link: 'https://nk.ilike.ru/',
         logo: '/assets/img/about/builder/novo-logo.svg',
         image: '/assets/img/about/builder/novokraskogo-dom.jpg',
         mod: 'novo',
@@ -113,7 +113,7 @@ export let ABOUT_PROJECT: IAboutProject[] = [
 
 export let PROJECT_SNIPPET: IProjectSnippet[] = [
     {
-        link: 'https://oblakadom.ru',
+        link: 'https://oblaka.ilike.ru/',
         city: 'г. Люберцы',
         distance: '5 км от МКАД',
         addDistance: true,
@@ -121,7 +121,7 @@ export let PROJECT_SNIPPET: IProjectSnippet[] = [
         subtitle: 'Квартиры от 2,3 млн. руб.',
         background: '/assets/img/about/builder/oblak-dom.jpg'
     }, {
-        link: 'https://novokraskovo.ru/',
+        link: 'https://nk.ilike.ru/',
         city: 'Люберецкий р-н, пос. Красково',
         distance: '13 км от МКАД',
         addDistance: true,
@@ -137,7 +137,7 @@ export let PROJECT_SNIPPET: IProjectSnippet[] = [
         subtitle: 'Квартиры от 6,3 млн. руб.',
         background: '/assets/img/about/builder/barvihinskaya-dom.jpg'
     }, {
-        link: '#',
+        link: 'https://vb2.ilike.ru/',
         city: 'г. Видное',
         distance: '7,5 км от МКАД',
         addDistance: true,
