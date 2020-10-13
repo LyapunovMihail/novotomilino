@@ -21,6 +21,7 @@ export class FormsRequestService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
+        console.log('form: ', form);
         return this.http.post('/api/request_form/credit', message, { headers } );
     }
 
@@ -30,6 +31,7 @@ export class FormsRequestService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
+        console.log('form: ', form);
         return this.http.post('/api/request_form/reserve', message, { headers } );
     }
 
@@ -37,19 +39,21 @@ export class FormsRequestService {
         const payTime = form.wait_for_call === 'now' ? 'ожидает сейчас' : form.time;
         let descr;
         if (type === 'credit') {
-            descr = `
+            descr = `${form.description}
+            ----------------------------------------------------------------------
                 --- Удобное время для связи ---: ${payTime}
                 --- Первоначальный взнос по ипотеке ---: ${form.first_pay}
                 --- Планируемый срок выплат ---: ${form.period_pay}
             `;
         } else if (type === 'reserve') {
-            descr = `
+            descr = `${form.description}
+            ----------------------------------------------------------------------
                 --- Удобное время для связи ---: ${payTime}
             `;
         }
 
         return {
-            ArticleId: form.article,
+            ArticleId: form.articleId,
             Description: descr,
             Email: form.mail,
             FirstName: form.name,

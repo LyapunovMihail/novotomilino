@@ -32,12 +32,14 @@
     [isOpen]="isCreditFormOpen"
     [apartmentPrice]="storeroomData.price"
     [apartmentNumber]="storeroomData.flat"
-    [type]="storeroomData.type">
+    [type]="storeroomData.type"
+    [articleId]="storeroomData.articleId">
 </app-form-credit>
 <app-form-reserve
     (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
     [isOpen]="isReserveFormOpen"
     [apartmentPrice]="storeroomData.price"
     [apartmentNumber]="storeroomData.flat"
-    [type]="storeroomData.type">
+    [type]="storeroomData.type"
+    [articleId]="storeroomData.articleId">
 </app-form-reserve>

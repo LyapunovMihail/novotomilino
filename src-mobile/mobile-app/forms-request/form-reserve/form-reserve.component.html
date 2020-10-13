@@ -33,7 +33,7 @@
             <input class="form-request__field" 
                 *ngIf="platform.isBrowser" 
                 [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                [ngClass]="{'input-invalid':!form.get('phone').valid && form.get('phone').touched }"
                 type="text" maxlength="11">
             <p class="form-request__notice">Например: 79991105522</p>
         </div>
@@ -76,6 +76,13 @@
 
         </div>
 
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Комментарий</p>
+            <input [formControl]="form.controls['description']"
+                   class="form-request__field"
+                   type="text">
+        </div>
+
         <label class="form-request__checkbox-wrap">
             <input [formControl]="form.controls['agreement']" type="checkbox">
             <div class="g-checkbox form-request__checkbox" [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }"></div>
@@ -83,8 +90,8 @@
         </label>
 
         <button
-            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
-            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)}"
+            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)"
             class="form-request__btn">
             Отправить заявку
         </button>

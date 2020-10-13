@@ -100,8 +100,10 @@ export class DbCronUpdate {
             space: Number(object.Quantity),
             price: Number(object.Sum),
             deliveryDate: object.DeliveryPeriodDate,
-            article: object.Article
+            article: object.Article,
+            articleId: object.ArticleID
         };
+        console.log('itemflat: ', itemflat);
         this.counter++;
         return itemflat;
     }

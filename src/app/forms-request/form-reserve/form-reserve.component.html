@@ -73,6 +73,13 @@
 
         </div>
 
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Комментарий</p>
+            <input [formControl]="form.controls['description']"
+                      class="form-request__field"
+                      type="text">
+        </div>
+
         <label class="form-request__checkbox-wrap">
             <input [formControl]="form.controls['agreement']" type="checkbox">
             <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }" class="g-checkbox form-request__checkbox"></div>
@@ -80,8 +87,8 @@
         </label>
 
         <button
-            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
-            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)}"
+            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)"
             class="form-request__btn">
             Забронировать
         </button>

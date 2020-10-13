@@ -63,11 +63,11 @@
         <p class="flat__delivery">Срок сдачи {{flatData.deliveryDate}}</p>
     
         <div class="flat__btn">
-            <button (click)="isReserveFormOpen = true;" class="flat__btn-reserve" [class.request-send]="isReserveFormSubmit">
-                {{ !isReserveFormSubmit ? 'Забронировать' : 'Заявка отправлена' }}
+            <button (click)="isReserveFormOpen = true;" class="flat__btn-reserve">
+                Забронировать
             </button>
-            <button (click)="isCreditFormOpen = true;" class="flat__btn-credit" [class.request-send]="isCreditFormSubmit">
-                {{ !isCreditFormSubmit ? 'Заявка на ипотеку' : 'Заявка отправлена' }}
+            <button (click)="isCreditFormOpen = true;" class="flat__btn-credit">
+                Заявка на ипотеку
             </button>
         </div>
     </div>
@@ -76,19 +76,24 @@
 
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
-    (isSubmited)="isCreditFormSubmit = $event"
+    (isSubmited)="isFormConfirmOpen = $event"
     [isOpen]="isCreditFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
-    [article]="flatData.article">
+    [articleId]="flatData.articleId">
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
-    (isSubmited)="isReserveFormSubmit = $event"
+    (isSubmited)="isFormConfirmOpen = $event"
     [isOpen]="isReserveFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
-    [article]="flatData.article">
+    [articleId]="flatData.articleId">
 </app-form-reserve>
+
+<app-form-confirm *ngIf="flatData"
+    (close)="isFormConfirmOpen = $event"
+    [isOpen]="isFormConfirmOpen">
+</app-form-confirm>

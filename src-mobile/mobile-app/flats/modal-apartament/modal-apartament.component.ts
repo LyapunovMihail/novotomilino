@@ -11,8 +11,9 @@ import { FavoritesService } from '../../favorites/favorites.service';
 })
 
 export class ModalApartamentComponent implements OnInit {
-    public isCreditFormOpen: boolean = false;
-    public isReserveFormOpen: boolean = false;
+    public isCreditFormOpen = false;
+    public isReserveFormOpen = false;
+    public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
 
@@ -33,7 +34,7 @@ export class ModalApartamentComponent implements OnInit {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        this.pdfLink = `/api/pdf?id=${this.flatData._id}`;
     }
 
     public prevFlat() {

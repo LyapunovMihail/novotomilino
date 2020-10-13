@@ -71,11 +71,11 @@
                 Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж
             </p>
             <div class="apartment__info-btn">
-                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve" [class.request-send]="isReserveFormSubmit">
-                    {{ !isReserveFormSubmit ? 'Забронировать' : 'Заявка отправлена' }}
+                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve">
+                    Забронировать
                 </button>
-                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit" [class.request-send]="isCreditFormSubmit">
-                    {{ !isCreditFormSubmit ? 'Заявка на ипотеку' : 'Заявка отправлена' }}
+                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit">
+                    Заявка на ипотеку
                 </button>
             </div>
         </div>
@@ -100,22 +100,28 @@
     </div>
 </div>
 
-
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
     [isOpen]="isCreditFormOpen"
-    (isSubmited)="isCreditFormSubmit = $event"
+    (isSubmited)="isFormConfirmOpen = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
-    [article]="flatData.article">
+    [articleId]="flatData.articleId">
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
     [isOpen]="isReserveFormOpen"
-    (isSubmited)="isReserveFormSubmit = $event"
+    (isSubmited)="isFormConfirmOpen = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
-    [article]="flatData.article">
+    [articleId]="flatData.articleId">
 </app-form-reserve>
+
+<app-form-confirm *ngIf="flatData"
+    (close)="isFormConfirmOpen = $event"
+    [isOpen]="isFormConfirmOpen">
+</app-form-confirm>
+
+

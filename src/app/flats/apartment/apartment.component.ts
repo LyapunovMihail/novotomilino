@@ -15,15 +15,13 @@ import { SearchService } from '../search/search.service';
 
 export class ApartmentComponent implements OnInit, OnDestroy {
 
-    public isCreditFormOpen: boolean = false;
-    public isReserveFormOpen: boolean = false;
+    public isCreditFormOpen = false;
+    public isReserveFormOpen = false;
+    public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     public clickedPdf = false;
     public changeFlatData;
-
-    public isCreditFormSubmit = false;
-    public isReserveFormSubmit = false;
 
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
@@ -43,6 +41,8 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         this.flatData.discount = this.getDiscount(this.flatData);
         // this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
         this.hideHeader(true);
+        console.log('flatData: ', this.flatData);
+
     }
     ngOnDestroy() {
         this.hideHeader(false);
@@ -64,23 +64,19 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public prevFlat() {
         this.flatData = this.flatsList[--this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        this.isCreditFormSubmit = false;
-        this.isReserveFormSubmit = false;
     }
 
     public nextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        this.isCreditFormSubmit = false;
-        this.isReserveFormSubmit = false;
     }
 
     public routePDF() {
         if (!this.platformDetectService.isBrowser) { return; }
 
         this.clickedPdf = true;
-        let location = window.location.href;
-        let modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+        const location = window.location.href;
+        const modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
 
         if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
             this.clickedPdf = false;
@@ -89,7 +85,7 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         }
         this.changeFlatData = this.flatData;
 
-        return this.searchService.getPDF(this.flatData['_id'], modeIndex).subscribe(
+        return this.searchService.getPDF(this.flatData._id, modeIndex).subscribe(
             data => {
                 console.log(data);
                 this.pdfLink = data.toString();

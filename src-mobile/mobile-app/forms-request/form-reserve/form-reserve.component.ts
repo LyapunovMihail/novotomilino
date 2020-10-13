@@ -15,7 +15,7 @@ export class FormReserveComponent implements OnChanges {
     @Input() isOpen: boolean = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
-    @Input() public article: string;
+    @Input() public articleId: string;
     @Input() public type: string;
     @Output() close: EventEmitter<boolean> = new EventEmitter();
     @Output() public isSubmited = new EventEmitter<boolean>();
@@ -32,7 +32,8 @@ export class FormReserveComponent implements OnChanges {
         time: '',
         wait_for_call: 'now',
         agreement: true,
-        article: ''
+        articleId: '',
+        description: ''
     });
 
     public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -54,7 +55,8 @@ export class FormReserveComponent implements OnChanges {
             this.form.controls['price'].setValue(this.apartmentPrice);
             this.form.controls['number'].setValue(this.apartmentNumber);
             this.form.controls['type'].setValue(this.type);
-            this.form.controls['article'].setValue(this.article);
+            this.form.controls['articleId'].setValue(this.articleId);
+            this.form.controls['description'].setValue('');
         }
     }
 
