@@ -80,7 +80,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 });
             }
         );
-        this.routerEvent = this.routerChange();
     }
 
     public routerChange() {
