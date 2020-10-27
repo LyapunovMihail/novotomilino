@@ -1,4 +1,4 @@
-import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
+import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
 const ObjectId = require('mongodb').ObjectID;
@@ -32,9 +32,31 @@ export class AddressesModel {
         return await this.collection.find({house: {$in: body.flatsData.houses}, flat: {$in: body.flatsData.numbers}}).toArray();
     }
 
-    public async getSearchConfig() {
-        let config = await this.db.collection('flats-search-config').find({}).toArray();
-        return config;
+    public async getHouseChess() {
+        const flats = await this.collection.find({type: 'КВ'}).toArray();
+        const chess: any = [];
+
+        flats.forEach((flat: IAddressItemFlat) => {
+            if (!chess[flat.house]) {
+                chess[flat.house] = [];
+            }
+
+            let section = chess[flat.house][flat.section];
+            if (!section) {
+                section = new Array(flat.floorsInSection).fill([]); // Заполняем секцию этажами и этажи мок квартирами
+                section.forEach((floor, i) => {
+                    const mockFlat = {status: '-1', house: flat.house, section: flat.section, floor: section.length - i};
+                    section[i] = new Array(flat.flatsInFloor).fill(mockFlat);
+                });
+                chess[flat.house][flat.section] = section;
+            }
+
+            const floor = section[section.length - flat.floor];
+            const firstMockFlat = floor.findIndex((mockFlat) => mockFlat.status === '-1');  // Находим первую мок квартиру на этаже и меняем на настоящую
+            floor[firstMockFlat] = flat;
+        });
+
+        return chess;
     }
 
     public parseRequest(query) {

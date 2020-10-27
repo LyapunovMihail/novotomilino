@@ -83,12 +83,15 @@ export class DbCronUpdate {
             return;
         }
         const {house, section, floor, flat} = this.parseArticle(object.Article);
+        const type = this.parseType(object.ArticleTypeCode, object.ArticleSubTypeCode);
+
         const itemflat: IAddressItemFlat = {
             house,
             section,
             floor,
             rooms: object.IsEuro === '1' ? 1 : Number(object.Rooms),
             flat,
+            type,
             status: object.StatusCode,
             statusName: object.StatusCodeName,
             decoration: object.Finishing,
@@ -101,11 +104,33 @@ export class DbCronUpdate {
             price: Number(object.Sum),
             deliveryDate: object.DeliveryPeriodDate,
             article: object.Article,
-            articleId: object.ArticleID
+            articleId: object.ArticleID,
+            floorsInSection: Number(object.planid.split('/')[0]),
+            flatsInFloor: Number(object.planid.split('/')[1]),
         };
-        console.log('itemflat: ', itemflat);
+
         this.counter++;
         return itemflat;
+    }
+
+    private parseType(articleType, subArticleType) {
+        switch (articleType) {
+            case '2':
+                return 'КВ';
+            case '4':
+                return 'ММ';
+            case '8':
+                switch (subArticleType) {
+                    case '2':
+                        return 'АП';
+                    case '4':
+                        return 'КЛ';
+                    case '8':
+                        return 'ММ';
+                    case '16':
+                        return 'КН';
+                }
+        }
     }
 
     private parseArticle(article: string) {

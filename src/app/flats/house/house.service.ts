@@ -12,4 +12,7 @@ export class HouseService {
     public getObjects(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
+    public getHousesChess(): Observable<any> {
+        return this.http.get<any>(`/api/get_house_chess`);
+    }
 }

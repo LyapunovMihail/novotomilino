@@ -25,20 +25,18 @@ interface IFLatDisabled extends IFlatWithDiscount {
 
 export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    public houseNumber: any;
     public defaultParams: any;
-    public sectionNumber: number;
     public sectionNumbers: any[] = [];
+    public houseNumbers: string[];
     public sectionsData: IFLatDisabled[][][] = [];
+    public chess: IFLatDisabled[][][][];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
     public routerEvent;
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
     public floorFlats: IFlatWithDiscount[];
-    public floorCount = FloorCount;
     public searchFlats: IFlatWithDiscount[];
-    public flatOnFloorCounter;
     // переменные для реализации скролла секций
     public scroll = 0;
     public chessMaxScroll: number;
@@ -52,10 +50,10 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         top: 100
     };
 
-    @ViewChild('chess')
-    public chess: ElementRef;
-    @ViewChild('chessContainer')
-    public chessContainer: ElementRef;
+    @ViewChild('chessChild')
+    public chessChild: ElementRef;
+    @ViewChild('chessParent')
+    public chessParent: ElementRef;
 
     constructor(
         private router: Router,
@@ -69,53 +67,39 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public ngOnInit() {
+        this.preloader = true;
+        this.service.getHousesChess().subscribe(
+            (data) => {
+                this.chess = data;
+                this.routerEvent = this.routerChange();
+            },
+            (err) => {
+                console.log(err);
+                this.router.navigate(['/error-404'], {
+                    skipLocationChange: true
+                });
+            }
+        );
         this.routerEvent = this.routerChange();
     }
 
     public routerChange() {
         return this.activatedRoute.queryParams.subscribe((params) => {
             // Если номера домов не менялись отменяем формирование схемы
+            this.preloader = true;
             if (this.defaultParams && this.defaultParams === params.houses) { return; }
 
-            const houses = (params.houses).split(',');
+            this.houseNumbers = (params.houses).split(',');
             this.defaultParams = params.houses;
-            this.preloader = true;
-            if (houses.every( house => this.floorCount[house] )) {
 
-                this.houseNumber = houses;
-                this.sectionsData = [];
-                this.sectionNumbers = [];
-                this.houseNumber.forEach( house => {
-                    this.sectionNumbers = [
-                        ...this.sectionNumbers,
-                        {
-                            house,
-                            sections: [ ...Object.keys(this.floorCount[Number(house)]) ] // создаём массив из номеров секций по выбранному дому.
-                        }
-                    ];
-                });
+            if (this.houseNumbers.every( house => this.chess[house] )) {
                 if (this.platform.isBrowser) {
-                    this.sectionNumbers.forEach( obj => {
-                        // получение квартир для нужных секций
-                        obj.sections.forEach( section => {
-                            this.getFlats(section, obj.house).subscribe(
-                                (flats) => {
-                                    this.buildSectionData(flats, section, obj.house);
-                                    this.preloader = false;
-                                },
-                                (err) => {
-                                    console.log(err);
-                                    this.preloader = false;
-                                }
-                            );
-                            if (this.searchFlats) {
-                                setTimeout(() => {
-                                    this.searchFlatsSelection();
-                                }, 100);
-                            }
-                            setTimeout(() => this.scrollCalculate(), 1000);
-                        });
-                    });
+                    if (this.searchFlats) {
+                        setTimeout(() => {
+                            this.searchFlatsSelection();
+                        }, 100);
+                    }
+                    this.scrollCalculate();
                 }
             } else {
                 this.router.navigate(['/error-404'], {
@@ -125,65 +109,26 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    private buildSectionData(flats, sectionNumber, house) {
-        const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
-            if (!section[flat.floor]) {
-                section[flat.floor] = [];
-            }
-            section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat), disabled: true});
-            return section;
-        }, []);
-
-        sectionData.reverse();
-
-        sectionData.map((floor: IFLatDisabled[]) => {
-            floor.sort();
-        });
-
-        this.buildFakeFlats(sectionData, sectionNumber, house);
-
-        // Удаляем дубликаты, если есть
-        if (this.sectionsData.findIndex( item => item[0][0]._id === sectionData[0][0]._id) > -1) { return; }
-
-        this.sectionsData.push(sectionData);
-    }
-
     public searchFlatsSelection() {
-        this.sectionsData.forEach((section: IFLatDisabled[][]) => {
-            section.forEach((floor: IFLatDisabled[]) => {
-                floor.forEach((flat: IFLatDisabled) => {
-                    flat.disabled = true;
-                    this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
-                        if (searchFlat.flat === flat.flat && searchFlat.house === flat.house ) {
-                            flat.disabled = false;
-                        }
+        this.houseNumbers.forEach((house) => {
+            this.chess[house].forEach((section: IFLatDisabled[][]) => {
+                if (!section) { return; }
+                section.forEach((floor: IFLatDisabled[]) => {
+                    floor.forEach((flat: IFLatDisabled) => {
+                        flat.disabled = true;
+                        flat.discount = this.flatsDiscountService.getDiscount(flat);
+                        this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
+                            if (searchFlat.articleId === flat.articleId
+                                || flat.status === '8') {
+                                flat.disabled = false;
+                            }
+                        });
                     });
                 });
             });
         });
-    }
-
-    public buildFakeFlats(sectionData, sectionNumber, house) {
-        /* Формируем новый объект для подсчета максимального кол-ва квартир на этаже
-            это нужно для заполнения пустых мест в шахматке фейк-квартирами */
-        sectionData.forEach((floor) => {
-            if (!this.flatOnFloorCounter) {
-                this.flatOnFloorCounter = {
-                    [house]: {
-                        [sectionNumber]: [...floor]
-                    }
-                };
-            } else if (!this.flatOnFloorCounter[house]) {
-
-                this.flatOnFloorCounter[house] = {
-                    [sectionNumber]: [...floor]
-                };
-            } else if (!this.flatOnFloorCounter[house][sectionNumber]) {
-                this.flatOnFloorCounter[house][sectionNumber] = [...floor];
-            } else if (floor.length > this.flatOnFloorCounter[house][sectionNumber].length) {
-                this.flatOnFloorCounter[house][sectionNumber] = floor;
-            }
-        });
+        this.preloader = false;
+        this.ref.detectChanges();
     }
 
     public getFlats(sections, houses) {
@@ -217,7 +162,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public scrollCalculate() {
         setTimeout(() => {
             this.scroll = 0;
-            this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
+            this.chessMaxScroll = this.chessChild.nativeElement.clientWidth - this.chessParent.nativeElement.clientWidth;
             if (this.chessMaxScroll > 0 ) {
                 this.lastScrollStep = this.chessMaxScroll % this.scrollStep;
             } else {
@@ -244,10 +189,5 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public ngOnDestroy() {
         // отписка от событий роута
         this.routerEvent.unsubscribe();
-    }
-
-    callConsoleLog(object) {
-        console.log('callConsoleLog: ->', object);
-        return object;
     }
 }

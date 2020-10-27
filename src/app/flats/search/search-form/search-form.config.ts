@@ -1,7 +1,7 @@
 export const FormConfig = {
     price: {
         min: 1400000,
-        max: 8000000
+        max: 11000000
     },
     floor: {
         min: 2,

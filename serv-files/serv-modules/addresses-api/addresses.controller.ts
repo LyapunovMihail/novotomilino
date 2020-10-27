@@ -24,11 +24,11 @@ export class AddressesController extends AddressesModel {
         this.router.get('/search', responseHandler(async(req) => {
             return await this.getObjects(req.query);
         }));
+        this.router.get('/get_house_chess', responseHandler(async(req) => {
+            return await this.getHouseChess();
+        }));
         this.router.post('/search/with_count', responseHandler(async(req) => {
             return await this.getObjectsWithCount(req.body.search);
-        }));
-        this.router.get('/search-config', responseHandler(async(req) => {
-            return await this.getSearchConfig();
         }));
         this.router.post('/search/by_houses_and_numbers', responseHandler(async(req) => {
             return await this.getObjectsByHousesAndNumbers(req.body);
