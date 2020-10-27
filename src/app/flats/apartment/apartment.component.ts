@@ -22,6 +22,8 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public pdfLink: string;
     public clickedPdf = false;
     public changeFlatData;
+    public prevFlat: IFlatWithDiscount;
+    public nextFlat: IFlatWithDiscount;
 
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
@@ -39,11 +41,16 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.setPrevAndNextFlats();
+        console.log('this.prevFlat: ', this.prevFlat);
+        console.log('this.nextFlat: ', this.nextFlat);
         // this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
         this.hideHeader(true);
         console.log('flatData: ', this.flatData);
 
     }
+
+
     ngOnDestroy() {
         this.hideHeader(false);
     }
@@ -61,14 +68,21 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         }
     }
 
-    public prevFlat() {
-        this.flatData = this.flatsList[--this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
+    private setPrevAndNextFlats() {
+        this.prevFlat = this.flatsList[this.flatIndex - 1];
+        this.nextFlat = this.flatsList[this.flatIndex + 1];
     }
 
-    public nextFlat() {
+    public toPrevFlat() {
+        this.flatData = this.flatsList[--this.flatIndex];
+        this.flatData.discount = this.getDiscount(this.flatData);
+        this.setPrevAndNextFlats();
+    }
+
+    public toNextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.setPrevAndNextFlats();
     }
 
     public routePDF() {

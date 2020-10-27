@@ -3,13 +3,13 @@
     <div class="apartment">
 
         <div class="apartment__elements">
-            <div class="apartment__elements-btn apartment__elements-btn_prev" *ngIf="flatIndex - 1 >= 0">
-                <button class="apartment__elements-prev" (click)="prevFlat()"></button>
-                <p>№ {{flatsList[flatIndex-1].flat}}</p>
+            <div class="apartment__elements-btn apartment__elements-btn_prev" *ngIf="prevFlat && prevFlat.articleId">
+                <button class="apartment__elements-prev" (click)="toPrevFlat()"></button>
+                <p>№ {{prevFlat.flat}}</p>
             </div>
-            <div class="apartment__elements-btn apartment__elements-btn_next" *ngIf="flatIndex + 1 < flatsList.length">
-                <button class="apartment__elements-next" (click)="nextFlat()"></button>
-                <p>№ {{flatsList[flatIndex+1].flat}}</p>
+            <div class="apartment__elements-btn apartment__elements-btn_next" *ngIf="nextFlat && nextFlat.articleId">
+                <button class="apartment__elements-next" (click)="toNextFlat()"></button>
+                <p>№ {{nextFlat.flat}}</p>
             </div>
             <button class="apartment__elements-cls" (click)="close.emit(false)"></button>
             <!-- <div class="apartment__elements-compass">
