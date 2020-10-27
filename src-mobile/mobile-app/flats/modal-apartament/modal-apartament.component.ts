@@ -13,7 +13,7 @@ import { FavoritesService } from '../../favorites/favorites.service';
 export class ModalApartamentComponent implements OnInit {
     public isCreditFormOpen = false;
     public isReserveFormOpen = false;
-    public isFormConfirmOpen = false;
+    public isformSuccessOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
 

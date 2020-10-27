@@ -1,0 +1,12 @@
+<div *ngIf="isOpen" class="g-modal-bg form-success__modal">
+
+    <div (click)="close.emit(false)" class="form-success__modal__close-area"></div>
+
+    <div class="form-success">
+        <button (click)="close.emit(false)" class="form-success__cls-btn"></button>
+
+        <h2 class="form-success__title">Заявка отправлена</h2>
+        <p class="form-success__subtitle">Мы свяжемся с вами и уточним необходимые детали</p>
+    </div>
+
+</div>

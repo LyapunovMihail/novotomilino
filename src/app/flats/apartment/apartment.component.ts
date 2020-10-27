@@ -17,7 +17,7 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
     public isCreditFormOpen = false;
     public isReserveFormOpen = false;
-    public isFormConfirmOpen = false;
+    public isFormSuccessOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     public clickedPdf = false;

@@ -103,7 +103,7 @@
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
     [isOpen]="isCreditFormOpen"
-    (isSubmited)="isFormConfirmOpen = $event"
+    (isSubmited)="isFormSuccessOpen = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
@@ -112,16 +112,16 @@
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
     [isOpen]="isReserveFormOpen"
-    (isSubmited)="isFormConfirmOpen = $event"
+    (isSubmited)="isFormSuccessOpen = $event"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
     [articleId]="flatData.articleId">
 </app-form-reserve>
 
-<app-form-confirm *ngIf="flatData"
-    (close)="isFormConfirmOpen = $event"
-    [isOpen]="isFormConfirmOpen">
-</app-form-confirm>
+<app-form-success *ngIf="flatData"
+    (close)="isFormSuccessOpen = $event"
+    [isOpen]="isFormSuccessOpen">
+</app-form-success>
 
 

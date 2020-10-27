@@ -41,9 +41,9 @@
         </div>
 
         <div class="form-request__wrap">
-            <p class="form-request__subtitle">Телефон</p>
+            <p class="form-request__subtitle">Номер телефона*</p>
             <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
+                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched}"
                 class="form-request__field" type="text" maxlength="11">
             <p class="form-request__notice">Например: 79991105522</p>
         </div>

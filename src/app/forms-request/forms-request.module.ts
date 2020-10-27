@@ -7,13 +7,13 @@ import { FormReserveComponent } from './form-reserve/form-reserve.component';
 import { FormCallComponent } from './form-call/form-call.component';
 import { NgModule } from '@angular/core';
 import { TextMaskModule } from 'angular2-text-mask';
-import { FormConfirmComponent } from './form-confirm/form-confirm.component';
+import { FormSuccessComponent } from './form-success/form-success.component';
 
 let Components = [
     FormCallComponent,
     FormReserveComponent,
     FormCreditComponent,
-    FormConfirmComponent,
+    FormSuccessComponent,
     BitNumberPipe
 ];
 

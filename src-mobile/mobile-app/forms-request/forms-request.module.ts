@@ -1,4 +1,4 @@
-import { FormConfirmComponent } from './form-confirm/form-confirm.component';
+import { FormSuccessComponent } from './form-success/form-success.component';
 import { FormsRequestService } from './forms-request.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ let Components = [
     FormCallComponent,
     FormReserveComponent,
     FormCreditComponent,
-    FormConfirmComponent,
+    FormSuccessComponent,
     BitNumberPipe
 ];
 

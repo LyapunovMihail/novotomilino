@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
-    selector: 'app-form-confirm',
-    templateUrl: './form-confirm.component.html',
+    selector: 'app-form-success',
+    templateUrl: './form-success.component.html',
     styleUrls: ['./../forms-request.component.scss']
 })
-export class FormConfirmComponent implements OnChanges {
+export class FormSuccessComponent implements OnChanges {
 
     @Output() close: EventEmitter<boolean> = new EventEmitter();
     @Input() isOpen = false;
