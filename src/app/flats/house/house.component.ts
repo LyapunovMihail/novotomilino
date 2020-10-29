@@ -26,9 +26,7 @@ interface IFLatDisabled extends IFlatWithDiscount {
 export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public defaultParams: any;
-    public sectionNumbers: any[] = [];
     public houseNumbers: string[];
-    public sectionsData: IFLatDisabled[][][] = [];
     public chess: IFLatDisabled[][][][];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;

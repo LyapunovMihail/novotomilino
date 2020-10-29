@@ -14,7 +14,7 @@
 
     <div class="house__sections" *ngIf="houseNumbers" #chessParent>
 
-        <div *ngIf="sectionsData" class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" #chessChild>
+        <div class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" #chessChild>
             <ng-container *ngFor="let h of houseNumbers">
                 <ng-container *ngIf="chess[h] && chess[h].length">
                     <ng-container *ngFor="let section of chess[h]; let s = index">

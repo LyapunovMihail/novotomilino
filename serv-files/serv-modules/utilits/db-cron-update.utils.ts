@@ -83,7 +83,7 @@ export class DbCronUpdate {
             return;
         }
         const {house, section, floor, flat} = this.parseArticle(object.Article);
-        const type = this.parseType(object.ArticleTypeCode, object.ArticleSubTypeCode);
+        const type = this.parseType(object.ArticleTypeCode, object.articleSubTypeCode);
 
         const itemflat: IAddressItemFlat = {
             house,
@@ -114,6 +114,9 @@ export class DbCronUpdate {
     }
 
     private parseType(articleType, subArticleType) {
+
+        subArticleType = subArticleType ? subArticleType.toString() : null;
+
         switch (articleType) {
             case '2':
                 return 'КВ';
