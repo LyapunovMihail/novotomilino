@@ -34,7 +34,7 @@ export class AddressesModel {
 
     public async getHouseChess() {
         const flats = await this.collection.find({type: 'КВ'}).toArray();
-        const chess: any = [];
+        const chess: any = {};
 
         flats.forEach((flat: IAddressItemFlat) => {
             if (!chess[flat.house]) {
