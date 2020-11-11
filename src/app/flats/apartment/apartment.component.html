@@ -32,15 +32,15 @@
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
                     </li>
-                    <li class="apartment__info-nav-item">Квартира №{{flatData.flat}}</li>
+                    <li class="apartment__info-nav-item">{{typeApartment === 'flat' ? 'Квартира' : 'Помещение'}} №{{flatData.flat}}</li>
                 </ul>
             </nav>
 
             <h1 class="apartment__info-title">
-                {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
+                {{apartamentRooms}}, №&nbsp;{{flatData.flat}}
             </h1>
             <div class="apartment__info-descr">
-                <div class="apartment__info-descr-item">
+                <div class="apartment__info-descr-item" *ngIf="typeApartment === 'flat'">
                     <p class="apartment__info-subtitle">Отделка</p>
                     <p class="apartment__info-descr-value">{{flatData.decorationName}}</p>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="apartment__plan-img">
                 <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
-                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
+                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + typeApartment + '.svg'" alt="" #img>
                 <div *ngIf="img.style.display === 'none'" class="apartment__plan-img-error">Изображение недоступно</div>
             </div>
         </div>

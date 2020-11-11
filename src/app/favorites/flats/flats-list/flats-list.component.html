@@ -13,16 +13,16 @@
         <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
         <!--<span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>-->
         <span class="search-output__result-item-price">
-                    <span class="search-output__result-item-content"
-                          [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
-                                      'search-output__result-item-content_price-not-sale' : flat.discount}">
-                          {{flat.price | myBitNumberPipe}} &#8381;
-                    </span>
-                    <span *ngIf="flat.discount"
-                          class="search-output__result-item-content search-output__result-item-content_price-sale">
-                          {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
-                    </span>
-                </span>
+            <span class="search-output__result-item-content"
+                [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
+                            'search-output__result-item-content_price-not-sale' : flat.discount}">
+                  {{flat.price | myBitNumberPipe}} &#8381;
+            </span>
+            <span *ngIf="flat.discount"
+                class="search-output__result-item-content search-output__result-item-content_price-sale">
+                  {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
+            </span>
+        </span>
     </a>
     <div class="search-output__result-item-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
 </div>

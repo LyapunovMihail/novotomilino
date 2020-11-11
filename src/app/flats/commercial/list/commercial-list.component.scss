@@ -1,0 +1,55 @@
+@import '../../../../styles/modules/mixins/mixin';
+
+.commercial-list {
+    width: 100%;
+    padding: 0 0 80px;
+
+    &__container {
+        @include container();
+        margin: 0 auto;
+    }
+
+    &__control {
+        @include container();
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+
+        &-more {
+            width: 177px;
+            height: 50px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            transition: color .3s linear, background-color .3s linear;
+            border: solid 1px $col-orange;
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing();
+            color: $col-orange;
+            &:hover {
+                background-color: $col-orange;
+                color: $col-white;
+            }
+        }
+        &-up {
+            font: 500 18px/24px $font-mus;
+            color: $col-orange;
+            position: relative;
+            background-color: transparent;
+            padding-right: 24px + 8px;
+            margin-left: auto;
+            border: 0;
+            &::after {
+                content: '';
+                width: 24px;
+                height: 24px;
+                background: url(/assets/img/flats/arrow-up.svg) center no-repeat;
+                position: absolute;
+                top: 0; right: 0;
+            }
+        }
+    }
+}

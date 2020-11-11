@@ -1,21 +1,24 @@
 <section class="favorites">
-    <div class="favorites-container">
-        <p class="favorites__subtitle">{{ favoritesService.favoriteFlats.length ? 'В избранном ' + favoritesService.favoriteFlats.length + ' ' + parseText(favoritesService.favoriteFlats.length) : 'На данный момент в избранное ничего не добавлено' }}</p>
+    <div class="favorites__container">
+        <p class="favorites__title">{{favoritesTitle}}</p>
 
-        <div class="favorites__filter">
+        <nav class="favorites__nav">
+            <ul class="favorites__nav-list">
+                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/flats" (click)="gateGuard('flats')">Квартиры</a></li>
+                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/commercial" (click)="gateGuard('commercial')">Коммерческая недвижимость</a></li>
+            </ul>
+        </nav>
+
+        <div class="favorites__filter" *ngIf="favoriteFlats.length">
             <button class="favorites__filter-item favorites__filter-item--{{item.name}}" 
-                *ngFor="let item of sortList; let i = index" (click)="changeFilter(item, i)"
+                *ngFor="let item of filterListByUrl; let i = index" (click)="changeFilter(item, i)"
                 [ngClass]="{'active': activeSort === item.name,
                     'minFromMax': activeSort === item.name && item.value,
                     'maxFromMin': activeSort === item.name && !item.value}">{{item.text}}</button>
         </div>
     </div>
 
-    <div class="favorites__wrapper">
-        <div class="favorites__result">
-            <app-flats-list
-                [flatsList]="favoritesService.favoriteFlats">
-            </app-flats-list>
-        </div>
+    <div class="favorites__container">
+        <router-outlet></router-outlet>
     </div>
 </section>

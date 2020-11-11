@@ -25,8 +25,9 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public prevFlat: IFlatWithDiscount;
     public nextFlat: IFlatWithDiscount;
 
-    @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
+    @Input() public typeApartment = 'flat';
+    @Input() public showApartmentWindow = false;
     @Input() public flatsList: IFlatWithDiscount[];
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
@@ -37,6 +38,14 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         private favoritesService: FavoritesService,
         public searchService: SearchService,
     ) {}
+
+    public get apartamentRooms() {
+        return this.typeApartment === 'flat'
+            ? this.flatData.rooms < 1
+                ? 'Студия'
+                : this.flatData.rooms + ' комнатная'
+            : 'Помещение';
+    }
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];

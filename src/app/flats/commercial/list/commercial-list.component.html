@@ -1,0 +1,24 @@
+
+<section class="commercial-list">
+
+    <app-commercial-filter
+        (formChange)="formChange($event)"
+    ></app-commercial-filter>
+
+    <ng-container *ngIf="outputFlatsList && outputFlatsList.length > 0">
+        <app-commercial-output
+            [count]="count"
+            [flatsList]="outputFlatsList"
+            (sortChange)="sortFlats($event.name, $event.shift)"
+        ></app-commercial-output>
+    
+        <div class="commercial-list__control">
+            <button (click)="loadMore()" *ngIf="isLoadMoreBtn" class="commercial-list__control-more">Показать еще</button>
+            <button (click)="scrollUp()" class="commercial-list__control-up">Наверх</button>
+        </div>
+    </ng-container>
+
+    <div class="commercial-list__container" *ngIf="!outputFlatsList || !outputFlatsList.length">
+        <p class="commercial-list__empty g-body">Помещений по вашему запросу не найдено</p>
+    </div>
+</section>

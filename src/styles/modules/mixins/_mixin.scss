@@ -7,10 +7,13 @@ $col-white: #fff;
 $col-black-8: rgba(0, 1, 5, .8);
 $col-black-6: rgba(0, 1, 5, .6);
 $col-orange: #e7490f;
+$col-orange--hover: rgba($color: $col-orange, $alpha: .8);
 $col-32: #323232;
 $col-97: #979797;
 $col-blue: #0070c9;
 $col-red: #ee4237;
+$col-61: #616161;
+$col-89: #898989;
 
 $w1600: 1600px - (180px *2);
 $w1280: 1240px;
@@ -22,6 +25,18 @@ $trans-link: .6s ease;
 $trans-img: transform .7s linear;
 
 $font-proba: 'ProbaPro', sans-serif, Arial;
+$text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+@mixin container() {
+    width: calc(100% - 60px);
+    max-width: $w1600;
+}
+@mixin before-img($width, $height) {
+    content: '';
+    position: absolute;
+    width: $width;
+    height: $height;
+}
 
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;

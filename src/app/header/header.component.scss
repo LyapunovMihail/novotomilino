@@ -25,6 +25,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
+        z-index: 3;
     }
 
     &__logo {
@@ -43,6 +45,7 @@
         &-list {
             display: flex;
             list-style: none;
+            align-items: center;
             font: 500 14px/20px $font-mus;
             @include font-smoothing;
             color: $col-black;
@@ -68,6 +71,29 @@
             &:hover::before,
             &.active::before { width: 100%; }
 
+            &.flats {
+                position: relative;
+                padding-right: 24px;
+                &::after {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    position: absolute;
+                    top: 48%; right: 5px;
+                    border-left: 5px solid transparent !important;
+                    border-top: 5px solid $col-black;
+                    border-right: 5px solid transparent !important;
+                }
+                &:hover {
+                    .header__menu-tooltip { display: flex; }
+                    &::after {
+                        border-top: 0;
+                        border-bottom: 5px solid $col-black;
+                    }
+                }
+                &.active::before { width: calc(100% - 24px); }
+            }
+
             &--favorites {
                 width: 25px;
                 height: 23px;
@@ -91,8 +117,27 @@
                 &:hover::before,
                 &.active::before { width: 0%; }
             }
-        }
 
+            &> a { padding: 10px 0; }
+        }
+        &-tooltip {
+            display: none;
+            flex-flow: column;
+            background-color: $col-white;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            position: absolute;
+            top: calc(100% + 10px); left: -16px;
+            padding: 16px;
+            z-index: 2;
+            &> a {
+                color: $col-89;
+                padding: 0;
+                &.active,
+                &:hover { color: $col-orange; }
+                &+ a { margin: 8px 0 0; }
+            }
+        }
     }
 
     &__info {
