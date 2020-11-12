@@ -1,0 +1,62 @@
+@import '../../../../styles/modules/mixins/mixin';
+
+.section-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 64px;
+
+    &__container { @include container(); }
+
+    &__houses {
+        width: 100%;
+        display: block;
+        margin: 0 0 40px;
+        &:last-child { margin: 0; }
+        @media (max-width: 767px) { margin: 0 0 32px; }
+
+        &-title {
+            font-weight: bold;
+            margin: 0 0 16px;
+        }
+    }
+    &__sections {
+        width: 100%;
+        max-width: 728px;
+        height: 64px;
+        background-color: $col-white;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+        transition: background-color .2s linear;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        align-items: center;
+        position: relative;
+        padding: 0 24px;
+        margin: 0 0 8px;
+        cursor: pointer;
+        &:hover { background-color: #fef5f5; }
+        &:last-child { margin: 0; }
+        @media (max-width: 767px) {
+            height: 40px;
+            padding: 0 16px;
+        }
+
+        &-counter,
+        &-floor,
+        &-price {
+            font: 18px/28px $font-mus;
+            color: $col-black;
+            @media (max-width: 767px) {
+                @include font-size(14px, 20px);
+            }
+        }
+        &-floor {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: $col-89;
+        }
+        &-price { font-weight: bold; }
+    }
+}

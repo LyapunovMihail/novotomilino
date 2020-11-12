@@ -1,0 +1,23 @@
+
+
+<section class="section-list">
+
+    <div class="section-list__container">    
+        <ng-container *ngFor="let item of sections">
+            <div class="section-list__houses">
+                <h2 class="section-list__houses-title g-body">Корпус {{item.house}}</h2>
+    
+                <a class="section-list__sections" *ngFor="let park of item.parks"
+                    routerLink="search" [queryParams]="{house: item.house, floor: park.floor, section: park.section}">
+
+                    <div class="section-list__sections-count">Секция  {{park.section}}</div>
+                    <div class="section-list__sections-floor">Этаж {{park.floor}}</div>
+                    <div class="section-list__sections-price">от {{park.price | myBitNumberPipe}} ₽</div>
+                </a>
+            </div>
+        </ng-container>
+
+        <p *ngIf="!sections || !sections.length" class="g-body">Помещений по вашему запросу не найдено.</p>
+    </div>
+
+</section>

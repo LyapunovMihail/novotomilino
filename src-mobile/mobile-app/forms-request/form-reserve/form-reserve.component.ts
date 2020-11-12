@@ -45,6 +45,16 @@ export class FormReserveComponent implements OnChanges {
         public platform: PlatformDetectService
     ) { }
 
+    public get typeApartament() {
+        return this.type === 'КВ'
+            ? 'квартиру'
+            : this.type === 'КН'
+                ? 'помещение'
+                : this.type === 'ММ'
+                    ? 'машиноместо'
+                    : 'кладовую';
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if ( 'isOpen' in changes && this.isOpen === true ) {
             this.form.reset();

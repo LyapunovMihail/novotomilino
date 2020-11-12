@@ -15,6 +15,7 @@ import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 import { VideoComponent } from './video/video.component';
 import { VideoAdminComponent } from './video/video-admin/video-admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeIlikeComponent } from './ilike/home-ilike.component';
 
 @NgModule({
     exports: [
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         SharesDayPipe,
         LineBreakPipe,
         VideoComponent,
-        VideoAdminComponent
+        VideoAdminComponent,
+        HomeIlikeComponent,
     ],
     imports: [
         CommonModule,

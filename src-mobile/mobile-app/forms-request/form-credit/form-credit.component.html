@@ -4,7 +4,7 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-request">
 
-        <h1 class="form-request__title">Заявка на ипотеку для квартиры №{{apartmentNumber}}</h1>
+        <h1 class="form-request__title">Заявка на ипотеку для {{typeApartament}} №{{apartmentNumber}}</h1>
 
         <input [formControl]="form.controls['price']" type="text" style="display: none;">
         <input [formControl]="form.controls['number']" type="text" style="display: none;">

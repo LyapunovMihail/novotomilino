@@ -1,0 +1,34 @@
+
+<section class="commercial-search">
+
+    <div class="commercial-search__show-wrap">
+        <button class="commercial-search__show-filter" (click)="openFilter()"
+            [ngClass]="{ 'active': showFilter }"
+        ></button>
+    </div>
+
+    <div class="commercial-search__container">
+
+        <a routerLink="/flats/commercial/section" class="commercial-search__back-link g-body">Коммерческая недвижимость</a>
+
+        <h2 class="commercial-search__title g-body_bold">Корпус {{params.houses}}, Секция {{params.sections}}</h2>
+    </div>
+
+    <app-commercial-output
+        [flatsList]="outputFlatsList"
+    ></app-commercial-output>
+
+    <app-commercial-filter
+        [type]="'commercial-search'"
+        [showFilter]="showFilter"
+        (formChange)="formChange($event)"
+        (close)="openFilter()"
+    ></app-commercial-filter>
+
+    <div class="commercial-search__footer" *ngIf="searchFlats">
+        <div class="commercial-search__footer-container">
+            <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="commercial-search__footer-more g-body_bold">Показать еще</button>
+            <button class="commercial-search__footer-up g-body_bold" (click)="scrollTop()" *ngIf="searchFlats.length >= 10">Наверх</button>
+        </div>
+    </div>
+</section>

@@ -22,6 +22,7 @@ interface ITriggerSnippet {
 export class HomeTriggerComponent implements OnInit {
 
     public triggersData: ITriggerSnippet[] = [];
+    public flats: IAddressItemFlat[] = [];
 
     constructor(
         private platform: PlatformDetectService,
@@ -32,7 +33,8 @@ export class HomeTriggerComponent implements OnInit {
     ngOnInit() {
         this.searchService.getObjects({})
             .subscribe((flats) => {
-                this.buildTriggersData(flats);
+                this.flats = flats;
+                this.buildTriggersData(flats.filter(el => el.type === 'КВ'));
             });
     }
 
@@ -71,5 +73,13 @@ export class HomeTriggerComponent implements OnInit {
 
     public navigate(rooms) {
         this.searchFlatsLinkHandlerService.linkHandle(true, { rooms, status: '4' });
+    }
+
+    public getPriceByMod(mod) {
+        if (!this.flats.length
+            || !(this.flats.filter(el => el.type === mod)).length) { return null; }
+
+        const objects = this.flats.filter(el => el.type === mod);
+        return Number(Math.min(...objects.map(el => el.price)) / 1000000).toFixed(2);
     }
 }

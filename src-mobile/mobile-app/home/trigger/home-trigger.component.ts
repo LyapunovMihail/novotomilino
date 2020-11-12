@@ -21,6 +21,7 @@ interface ITriggerSnippet {
 export class HomeTriggerComponent implements OnInit {
 
     public triggersData: ITriggerSnippet[] = [];
+    public flats: IAddressItemFlat[] = [];
 
     constructor(
         public flatsService: FlatsService,
@@ -30,7 +31,8 @@ export class HomeTriggerComponent implements OnInit {
     ngOnInit() {
         this.flatsService.getObjects({})
             .subscribe((data) => {
-                this.buildTriggersData(data.flats);
+                this.flats = data.flats;
+                this.buildTriggersData(data.flats.filter(el => el.type === 'КВ'));
             });
     }
 
@@ -68,10 +70,17 @@ export class HomeTriggerComponent implements OnInit {
     }
 
     navigate(rooms) {
-        let navigationExtras: NavigationExtras = {
-            queryParams: {rooms:rooms, status: '4'}
+        const navigationExtras: NavigationExtras = {
+            queryParams: {rooms, status: '4'}
         };
 
         this.router.navigate(['/flats/search'], navigationExtras);
+    }
+    public getPriceByMod(mod) {
+        if (!this.flats.length
+            || !(this.flats.filter(el => el.type === mod)).length) { return null; }
+
+        const objects = this.flats.filter(el => el.type === mod);
+        return Number(Math.min(...objects.map(el => el.price)) / 1000000).toFixed(2);
     }
 }

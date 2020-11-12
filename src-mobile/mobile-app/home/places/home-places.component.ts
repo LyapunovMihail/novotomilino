@@ -46,8 +46,6 @@ export class HomePlacesComponent implements OnInit, AfterViewInit {
             },
             (err) => console.log(err)
         );
-        console.log(this.gallerySlides);
-        
     }
 
     public ngAfterViewInit() {

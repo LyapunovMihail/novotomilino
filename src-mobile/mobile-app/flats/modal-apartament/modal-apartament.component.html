@@ -16,11 +16,11 @@
             <li class="flat__nav-item">Корпус {{flatData.house}}</li>
             <li class="flat__nav-item">Секция {{flatData.section}}</li>
             <li class="flat__nav-item">Этаж {{flatData.floor}}</li>
-            <li class="flat__nav-item">Квартира №{{flatData.flat}}</li>
+            <li class="flat__nav-item">{{flatType === 'flat' ? 'Квартира' : 'Помещение'}} №{{flatData.flat}}</li>
         </ul>
     
         <h1 class="flat__title">
-            {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
+            {{apartamentRooms}}, №&nbsp;{{flatData.flat}}
         </h1>
     
         <div class="flat__wrap flat__wrap_price" [class.not-sale]="flatData.status === '1'">
@@ -38,16 +38,15 @@
             <p class="flat__favorite g-link_red" (click)="setFavorite()"
                [class.flat__favorite_active]="flatData.inFavorite">Добавить в избранное</p>
             <div class="flat__img">
-                <img (error)="img.style.display = 'none'"
-                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
-                <div class="flat__img-error" *ngIf="img.style.display === 'none'">
+                <img (error)="img.style.display = 'none'" [src]="imageSrc" alt="" #img>
+                <div class="flat__img-error" *ngIf="img && img.style.display === 'none'">
                     Изображение недоступно
                 </div>
             </div>
         </div>
     
         <div class="flat__info">
-            <div class="flat__info-item .flat__info-decor">
+            <div class="flat__info-item .flat__info-decor" *ngIf="flatType === 'flat'">
                 <p class="flat__subtitle">Отделка</p>
                 <p class="flat__text">{{flatData.decorationName}}</p>
             </div>

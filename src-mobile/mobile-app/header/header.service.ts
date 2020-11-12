@@ -30,41 +30,17 @@ export class HeaderService {
         let year = (data.year) ? data.year : date.getFullYear();
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );
         return [
-            {
-                name: 'О ЖК',
-                url: '/about'
-            }, {
-                name: 'Офис продаж',
-                url: `/location/office`
-            }, {
-                name: 'Расположение',
-                url: `/location/routes`
-            }, {
-                name: 'Инфраструктура',
-                url: `/location/infrastructure`
-            },
-            {
-                name: 'Квартиры',
-                url: `/flats/search`
-            },
-            {
-                name: 'Отделка',
-                url: '/decoration'
-            }, {
-                name: 'Ход строительства',
-                url: `/dynamic/${year}/${month}`
-            },
-            {
-                name: 'Условия покупки',
-                url: '/purchase'
-            },
-            {
-                name: 'Новости и акции',
-                url: '/news-shares'
-            }, {
-                name: 'Документация',
-                url: '/documentation'
-            }
+            { name: 'О ЖК', url: '/about' },
+            { name: 'Офис продаж', url: `/location/office` },
+            { name: 'Расположение', url: `/location/routes` },
+            { name: 'Инфраструктура', url: `/location/infrastructure` },
+            { name: 'Квартиры', url: `/flats/search` },
+            { name: 'Коммерческая недвижимость', url: `/flats/commercial` },
+            { name: 'Отделка', url: '/decoration' },
+            { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
+            { name: 'Условия покупки', url: '/purchase' },
+            { name: 'Новости и акции', url: '/news-shares' },
+            // { name: 'Документация', url: '/documentation' }
         ];
     }
 }
