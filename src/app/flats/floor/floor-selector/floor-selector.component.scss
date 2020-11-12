@@ -15,8 +15,10 @@
         transform: rotate(90deg);
         margin: 0 0 20px;
         transition: background-position $transition;
-        &:hover {
-            background-position: calc(50% - 3px);
+        &:hover { background-position: calc(50% - 3px); }
+        &:disabled {
+            opacity: .5;
+            pointer-events: none;
         }
     }
     &_btn-down {

@@ -27,6 +27,7 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
     public config;
 
     public floorSvg;
+    public loadFloorSvg = false;
     public infoWindow: IFlatWithDiscount;
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
@@ -49,6 +50,7 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscribeParams();
+        this.loadFloorSvg = true;
     }
     ngOnDestroy() {
         if (this.paramsSubcribe) {
@@ -80,7 +82,6 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
             type: 'КН',
             houses: value.houses,
         };
-        console.log(params);
         this.commercialService.getObjects(params).subscribe(
             data => {
                 this.apartaments = data;
@@ -92,6 +93,7 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
                     click: (i) => this.openApartmentModal(i, this.apartaments),
                     hover: (flat) => this.infoWindow = flat
                 });
+                setTimeout(() => this.loadFloorSvg = false);
             },
             error => {
                 console.error(error);

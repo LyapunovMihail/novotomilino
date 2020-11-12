@@ -29,8 +29,13 @@
     </div>
 
     <app-floor-info-window
+        class="commercial-floor__info"
         [infoWindow]="infoWindow">
     </app-floor-info-window>
+
+    <app-loader 
+        [loaderShow]="loadFloorSvg && !floorSvg">
+    </app-loader>
 </section>
 
 <app-flats-apartment-modal 

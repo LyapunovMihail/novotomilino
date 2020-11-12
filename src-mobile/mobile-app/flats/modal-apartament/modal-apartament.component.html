@@ -46,11 +46,11 @@
         </div>
     
         <div class="flat__info">
-            <div class="flat__info-item .flat__info-decor" *ngIf="flatType === 'flat'">
+            <div class="flat__info-item flat__info-decor" *ngIf="flatType === 'flat'">
                 <p class="flat__subtitle">Отделка</p>
                 <p class="flat__text">{{flatData.decorationName}}</p>
             </div>
-            <div class="flat__info-item .flat__info-square">
+            <div class="flat__info-item flat__info-square">
                 <p class="flat__subtitle">Площадь</p>
                 <p class="flat__text">{{flatData.space}} м²</p>
             </div>
@@ -58,6 +58,10 @@
                 <p class="flat__subtitle">Ипотека от</p>
                 <p class="flat__text">{{ minCredit(flatData.price) | myBitNumberPipe }} &#8381;</p>
             </div> -->
+            <div class="flat__info-item" *ngIf="flatType === 'office'">
+                <p class="flat__subtitle">Цена за 1 м²</p>
+                <p class="flat__text">{{ (flatData.price / flatData.space).toFixed(2) | myBitNumberPipe }} &#8381;</p>
+            </div>
         </div>
         <p class="flat__delivery">Срок сдачи {{flatData.deliveryDate}}</p>
     

@@ -38,8 +38,8 @@
             pointer-events: all;
             cursor: pointer;
             &--space { left: 340px; }
-            &--priceBySpace { left: 905px; }
-            &--price { left: 1110px; }
+            &--priceBySpace { right: 200px; }
+            &--price { right: 60px; }
             &::after {
                 content: '';
                 width: 10px;

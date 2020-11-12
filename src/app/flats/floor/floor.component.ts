@@ -26,8 +26,8 @@ export class FloorComponent implements OnInit, OnDestroy {
 
     public floorSelector: number[] = [];
     public floorCount = FloorCount;
-    public floorSvg: string = '';
-    public loadFloorSvg: boolean = false;
+    public floorSvg = '';
+    public loadFloorSvg = false;
     public routerEvents: any;
     public houseNumber: number;
     public sectionNumber: number;

@@ -42,7 +42,6 @@ export class CommercialPlanComponent implements OnInit {
 
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
-        this.allflats = flats;
         this.houses[i].freeFlats = flats.length;
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
@@ -58,9 +57,13 @@ export class CommercialPlanComponent implements OnInit {
         if (event) {
             event.preventDefault();
         }
-        this.router.navigate([`/flats/commercial/house/${url}/section/1/floor/1`]);
+        this.commercialService.getHouse(url).subscribe(
+            data => {
+                this.router.navigate([`/flats/commercial/house/${url}/section/${this.getMinParams(data, 'section')}/floor/${this.getMinParams(data, 'floor')}`]);
+            }
+        );
     }
-    private getMinFloor(house) {
-        return Math.min( ...this.allflats.filter(el => el.house === house).map(el => el.floor));
+    private getMinParams(flats, params) {
+        return flats.length > 1 ? Math.min( ...flats.map(el => el[params])) : flats[0][params];
     }
 }

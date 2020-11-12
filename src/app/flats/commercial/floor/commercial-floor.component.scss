@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
-    padding: 39px 0 0;
+    padding: 39px 0 70px;
 
     &__head {
         @include container();
@@ -94,6 +94,12 @@
             top: 0; left: calc(100% + 48px);
         }
     }
+
+    &__info {
+        min-height: 50px;
+        display: block;
+        margin: 20px 0 0;
+    }
 }
 
 .flat-mod {
@@ -102,13 +108,13 @@
     &--free {
         path, polygon, 
         polyline, rect {
-            fill: #D45A42;
+            fill: rgb(170, 171, 34) !important;
             pointer-events: all;
-            opacity: .2;
+            opacity: .1;
         }
         &:hover {
             path, polygon, 
-            polyline, rect { opacity: .1; }
+            polyline, rect { opacity: .3; }
         }
     }
     &--out-of-stock {

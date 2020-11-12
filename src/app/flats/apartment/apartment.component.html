@@ -23,14 +23,17 @@
                     <li class="apartment__info-nav-item">
                         <a class="apartment__info-nav-item-link" [routerLink]="'/flats/plan'" (click)="close.emit(false)">Общий вид</a>
                     </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
+                    <li class="apartment__info-nav-item" [class.apartment__info-nav-item--underline]="typeApartment === 'flat'">
+                        <ng-container *ngIf="typeApartment === 'flat'">
+                            <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
+                        </ng-container>
+                        <ng-container *ngIf="typeApartment === 'office'">Корпус {{flatData.house}}</ng-container>
                     </li>
                     <li class="apartment__info-nav-item">
                         Секция {{flatData.section}}
                     </li>
                     <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
+                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats' + (typeApartment === 'office' ? '/commercial' : '') + '/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
                     </li>
                     <li class="apartment__info-nav-item">{{typeApartment === 'flat' ? 'Квартира' : 'Помещение'}} №{{flatData.flat}}</li>
                 </ul>
@@ -52,6 +55,10 @@
                     <p class="apartment__info-subtitle">Ипотека от</p>
                     <p class="apartment__info-descr-value">{{ minCredit(flatData.price) | myBitNumberPipe }} &#8381;</p>
                 </div> -->
+                <div class="apartment__info-descr-item" *ngIf="typeApartment === 'office'">
+                    <p class="apartment__info-subtitle">Цена за 1 м²</p>
+                    <p class="apartment__info-descr-value">{{ (flatData.price / flatData.space).toFixed(2) | myBitNumberPipe }} &#8381;</p>
+                </div>
             </div>
             <!--<div class="apartment__info-delivery">-->
                 <!--Срок сдачи {{flatData.deliveryDate}}-->
@@ -83,7 +90,7 @@
         <div class="apartment__plan">
             <div class="apartment__plan-link">
                 <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" target="_blank"
-                    [class.clicked]="clickedPdf">План квартиры.pdf</a>
+                    [class.clicked]="clickedPdf">{{typeApartment === 'flat' ? 'План квартиры' : 'План помещения'}}.pdf</a>
                 <div (click)="setFavorite()"
                      [ngClass]="{'apartment__plan-link-favorite_active': flatData.inFavorite}"
                      class="g-link_red apartment__plan-link-favorite">
