@@ -40,9 +40,7 @@ export class ModalApartamentComponent implements OnInit {
             : 'Помещение';
     }
     public get imageSrc() {
-        return this.flatType === 'office'
-            ? `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/floor_${this.flatData.floor}_office${this.flatData.flat}.svg`
-            : `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.flatType}.svg`;
+        return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.flatType}.svg`;
     }
 
     public ngOnInit() {
