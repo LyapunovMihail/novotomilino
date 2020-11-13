@@ -106,7 +106,6 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
         return this.searchService.getPDF(this.flatData._id, modeIndex).subscribe(
             data => {
-                console.log(data);
                 this.pdfLink = data.toString();
                 window.open(data.toString());
                 this.clickedPdf = false;

@@ -25,7 +25,7 @@
                     </li>
                     <li class="apartment__info-nav-item" [class.apartment__info-nav-item--underline]="typeApartment === 'flat'">
                         <ng-container *ngIf="typeApartment === 'flat'">
-                            <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
+                            <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house'" [queryParams]="{house: flatData.house}" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
                         </ng-container>
                         <ng-container *ngIf="typeApartment === 'office'">Корпус {{flatData.house}}</ng-container>
                     </li>
@@ -89,7 +89,8 @@
 
         <div class="apartment__plan">
             <div class="apartment__plan-link">
-                <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" target="_blank"
+                <!-- Скрыл для офисов потому что не выводит планировку для офисных помещений, нужно доработать -->
+                <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" target="_blank" *ngIf="typeApartment === 'flat'"
                     [class.clicked]="clickedPdf">{{typeApartment === 'flat' ? 'План квартиры' : 'План помещения'}}.pdf</a>
                 <div (click)="setFavorite()"
                      [ngClass]="{'apartment__plan-link-favorite_active': flatData.inFavorite}"
