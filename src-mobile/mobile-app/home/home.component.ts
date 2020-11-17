@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
-    public mainNews: INewsSnippet[] = [];
-    public mainShares: Share[] = [];
     public newsLoaded = false;
     public isDescription;
 
@@ -41,8 +39,6 @@ export class HomeComponent implements OnInit {
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
                 this.shareSnippets = this.filterExpiredShares(shares.sharesList);
-                this.mainNews = this.makeArrayCopy(this.newsSnippets);
-                this.mainShares = this.makeArrayCopy(this.shareSnippets);
                 return [...this.shareSnippets, ...this.newsSnippets];
             })
         ).subscribe(
@@ -67,13 +63,9 @@ export class HomeComponent implements OnInit {
     }
 
     private sortByDateOfCreate(snippets) {
-        snippets.sort((share1, share2) => {
-            return new Date(share1.created_at) > new Date(share2.created_at) ? -1 : 1;
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
         });
-    }
-
-    public makeArrayCopy(snippetArr) {
-        return JSON.parse(JSON.stringify(snippetArr));
     }
 
 }
