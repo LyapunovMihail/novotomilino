@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
     private sortByDateOfCreate(snippets) {
         snippets.sort((share1, share2) => {
-            return new Date(share1.created_at) > new Date(share2.created_at) ? 1 : -1;
+            return new Date(share1.created_at) > new Date(share2.created_at) ? -1 : 1;
         });
     }
 
