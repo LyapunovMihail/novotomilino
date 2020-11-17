@@ -1,11 +1,52 @@
 @import '../../../styles/modules/mixins/mixin';
 
+@mixin trigger-container {
+    display: flex;
+    @include container();
+    margin: 0 auto;
+}
+@mixin snippet {
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    box-sizing: border-box;
+    transition: box-shadow $transition;
+    &:hover { box-shadow: 0 1px 10px 4px rgba(0, 0, 0, 0.15); }
+}
+@mixin snippet-title {
+    font: 23px/28px $font-leksa;
+    @include font-smoothing;
+    color: #2e2e2e;
+}
+@mixin snipper-desc {
+    font: 500 18px/28px $font-mus;
+    @include font-smoothing;
+    color: rgba($color: $col-black, $alpha: .6);
+    margin: 0 0 24px;
+    max-width: 504px;
+}
+@mixin snipper-price {
+    font: 500 18px/28px $font-mus;
+    @include font-smoothing;
+    color: $col-orange;
+    & > span {
+        font-size: 50px;
+        line-height: 58px;
+    }
+}
+.triggers {
+    &:last-child {
+        margin: 0 0 96px;
+    }
+}
 .home-trigger {
     width: 100%;
     display: flex;
-    min-height: 324px;
     justify-content: center;
     align-items: center;
+    padding: 80px 0 0;
+    &+ div { margin: 32px 0 0; }
 
     &__anchor {
         position: absolute;
@@ -58,5 +99,58 @@
                 line-height: 48px;
             }
         }
+    }
+}
+
+.commercial {
+    &+ div { margin: 32px 0 0; }
+    
+    &__container {
+        @include trigger-container();
+    }
+    &__snippet {
+        width: 100%;
+        @include snippet;
+        padding: 24px 32px;
+        min-height: 222px;
+    }
+    &__title {
+        @include snippet-title;
+        margin: 0 0 8px;
+    }
+    &__desc { @include snipper-desc; }
+    &__price { @include snipper-price; }
+    &__image {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.storerooms-parking {
+    &__container {
+        @include trigger-container();
+    }
+    &__snippet {
+        @include snippet;
+        padding: 24px 32px;
+        width: 100%;
+        min-height: 222px;
+
+        & + & {
+            margin-left: 32px;
+            min-height: 322px;
+        }
+    }
+    &__title {
+        @include snippet-title;
+        margin: 0 0 8px;
+    }
+    &__desc { @include snipper-desc; }
+    &__price { @include snipper-price; }
+    &__image {
+        position: absolute;
+        right: 0;
+        bottom: 0;
     }
 }

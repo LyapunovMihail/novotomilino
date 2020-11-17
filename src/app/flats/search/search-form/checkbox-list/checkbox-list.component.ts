@@ -18,6 +18,7 @@ export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
     @Input() public name: string;
+    @Input() public typeBox = 'checkbox';
     @Output() close = new EventEmitter<boolean>();
 
     public activeList: any[] = [];

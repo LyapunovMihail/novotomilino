@@ -12,6 +12,7 @@ import { LineBreakPipe } from './line-break.pipe';
 import { ScrollUpComponent } from './scroll-up/scroll-up.component';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
 import { VideoComponent } from './video/video.component';
+import { HomeIlikeComponent } from './ilike/home-ilike.component';
 
 @NgModule({
     exports : [
@@ -27,7 +28,8 @@ import { VideoComponent } from './video/video.component';
         SharesDayPipe,
         LineBreakPipe,
         ScrollUpComponent,
-        VideoComponent
+        VideoComponent,
+        HomeIlikeComponent,
     ],
     imports : [
         CommonModule,

@@ -29,9 +29,7 @@
     }
     
     &_house-select {
-
         &_svg {
-
             &_house {
                 opacity: 0;
                 cursor: pointer;
@@ -104,7 +102,7 @@
             pointer-events: none;
             opacity: 0;
 
-            &:after {
+            &::after {
                 content: '';
                 position: absolute;
                 bottom: -22px;
@@ -113,7 +111,7 @@
                 border: 9px solid transparent;
                 border-top: 13px solid #ffffff;
             }
-            &:before {
+            &::before {
                 content: '';
                 position: absolute;
                 width: 50%;
@@ -125,13 +123,25 @@
             &--house-9 {
                 bottom: -266px;
 
-                &:after {
+                &::after {
                     bottom: 248px;
                     border: 9px solid transparent;
                     border-bottom: 13px solid #ffffff;
                 }
-                &:before {
+                &::before {
                     bottom: 248px;
+                }
+            }
+            &--house-3 {
+                @media (max-height: 690px) {
+                    bottom: -130px;
+                    left: calc(100% + 20px);
+                    &::after {
+                        bottom: 54.6%;
+                        left: -8%;
+                        border: 9px solid transparent;
+                        border-right: 13px solid #ffffff;
+                    }
                 }
             }
 

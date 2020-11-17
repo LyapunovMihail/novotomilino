@@ -1,0 +1,43 @@
+
+<section class="commercial-plan">
+
+    <div class="commercial-plan__container">
+        <div class="commercial-plan__title">
+            <h2 class="g-title-path">Выберите дом</h2>
+        </div>
+    
+        <img src="/assets/img/flats/plan/plan.jpg">
+    
+        <div class="commercial-plan__house commercial-plan__house--house-{{house.houseNumber}}" 
+            *ngFor="let house of houses"
+            [ngClass]="{'active' : house.houseNumber === activeLink,
+                        'disabled' : !house.freeFlats}"
+            (mouseenter)="activeLink = house.houseNumber"
+            (mouseleave)="activeLink = ''"
+            (click)="svgRouterLink($event, house.houseNumber)">
+            
+            <span class="g-title-nav">№{{house.houseNumber}}</span>
+            <span class="g-title-nav">{{house.freeFlats ? house.freeFlats + ' пом.' : 'не в продаже'}}</span>
+        </div>
+        
+        <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
+            class="commercial-plan__svg">
+    
+            <ng-container *ngFor="let plan of houses">
+                <a (click)="svgRouterLink($event, plan.houseNumber)"
+                        [attr.xlink:href]="'/flats/house/' + plan.houseNumber">
+    
+                    <path class="commercial-plan__svg-house"
+                        [class.disabled]="!plan.freeFlats"
+                        [attr.transform]="plan.transform"
+                        [attr.style]="('opacity:' + ( activeLink === plan.houseNumber ? '1' : '0' )) | stylePipe"
+                        (mouseenter)="activeLink = plan.houseNumber"
+                        (mouseleave)="activeLink = ''"
+                        [attr.d]="plan.svgPath"
+                        id="k-{{plan.houseNumber}}">
+                    </path>
+                </a>
+            </ng-container>
+        </svg>
+    </div>
+</section>

@@ -6,7 +6,7 @@
 
         <button (click)="close.emit(false)" class="form-request__cls-btn"></button>
 
-        <h1 class="form-request__title">Забронировать квартиру №{{apartmentNumber}}</h1>
+        <h1 class="form-request__title">Забронировать {{typeApartament}} №{{apartmentNumber}}</h1>
 
         <input [formControl]="form.controls['price']" type="text" style="display: none;">
         <input [formControl]="form.controls['number']" type="text" style="display: none;">
@@ -92,9 +92,5 @@
             class="form-request__btn">
             Забронировать
         </button>
-
-        <!-- <button *ngIf="isSubmited" class="form-request__btn">Забронировать</button> -->
-
     </form>
-
 </div>

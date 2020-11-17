@@ -47,6 +47,16 @@ export class FormCreditComponent implements OnChanges {
         public platform: PlatformDetectService
     ) { }
 
+    public get typeApartament() {
+        return this.type === 'КВ'
+            ? 'квартиры'
+            : this.type === 'КН'
+                ? 'помещения'
+                : this.type === 'ММ'
+                    ? 'машиноместа'
+                    : 'кладовой';
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if ( 'isOpen' in changes && this.isOpen === true ) {
             this.form.reset();

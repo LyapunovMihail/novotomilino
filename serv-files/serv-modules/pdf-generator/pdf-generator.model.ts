@@ -111,7 +111,7 @@ export class PDFGeneratorModel {
         })();
     }
 
-    public style = `
+    public get style() { return `
         @font-face {
             font-family: "abrade-book";
             src: url("file:///${this.params !== 'prod' ? devModPath : prodModPath}/assets/fonts/MuseoSansCyrl_300.otf');
@@ -373,7 +373,7 @@ export class PDFGeneratorModel {
         .flats_aside_scheme_fill {
             fill: #888BA2;
         }
-    `;
+    `; }
 
     public htmlRender (svgFloor, svgFlat, phoneNumber, addr) {
         return `

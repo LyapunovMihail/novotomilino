@@ -139,7 +139,7 @@ export class DbCronUpdate {
     private parseArticle(article: string) {
         // НТМ-03-01-04-02-018
         const [, houseStr, sectionStr, floorStr, , flatStr] = article.split('-');
-        const [house, section, floor, flat] = [houseStr, sectionStr, floorStr, flatStr].map(Number);
+        const [house, section, floor, flat] = [houseStr, sectionStr, floorStr, flatStr].map(el => Number(el.replace(/[^0-9]/g, '')));
         return {
             house,
             section,

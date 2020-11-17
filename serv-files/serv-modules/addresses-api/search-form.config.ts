@@ -22,14 +22,9 @@ export const FormConfig = {
         }
     ],
     typeList: [
-        {
-            name: 'квартиры',
-            value: 'КВ'
-        },
-        {
-            name: 'апартаменты',
-            value: 'АП'
-        }
+        { name: 'квартиры', value: 'КВ' },
+        { name: 'апартаменты', value: 'АП' },
+        { name: 'коммерческая недвижимость', value: 'КН' },
     ],
     decorationList: [
         {

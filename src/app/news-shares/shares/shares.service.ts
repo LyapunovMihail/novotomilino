@@ -37,7 +37,7 @@ export class SharesService {
     }
 
     public getFlatsBySectionAndHouse(params) {
-        return this.http.get(`/api/search?houses=${params.house}&sections=${params.section}`);
+        return this.http.get(`/api/search?houses=${params.house}&sections=${params.section}&type=КВ`);
     }
 
     public getFlatsByHousesAndNumbers(flatsData) {

@@ -22,6 +22,7 @@ export class ModalApartamentComponent implements OnInit {
 
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
+    @Input() public flatType = 'flat';
     @Input() public flatsList: IFlatWithDiscount[];
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
@@ -30,6 +31,17 @@ export class ModalApartamentComponent implements OnInit {
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
     ) {}
+
+    public get apartamentRooms() {
+        return this.flatType === 'flat'
+            ? this.flatData.rooms < 1
+                ? 'Студия'
+                : this.flatData.rooms + ' комнатная'
+            : 'Помещение';
+    }
+    public get imageSrc() {
+        return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.flatType}.svg`;
+    }
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];

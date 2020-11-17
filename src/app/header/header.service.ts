@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export interface IHeaderLink {
     name: string;
     url: string;
+    tooltip?: any[];
 }
 
 @Injectable( )
@@ -26,36 +27,18 @@ export class HeaderService {
         let year = (data.year) ? data.year : date.getFullYear();
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );
         return [
-            {
-                name: 'О ЖК',
-                url: '/about'
-            }, {
-                name: 'Расположение',
-                url: `/location`
+            { name: 'О ЖК', url: '/about' },
+            { name: 'Расположение', url: `/location` },
+            { name: 'Квартиры', url: `/flats`,
+                tooltip: [
+                    { name: 'Коммерческая недвижимость', url: '/flats/commercial' }
+                ],
             },
-            {
-                name: 'Квартиры',
-                url: `/flats`
-            },
-            {
-                name: 'Отделка',
-                url: '/decoration'
-            }, {
-                name: 'Ход строительства',
-                url: `/dynamic/${year}/${month}`
-            },
-            {
-                name: 'Условия покупки',
-                url: '/purchase'
-            },
-            {
-                name: 'Новости и акции',
-                url: '/news-shares'
-            }
-            // {
-            //     name: 'Избранное',
-            //     url: '/favorites'
-            // }
+            { name: 'Отделка', url: '/decoration' },
+            { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
+            { name: 'Условия покупки', url: '/purchase' },
+            { name: 'Новости и акции', url: '/news-shares' },
+            // { name: 'Избранное', url: '/favorites' },
         ];
     }
 }

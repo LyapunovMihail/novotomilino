@@ -1,0 +1,38 @@
+
+<div class="flat-snippet" *ngFor="let flat of favoriteFlats; let i = index">
+    <a class="flat-snippet__link" (click)="openApartmentModal(i)">
+        <div class="flat-snippet__wrap">
+            <div class="flat-snippet__image">
+                <img (error)="img.style.display = 'none'"
+                     [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'" alt="" #img>
+                <div *ngIf="img.style.display === 'none'" class="flat-snippet__image-error">Изображение недоступно</div>
+            </div>
+            <div class="flat-snippet__number">Пом. №{{flat.flat}}</div>
+        </div>
+        <div class="flat-snippet__wrap">
+            <div class="flat-snippet__space">{{flat.space}} м²</div>
+            <div class="flat-snippet__corpus">Корпус {{flat.house}}</div>
+            <div class="flat-snippet__section">Секция {{flat.section}}</div>
+        </div>
+        <div class="flat-snippet__wrap flat-snippet__wrap--price">
+            <div class="flat-snippet__price flat-snippet__price--for-space">{{(flat.price / flat.space).toFixed(0) | myBitNumberPipe}} <span class="g-rub">Р</span>/м²</div>
+            <div class="flat-snippet__price">{{flat.price | myBitNumberPipe}} <span class="g-rub--bold">Р</span></div>
+        </div>
+    </a>
+    <div class="flat-snippet__favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
+</div>
+
+
+<div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">
+    <p class="favorites-flats__empty-hint">Коммерческую недвижимость вы можете добавлять в этот раздел</p>
+    <a class="favorites-flats__empty-link g-body_bold" routerLink="/flats/commercial">Коммерческая недвижимость</a>
+</div>
+
+<app-flats-apartment-modal 
+    *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [typeApartment]="'office'"
+    [flatsList]="favoriteFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal>

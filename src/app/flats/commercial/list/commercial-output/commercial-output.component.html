@@ -1,0 +1,52 @@
+
+<section class="commercial-output">
+
+    <div class="commercial-output__container">
+
+        <div class="commercial-output__head">
+            <p class="commercial-output__head-result">Найдено {{count}} {{parseText(count)}}</p>
+
+            <div class="commercial-output__filter">
+                <div class="commercial-output__filter-item commercial-output__filter-item--{{item.name}}"
+                    (click)="filter(item)" *ngFor="let item of sortList"
+                    [ngClass]="{
+                        'active-up': selectFilterItem == item && selectFilter,
+                        'active-turn': selectFilterItem == item && !selectFilter}"
+                    >{{item.text}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="commercial-output__list">
+        <div class="commercial-output__flat flat-snippet" *ngFor="let flat of flatsList; let i = index">
+            <a class="flat-snippet__link" (click)="openApartmentModal(i)">
+                <div class="flat-snippet__wrap">
+                    <div class="flat-snippet__image">
+                        <img (error)="img.style.display = 'none'"
+                             [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'" alt="" #img>
+                        <div *ngIf="img.style.display === 'none'" class="flat-snippet__image-error">Изображение недоступно</div>
+                    </div>
+                    <div class="flat-snippet__number">Пом. №{{flat.flat}}</div>
+                </div>
+                <div class="flat-snippet__wrap">
+                    <div class="flat-snippet__space">{{flat.space}} м²</div>
+                    <div class="flat-snippet__corpus">Корпус {{flat.house}}</div>
+                    <div class="flat-snippet__section">Секция {{flat.section}}</div>
+                </div>
+                <div class="flat-snippet__wrap flat-snippet__wrap--prices">
+                    <div class="flat-snippet__price flat-snippet__price--for-space">{{(flat.price / flat.space).toFixed(0) | myBitNumberPipe}} &#8381;/м²</div>
+                    <div class="flat-snippet__price">{{flat.price | myBitNumberPipe}} &#8381;</div>
+                </div>
+            </a>
+            <div class="flat-snippet__favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
+        </div>
+    </div>
+</section>
+
+<app-flats-apartment-modal *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [typeApartment]="'office'"
+    [flatsList]="flatsList"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal>

@@ -1,0 +1,103 @@
+@import '../../../../styles/modules/mixins/mixin.scss';
+
+.commercial-search {
+    width: 100%;
+    min-height: calc(100vh - 96px - 50px);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 40px 0 64px;
+    @media (max-width: 767px) {
+        min-height: calc(100vh - 102px);
+    }
+
+    &__container { @include container(); }
+
+    &__back-link {
+        position: relative;
+        cursor: pointer;
+        padding: 0 0 0 27px;
+        &::before {
+            @include before-img(19px, 100%);
+            left: 0; top: 0;
+            background: url(/assets/img/arrow-back.svg) center no-repeat;
+            background-size: 19px 20px;
+            transition: left $transition;
+        }
+    }
+    &__title { margin: 40px 0 8px; }
+
+    &__show {
+        &-wrap {
+            width: 100%;
+            height: calc(100% - 150px);
+            min-height: calc(100vh - 96px - 50px);
+            position: absolute;
+            top: 0; left: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
+            pointer-events: none;
+            padding: 0 32px;
+            @media (max-width: 767px) {
+                padding: 0 16px;
+            }
+        }
+        &-filter {
+            width: 56px;
+            height: 56px;
+            position: -webkit-sticky;
+            position: sticky;
+            top: calc(100% - 56px - 24px - 50px);
+            background: url(/assets/img/flats/show_filter.svg) center no-repeat $col-orange;
+            background-size: 18px;
+            pointer-events: all;
+            border-radius: 50%;
+            z-index: 91;
+            &.active {
+                position: fixed;
+                top: auto;
+                bottom: 24px + 50px; right: 32px;
+                background-image: url(/assets/img/flats/check_white.svg);
+                @media (max-width: 767px) {
+                    right: 16px;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        &-container {
+            display: flex;
+            @include container();
+            align-items: center;
+        }
+
+        &-more {
+            @include size(157px,40px);
+            color: $col-white;
+            background-color: $col-orange;
+        }
+        &-up {
+            height: 24px;
+            color: $col-orange;
+            line-height: 24px;
+            background-color: transparent;
+            padding: 0 (24px + 8px) 0 0;
+            position: relative;
+            margin-left: auto;
+            border: 0;
+            &::after {
+                @include before-img(24px,24px);
+                background: url(/assets/img/flats/arrow-up.svg) center no-repeat;
+                top: 0; right: 0;
+            }
+        }
+    }
+}

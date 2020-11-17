@@ -1,11 +1,13 @@
 <aside class="floor__slider">
-    <button (click)="floorSelect(floorNumber + 1)" class="floor__slider_btn-up"></button>
+    <button (click)="floorSelect(floorNumber + 1)" class="floor__slider_btn-up"
+        [disabled]="floorSelector.length < 2"></button>
 
     <div class="floor__slider_hidden">
-        <ul [style.top.px]="-((floorSelector.length + 1 - floorNumber) * 40)" class="floor__slider-list">
+        <ul [style.top.px]="floorSelector.length > 1 ? -((floorSelector.length + 1 - floorNumber) * 40) : 0" class="floor__slider-list">
             <li *ngFor="let floor of floorSelector" class="floor__slider-item">{{floor}}</li>
         </ul>
     </div>
 
-    <button (click)="floorSelect(floorNumber - 1)" class="floor__slider_btn-down"></button>
+    <button (click)="floorSelect(floorNumber - 1)" class="floor__slider_btn-down"
+        [disabled]="floorSelector.length < 2"></button>
 </aside>

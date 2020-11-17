@@ -1,0 +1,39 @@
+
+<section class="commercial-output">
+    <div class="commercial-output__flat" *ngFor="let flat of flatsList; let i = index">
+        <div class="commercial-output__flat-container">
+            <a class="commercial-output__flat-link" (click)="openApartmentModal(i)">
+                <div class="g-flat__item-image">
+                    <!-- [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'" -->
+                    <img class="result__scheme-content" 
+                    [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + 'floor_' + flat.floor + '_' + 'office' + flat.flat + '.svg'"
+                        (error)="img.style.display = 'none'" #img>
+                        
+                    <div class="image-error" *ngIf="img.style.display === 'none'"></div>
+                </div>
+                <div class="g-flat__item-wrap g-flat__item-wrap--info">
+    
+                    <div class="g-flat__item-wrap g-flat__item-wrap--space-between">
+                        <p class="g-flat__item-text g-flat__item-text--room">Пом. №{{flat.flat}} {{flat.space}} м&#178;</p>
+                    </div>
+                    <div class="g-flat__item-wrap g-flat__item-wrap--flex-start">
+                        <p class="g-flat__item-text g-flat__item-text--floor">Секция {{flat.section}}</p>
+                        <p class="g-flat__item-text g-flat__item-text--corpus">Корпус {{flat.house}}</p>
+                        <p class="g-flat__item-text g-flat__item-text--price">
+                            {{+flat.price | myBitNumberPipe}} <span class="g-rub_bold">P</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <div class="commercial-output__flat-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
+        </div>
+    </div>
+</section>
+
+<app-modal-apartment *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="flatsList"
+    [flatIndex]="selectedFlatIndex"
+    [flatType]="'office'"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-modal-apartment>

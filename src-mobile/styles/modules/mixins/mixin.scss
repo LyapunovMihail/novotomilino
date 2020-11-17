@@ -20,6 +20,8 @@ $col-black-5: rgba(0, 0, 0, 0.5);
 $col-orange: #e7490f;
 $col-32: #323232;
 $col-97: #979797;
+$col-61: #616161;
+$col-89: #898989;
 $col-blue: #0070c9;
 //--
 $col-red: #ee4237;
@@ -41,11 +43,39 @@ $transition: .2s linear;
 $trans-link: .6s ease;
 $trans-img: transform .7s linear;
 
+@mixin container() {
+    width: calc(100% - 60px);
+    max-width: $tabletContainer;
+    @media(max-width: 767px) {
+        width: $mobileContainer;
+    }
+}
+
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -o-font-smoothing: antialiased;
 }
+
+@mixin overflow($x: scroll, $y: hidden) {
+    overflow-x: $x;
+    overflow-y: $y;
+}
+@mixin font-size($fs, $lh) {
+    font-size: $fs;
+    line-height: $lh;
+}
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+@mixin before-img($width, $height) {
+    content: '';
+    position: absolute;
+    width: $width;
+    height: $height;
+}
+
 @mixin fw14-20($color: #000105) {
     font: 500 14px/20px $font-mus;
     @include font-smoothing();

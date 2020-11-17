@@ -9,8 +9,15 @@
 
         <nav class="header__menu">
             <ul class="header__menu-list">
-                <li [class.active]="checkLink(link.url)" class="header__menu-item" *ngFor="let link of links">
+                <li class="header__menu-item" *ngFor="let link of links"
+                  [ngClass]="{'flats': link.name === 'Квартиры', 'active': checkLink(link.url)}">
                     <a [routerLink]="link.url">{{link.name}}</a>
+
+                    <div class="header__menu-tooltip" *ngIf="link.tooltip">
+                        <ng-container *ngFor="let item of link.tooltip">
+                            <a [routerLink]="item.url" routerLinkActive="active">{{item.name}}</a>
+                        </ng-container>
+                    </div>
                 </li>
                 <li class="header__menu-item header__menu-item--favorites" routerLink="/favorites">
                     <span class="empty" *ngIf="favoriteCounter === 0"><img src="/assets/img/favorite.svg" alt=""></span>

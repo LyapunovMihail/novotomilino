@@ -1,4 +1,4 @@
-<section class="main__place" *ngIf="gallerySlides">
+<section class="main__place" *ngIf="gallerySlides && gallerySlides.length">
     <div class="main__container">
         <h1 class="main__place-title g-title-path">Места поблизости</h1>
     </div>
@@ -19,9 +19,9 @@
 
     <div class="gallery_content_list_item-descr">
         <div class="gallery_content_list_item-descr-group">
-            <h1 class="gallery_content_list_item-title">{{gallerySlides[slide - 1].name}}</h1>
+            <h1 class="gallery_content_list_item-title" *ngIf="gallerySlides[slide - 1]">{{gallerySlides[slide - 1].name}}</h1>
             <p class="gallery_content_list_item-count">{{slide < 10 ? '0' : ''}}{{slide}}/{{slide < 10 ? '0' : ''}}{{gallerySlides.length}}</p>
         </div>
-        <p class="gallery_content_list_item-text">{{gallerySlides[slide - 1].description}}</p>
+        <p class="gallery_content_list_item-text" *ngIf="gallerySlides[slide - 1]">{{gallerySlides[slide - 1].description}}</p>
     </div>
 </section>

@@ -15,10 +15,17 @@ import { PlanComponent } from './plan/plan.component';
 import { PlanComponents } from './plan/plan';
 import { PopularComponent } from './popular/popular.component';
 import { LoaderModule } from '../UI/loader/loader.module';
+import { CommercialComponents } from './commercial/commercial';
+import { CommercialComponent } from './commercial/commercial.component';
+import { CommercialListComponent } from './commercial/list/commercial-list.component';
+import { CommercialPlanComponent } from './commercial/plan/commercial-plan.component';
+import { CommercialFloorComponent } from './commercial/floor/commercial-floor.component';
 
 const FlatsComponents = [
     FlatsComponent,
     PopularComponent,
+
+    ...CommercialComponents,
 
     ...HouseComponents,
 
@@ -50,6 +57,14 @@ const FlatsComponents = [
                 children: [
                     { path: '', redirectTo: 'plan', pathMatch: 'full' },
                     { path: 'plan', component: PlanComponent },
+                    { path: 'commercial', component: CommercialComponent,
+                        children: [
+                            { path: '', redirectTo: 'list', pathMatch: 'full' },
+                            { path: 'list', component: CommercialListComponent },
+                            { path: 'plan', component: CommercialPlanComponent },
+                            { path: 'house/:houses/section/:sections/floor/:floor', component: CommercialFloorComponent },
+                        ]
+                    },
                     { path: '_search', component: PlanComponent, children: [{path: '**', component: PlanComponent}]},
                     { path: 'house', component: HouseComponent },
                     { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
