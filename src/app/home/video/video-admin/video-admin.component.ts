@@ -32,20 +32,11 @@ export class VideoAdminComponent implements OnInit {
     }
 
     createForm(form) {
-
         this.videoForm = this.fb.group({
             name: [form.name, Validators.required ],
             link: [form.link, Validators.required ],
             show: [form.show, Validators.required ]
         });
-    }
-
-    showButton(ev) {
-        let isCheck = ev.target.checked;
-
-        console.log(isCheck);
-        console.log(this.videoForm.controls['show']);
-        // isCheck ? this.videoForm.patchValue({show: true }) : '';
     }
 
     save(form) {

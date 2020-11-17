@@ -86,7 +86,7 @@
         </div>
 
         <div class="shares-edit-form__path-wrap">
-            <div class="shares-edit-form__show-home">
+            <div class="shares-edit-form__show-home" [class.shares-edit-form__show-home--disabled]="form.get('countdown').value && days < 0">
                 <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_main'">
                 <label for="public" class="g-checkbox shares-edit-form__show-home-checkbox"></label>
                 <label for="public" class="shares-edit-form__show-home-text">Показать акцию на главной</label>

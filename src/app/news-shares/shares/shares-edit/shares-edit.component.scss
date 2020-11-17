@@ -207,6 +207,11 @@
         }
 
         &-text  { @include fw18-24; }
+
+        &--disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
     }
 
     &__save {

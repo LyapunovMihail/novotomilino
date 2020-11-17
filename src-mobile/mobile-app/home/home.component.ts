@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { HomeService } from './home.service';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
@@ -39,18 +40,36 @@ export class HomeComponent implements OnInit {
             this.homeService.getNews()
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
-                this.shareSnippets = shares.sharesList;
+                this.shareSnippets = this.filterExpiredShares(shares.sharesList);
                 this.mainNews = this.makeArrayCopy(this.newsSnippets);
                 this.mainShares = this.makeArrayCopy(this.shareSnippets);
-                return [...shares.sharesList, ...news];
+                return [...this.shareSnippets, ...this.newsSnippets];
             })
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
+                this.sortByDateOfCreate(this.allSnippets);
                 this.newsLoaded = true;
             },
             (err) => console.log(err)
         );
+    }
+
+    private countDown(finishDate) {
+        const createdDateVal = moment(Date.now());
+        const finishDateVal = moment(finishDate);
+        const duration = moment.duration(createdDateVal.diff(finishDateVal));
+        return Math.ceil(duration.asDays() * -1);
+    }
+
+    private filterExpiredShares(shares) {
+        return shares.filter((share) => !share.countdown || (share.countdown && this.countDown(share.finish_date) >= 0));
+    }
+
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((share1, share2) => {
+            return new Date(share1.created_at) > new Date(share2.created_at) ? 1 : -1;
+        });
     }
 
     public makeArrayCopy(snippetArr) {

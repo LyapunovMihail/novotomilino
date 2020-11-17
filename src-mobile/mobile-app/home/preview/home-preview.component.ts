@@ -1,9 +1,7 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
-import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import * as moment from 'moment';
 import {
-    EnumGallerySnippet, GALLERY_UPLOADS_PATH,
+    GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { HomeService } from '../home.service';

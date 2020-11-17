@@ -42,17 +42,15 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public uploadsPath: string;
 
-    public finishDate;
-
     public days: number;
 
     public dateNow: string;
 
     public paginatorCount;
 
-    @Input() isForm = false ;
+    @Input() isForm = false;
 
-    @Input() redactId: any ;
+    @Input() redactId: any;
 
     // вызывается при изменении сниппета
     @Output() snippetsChange = new EventEmitter();
@@ -71,7 +69,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         private flatsDiscountService: FlatsDiscountService
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
-        this.form  = new FormGroup({
+        this.form = new FormGroup({
             name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
             text: new FormControl('', Validators.required),
             textPreview: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
@@ -100,33 +98,43 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         } else {
             this.getObjectById();
         }
-        this.finishDate = this.form.value.finish_date;
 
         this.countDown();
+        this.setShowOnMain();
 
-        this.subs.push(this.form.get('finish_date').valueChanges
-            .pipe(takeUntil(this._ngUnsubscribe))
-            .subscribe((value) => {
-                this.finishDate = this.form.get('finish_date').value;
-                this.countDown();
-            }));
+        this.subscribeValueChanges();
 
         this.identifyPaginatorCount();
 
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
 
+    subscribeValueChanges() {
+        this.subs.push(this.form.get('finish_date').valueChanges
+            .pipe(takeUntil(this._ngUnsubscribe))
+            .subscribe(() => {
+                this.countDown();
+                this.setShowOnMain();
+            }));
+
+        this.subs.push(this.form.get('countdown').valueChanges
+            .pipe(takeUntil(this._ngUnsubscribe))
+            .subscribe(() => {
+                this.setShowOnMain();
+            }));
+    }
 
     // tslint:disable-next-line:member-access
     ngOnDestroy() {
         this.unsubscribe();
     }
 
-    public get shareFlats(): FormArray { return this.form.get('shareFlats') as FormArray; }
+    public get shareFlats(): FormArray {
+        return this.form.get('shareFlats') as FormArray;
+    }
 
     public addFlats(value?: ShareFlat[]) {
         if (value) {
-            console.log('values: ', value);
             value.forEach((flat: ShareFlat) => {
                 this.shareFlats.push(new FormControl(flat));
             });
@@ -157,7 +165,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public onImagePicked(e: Event, type: string): void {
         const file = (e.target as HTMLInputElement).files[0];
-        const results = [];
         this.sharesService.imageUpload(file)
             .then((data: any) => {
                 if (type === 'main-image') {
@@ -165,24 +172,33 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     this.form.patchValue({mainThumbnail: data.thumbnail});
                 }
             }).catch((err) => {
-                alert('Что-то пошло не так!');
-                console.error(err);
-            });
+            alert('Что-то пошло не так!');
+            console.error(err);
+        });
     }
 
     public countDown() {
         const createdDateVal = moment(Date.now());
-        const finishDateVal = moment(this.finishDate);
+        const finishDateVal = moment(this.form.get('finish_date').value);
         const duration = moment.duration(createdDateVal.diff(finishDateVal));
         this.days = Math.ceil(duration.asDays() * -1);
+
+    }
+
+    public setShowOnMain() {
+        let showOnMain = this.form.get('show_on_main').value;
+        if (this.form.get('countdown').value && this.days < 0) {
+            showOnMain = false;
+        }
+        this.form.get('show_on_main').setValue(showOnMain);
     }
 
     public getObjectById() {
         this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
-            this.finishDate = data[0].finish_date;
             this.addFlats(data[0].shareFlats);
             this.countDown();
+            this.setShowOnMain();
         });
     }
 

@@ -1,6 +1,7 @@
-import {Component, Input, OnInit } from '@angular/core';
-import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
-import {Share, SHARES_UPLOADS_PATH} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Component, Input, OnInit } from '@angular/core';
+import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { Share, SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+
 declare let $: any;
 import * as moment from 'moment';
 
@@ -18,7 +19,7 @@ export class HomeNewsComponent implements OnInit {
 
     public sharesUploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
 
-    public isAuthorizated: boolean = false ;
+    public isAuthorizated: boolean = false;
 
     public AuthorizationEvent;
 
@@ -43,13 +44,13 @@ export class HomeNewsComponent implements OnInit {
     }
 
     public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 3 ) ? this.currentSlide + 1 : this.mainSnippets.length - 3;
+        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 3) ? this.currentSlide + 1 : this.mainSnippets.length - 3;
         const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
 
     public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
+        this.currentSlide = (this.currentSlide > 0) ? this.currentSlide - 1 : 0;
         const snippets = this.activeSnippets === 'all' ? this.allSnippets : this.activeSnippets === 'news' ? this.newsSnippets : this.shareSnippets;
         this.setSlidesOpacity(snippets);
     }
@@ -58,9 +59,9 @@ export class HomeNewsComponent implements OnInit {
     private setSlidesOpacity(snippets) {
         snippets.forEach((item, index) => {
             if (index < this.currentSlide || index > this.currentSlide + 2) {
-                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events'] : 'none'});
+                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events']: 'none'});
             } else {
-                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events'] : 'unset'});
+                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events']: 'unset'});
             }
         });
     }

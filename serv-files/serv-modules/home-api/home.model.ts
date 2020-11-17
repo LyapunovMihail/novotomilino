@@ -51,7 +51,7 @@ export class HomeModel {
             description: val.description,
         };
         if (headerDescription) {
-            await this.collection.updateOne({_id: this.homeObjectId}, {$set: val} );
+            await this.collection.update({_id: this.homeObjectId}, {$set: val} );
         } else {
             await this.collection.insert(options);
         }

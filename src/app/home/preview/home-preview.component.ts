@@ -1,9 +1,6 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
-import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
-import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Component, HostListener, Input, OnDestroy, OnInit, Output, EventEmitter, HostBinding } from '@angular/core';
 import * as moment from 'moment';
 import {
-    EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
@@ -43,7 +40,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public gallerySlides: IGallerySnippet[];
 
-    public activeNews= 0;
+    public activeNews = 0;
 
     public activeShare = 0;
 
@@ -74,7 +71,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         });
         this.homeService.getPreviewVideo().subscribe(
             data => {
-                console.log(data);
                 this.videoContent = data;
             },
             err => console.log(err)
@@ -115,7 +111,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public changeDescr(descr) {
         this.homePreview.description = descr;
-        console.log('this.homePreview', this.homePreview);
         this.homeService.updateHomePreview(this.homePreview).subscribe(
             data => {
                 this.homePreview = data;
