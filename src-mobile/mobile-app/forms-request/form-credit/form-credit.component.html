@@ -11,19 +11,19 @@
 
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Фамилия</p>
-            <input [formControl]="form.controls['lastName']" 
+            <input [formControl]="form.controls['lastName']"
                 class="form-request__field"
                 type="text">
         </div>
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Имя</p>
-            <input [formControl]="form.controls['name']" 
+            <input [formControl]="form.controls['name']"
                 class="form-request__field"
                 type="text">
         </div>
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Отчество</p>
-            <input [formControl]="form.controls['middleName']" 
+            <input [formControl]="form.controls['middleName']"
                 class="form-request__field"
                 type="text">
         </div>
@@ -44,10 +44,10 @@
 
         <div class="form-request__wrap">
             <span class="form-request__subtitle">Номер телефона*</span>
-            <input class="form-request__field" 
-                *ngIf="platform.isBrowser" 
+            <input class="form-request__field"
+                *ngIf="platform.isBrowser"
                 [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
+                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }"
                 type="text" maxlength="11">
             <p class="form-request__notice">Например: 79991105522</p>
         </div>
@@ -97,7 +97,7 @@
         <label class="form-request__checkbox-wrap">
             <input [formControl]="form.controls['agreement']" type="checkbox">
             <div class="g-checkbox form-request__checkbox" [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }"></div>
-            <p class="form-request__subtitle form-request__subtitle_checkbox">Я соглашаюсь на использование моих персональных данных.</p>
+            <span>Я соглашаюсь на <a class="form-request__agreement" routerLink="/agreement">обработку моих персональных данных.</a></span>
         </label>
 
         <button

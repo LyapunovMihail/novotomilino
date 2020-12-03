@@ -15,6 +15,7 @@ export const ROUTES: Routes = [
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
     { path: 'parking', loadChildren: './parking/parking.module#ParkingModule' },
     { path: 'storerooms', loadChildren: './storerooms/storerooms.module#StoreroomsModule' },
+    { path: 'agreement', loadChildren: './agreement/agreement.module#AgreementModule' },
 
     { path: 'error-404', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' },
     { path: '**', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' }

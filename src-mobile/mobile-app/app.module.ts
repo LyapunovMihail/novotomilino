@@ -40,6 +40,7 @@ import { DynamicModule } from './dynamic/dynamic.module';
 import '../styles/styles.scss';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
+import { AgreementModule } from './agreement/agreement.module';
 
 
 // Application wide providers
@@ -70,6 +71,7 @@ const APP_MODULES = [
     DecorationModule,
     DocumentationModule,
     QuarantineInfoModule,
+    AgreementModule,
 
     BrowserModule,
     BrowserAnimationsModule,

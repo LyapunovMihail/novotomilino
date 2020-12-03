@@ -53,6 +53,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
+import { AgreementModule } from './agreement/agreement.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -69,7 +70,7 @@ const APP_PROVIDERS = [
     PhoneObserverService,
     MetaService,
     MetaTagsRenderService,
-    FavoritesService
+    FavoritesService,
 ];
 
 const APP_MODULES = [
@@ -92,7 +93,7 @@ const APP_MODULES = [
     DocumentationModule,
     QuarantineInfoModule,
     SeoModule,
-
+    AgreementModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

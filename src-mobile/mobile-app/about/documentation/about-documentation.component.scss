@@ -78,4 +78,8 @@
             }
         }
     }
+    &__agreement {
+        color: $col-red;
+        text-decoration: underline;
+    }
 }

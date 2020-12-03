@@ -1,0 +1,117 @@
+@import "../../styles/modules/mixins/mixin";
+
+@mixin font-h1 {
+  font-family: $font-proba;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 120%;
+}
+@mixin font-h3 {
+  font-family: $font-proba;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 130%;
+}
+@mixin font-body {
+  font-family: $font-proba;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 146%;
+}
+@mixin font-small {
+  font-size: 14px;
+  line-height: 146%;
+}
+
+.agreement {
+  &__bg {
+    background-color: $col-bg-secondary;
+  }
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+  &__wrapper {
+    padding: 48px 40px;
+    background-color: $col-white;
+  }
+  &__heading {
+    @include font-h1;
+    margin: 0 0 32px;
+  }
+  & li > a {
+    color: $col-red;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__main {
+    &-list {
+      counter-reset: main-item;
+    }
+    &-item {
+      @include font-h3;
+      margin: 0 0 32px;
+      &::before {
+        content: counter(main-item) '.';
+        counter-increment: main-item;
+      }
+      &:nth-child(1) .agreement__base-list .agreement__base-item::before { content: '1.' counter(base-item) '.'; }
+      &:nth-child(2) .agreement__base-list .agreement__base-item::before { content: '2.' counter(base-item) '.'; }
+      &:nth-child(3) .agreement__base-list .agreement__base-item::before { content: '3.' counter(base-item) '.'; }
+      &:nth-child(4) .agreement__base-list .agreement__base-item::before { content: '4.' counter(base-item) '.'; }
+      &:nth-child(5) .agreement__base-list .agreement__base-item::before { content: '5.' counter(base-item) '.'; }
+      &:nth-child(6) .agreement__base-list .agreement__base-item::before { content: '6.' counter(base-item) '.'; }
+      &:nth-child(7) .agreement__base-list .agreement__base-item::before { content: '7.' counter(base-item) '.'; }
+      &:nth-child(8) .agreement__base-list .agreement__base-item::before { content: '8.' counter(base-item) '.'; }
+      &:last-child { margin: 0; }
+    }
+  }
+  &__base {
+    &-list {
+      counter-reset: base-item;
+    }
+    &-item {
+      @include font-body;
+      margin: 0 0 16px;
+
+      &::before {
+        counter-increment: base-item;
+      }
+      &:first-child {
+        margin: 16px 0 16px;
+      }
+    }
+  }
+  &__mark {
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+    &-item {
+      position: relative;
+      padding-left: 18px;
+      margin: 0 0 8px;
+
+      &:first-child {
+        margin: 8px 0 8px;
+      }
+      &:last-child {
+        margin: 0;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 1px;
+        background-color: $col-89;
+        top: 12px;
+        left: 0;
+      }
+    }
+  }
+}

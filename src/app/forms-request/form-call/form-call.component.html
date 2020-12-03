@@ -12,7 +12,7 @@
 
             <div class="form-request_wrap">
                 <span class="form-request_name">Ваше имя</span>
-                <input [formControl]="form.controls['name']" 
+                <input [formControl]="form.controls['name']"
                     class="form-request_field"
                     type="text">
             </div>
@@ -20,7 +20,7 @@
             <div class="form-request_wrap">
                 <span class="form-request_name">Телефон</span>
                 <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
-                    [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                    [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }"
                     class="form-request_field" [textMask]="{mask: phoneMask}" type="text">
             </div>
 
@@ -52,12 +52,15 @@
             <label class="form-request_label form-request_label--agreement">
                 <input [formControl]="form.controls['agreement']" class="form-request_checkbox" type="checkbox">
                 <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }" class="form-request_for-checkbox"></div>
-                <span class="form-request_checkbox-text">Я соглашаюсь на использование моих персональных данных.</span>
+                <span class="form-request_checkbox-text">
+                      Я соглашаюсь на
+                      <a class="form-request__agreement" routerLink="/agreement">обработку моих персональных данных.</a>
+                </span>
             </label>
 
             <button *ngIf="!isSubmited"
-                [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
-                [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+                [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}"
+                [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)"
                 class="form-request_btn">
                 <span class="form-request_btn_text">Отправить заявку</span>
             </button>

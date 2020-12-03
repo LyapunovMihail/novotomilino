@@ -106,8 +106,8 @@
         transition: border-color .2s linear;
         @include fw18-24;
         &::-webkit-input-placeholder { color: $col-black; }
-        &::-moz-placeholder { color: $col-black; }      
-        &:-moz-placeholder { color: $col-black; }    
+        &::-moz-placeholder { color: $col-black; }
+        &:-moz-placeholder { color: $col-black; }
         &:-ms-input-placeholder { color: $col-black; }
 
         &_not-valid { border-color: #d8241d; }
@@ -119,8 +119,6 @@
             pointer-events: none;
             padding: 0 15px;
         }
-
-
     }
 
     &__radio {
@@ -160,7 +158,7 @@
                 height: 90px;
                 margin: 0 0 50px;
             }
-            
+
             input {
                 &:not(.form-request__field) { display: none; }
                 &:checked {
@@ -204,9 +202,13 @@
                     border-color: $col-orange;
                 }
             }
+
+            span {
+                max-width: 240px;
+            }
         }
     }
-    
+
     &__btn {
         width: 100%;
         height: 50px;
@@ -218,6 +220,10 @@
         border-radius: 4px;
         box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
         letter-spacing: .5px;
+    }
+    &__agreement {
+        color: $col-red;
+        text-decoration: underline;
     }
 }
 

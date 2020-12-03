@@ -8,6 +8,7 @@ import { FormCallComponent } from './form-call/form-call.component';
 import { NgModule } from '@angular/core';
 import { TextMaskModule } from 'angular2-text-mask';
 import { FormSuccessComponent } from './form-success/form-success.component';
+import { RouterModule } from '@angular/router';
 
 let Components = [
     FormCallComponent,
@@ -28,7 +29,8 @@ let Components = [
         TextMaskModule,
         CommonModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     providers: [
         FormsRequestService

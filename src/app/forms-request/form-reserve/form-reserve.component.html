@@ -13,19 +13,19 @@
 
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Фамилия</p>
-            <input [formControl]="form.controls['lastName']" 
+            <input [formControl]="form.controls['lastName']"
                 class="form-request__field"
                 type="text">
         </div>
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Имя</p>
-            <input [formControl]="form.controls['name']" 
+            <input [formControl]="form.controls['name']"
                 class="form-request__field"
                 type="text">
         </div>
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Отчество</p>
-            <input [formControl]="form.controls['middleName']" 
+            <input [formControl]="form.controls['middleName']"
                 class="form-request__field"
                 type="text">
         </div>
@@ -33,11 +33,11 @@
         <div class="form-request__wrap">
             <p class="form-request__subtitle">Номер телефона*</p>
             <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }" 
+                [ngClass]="{'input-invalid': !form.get('phone').valid && form.get('phone').touched }"
                 class="form-request__field" type="text" maxlength="11">
             <p class="form-request__notice">Например: 79991105522</p>
         </div>
-        
+
         <div class="form-request__wrap form-request__wrap_last">
             <p class="form-request__subtitle">Эл. почта</p>
             <input [formControl]="form.controls['mail']" class="form-request__field" type="email">
@@ -83,7 +83,7 @@
         <label class="form-request__checkbox-wrap">
             <input [formControl]="form.controls['agreement']" type="checkbox">
             <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }" class="g-checkbox form-request__checkbox"></div>
-            <span class="form-request__subtitle form-request__subtitle_checkbox">Даю согласие на обработку моих персональных данных</span>
+            <p>Я соглашаюсь на <a class="form-request__agreement" target="_blank" routerLink="/agreement">обработку моих персональных данных.</a></p>
         </label>
 
         <button
