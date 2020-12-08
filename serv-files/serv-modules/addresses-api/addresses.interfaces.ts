@@ -62,6 +62,7 @@ export interface IAddressItemFlat {
     inFavorite?: boolean;
     floorsInSection: number;
     flatsInFloor: number;
+    isEuro: string;
     _id?: any;
 }
 
