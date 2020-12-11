@@ -1,5 +1,26 @@
 @import "../mixins/mixin";
 
+.img-map { // Для страницы "О ЖК"
+    width: 64px;
+    height: 64px;
+    display: block;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 3px solid $col-white;
+    transition: border-color .2s linear;
+    overflow: hidden;
+    &> img {
+        width: 100%;
+        height: 100%;
+        transition: transform .2s linear;
+        object-fit: cover;
+    }
+    &--hover {
+        border-color: $col-red;
+        &> img { transform: scale(1.1); }
+    }
+}
+
 .marker-content {
     width: 38px;
     height: 34px;

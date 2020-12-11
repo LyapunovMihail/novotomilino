@@ -13,6 +13,8 @@ import { AboutGalleryComponent } from './gallery/about-gallery.component';
 import { AboutGalleryAdminComponent } from './gallery/gallery-admin/about-gallery-admin.component';
 import { LoaderModule } from '../UI/loader/loader.module';
 import { AboutNavMenuComponent } from './nav-menu/nav-menu.component';
+import { BuilderListComponent } from './builder/builder-list/builder-list.component';
+import { BuilderMapComponent } from './builder/builder-map/builder-map.component';
 
 const AboutComponents = [
     AboutComponent,
@@ -24,6 +26,8 @@ const AboutComponents = [
     AboutMembersComponent,
     AboutDocumentationComponent,
     AboutNavMenuComponent,
+    BuilderListComponent,
+    BuilderMapComponent,
 ];
 
 @NgModule({

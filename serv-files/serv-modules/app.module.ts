@@ -18,6 +18,7 @@ import { TriggerController } from './trigger-api/trigger.controller';
 import { GalleryController } from './gallery-api/gallery.controller';
 import { HomeController } from './home-api/home.controller';
 import { PDFController } from './pdf-generator/pdf-generator.controller';
+import { ProjectsController } from './projects-api/projects-api.controller';
 
 @Module({
     imports: [],
@@ -39,6 +40,7 @@ import { PDFController } from './pdf-generator/pdf-generator.controller';
         HomeController,
         SeoController,
         PDFController,
+        ProjectsController,
     ],
     providers: [
         MongoConnectionService,

@@ -10,6 +10,8 @@ import { AboutProjectComponent } from './project/about-project.component';
 import { AboutBuilderComponent } from './builder/about-builder.component';
 import { AboutDocumentationComponent } from './documentation/about-documentation.component';
 import { AboutMembersComponent } from './members/about-members.component';
+import { BuilderListComponent } from './builder/builder-list/builder-list.component';
+import { BuilderMapComponent } from './builder/builder-map/builder-map.component';
 
 const AboutComponents = [
     AboutComponent,
@@ -18,7 +20,9 @@ const AboutComponents = [
     AboutBuilderComponent,
     AboutMembersComponent,
     AboutDocumentationComponent,
-    AboutGalleryComponent
+    AboutGalleryComponent,
+    BuilderListComponent,
+    BuilderMapComponent,
 ];
 
 @NgModule({

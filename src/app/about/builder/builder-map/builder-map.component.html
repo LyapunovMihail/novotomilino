@@ -1,0 +1,22 @@
+
+<section class="project-map">
+
+    <div class="project-map__list">
+        <a class="project-map__list-item project-item" id="project-map-item-{{i}}"
+            (mouseenter)="sideMarkerHover(i)" (mouseleave)="sideMarkerDishover(i)"
+            *ngFor="let item of filteredProject; let i = index"
+            [href]="'//3-red.com/objects/list/' + item._id" target="_blank">
+        
+            <div class="project-item__image">
+                <img (error)="img.style.display = 'none'" [src]="uploadPath + item.image" alt="object-image" #img>
+                <div *ngIf="img.style.display === 'none'" class="g-image-error"></div>
+            </div>
+            <div class="project-item__info">
+                <p class="project-item__info-title">{{item.name}}</p>
+                <p class="project-item__info-status">{{item.status}}</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="project-map__map" id="map"></div>
+</section>

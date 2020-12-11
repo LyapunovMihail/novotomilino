@@ -1,9 +1,12 @@
-$font: 18px/31px 'Montserrat', sans-serif;
 @import "../../../styles/modules/mixins/mixin";
 
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.margin-32 {
+    margin: 0 0 32px;
 }
 
 .developer {
@@ -42,144 +45,92 @@ $font: 18px/31px 'Montserrat', sans-serif;
             }
         }
     }
-
-    &__project {
+    &__switch {
         width: 100%;
         max-width: $w1600;
-
+        display: flex;
+        align-items: center;
+        
         &-title {
             font: 500 20px/24px $font-mus;
             @include font-smoothing;
             color: $col-black;
-            margin: 30px 0;
-            width: 100%;
+            margin-right: 32px;
         }
-        &-link {
-            text-decoration: none;
+        &-item {
+            font: 18px/27px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
             position: relative;
+            padding-right: 52px + 16px;
+            cursor: pointer;
 
-            &:before {
-                content: '';
+            &> div {
+                width: 52px;
+                height: 30px;
+                border-radius: 20px;
+                background-color: #D9D9D9;
+                transition: background-color .2s ease;
+                box-sizing: border-box;
                 position: absolute;
-                width: 100%;
-                height: 1px;
-                background-color: $col-orange;
-                right: 0;
-                bottom: 0;
-                transition: width .6s ease;
+                top: -3px; right: 0;
+                padding: 5px;
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: $col-76;
+                    transition: background-color .2s ease, transform .2s ease;
+                }
             }
-            &:hover {
-                &:before {
-                    width: 0%;
+            &> input:checked + div {
+                background-color: $col-orange;
+                &::after {
+                    background-color: $col-white;
+                    transform: translateX(100%);
                 }
             }
         }
-        &-grid {
-            display: grid;
-            grid-template: repeat(4, 260px)/repeat(2, 605px);
-            gap: 30px;
+    }
+    &__nav {
+        width: 100%;
+        max-width: $w1600;
+        display: flex;
+        justify-content: flex-start;
 
-            &-item {
-                padding: 20px 20px 15px;
-                box-sizing: border-box;
-                width: 100%;
+        &-wrap {
+            display: flex;
+            padding: 0 0 10px;
+            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+        }
+        &-item {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, 0.7);
+            box-sizing: border-box;
+            cursor: pointer;
+            &+ a { margin-left: 16px; }
+
+            &.active {
+                color: #000105;
                 position: relative;
-                border-radius: 4px;
-                display: flex;
-                flex-flow: column nowrap;
-                justify-content: space-between;
-                overflow: hidden;
-                will-change: transform;
-
-                &:hover .grid-item__bg-image {
-                    transform: scale(1.1);
-                }
-                &:hover .grid-item__name-title {
-                    color: #d45a42; // Уточнить размер увеличения
-                }
-
                 &:before {
                     content: '';
                     position: absolute;
                     left: 0;
-                    bottom: 0;
+                    bottom: -11px;
                     width: 100%;
-                    height: 100%;
-                    border-radius: 4px;
-                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+                    height: 2px;
+                    background: #e7490f;
                 }
-
-                .grid-item__bg-image {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    left: 0;
-                    top: 0;
-                    z-index: -1;
-                    transform: scale(1);
-                    transition: $trans-img;
-                    will-change: transform;
-                }
-
-                .grid-item__location {
-                    display: flex;
-
-                    &-city,
-                    &-distance {
-                        padding: 5px 10px;
-                        background: #fff;
-                        position: relative;
-                        font: 500 14px/20px $font-mus;
-                        @include font-smoothing;
-                        color: $col-black;
-                    }
-                    &-city {
-                        border-radius: 4px 0 0 4px;
-                        margin: 0 1px 0 0;
-                    }
-                    &-city_barviha {
-                        border-radius: 4px;
-                    }
-                    &-distance {
-                        border-radius: 0 4px 4px 0;
-                    }
-                }
-                .grid-item__name {
-                    position: relative;
-
-                    &-title {
-                        font: 500 24px/29px $font-mus;
-                        @include font-smoothing;
-                        color: #fff;
-                        transition: $transition;
-                    }
-                    &-subtitle {
-                        font: 500 14px/20px $font-mus;
-                        @include font-smoothing;
-                        color: #fff;
-                    }
-                    &-ilike {
-                        width: 66px;
-                        height: 24px;
-                        position: absolute;
-                        top: -12px - 24px;
-                        left: 0;
-                    }
-                }
-            }
-            .grid-item_one {
-                grid-row-start: 1;
-                grid-row-end: 3;
-                grid-column-start: 1;
-                grid-column-end: 2;
-            }
-            .grid-item_five {
-                grid-row-start: 3;
-                grid-row-end: 5;
-                grid-column-start: 2;
-                grid-column-end: 3;
             }
         }
     }
+    &__project {
+        width: 100%;
+        max-width: $w1600;
+    }
+    &__map { width: 100%; }
 }
