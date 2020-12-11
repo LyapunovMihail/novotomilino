@@ -130,7 +130,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public loadMore() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 12; i++) {
             if (this.skip < this.searchFlats.length) {
                 this.outputFlatsList.push(this.searchFlats[this.skip++]);
             }

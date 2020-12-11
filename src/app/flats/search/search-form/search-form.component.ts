@@ -139,10 +139,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public formReset() {
         this.buildForm({});
-        setTimeout(() => {
-            this.sort = this.config.sort;
-            this.sortChange.emit(this.sort);
-        }, 100);
+        // setTimeout(() => {
+        //     this.sort = this.config.sort;
+        //     this.sortChange.emit(this.sort);
+        // }, 100);
     }
 
     public ngOnDestroy() {

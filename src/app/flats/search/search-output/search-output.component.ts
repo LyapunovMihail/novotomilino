@@ -1,5 +1,5 @@
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { FavoritesService } from '../../../favorites/favorites.service';
@@ -9,49 +9,28 @@ import { SearchService } from '../search.service';
     selector: 'app-search-output',
     templateUrl: './search-output.component.html',
     styleUrls: ['./search-output.component.scss'],
-    providers: [
-        WindowScrollLocker
-    ]
+    providers: [ WindowScrollLocker ]
 })
 
 export class SearchOutputComponent implements OnInit {
 
-    public showApartmentWindow = false;
+    public sort = 'price_1_block';
+    public viewType = 'block';
     public selectedFlatIndex: number;
+    public showApartmentWindow = false;
+
+    @Input() public count: number;
+    @Input() public preloader: boolean;
     @Input() public parentPlan: boolean;
     @Input() public flatsList: IFlatWithDiscount[] = [];
-    @Input() public count: number;
-    @Input() public preloader = false;
 
-    public activeSort: string;
-    public sortList: any = [
-        {
-            name: 'price',
-            text: 'По цене',
-            value: false
-        },
-        {
-            name: 'space',
-            text: 'По площади',
-            value: false
-        },
-        {
-            name: 'floor',
-            text: 'По этажу',
-            value: false
-        },
-        // {
-        //     name: 'delivery',
-        //     text: 'По сроку сдачи',
-        //     value: false
-        // }
-    ];
+    @Output() public sortChange: EventEmitter<any> = new EventEmitter();
 
     constructor(
-        public windowScrollLocker: WindowScrollLocker,
-        private flatsDiscountService: FlatsDiscountService,
         private searchService: SearchService,
         public favoritesService: FavoritesService,
+        public windowScrollLocker: WindowScrollLocker,
+        private flatsDiscountService: FlatsDiscountService,
     ) {}
 
     public ngOnInit() {
@@ -89,14 +68,6 @@ export class SearchOutputComponent implements OnInit {
         this.showApartmentWindow = true;
     }
 
-    public changeFilter(item, i) {
-        this.sortList[i].value = this.activeSort === item.name ? !item.value : true;
-        this.sortList.push({ activeIndex: i });
-        this.activeSort = item.name;
-
-        this.flatsDiscountService.setFilterValue(item);
-    }
-
     public parseText(num) {
 
         num = Math.abs(num) % 100;
@@ -107,5 +78,11 @@ export class SearchOutputComponent implements OnInit {
         if (sum > 1 && sum < 5) { return words[1]; }
         if (sum === 1) { return words[0]; }
         return words[2];
+    }
+    public sortFlats(sort) {
+        const name = (sort.split('_'))[0];
+        const value = (sort.split('_'))[1];
+        this.viewType = (sort.split('_'))[2];
+        this.sortChange.emit(`${name}_${value}`);
     }
 }

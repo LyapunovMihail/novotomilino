@@ -2,12 +2,6 @@
 
     <form [formGroup]="form" class="search-form">
 
-        <app-search-sorting
-            [(ngModel)]="sort"
-            [ngModelOptions]="{standalone: true}"
-            (ngModelChange)="sortChange.emit(sort)">
-        </app-search-sorting>
-
         <div class="search-form__wrap">
 
             <div class="search-form__wrap-item search-form__wrap-item_room">

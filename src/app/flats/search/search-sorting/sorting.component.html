@@ -1,0 +1,38 @@
+
+<div class="search-sorting">
+
+    <div class="search-sorting__sort">
+        <div class="search-sorting__sort-changed" (click)="showTooltip = !showTooltip" 
+            [ngClass]="{'isOpen': showTooltip, 'fromLess': !activeValue}">{{activeSort}}</div>
+        
+        <div class="search-sorting__sort-closeArea" *ngIf="showTooltip" (click)="showTooltip = !showTooltip"></div>
+        <div class="search-sorting__sort-tooltip" *ngIf="showTooltip" @showHideTooltip>
+            <ul class="search-sorting__sort-list">
+                <li class="search-sorting__sort-item" [class.active]="activeSort === item.text"
+                    (click)="sortChange(item.name, item.value)"
+                    *ngFor="let item of sortList">{{item.text}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="search-sorting__type">
+        <button class="search-sorting__type-item" [class.active]="activeViewType === 'block'" (click)="viewTypeChange('block')">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="5" height="5" stroke="#000105"/>
+                <rect x="0.5" y="8.5" width="5" height="5" stroke="#000105"/>
+                <rect x="8.5" y="0.5" width="5" height="5" stroke="#000105"/>
+                <rect x="8.5" y="8.5" width="5" height="5" stroke="#000105"/>
+            </svg>                
+        </button>
+        <button class="search-sorting__type-item" [class.active]="activeViewType === 'inline'" (click)="viewTypeChange('inline')">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3.19995" width="12.8001" height="1.56522" fill="#000105"/>
+                <rect width="1.60002" height="1.56522" fill="#000105"/>
+                <rect x="3.19995" y="5.21741" width="12.8001" height="1.56522" fill="#000105"/>
+                <rect y="5.21741" width="1.60002" height="1.56522" fill="#000105"/>
+                <rect x="3.19995" y="10.4348" width="12.8001" height="1.56522" fill="#000105"/>
+                <rect y="10.4348" width="1.60002" height="1.56522" fill="#000105"/>
+            </svg>                
+        </button>
+    </div>
+</div>

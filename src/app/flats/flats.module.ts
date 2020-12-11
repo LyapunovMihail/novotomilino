@@ -20,6 +20,7 @@ import { CommercialComponent } from './commercial/commercial.component';
 import { CommercialListComponent } from './commercial/list/commercial-list.component';
 import { CommercialPlanComponent } from './commercial/plan/commercial-plan.component';
 import { CommercialFloorComponent } from './commercial/floor/commercial-floor.component';
+import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -44,11 +45,12 @@ const FlatsComponents = [
         ...FlatsComponents
     ],
     imports: [
-        ReactiveFormsModule,
         FormsModule,
-        GHMRangeNumberModule,
-        ApartmentModule,
         LoaderModule,
+        ApartmentModule,
+        FlatSnippetModule,
+        ReactiveFormsModule,
+        GHMRangeNumberModule,
 
         CommonModule,
         RouterModule,
