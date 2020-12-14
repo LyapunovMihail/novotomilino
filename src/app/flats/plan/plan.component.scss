@@ -34,7 +34,8 @@
                 opacity: 0;
                 cursor: pointer;
                 fill: rgba(231,73,15,0.3);
-                transition: .2s linear;
+                transition: opacity .2s linear;
+                &:hover { opacity: 1; }
             }
         }
 
@@ -46,24 +47,20 @@
             cursor: pointer;
             transition: .2s linear, .7s opacity ease-in;
             transform: translateX(-50%);
+            pointer-events: none;
             white-space: nowrap;
+            padding: 5px 15px;
             z-index: 11;
             opacity: 1;
-            padding: 5px 15px;
 
             span {
                 margin-right: 5px;
             }
 
 
-            &--active {
+            &.active {
                 color: #000105;
                 background-color: #ffffff;
-
-                .plan_house-select_info {
-                    pointer-events: all;
-                    opacity: 1;
-                }
             }
 
             &--house-1 {
@@ -83,95 +80,50 @@
                 left: 88%;
             }
 
-            &--z-index-off {
+            &.z-index-off {
                 z-index: unset;
                 opacity: 0;
             }
         }
+    }
+    &__tooltip {
+        width: 300px;
+        position: absolute;
+        top: 0; left: 0;
+        background-color: #ffffff;
+        animation: forOnInit .2s ease backwards;
+        box-sizing: border-box;
+        pointer-events: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        z-index: 12;
 
-        &_info {
-            position: absolute;
-            left: -77px;
-            bottom: 48px;
-            width: 250px;
-            background-color: #ffffff;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            transition: .2s linear;
-            pointer-events: none;
-            opacity: 0;
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing();
+            color: $col-orange;
+        }
+        &-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0,1,5,0.3);
+            padding: 10px 0;
 
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: -22px;
-                left: 46%;
-                margin: auto;
-                border: 9px solid transparent;
-                border-top: 13px solid #ffffff;
-            }
-            &::before {
-                content: '';
-                position: absolute;
-                width: 50%;
-                height: 18px;
-                bottom: -18px;
-                left: 26%;
-            }
-
-            &--house-9 {
-                bottom: -266px;
-
-                &::after {
-                    bottom: 248px;
-                    border: 9px solid transparent;
-                    border-bottom: 13px solid #ffffff;
-                }
-                &::before {
-                    bottom: 248px;
-                }
-            }
-            &--house-3 {
-                @media (max-height: 690px) {
-                    bottom: -130px;
-                    left: calc(100% + 20px);
-                    &::after {
-                        bottom: 54.6%;
-                        left: -8%;
-                        border: 9px solid transparent;
-                        border-right: 13px solid #ffffff;
-                    }
-                }
-            }
-
-            &_title {
-                font: 500 20px/24px $font-mus;
-                @include font-smoothing();
-                color: #e7490f;
-            }
-
-            &_row {
-                padding: 10px 0;
-                border-bottom: 1px solid rgba(0,1,5,0.3);
-
-                &:last-child {
-                    padding-bottom: 0;
-                    border-bottom: none;
-                }
-            }
-
-            &_rooms {
-                @include fw14-20();
-            }
-
-            &_min-price {
-                float: right;
-                @include fw14-20();
-                color: rgba(0,1,5,0.6);
+            &:last-child {
+                padding-bottom: 0;
+                border-bottom: none;
             }
         }
+        &-rooms { @include fw14-20(); }
+        &-price {
+            @include fw14-20();
+            color: rgba(0,1,5,0.6);
+        }
     }
+}
+@keyframes forOnInit {
+    from { transform: scale(0.7); }
+    to { transform: scale(1); }
 }
 
 .search__show-btn {

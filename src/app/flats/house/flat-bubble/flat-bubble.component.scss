@@ -6,6 +6,7 @@
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     border-radius: 2px;
+    z-index: 100;
 
     &__img {
         width: 100%;
@@ -48,6 +49,30 @@
 
         &-text {
             @include f16-24(rgba(0, 1, 5, 0.8));
+
+            &--room {
+                font-size: 18px;
+                font-weight: 500;
+                color: $col-black;
+                margin: 0 0 14px;
+                &.isEuro {
+                    width: 100%;
+                    position: relative;
+                    &::after {
+                        content: 'Евро';
+                        position: absolute;
+                        top: 0; right: 0;
+                        font: 500 14px/18px $font-mus;
+                        @include font-smoothing;
+                        color: #666769;
+                        background-color: #ECECEC;
+                        border: 1px solid #BDBDBD;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        padding: 2px 8px;
+                    }
+                }
+            }
 
             &_price {
                 font-weight: 500;

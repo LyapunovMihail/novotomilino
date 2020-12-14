@@ -5,7 +5,9 @@
         <div *ngIf="img.style.display === 'none'" class="hover-flat__img-error">Изображение <br> недоступно</div>
     </div>
     <div class="hover-flat__info">
-        <p class="hover-flat__info-text">{{(bubbleData.rooms < 1) ? '' : bubbleData.rooms }} {{(bubbleData.rooms < 1) ? 'Студия' : 'комнатная'}}</p>
+        <p class="hover-flat__info-text hover-flat__info-text--room" [class.isEuro]="isEuro">
+            {{(bubbleData.rooms < 1) ? '' : bubbleData.rooms }} {{(bubbleData.rooms < 1) ? 'Студия' : 'комнатная'}}
+        </p>
         <div class="hover-flat__info__container">
             <p class="hover-flat__info-text">{{bubbleData.space}} м²</p>
             <div>

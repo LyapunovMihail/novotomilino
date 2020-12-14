@@ -23,6 +23,9 @@ export class PlanComponent implements OnInit {
     public activeLink = '';
     public metaTags;
 
+    public infoAboutSect: IHousePlanItem;
+    public coord;
+
     constructor(
         public router: Router,
         private planService: PlanService,
@@ -66,5 +69,24 @@ export class PlanComponent implements OnInit {
             event.preventDefault();
         }
         this.router.navigate(['/flats/house/'], {queryParams: {houses: house}});
+    }
+    public onmouseenter(house) {
+        this.infoAboutSect = house;
+    }
+    public onMousemove(ev: MouseEvent, parent: HTMLElement) {
+        if (!this.infoAboutSect || this.showSearchWindow) { return; }
+        const elem = document.querySelector('.plan__tooltip');
+        const tooltip = elem ? { width: elem.clientWidth, height: elem.clientHeight } : { width: 0, height: 0 };
+        const jparent = { width: parent.clientWidth, height: parent.clientHeight }
+        this.coord = {
+            x: ev.clientX,
+            y: ev.clientY,
+            posX: ev.clientX + tooltip.width > jparent.width
+                ? -tooltip.width - 20
+                : 20,
+            posY: ev.clientY + tooltip.height > jparent.height
+                ? -tooltip.height
+                : -80,
+        }
     }
 }

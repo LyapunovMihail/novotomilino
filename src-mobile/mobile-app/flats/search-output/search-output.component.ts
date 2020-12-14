@@ -16,10 +16,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class SearchOutputComponent implements OnChanges {
 
-    @Input() public flatsList: IFlatWithDiscount[] = [];
     public isReserveFormOpen: boolean = false;
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
+    
+    @Input() public viewType: 'block' | 'inline';
+    @Input() public flatsList: IFlatWithDiscount[] = [];
 
     public selectFlat = {
         house: '0',

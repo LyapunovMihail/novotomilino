@@ -11,7 +11,7 @@ export const FormConfig = {
         min: 17,
         max: 120
     },
-    sort: 'floor_1',
+    sort: 'price_1',
     statusList: [
         {
             name: 'В продаже',

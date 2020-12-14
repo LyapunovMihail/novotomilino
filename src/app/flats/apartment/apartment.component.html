@@ -23,7 +23,10 @@
             <div *ngIf="img.style.display === 'none'" class="apartament__image-error">Изображение недоступно</div>
         </figure>
         <div class="apartament__info">
-            <h2 class="apartament__info-title">{{apartamentRooms}}, №{{flatData.flat}}</h2>
+            <h2 class="apartament__info-title">
+                {{apartamentRooms}}, №{{flatData.flat}}
+                <span *ngIf="isEuro">Евро</span>
+            </h2>
 
             <div class="apartament__info-not-sale" *ngIf="flatData.status === '1'">
                 Квартира пока не в продаже. Вы можете забронировать <br>

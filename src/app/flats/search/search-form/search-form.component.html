@@ -99,6 +99,11 @@
         <div class="search-form__wrap search-form__wrap_decoration">
             <div class="search-form__wrap">
                 <app-search-checkbox-list
+                    [btnList]="config.typePlan"
+                    [formControl]="form.controls['euro']"
+                    [name]="'decoration'"
+                ></app-search-checkbox-list>
+                <app-search-checkbox-list
                     [btnList]="config.statusList"
                     [formControl]="form.controls['status']"
                     [name]="'decoration'">

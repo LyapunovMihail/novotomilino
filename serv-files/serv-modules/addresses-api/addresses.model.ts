@@ -79,6 +79,9 @@ export class AddressesModel {
             }
             request.rooms = { $in: query.rooms.split(',').map(Number) };
         }
+        if ('euro' in query) {
+            request.isEuro = query.euro;
+        }
         if ( 'priceMin' in query && 'priceMax' in query ) {
             request.price = { $gte: Number(query.priceMin), $lte: Number(query.priceMax) };
         }

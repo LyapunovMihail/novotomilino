@@ -22,12 +22,13 @@ export class FlatsComponent implements OnInit {
     public params: any = {};
     public flatsList: IAddressItemFlat[] = [];
     public isLoadMoreBtn = false;
-    public isVisible: boolean = false;
+    public isVisible: boolean;
     public counter: number = 0;
 
-    public showFilter: boolean = false;
+    public showFilter: boolean;
     public skip = 0;
     public outputFlatsList;
+    public viewType: 'block' | 'inline' = 'block';
 
     constructor(
         public router: Router,
@@ -36,7 +37,7 @@ export class FlatsComponent implements OnInit {
         public windowScrollLocker: WindowScrollLocker
     ) {}
 
-    public ngOnInit() {
+    ngOnInit() {
         if (this.platform.isBrowser) {
             if ( localStorage.getItem('previousRoute') ) {
                 this.previousUrl = localStorage.getItem('previousRoute');
@@ -49,28 +50,9 @@ export class FlatsComponent implements OnInit {
     }
 
     public openFilter() {
-
         this.showFilter = !this.showFilter;
         this.showFilter === true ? this.windowScrollLocker.block() : this.windowScrollLocker.unblock();
     }
-
-    /*
-    @HostListener('window:scroll', [])
-    public windowScroll() {
-        const num = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const form = this.elRef.nativeElement.querySelector('.search-form').offsetHeight;
-
-        this.isVisible = (num >= 500)
-            ? true
-            : false;
-    }
-
-    public scrollToTop() {
-        if (!this.platform.isBrowser) { return false; }
-
-        $('html, body').animate({scrollTop: 0 }, 200);
-    }
-    */
 
     public formChange(changedForm) {
         const { form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
@@ -82,7 +64,7 @@ export class FlatsComponent implements OnInit {
             priceMax: form.price.max,
             floorMin: form.floor.min,
             floorMax: form.floor.max,
-            sort: this.params.sort || form.sort,
+            sort: form.sort || this.params.sort,
         };
 
         if (form.type.length > 0) {
@@ -112,18 +94,14 @@ export class FlatsComponent implements OnInit {
         this.outputFlatsList = [];
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
-            // console.log('CHECK@');
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
-        // console.log('params', params)
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.getFlats();
     }
 
     public loadMore() {
-        // this.params.skip += 10;
-        // this.getFlats();
         for (let i = 0; i < 10; i++) {
             if (this.skip < this.flatsList.length) {
                 this.outputFlatsList.push(this.flatsList[this.skip++]);
@@ -180,5 +158,11 @@ export class FlatsComponent implements OnInit {
             });
         }
         return isFilterFlats;
+    }
+    public sortChange(sort) {
+        const name = (sort.split('_'))[0];
+        const value = (sort.split('_'))[1];
+        this.viewType = (sort.split('_'))[2];
+        this.params.sort = `${name}_${value}`;
     }
 }

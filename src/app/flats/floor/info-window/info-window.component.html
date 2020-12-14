@@ -1,5 +1,7 @@
 <div *ngIf="infoWindow" class="flats-item__description">
-    <p class="flats-item__description-section-text">{{(infoWindow.rooms === 0) ? '' : infoWindow.rooms }} {{((infoWindow.rooms === 0) ? 'Студия' : "комнатная")}}</p>
+    <p class="flats-item__description-section-text" [class.isEuro]="isEuro">
+        {{(infoWindow.rooms === 0) ? '' : infoWindow.rooms }} {{((infoWindow.rooms === 0) ? 'Студия' : "комнатная")}}
+    </p>
 
     <p class="flats-item__description-section-text">{{infoWindow.space}} м²</p>
 

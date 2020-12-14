@@ -48,6 +48,7 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public get planPath() {
         return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.typeApartment}.svg`;
     }
+    public get isEuro() { return this.flatData.isEuro === '1'; }
 
     ngOnInit() {
         this.getFlatData();

@@ -78,6 +78,10 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             params['type'] = (form.type).join(',');
         }
 
+        if (form['euro'].length > 0) {
+            params['euro'] = (form.euro).join(',');
+        }
+
         if (form['decoration'].length > 0) {
             params['decoration'] = (form.decoration).join(',');
         }
@@ -98,6 +102,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.outputFlatsList = [];
 
         this.seoPageParams = params;
+        console.log({form,params});
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});

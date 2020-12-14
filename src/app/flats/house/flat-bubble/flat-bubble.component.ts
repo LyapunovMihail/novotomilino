@@ -22,4 +22,6 @@ export class FlatBubbleComponent {
     constructor(
         public platform: PlatformDetectService,
     ) {}
+
+    public get isEuro() { return this.bubbleData.isEuro === '1'; }
 }

@@ -1,4 +1,5 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -11,66 +12,70 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => SearchSortingComponent),
             multi: true
         }
+    ],
+    animations: [
+        trigger('showHideTooltip', [
+            transition('void => *', [
+                style({
+                    opacity: 0,
+                    transform: 'translateY(-10px)'
+                }),
+                animate('200ms ease-in',
+                    style({
+                        opacity: 1,
+                        transform: 'translateY(0px)'
+                    }))
+            ])
+        ])
     ]
 })
 
 export class SearchSortingComponent {
 
-    @Input() public counter;
-
     public activeSort: string;
-
+    public activeValue: number;
+    public showTooltip: boolean;
     public sortList = [
-        {
-            name: 'price',
-            text: 'По цене',
-            value: false
-        },
-        {
-            name: 'space',
-            text: 'По площади',
-            value: false
-        },
-        {
-            name: 'floor',
-            text: 'По этажу',
-            value: false
-        },
-        {
-            name: 'delivery',
-            text: 'По сроку сдачи',
-            value: false
-        }
+        { name: 'price', text: 'Сначала дешевле', value: '1' },
+        { name: 'price', text: 'Сначала дороже', value: '0' },
+        { name: 'space', text: 'Сначала с большей площадью', value: '0' },
+        { name: 'space', text: 'Сначала с меньшей площадью', value: '1' },
     ];
+
+    @Input() public counter;
+    @Input() public viewType: 'block' | 'inline';
+    @Output() public viewTypeChanges = new EventEmitter<any>();
 
     constructor() {}
 
+    public viewTypeChange(type) {
+        if (this.viewType === type) { return; }
+        this.viewTypeChanges.emit(type);
+    }
     public sortChange(name, value) {
-        let el = this.sortList.findIndex((item) => item.name === name);
-        this.activeSort = name;
-        this.sortList[el].value = value;
-        this.propagateChange(`${this.activeSort}_${(value ? '1' : '0')}`);
+        this.activeValue = +value;
+        this.activeSort = this.sortList.find(el => el.name === name && el.value === value).text;
+        this.propagateChange(`${name}_${value}`);
+        this.showTooltip = false;
     }
 
     public writeValue(control) {
         if (control) {
-            let name = (control).split('_')[0];
-            let value = (control).split('_')[1];
-            this.activeSort = (this.sortList.some((item) => item.name === name)) ? name : this.sortList[0].name;
-            let el = this.sortList.findIndex((item) => item.name === name);
-            if ( el >= 0 && (/^[0|1]$/).exec(value)) {
-                this.sortList[el].value = (value === '1');
-            }
+            const name = (control).split('_')[0];
+            const value = (control).split('_')[1];
+            this.activeValue = (control).split('_')[1];
+            this.activeSort = (this.sortList.some((item) => item.name === name && item.value === value))
+                ? this.sortList.find(el => el.name === name && el.value === value).text
+                : this.sortList[0].text;
         }
     }
 
     public propagateChange = (_: any) => {};
+    public registerOnTouched() {}
 
     public registerOnChange(fn) {
         this.propagateChange = fn;
     }
-
-    public registerOnTouched() {}
 
     public parseText(num) {
 

@@ -1,0 +1,44 @@
+
+<div class="flat-snippet" [class.child-4n]="child4n && index > 0">
+    <a class="flat-snippet__link" (click)="goToFlat()">
+        <figure class="flat-snippet__link-image">
+            <img [src]="svgPath" alt="flat-block-image">
+            <div class="flat-snippet__link-error"></div>
+        </figure>
+        <div class="flat-snippet__link-content">
+            <div class="flat-snippet__link-wrap flat-snippet__link-wrap--head">
+                <p class="flat-snippet__link-text flat-snippet__link-text--flat">
+                    {{(flatData.rooms === 0) ? 'Студия' : flatData.rooms + ' комнатная'}}, № {{flatData.flat}}
+                    <span *ngIf="isEuro">Евро</span>
+                </p>
+                <p class="flat-snippet__link-text">{{flatData.decorationName}}</p>
+            </div>
+            <div class="flat-snippet__link-wrap flat-snippet__link-wrap--info">
+                <div>
+                    <p class="flat-snippet__link-text">Площадь</p>
+                    <p class="flat-snippet__link-text flat-snippet__link-text--space">{{flatData.space}} м²</p>
+                </div>
+                <div>
+                    <p class="flat-snippet__link-text">Корпус</p>
+                    <p class="flat-snippet__link-text flat-snippet__link-text--house">{{flatData.house}}</p>
+                </div>
+                <div>
+                    <p class="flat-snippet__link-text">Этаж</p>
+                    <p class="flat-snippet__link-text flat-snippet__link-text--floor">{{flatData.floor}}</p>
+                </div>
+            </div>
+            <div class="flat-snippet__link-wrap flat-snippet__link-wrap--price">
+                <p *ngIf="flatData.discount" class="flat-snippet__link-text flat-snippet__link-text--price new-price">
+                    {{+flatData.price - flatData.discount | flatNumberPipe}} &#8381;
+                </p>
+                <p [class.old-price]="flatData.discount" class="flat-snippet__link-text flat-snippet__link-text--price">{{flatData.price | flatNumberPipe}} &#8381;</p>
+                <p *ngIf="flatData.status === '1' && !flatData.discount" class="flat-snippet__link-text">Скоро в продаже</p>
+            </div>
+        </div>
+    </a>
+    <div class="flat-snippet__favorites" [class.inFavorite]="flatData.inFavorite" (click)="setFavorite()">
+        <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#666769" stroke="#666769" d="M8 1.30198L9.65437 5.27955L9.77165 5.56153L10.0761 5.58594L14.3702 5.9302L11.0985 8.73273L10.8666 8.93141L10.9374 9.22847L11.937 13.4188L8.26063 11.1733L8 11.0141L7.73937 11.1733L4.063 13.4188L5.06255 9.22847L5.13341 8.93141L4.90147 8.73273L1.6298 5.9302L5.92393 5.58594L6.22835 5.56153L6.34563 5.27955L8 1.30198Z"/>
+        </svg>
+    </div>
+</div>

@@ -128,10 +128,46 @@
         padding: 24px;
 
         &-title {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
             font: 500 20px/28px $font-mus;
             @include font-smoothing;
             color: $col-black;
             margin: 0 0 16px;
+
+            &> span {
+                font-size: 14px;
+                line-height: 18px;
+                color: #666769;
+                background-color: #ECECEC;
+                border: 1px solid #BDBDBD;
+                box-sizing: border-box;
+                border-radius: 4px;
+                position: relative;
+                padding: 2px 8px;
+                cursor: default;
+                &::after {
+                    content: 'Совмещенная кухня-гостиная';
+                    font: 500 14px/20px $font-mus;
+                    @include font-smoothing;
+                    white-space: nowrap;
+                    color: inherit;
+                    position: absolute;
+                    top: 90%; left: 110%;
+                    background-color: $col-white;
+                    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+                    transition: opacity .1s linear;
+                    pointer-events: none;
+                    border-radius: 2px;
+                    padding: 8px 12px;
+                    opacity: 0;
+                    z-index: 1;
+                }
+                &:hover {
+                    &::after { opacity: 1; }
+                }
+            }
         }
         &-not-sale {
             width: 100%;

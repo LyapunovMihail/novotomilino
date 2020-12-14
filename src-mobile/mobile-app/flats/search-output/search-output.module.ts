@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchOutputComponent } from './search-output.component';
 import { SearchOutputPipe } from './search-output.pipe';
 import { SearchBitNumberPipe } from './search-bit-number.pipe';
+import { FlatSnippetModule } from '../flat-snippet/flat-snippet.module';
 
 @NgModule({
     exports: [
@@ -18,7 +19,8 @@ import { SearchBitNumberPipe } from './search-bit-number.pipe';
     ],
     providers: [],
     imports: [
-        CommonModule
+        CommonModule,
+        FlatSnippetModule,
     ],
 })
 export class SearchOutputModule { }

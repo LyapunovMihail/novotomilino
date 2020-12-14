@@ -11,5 +11,5 @@ export class InfoWindowComponent {
 
     @Input() public infoWindow: IAddressItemFlat;
 
-    constructor() {}
+    public get isEuro() { return this.infoWindow.isEuro === '1'; }
 }

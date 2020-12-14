@@ -1,4 +1,4 @@
-<div class="plan flats_main">
+<div class="plan flats_main" (mousemove)="onMousemove($event, parent)" #parent>
 
     <h1 class="plan__title">Выберите дом</h1>
     <div class="plan__rose"></div>
@@ -9,22 +9,13 @@
 
         <a *ngFor="let house of houses"
             class="plan_house-select_link plan_house-select_link--house-{{house.houseNumber}}"
-            [ngClass]="{'plan_house-select_link--active' : house.houseNumber === activeLink,
-                        'plan_house-select_link--z-index-off' : showSearchWindow}"
-            (mouseenter)="activeLink = house.houseNumber"
-            (mouseleave)="activeLink = ''"
-            (click)="svgRouterLink($event, house.houseNumber)"
-            [style.pointer-events]="house.freeFlats ? 'all' : 'none'">
+            [ngClass]="{'active' : infoAboutSect && house.houseNumber === infoAboutSect.houseNumber,
+                        'z-index-off' : showSearchWindow}"
+            (mouseenter)="onmouseenter(house)"
+            (mouseleave)="infoAboutSect = null"
+            (click)="svgRouterLink($event, house.houseNumber)">
 
             №{{house.houseNumber}} <span></span> {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
-
-            <div class="plan_house-select_info plan_house-select_info--house-{{house.houseNumber}}">
-                <h5 class="plan_house-select_info_title">Дом №{{house.houseNumber}}</h5>
-                <p class="plan_house-select_info_row" *ngFor="let rooms of house.rooms">
-                    <span class="plan_house-select_info_rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
-                    <span class="plan_house-select_info_min-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
-                </p>
-            </div>
         </a>
 
         <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
@@ -36,20 +27,25 @@
 
                     <path class="plan_house-select_svg_house"
                         [attr.transform]="plan.transform"
-                        [attr.style]="('opacity:' + ( activeLink === plan.houseNumber ? '1' : '0' )) | stylePipe"
-                        (mouseenter)="activeLink = plan.houseNumber"
-                        (mouseleave)="activeLink = ''"
+                        (mouseenter)="onmouseenter(plan)"
+                        (mouseleave)="infoAboutSect = null"
                         [attr.d]="plan.svgPath"
                           id="k-{{plan.houseNumber}}">
                     </path>
                 </a>
             </ng-container>
-
         </svg>
-
     </div>
-    <!-- <a href="https://exporealty.ru/visit/registration/" class="link__banner"></a> -->
 
+    <div class="plan__tooltip" [ngStyle]="{'left': (coord.x + coord.posX) + 'px', 'top': (coord.y + coord.posY) + 'px'}" *ngIf="infoAboutSect && coord">
+        <h5 class="plan__tooltip-title">Корпус №{{infoAboutSect.houseNumber}}</h5>
+        <ng-container *ngFor="let rooms of infoAboutSect.rooms">
+            <p class="plan__tooltip-row" *ngIf="rooms.minPrice">
+                <span class="plan__tooltip-rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
+                <span class="plan__tooltip-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
+            </p>
+        </ng-container>
+    </div>
 </div>
 
 <button class="search__show-btn" [ngClass]="{'search__show-btn_active': showSearchWindow}" (click)="showSearchWindow = !showSearchWindow">

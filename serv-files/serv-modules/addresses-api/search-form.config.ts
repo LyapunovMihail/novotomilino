@@ -11,7 +11,7 @@ export const FormConfig = {
         min: 30,
         max: 100
     },
-    sort: 'floor_1',
+    sort: 'price_1',
     statusList: [
         {
             name: 'В продаже',
@@ -20,6 +20,9 @@ export const FormConfig = {
             name: 'Скоро в продаже',
             value: '1'
         }
+    ],
+    typePlan: [
+        { name: 'Евро', value: '1' }
     ],
     typeList: [
         { name: 'квартиры', value: 'КВ' },

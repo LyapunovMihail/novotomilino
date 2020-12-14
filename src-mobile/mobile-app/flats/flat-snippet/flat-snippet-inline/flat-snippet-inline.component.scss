@@ -1,0 +1,190 @@
+@import "~styles/modules/mixins/mixin";
+
+@mixin font-size($font-size, $line-height: $font-size) {
+    font-size: $font-size;
+    line-height: $line-height;
+}
+
+.flat-snippet {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #B7B7B7;
+    transition: background-color $transition;
+    box-sizing: border-box;
+    cursor: pointer;
+    &.first { border-top: 1px solid #B7B7B7; }
+    &:hover { background-color: rgba(231, 73, 15, 0.03); }
+
+    &__container {
+        width: calc(100% - 64px);
+        position: relative;
+    }
+
+    &__link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 16px 0;
+        @media (max-width: 767px) {
+            padding: 12px 0;
+        }
+
+        &-image {
+            width: 67px;
+            height: 67px;
+            min-width: 67px;
+            margin-right: 22px;
+            &> img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            @media (max-width: 767px) {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                margin-right: 12px;
+            }
+        }
+        &-error {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background: url("data:image/svg+xml,%3Csvg width='18px' height='18px' viewBox='0 0 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Квартиры++' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' opacity='0.600000024'%3E%3Cg id='заглушки-квартир' transform='translate(-671.000000, -1340.000000)' stroke='%23000105' stroke-width='2'%3E%3Cg id='Group-2' transform='translate(655.000000, 1324.000000)'%3E%3Cg id='Combined-Shape-2' transform='translate(17.000000, 17.000000)'%3E%3Cpath d='M8,16 C12.418278,16 16,12.418278 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,12.418278 3.581722,16 8,16 Z M2.5,2.5 L13.5,13.5' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E") center no-repeat #fafafa;
+            font: 500 14px/20px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            opacity: .6;
+        }
+
+        &-wrap {
+
+            &--info { flex-grow: 1; }
+            &--top { margin: 0 0 16px; }
+            &--bottom {
+                display: flex;
+                @media (max-width: 767px) {
+                    display: block;
+                }
+            }
+        }
+
+        &-text {
+            font: 500 14px/18px $font-mus;
+            @include font-smoothing;
+            color: #666769;
+            @media (max-width: 767px) {
+                @include font-size(12px, 16px);
+            }
+
+            &--room {
+                @include font-size(18px, 24px);
+                color: $col-orange;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                position: relative;
+                &> span {
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #666769;
+                    background-color: #ECECEC;
+                    border: 1px solid #BDBDBD;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    position: relative;
+                    margin-left: 8px;
+                    padding: 2px 8px;
+                    &::after {
+                        content: 'Совмещенная кухня-гостиная';
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: inherit;
+                        position: absolute;
+                        top: 90%; left: 110%;
+                        background-color: $col-white;
+                        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+                        transition: opacity .1s linear;
+                        pointer-events: none;
+                        border-radius: 2px;
+                        padding: 8px 12px;
+                        opacity: 0;
+                    }
+                    &:hover {
+                        &::after { opacity: 1; }
+                    }
+                }
+                @media (max-width: 767px) {
+                    @include font-size(14px, 18px);
+                }
+            }
+
+            &--space,
+            &--floor,
+            &--house {
+                margin-right: 12px;
+                @media (max-width: 767px) {
+                    margin: 0 0 4px;
+                }
+            }
+            &--price {
+                @include font-size(16px, 24px);
+                color: $col-black;
+                &.old-price {
+                    color: #999a9b;
+                    text-decoration: line-through;
+                }
+                &.new-price {
+                    color: $col-orange;
+                    position: relative;
+                }
+                @media (max-width: 767px) {
+                    @include font-size(14px, 18px);
+                }
+            }
+        }
+        &-price {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-end;
+            margin-left: auto;
+            @media (max-width: 767px) {
+                position: absolute;
+                bottom: 12px; right: 0;
+                margin-left: 0;
+            }
+        }
+    }
+    &__favorite {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #B7B7B7;
+        transition: background-color .2s linear, border-color .2s linear;
+        box-sizing: border-box;
+        border-radius: 4px;
+        position: absolute;
+        top: 16px; right: 0;
+        margin-left: auto;
+        cursor: pointer;
+        &> svg > path { transition: fill .2s linear, stroke .2s linear; }
+        &.inFavorite {
+            background-color: $col-orange;
+            border-color: $col-orange;
+            &> svg > path {
+                fill: $col-white;
+                stroke: $col-white;
+            }
+        }
+        @media (max-width: 767px) {
+            top: 12px;
+        }
+    }
+}

@@ -19,6 +19,7 @@ import { ModalApartamentComponent } from './modal-apartament/modal-apartament.co
 import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentFurnitureComponent } from './modal-apartament/apartment-furniture/apartment-furniture.component';
 import { ApartamentBitNumberPipe } from './modal-apartament/apartament-bit-number.pipe';
+import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -42,12 +43,13 @@ const FlatsComponents = [
         ...CommercialComponents,
     ],
     imports: [
-        SearchOutputModule,
-        CommonModule,
-        ReactiveFormsModule,
         FormsModule,
+        CommonModule,
         RouterModule,
+        FlatSnippetModule,
         FormsRequestModule,
+        SearchOutputModule,
+        ReactiveFormsModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
             // { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
