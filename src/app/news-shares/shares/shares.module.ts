@@ -1,4 +1,3 @@
-import { ApartmentModule } from '../../flats/apartment/apartment.module';
 import { FormsRequestModule } from '../../forms-request/forms-request.module';
 import { SharesEditFlatsComponent } from './shares-edit/shares-edit-controls/shares-edit-flats/shares-edit-flats.component';
 import { SharesDayPipe } from './shares-day.pipe';
@@ -43,7 +42,7 @@ const SHARES_COMPONENTS = [
         DatePickerModule,
         FormsModule,
         LoaderModule,
-        ApartmentModule,
+        // ApartmentModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

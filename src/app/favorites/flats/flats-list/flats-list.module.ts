@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApartmentModule } from '../../../flats/apartment/apartment.module';
 import { FlatsListComponent } from './flats-list.component';
 import { BitNumberPipe } from './bit-number.pipe';
 
@@ -14,8 +13,7 @@ import { BitNumberPipe } from './bit-number.pipe';
         BitNumberPipe
     ],
     imports: [
-        CommonModule,
-        ApartmentModule
+        CommonModule
     ]
 })
 export class FlatsListModule {

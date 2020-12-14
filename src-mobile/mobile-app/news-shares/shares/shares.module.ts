@@ -1,4 +1,3 @@
-import { ModalApartamenModule } from '../../flats/modal-apartament/modal-apartament.module';
 import { BitNumberPipe } from './bit-number.pipe';
 import { SharesService } from './shares.service';
 import { SharesDayPipe } from './shares-day.pipe';
@@ -22,7 +21,6 @@ const SHARES_COMPONENTS = [
     exports: [...SHARES_COMPONENTS],
     imports: [
         CommonModule,
-        ModalApartamenModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

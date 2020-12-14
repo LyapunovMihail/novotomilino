@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
@@ -33,7 +33,8 @@ export class SharesItemComponent implements OnInit {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private sharesService: SharesService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
     ) {}
 
     public ngOnInit() {
@@ -116,9 +117,11 @@ export class SharesItemComponent implements OnInit {
         shareFlat = {discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat};
     }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public openApartmentModal(flat) {
+        // this.selectedFlatIndex = index;
+        // this.windowScrollLocker.block();
+        // this.showApartmentWindow = true;
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }
 }

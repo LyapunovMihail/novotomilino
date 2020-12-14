@@ -30,10 +30,3 @@
         </a>
     </li>
 </ul>
-
-<app-modal-apartment *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="flatsList"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-modal-apartment>

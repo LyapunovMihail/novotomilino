@@ -20,4 +20,7 @@ export class FlatsService {
     public getFlats(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
     }
+    public getFlatData(route) {
+        return this.http.get('/api' + route);
+    }
 }

@@ -1,4 +1,5 @@
 import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
+import * as request from 'request';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
 const ObjectId = require('mongodb').ObjectID;
@@ -183,5 +184,42 @@ export class AddressesModel {
     public async refreshFavorites(session, flats) {
         session.favoriteFlats = flats;
         return 'OK';
+    }
+
+    public async getFlatByParams(query) {
+        const params = {
+            flat: Number(query.apartment),
+            house: Number(query.house),
+            floor: Number(query.floor),
+            section: Number(query.section),
+            type: query.type === 'flat' ? 'КВ' : 'КН',
+        };
+        const flat = await this.collection.findOne(params);
+        if (flat.saleChars && flat.saleChars.length) { // если есть список меблировки
+            const furnitureList = await this.getFurnitureJSON(); // получаем список составляющих(доп. стол, стул, тумба и тд) меблировки с выгрузки
+
+            if (flat.saleChars.some(el => furnitureList.findIndex(item => item.id === el.id) >= 0) ) { // если id поставщика совпадает c id составляющих
+                flat.saleChars = await this.buildFlatWithFurniture(flat.saleChars, furnitureList); // добавляем к имеющеися меблировки еще одно поле с комплектующими
+            }
+            // console.log(furnitureList, Array.isArray(furnitureList));
+        }
+        return await flat;
+    }
+    private getFurnitureJSON(): Promise<any[]> {
+        return new Promise((resp,rej) => {
+            const url = 'http://incrm.ru/Export-TRED/ExportToSite.svc/ExportToSaleCharItems';
+            request.get({url, json: true}, (err, res, body) => {
+                resp(body.saleCharItems);
+            });
+        });
+    }
+    private buildFlatWithFurniture(saleChars, items) {
+        return saleChars.map(el => {
+            const furniture = items.find(item => el.id === item.id);
+            if (!furniture) return el;
+            const ctrl = { ...el };
+            ctrl['items'] = furniture.items || [];
+            return ctrl;
+        });
     }
 }

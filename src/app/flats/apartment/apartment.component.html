@@ -1,112 +1,86 @@
-<div class="g-modal-bg apartment__modal" *ngIf="showApartmentWindow">
 
-    <div class="apartment">
-
-        <div class="apartment__elements">
-            <div class="apartment__elements-btn apartment__elements-btn_prev" *ngIf="prevFlat && prevFlat.articleId">
-                <button class="apartment__elements-prev" (click)="toPrevFlat()"></button>
-                <p>№ {{prevFlat.flat}}</p>
-            </div>
-            <div class="apartment__elements-btn apartment__elements-btn_next" *ngIf="nextFlat && nextFlat.articleId">
-                <button class="apartment__elements-next" (click)="toNextFlat()"></button>
-                <p>№ {{nextFlat.flat}}</p>
-            </div>
-            <button class="apartment__elements-cls" (click)="close.emit(false)"></button>
-            <!-- <div class="apartment__elements-compass">
-                <img src="/assets/img/flats/apartment/compass.svg" alt="compass">
-            </div> -->
-        </div>
-
-        <div class="apartment__info">
-            <nav class="apartment__info-nav">
-                <ul class="apartment__info-nav-list">
-                    <li class="apartment__info-nav-item">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/plan'" (click)="close.emit(false)">Общий вид</a>
-                    </li>
-                    <li class="apartment__info-nav-item" [class.apartment__info-nav-item--underline]="typeApartment === 'flat'">
-                        <ng-container *ngIf="typeApartment === 'flat'">
-                            <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house'" [queryParams]="{house: flatData.house}" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
-                        </ng-container>
-                        <ng-container *ngIf="typeApartment === 'office'">Корпус {{flatData.house}}</ng-container>
-                    </li>
-                    <li class="apartment__info-nav-item">
-                        Секция {{flatData.section}}
-                    </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats' + (typeApartment === 'office' ? '/commercial' : '') + '/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
-                    </li>
-                    <li class="apartment__info-nav-item">{{typeApartment === 'flat' ? 'Квартира' : 'Помещение'}} №{{flatData.flat}}</li>
-                </ul>
-            </nav>
-
-            <h1 class="apartment__info-title">
-                {{apartamentRooms}}, №&nbsp;{{flatData.flat}}
-            </h1>
-            <div class="apartment__info-descr">
-                <div class="apartment__info-descr-item" *ngIf="typeApartment === 'flat'">
-                    <p class="apartment__info-subtitle">Отделка</p>
-                    <p class="apartment__info-descr-value">{{flatData.decorationName}}</p>
-                </div>
-                <div class="apartment__info-descr-item">
-                    <p class="apartment__info-subtitle">Площадь</p>
-                    <p class="apartment__info-descr-value">{{flatData.space}} м<sup>2</sup></p>
-                </div>
-                <!-- <div class="apartment__info-descr-item">
-                    <p class="apartment__info-subtitle">Ипотека от</p>
-                    <p class="apartment__info-descr-value">{{ minCredit(flatData.price) | myBitNumberPipe }} &#8381;</p>
-                </div> -->
-                <div class="apartment__info-descr-item" *ngIf="typeApartment === 'office'">
-                    <p class="apartment__info-subtitle">Цена за 1 м²</p>
-                    <p class="apartment__info-descr-value">{{ (flatData.price / flatData.space).toFixed(2) | myBitNumberPipe }} &#8381;</p>
-                </div>
-            </div>
-            <!--<div class="apartment__info-delivery">-->
-                <!--Срок сдачи {{flatData.deliveryDate}}-->
-            <!--</div>-->
-            <div class="apartment__info-price">
-                <p class="apartment__info-subtitle">Стоимость</p>
-                <p class="apartment__info-price-value"
-                    [class.apartment__info-price-value_not-sale]="flatData.discount">
-                    {{flatData.price | myBitNumberPipe}} &#8381;
-                </p>
-                <p *ngIf="flatData.discount"
-                    class="apartment__info-price-value apartment__info-price-value_sale">
-                    {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
-                </p>
-            </div>
-            <p class="apartment__info-text" *ngIf="flatData.status === '1'">
-                Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж
-            </p>
-            <div class="apartment__info-btn">
-                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve">
-                    Забронировать
-                </button>
-                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit">
-                    Заявка на ипотеку
-                </button>
-            </div>
-        </div>
-
-        <div class="apartment__plan">
-            <div class="apartment__plan-link">
-                <!-- Скрыл для офисов потому что не выводит планировку для офисных помещений, нужно доработать -->
-                <a class="g-link_red apartment__plan-link-dwnld" (click)="routePDF()" target="_blank" *ngIf="typeApartment === 'flat'"
-                    [class.clicked]="clickedPdf">{{typeApartment === 'flat' ? 'План квартиры' : 'План помещения'}}.pdf</a>
-                <div (click)="setFavorite()"
-                     [ngClass]="{'apartment__plan-link-favorite_active': flatData.inFavorite}"
-                     class="g-link_red apartment__plan-link-favorite">
-                        Добавить в избранное
-                </div>
-            </div>
-            <div class="apartment__plan-img">
-                <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
-                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + typeApartment + '.svg'" alt="" #img>
-                <div *ngIf="img.style.display === 'none'" class="apartment__plan-img-error">Изображение недоступно</div>
-            </div>
-        </div>
-
+<section class="apartament" *ngIf="flatData">
+    <div class="apartament__nav">
+        <a class="apartament__nav-link" (click)="previousRoute()">Назад</a>
     </div>
-</div>
+    <div class="apartament__ctrls">
+        <div class="apartament__ctrls-wrap">
+            <button class="apartament__ctrls-reserve" (click)="isReserveFormOpen = true">Забронировать</button>
+            <button class="apartament__ctrls-credit" (click)="isCreditFormOpen = true">Заявка на ипотеку</button>
+        </div>
+        <div class="apartament__ctrls-wrap">
+            <a class="apartament__ctrls-pdf" (click)="routePDF()" target="_blank">План {{typeApartment !== 'office' ? 'квартиры' : 'помещения'}}</a>
+            <button class="apartament__ctrls-favorite" (click)="setFavorite()">
+                <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path [attr.fill]="flatData.inFavorite ? '#E7490F' : '#F9F9F9'" d="M15 1.30198L18.5059 9.73115L18.6232 10.0131L18.9276 10.0375L28.0276 10.7671L21.0944 16.7061L20.8624 16.9048L20.9333 17.2019L23.0515 26.0819L15.2606 21.3233L15 21.1641L14.7394 21.3233L6.9485 26.0819L9.06672 17.2019L9.13758 16.9048L8.90565 16.7061L1.97241 10.7671L11.0724 10.0375L11.3768 10.0131L11.4941 9.73115L15 1.30198Z" stroke="#E7490F"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="apartament__container">
+        <figure class="apartament__image">
+            <img [src]="planPath" alt="plan" (error)="img.style.display = 'none'" #img>
+            <div *ngIf="img.style.display === 'none'" class="apartament__image-error">Изображение недоступно</div>
+        </figure>
+        <div class="apartament__info">
+            <h2 class="apartament__info-title">{{apartamentRooms}}, №{{flatData.flat}}</h2>
+
+            <div class="apartament__info-not-sale" *ngIf="flatData.status === '1'">
+                Квартира пока не в продаже. Вы можете забронировать <br>
+                ее на индивидуальных условиях, связавшись <br>
+                с менеджером отдела продаж.
+            </div>
+
+            <ul class="apartament__info-list">
+                <li>
+                    <p>Площадь</p>
+                    <p>{{flatData.space}}</p>
+                </li>
+                <li>
+                    <p>Корпус</p>
+                    <p>{{flatData.house}}</p>
+                </li>
+                <li>
+                    <p>Секция</p>
+                    <p>{{flatData.section}}</p>
+                </li>
+                <li>
+                    <p>Этаж</p>
+                    <p>{{flatData.floor}}</p>
+                </li>
+                <li *ngIf="typeApartment !== 'office'">
+                    <p>Отделка</p>
+                    <p>{{flatData.decorationName}}</p>
+                </li>
+                <li>
+                    <p>Стоимость</p>
+                    <p [class.discount]="flatData.discount">{{ (flatData.discount ? (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe}} &#8381;</p>
+                </li>
+                <!-- <li>
+                    <p>Срок сдачи</p>
+                    <p>{{flatData.deliveryDate}}</p>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- <div class="apartament__furniture" *ngIf="typeApartment !== 'office' && (flatData.saleChars && flatData.saleChars.length)"> -->
+    <div class="apartament__furniture" *ngIf="false">
+        <label class="apartament__furniture-head" for="switcher">
+            <h2 class="apartament__furniture-title">Меблировка</h2>
+            <label class="apartament__furniture-switcher">
+                <input id="switcher" type="checkbox" #furnitureSwitcher>
+                <div></div>
+            </label>
+        </label>
+
+        <app-apartment-furniture
+            *ngIf="furnitureSwitcher.checked"
+            [flatData]="flatData"
+            [isActive]="furnitureSwitcher.checked"
+        ></app-apartment-furniture>
+    </div>
+</section>
 
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
@@ -133,3 +107,21 @@
 </app-form-success>
 
 
+<!-- 
+    {
+        "SaleChars":[
+            {
+                "SaleCharName":"Лазурит-11",
+                "Vendor":"Лазурит",
+                "CharCost":-835432.000,
+                "Id":"f87210c7-13f1-ea11-80fd-001dd8bb025e"
+            },
+            {
+                "SaleCharName":"Шатура-11",
+                "Vendor":"Шатура",
+                "CharCost":-472146.000,
+                "Id":"1d3a4e26-14f1-ea11-80fd-001dd8bb025e"
+            }
+        ]
+    }
+ -->

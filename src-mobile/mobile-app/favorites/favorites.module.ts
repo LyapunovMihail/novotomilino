@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites.component';
 import { RouterModule } from '@angular/router';
 import { FlatsListModule } from './flats/flats-list/flats-list.module';
-import { ModalApartamenModule } from '../flats/modal-apartament/modal-apartament.module';
 import { FavoritesFlatsComponent } from './flats/favorites-flats.component';
 import { FavoritesCommercialComponent } from './commercial/favorites-commercial.component';
 
@@ -21,7 +20,6 @@ import { FavoritesCommercialComponent } from './commercial/favorites-commercial.
     imports: [
         CommonModule,
         FlatsListModule,
-        ModalApartamenModule,
         RouterModule.forChild([
             { path: 'favorites', component: FavoritesComponent,
                 children: [

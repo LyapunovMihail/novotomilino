@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SearchOutputComponent } from './search-output.component';
 import { SearchOutputPipe } from './search-output.pipe';
 import { SearchBitNumberPipe } from './search-bit-number.pipe';
-import { ModalApartamenModule } from '../modal-apartament/modal-apartament.module';
 
 @NgModule({
     exports: [
@@ -19,8 +18,7 @@ import { ModalApartamenModule } from '../modal-apartament/modal-apartament.modul
     ],
     providers: [],
     imports: [
-        CommonModule,
-        ModalApartamenModule
+        CommonModule
     ],
 })
 export class SearchOutputModule { }

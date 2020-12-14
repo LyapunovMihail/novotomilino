@@ -3,16 +3,23 @@
 // .search { position: static !important; }
 .house {
     width: 100%;
-    min-height: calc(100vh - 362px);
+    min-height: calc(100vh - (64px + 50px));
     display: flex;
     flex-flow: column;
     align-items: center;
     justify-content: flex-end;
     padding: 205px 0 0;
     box-sizing: border-box;
-    z-index: 100;
+    position: relative;
     overflow: hidden;
+    z-index: 90;
 
+    &__preloader {
+        width: 100%;
+        position: fixed;
+        top: 64px; bottom: 50px;
+        z-index: 91;
+    }
     &__sections {
         width: $w1600;
         min-height: 300px;
@@ -24,7 +31,7 @@
             width: $w1600;
             position: absolute;
             left: auto;
-            top: 15px;
+            top: 80px;
 
             &-list {
                 font: 500 16px/22px $font-mus;

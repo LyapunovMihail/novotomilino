@@ -73,6 +73,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public checkLink(linkUrl) {
+        if (linkUrl.split('/')[1] === 'decoration') {
+            return this.router.url.split('/')[1] === 'furniture'
+                || this.router.url.split('/')[1] === linkUrl.split('/')[1];
+        }
         return this.router.url.split('/')[1] === linkUrl.split('/')[1];
     }
 

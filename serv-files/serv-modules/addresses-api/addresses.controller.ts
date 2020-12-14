@@ -24,6 +24,9 @@ export class AddressesController extends AddressesModel {
         this.router.get('/search', responseHandler(async(req) => {
             return await this.getObjects(req.query);
         }));
+        this.router.get('/flats/house/:house/section/:section/floor/:floor/:type/:apartment', responseHandler(async(req) => {
+            return await this.getFlatByParams(req.params);
+        }));
         this.router.get('/get_house_chess', responseHandler(async(req) => {
             return await this.getHouseChess();
         }));

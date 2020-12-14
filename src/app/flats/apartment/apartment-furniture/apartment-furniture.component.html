@@ -1,0 +1,108 @@
+
+<section class="apartament-furniture" [class.active]="isActive">
+
+    <div class="apartament-furniture__vars">
+        <p class="apartament-furniture__vars-text">Показать:</p>
+        <label class="apartament-furniture__vars-item" *ngFor="let item of furnitureVariant">
+            <input type="radio" name="furnitureVariant">
+            <div>
+                <span class="apartament-furniture__vars-name">{{item.name}}</span>
+                <span class="apartament-furniture__vars-price">{{item.price}} &#8381;</span>
+            </div>
+        </label>
+    </div>
+    <div class="apartament-furniture__content">
+        <div class="apartament-furniture__slides">
+            <figure class="apartament-furniture__slides-item">
+                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img1.style.display = 'none'" #img1>
+                <div *ngIf="img1.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
+            </figure>
+            <figure class="apartament-furniture__slides-item">
+                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img2.style.display = 'none'" #img2>
+                <div *ngIf="img2.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
+            </figure>
+            <figure class="apartament-furniture__slides-item">
+                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img3.style.display = 'none'" #img3>
+                <div *ngIf="img3.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
+            </figure>
+            <a class="apartament-furniture__slides-item apartament-furniture__slides-item--link">
+                <h2 class="apartament-furniture__slides-title">Больше примеров</h2>
+                <p class="apartament-furniture__slides-text">Подробная галерея для всех видов меблировки и квартир</p>
+            </a>
+        </div>
+        <div class="apartament-furniture__info">
+            <div class="apartament-furniture__info-head">
+                <p class="apartament-furniture__info-title">В стоимость включено:</p>
+                <div class="apartament-furniture__info-kitchen">
+                    <div class="apartament-furniture__info-text notice">
+                        Кухня со встроенной техникой
+                        <span></span>
+                        <div class="apartament-furniture__info-notice">
+                            <p class="apartament-furniture__info-title">Включает в себя</p>
+                            <ul>
+                                <li class="apartament-furniture__info-text">Кухонный комплект</li>
+                                <li class="apartament-furniture__info-text">Варочная панель</li>
+                                <li class="apartament-furniture__info-text">Духовой шкаф</li>
+                                <li class="apartament-furniture__info-text">Холодильник</li>
+                                <li class="apartament-furniture__info-text">Вытяжка</li>
+                                <li class="apartament-furniture__info-text">Мойка и кухонный смеситель</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="apartament-furniture__info-text">464 555 &#8381;</p>
+                </div>
+            </div>
+            <div class="apartament-furniture__info-option">
+                <div class="apartament-furniture__info-switcher">
+                    <p class="apartament-furniture__info-title">Предметы мебели (опционально):</p>
+                    <label>
+                        <input type="checkbox" name="furniture-option" #furnitureOption>
+                        <div></div>
+                    </label>
+                </div>
+
+                <ng-container *ngIf="furnitureOption.checked">
+                    <div class="apartament-furniture__info-list">
+                        <label>
+                            <div class="apartament-furniture__info-checkbox">
+                                <input type="checkbox" name="add-furniture">
+                                <div></div>
+                                <p class="apartament-furniture__info-text">Кровать 2 сп. изг. прямоуг. (1600мм)</p>
+                            </div>
+                            <p class="apartament-furniture__info-text">+ 39 224 &#8381;</p>
+                        </label>
+                        <label>
+                            <div class="apartament-furniture__info-checkbox">
+                                <input type="checkbox" name="add-furniture">
+                                <div></div>
+                                <p class="apartament-furniture__info-text">Тумба 2 ящ</p>
+                            </div>
+                            <p class="apartament-furniture__info-text">+ 7 800 &#8381;</p>
+                        </label>
+                        <label>
+                            <div class="apartament-furniture__info-checkbox">
+                                <input type="checkbox" name="add-furniture">
+                                <div></div>
+                                <p class="apartament-furniture__info-text">Комод 4 ящ</p>
+                            </div>
+                            <p class="apartament-furniture__info-text">+ 14 400 &#8381;</p>
+                        </label>
+                        <label>
+                            <div class="apartament-furniture__info-checkbox">
+                                <input type="checkbox" name="add-furniture">
+                                <div></div>
+                                <p class="apartament-furniture__info-text">Зеркало навесное</p>
+                            </div>
+                            <p class="apartament-furniture__info-text">+ 12 903 &#8381;</p>
+                        </label>
+                    </div>
+    
+                    <div class="apartament-furniture__info-result">
+                        <p class="apartament-furniture__info-title">Итоговая стоимость меблировки</p>
+                        <p class="apartament-furniture__info-price">589 999 &#8381;</p>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</section>

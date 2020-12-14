@@ -1,4 +1,4 @@
-import { ApartmentModule } from './apartment/apartment.module';
+// import { ApartmentModule } from './apartment/apartment.module';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
@@ -21,10 +21,14 @@ import { CommercialListComponent } from './commercial/list/commercial-list.compo
 import { CommercialPlanComponent } from './commercial/plan/commercial-plan.component';
 import { CommercialFloorComponent } from './commercial/floor/commercial-floor.component';
 import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
+import { FormsRequestModule } from '../forms-request/forms-request.module';
+import { ApartmentFurnitureComponent } from './apartment/apartment-furniture/apartment-furniture.component';
 
 const FlatsComponents = [
     FlatsComponent,
     PopularComponent,
+    ApartmentComponent,
+    ApartmentFurnitureComponent,
 
     ...CommercialComponents,
 
@@ -46,8 +50,9 @@ const FlatsComponents = [
     ],
     imports: [
         FormsModule,
+        FormsRequestModule,
+        GHMRangeNumberModule,
         LoaderModule,
-        ApartmentModule,
         FlatSnippetModule,
         ReactiveFormsModule,
         GHMRangeNumberModule,
@@ -70,7 +75,7 @@ const FlatsComponents = [
                     { path: '_search', component: PlanComponent, children: [{path: '**', component: PlanComponent}]},
                     { path: 'house', component: HouseComponent },
                     { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
-                    { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
+                    { path: 'house/:house/section/:section/floor/:floor/:type/:apartment', component: ApartmentComponent }
                 ]
             }
         ])

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../../favorites/favorites.service';
 
@@ -16,6 +17,8 @@ export class FlatSnippetBlockComponent implements OnInit {
 
     constructor(
         public favoritesService: FavoritesService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
     ) { }
 
     // tslint:disable-next-line: max-line-length
@@ -31,10 +34,8 @@ export class FlatSnippetBlockComponent implements OnInit {
         this.flatData.inFavorite = !this.flatData.inFavorite;
         this.favoritesService.setFavorite(this.flatData);
     }
-
-    public openApartmentModal(index) {
-        // this.selectedFlatIndex = index;
-        // this.windowScrollLocker.block();
-        // this.showApartmentWindow = true;
+    public goToFlat() {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRoute.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${this.flatData.house}/section/${this.flatData.section}/floor/${this.flatData.floor}/flat/${this.flatData.flat}`]);
     }
 }

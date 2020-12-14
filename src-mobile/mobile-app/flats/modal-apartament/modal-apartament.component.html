@@ -1,4 +1,4 @@
-<div class="g-modal-bg flat_modal">
+<!-- <div class="g-modal-bg flat_modal">
 
     <div class="flat">
         <button class="flat__cls-btn" (click)="close.emit(false)"></button>
@@ -54,10 +54,6 @@
                 <p class="flat__subtitle">Площадь</p>
                 <p class="flat__text">{{flatData.space}} м²</p>
             </div>
-            <!-- <div class="flat__info-item .flat__info-credit">
-                <p class="flat__subtitle">Ипотека от</p>
-                <p class="flat__text">{{ minCredit(flatData.price) | myBitNumberPipe }} &#8381;</p>
-            </div> -->
             <div class="flat__info-item" *ngIf="flatType === 'office'">
                 <p class="flat__subtitle">Цена за 1 м²</p>
                 <p class="flat__text">{{ (flatData.price / flatData.space).toFixed(2) | myBitNumberPipe }} &#8381;</p>
@@ -75,7 +71,91 @@
         </div>
     </div>
 
-</div>
+</div> -->
+
+<section class="apartament" *ngIf="flatData">
+    <div class="apartament__nav">
+        <a class="apartament__nav-link" (click)="previousRoute()">Назад</a>
+    </div>
+
+    <div class="apartament__ctrls">
+        <h2 class="apartament__ctrls-flat">{{apartamentRooms}}, №{{flatData.flat}}</h2>
+        <div class="apartament__ctrls-wrap">
+            <a class="apartament__ctrls-pdf" (click)="routePDF()" target="_blank">План {{typeApartment !== 'office' ? 'квартиры' : 'помещения'}}</a>
+            <button class="apartament__ctrls-favorite" (click)="setFavorite()">
+                <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path [attr.fill]="flatData.inFavorite ? '#E7490F' : '#F9F9F9'" d="M15 1.30198L18.5059 9.73115L18.6232 10.0131L18.9276 10.0375L28.0276 10.7671L21.0944 16.7061L20.8624 16.9048L20.9333 17.2019L23.0515 26.0819L15.2606 21.3233L15 21.1641L14.7394 21.3233L6.9485 26.0819L9.06672 17.2019L9.13758 16.9048L8.90565 16.7061L1.97241 10.7671L11.0724 10.0375L11.3768 10.0131L11.4941 9.73115L15 1.30198Z" stroke="#E7490F"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <figure class="apartament__image">
+        <img [src]="planPath" alt="plan" (error)="img.style.display = 'none'" #img>
+        <div *ngIf="img.style.display === 'none'" class="apartament__image-error">Изображение недоступно</div>
+    </figure>
+
+    <div class="apartament__info">
+        <div class="apartament__info-not-sale" *ngIf="flatData.status === '1'">
+            Квартира пока не в продаже. Вы можете забронировать 
+            ее на индивидуальных условиях, связавшись 
+            с менеджером отдела продаж.
+        </div>
+
+        <ul class="apartament__info-list">
+            <li>
+                <p>Площадь</p>
+                <p>{{flatData.space}}</p>
+            </li>
+            <li>
+                <p>Корпус</p>
+                <p>{{flatData.house}}</p>
+            </li>
+            <li>
+                <p>Секция</p>
+                <p>{{flatData.section}}</p>
+            </li>
+            <li>
+                <p>Этаж</p>
+                <p>{{flatData.floor}}</p>
+            </li>
+            <li *ngIf="typeApartment !== 'office'">
+                <p>Отделка</p>
+                <p>{{flatData.decorationName}}</p>
+            </li>
+            <li>
+                <p>Стоимость</p>
+                <p [class.discount]="flatData.discount">{{ (flatData.discount ? (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe}} &#8381;</p>
+            </li>
+            <!-- <li>
+                <p>Срок сдачи</p>
+                <p>{{flatData.deliveryDate}}</p>
+            </li> -->
+        </ul>
+    </div>
+
+    <div class="apartament__furniture">
+        <label class="apartament__furniture-head" for="switcher">
+            <h2 class="apartament__furniture-title">Меблировка</h2>
+            <label class="apartament__furniture-switcher">
+                <input id="switcher" type="checkbox" #furnitureSwitcher>
+                <div></div>
+            </label>
+        </label>
+
+        <app-apartment-furniture
+            *ngIf="furnitureSwitcher.checked"
+            [flatData]="flatData"
+            [isActive]="furnitureSwitcher.checked"
+        ></app-apartment-furniture>
+    </div>
+
+    <div class="apartament__ctrls">
+        <button class="apartament__ctrls-reserve">Забронировать</button>
+        <button class="apartament__ctrls-credit">Заявка на ипотеку</button>
+    </div>
+
+</section>
 
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"

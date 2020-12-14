@@ -10,7 +10,7 @@
         <nav class="header__menu">
             <ul class="header__menu-list">
                 <li class="header__menu-item" *ngFor="let link of links"
-                  [ngClass]="{'flats': link.name === 'Квартиры', 'active': checkLink(link.url)}">
+                  [ngClass]="{'tooltip': link.tooltip, 'active': checkLink(link.url)}">
                     <a [routerLink]="link.url">{{link.name}}</a>
 
                     <div class="header__menu-tooltip" *ngIf="link.tooltip">

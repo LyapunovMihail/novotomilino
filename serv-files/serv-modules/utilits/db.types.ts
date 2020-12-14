@@ -17,5 +17,6 @@ export interface DbJsonObject {
     ArticleTypeCode: string;
     articleSubTypeCode: string;
     DeliveryPeriodDate: string;
+    SaleChars?: any[];
     planid: string;
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-flats-list',
@@ -19,17 +20,15 @@ export class FlatsListComponent implements OnInit, OnChanges {
     public selectedFlatIndex: number;
 
     constructor(
-        public windowScrollLocker: WindowScrollLocker
-    ) {
-    }
+        public windowScrollLocker: WindowScrollLocker,
+        private router: Router,
+    ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public openApartmentModal(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0] }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }
 
     ngOnChanges(obj: SimpleChanges) {

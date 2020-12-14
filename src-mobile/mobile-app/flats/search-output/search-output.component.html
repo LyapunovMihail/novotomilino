@@ -2,7 +2,7 @@
 
     <li *ngFor="let flat of flatsList; let i = index" class="result__item" [class.not-saled]="flat.status === '1'">
 
-        <a class="result__item-wrap" (click)="openApartmentModal(i)" >
+        <a class="result__item-wrap" (click)="openApartmentModal(flat)" >
             <span class="result__wrap result__wrap_scheme">
                 <img class="result__scheme-content" 
                     [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
@@ -34,9 +34,9 @@
 
 </ul>
 
-<app-modal-apartment *ngIf="showApartmentWindow"
+<!-- <app-modal-apartment *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"
     [flatsList]="flatsList"
     [flatIndex]="selectedFlatIndex"
     (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-modal-apartment>
+</app-modal-apartment> -->

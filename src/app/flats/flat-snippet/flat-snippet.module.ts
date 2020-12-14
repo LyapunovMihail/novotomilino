@@ -6,7 +6,6 @@ import { FlatNumberPipe } from './bit-number.pipe';
 import { FlatSnippetComponent } from './flat-snippet.component';
 import { FlatSnippetInlineComponent } from './flat-snippet-inline/flat-snippet-inline.component';
 import { FlatSnippetBlockComponent } from './flat-snippet-block/flat-snippet-block.component';
-import { ApartmentModule } from '../apartment/apartment.module';
 
 const components = [
     FlatNumberPipe,
@@ -21,7 +20,6 @@ const components = [
     imports: [
         RouterModule,
         CommonModule,
-        ApartmentModule,
     ],
     providers: [],
 })

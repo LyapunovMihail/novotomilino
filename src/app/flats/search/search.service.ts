@@ -23,6 +23,9 @@ export class SearchService {
     public getConfig() {
         return this.http.get('/api/search-config');
     }
+    public getFlatData(route) {
+        return this.http.get('/api' + route);
+    }
 
     public getPDF(id, mod) {
         return this.http.get(`/api/pdf/${id}/${mod}`);

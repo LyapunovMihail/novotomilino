@@ -53,6 +53,13 @@ $trans-img: transform .7s linear;
     }
 }
 
+// Переводит 'px' в 'vw'
+// 'base-viewport' = разрешение экрана
+// 'height' = высота в 'px', которая должна быть у блока при указанном 'base-viewport'
+@function vw($height, $base-viewport: 320px) {
+    @return ($height * 100vw) / $base-viewport;
+}
+
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

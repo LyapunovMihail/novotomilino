@@ -136,10 +136,13 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public openApartmentModal(index, floorFlats) {
-        this.selectedFlatIndex = index;
-        this.floorFlats = floorFlats;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+        // this.selectedFlatIndex = index;
+        // this.floorFlats = floorFlats;
+        // this.windowScrollLocker.block();
+        // this.showApartmentWindow = true;
+        const flatData = floorFlats.find((el,j) => j === index);
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRoute.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${flatData.house}/section/${flatData.section}/floor/${flatData.floor}/flat/${flatData.flat}`]);
     }
 
     public showFlatBubble(event, flat, sectionContainer) {

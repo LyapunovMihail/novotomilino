@@ -1,16 +1,19 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
+import { FlatsService } from '../flats.service';
 
 @Component({
     selector: 'app-modal-apartment',
     templateUrl: 'modal-apartament.component.html',
-    styleUrls: ['modal-apartament.component.scss']
+    styleUrls: ['modal-apartament.component.scss'],
+    providers: [ FlatsService ]
 })
 
-export class ModalApartamentComponent implements OnInit {
+export class ModalApartamentComponent implements OnInit, OnDestroy {
+
     public isCreditFormOpen = false;
     public isReserveFormOpen = false;
     public isformSuccessOpen = false;
@@ -20,47 +23,46 @@ export class ModalApartamentComponent implements OnInit {
     public isCreditFormSubmit = false;
     public isReserveFormSubmit = false;
 
-    @Input() public showApartmentWindow = false;
-    @Input() public flatIndex: number;
-    @Input() public flatType = 'flat';
-    @Input() public flatsList: IFlatWithDiscount[];
-    @Output() public close: EventEmitter<boolean> = new EventEmitter();
-
     constructor(
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
+        private flatsService: FlatsService,
     ) {}
 
     public get apartamentRooms() {
-        return this.flatType === 'flat'
+        return this.typeApartment === 'flat'
             ? this.flatData.rooms < 1
                 ? 'Студия'
                 : this.flatData.rooms + ' комнатная'
             : 'Помещение';
     }
-    public get imageSrc() {
-        return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.flatType}.svg`;
+    public get typeApartment() {
+        return this.flatData.type === 'КВ'
+            ? 'flat'
+            : 'office';
+    }
+    public get planPath() {
+        // tslint:disable-next-line: max-line-length
+        return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.typeApartment}.svg`;
     }
 
-    public ngOnInit() {
-        this.flatData = this.flatsList[this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.pdfLink = `/api/pdf?id=${this.flatData._id}`;
+    ngOnInit() {
+        this.getFlatData();
+    }
+    ngOnDestroy() {
+        sessionStorage.removeItem('ntm-prev-route');
     }
 
-    public prevFlat() {
-        this.flatData = this.flatsList[--this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.isCreditFormSubmit = false;
-        this.isReserveFormSubmit = false;
+    private getFlatData() {
+        this.flatsService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
+            this.flatData = data;
+            this.flatData.discount = this.getDiscount(data);
+        });
     }
-
-    public nextFlat() {
-        this.flatData = this.flatsList[++this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.isCreditFormSubmit = false;
-        this.isReserveFormSubmit = false;
+    public previousRoute() {
+        const prevRoute = JSON.parse(sessionStorage.getItem('ntm-prev-route'));
+        this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
     }
 
     public getDiscount(flat): number {

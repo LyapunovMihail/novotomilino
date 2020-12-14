@@ -108,6 +108,7 @@ export class DbCronUpdate {
             articleId: object.ArticleID,
             floorsInSection: Number(object.planid.split('/')[0]),
             flatsInFloor: Number(object.planid.split('/')[1]),
+            saleChars: ('SaleChars' in object) ? this.paraseSaleChars(object.SaleChars) : null,
         };
 
         this.counter++;
@@ -135,6 +136,18 @@ export class DbCronUpdate {
                         return 'КН';
                 }
         }
+    }
+    private paraseSaleChars(object) {
+        const newObject = object.map(el => {
+            const newCtrl = {};
+            // tslint:disable-next-line: forin
+            for (const key in el) { newCtrl[this.myCase(key)] = el[key]; }
+            return newCtrl;
+        });
+        return newObject;
+    }
+    private myCase(ctrl) {
+        return `${ctrl[0].toLowerCase()}${ctrl.slice(1)}`;
     }
 
     private parseArticle(article: string) {

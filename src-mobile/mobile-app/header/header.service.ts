@@ -37,6 +37,7 @@ export class HeaderService {
             { name: 'Квартиры', url: `/flats/search` },
             { name: 'Коммерческая недвижимость', url: `/flats/commercial` },
             { name: 'Отделка', url: '/decoration' },
+            { name: 'Квартиры с мебелью', url: '/furniture/type/classic/variant/shatura/room/0' }, // type/:type/variant/:variant/room/:room
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
             { name: 'Условия покупки', url: '/purchase' },
             { name: 'Новости и акции', url: '/news-shares' },

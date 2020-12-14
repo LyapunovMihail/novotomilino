@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FlatsListModule } from './flats/flats-list/flats-list.module';
 import { FavoritesFlatsComponent } from './flats/favorites-flats.component';
 import { FavoritesCommercialComponent } from './commercial/commercial-list.component';
-import { ApartmentModule } from '../flats/apartment/apartment.module';
+// import { ApartmentModule } from '../flats/apartment/apartment.module';
 
 @NgModule({
     exports: [
@@ -21,7 +21,7 @@ import { ApartmentModule } from '../flats/apartment/apartment.module';
     imports: [
         CommonModule,
         FlatsListModule,
-        ApartmentModule,
+        // ApartmentModule,
         RouterModule.forChild([
             { path: 'favorites', component: FavoritesComponent,
                 children: [

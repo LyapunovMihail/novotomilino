@@ -30,7 +30,7 @@
         <li>
             <ul class="flat-list__item-info">
                 <li *ngFor="let flat of share.shareFlats; let i = index" class="flat-list__item flat-list__item_info">
-                    <a (click)="openApartmentModal(i)" class="flat-list__item_link">
+                    <a (click)="openApartmentModal(flat)" class="flat-list__item_link">
                         <div class="flat-list__item-img">
                             <img (error)="img.style.display = 'none'"
                                  [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
@@ -56,10 +56,3 @@
         </li>
     </ul>
 </div>
-
-<app-modal-apartment *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="share.shareFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-modal-apartment>

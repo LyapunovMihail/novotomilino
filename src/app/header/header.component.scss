@@ -71,7 +71,7 @@
             &:hover::before,
             &.active::before { width: 100%; }
 
-            &.flats {
+            &.tooltip {
                 position: relative;
                 padding-right: 24px;
                 &::after {

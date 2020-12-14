@@ -4,6 +4,7 @@ import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { FavoritesService } from '../../../favorites/favorites.service';
 import { SearchService } from '../search.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-search-output',
@@ -18,6 +19,7 @@ export class SearchOutputComponent implements OnInit {
     public viewType = 'block';
     public selectedFlatIndex: number;
     public showApartmentWindow = false;
+    public showFavoriteWindow = true;
 
     @Input() public count: number;
     @Input() public preloader: boolean;
@@ -31,6 +33,8 @@ export class SearchOutputComponent implements OnInit {
         public favoritesService: FavoritesService,
         public windowScrollLocker: WindowScrollLocker,
         private flatsDiscountService: FlatsDiscountService,
+        private activatedRouter: ActivatedRoute,
+        private router: Router,
     ) {}
 
     public ngOnInit() {
@@ -62,10 +66,9 @@ export class SearchOutputComponent implements OnInit {
         return this.favoritesService.inFavorite(flat);
     }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public flatNavigate(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }
 
     public parseText(num) {

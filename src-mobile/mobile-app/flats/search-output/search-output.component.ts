@@ -1,9 +1,9 @@
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { FavoritesService } from '../../favorites/favorites.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-search-output',
@@ -32,7 +32,10 @@ export class SearchOutputComponent implements OnChanges {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private flatsDiscountService: FlatsDiscountService,
-        private favoritesService: FavoritesService) {
+        private favoritesService: FavoritesService,
+        private activatedRouter: ActivatedRoute,
+        private router: Router,
+    ) {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -64,9 +67,8 @@ export class SearchOutputComponent implements OnChanges {
         return this.favoritesService.inFavorite(flat);
     }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public openApartmentModal(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }
 }

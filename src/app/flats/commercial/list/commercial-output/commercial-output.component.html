@@ -19,7 +19,7 @@
 
     <div class="commercial-output__list">
         <div class="commercial-output__flat flat-snippet" *ngFor="let flat of flatsList; let i = index">
-            <a class="flat-snippet__link" (click)="openApartmentModal(i)">
+            <a class="flat-snippet__link" (click)="flatNavigate(flat)">
                 <div class="flat-snippet__wrap">
                     <div class="flat-snippet__image">
                         <img (error)="img.style.display = 'none'"
@@ -43,10 +43,10 @@
     </div>
 </section>
 
-<app-flats-apartment-modal *ngIf="showApartmentWindow"
+<!-- <app-flats-apartment-modal *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"
     [typeApartment]="'office'"
     [flatsList]="flatsList"
     [flatIndex]="selectedFlatIndex"
     (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal>
+</app-flats-apartment-modal> -->

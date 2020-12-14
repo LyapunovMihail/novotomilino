@@ -22,23 +22,19 @@ export class CommercialOutputComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         public favoritesService: FavoritesService,
         public windowScrollLocker: WindowScrollLocker,
+        private activatedRouter: ActivatedRoute,
         private router: Router
     ) { }
-    ngOnInit() { }
 
-    public goToFlat(flat) {
-        sessionStorage.setItem('vb2_prevRouter_in_flat_page', JSON.stringify({url: this.router.url.split('?')[0], queryParams: this.activatedRoute.snapshot.queryParams}));
-        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/office/${flat.flat}`]);
-    }
+    ngOnInit() { }
 
     public setFavorite(flat): void {
         flat.inFavorite = !flat.inFavorite;
         this.favoritesService.setFavorite(flat);
     }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public openApartmentModal(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/office/${flat.flat}`]);
     }
 }

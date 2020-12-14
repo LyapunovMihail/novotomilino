@@ -119,10 +119,13 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
         this.router.navigate([`/flats/commercial/house/${this.params['houses']}/section/${section}/floor/1`]);
     }
     public openApartmentModal(index, floorFlats) {
-        const filteredFlats = floorFlats.filter(el => el.floor === +this.params.floor && el.section === +this.params.sections);
-        this.selectedFlatIndex = filteredFlats.findIndex(el => el._id === floorFlats[index]._id);
-        this.floorFlats = filteredFlats;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+        // const filteredFlats = floorFlats.filter(el => el.floor === +this.params.floor && el.section === +this.params.sections);
+        // this.selectedFlatIndex = filteredFlats.findIndex(el => el._id === floorFlats[index]._id);
+        // this.floorFlats = filteredFlats;
+        // this.windowScrollLocker.block();
+        // this.showApartmentWindow = true;
+        const flatData = floorFlats.find((el,j) => j === index);
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0] }));
+        this.router.navigate([`/flats/house/${flatData.house}/section/${flatData.section}/floor/${flatData.floor}/office/${flatData.flat}`]);
     }
 }

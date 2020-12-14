@@ -34,11 +34,14 @@ export class HeaderService {
                     { name: 'Коммерческая недвижимость', url: '/flats/commercial' }
                 ],
             },
-            { name: 'Отделка', url: '/decoration' },
+            { name: 'Отделка', url: '/decoration',
+                tooltip: [
+                    { name: 'Квартиры с мебелью', url: '/furniture' }
+                ],
+            },
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
             { name: 'Условия покупки', url: '/purchase' },
             { name: 'Новости и акции', url: '/news-shares' },
-            // { name: 'Избранное', url: '/favorites' },
         ];
     }
 }

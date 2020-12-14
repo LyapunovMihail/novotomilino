@@ -57,11 +57,6 @@
             </ng-container>
         </div>
 
-        <app-loader
-            [loaderShow]="preloader"
-            [loaderHeight]="460">
-        </app-loader>
-
         <button class="house__sections-btn_prev" (click)="scrollPrev()" *ngIf="scroll !== 0">
         </button>
         <button class="house__sections-btn_next" (click)="scrollNext()" *ngIf="scroll !== chessMaxScroll">
@@ -74,17 +69,17 @@
         [parentPlan]="false"
         (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
     </app-flats-search>
+
+    <div class="house__preloader" *ngIf="preloader">
+        <app-loader
+            [loaderShow]="preloader"
+        ></app-loader>
+    </div>
 </div>
+
 
 <app-flats-flat-bubble
     [bubbleData]="bubbleData"
     [coords]="bubbleCoords"
     [showBubble]="showBubble">
 </app-flats-flat-bubble>
-
-<app-flats-apartment-modal *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="floorFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal>

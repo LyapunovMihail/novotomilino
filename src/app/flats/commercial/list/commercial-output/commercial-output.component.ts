@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 import { FavoritesService } from '../../../../favorites/favorites.service';
 
@@ -30,6 +31,8 @@ export class CommercialOutputComponent implements OnInit {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         public favoritesService: FavoritesService,
+        private activatedRouter: ActivatedRoute,
+        private router: Router,
     ) { }
 
     ngOnInit() { }
@@ -66,6 +69,10 @@ export class CommercialOutputComponent implements OnInit {
         this.selectedFlatIndex = index;
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
+    }
+    public flatNavigate(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }
 
     public setFavorite(flat): void {

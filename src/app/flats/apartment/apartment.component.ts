@@ -5,9 +5,10 @@ import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses
 import { FavoritesService } from '../../favorites/favorites.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { SearchService } from '../search/search.service';
+import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 
 @Component({
-    selector: 'app-flats-apartment-modal',
+    selector: 'app-flats-apartment',
     templateUrl: './apartment.component.html',
     styleUrls: ['./apartment.component.scss', '../flats.component.scss'],
     providers: [ SearchService ]
@@ -22,21 +23,14 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public pdfLink: string;
     public clickedPdf = false;
     public changeFlatData;
-    public prevFlat: IFlatWithDiscount;
-    public nextFlat: IFlatWithDiscount;
-
-    @Input() public flatIndex: number;
-    @Input() public typeApartment = 'flat';
-    @Input() public showApartmentWindow = false;
-    @Input() public flatsList: IFlatWithDiscount[];
-    @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
     constructor(
+        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService,
         private platformDetectService: PlatformDetectService,
-        public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
         public searchService: SearchService,
+        public router: Router,
     ) {}
 
     public get apartamentRooms() {
@@ -46,50 +40,38 @@ export class ApartmentComponent implements OnInit, OnDestroy {
                 : this.flatData.rooms + ' комнатная'
             : 'Помещение';
     }
-
-    public ngOnInit() {
-        this.flatData = this.flatsList[this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.setPrevAndNextFlats();
-        // this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
-        this.hideHeader(true);
+    public get typeApartment() {
+        return this.flatData.type === 'КВ'
+            ? 'flat'
+            : 'office';
+    }
+    public get planPath() {
+        return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.typeApartment}.svg`;
     }
 
-
+    ngOnInit() {
+        this.getFlatData();
+    }
     ngOnDestroy() {
-        this.hideHeader(false);
+        sessionStorage.removeItem('ntm-prev-route');
     }
 
-    public hideHeader(val) {
-        if (this.router.url.startsWith('/flats/house')) { return; }
-        const header = (document.querySelector('.header') as HTMLElement);
-        const showFilterBtn = (document.querySelector('.search__show-btn') as HTMLElement) || null;
-        if (val) {
-            header.style.zIndex = '0';
-            if (showFilterBtn !== null) { showFilterBtn.style.zIndex = '0'; }
-        } else {
-            header.style.zIndex = '';
-            if (showFilterBtn !== null) { showFilterBtn.style.zIndex = ''; }
+    private getFlatData() {
+        this.searchService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
+            this.flatData = data;
+            this.flatData.discount = this.getDiscount(data);
+            // console.log('flatData -> ', data);
+        });
+    }
+
+    public previousRoute() {
+        const prevRoute = JSON.parse(sessionStorage.getItem('ntm-prev-route'));
+        if (prevRoute.route === '/flats/plan') {
+            this.searchFlatsLinkHandlerService.linkHandle(true, prevRoute.params);
+            return;
         }
+        this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
     }
-
-    private setPrevAndNextFlats() {
-        this.prevFlat = this.flatsList[this.flatIndex - 1];
-        this.nextFlat = this.flatsList[this.flatIndex + 1];
-    }
-
-    public toPrevFlat() {
-        this.flatData = this.flatsList[--this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.setPrevAndNextFlats();
-    }
-
-    public toNextFlat() {
-        this.flatData = this.flatsList[++this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
-        this.setPrevAndNextFlats();
-    }
-
     public routePDF() {
         if (!this.platformDetectService.isBrowser) { return; }
 

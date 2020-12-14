@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { FavoritesService } from '../favorites.service';
@@ -21,17 +22,17 @@ export class FavoritesCommercialComponent implements OnInit {
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
-        public favoritesService: FavoritesService
+        public favoritesService: FavoritesService,
+        private router: Router,
     ) { }
 
     public get favoriteFlats() { return this.favoritesService.favoriteFlats.filter(flat => flat.type === 'КН'); }
 
     ngOnInit() { }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public openApartmentModal(flat) {
+        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0] }));
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/office/${flat.flat}`]);
     }
     public setFavorite(flat): void {
         flat.inFavorite = !flat.inFavorite;

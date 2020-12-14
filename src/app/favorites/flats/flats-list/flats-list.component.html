@@ -1,5 +1,5 @@
 <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
-    <a (click)="openApartmentModal(i)" class="search-output__result-item">
+    <a (click)="openApartmentModal(flat)" class="search-output__result-item">
         <div class="search-output__result-item-img">
             <img class="search-output__result-item-scheme" (error)="img.style.display = 'none'"
                  [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
@@ -27,9 +27,9 @@
     <div class="search-output__result-item-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
 </div>
 
-<app-flats-apartment-modal *ngIf="showApartmentWindow"
+<!-- <app-flats-apartment-modal *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"
     [flatsList]="flatsList"
     [flatIndex]="selectedFlatIndex"
     (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal>
+</app-flats-apartment-modal> -->

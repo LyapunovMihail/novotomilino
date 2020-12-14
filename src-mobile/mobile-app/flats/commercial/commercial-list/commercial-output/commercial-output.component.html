@@ -2,7 +2,7 @@
 <section class="commercial-output">
     <div class="commercial-output__flat" *ngFor="let flat of flatsList; let i = index">
         <div class="commercial-output__flat-container">
-            <a class="commercial-output__flat-link" (click)="openApartmentModal(i)">
+            <a class="commercial-output__flat-link" (click)="openApartmentModal(flat)">
                 <div class="g-flat__item-image">
                     <!-- [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'" -->
                     <img class="result__scheme-content" 
@@ -30,10 +30,10 @@
     </div>
 </section>
 
-<app-modal-apartment *ngIf="showApartmentWindow"
+<!-- <app-modal-apartment *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"
     [flatsList]="flatsList"
     [flatIndex]="selectedFlatIndex"
     [flatType]="'office'"
     (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-modal-apartment>
+</app-modal-apartment> -->

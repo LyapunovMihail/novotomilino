@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
 import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 import { SearchOutputModule } from './search-output/search-output.module';
 import { CommercialComponents } from './commercial/commercial';
@@ -16,6 +15,10 @@ import { CommercialComponent } from './commercial/commercial.component';
 import { CommercialListComponent } from './commercial/commercial-list/commercial-list.component';
 import { CommercialSectionComponent } from './commercial/commercial-section/commercial-section.component';
 import { CommercialSearchComponent } from './commercial/commercial-search/commercial-search.component';
+import { ModalApartamentComponent } from './modal-apartament/modal-apartament.component';
+import { FormsRequestModule } from '../forms-request/forms-request.module';
+import { ApartmentFurnitureComponent } from './modal-apartament/apartment-furniture/apartment-furniture.component';
+import { ApartamentBitNumberPipe } from './modal-apartament/apartament-bit-number.pipe';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -23,7 +26,10 @@ const FlatsComponents = [
     SectionsSelectComponent,
     CheckboxListComponent,
     SearchFormPipe,
-    SearchSortingComponent
+    SearchSortingComponent,
+    ModalApartamentComponent,
+    ApartmentFurnitureComponent,
+    ApartamentBitNumberPipe,
 ];
 
 @NgModule({
@@ -36,12 +42,12 @@ const FlatsComponents = [
         ...CommercialComponents,
     ],
     imports: [
-        ModalApartamenModule,
         SearchOutputModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
         RouterModule,
+        FormsRequestModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
             // { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
@@ -59,7 +65,8 @@ const FlatsComponents = [
                     { path: 'section', component: CommercialSectionComponent },
                     { path: 'section/search', component: CommercialSearchComponent },
                 ]
-            }
+            },
+            { path: 'flats/house/:house/section/:section/floor/:floor/:type/:apartment', component: ModalApartamentComponent }
         ])
     ]
 })

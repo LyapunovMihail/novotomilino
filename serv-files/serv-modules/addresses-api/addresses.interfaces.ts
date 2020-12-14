@@ -63,11 +63,30 @@ export interface IAddressItemFlat {
     floorsInSection: number;
     flatsInFloor: number;
     isEuro: string;
+    saleChars?: any[] | any;
     _id?: any;
 }
 
 export interface IFlatWithDiscount extends IAddressItemFlat {
     discount: number;
+}
+export interface IFlatWithFurniture extends IAddressItemFlat {
+    furniture: {
+        id: string;
+        items: IFlatFurniture[];
+    };
+}
+/*{
+    id: 'a34d17fc-e612-eb11-80fd-001dd8bb025e',
+    itemId: 'Лазурит-12_01',
+    itemName: '[дДС01] Диван 3-х местный механизм Книжка Дастин Twist pebble',
+    itemsDefaultCount: 1,
+    itemPrice: 38760.00,
+    chSalesId: 'eaac5462-15f1-ea11-80fd-001dd8bb025e'
+}*/
+export interface IFlatFurniture {
+    itemName: string;
+    itemPrice: number;
 }
 
 export interface IFlatResponse {
