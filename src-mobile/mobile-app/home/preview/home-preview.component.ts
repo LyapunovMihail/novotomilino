@@ -1,12 +1,14 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import {
+    EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { HomeService } from '../home.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { combineLatest } from 'rxjs';
 declare let $: any;
 
 @Component({
@@ -25,9 +27,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
 
-    public currentSlide: number = 0;
+    public currentSlide = 0;
 
-    public showTrojka: boolean = false;
+    public showTrojka: boolean;
 
     public slideWidth = document.documentElement.clientWidth;
 
@@ -59,15 +61,15 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
         if ( !this.platform.isBrowser ) { return false; }
 
-        this.homeService.getHomePreview().subscribe(
-            data => this.homePreview = data,
-            error => console.log(error)
-        );
-
-        this.homeService.getPreviewVideo().subscribe(
-            data => this.videoContent = data,
-            err => console.log(err)
-        );
+        combineLatest(
+            this.homeService.getHomePreview(),
+            this.homeService.getPreviewVideo(),
+            this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW),
+        ).subscribe( ([previewText, previewVideo, gallerySnippet]) => {
+            this.homePreview = previewText;
+            this.videoContent = previewVideo;
+            this.gallerySlides = gallerySnippet;
+        });
 
         this.prepareMainNewsSnippets();
         setTimeout( () => {

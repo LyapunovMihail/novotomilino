@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, OnDestroy, OnInit, Output, EventEmitter, HostBinding } from '@angular/core';
 import * as moment from 'moment';
 import {
+    EnumGallerySnippet,
     GALLERY_UPLOADS_PATH,
     IGallerySnippet
 } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
@@ -74,6 +75,12 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
                 this.videoContent = data;
             },
             err => console.log(err)
+        );
+        this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW).subscribe(
+            (data: IGallerySnippet[]) => {
+                this.gallerySlides = data;
+            },
+            (err) => console.log(err)
         );
 
         this.prepareMainNewsSnippets();

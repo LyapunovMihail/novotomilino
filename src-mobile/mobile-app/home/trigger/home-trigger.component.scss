@@ -101,7 +101,7 @@
     }
     &__snippet {
         width: 100%;
-        max-width: 290px;
+        // max-width: 290px;
         @include snippet;
         padding: 16px 24px;
         min-height: 222px;

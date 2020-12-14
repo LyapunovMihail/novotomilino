@@ -36,7 +36,7 @@
         <button class="gallery-admin_close-btn" (click)="close.emit()"></button>
 
         <label class="admin-gallery_modal-load-more-button">Загрузить еще
-            <input style='display: none;' type="file" (change)="setSlides($event)" multiple placeholder="Upload file" accept=".jpg" multiple>
+            <input style='display: none;' type="file" (change)="setSlides($event)" placeholder="Upload file" accept=".jpg" [attr.multiple]="type !== 'PREVIEW'">
         </label>
     </div>
 </div>

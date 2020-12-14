@@ -28,6 +28,13 @@
             <div class="favorites-commercial__flat-favorite" (click)="setFavorite(flat)" [class.active]="flat.inFavorite"></div>
         </div>
     </div>
+
+    <div class="favorites-commercial__empty" *ngIf="!favoriteFlats.length">
+        <div class="favorites-commercial__empty-container">
+            <p class="favorites-commercial__empty-hint">Коммерческую недвижимость вы можете добавлять в этот раздел</p>
+            <a class="favorites-commercial__empty-link" routerLink="/flats/commercial">Коммерческая недвижимость</a>
+        </div>
+    </div>
 </section>
 
 <app-modal-apartment *ngIf="showApartmentWindow"

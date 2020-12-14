@@ -1,11 +1,13 @@
 
 <div class="favorites-flats">
-    <app-flats-list
-        [flatsList]="favoriteFlats">
-    </app-flats-list>
-</div>
 
-<div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">
-    <p class="favorites-flats__empty-hint">Интересующие вас квартиры вы можете добавлять в этот раздел</p>
-    <a class="favorites-flats__empty-link g-body_bold" routerLink="/flats/commercial">Выбрать квартиру</a>
+    <div class="favorites-flats__list">
+        <app-flats-list
+            [flatsList]="favoriteFlats">
+        </app-flats-list>
+    </div>
+    <div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">
+        <p class="favorites-flats__empty-hint">Интересующие вас квартиры вы можете добавлять в этот раздел</p>
+        <a class="favorites-flats__empty-link g-body_bold" routerLink="/flats">Выбрать квартиру</a>
+    </div>
 </div>
