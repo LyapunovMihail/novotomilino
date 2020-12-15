@@ -6,8 +6,26 @@
     align-items: center;
 
     &__list {
-        width: $mobileContainer;
-        max-width: $tabletContainer;
+        width: 100%;
+
+        &.flex-wrap {
+            width: $mobileContainer;
+            max-width: $tabletContainer;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            margin: 0 auto;
+            
+            &> * {
+                display: block;
+                width: calc((100% - 24px) / 2);
+                margin: 0 0 24px;
+                @media (max-width: 767px) {
+                    width: 100%;
+                    margin: 0 0 16px;
+                }
+            }
+        }
     }
 
     &__empty {

@@ -27,6 +27,7 @@ export class SearchOutputComponent implements OnInit {
     @Input() public flatsList: IFlatWithDiscount[] = [];
 
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
+    @Output() public closeFavoriteNotice: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private searchService: SearchService,
@@ -39,6 +40,9 @@ export class SearchOutputComponent implements OnInit {
 
     public ngOnInit() {
         this.preloader = true;
+        this.showFavoriteWindow = sessionStorage.getItem('ntm-favorite-notice')
+            ? JSON.parse(sessionStorage.getItem('ntm-favorite-notice')).show
+            : true;
         this.searchService.getOutputFlatsChanged()
             .subscribe((flats: IFlatWithDiscount[]) => {
                 this.flatsList = flats;
@@ -87,5 +91,11 @@ export class SearchOutputComponent implements OnInit {
         const value = (sort.split('_'))[1];
         this.viewType = (sort.split('_'))[2];
         this.sortChange.emit(`${name}_${value}`);
+    }
+
+    public noticeFavorite() {
+        this.showFavoriteWindow = !this.showFavoriteWindow;
+        sessionStorage.setItem('ntm-favorite-notice', JSON.stringify({ show: false }));
+        this.closeFavoriteNotice.emit();
     }
 }

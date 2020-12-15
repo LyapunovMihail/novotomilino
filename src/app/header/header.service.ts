@@ -35,9 +35,9 @@ export class HeaderService {
                 ],
             },
             { name: 'Отделка', url: '/decoration',
-                tooltip: [
-                    { name: 'Квартиры с мебелью', url: '/furniture' }
-                ],
+                // tooltip: [
+                //     { name: 'Квартиры с мебелью', url: '/furniture' }
+                // ],
             },
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
             { name: 'Условия покупки', url: '/purchase' },

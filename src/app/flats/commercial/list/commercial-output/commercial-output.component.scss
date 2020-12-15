@@ -10,13 +10,14 @@
     &__container { @include container(); }
     &__head {
         width: 100%;
-        position: relative;
-        // border-bottom: 1px solid #eee;
-        padding: 0 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin: 0 0 8px;
 
         &-result {
-            font: 18px/28px $font-mus;
+            font: 500 24px/28px $font-mus;
+            @include font-smoothing;
             color: $col-black;
         }
     }

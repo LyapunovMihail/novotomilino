@@ -105,6 +105,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.type)],
+            euro: [((euro) => {
+                if (euro && euro.split(',').every((item) => this.config.typePlan.some((i) => item === i.value))) {
+                    return euro.split(',');
+                }
+                return [];
+            })(params.euro)],
             status: [((status) => {
                 if (status && status.split(',').every((item) => this.config.statusList.some((i) => item === i.value))) {
                     return status.split(',');

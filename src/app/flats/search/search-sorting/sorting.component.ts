@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 
@@ -26,17 +26,6 @@ import { FlatsDiscountService } from '../../../commons/flats-discount.service';
                         opacity: 1,
                         transform: 'translateY(0px)'
                     }))
-            ]),
-            transition('* => void', [
-                style({
-                    opacity: 1,
-                    transform: 'translateY(0px)'
-                }),
-                animate('200ms ease-in',
-                    style({
-                        opacity: 0,
-                        transform: 'translateY(-10px)'
-                    }))
             ])
         ])
     ]
@@ -54,6 +43,10 @@ export class SearchSortingComponent implements OnInit {
         { name: 'space', text: 'Сначала с большей площадью', value: '0' },
         { name: 'space', text: 'Сначала с меньшей площадью', value: '1' },
     ];
+
+    @Input() public counter;
+    @Input() public hideViewTypeBtn: boolean;
+    @Input() public viewType: 'block' | 'inline';
 
     constructor( public flatsDiscountService: FlatsDiscountService ) {}
 
@@ -81,7 +74,7 @@ export class SearchSortingComponent implements OnInit {
             const name = (control).split('_')[0];
             const value = (control).split('_')[1];
             this.activeValue = (control).split('_')[1];
-            this.activeViewType = (control).split('_')[2];
+            this.activeViewType = (control).split('_')[2] || this.viewType || 'block';
             this.activeSort = (this.sortList.some((item) => item.name === name && item.value === value))
                 ? this.sortList.find(el => el.name === name && el.value === value).text
                 : this.sortList[0].text;

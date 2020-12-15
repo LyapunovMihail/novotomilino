@@ -11,8 +11,8 @@
     </div>
 
     <div class="search-output__result" [class.flex-output]="viewType === 'block'">
-        <div class="search-output__favorite" *ngIf="viewType === 'block' && showFavoriteWindow">
-            <button class="search-output__favorite-close" (click)="showFavoriteWindow = !showFavoriteWindow"></button>
+        <div class="search-output__favorite" *ngIf="viewType === 'block' && showFavoriteWindow && flatsList.length">
+            <button class="search-output__favorite-close" (click)="noticeFavorite()"></button>
             <p class="search-output__favorite-title">Добавляйте квартиры в избранное</p>
             <p class="search-output__favorite-text">
                 Нажимайте
@@ -22,7 +22,7 @@
                 , чтобы не потерять понравившуюся квартиру.
             </p>
 
-            <button class="search-output__favorite-success" (click)="showFavoriteWindow = !showFavoriteWindow">Хорошо, спасибо!</button>
+            <button class="search-output__favorite-success" (click)="noticeFavorite()">Хорошо, спасибо!</button>
         </div>
 
         <ng-container *ngFor="let flat of flatsList; index as i">

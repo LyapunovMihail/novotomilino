@@ -18,6 +18,7 @@
             [flatsList]="outputFlatsList"
             [preloader]="preloaderFlats"
             (sortChange)="sortChange($event)"
+            (closeFavoriteNotice)="loadMore(1)"
             [count]="count">
         </app-search-output>
 

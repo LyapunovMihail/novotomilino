@@ -1,7 +1,7 @@
 
 <div class="flat-snippet">
     <div class="flat-snippet__container">
-        <a class="flat-snippet__link" [title]="statusNotSale">
+        <a class="flat-snippet__link" [title]="statusNotSale" (click)="goToFlat()">
     
             <figure class="flat-snippet__link-image">
                 <img [src]="svgPath" alt="flat-image" (error)="img.style.display = 'none'" #img>

@@ -12,7 +12,6 @@ export const SearchComponents = [
     SearchComponent,
     SearchFormComponent,
     SearchOutputComponent,
-    SearchSortingComponent,
     SearchOutputPipe,
     SearchFormPipe,
     BitNumberPipe,

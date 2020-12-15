@@ -92,7 +92,11 @@
         <div class="search-form__container search-form__container_decor">
     
             <div class="search-form__decoration">
-
+                <app-search-checkbox-list
+                    [btnList]="config.typePlan"
+                    [formControl]="form.controls['euro']"
+                    [name]="'decoration'"
+                ></app-search-checkbox-list>
                 <app-search-checkbox-list
                     [btnList]="config.statusList"
                     [formControl]="form.controls['status']"

@@ -81,22 +81,8 @@ export class CommercialListComponent implements OnInit {
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
     }
-    public sortFlats(val = 'space', shift = 1) {
-        this.searchFlats.sort((a,b) => {
-            if (val === 'priceBySpace') {
-                if (shift < 0) {
-                    return (a.price / a.space) - (b.price / b.space);
-                } else {
-                    return (b.price / b.space) - (a.price / a.space);
-                }
-            } else {
-                if (shift < 0) {
-                    return a[val] - b[val];
-                } else {
-                    return b[val] - a[val];
-                }
-            }
-        });
+    public sortFlats(sort) {
+        this.searchService.sortFlats(sort, this.searchFlats);
         this.skip = 0;
         this.outputFlatsList = [];
         this.loadMore();

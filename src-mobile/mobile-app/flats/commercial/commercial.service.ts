@@ -13,7 +13,7 @@ export class CommercialService {
     }
 
     public getHouse(num): Observable<IAddressItemFlat[]> {
-        return this.http.get<IAddressItemFlat[]>('/api/search', { params: { houses: num, articleType: '16' } });
+        return this.http.get<IAddressItemFlat[]>('/api/search', { params: { houses: num, type: 'КН' } });
     }
 
     public parseConfig(flats) {
@@ -26,7 +26,7 @@ export class CommercialService {
                 min: Math.min(...flats.map(flat => flat.space)),
                 max: Math.max(...flats.map(flat => flat.space))
             },
-            sort: 'floor_1',
+            sort: 'price_1',
             status: [
                 {
                     name: 'В продаже',
@@ -62,25 +62,9 @@ export class CommercialService {
                     value: '3',
                     disabled: !flats.some(flat => flat.house === 3),
                 }, {
-                    name: '4',
-                    value: '4',
-                    disabled: !flats.some(flat => flat.house === 4),
-                }, {
-                    name: '5',
-                    value: '5',
-                    disabled: !flats.some(flat => flat.house === 5),
-                }, {
-                    name: '6',
-                    value: '6',
-                    disabled: !flats.some(flat => flat.house === 6),
-                }, {
-                    name: '7',
-                    value: '7',
-                    disabled: !flats.some(flat => flat.house === 7),
-                }, {
-                    name: '8',
-                    value: '8',
-                    disabled: !flats.some(flat => flat.house === 8),
+                    name: '9',
+                    value: '9',
+                    disabled: !flats.some(flat => flat.house === 9),
                 }
             ]
         };

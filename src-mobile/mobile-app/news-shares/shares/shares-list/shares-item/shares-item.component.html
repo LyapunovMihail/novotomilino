@@ -26,33 +26,13 @@
     </div>
 
 
-    <ul class="shares-view__flat flat-list">
-        <li>
-            <ul class="flat-list__item-info">
-                <li *ngFor="let flat of share.shareFlats; let i = index" class="flat-list__item flat-list__item_info">
-                    <a (click)="openApartmentModal(flat)" class="flat-list__item_link">
-                        <div class="flat-list__item-img">
-                            <img (error)="img.style.display = 'none'"
-                                 [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-                            <div *ngIf="img.style.display === 'none'" class="flat-list__item-img-error"></div>
-                        </div>
-    
-                        <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
-                            <div class="flat-list__item-text flat-list__item-text_corpus">Корпус {{flat.house}}</div>
-                            <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
-                        </div>
-                        <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_space">{{flat.space}} м&#178;</div>
-                            <div class="flat-list__item-price">
-                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>
-                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{flat.price | bitNumber}} &#8381;</div>
-                            </div>
-                        </div>
-                    </a>
-                   <!-- <div class="flat-list__item-favorite"></div> -->
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <div class="shares-view__flat flat-list">
+        <ng-container *ngFor="let flat of share.shareFlats; index as i">
+            <app-flat-snippet
+                [index]="i"
+                [flatData]="flat"
+                [viewType]="'inline'"
+            ></app-flat-snippet>
+        </ng-container>
+    </div>
 </div>

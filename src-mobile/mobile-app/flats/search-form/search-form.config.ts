@@ -21,6 +21,12 @@ export const FormConfig = {
             value: '1'
         }
     ],
+    typePlan: [
+        {
+            name: 'Евро',
+            value: '1'
+        }
+    ],
     typeList: [
         {
             name: 'Квартиры',

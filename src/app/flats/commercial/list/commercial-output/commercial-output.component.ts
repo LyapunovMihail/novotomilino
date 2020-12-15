@@ -2,27 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 import { FavoritesService } from '../../../../favorites/favorites.service';
+import { SearchService } from '../../../search/search.service';
 
 @Component({
     selector: 'app-commercial-output',
     templateUrl: 'commercial-output.component.html',
     styleUrls: ['./commercial-output.component.scss'],
     providers: [
-        WindowScrollLocker
+        WindowScrollLocker,
     ]
 })
 
 export class CommercialOutputComponent implements OnInit {
 
-    public showApartmentWindow = false;
-    public selectedFlatIndex: number;
-    public selectFilterItem;
-    public selectFilter;
-    public sortList = [
-        { name: 'space', text: 'По площади', value: false },
-        { name: 'priceBySpace', text: 'По цене за 1 м²', value: false },
-        { name: 'price', text: 'По цене', value: false },
-    ];
+    public sort = 'price_1';
 
     @Input() public flatsList = [];
     @Input() public count: number = 0;
@@ -37,6 +30,14 @@ export class CommercialOutputComponent implements OnInit {
 
     ngOnInit() { }
 
+    public changeSort() {
+        const name = this.sort.split('_')[0];
+        const value = this.sort.split('_')[1];
+        this.favoritesService.viewTypeValue = this.sort.split('_')[2] || 'block';
+        this.sort = `${name}_${value}`;
+        this.sortChange.emit(this.sort);
+    }
+
     public parseText(num) {
 
         num = Math.abs(num) % 100;
@@ -49,30 +50,9 @@ export class CommercialOutputComponent implements OnInit {
         return words[2];
     }
 
-    public filter(item) {
-        if (this.selectFilterItem) {
-
-            if (this.selectFilterItem === item) {
-                this.selectFilter = !this.selectFilter;
-            } else {
-                this.selectFilterItem = item;
-                this.selectFilter = true;
-            }
-        } else {
-            this.selectFilterItem = item;
-            this.selectFilter = true;
-        }
-        this.sortChange.emit({value: item.name, shift: (this.selectFilter ? 1 : -1)});
-    }
-
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
-    }
     public flatNavigate(flat) {
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
-        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
+        this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/office/${flat.flat}`]);
     }
 
     public setFavorite(flat): void {

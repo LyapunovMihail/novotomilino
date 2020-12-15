@@ -4,17 +4,20 @@
 
         <nav class="favorites__nav">
             <ul class="favorites__nav-list">
-                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/flats" (click)="gateGuard('flats')">Квартиры</a></li>
-                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/commercial" (click)="gateGuard('commercial')">Коммерческая недвижимость</a></li>
+                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/flats">Квартиры</a></li>
+                <li class="favorites__nav-item" routerLinkActive="active"><a routerLink="/favorites/commercial">Коммерческая недвижимость</a></li>
             </ul>
         </nav>
 
-        <div class="favorites__filter" *ngIf="favoriteFlats.length">
-            <button class="favorites__filter-item favorites__filter-item--{{item.name}}" 
-                *ngFor="let item of filterListByUrl; let i = index" (click)="changeFilter(item, i)"
-                [ngClass]="{'active': activeSort === item.name,
-                    'minFromMax': activeSort === item.name && item.value,
-                    'maxFromMin': activeSort === item.name && !item.value}">{{item.text}}</button>
+        <div class="favorites__filter" *ngIf="flatListLength">
+            <p class="favorites__filter-text">В избранном {{flatListLength}} {{parseText(flatListLength)}}</p>
+
+            <app-search-sorting
+                [(ngModel)]="sort"
+                [viewType]="viewType"
+                (ngModelChange)="changeSort()"
+                [hideViewTypeBtn]="page === 'commercial'"
+            ></app-search-sorting>
         </div>
     </div>
 

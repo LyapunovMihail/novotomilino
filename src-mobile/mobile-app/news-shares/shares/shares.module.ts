@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
+import { FlatSnippetModule } from '../../flats/flat-snippet/flat-snippet.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -21,6 +22,7 @@ const SHARES_COMPONENTS = [
     exports: [...SHARES_COMPONENTS],
     imports: [
         CommonModule,
+        FlatSnippetModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

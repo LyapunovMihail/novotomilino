@@ -6,14 +6,11 @@
         <div class="commercial-output__head">
             <p class="commercial-output__head-result">Найдено {{count}} {{parseText(count)}}</p>
 
-            <div class="commercial-output__filter">
-                <div class="commercial-output__filter-item commercial-output__filter-item--{{item.name}}"
-                    (click)="filter(item)" *ngFor="let item of sortList"
-                    [ngClass]="{
-                        'active-up': selectFilterItem == item && selectFilter,
-                        'active-turn': selectFilterItem == item && !selectFilter}"
-                    >{{item.text}}</div>
-            </div>
+            <app-search-sorting
+                [(ngModel)]="sort"
+                (ngModelChange)="changeSort()"
+                [hideViewTypeBtn]="true"
+            ></app-search-sorting>
         </div>
     </div>
 

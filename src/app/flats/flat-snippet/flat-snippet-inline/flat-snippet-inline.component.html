@@ -1,6 +1,6 @@
 
 <div class="flat-snippet">
-    <a class="flat-snippet__link" [title]="statusNotSale">
+    <a class="flat-snippet__link" [title]="statusNotSale" (click)="goToFlat()">
         <figure class="flat-snippet__link-image">
             <img [src]="svgPath" alt="flat-image" (error)="img.style.display = 'none'" #img>
             <div *ngIf="img.style.display === 'none'" class="flat-snippet__link-error"></div>

@@ -1,15 +1,18 @@
 
-<div class="favorites-flats" [class.flex-wrap]="viewType === 'block'">
+<div class="favorites-flats">
 
-    <ng-container *ngFor="let flat of favoriteFlats">
-        <app-flat-snippet
-            [flatData]="flat"
-            [viewType]="viewType"
-        ></app-flat-snippet>
-    </ng-container>
+    <div class="favorites-flats__list" [class.flex-wrap]="viewType === 'block'">
+        <ng-container *ngFor="let flat of favoriteFlats">
+            <app-flat-snippet
+                [flatData]="flat"
+                [viewType]="viewType"
+            ></app-flat-snippet>
+        </ng-container>
+    </div>
+    
+    <div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">
+        <p class="favorites-flats__empty-hint">Интересующие вас квартиры вы можете добавлять в этот раздел</p>
+        <a class="favorites-flats__empty-link g-body_bold" routerLink="/flats">Выбрать квартиру</a>
+    </div>
 </div>
 
-<div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">
-    <p class="favorites-flats__empty-hint">Интересующие вас квартиры вы можете добавлять в этот раздел</p>
-    <a class="favorites-flats__empty-link g-body_bold" routerLink="/flats">Выбрать квартиру</a>
-</div>

@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IFlatWithDiscount } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable()
 
 export class FavoritesService {
 
+    private viewType = new BehaviorSubject<'block' | 'inline'>('block');
     public favoriteEmitter = new Subject<number>();
     public favoriteFlats: IFlatWithDiscount[] = [];
 
     constructor(private http: HttpClient) { }
+
+    public get viewTypeValue() { return this.viewType.asObservable(); }
+    public set viewTypeValue(value: any) { this.viewType.next(value); }
 
     public getFavoriteFlats() {
         this.http.get<IFlatWithDiscount[]>('/api/favorites/get')

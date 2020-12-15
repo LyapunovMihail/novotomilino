@@ -68,11 +68,15 @@ export class FlatsComponent implements OnInit {
             priceMax: form.price.max,
             floorMin: form.floor.min,
             floorMax: form.floor.max,
-            sort: form.sort || this.params.sort,
+            sort: this.params.sort || form.sort,
         };
 
         if (form.type.length > 0) {
             params['type'] = (form.type).join(',');
+        }
+
+        if (form['euro'].length > 0) {
+            params['euro'] = (form.euro).join(',');
         }
 
         if (form['status'].length > 0) {
@@ -102,7 +106,7 @@ export class FlatsComponent implements OnInit {
         }
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
-        this.getFlats();
+        this.getFlats(params);
     }
 
     public loadMore() {
@@ -114,11 +118,11 @@ export class FlatsComponent implements OnInit {
         this.isLoadMoreBtn = this.skip < this.flatsList.length;
     }
 
-    public getFlats() {
+    public getFlats(params?) {
         this.skip = 0;
         this.outputFlatsList = [];
         // console.log(this.params.sort);
-        this.searchService.getFlats(this.params).subscribe(
+        this.searchService.getFlats(params || this.params).subscribe(
             (data: IFlatWithDiscount[]) => {
                 this.counter = data.length;
                 this.flatsList = data.map((flat) => {

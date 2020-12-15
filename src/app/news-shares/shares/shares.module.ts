@@ -19,6 +19,7 @@ import { BitNumberPipe } from './bit-number.pipe';
 import { SharesDeleteComponent } from './shares-delete/shares-delete.component';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 import { LoaderModule } from '../../UI/loader/loader.module';
+import { FlatSnippetModule } from '../../flats/flat-snippet/flat-snippet.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -42,7 +43,7 @@ const SHARES_COMPONENTS = [
         DatePickerModule,
         FormsModule,
         LoaderModule,
-        // ApartmentModule,
+        FlatSnippetModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

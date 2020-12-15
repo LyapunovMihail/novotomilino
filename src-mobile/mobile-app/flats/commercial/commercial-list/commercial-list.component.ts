@@ -51,6 +51,9 @@ export class CommercialListComponent implements OnInit {
             spaceMax: form.space.max,
             priceMin: form.price.min,
             priceMax: form.price.max,
+            sort: this.params && this.params.sort
+                ? this.params.sort
+                : this.sort,
         };
 
         if ( 'houses' in form && form.houses.length > 0 ) {
@@ -73,6 +76,7 @@ export class CommercialListComponent implements OnInit {
                     return flat;
                 });
                 this.counter = this.searchFlats.length;
+                this.sortFlats();
                 this.loadMore();
             },
             (err) => {
@@ -95,19 +99,26 @@ export class CommercialListComponent implements OnInit {
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
     }
-    public sortFlats(val = 'space', shift = 1) {
-        this.searchFlats.sort((a,b) => {
-            if (val === 'priceBySpace') {
-                if (shift < 0) {
-                    return (a.price / a.space) - (b.price / b.space);
+    public sortFlats() {
+        const name = this.params.sort.split('_')[0] || this.sort.split('_')[0];
+        const value = this.params.sort.split('_')[1] || this.sort.split('_')[1];
+
+        this.searchFlats.sort((flat, flat2) => {
+            if (value === '1') {
+                if (new Date(flat[name]) > new Date(flat2[name])) {
+                    return 1;
+                } else if ( new Date(flat[name]) < new Date(flat2[name])) {
+                    return -1;
                 } else {
-                    return (b.price / b.space) - (a.price / a.space);
+                    return 0;
                 }
             } else {
-                if (shift < 0) {
-                    return a[val] - b[val];
+                if (new Date(flat[name]) > new Date(flat2[name])) {
+                    return -1;
+                } else if ( new Date(flat[name]) < new Date(flat2[name])) {
+                    return 1;
                 } else {
-                    return b[val] - a[val];
+                    return 0;
                 }
             }
         });
@@ -126,22 +137,6 @@ export class CommercialListComponent implements OnInit {
         if (sum > 1 && sum < 5) { return words[1]; }
         if (sum === 1) { return words[0]; }
         return words[2];
-    }
-
-    public filter(item) {
-        if (this.selectFilterItem) {
-
-            if (this.selectFilterItem === item) {
-                this.selectFilter = !this.selectFilter;
-            } else {
-                this.selectFilterItem = item;
-                this.selectFilter = true;
-            }
-        } else {
-            this.selectFilterItem = item;
-            this.selectFilter = true;
-        }
-        this.sortFlats(item.name, (this.selectFilter ? 1 : -1));
     }
 
     public openFilter() {

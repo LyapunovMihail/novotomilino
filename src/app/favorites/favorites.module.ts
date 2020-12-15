@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 import { FlatsListModule } from './flats/flats-list/flats-list.module';
 import { FavoritesFlatsComponent } from './flats/favorites-flats.component';
 import { FavoritesCommercialComponent } from './commercial/commercial-list.component';
-// import { ApartmentModule } from '../flats/apartment/apartment.module';
+import { SortModule } from '../flats/search/search-sorting/sorting.module';
+import { FormsModule } from '@angular/forms';
+import { FlatSnippetModule } from '../flats/flat-snippet/flat-snippet.module';
 
 @NgModule({
     exports: [
@@ -19,9 +21,11 @@ import { FavoritesCommercialComponent } from './commercial/commercial-list.compo
         FavoritesCommercialComponent,
     ],
     imports: [
+        SortModule,
+        FormsModule,
         CommonModule,
         FlatsListModule,
-        // ApartmentModule,
+        FlatSnippetModule,
         RouterModule.forChild([
             { path: 'favorites', component: FavoritesComponent,
                 children: [

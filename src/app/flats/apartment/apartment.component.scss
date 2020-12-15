@@ -82,7 +82,29 @@
             margin-right: 16px;
             padding: 9px 24px;
         }
-        &-favorite { background-color: transparent; }
+        &-favorite {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #B7B7B7;
+            background-color: $col-white;
+            transition: background-color .2s linear, border-color .2s linear;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-left: auto;
+            cursor: pointer;
+            &> svg > path { transition: fill .2s linear, stroke .2s linear; }
+            &.inFavorite {
+                background-color: $col-orange;
+                border-color: $col-orange;
+                &> svg > path {
+                    fill: $col-white;
+                    stroke: $col-white;
+                }
+            }
+        }
     }
 
     &__container {

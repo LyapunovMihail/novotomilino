@@ -1,8 +1,14 @@
 
-<div class="favorites-flats">
-    <app-flats-list
+<div class="favorites-flats" [class.flex-output]="viewType === 'block'">
+    <!-- <app-flats-list
         [flatsList]="favoriteFlats">
-    </app-flats-list>
+    </app-flats-list> -->
+    <ng-container *ngFor="let flat of favoriteFlats">
+        <app-flat-snippet
+            [flatData]="flat"
+            [viewType]="viewType"
+        ></app-flat-snippet>
+    </ng-container>
 </div>
 
 <div class="favorites-flats__empty"  *ngIf="!favoriteFlats.length">

@@ -6,7 +6,6 @@
     &__sort {
         user-select: none;
         position: relative;
-        margin-right: 16px;
 
         &-changed {
             min-width: 237px;
@@ -67,6 +66,7 @@
 
     &__type {
         display: flex;
+        margin-left: 16px;
 
         &-item {
             width: 42px;
