@@ -81,11 +81,70 @@
             background-color: $col-orange;
             margin-right: 16px;
         }
-        &-favorite { background-color: transparent; }
+        &-favorite {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #B7B7B7;
+            background-color: $col-white;
+            transition: background-color .2s linear, border-color .2s linear;
+            box-sizing: border-box;
+            border-radius: 4px;
+            cursor: pointer;
+            &> svg > path { transition: fill .2s linear, stroke .2s linear; }
+            &.inFavorite {
+                background-color: $col-orange;
+                border-color: $col-orange;
+                &> svg > path {
+                    fill: $col-white;
+                    stroke: $col-white;
+                }
+            }
+        }
         &-flat {
             font: 34px/44px $font-leksa;
             @include font-smoothing;
             color: $col-black;
+            &.euro-plan {
+                position: relative;
+                padding-top: 30px;
+            }
+
+            &> span {
+                font: 500 14px/18px $font-mus;
+                @include font-smoothing;
+                color: #666769;
+                background-color: #ECECEC;
+                border: 1px solid #BDBDBD;
+                box-sizing: border-box;
+                border-radius: 4px;
+                position: absolute;
+                top: 0; left: 0;
+                padding: 2px 8px;
+                cursor: default;
+                &::after {
+                    content: 'Совмещенная кухня-гостиная';
+                    font: 500 14px/20px $font-mus;
+                    @include font-smoothing;
+                    white-space: nowrap;
+                    color: inherit;
+                    position: absolute;
+                    top: 90%; left: 110%;
+                    background-color: $col-white;
+                    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+                    transition: opacity .1s linear;
+                    pointer-events: none;
+                    border-radius: 2px;
+                    padding: 8px 12px;
+                    opacity: 0;
+                    z-index: 1;
+                }
+                &:hover {
+                    &::after { opacity: 1; }
+                }
+            }
         }
     }
 
@@ -231,7 +290,10 @@
             justify-content: flex-start;
             margin: 0 0 8px;
 
-            &-wrap { justify-content: space-between; }
+            &-wrap {
+                width: 100%;
+                justify-content: space-between;
+            }
             &-credit,
             &-reserve { width: 100%; }
             &-reserve { margin: 0 0 8px; }

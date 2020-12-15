@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites.component';
 import { RouterModule } from '@angular/router';
-import { FlatsListModule } from './flats/flats-list/flats-list.module';
 import { FavoritesFlatsComponent } from './flats/favorites-flats.component';
 import { FavoritesCommercialComponent } from './commercial/favorites-commercial.component';
+import { SearchSortingModule } from '../flats/search-sorting/search-sorting.module';
+import { FormsModule } from '@angular/forms';
+import { FlatSnippetModule } from '../flats/flat-snippet/flat-snippet.module';
 
 @NgModule({
     exports: [
@@ -18,8 +20,10 @@ import { FavoritesCommercialComponent } from './commercial/favorites-commercial.
         FavoritesCommercialComponent,
     ],
     imports: [
+        FormsModule,
         CommonModule,
-        FlatsListModule,
+        FlatSnippetModule,
+        SearchSortingModule,
         RouterModule.forChild([
             { path: 'favorites', component: FavoritesComponent,
                 children: [

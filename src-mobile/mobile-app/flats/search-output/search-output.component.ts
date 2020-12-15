@@ -16,10 +16,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class SearchOutputComponent implements OnChanges {
 
-    public isReserveFormOpen: boolean = false;
-    public showApartmentWindow = false;
     public selectedFlatIndex: number;
-    
+    public isReserveFormOpen = false;
+    public showApartmentWindow = false;
+    public favoriteNotice: boolean;
+
+    @Input() public flatsCount: number;
     @Input() public viewType: 'block' | 'inline';
     @Input() public flatsList: IFlatWithDiscount[] = [];
 
@@ -37,16 +39,23 @@ export class SearchOutputComponent implements OnChanges {
         private favoritesService: FavoritesService,
         private activatedRouter: ActivatedRoute,
         private router: Router,
-    ) {
+    ) { }
+
+    public get favoriteSnippet() {
+        return this.flatsCount <= 12 && this.favoriteNotice && this.viewType === 'block';
     }
 
     public ngOnChanges(changes: SimpleChanges) {
         if ('flatsList' in changes) {
             this.flatsList.map((flat) => {
                 flat.discount = this.getDiscount(flat);
-                flat.inFavorite = this.inFavorite(flat);
                 return flat;
             });
+        }
+        if ('viewType' in changes) {
+            this.favoriteNotice = sessionStorage.getItem('ntm-favorite-notice')
+                ? JSON.parse(sessionStorage.getItem('ntm-favorite-notice')).show
+                : true;
         }
     }
 

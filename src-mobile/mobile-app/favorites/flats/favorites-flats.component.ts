@@ -9,6 +9,8 @@ import { FavoritesService } from '../favorites.service';
 
 export class FavoritesFlatsComponent implements OnInit {
 
+    public viewType: 'block' | 'inline';
+
     constructor(
         public favoritesService: FavoritesService,
     ) { }
@@ -19,5 +21,9 @@ export class FavoritesFlatsComponent implements OnInit {
             : [];
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.favoritesService.viewTypeValue.subscribe(value => {
+            this.viewType = value;
+        });
+    }
 }

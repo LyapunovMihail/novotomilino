@@ -13,6 +13,7 @@ export class FlatSnippetBlockComponent implements OnInit {
 
     @Input() public index: number;
     @Input() public isFirst: boolean;
+    @Input() public flatsCount: number;
     @Input() public flatData: IFlatWithDiscount;
 
     constructor(
@@ -26,7 +27,9 @@ export class FlatSnippetBlockComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     public get statusNotSale() { return this.flatData.status === '1' ? 'Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж' : ''; }
     public get isEuro() { return this.flatData.isEuro === '1'; }
-    public get child4n() { return (this.index + 1) % 4 === 0; }
+    public get showFavoriteNotice() {
+        return this.isFirst && this.flatsCount > 12;
+    }
 
     ngOnInit() { }
 

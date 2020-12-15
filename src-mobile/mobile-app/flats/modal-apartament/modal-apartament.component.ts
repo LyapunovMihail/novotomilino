@@ -46,6 +46,7 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line: max-line-length
         return `/assets/floor-plans/house_${this.flatData.house}/section_${this.flatData.section}/floor_${this.flatData.floor}/${this.flatData.floor}floor_${this.flatData.flat}${this.typeApartment}.svg`;
     }
+    public get isEuro() { return this.flatData.isEuro === '1'; }
 
     ngOnInit() {
         this.getFlatData();
@@ -58,6 +59,7 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
         this.flatsService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
             this.flatData = data;
             this.flatData.discount = this.getDiscount(data);
+            this.flatData.inFavorite = this.inFavorite(data);
         });
     }
     public previousRoute() {
@@ -80,5 +82,8 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
     public setFavorite(): void {
         this.flatData.inFavorite = !this.flatData.inFavorite;
         this.favoritesService.setFavorite(this.flatData);
+    }
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 }

@@ -22,12 +22,23 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
+            @media (max-width: 767px) {
+                width: calc(100% - 32px);
+            }
             
             &> * {
                 display: block;
                 width: calc((100% - 24px) / 2);
                 margin: 0 0 24px;
+                @media (max-width: 767px) {
+                    width: 100%;
+                    margin: 0 0 16px;
+                }
             }
         }
+    }
+    &__favorite {
+        min-height: 347px;
+        position: relative;
     }
 }

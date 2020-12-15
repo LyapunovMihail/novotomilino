@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IFlatResponse, IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TagInterface } from '../../../serv-files/serv-modules/seo-api/seo.interfaces';
 
 @Injectable()

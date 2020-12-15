@@ -12,6 +12,7 @@
     border-bottom: 1px solid #B7B7B7;
     transition: background-color $transition;
     box-sizing: border-box;
+    overflow: hidden;
     cursor: pointer;
     &.first { border-top: 1px solid #B7B7B7; }
     &:hover { background-color: rgba(231, 73, 15, 0.03); }
@@ -24,7 +25,6 @@
     &__link {
         width: 100%;
         display: flex;
-        align-items: center;
         box-sizing: border-box;
         padding: 16px 0;
         @media (max-width: 767px) {
@@ -65,7 +65,12 @@
         &-wrap {
 
             &--info { flex-grow: 1; }
-            &--top { margin: 0 0 16px; }
+            &--top {
+                margin: 0 0 16px;
+                @media (max-width: 767px) {
+                    margin: 0 0 14px;
+                }
+            }
             &--bottom {
                 display: flex;
                 @media (max-width: 767px) {

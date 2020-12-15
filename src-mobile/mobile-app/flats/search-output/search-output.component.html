@@ -1,11 +1,20 @@
 <ul class="result">
 
     <div class="result__container" [class.flex-wrap]="viewType === 'block'">
-        <ng-container *ngFor="let flat of flatsList">
+        <div class="result__favorite" *ngIf="favoriteSnippet">
+            <app-flat-favorite-snippet
+                [type]="'output-compnt'"
+                [isShow]="flatsCount <= 12"
+                (close)="favoriteNotice = false"
+            ></app-flat-favorite-snippet>
+        </div>
+
+        <ng-container *ngFor="let flat of flatsList; index as i">
             <app-flat-snippet
                 [index]="i"
                 [flatData]="flat"
                 [viewType]="viewType"
+                [flatsCount]="flatsCount"
             ></app-flat-snippet>
         </ng-container>
     </div>

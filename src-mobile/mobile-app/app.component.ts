@@ -71,5 +71,7 @@ export class AppComponent implements OnInit {
         this.flatsDiscountService.getShares();
         // Загружаем избранные квартиры
         this.favoritesService.getFavoriteFlats();
+
+        // sessionStorage.removeItem('ntm-favorite-notice');
     }
 }

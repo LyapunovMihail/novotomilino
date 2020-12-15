@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 import { SearchOutputModule } from './search-output/search-output.module';
 import { CommercialComponents } from './commercial/commercial';
 import { CommercialComponent } from './commercial/commercial.component';
@@ -20,6 +19,7 @@ import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentFurnitureComponent } from './modal-apartament/apartment-furniture/apartment-furniture.component';
 import { ApartamentBitNumberPipe } from './modal-apartament/apartament-bit-number.pipe';
 import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
+import { SearchSortingModule } from './search-sorting/search-sorting.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -27,7 +27,6 @@ const FlatsComponents = [
     SectionsSelectComponent,
     CheckboxListComponent,
     SearchFormPipe,
-    SearchSortingComponent,
     ModalApartamentComponent,
     ApartmentFurnitureComponent,
     ApartamentBitNumberPipe,
@@ -50,6 +49,7 @@ const FlatsComponents = [
         FormsRequestModule,
         SearchOutputModule,
         ReactiveFormsModule,
+        SearchSortingModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
             // { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },

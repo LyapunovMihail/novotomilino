@@ -12,8 +12,9 @@ import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses
 
         <app-flat-snippet-block
             [index]="index"
-            [isFirst]="index === 0"
             [flatData]="flatData"
+            [isFirst]="index === 0"
+            [flatsCount]="flatsCount"
             *ngIf="viewType === 'block'"
         ></app-flat-snippet-block>
     `
@@ -24,4 +25,5 @@ export class FlatSnippetComponent {
     @Input() public index: number;
     @Input() public viewType: 'block' | 'inline';
     @Input() public flatData: IFlatWithDiscount;
+    @Input() public flatsCount: number;
 }

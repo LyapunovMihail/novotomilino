@@ -1,9 +1,11 @@
 import { PlatformDetectService } from './../platform-detect.service';
-import { IAddressItemFlat, IFlatResponse } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat, IFlatResponse, IFlatWithDiscount } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlatsService } from './flats.service';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
+import { FlatsDiscountService } from '../commons/flats-discount.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Component({
     selector: 'app-flats',
@@ -20,7 +22,7 @@ export class FlatsComponent implements OnInit {
     public previousUrl = '';
     public isReturnLink = false;
     public params: any = {};
-    public flatsList: IAddressItemFlat[] = [];
+    public flatsList: IFlatWithDiscount[] = [];
     public isLoadMoreBtn = false;
     public isVisible: boolean;
     public counter: number = 0;
@@ -34,7 +36,9 @@ export class FlatsComponent implements OnInit {
         public router: Router,
         public searchService: FlatsService,
         public platform: PlatformDetectService,
-        public windowScrollLocker: WindowScrollLocker
+        public windowScrollLocker: WindowScrollLocker,
+        private flatsDiscountService: FlatsDiscountService,
+        private favoritesService: FavoritesService,
     ) {}
 
     ngOnInit() {
@@ -115,9 +119,13 @@ export class FlatsComponent implements OnInit {
         this.outputFlatsList = [];
         // console.log(this.params.sort);
         this.searchService.getFlats(this.params).subscribe(
-            (data: IAddressItemFlat[]) => {
+            (data: IFlatWithDiscount[]) => {
                 this.counter = data.length;
-                this.flatsList = data;
+                this.flatsList = data.map((flat) => {
+                    flat.discount = this.getDiscount(flat);
+                    flat.inFavorite = this.inFavorite(flat);
+                    return flat;
+                });
                 // this.responseParse(data.flats);
                 if (this.params.rooms === '1' || this.params.rooms === '2') {
                     this.flatsList = this.filterFlats(this.params.rooms, data);
@@ -164,5 +172,12 @@ export class FlatsComponent implements OnInit {
         const value = (sort.split('_'))[1];
         this.viewType = (sort.split('_'))[2];
         this.params.sort = `${name}_${value}`;
+    }
+
+    public getDiscount(flat): number {
+        return this.flatsDiscountService.getDiscount(flat);
+    }
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 }

@@ -43,6 +43,7 @@ export class SearchSortingComponent {
     ];
 
     @Input() public counter;
+    @Input() public hideViewTypeBtn: boolean;
     @Input() public viewType: 'block' | 'inline';
     @Output() public viewTypeChanges = new EventEmitter<any>();
 

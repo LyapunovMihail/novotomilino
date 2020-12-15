@@ -97,3 +97,24 @@
         }
     }
 }
+
+@media (max-width: 767px) {
+
+    .flats-sort {
+        flex-flow: row wrap;
+
+        &__count {
+            font-size: 16px;
+            line-height: 20px;
+        }
+        &__sort {
+            width: 100%;
+            margin: 16px 0 0;
+            order: 2;
+        }
+        &__type {
+            margin-left: auto;
+            order: 1;
+        }
+    }
+}

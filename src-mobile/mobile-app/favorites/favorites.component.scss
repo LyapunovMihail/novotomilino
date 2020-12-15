@@ -1,5 +1,28 @@
 @import "../../styles/modules/mixins/mixin";
 
+.favorites-flats {
+    width: 100%;
+
+    &.flex-wrap {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin: 0 auto;
+        
+        &> * {
+            display: block;
+            width: calc((100% - 24px) / 2);
+            margin: 0 0 24px;
+            @media (max-width: 767px) {
+                width: 100%;
+                margin: 0 0 16px;
+            }
+        }
+    }
+}
+
 .favorite {
     width: 100%;
     padding: 40px 0 96px;
@@ -30,9 +53,9 @@
         height: 40px;
         justify-content: flex-start;
         margin: 0 0 24px;
-        @media (max-width: 767px) {
-            margin: 0;
-        }
+        // @media (max-width: 767px) {
+        //     margin: 0;
+        // }
 
         &--overflow {
             @media (max-width: 425px) {
@@ -102,39 +125,7 @@
         }
     }
     &__filter {
-        display: flex;
-        flex-flow: row wrap;
         margin: 0 0 30px;
-
-        &-item {
-            font: 500 18px/24px $font-mus;
-            color: rgba(0, 1, 5, .6);
-            background-color: transparent;
-            transition: color $transition;
-            position: relative;
-            margin-right: 30px;
-            border: 0;
-            &::after {
-                content: '';
-                width: 10px;
-                height: 16px;
-                position: absolute;
-                top: 5px; left: calc(100% + 5px);
-                background: url(/assets/img/filter_arrow.svg) no-repeat;
-                background-size: 100%;
-                transition: top .5s ease;
-                display: none;
-            }
-            &.active { color: $col-black; }
-            &.minFromMax::after { display: block; }
-            &.maxFromMin{
-                &::after {
-                    display: block;
-                    transform: rotate(180deg);
-                }
-                &:hover::after { top: 2px; }
-            }
-        }
     }
 
     &__objects { width: 100%; }

@@ -7,19 +7,22 @@
                 <div class="favorite__nav--overflow">
                     <div class="favorite__nav--scroll">
                         <ul class="favorite__nav-list">
-                            <li class="favorite__nav-item" routerLinkActive="active"><a routerLink="/favorites/flats" (click)="gateGuard('flats')">Квартиры</a></li>
-                            <li class="favorite__nav-item" routerLinkActive="active"><a routerLink="/favorites/commercial" (click)="gateGuard('commercial')">Коммерческая недвижимость</a></li>
+                            <li class="favorite__nav-item" routerLinkActive="active"><a routerLink="/favorites/flats">Квартиры</a></li>
+                            <li class="favorite__nav-item" routerLinkActive="active"><a routerLink="/favorites/commercial">Коммерческая недвижимость</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
-            <div class="favorite__filter">
-                <button class="favorite__filter-item favorite__filter-item--{{item.name}}" 
-                    *ngFor="let item of filterListByUrl; let i = index" (click)="changeFilter(item, i)"
-                    [ngClass]="{'active': activeSort === item.name,
-                        'minFromMax': activeSort === item.name && item.value,
-                        'maxFromMin': activeSort === item.name && !item.value}">{{item.text}}</button>
+            <div class="favorite__filter" *ngIf="flatListLength">
+                <app-search-sorting
+                    [counter]="flatListLength"
+                    [viewType]="viewType"
+                    [(ngModel)]="sort"
+                    [hideViewTypeBtn]="page === 'commercial'"
+                    (viewTypeChanges)="favoritesService.viewTypeValue = $event"
+                    (ngModelChange)="changeSort()"
+                ></app-search-sorting>
             </div>
         </div>
     </div>

@@ -16,7 +16,10 @@
         @include font-smoothing;
         color: $col-black;
         margin: 0 0 40px;
-        @media (max-width: 767px) { width: calc(100% - 30px); }
+        @media (max-width: 767px) {
+            width: calc(100% - 30px);
+            margin: 0 0 24px;
+        }
 
         span { display: block; }
     }
@@ -38,7 +41,12 @@
         }
     }
 
-    &__sorting { width: calc(100% - 60px); }
+    &__sorting {
+        width: calc(100% - 60px);
+        @media (max-width: 767px) {
+            width: calc(100% - 30px);
+        }
+    }
 }
 
 .up {
