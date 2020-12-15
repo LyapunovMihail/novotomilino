@@ -1,7 +1,7 @@
 <section class="home__preview home-preview" [class.home__preview--no-margin]="!isDescription">
     
-    <div class="home-preview__bgr">
-        <img src="/assets/img/home-preview.jpg" alt="home-preview">
+    <div class="home-preview__bgr"  *ngIf="gallerySlides">
+        <img [src]="uploadsPath + gallerySlides[0].image" alt="home-preview">
     </div>
 
     <div class="home-preview__container">

@@ -13,7 +13,8 @@ import { PlatformDetectService } from '../platform-detect.service';
     providers: [
         PlatformDetectService,
         HomeService
-    ]
+    ],
+    styles: ['.home { overflow: hidden; }']
 })
 
 export class HomeComponent implements OnInit {

@@ -1,0 +1,47 @@
+@import '../../../styles/modules/mixins/mixin.scss';
+
+.favorites-flats {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    &__list {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+    }
+
+    &__empty {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+
+        &-hint {
+            max-width: 536px;
+            font: 500 20px/29px $font-mus;
+            @include font-smoothing;
+            color: $col-black-5;
+            margin: 0 0 16px;
+            @media (max-width: 767px) {
+                font-size: 16px;
+                line-height: 20px;
+            }
+        }
+        &-link {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            background: $col-white;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            transition: color .3s linear, background-color .3s linear;
+            border: solid 1px $col-orange;
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing();
+            color: $col-orange;
+            padding: 0 20px;
+        }
+    }
+}

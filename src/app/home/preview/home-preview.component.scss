@@ -30,6 +30,17 @@
         }
     }
 
+    &__admin-open-btn {
+        font: 500 20px/28px $font-mus;
+        @include font-smoothing;
+        color: $col-white;
+        position: absolute;
+        top: 48px; left: 0;
+        background: #0370C5;
+        padding: 11px 29px;
+        cursor: pointer;
+    }
+
     &__container {
         width: 100%;
         max-width: $w1600;
