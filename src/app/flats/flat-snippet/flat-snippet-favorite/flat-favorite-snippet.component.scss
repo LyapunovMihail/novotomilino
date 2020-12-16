@@ -14,12 +14,6 @@
     position: relative;
     padding: 24px;
     z-index: 1;
-    @media (max-width: 767px) {
-        min-height: 347px;
-        position: relative;
-        justify-content: flex-start;
-        padding-top: 52px;
-    }
 
     &__title {
         font: 500 20px/28px $font-mus;

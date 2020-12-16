@@ -37,6 +37,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageModalOpen = false;
 
+    public loadMoreFirst = true; // первое нажатие "Показать еще"
+
     @Input() public showSearchWindow: boolean;
     @Input() public parentPlan: boolean;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
@@ -91,7 +93,7 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
+            params['rooms'] = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
 
         if ( 'houses' in form && form.houses.length > 0 ) {
@@ -102,7 +104,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.outputFlatsList = [];
 
         this.seoPageParams = params;
-        console.log({form,params});
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
@@ -116,6 +117,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
+                this.loadMoreFirst = true;
+
                 this.count = data.length;
                 this.searchFlats = data;
                 if (params.rooms === '1' || params.rooms === '2') {
@@ -135,7 +138,10 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public loadMore(num?) {
-        for (let i = 0; i < (num || 11); i++) {
+        if (this.loadMoreFirst) { this.addFavoriteSnippet(); }
+        this.loadMoreFirst = false;
+
+        for (let i = 0; i < (num || 12); i++) {
             if (this.skip < this.searchFlats.length) {
                 this.outputFlatsList.push(this.searchFlats[this.skip++]);
             }
@@ -143,16 +149,35 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
         this.searchService.setOutputFlatsChanged(this.outputFlatsList);
     }
+    private addFavoriteSnippet() {
+        let lastIndex;
+        const flats = new Array(this.searchFlats.length).fill(null);
+        flats.forEach( (flat, i) => {
+            if (i < 14) { return; }
+            const start = lastIndex ? lastIndex + 7 : i + 1;
+            const end = start + 10;
+            const index = this.randomNum(start, end);
+
+            if (!this.searchFlats[index]) { return; }
+            lastIndex = index;
+            const icon = { ...this.searchFlats[index] };
+            icon.type = 'favorite';
+            icon.price = this.searchFlats[index].price - 1;
+            this.searchFlats.splice(index, 0, icon);
+        });
+    }
+    private randomNum(start, end) {
+        return Math.floor(Math.random() * (end - start)) + start;
+    }
 
     public ngOnChanges() {
         if (this.showSearchWindow) {
             setTimeout(() => {
-                // this.formChange(this.form);
-                this.formChange({ form: this.form, isSeoPageParamsLoaded: false, isEmptySeoPageParams: true });
                 this.windowScrollLocker.unblock();
+                this.formChange({ form: this.form, isSeoPageParamsLoaded: false, isEmptySeoPageParams: true });
                 document.body.style.padding = '0';
-            }, 500); // таймаут чтобы анимация открытия окна отработала без тормозов
-
+                // setTimeout(() => this.windowScrollLocker.unblock(), 150); // Дожидаемся открытия +150ms, что бы скролл не прыгал (при переходе с триггеров на главной)
+            }, 550); // таймаут чтобы анимация открытия окна отработала без тормозов
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
             this.outputFlatsList = [];
@@ -186,9 +211,20 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.sort = sort;
         this.skip = 0;
         this.outputFlatsList = [];
+        this.searchFlats = this.searchFlats.filter(el => el.type !== 'favorite');
+        this.loadMoreFirst = true;
 
         this.sortFlats();
         this.loadMore();
+    }
+    public noticeChange() {
+        const limit = this.outputFlatsList.length;
+        this.skip = 0;
+        this.outputFlatsList = [];
+        this.searchFlats = this.searchFlats.filter(el => el.type !== 'favorite');
+        console.log('noticeChange');
+
+        this.loadMore(limit);
     }
 
     public sortFlats() {

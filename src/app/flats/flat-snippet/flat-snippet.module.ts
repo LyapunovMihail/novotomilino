@@ -6,12 +6,14 @@ import { FlatNumberPipe } from './bit-number.pipe';
 import { FlatSnippetComponent } from './flat-snippet.component';
 import { FlatSnippetInlineComponent } from './flat-snippet-inline/flat-snippet-inline.component';
 import { FlatSnippetBlockComponent } from './flat-snippet-block/flat-snippet-block.component';
+import { FlatFavoriteSnippetComponent } from './flat-snippet-favorite/flat-favorite-snippet.component';
 
 const components = [
     FlatNumberPipe,
     FlatSnippetComponent,
     FlatSnippetBlockComponent,
     FlatSnippetInlineComponent,
+    FlatFavoriteSnippetComponent,
 ];
 
 @NgModule({

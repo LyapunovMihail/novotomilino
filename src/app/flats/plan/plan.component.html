@@ -1,4 +1,6 @@
-<div class="plan flats_main" (mousemove)="onMousemove($event, parent)" #parent>
+<div class="plan flats_main" #parent
+    (mousemove)="onMousemove($event, parent)" 
+    (click)="onclick()">
 
     <h1 class="plan__title">Выберите дом</h1>
     <div class="plan__rose"></div>

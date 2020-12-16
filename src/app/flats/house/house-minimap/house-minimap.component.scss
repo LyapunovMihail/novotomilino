@@ -3,7 +3,7 @@
 .house-minimap {
     position: absolute;
     left: calc((100% - 1240px) / 2);
-    top: 62px + 50px;
+    top: 63px;// top: 62px + 50px;
     width: $w1600;
     height: 100%;
     display: flex;

@@ -1,5 +1,5 @@
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { FavoritesService } from '../../favorites/favorites.service';
@@ -24,6 +24,7 @@ export class SearchOutputComponent implements OnChanges {
     @Input() public flatsCount: number;
     @Input() public viewType: 'block' | 'inline';
     @Input() public flatsList: IFlatWithDiscount[] = [];
+    @Output() public closeFavoriteNotice: EventEmitter<any> = new EventEmitter();
 
     public selectFlat = {
         house: '0',
@@ -81,5 +82,8 @@ export class SearchOutputComponent implements OnChanges {
     public openApartmentModal(flat) {
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRouter.snapshot.queryParams }));
         this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
+    }
+    public noticeFavorite() {
+        this.closeFavoriteNotice.emit();
     }
 }

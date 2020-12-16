@@ -32,6 +32,8 @@ export class FlatsComponent implements OnInit {
     public outputFlatsList;
     public viewType: 'block' | 'inline' = 'block';
 
+    public loadMoreFirst = true; // первое нажатие "Показать еще"
+
     constructor(
         public router: Router,
         public searchService: FlatsService,
@@ -109,8 +111,10 @@ export class FlatsComponent implements OnInit {
         this.getFlats(params);
     }
 
-    public loadMore() {
-        for (let i = 0; i < 10; i++) {
+    public loadMore(limit?) {
+        if (this.loadMoreFirst) { this.addFavoriteSnippet(); }
+        this.loadMoreFirst = false;
+        for (let i = 0; i < (limit || 6); i++) {
             if (this.skip < this.flatsList.length) {
                 this.outputFlatsList.push(this.flatsList[this.skip++]);
             }
@@ -124,6 +128,7 @@ export class FlatsComponent implements OnInit {
         // console.log(this.params.sort);
         this.searchService.getFlats(params || this.params).subscribe(
             (data: IFlatWithDiscount[]) => {
+                this.loadMoreFirst = true;
                 this.counter = data.length;
                 this.flatsList = data.map((flat) => {
                     flat.discount = this.getDiscount(flat);
@@ -141,6 +146,28 @@ export class FlatsComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+
+    private addFavoriteSnippet() {
+        let lastIndex;
+        const flats = new Array(this.flatsList.length).fill(null);
+        flats.forEach( (flat, i) => {
+            if (i < 7) { return; }
+            const start = lastIndex ? lastIndex + 7 : i + 1;
+            const end = start + 7;
+            const index = this.randomNum(start, end);
+
+            if (!this.flatsList[index]) { return; }
+            lastIndex = index;
+            const icon = { ...this.flatsList[index] };
+            icon.type = 'favorite';
+            icon.price = this.flatsList[index].price - 1;
+            this.flatsList.splice(index, 0, icon);
+        });
+        // console.log(count, this.flatsList);
+    }
+    private randomNum(start, end) {
+        return Math.floor(Math.random() * (end - start)) + start;
     }
 
     public responseParse(response) {
@@ -176,6 +203,14 @@ export class FlatsComponent implements OnInit {
         const value = (sort.split('_'))[1];
         this.viewType = (sort.split('_'))[2];
         this.params.sort = `${name}_${value}`;
+    }
+    public noticeChange() {
+        const limit = this.outputFlatsList.length;
+        this.skip = 0;
+        this.outputFlatsList = [];
+        this.flatsList = this.flatsList.filter(el => el.type !== 'favorite');
+
+        this.loadMore(limit);
     }
 
     public getDiscount(flat): number {

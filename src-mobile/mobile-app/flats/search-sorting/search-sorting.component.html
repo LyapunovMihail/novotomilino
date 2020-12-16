@@ -1,17 +1,3 @@
-<!-- <p *ngIf="counter > 0" class="flats__sorting-find">Найдено {{counter}} {{parseText(counter)}}</p>
-<p *ngIf="counter === 0" class="flats__sorting-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
-
-<div class="flats__sorting-wrap">
-    <p *ngFor="let sort of sortList"
-        (click)="sortChange(sort.name, !sort.value)"
-        [ngClass]="{
-            'flats__sorting-item_active': (activeSort === sort.name),
-            'flats__sorting-item_turn': (activeSort === sort.name && !sort.value )
-        }"
-        class="flats__sorting-item">
-        {{sort.text}}
-    </p>
-</div> -->
 
 <section class="flats-sort">
     <p class="flats-sort__count">Найдено {{counter}} {{parseText(counter)}}</p>
@@ -35,7 +21,7 @@
                 <rect x="0.5" y="8.5" width="5" height="5" stroke="#000105"/>
                 <rect x="8.5" y="0.5" width="5" height="5" stroke="#000105"/>
                 <rect x="8.5" y="8.5" width="5" height="5" stroke="#000105"/>
-            </svg>                
+            </svg>
         </button>
         <button class="flats-sort__type-item" [class.active]="viewType === 'inline'" (click)="viewTypeChange('inline')">
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">

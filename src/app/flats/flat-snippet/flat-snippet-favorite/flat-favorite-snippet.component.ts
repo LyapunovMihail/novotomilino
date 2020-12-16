@@ -16,13 +16,19 @@ export class FlatFavoriteSnippetComponent implements OnInit {
     constructor() { }
 
     public get showFavoriteNotice() {
-        return this.favoriteNotice;
+        return this.favoriteNotice && this.isShow;
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        // this.favoriteNotice = sessionStorage.getItem('ntm-favorite-notice')
+        //     ? JSON.parse(sessionStorage.getItem('ntm-favorite-notice')).show
+        //     : true;
+    }
 
     public closeFavoriteNotice() {
         this.favoriteNotice = false;
+        // добавляем информацию о скрытии подсказки избранного
+        sessionStorage.setItem('ntm-favorite-notice', JSON.stringify({ show: false }));
         this.close.emit();
     }
 }

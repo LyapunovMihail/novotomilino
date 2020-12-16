@@ -1,13 +1,6 @@
 <ul class="result">
 
     <div class="result__container" [class.flex-wrap]="viewType === 'block'">
-        <div class="result__favorite" *ngIf="favoriteSnippet">
-            <app-flat-favorite-snippet
-                [type]="'output-compnt'"
-                [isShow]="flatsCount <= 12"
-                (close)="favoriteNotice = false"
-            ></app-flat-favorite-snippet>
-        </div>
 
         <ng-container *ngFor="let flat of flatsList; index as i">
             <app-flat-snippet
@@ -15,6 +8,7 @@
                 [flatData]="flat"
                 [viewType]="viewType"
                 [flatsCount]="flatsCount"
+                (closeFavorite)="noticeFavorite()"
             ></app-flat-snippet>
         </ng-container>
     </div>

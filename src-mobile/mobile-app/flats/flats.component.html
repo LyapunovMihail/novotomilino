@@ -21,6 +21,7 @@
         [viewType]="viewType"
         [flatsCount]="counter"
         [flatsList]="outputFlatsList"
+        (closeFavoriteNotice)="noticeChange()"
     ></app-search-output>
     
     <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>

@@ -45,20 +45,20 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.buildHouses(this.config);
-        this.activatedRoute.queryParams.subscribe((queryParams) => {
-
-            this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
-                .subscribe((params: IFlatsSearchParams) => {
-                    this.seoPageParams = params;
-                    this.isSeoPageParamsLoaded = true;
-                    this.buildForm(this.seoPageParams);
-                });
-
-            this.buildForm(queryParams);
-        });
+        setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
+            this.buildForm(this.activatedRoute.snapshot.queryParams);
+        }, 600);
+        this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
+            .subscribe((params: IFlatsSearchParams) => {
+                this.seoPageParams = params;
+                this.isSeoPageParamsLoaded = true;
+                if (!params) { return; }
+                this.buildForm(this.seoPageParams);
+            });
     }
 
     public buildForm(params) {
+        if (!params) { return; }
 
         const roomsFormArray = ((() => {
             /**
@@ -68,11 +68,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
              * otherwise pass an array of false
              */
             const arr = [false, false, false, false, false];
-            if (params.rooms) {
+            if (params && params.rooms) {
                 const result = parseQueryParams(params.rooms);
                 const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === '0') ? 4 : Number(item) - 1] = true);
+                    result.forEach((item) => arr[Number(item)] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));

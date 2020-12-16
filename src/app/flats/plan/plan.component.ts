@@ -73,6 +73,11 @@ export class PlanComponent implements OnInit {
     public onmouseenter(house) {
         this.infoAboutSect = house;
     }
+    public onclick() {
+        if (this.showSearchWindow) {
+            this.showSearchWindow = false;
+        }
+    }
     public onMousemove(ev: MouseEvent, parent: HTMLElement) {
         if (!this.infoAboutSect || this.showSearchWindow) { return; }
         const elem = document.querySelector('.plan__tooltip');

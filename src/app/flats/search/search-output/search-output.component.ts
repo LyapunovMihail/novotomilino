@@ -95,7 +95,6 @@ export class SearchOutputComponent implements OnInit {
 
     public noticeFavorite() {
         this.showFavoriteWindow = !this.showFavoriteWindow;
-        sessionStorage.setItem('ntm-favorite-notice', JSON.stringify({ show: false }));
         this.closeFavoriteNotice.emit();
     }
 }

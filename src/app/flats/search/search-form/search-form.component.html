@@ -1,4 +1,4 @@
-<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan }">
+<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan }" *ngIf="form">
 
     <form [formGroup]="form" class="search-form">
 
@@ -13,7 +13,7 @@
                             <input [formControl]="control" name="rooms" [value]="control" type="checkbox">
                             <div class="search-form__rooms-checkbox_for-click search-form__text"
                                  [class.search-form__rooms-checkbox_for-click-first]="i === 0">
-                                {{(i === 4) ? 'С' : i + 1}}
+                                {{ (i === 0) ? 'С' : i }}
                             </div>
                         </label>
                     </li>
