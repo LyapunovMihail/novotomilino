@@ -5,7 +5,7 @@
     <ng-container *ngFor="let trigger of triggersData">
         <div class="home-trigger__item" *ngIf="trigger">
             <a class="home-trigger__anchor" (click)="navigate(trigger.rooms)"></a>
-            <p class="home-trigger__item-name">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms + ' комнатные'}}</p>
+            <p class="home-trigger__item-name">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms === 3 ? trigger.rooms + '+ комнатные' : trigger.rooms + ' комнатные'}}</p>
             <p class="home-trigger__item-space">({{trigger.space}})</p>
             <p class="home-trigger__item-price">
                 от
