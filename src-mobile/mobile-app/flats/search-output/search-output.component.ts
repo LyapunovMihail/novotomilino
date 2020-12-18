@@ -47,7 +47,7 @@ export class SearchOutputComponent implements OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
-        if ('flatsList' in changes) {
+        if ('flatsList' in changes && this.flatsList && this.flatsList.length) {
             this.flatsList.map((flat) => {
                 flat.discount = this.getDiscount(flat);
                 return flat;

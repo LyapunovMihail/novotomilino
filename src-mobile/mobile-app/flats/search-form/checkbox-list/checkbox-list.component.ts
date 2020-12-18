@@ -45,11 +45,20 @@ export class CheckboxListComponent {
             return;
         }
 
+        if (this.isCheckedAll() && value !== 'all') {
+            event.target.checked = true;
+            this.activeList = this.activeList.filter(el => el === value);
+        }
+
         if (event.target.checked && !this.activeList.some((item) => item === value)) {
             this.activeList.push(value);
         } else {
             const index = this.activeList.findIndex((item) => item === value);
-            if (index >= 0) {
+            if (index === 0 && this.activeList.length === 1 && this.name === 'houses') { event.target.checked = true; }
+            if (index >= 0 && this.activeList.length > 1 && this.name === 'houses') {
+                this.activeList.splice(index, 1);
+            }
+            if (index >= 0 && this.name !== 'houses') {
                 this.activeList.splice(index, 1);
             }
         }

@@ -51,11 +51,11 @@ export class PlanComponent implements OnInit {
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         this.houses[i].freeFlats = flats.length;
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
-                room.minPrice = flats.filter((flat) => flat.rooms === room.name)
+                // RED3-705: При ховере на корпус должны выводится мин.цены только по квартирам в продаже
+                room.minPrice = flats.filter((flat) => flat.rooms === room.name && flat.status === '4')
                     .reduce((minPrice, flat) => {
                         return flat.price < minPrice ? flat.price : minPrice;
                     }, 9999999999);

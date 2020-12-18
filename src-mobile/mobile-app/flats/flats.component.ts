@@ -90,23 +90,21 @@ export class FlatsComponent implements OnInit {
         }
 
         if ( 'rooms' in form && form['rooms'].some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
+            params['rooms'] = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
 
         if ( 'houses' in form && form['houses'].length > 0 ) {
             params['houses'] = (form.houses).join(',');
         }
 
-        this.params = params;
-        // this.params.skip = 0;
-        // this.params.limit = 10;
         this.skip = 0;
+        this.params = params;
         this.outputFlatsList = [];
 
         if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         }
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        // this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
         this.getFlats(params);
     }
@@ -135,11 +133,7 @@ export class FlatsComponent implements OnInit {
                     flat.inFavorite = this.inFavorite(flat);
                     return flat;
                 });
-                // this.responseParse(data.flats);
-                if (this.params.rooms === '1' || this.params.rooms === '2') {
-                    this.flatsList = this.filterFlats(this.params.rooms, data);
-                    this.counter = this.flatsList.length;
-                }
+
                 this.loadMore();
             },
             (err) => {
@@ -170,34 +164,6 @@ export class FlatsComponent implements OnInit {
         return Math.floor(Math.random() * (end - start)) + start;
     }
 
-    public responseParse(response) {
-        if ( this.params.skip === 0 ) {
-            this.flatsList = response;
-        } else {
-            this.flatsList = this.flatsList.concat(response);
-        }
-        this.isLoadMoreBtn = ( response.length < this.params.limit ) ? false : true ;
-    }
-    public filterFlats(i, flats) {
-        // console.log(flats);
-        let isFilterFlats;
-        if (i === '1') {
-            isFilterFlats = flats.filter( flat => {
-                if (flat.rooms === 2 && flat.isEuro === '1') { return flat; } // Если у квартиры евро планировка - выводим к 1комн
-                if (flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
-                if (flat.rooms === 1 && flat.space >= 41) { return; } // 1к кв площадь которых >= 41м = 2комн
-                if (flat.rooms === Number(i)) { return flat; }
-            });
-        }
-        if (i === '2') {
-            isFilterFlats = flats.filter( flat => {
-                if (flat.rooms === 1 && flat.space < 41.31) { return flat; }  // 1к кв площадь которых < 41м = 1комн и 2комн
-                if (flat.rooms === 1 && flat.space >= 41.31) { return flat; } // 1к кв площадь которых >= 41м = 2комн
-                if (flat.rooms === Number(i)) { return flat; }
-            });
-        }
-        return isFilterFlats;
-    }
     public sortChange(sort) {
         const name = (sort.split('_'))[0];
         const value = (sort.split('_'))[1];

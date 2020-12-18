@@ -76,7 +76,7 @@
                 <p class="search-form__subtitle">Номер корпуса</p>
 
                 <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                    <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses || (form.controls['houses'].value).length === 0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
+                    <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses ||  0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
                 </div>
 
                 <div *ngIf="showCorpus"

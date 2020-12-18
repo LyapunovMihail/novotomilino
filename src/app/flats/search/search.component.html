@@ -8,8 +8,9 @@
     <app-search-form
         [parentPlan]="parentPlan"
         (formChange)="formChange($event)"
-        (showPopular)="showPopular.emit()">
-    </app-search-form>
+        (showPopular)="showPopular.emit()"
+        [housesFromMinimap]="housesFromMinimap"
+    ></app-search-form>
 
     <div class="search__main">
 

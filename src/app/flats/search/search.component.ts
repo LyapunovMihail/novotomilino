@@ -39,8 +39,9 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public loadMoreFirst = true; // первое нажатие "Показать еще"
 
-    @Input() public showSearchWindow: boolean;
     @Input() public parentPlan: boolean;
+    @Input() public showSearchWindow: boolean;
+    @Input() public housesFromMinimap: string[];
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
     @Output() public showPopular = new EventEmitter<any>();
 
@@ -118,13 +119,9 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.loadMoreFirst = true;
-
                 this.count = data.length;
                 this.searchFlats = data;
-                if (params.rooms === '1' || params.rooms === '2') {
-                    this.searchFlats = this.filterFlats(params.rooms, data);
-                    this.count = this.searchFlats.length;
-                }
+
                 this.sortFlats();
                 this.loadMore();
                 this.flatsChanged.emit(this.searchFlats);
@@ -175,8 +172,9 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             setTimeout(() => {
                 this.windowScrollLocker.unblock();
                 this.formChange({ form: this.form, isSeoPageParamsLoaded: false, isEmptySeoPageParams: true });
-                document.body.style.padding = '0';
-                // setTimeout(() => this.windowScrollLocker.unblock(), 150); // Дожидаемся открытия +150ms, что бы скролл не прыгал (при переходе с триггеров на главной)
+                if (this.parentPlan) {
+                    document.body.style.padding = '0';
+                }
             }, 550); // таймаут чтобы анимация открытия окна отработала без тормозов
         } else {
             this.router.navigate([this.router.url.split('?')[0]]);
@@ -185,26 +183,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
                 this.windowScrollLocker.block();
             }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла
         }
-    }
-
-    public filterFlats(i, flats) {
-        let isFilterFlats;
-        if (i === '1') {
-            isFilterFlats = flats.filter( flat => {
-                if (flat.rooms === 2 && flat.isEuro === '1') { return flat; } // Если у квартиры евро планировка - выводим к 1комн
-                if (flat.rooms === 2 && flat.space < 34) { return flat; } // 2к кв площадь которых < 34м = 1комн и 2комн
-                if (flat.rooms === 1 && flat.space >= 41) { return; } // 1к кв площадь которых >= 41м = 2комн
-                if (flat.rooms === Number(i)) { return flat; }
-            });
-        }
-        if (i === '2') {
-            isFilterFlats = flats.filter( flat => {
-                if (flat.rooms === 1 && flat.space < 41.31) { return flat; }  // 1к кв площадь которых < 41м = 1комн и 2комн
-                if (flat.rooms === 1 && flat.space >= 41.31) { return flat; } // 1к кв площадь которых >= 41м = 2комн
-                if (flat.rooms === Number(i)) { return flat; }
-            });
-        }
-        return isFilterFlats;
     }
 
     public sortChange(sort) {
@@ -222,7 +200,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.skip = 0;
         this.outputFlatsList = [];
         this.searchFlats = this.searchFlats.filter(el => el.type !== 'favorite');
-        console.log('noticeChange');
 
         this.loadMore(limit);
     }

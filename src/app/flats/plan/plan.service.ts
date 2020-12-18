@@ -11,8 +11,8 @@ export class PlanService {
 
     constructor( private http: HttpClient ) { }
 
-    public getHouse(num): Observable<IAddressItemFlat[]> {
-        return this.http.get<IAddressItemFlat[]>('/api/search', { params: {houses: num} });
+    public getHouse(houses): Observable<IAddressItemFlat[]> {
+        return this.http.get<IAddressItemFlat[]>('/api/search', { params: { houses, status: '1,4', type: 'КВ' } });
     }
 
     public setShowSearchPanel(val) {

@@ -16,8 +16,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export class CheckboxListComponent {
 
-    @Input() public btnList: any[] = [];
     @Input() public name: string;
+    @Input() public btnList: any[] = [];
     @Input() public typeBox = 'checkbox';
     @Output() close = new EventEmitter<boolean>();
 
@@ -45,6 +45,11 @@ export class CheckboxListComponent {
             this.checkAll(event);
             this.propagateChange(this.activeList);
             return;
+        }
+
+        if (this.isCheckedAll() && value !== 'all') {
+            event.target.checked = true;
+            this.activeList = this.activeList.filter(el => el === value);
         }
 
         if (event.target.checked && !this.activeList.some((item) => item === value)) {

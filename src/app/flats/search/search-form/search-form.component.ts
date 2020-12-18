@@ -2,9 +2,10 @@ import { IFlatsSearchParams, TagInterface } from '../../../../../serv-files/serv
 import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { SearchService } from '../search.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-search-form',
@@ -13,14 +14,14 @@ import { SearchService } from '../search.service';
     providers: [ SearchService ]
 })
 
-export class SearchFormComponent implements OnInit, OnDestroy {
+export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
 
-    public config = FormConfig;
+    public sort: string;
     public formEvents: any;
     public form: FormGroup;
     public moreFilter = false;
     public showCorpus = false;
-    public sort: string;
+    public config = FormConfig;
 
     public seoPageParams: IFlatsSearchParams;
     public isSeoPageParamsLoaded = false;
@@ -31,6 +32,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public allHouses;
 
     @Input() public parentPlan: boolean;
+    @Input() public housesFromMinimap: string[];
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
     @Output() public showPopular: EventEmitter<any> = new EventEmitter();
@@ -43,11 +45,21 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public searchService: SearchService,
     ) {}
 
-    public ngOnInit() {
-        this.buildHouses(this.config);
-        setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
-            this.buildForm(this.activatedRoute.snapshot.queryParams);
-        }, 600);
+    ngOnInit() {
+        // this.buildHouses(this.config);
+        this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
+
+            this.config.housesList = this.config.housesList.map( house => {
+                if ( house.value === 'all') { return house; }
+                house.disabled = !flats.some(flat => flat.house === Number(house.value));
+                return house;
+            });
+            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+            setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
+                this.buildForm(this.activatedRoute.snapshot.queryParams);
+            }, 600);
+        });
+
         this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
             .subscribe((params: IFlatsSearchParams) => {
                 this.seoPageParams = params;
@@ -55,6 +67,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 if (!params) { return; }
                 this.buildForm(this.seoPageParams);
             });
+    }
+    ngOnChanges(changes: SimpleChanges) {
+        if ('housesFromMinimap' in changes && this.form) {
+            this.form.patchValue({ houses: this.housesFromMinimap });
+        }
     }
 
     public buildForm(params) {
@@ -127,7 +144,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
                     return (test) ? result : [];
                 }
-                return [];
+                return this.config.housesList.filter(el => !el.disabled && el.value !== 'all').map(el => el.value + '');
             })(params.houses)]
         });
 
@@ -158,7 +175,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public buildHouses(config) {
 
-        this.searchService.getObjects({}).subscribe( flats => {
+        this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
 
             this.config.housesList = config.housesList.map( house => {
                 if ( house.value === 'all') { return house; }

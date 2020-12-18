@@ -38,7 +38,18 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
-        this.buildHouses(this.config);
+        // this.buildHouses(this.config);
+        this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
+
+            this.config.housesList = this.config.housesList.map( house => {
+                if (house.value === 'all') { return house; }
+                house.disabled = !flats.flats.some(flat => flat.house === Number(house.value));
+                return house;
+            });
+            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+            this.buildForm(this.activatedRoute.snapshot.queryParams);
+        });
+
         this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
             .subscribe((params: IFlatsSearchParams) => {
                 this.seoPageParams = params;
@@ -46,8 +57,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 if (!this.seoPageParams) { return; }
                 this.buildForm();
             });
-
-        this.buildForm();
 
         this.searchService.getMetaTags()
             .subscribe((tags) => {
@@ -80,7 +89,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 const result = parseQueryParams(params.rooms);
                 const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === '0') ? 4 : Number(item) - 1] = true);
+                    result.forEach((item) => arr[Number(item)] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));
@@ -136,7 +145,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
                     return (test) ? result : [];
                 }
-                return [];
+                return this.config.housesList.filter(el => !el.disabled && el.value !== 'all').map(el => el.value + '');
             })(params.houses)]
         });
 

@@ -1,8 +1,8 @@
 <div class="house">
 
     <app-house-minimap *ngIf="houseNumbers"
-        [houseNumber]="houseNumbers">
-    </app-house-minimap>
+        [houseNumber]="houseNumbers"
+    ></app-house-minimap>
 
     <div class="house__sections__nav">
         <ul class="house__sections__nav-list">
@@ -65,8 +65,9 @@
     </div>
 
     <app-flats-search
-        [showSearchWindow]="true"
         [parentPlan]="false"
+        [showSearchWindow]="true"
+        [housesFromMinimap]="houseNumbers"
         (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
     </app-flats-search>
 

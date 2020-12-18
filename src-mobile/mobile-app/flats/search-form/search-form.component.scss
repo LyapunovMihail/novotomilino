@@ -109,18 +109,17 @@
             }
         }
         &-item {
-            &:first-child { .search-form__rooms-checkbox_for-click { border-radius: 2px 0 0 2px; } }
-            &:nth-child(2) { transform: translateX(-1px); }
-            &:nth-child(3) { transform: translateX(-2px); }
-            &:nth-child(4) { transform: translateX(-3px); }
-            &:nth-child(5) {
-                transform: translateX(-4px);
+            &:first-child {
                 .search-form__rooms-checkbox_for-click {
                     width: 75px;
                     border-radius: 0 2px 2px 0;
                     @media (min-width: 768px) { width: 108px; }
                 }
             }
+            &:nth-child(2) { transform: translateX(-1px); }
+            &:nth-child(3) { transform: translateX(-2px); }
+            &:nth-child(4) { transform: translateX(-3px); }
+            &:nth-child(5) { transform: translateX(-4px); }
         }
     }
     &__corpus {
