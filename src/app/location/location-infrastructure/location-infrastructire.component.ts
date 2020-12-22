@@ -23,8 +23,7 @@ export class LocationInfrastructureComponent implements OnInit {
     public markers = [];
 
     constructor(
-        private platform: PlatformDetectService,
-        @Inject(DOCUMENT) private document: any
+        private platform: PlatformDetectService
     ) { }
 
     ngOnInit() {
@@ -35,10 +34,23 @@ export class LocationInfrastructureComponent implements OnInit {
         if ( !this.platform.isBrowser ) { return false; }
 
         // кнопки бокового меню
+        if (this.firstNavClick && type === 'all') {
+            $('.location__infrastructure-list-item--all').removeClass('item-active');
+            this.markers.forEach((marker) => {
+                if (marker.type !== 'main-marker') {
+                    $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
+                    marker.marker.options.set({
+                        visible: false
+                    });
+                }
+            });
+            this.firstNavClick = false;
+            return;
+        }
         if (this.firstNavClick) {
             this.markers.forEach((marker) => {
                 if (marker.type !== type && marker.type !== 'main-marker') {
-                    $(`.location__infrastructure-list-item_${marker.type}`).removeClass('location__infrastructure-list-item_active');
+                    $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
                     marker.marker.options.set({
                         visible: false
                     });
@@ -48,15 +60,34 @@ export class LocationInfrastructureComponent implements OnInit {
             return;
         }
 
-        const item = $(`.location__infrastructure-list-item_${type}`);
+        const item = $(`.location__infrastructure-list-item--${type}`);
 
-        item.toggleClass('location__infrastructure-list-item_active');
+        item.toggleClass('item-active');
+
+        if (type === 'all') {
+            const checked = item.hasClass('item-active');
+            this.markers.forEach((marker) => {
+                const elem = $(`.location__infrastructure-list-item--${marker.type}`);
+                if (checked) {
+                    if (!elem.hasClass('item-active')) {
+                        $(`.location__infrastructure-list-item--${marker.type}`).addClass('item-active');
+                    }
+                    marker.marker.options.set({ visible: true });
+                } else {
+                    if (marker.type !== 'main-marker') {
+                        $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
+                        marker.marker.options.set({ visible: false });
+                    }
+                }
+            });
+            return;
+        }
 
         // всем выбранным маркерам через yamaps api добавляется видимость visible
         this.markers.forEach((marker) => {
             if (marker.type === type) {
                 marker.marker.options.set({
-                    visible: item.hasClass('location__infrastructure-list-item_active')
+                    visible: item.hasClass('item-active')
                 });
             }
         });
