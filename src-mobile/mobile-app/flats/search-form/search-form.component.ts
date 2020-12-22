@@ -47,7 +47,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 return house;
             });
             this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
-            this.buildForm(this.activatedRoute.snapshot.queryParams);
+            setTimeout(() => {
+                this.buildForm(this.activatedRoute.snapshot.queryParams);
+            }, 600);
         });
 
         this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
@@ -74,7 +76,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         } else if (!reset) {
             params = this.activatedRoute.snapshot.queryParams;
         } else {
-            params = this.config;
+            params = reset || this.config;
         }
 
         const roomsFormArray = ((() => {

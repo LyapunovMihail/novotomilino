@@ -69,11 +69,17 @@ export class AddressesModel {
         if ('houses' in query && (/[1|2|3|9]/).exec(query.houses)) {
             request.house = { $in: query.houses.split(',').map(Number) };
         }
-        if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
-            request.rooms = { $in: query.rooms.split(',').map(Number) };
-        }
         if ('euro' in query) {
-            request.isEuro = query.euro;
+            
+            if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
+                const rooms = query.rooms.split(',').map(Number);
+                const option = rooms.map( room => {
+                    return { $and : [{ rooms: ++room, isEuro: '1' }] };
+                });
+                request = { ...request, $or: option };
+            } else {
+                request.isEuro = query.euro;
+            }
         }
         if ( 'priceMin' in query && 'priceMax' in query ) {
             request.price = { $gte: Number(query.priceMin), $lte: Number(query.priceMax) };
@@ -151,9 +157,38 @@ export class AddressesModel {
             };
         }
 
+        if ('euro' in query) {
+            return {
+                request,
+                parameters
+            };
+        }
+
+        let roomsQuery = {};
+
+        if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
+            /*
+                Студии = студии+1Е, однушки = 1к+2Е, двушки = 2к+3Е, трешки = 3к
+                Все также как и у 2Е, то есть 1Е это Rooms:1 + IsEuro:1, 3Е это Rooms:3 + IsEuro:1
+            */
+            const rooms = query.rooms.split(',').map(Number);
+            const option = rooms.map(room => {
+                if (room < 3) {
+                    return { $or: [
+                        { $and: [{ rooms: room, isEuro: '0' }] },
+                        { $and: [{ rooms: ++room, isEuro: '1' }] },
+                    ]};
+                } else {
+                    return { $and : [{ rooms: room, isEuro: '0' }] };
+                }
+            });
+            roomsQuery = { $or: option };
+        }
+        request = { ...request, ...roomsQuery };
+        
         return {
             request,
-            parameters
+            parameters,
         };
     }
 

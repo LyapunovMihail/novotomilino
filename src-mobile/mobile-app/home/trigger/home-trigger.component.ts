@@ -41,11 +41,22 @@ export class HomeTriggerComponent implements OnInit {
         if (flats.length) {
             for (let i = 0; i < 4; i++) {
                 const filteredFlats = flats.filter((flat) => {
-                    if (i === 3) {
-                        return flat.rooms === 3 || flat.rooms === 4;
+                    switch (i) {
+                        case 0:
+                            return (flat.rooms === i && !this.getIsEuro(flat))
+                                || flat.rooms === 1 && this.getIsEuro(flat);
+                        case 1:
+                            return (flat.rooms === i && !this.getIsEuro(flat))
+                                || flat.rooms === 2 && this.getIsEuro(flat);
+                        case 2:
+                            return (flat.rooms === i && !this.getIsEuro(flat))
+                                || (flat.rooms === 3 && this.getIsEuro(flat));
+                        case 3:
+                            return (flat.rooms === i && !this.getIsEuro(flat))
+                                || flat.rooms === 4;
                     }
-                    return flat.rooms === i;
                 });
+                // console.log({ i, flats: filteredFlats.map(el => ({ rooms: el.rooms, euro: el.isEuro })) });
 
                 if (filteredFlats.length) {
                     this.triggersData[i] = {rooms: i, space: '', price: 0};
@@ -72,6 +83,7 @@ export class HomeTriggerComponent implements OnInit {
 
         }
     }
+    private getIsEuro(flat) { return flat.isEuro === '1'; }
 
     navigate(rooms) {
         const navigationExtras: NavigationExtras = {

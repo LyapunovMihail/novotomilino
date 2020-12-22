@@ -54,15 +54,33 @@ export class PlanComponent implements OnInit {
         this.houses[i].freeFlats = flats.length;
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
-                // RED3-705: При ховере на корпус должны выводится мин.цены только по квартирам в продаже
-                room.minPrice = flats.filter((flat) => flat.rooms === room.name && flat.status === '4')
+                room.minPrice = flats // RED3-705: При ховере на корпус должны выводится мин.цены только по квартирам в продаже
+                    .filter(el => el.status === '4')
+                    .filter(el => {
+                        switch (room.name) {
+                            case 0:
+                                return (el.rooms === room.name && !this.getIsEuro(el))
+                                    || el.rooms === 1 && this.getIsEuro(el);
+                            case 1:
+                                return (el.rooms === room.name && !this.getIsEuro(el))
+                                    || el.rooms === 2 && this.getIsEuro(el);
+                            case 2:
+                                return (el.rooms === room.name && !this.getIsEuro(el))
+                                    || (el.rooms === 3 && this.getIsEuro(el));
+                            case 3:
+                                return (el.rooms === room.name && !this.getIsEuro(el))
+                                    || el.rooms === 4;
+                        }
+                    })
                     .reduce((minPrice, flat) => {
                         return flat.price < minPrice ? flat.price : minPrice;
                     }, 9999999999);
                 room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
             });
         }
+
     }
+    private getIsEuro(flat) { return flat.isEuro === '1'; }
 
     public svgRouterLink(event: Event, house) {
         if (event) {

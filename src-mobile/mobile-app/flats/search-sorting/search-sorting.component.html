@@ -1,6 +1,8 @@
 
 <section class="flats-sort">
-    <p class="flats-sort__count">Найдено {{counter}} {{parseText(counter)}}</p>
+    <p class="flats-sort__count" *ngIf="counter > 0">Найдено {{counter}} {{parseText(counter)}}</p>
+    <p class="flats-sort__count" *ngIf="counter <= 0">Квартир по вашему запросу не найдено</p>
+
     <div class="flats-sort__sort">
         <div class="flats-sort__sort-changed" (click)="showTooltip = !showTooltip" 
             [ngClass]="{'isOpen': showTooltip, 'fromLess': !activeValue}">{{activeSort}}</div>
