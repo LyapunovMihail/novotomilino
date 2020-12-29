@@ -185,7 +185,7 @@ export class AddressesModel {
             roomsQuery = { $or: option };
         }
         request = { ...request, ...roomsQuery };
-        
+
         return {
             request,
             parameters,
@@ -193,7 +193,7 @@ export class AddressesModel {
     }
 
     public async getFavorites(session) {
-        const flats = session.favoriteFlats.filter(el => el.article.startsWith('НТМ'));
+        const flats = session.favoriteFlats ? session.favoriteFlats.filter(el => el.article.startsWith('НТМ')) : [];
         return flats ? flats : [];
     }
 
