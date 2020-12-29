@@ -193,7 +193,8 @@ export class AddressesModel {
     }
 
     public async getFavorites(session) {
-        return session.favoriteFlats ? session.favoriteFlats : [];
+        const flats = session.favoriteFlats.filter(el => el.article.startsWith('НТМ'));
+        return flats ? flats : [];
     }
 
     public async setFavorites(session, flat) {

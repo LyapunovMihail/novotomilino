@@ -16,7 +16,7 @@ import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 })
 export class SharesItemComponent implements OnInit {
 
-    public share: Share;
+    public share;
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
@@ -65,6 +65,10 @@ export class SharesItemComponent implements OnInit {
 
     public getSnippet(id) {
         this.share = this.sharesList.find((share) => share._id === id);
+        this.share.shareFlats = this.share.shareFlats.map(el => {
+            el.discount = this.getDiscount(el);
+            return el;
+        });
         this.refreshShareFlats();
         this.checkPrevAndNext(id);
     }

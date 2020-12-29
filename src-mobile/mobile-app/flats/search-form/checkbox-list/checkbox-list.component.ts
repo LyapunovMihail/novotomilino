@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,70 +16,36 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export class CheckboxListComponent {
 
-    @Input() public btnList: any[] = [];
     @Input() public name: string;
+    @Input() public btnList: any[] = [];
+    @Output() public close = new EventEmitter<boolean>();
 
-    public activeList: string[] = [];
+    public activeList: any[] = [];
 
     constructor() {}
 
+    // Скрываем дома в которых нет квартир
+    public get checkboxList() { return this.btnList.filter( house => !house.disabled); }
     public isChecked(val) {
-        if (val === 'all') {
-            return this.isCheckedAll();
-        }
+        if (val === 'all') { return this.isCheckedAll; }
         return this.activeList.some((item) => item === val);
     }
 
-    // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву чекбоксов-1, если равен, то возвращаем тру, если нет - фэлс.
-    // Так как значение 'выбрать всё' не попадает в массив значений, сделать проверку на наличие этого значения в массиве не удастся
-    public isCheckedAll(): boolean {
-        return (this.activeList.length === this.btnList.filter( house => !house.disabled).length - 1);
-        // return this.activeList.length === this.btnList.length - 1;
+    // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву не заблокированных чекбоксов,
+    // или массив значений пуст
+    // то возвращаем true, если нет - false.
+    public get isCheckedAll(): boolean {
+        return !this.activeList.length || (this.activeList.length === this.btnList.filter( house => !house.disabled).length - 1);
     }
 
     public checkBtn(event) {
         const value = event.target.value;
-        if (value === 'all') {
-            this.checkAll(event);
-            this.propagateChange(this.activeList);
-            return;
-        }
 
-        if (this.isCheckedAll() && value !== 'all') {
-            event.target.checked = true;
-            this.activeList = this.activeList.filter(el => el === value);
-        }
-
-        if (event.target.checked && !this.activeList.some((item) => item === value)) {
-            this.activeList.push(value);
+        if (this.name === 'houses') {
+            this.checkHouses(event, value);
         } else {
-            const index = this.activeList.findIndex((item) => item === value);
-            if (index === 0 && this.activeList.length === 1 && this.name === 'houses') { event.target.checked = true; }
-            if (index >= 0 && this.activeList.length > 1 && this.name === 'houses') {
-                this.activeList.splice(index, 1);
-            }
-            if (index >= 0 && this.name !== 'houses') {
-                this.activeList.splice(index, 1);
-            }
+            this.checkOtherCtrls(event, value);
         }
-
-        this.propagateChange(this.activeList);
-    }
-
-    // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
-    public checkAll(event) {
-        this.btnList.forEach((item) => {
-            if (item.value !== 'all' && !item.disabled) {
-                if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
-                    this.activeList.push(item.value);
-                } else if (!event.target.checked) {
-                    const index = this.activeList.findIndex((value) => value === item.value);
-                    if (index >= 0) {
-                        this.activeList.splice(index, 1);
-                    }
-                }
-            }
-        });
     }
 
     public writeValue(control) {
@@ -87,13 +53,65 @@ export class CheckboxListComponent {
             this.activeList = control;
         }
     }
-
     public propagateChange = (_: any) => {};
-
-    public registerOnChange(fn) {
-        this.propagateChange = fn;
-    }
-
+    public registerOnChange(fn) { this.propagateChange = fn; }
     public registerOnTouched() {}
+
+    private checkHouses(ev, value) {
+        const checked = ev.target.checked;
+        const inList = this.activeList.some((item) => item === value);
+        const allHouses = this.btnList.filter( house => !house.disabled && house.value !== 'all').map(el => el.value);
+
+        /*  RED3-736: ->
+                При формировании формы массив домов приходит пустой,
+                и в этом случае чекбокс "Все корпуса" активен, при первом нажатии на любой доступный корпус
+                он деактивируется, а чекбокс корпуса активируется. Если мы выберем все корпуса щелкая на каждый из них,
+                или нажав на "Все корпуса", то все чекбоксы деактивируются, а "Все корпуса" - активируется. 
+                И в момент активации в форму отдается заполненый массив домов
+        */
+
+        if (value === 'all') {
+            if (!this.isCheckedAll) {
+                this.activeList = allHouses;
+            } else {
+                ev.target.checked = true;
+                return;
+            }
+            this.propagateChange(this.activeList);
+            return;
+        }
+
+        if (this.isCheckedAll && checked) {
+            this.activeList = [ value ];
+            this.propagateChange(this.activeList);
+            return;
+        }
+
+        if (checked && !inList) {
+            this.activeList.push(value);
+            if (this.isCheckedAll) {
+                this.activeList = allHouses;
+                ev.target.checked = false;
+            }
+        } else {
+            const index = this.activeList.findIndex((item) => item === value);
+            this.activeList.splice(index, 1);
+        }
+
+        this.propagateChange(this.activeList);
+    }
+    private checkOtherCtrls(ev, value) {
+        const checked = ev.target.checked;
+        const inList = this.activeList.some((item) => item === value);
+
+        if (checked && !inList) {
+            this.activeList.push(value);
+        } else {
+            const index = this.activeList.findIndex((item) => item === value);
+            this.activeList.splice(index, 1);
+        }
+
+        this.propagateChange(this.activeList);
+    }
 }
 

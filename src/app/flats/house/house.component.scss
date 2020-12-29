@@ -103,6 +103,24 @@
                 position: relative;
                 padding: 10px 0 10px 10px;
                 border: solid 1px #999a9b;
+                &.selected::after {
+                    content: '';
+                    width: 34px;
+                    height: 100%;
+                    position: absolute;
+                    top: 0; left: calc(100% + 5px);
+                    box-sizing: border-box;
+                    border: 1px solid transparent;
+                    animation: floorActive 2.5s linear;
+                    pointer-events: none;
+                }
+                @keyframes floorActive {
+                    0% { border-color: transparent; }
+                    25% { border-color: $col-red; }
+                    50% { border-color: rgba($color: $col-red, $alpha: .1); }
+                    75% { border-color: $col-red; }
+                    100% { border-color: transparent; }
+                }
 
                 &_title {
                     @include fw14-20();

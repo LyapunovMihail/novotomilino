@@ -1,0 +1,23 @@
+@import "~styles/modules/mixins/mixin";
+
+.floor-bubble {
+    position: fixed;
+    min-width: 160px;
+    border: 1px solid #eee;
+    background-color: $col-white;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    padding: 8px 25px 8px 8px;
+    z-index: 300;
+
+    &__floor {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-orange;
+        margin: 0 0 4px;
+    }
+    &__flat {
+        font: 500 12px/15px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+    }
+}

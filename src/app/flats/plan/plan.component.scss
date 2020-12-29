@@ -11,10 +11,19 @@
         font: 54px/58px 'Leksa', sans-serif;
         @include font-smoothing;
         position: absolute;
-        top: 40px; left: 50%;
+        top: 42px; left: 50%;
         transform: translateX(-50%);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         color: #fff;
         z-index: 1;
+
+        &--h1 {
+            top: 16px;
+            font: 500 14px/18px $font-mus;
+            @include font-smoothing;
+            color: $col-white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
     }
     &__rose {
         width: 85px;

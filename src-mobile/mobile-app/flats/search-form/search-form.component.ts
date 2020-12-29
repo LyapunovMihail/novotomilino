@@ -28,6 +28,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
 
     public allHouses;
+    public rangeMoved = {
+        price: { min: 0, max: 0 },
+        space: { min: 0, max: 0 },
+        floor: { min: 0, max: 0 },
+    };
 
     constructor(
         public formBuilder: FormBuilder,
@@ -170,6 +175,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
         this.seoPageEvent.unsubscribe();
+    }
+    public formChanges(val, type) {
+        this.form.patchValue({ [type]: val });
     }
 
     public buildHouses(config) {

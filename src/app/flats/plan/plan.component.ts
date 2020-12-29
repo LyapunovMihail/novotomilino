@@ -86,7 +86,7 @@ export class PlanComponent implements OnInit {
         if (event) {
             event.preventDefault();
         }
-        this.router.navigate(['/flats/house/'], {queryParams: {houses: house}});
+        this.router.navigate(['/flats/house/'], { queryParams: { houses: house, status: '4' }});
     }
     public onmouseenter(house) {
         this.infoAboutSect = house;

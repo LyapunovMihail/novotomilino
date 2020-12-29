@@ -31,6 +31,12 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
 
     public allHouses;
 
+    public rangeMoved = {
+        price: { min: 0, max: 0 },
+        space: { min: 0, max: 0 },
+        floor: { min: 0, max: 0 },
+    };
+
     @Input() public parentPlan: boolean;
     @Input() public housesFromMinimap: string[];
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
@@ -46,7 +52,7 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
     ) {}
 
     ngOnInit() {
-        // this.buildHouses(this.config);
+
         this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
 
             this.config.housesList = this.config.housesList.map( house => {
@@ -139,12 +145,13 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
                  * then split them into an array,
                  * otherwise pass an empty array
                  */
+                const allHouses = this.config.housesList.filter( house => !house.disabled && house.value !== 'all').map(el => el.value);
                 if (houses) {
                     const result = parseQueryParams(houses);
                     const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
-                    return (test) ? result : [];
+                    return (test) ? result : allHouses;
                 }
-                return this.config.housesList.filter(el => !el.disabled && el.value !== 'all').map(el => el.value + '');
+                return [];
             })(params.houses)]
         });
 
@@ -162,27 +169,13 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
 
     public formReset() {
         this.buildForm({});
-        // setTimeout(() => {
-        //     this.sort = this.config.sort;
-        //     this.sortChange.emit(this.sort);
-        // }, 100);
+    }
+    public formChanges(val, type) {
+        this.form.patchValue({ [type]: val });
     }
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
         this.seoPageEvent.unsubscribe();
-    }
-
-    public buildHouses(config) {
-
-        this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
-
-            this.config.housesList = config.housesList.map( house => {
-                if ( house.value === 'all') { return house; }
-                house.disabled = !flats.some(flat => flat.house === Number(house.value));
-                return house;
-            });
-            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
-        });
     }
 }

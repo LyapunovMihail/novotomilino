@@ -16,7 +16,9 @@ export class HouseMinimapComponent implements OnInit {
     public floorCount = FloorCount;
     public houseList = houses;
     public houseNumbers: string[];
+
     @Input() public houseNumber: string;
+    @Output() public floorClicked = new EventEmitter();
 
     public activeList: any;
 

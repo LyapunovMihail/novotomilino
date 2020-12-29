@@ -14,14 +14,14 @@ export class FlatsDiscountService {
     ) {}
 
     public getShares() {
-        // this.http.get<{ length: number, sharesList: Share[] }>(`/api/shares/list?limit=${100}&skip=${0}`)
-        //     .subscribe((data: { length: number, sharesList: Share[] }) => {
-        //         data.sharesList.forEach((share: Share) => {
-        //             this.shareFLats = [...this.shareFLats, ...share.shareFlats];
-        //         });
-        //     }, (err) => {
-        //         console.log(err);
-        //     });
+        this.http.get<{ length: number, sharesList: Share[] }>(`/api/shares/list?limit=${100}&skip=${0}`)
+            .subscribe((data: { length: number, sharesList: Share[] }) => {
+                data.sharesList.forEach((share: Share) => {
+                    this.shareFLats = [...this.shareFLats, ...share.shareFlats];
+                });
+            }, (err) => {
+                console.log(err);
+            });
     }
 
     public getDiscount(flat): number {

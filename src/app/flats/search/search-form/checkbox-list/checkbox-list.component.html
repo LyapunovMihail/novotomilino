@@ -1,23 +1,30 @@
-<ul [class.search-form--row]="name === 'decoration'">
 
-    <li class="close-area" (click)="close.emit(false)" *ngIf="name === 'houses'"></li>
-
-    <ng-container *ngFor="let btn of btnList">
-
-        <li *ngIf="name === 'houses' && !btn.disabled || btn.value === 'all'" class="search-form__list-item search-form__list-item--{{name}}">
-            <input [id]="btn.value" [name]="name" (change)="checkBtn($event)"
-                [value]="btn.value" [checked]="isChecked(btn.value)" type="checkbox">
-            <label [for]="btn.value" class="g-checkbox search-form__list-checkbox"></label>
-            <label [for]="btn.value" class="search-form__list-text--{{name}}">{{btn.name}}</label>
-        </li>
-
-        <li class="decoration-checkbox" *ngIf="name === 'decoration'">
-            <label class="decoration-checkbox__item">
-                <input [id]="btn.value" [name]="name" [style.display]="'none'"
-                    (change)="checkBtn($event)" [value]="btn.value"
-                    [checked]="isChecked(btn.value)" type="checkbox">
-                <div>{{btn.name}}</div>
+<ng-container [ngSwitch]="name">
+    <ul class="checkbox-houses" *ngSwitchCase="'houses'">
+        <li class="close-area" (click)="close.emit(false)"></li>
+        <li class="checkbox-houses__item" *ngFor="let btn of checkboxList">
+            <label class="checkbox-houses__item-checkbox">
+                <input type="checkbox" [name]="name"
+                    [checked]="isChecked(btn.value) && (btn.value !== 'all' ? !isCheckedAll : true)"
+                    (change)="checkBtn($event)"
+                    [style.display]="'none'"
+                    [value]="btn.value">
+                <div class="g-checkbox"></div>
+                <p>{{ btn.name }}</p>
             </label>
         </li>
-    </ng-container>
-</ul>
+    </ul>
+
+    <ul class="checkbox-other" *ngSwitchCase="'decoration'">
+        <li class="checkbox-other__item" *ngFor="let btn of btnList">
+            <label class="checkbox-other__item-checkbox">
+                <input type="checkbox" [name]="name"
+                    [checked]="isChecked(btn.value)"
+                    (change)="checkBtn($event)"
+                    [style.display]="'none'"
+                    [value]="btn.value">
+                <p>{{btn.name}}</p>
+            </label>
+        </li>
+    </ul>
+</ng-container>

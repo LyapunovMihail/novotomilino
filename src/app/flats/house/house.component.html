@@ -1,7 +1,9 @@
 <div class="house">
 
-    <app-house-minimap *ngIf="houseNumbers"
+    <app-house-minimap 
+        *ngIf="houseNumbers"
         [houseNumber]="houseNumbers"
+        (floorClicked)="floorEmitted()"
     ></app-house-minimap>
 
     <div class="house__sections__nav">
@@ -19,7 +21,7 @@
                 <ng-container *ngIf="chess[h] && chess[h].length">
                     <ng-container *ngFor="let section of chess[h]; let s = index">
                         <div class="house__sections-chess" *ngIf="section && section.length > 0">
-                            <ul class="house__sections-chess_section" #sectionContainer>
+                            <ul class="house__sections-chess_section" [class.selected]="floorClicked" #sectionContainer>
                                 <p class="house__sections-chess_section_title" *ngIf="section && section.length > 0">Корпус {{h}}, Cекция {{s}}</p>
                                 <ng-container *ngFor="let floor of section; let j = index">
                                     <li *ngIf="floor" class="house__sections-chess_section_floor">
@@ -41,7 +43,9 @@
                                                 </li>
                                                 <!--<li class="house__sections-chess_section_flat house__sections-chess_section_flat&#45;&#45;sold-out" *ngIf="!floor[i]"></li>-->
                                             </ng-container>
-                                            <li class="house__sections-chess_section_floor-button">
+                                            <li class="house__sections-chess_section_floor-button" 
+                                              (mouseenter)="showFloorBubble($event, floor, (section.length - j))"
+                                              (mouseleave)="floorShowBubble = false">
                                                 <a class="house__sections-chess_section_floor-link"
                                                     [routerLink]="'/flats/house/' + h + '/section/' + s + '/floor/' + (section.length - j)"> <!-- этаж и секция прописаны в любой квартире -->
                                                     {{section.length - j}}
@@ -84,3 +88,9 @@
     [coords]="bubbleCoords"
     [showBubble]="showBubble">
 </app-flats-flat-bubble>
+
+<app-flats-floor-bubble
+    [coords]="bubbleCoords"
+    [bubbleData]="floorBubble"
+    [showBubble]="floorShowBubble"
+></app-flats-floor-bubble>

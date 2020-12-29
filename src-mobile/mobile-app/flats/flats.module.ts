@@ -1,6 +1,5 @@
 import { SearchFormPipe } from './search-form/search-form.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
-import { SectionsSelectComponent } from './search-form/sections-select/sections-select.component';
 import { GHMRangeNumberModule } from './search-form/ghm-range-number/ghm-range-number.module';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { FlatsComponent } from './flats.component';
@@ -20,16 +19,17 @@ import { ApartmentFurnitureComponent } from './modal-apartament/apartment-furnit
 import { ApartamentBitNumberPipe } from './modal-apartament/apartament-bit-number.pipe';
 import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 import { SearchSortingModule } from './search-sorting/search-sorting.module';
+import { InputsListComponent } from './search-form/inputs-list/inputs-list.component';
 
 const FlatsComponents = [
     FlatsComponent,
     SearchFormComponent,
-    SectionsSelectComponent,
     CheckboxListComponent,
     SearchFormPipe,
     ModalApartamentComponent,
     ApartmentFurnitureComponent,
     ApartamentBitNumberPipe,
+    InputsListComponent,
 ];
 
 @NgModule({
@@ -52,8 +52,6 @@ const FlatsComponents = [
         SearchSortingModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
-            // { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
-            // { path: 'flats/_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
             { path: 'flats', component: FlatsComponent,
                 children: [
                     { path: '', redirectTo: 'search', pathMatch: 'full' },

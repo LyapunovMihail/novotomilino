@@ -1,0 +1,28 @@
+
+<div class="inputs-list">
+    <ng-container *ngIf="value">
+
+        <label class="inputs-list__wrap">
+            <p class="inputs-list__input inputs-list__input--fake" #fakeMin>{{value.min | ghmNumberPipe}}</p>
+            <input type="text" class="inputs-list__input {{'is-' + type}}"
+                [style.width.px]="fakeMin.clientWidth"
+                [ngModel]="value.min | ghmNumberPipe"
+                (ngModelChange)="parseString('min', $event)">
+            <p class="inputs-list__output">
+                {{minValue[type]}}
+            </p>
+        </label>
+
+        <label class="inputs-list__wrap">
+            <p class="inputs-list__input inputs-list__input--fake" #fakeMax>{{value.max | ghmNumberPipe}}</p>
+            <input type="text" class="inputs-list__input {{'is-' + type}}"
+                [style.width.px]="fakeMax.clientWidth"
+                [ngModel]="value.max | ghmNumberPipe"
+                (ngModelChange)="parseString('max', $event)">
+                <p class="inputs-list__output">
+                    {{maxValue[type]}}
+                </p>
+        </label>
+
+    </ng-container>
+</div>

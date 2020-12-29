@@ -61,7 +61,8 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         this.searchService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
             this.flatData = data;
             this.flatData.discount = this.getDiscount(data);
-            // console.log('flatData -> ', data);
+            this.flatData.inFavorite = this.inFavorite(data);
+            console.log('flatData -> ', data);
         });
     }
 
@@ -103,6 +104,9 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
+    }
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 
     public minCredit(price) {
