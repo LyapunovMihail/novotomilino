@@ -20,21 +20,26 @@
                 </ul>
             </div>
             <div class="search-form__wrap-item search-form__wrap-item_price">
-                <p class="search-form__subtitle">Цена</p>
+                <p class="search-form__subtitle">Цена, млн &#8381;</p>
 
                 <div class="search-form__range search-form__range_price">
                     <div class="search-form__range-text search-form__text">
-                        <p><span #minPrice></span> млн &#8381;</p>
-                        <p><span #maxPrice></span> млн &#8381;</p>
+                        <app-inputs-list
+                            [type]="'price'"
+                            [value]="rangeMoved.price"
+                            [defValues]="config.price"
+                            [formControl]="form.controls['price']"
+                            (inputChange)="formChanges($event, 'price')"
+                        ></app-inputs-list>
                     </div>
 
                     <ghm-range-number
-                        [formControl]="form.controls['price']"
+                        [toFixed]="true"
                         [min]="config.price.min"
                         [max]="config.price.max"
-                        [toFixed]="true"
-                        (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
-                    </ghm-range-number>
+                        (move)="rangeMoved.price = $event"
+                        [formControl]="form.controls['price']"
+                    ></ghm-range-number>
                 </div>
             </div>
             <div class="search-form__wrap-item search-form__wrap-item_square">
@@ -42,16 +47,21 @@
 
                 <div class="search-form__range search-form__range_square">
                     <div class="search-form__range-text search-form__text">
-                        <p><span #minSpace></span></p>
-                        <p><span #maxSpace></span></p>
+                        <app-inputs-list
+                            [type]="'space'"
+                            [value]="rangeMoved.space"
+                            [defValues]="config.space"
+                            [formControl]="form.controls['space']"
+                            (inputChange)="formChanges($event, 'space')"
+                        ></app-inputs-list>
                     </div>
 
                     <ghm-range-number
-                        [formControl]="form.controls['space']"
                         [min]="config.space.min"
                         [max]="config.space.max"
-                        (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
-                    </ghm-range-number>
+                        (move)="rangeMoved.space = $event"
+                        [formControl]="form.controls['space']"
+                    ></ghm-range-number>
                 </div>
             </div>
             <div class="search-form__wrap-item search-form__wrap-item_floor">
@@ -59,35 +69,40 @@
 
                 <div class="search-form__range search-form__range_floor">
                     <div class="search-form__range-text search-form__text">
-                        <p><span #minFloor></span></p>
-                        <p><span #maxFloor></span></p>
+                        <app-inputs-list
+                            [type]="'floor'"
+                            [value]="rangeMoved.floor"
+                            [defValues]="config.floor"
+                            [formControl]="form.controls['floor']"
+                            (inputChange)="formChanges($event, 'floor')"
+                        ></app-inputs-list>
                     </div>
 
                     <ghm-range-number
-                        [formControl]="form.controls['floor']"
                         [min]="config.floor.min"
                         [max]="config.floor.max"
-                        [toFixed]="true"
-                        (move)="minFloor.innerHTML = $event.min; maxFloor.innerHTML = $event.max">
-                    </ghm-range-number>
+                        (move)="rangeMoved.floor = $event"
+                        [formControl]="form.controls['floor']"
+                    ></ghm-range-number>
                 </div>
             </div>
             <div class="search-form__wrap-item search-form__wrap-item_corpus">
                 <p class="search-form__subtitle">Номер корпуса</p>
 
                 <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                    <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses ||  0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
+                    <p class="search-form__text">{{(form.controls['houses'].value).length === allHouses || (form.controls['houses'].value).length === 0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
                 </div>
 
                 <div *ngIf="showCorpus"
                      class="search-form__corpus"
                      [class.search-form__corpus--position-top]="!parentPlan">
                     <app-search-checkbox-list
+                        [name]="'houses'"
+                        [parentPlan]="parentPlan"
                         (close)="showCorpus = false"
                         [btnList]="config.housesList"
                         [formControl]="form.controls['houses']"
-                        [name]="'houses'">
-                    </app-search-checkbox-list>
+                    ></app-search-checkbox-list>
                 </div>
             </div>
 

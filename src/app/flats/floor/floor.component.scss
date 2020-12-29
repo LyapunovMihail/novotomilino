@@ -93,23 +93,37 @@
     }
 }
 
-.flat-mod,
-path.flat-mod {
+.flat-mod {
     cursor: pointer;
-    opacity: 0.1;
-
-    &:hover { opacity: .3; }
-    &--free { fill: rgb(170, 171, 34) !important; }
+    
+    &--free {
+        fill: rgba($color: $col-orange, $alpha: .2) !important;
+        path, polygon, 
+        polyline, rect {
+            fill: rgba($color: $col-red, $alpha: .2);
+        }
+        &:hover {
+            fill: rgba($color: $col-orange, $alpha: .1) !important;
+            path, polygon, 
+            polyline, rect { fill: rgba($color: $col-red, $alpha: .1); }
+        }
+    }
+    &--reserved {
+        fill: #eee !important;
+        path, polygon, 
+        polyline, rect { fill: #eee; }
+        &:hover { opacity: .5; }
+    }
+    &--saled {
+        pointer-events: none;
+        fill: #fff;
+        path, polygon, 
+        polyline, rect { fill: #fff; }
+    }
+    &--not-sale {
+        fill: #FFFBDA !important;
+        path, polygon,
+        polyline, rect { fill: #FFFBDA; }
+        &:hover { opacity: .5; }
+    }
 }
-
-.flat-mod--free path, .flat-mod--free polygon, .flat-mod--free polyline, .flat-mod--free rect {
-    fill: rgb(170, 171, 34) !important;
-}
-
-.flat-mod--out-of-stock path, .flat-mod--out-of-stock polygon, .flat-mod--out-of-stock polyline, .flat-mod--out-of-stock rect {
-    fill: rgb(0, 1, 5);
-}
-// path.flat-mod--out-of-stock {
-//     fill: rgb(170, 171, 34) !important;
-//     &:hover { opacity: .3; }
-// }

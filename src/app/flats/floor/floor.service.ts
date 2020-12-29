@@ -25,7 +25,7 @@ export class FloorService {
                 $(flat).on('mouseleave', () => callbacks.hover(null));
                 $(flat).on('click', () => callbacks.click(i));
                 $(flat).addClass('flat-mod');
-                $(flat).addClass(`flat-mod--${((item.status === '4' || item.status === '1') ? 'free' : 'out-of-stock')}`);
+                $(flat).addClass(`flat-mod--${((item.status === '4') ? 'free' : (item.status === '1') ? 'not-sale' : (item.status === '8') ? 'reserved' : 'saled')}`);
             }
         });
     }

@@ -29,7 +29,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     @Input() formControlName: any;
 
-    public sectionsOptions = ['1', '2', '3', '4'];
+    public sectionsOptions = ['1', '2', '3', '4', '5', '6'];
 
     public housesOptions = ['1', '2', '3', '9'];
 

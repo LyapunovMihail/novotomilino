@@ -1,63 +1,89 @@
-@import "../../../../styles/modules/mixins/mixin.scss";
+@import "../../../../styles/modules/mixins/mixin";
 
-.search-form__list {
-    &.display-flex {
-        display: flex;
-        flex-flow: row wrap;
-        margin: 0 0 8px;
-    }
+.close-area {
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: 1;
+}
 
-    &-item {
-        margin-bottom: 20px;
-        &:last-of-type { margin: 0; }
-    }
-
-    &-checkbox {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+.checkbox-houses {
+    &__item {
+        width: 100%;
+        position: relative;
         cursor: pointer;
-        user-select: none;
-        outline: none;
+        z-index: 2;
+        &.disabled {
+            opacity: .5;
+            pointer-events: none;
+        }
+        &+ li { margin-top: 10px; }
 
-        &-content {
-            display: none;
-            &:checked + .search-form__list-checkbox_for-click {
+        &-checkbox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            transition: background-color .2s linear;
+            box-sizing: border-box;
+            cursor: pointer;
+            &:hover {
+                div { border-color: $col-orange; }
+            }
+            input:checked + div {
                 background: url(/assets/img/check.svg) center no-repeat $col-orange;
-                background-size: 20px 16px;
                 border-color: $col-orange;
             }
+            &> div {
+                width: 20px;
+                height: 20px;
+                min-width: 20px;
+            }
+            &> p {
+                height: auto;
+                font: 500 18px/24px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                padding: 0;
+            }
         }
-        &_for-click {
-            width: 30px;
-            height: 30px;
-            margin-right: 8px;
-        }
-    }
-
-    &-text {
-        @include fw18-24;
-        white-space: nowrap;
     }
 }
 
-.decoration-checkbox {
-    margin: 0 8px 8px 0;
+.checkbox-other {
+    display: flex;
+    margin: 23px 0 0;
 
     &__item {
-        display: block;
+        margin-right: 8px;
 
-        &> input:checked + div {
-            background-color: $col-orange;
-            border-color: $col-orange;
-            color: $col-white;
-        }
-        &> div {
-            @include f16-24;
-            border: 1px solid #979797;
-            background-color: $col-white;
-            border-radius: 16px;
-            padding: 4px 12px;
+        &-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        
+            &> input {
+                display: none;
+                &:checked + p {
+                    background-color: $col-orange;
+                    border-color: $col-orange;
+                    color: $col-white;
+                }
+            }
+            &> p {
+                font: 500 14px/18px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                white-space: nowrap;
+                background-color: $col-white;
+                border: 1px solid #eee;
+                border-radius: 16px;
+                transition: (
+                    color $transition,
+                    background-color $transition,
+                    border-color $transition
+                );
+                padding: 4px 8px;
+            }
         }
     }
 }

@@ -48,6 +48,21 @@
                 border: 1px solid #e5e5e5;
                 background: url(/assets/img/flats/house/lock_flat.svg) center no-repeat;
             }
+            &--floor {
+                font: 500 14px/20px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                pointer-events: all;
+                padding-left: 30px;
+                cursor: pointer;
+                &::before {
+                    content: '11';
+                    background-color: $col-white;
+                    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+                    color: $col-orange;
+                    padding: 1px 3px;
+                }
+            }
         }
     }
 

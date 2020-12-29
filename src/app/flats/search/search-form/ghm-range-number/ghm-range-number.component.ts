@@ -1,22 +1,5 @@
-import {
-    Component,
-    OnInit,
-    OnChanges,
-    SimpleChanges,
-    ElementRef,
-    Input,
-    Output,
-    EventEmitter,
-    HostListener,
-    Inject,
-    ViewEncapsulation,
-    PLATFORM_ID,
-    forwardRef
-} from '@angular/core';
-import {
-    isPlatformBrowser,
-    isPlatformServer
-} from '@angular/common';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter, HostListener, Inject, ViewEncapsulation, PLATFORM_ID, forwardRef } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({

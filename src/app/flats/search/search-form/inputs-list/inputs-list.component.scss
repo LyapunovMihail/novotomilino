@@ -1,0 +1,67 @@
+@import '~styles/modules/mixins/mixin';
+
+:host {
+    width: 100%;
+    display: block;
+}
+
+@mixin resetInput {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.inputs-list {
+    width: calc(100% - 2px);
+    height: 24px;
+    display: flex;
+    position: relative;
+
+    &__wrap {
+        width: 50%;
+        max-width: 50%;
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+        &:last-child {
+            justify-content: flex-end;
+            input { text-align: right; }
+            .inputs-list__output {
+                right: 0;
+                left: auto;
+            }
+        }
+    }
+
+    &__input {
+        font: 500 18px/24px $font-mus;
+        @include font-smoothing;
+        @include resetInput();
+        color: $col-black;
+        opacity: 0;
+        &:focus {
+            opacity: 1;
+            &+ p { opacity: 0; }
+        }
+        &.is-space,
+        &.is-floor { min-width: 40px; }
+        &.is-price { min-width: 80px; }
+
+        &--fake {
+            pointer-events: none;
+            position: absolute;
+            top: 0; left: 0;
+            opacity: 0;
+        }
+    }
+    &__output {
+        pointer-events: none;
+        font: 500 18px/24px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+        position: absolute;
+        top: 0; left: 0;
+        opacity: 1;
+    }
+}

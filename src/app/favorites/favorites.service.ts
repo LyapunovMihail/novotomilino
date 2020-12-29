@@ -22,7 +22,7 @@ export class FavoritesService {
                 (data) => {
                         this.favoriteFlats = data;
                         if (!this.favoriteFlats.length) {
-                            this.favoriteFlats = JSON.parse(localStorage.getItem('favorite')) || [];
+                            this.favoriteFlats = JSON.parse(localStorage.getItem('favorite')).filter(el => el.article.startsWith('НТМ')) || [];
                             this.refreshFavorite(this.favoriteFlats);
                         }
                         this.setFavoriteCount();

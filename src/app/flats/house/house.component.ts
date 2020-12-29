@@ -29,7 +29,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public houseNumbers: string[];
     public chess: IFLatDisabled[][][][];
     public bubbleData: IFlatWithDiscount;
+    public floorBubble; // Модальное окно при наведении на этаж в схеме
     public showBubble = false;
+    public floorShowBubble = false;
     public routerEvent;
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
@@ -43,6 +45,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public preloader = false;
 
+    public floorClicked: boolean;
     public bubbleCoords: IFlatBubbleCoordinates = {
         left: 100,
         top: 100
@@ -149,6 +152,17 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.bubbleData = flat;
         this.showBubble = true;
     }
+    public showFloorBubble(event, floor, i) {
+        const coords = event.target.getBoundingClientRect();
+        const offsetTop = event.target.offsetTop;
+        const screenWidth = document.body.clientWidth;
+        const bubbleWidth = 160;
+        const bubbleHeight = 55;
+        this.bubbleCoords.top = (bubbleHeight > offsetTop) || (bubbleHeight > coords.top) ? coords.top : coords.top - bubbleHeight + 30;
+        this.bubbleCoords.left = (coords.left + 40 + bubbleWidth > screenWidth) ? (coords.left - bubbleWidth - 40) : (coords.left + 40) ;
+        this.floorBubble = { flats: floor.filter(el => el && el.status === '4').length, count: i };
+        this.floorShowBubble = true;
+    }
 
     public ngAfterViewInit() {
         this.scrollCalculate();
@@ -172,6 +186,12 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this.scroll < 0) {
             this.scroll = 0;
         }
+    }
+
+    public floorEmitted() {
+        if (this.floorClicked) { return; }
+        this.floorClicked = true;
+        setTimeout(() => this.floorClicked = false, 3000);
     }
 
     public scrollNext() {
