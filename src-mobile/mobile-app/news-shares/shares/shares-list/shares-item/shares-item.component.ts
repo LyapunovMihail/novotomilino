@@ -104,8 +104,8 @@ export class SharesItemComponent implements OnInit {
 
         this.sharesService.getFlatsByHousesAndNumbers(flatsData)
             .subscribe((refreshFlats: IAddressItemFlat[]) => {
-                    this.share.shareFlats.forEach((flat: ShareFlat) => {
-                        this.updateFlat(flat, refreshFlats);
+                    this.share.shareFlats = this.share.shareFlats.map((flat: ShareFlat) => {
+                        return this.updateFlat(flat, refreshFlats);
                     });
                 },
                 (err) => console.error(err)
@@ -115,10 +115,9 @@ export class SharesItemComponent implements OnInit {
     updateFlat(shareFlat: ShareFlat, refreshFlats: IAddressItemFlat[]) {
         const refreshFlat: IAddressItemFlat = refreshFlats.find((freshFlat) => shareFlat.house === freshFlat.house && shareFlat.flat === freshFlat.flat);
         if (refreshFlat == null) {
-            return;
+            return shareFlat;
         }
-
-        shareFlat = {discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat};
+        return { discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat };
     }
 
     public openApartmentModal(flat) {

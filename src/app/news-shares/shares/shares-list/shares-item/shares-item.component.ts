@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 
@@ -34,6 +34,7 @@ export class SharesItemComponent implements OnInit {
         public windowScrollLocker: WindowScrollLocker,
         private sharesService: SharesService,
         private activatedRoute: ActivatedRoute,
+        private changeRef: ChangeDetectorRef,
         private router: Router,
     ) {}
 
@@ -104,8 +105,8 @@ export class SharesItemComponent implements OnInit {
 
         this.sharesService.getFlatsByHousesAndNumbers(flatsData)
             .subscribe((refreshFlats: IAddressItemFlat[]) => {
-                    this.share.shareFlats.forEach((flat: ShareFlat) => {
-                        this.updateFlat(flat, refreshFlats);
+                    this.share.shareFlats = this.share.shareFlats.map((flat: ShareFlat) => {
+                        return this.updateFlat(flat, refreshFlats);
                     });
                 },
                 (err) => console.error(err)
@@ -115,16 +116,12 @@ export class SharesItemComponent implements OnInit {
     updateFlat(shareFlat: ShareFlat, refreshFlats: IAddressItemFlat[]) {
         const refreshFlat: IAddressItemFlat = refreshFlats.find((freshFlat) => shareFlat.house === freshFlat.house && shareFlat.flat === freshFlat.flat);
         if (refreshFlat == null) {
-            return;
+            return shareFlat;
         }
-
-        shareFlat = {discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat};
+        return { discountValue: shareFlat.discountValue, discountType: shareFlat.discountType, ...refreshFlat };
     }
 
     public openApartmentModal(flat) {
-        // this.selectedFlatIndex = index;
-        // this.windowScrollLocker.block();
-        // this.showApartmentWindow = true;
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url }));
         this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
     }

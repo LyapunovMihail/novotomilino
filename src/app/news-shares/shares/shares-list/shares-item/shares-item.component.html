@@ -25,7 +25,6 @@
     </div>
 
     <div class="client-share__flats">
-        <!-- <li *ngFor="let flat of share.shareFlats; let i = index" class="client-share__flats-wrap"></li> -->
         <ng-container *ngFor="let flat of share.shareFlats">
             <app-flat-snippet
                 [flatData]="flat"
