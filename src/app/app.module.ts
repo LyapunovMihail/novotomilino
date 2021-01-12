@@ -39,9 +39,7 @@ import { NewsSharesModule } from './news-shares/news-shares.module';
 import { DecorationModule } from './decoration/decoration.module';
 import { FlatsModule } from './flats/flats.module';
 import { FavoritesModule } from './favorites/favorites.module';
-import { ParkingModule } from './parking/parking.module';
 import { SeoModule } from './seo/seo.module';
-import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { DocumentationModule } from './documentation/documentation.module';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
@@ -87,8 +85,6 @@ const APP_MODULES = [
     DecorationModule,
     FlatsModule,
     FavoritesModule,
-    ParkingModule,
-    StoreroomsModule,
     AdminContactsModule,
     DocumentationModule,
     QuarantineInfoModule,
