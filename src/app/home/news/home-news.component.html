@@ -1,7 +1,7 @@
 <section class="main__news" *ngIf="allSnippets.length">
 
     <div class="main__container">
-        <h2 class="main__news-title g-title-path">Новости</h2>
+        <h3 class="main__news-title g-title-path">Новости</h3>
         <div class="main__news-nav">
             <ul class="main__news-list">
                 <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'all'" (click)="changeSnippets(allSnippets, 'all')">Все</li>

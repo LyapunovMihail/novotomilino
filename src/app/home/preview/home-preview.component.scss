@@ -69,6 +69,14 @@
                 padding: 5px 10px;
                 border: 2px dashed;
             }
+            &--h1 {
+                font: 500 14px/18px $font-mus;
+                @include font-smoothing;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                color: $col-white;
+                position: absolute;
+                top: 16px; left: 0;
+            }
         }
         &-descr {
             font: 24px/32px $font-mus;

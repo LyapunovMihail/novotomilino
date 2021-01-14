@@ -15,7 +15,8 @@
             </div>
         </div>
         <div class="news__view-wrap">
-            <h1 class="news__view-title" [innerHTML]="title | lineBreakPipe"></h1>
+            <!-- <h1 class="news__view-title" [innerHTML]="title | lineBreakPipe"></h1> -->
+            <h1 class="news__view-title">{{title}}</h1>
             <div class="news__view-text-wrap">
                 <p class="news__view-text" [innerHTML]="description | lineBreakPipe"></p>
                 <p class="news__view-text news__view-text_date">{{created_at | date: 'd.M.yyyy' }}</p>

@@ -43,9 +43,7 @@
     }
     &__video {
         position: absolute;
-        // top: (150px - 67px);
-        top: (150px - (67px + 34px));
-        right: 0;
+        top: 60px; right: 0;
 
         &-btn {
             min-height: 58px;
@@ -81,6 +79,15 @@
             color: $col-white;
             margin: 0 0 20px;
             white-space: pre-wrap;
+
+            &--h1 {
+                font: 500 14px/18px $font-mus;
+                @include font-smoothing;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                color: $col-white;
+                position: absolute;
+                top: 16px; left: 0;
+            }
         }
         &-descr {
             font: 16px/22px $font-mus;
@@ -207,10 +214,6 @@
 
             &-title { margin: 0 0 10px; }
             &-descr { font: 14px/18px $font-mus; }
-        }
-        &__video {
-            // top: (139px - 67px);
-            top: (139px - (67px + 34px));
         }
         &__news {
             top: calc(100% + 15px);
