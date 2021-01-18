@@ -26,6 +26,9 @@
             max-width: 615px;
             @include f16-24;
             color: rgba(0, 1, 5, 0.8);
+            a {
+                color: $col-orange;
+            }
         }
     }
     &__objects {

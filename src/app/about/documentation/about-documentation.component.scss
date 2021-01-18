@@ -36,6 +36,13 @@
         &-content {
             width: 50%;
             margin-bottom: 20px;
+
+            a {
+                color: $col-orange;
+                &:hover {
+                    color: $col-orange--hover;
+                }
+            }
         }
 
         &-text {
