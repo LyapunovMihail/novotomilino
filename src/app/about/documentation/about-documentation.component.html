@@ -32,8 +32,8 @@
             <li class="documentation__object"
                 *ngFor="let object of objectsList">
                 <div class="documentation__object-header">
-                    <h2 class="documentation__object-title"
-                        *ngIf="!isAuthorizated">{{object.title}}</h2>
+                    <h3 class="documentation__object-title"
+                        *ngIf="!isAuthorizated">{{object.title}}</h3>
                     <ghm-textarea class="documentation__object-title admin-input"
                         *ngIf="isAuthorizated"
                         [value]="object.title"

@@ -36,9 +36,7 @@ export class SharesItemComponent implements OnInit {
         private sharesService: SharesService,
         private activatedRoute: ActivatedRoute,
         private changeRef: ChangeDetectorRef,
-        private titleService: Title,
         private router: Router,
-        private meta: Meta,
     ) {}
 
     public ngOnInit() {
@@ -75,7 +73,6 @@ export class SharesItemComponent implements OnInit {
         });
         this.refreshShareFlats();
         this.checkPrevAndNext(id);
-        setTimeout(() => this.setMeta(), 100);
     }
 
     public checkPrevAndNext(id) {
@@ -128,11 +125,5 @@ export class SharesItemComponent implements OnInit {
     public openApartmentModal(flat) {
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url }));
         this.router.navigate([`/flats/house/${flat.house}/section/${flat.section}/floor/${flat.floor}/flat/${flat.flat}`]);
-    }
-
-    private setMeta() {
-        const title = this.share.name;
-        this.titleService.setTitle(`${title} ЖК «Новотомилино» Официальный сайт`);
-        this.meta.updateTag({ name: 'description', content: `Новости ЖК "Новотомилино" - ${title}`});
     }
 }

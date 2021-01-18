@@ -2,6 +2,7 @@ import { AuthorizationObserverService } from '../../../../authorization/authoriz
 import { NewsService } from '../../news.service';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { INewsSnippet } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { MetaRenderAdminService } from '../../../render-meta-admin.service';
 
 @Component({
     selector : 'app-news-delete-form',
@@ -29,6 +30,7 @@ export class NewsDeleteFormComponent implements OnInit, OnDestroy, OnChanges {
 
     constructor(
         private authorization: AuthorizationObserverService,
+        private metaRenderAdminService: MetaRenderAdminService,
         private newsService: NewsService,
         public ref: ChangeDetectorRef
     ) { }
@@ -51,7 +53,10 @@ export class NewsDeleteFormComponent implements OnInit, OnDestroy, OnChanges {
         this.close.emit();
         this.newsService.deleteSnippet(this.redactId).subscribe(
             // а в общий компонент передается новый массив сниппетов
-            (data) => this.snippetsChange.emit(data),
+            (data) => {
+                this.snippetsChange.emit(data);
+                this.metaRenderAdminService.popMeta(this.redactId);
+            },
             (err) => {
                 alert('Что-то пошло не так!');
                 console.error(err);

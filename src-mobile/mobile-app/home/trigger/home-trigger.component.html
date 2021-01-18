@@ -18,7 +18,7 @@
 <div class="commercial triggers" *ngIf="getPriceByMod('КН')">
     <div class="commercial__container">
         <a class="commercial__snippet" routerLink="/flats/commercial">
-            <h3 class="commercial__title">Коммерческая недвижимость</h3>
+            <p class="commercial__title">Коммерческая недвижимость</p>
             <p class="commercial__desc">
                 Спешите приобрести коммерческие площади в&nbsp;перспективном районе по&nbsp;выгодным ценам
             </p>
@@ -31,7 +31,7 @@
 <div class="storerooms-parking triggers">
     <div class="storerooms-parking__container">
         <a class="storerooms-parking__snippet storerooms-parking__snippet--parking" *ngIf="getPriceByMod('ММ')" routerLink="/flats/parking">
-            <h3 class="storerooms-parking__title">Машиноместа</h3>
+            <p class="storerooms-parking__title">Машиноместа</p>
             <p class="storerooms-parking__desc">
                 Продлите срок жизни вашего автомобиля и&nbsp;обезопасьте его от&nbsp;угона. Приобретите машиноместо
                 в&nbsp;подземном паркинге.
@@ -40,7 +40,7 @@
             <img class="storerooms-parking__image" src="/assets/img/home-parking.png" alt="">
         </a>
         <a class="storerooms-parking__snippet storerooms-parking__snippet--storerooms" *ngIf="getPriceByMod('КЛ')" routerLink="/flats/storerooms">
-            <h3 class="storerooms-parking__title">Кладовые</h3>
+            <p class="storerooms-parking__title">Кладовые</p>
             <p class="storerooms-parking__desc">
                 Персональные кладовые помещения&nbsp;&mdash; это доступный, экономичный и&nbsp;удобный способ хранения
                 сезонных и&nbsp;крупногабаритных вещей.

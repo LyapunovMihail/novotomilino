@@ -13,6 +13,7 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import * as moment from 'moment';
 import { SharesObserverService } from '../shares-observer.service';
 import { takeUntil } from 'rxjs/operators';
+import { MetaRenderAdminService } from '../../render-meta-admin.service';
 
 export function createDynamicNewsObj(): Share {
     return ({
@@ -33,7 +34,8 @@ export function createDynamicNewsObj(): Share {
 @Component({
     selector: 'app-shares-edit',
     templateUrl: './shares-edit.component.html',
-    styleUrls: ['./shares-edit.component.scss']
+    styleUrls: ['./shares-edit.component.scss'],
+    providers: [ MetaRenderAdminService ]
 })
 
 export class SharesEditComponent implements OnInit, OnDestroy {
@@ -66,7 +68,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         private activeRoute: ActivatedRoute,
         private sharesService: SharesService,
         private sharesObserverService: SharesObserverService,
-        private flatsDiscountService: FlatsDiscountService
+        private flatsDiscountService: FlatsDiscountService,
+        private metaAdminService: MetaRenderAdminService,
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
         this.form = new FormGroup({
@@ -211,6 +214,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                         this.close.emit();
                         this.snippetsChange.emit(response);
                         this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
+                        this.metaAdminService.setMeta(response, form.value, 'shares');
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
@@ -222,6 +226,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                             this.close.emit();
                             this.snippetsChange.emit(response);
                             this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
+                            this.metaAdminService.updateMeta(form.value, this.redactId, 'shares');
                         },
                         (err) => {
                             alert('Что-то пошло не так!');

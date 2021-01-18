@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SeoService } from '../seo/seo.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class MetaRenderAdminService {
@@ -10,53 +12,98 @@ export class MetaRenderAdminService {
 
         При редактировании, они изменяются, или же, если это старая акция/новость, которая была
         создана до внедрения этого сервиса, при ее редактировании ей так же добавляются мета-теги
+
+        При удалении новости/акции, находим по id в поле url элемент с мета тегами и удаляем его
     */
 
+    private ngUnsubscribe = new Subject();
     private metaOption = {
-        siteName: 'Видный Берег 2',
+        siteName: 'Новотомилино',
         typeName: { news: 'Новости', shares: 'Акции' },
+        url: {
+            news: '/news-shares/news/list/',
+            shares: '/news-shares/shares/list/1/',
+        },
+        title: {
+            news: 'title',
+            shares: 'name',
+        }
     };
 
     constructor(
         private seoService: SeoService
     ) { }
 
-    public setMeta(insertedShares, form, page) {
-        const id = insertedShares.insertedIds[0];
+    public setMeta(obj, form, page) {
+        const id = this.getId(obj, page);
         const option = this.metaOption;
 
-        this.seoService.setTag().subscribe( data => {
-            const newMeta = data.concat().pop();
+        this.seoService.setTag()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe( data => {
+                const newMeta = data.concat().pop();
 
-            newMeta.title = `${form.name} ЖК «${option.siteName}» Официальный сайт`;
-            newMeta.h1 = form.name;
-            newMeta.url = `/news-shares/${page}/list/1/${id}`;
-            newMeta.meta[0] = {
-                name: 'description',
-                content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form.name}`
-            };
-            this.seoService.updateTag(newMeta).subscribe();
+                newMeta.title = `${form[option.title[page]]} ЖК «${option.siteName}» Официальный сайт`;
+                newMeta.h1 = form[option.title[page]];
+                newMeta.url = option.url[page] + id;
+                newMeta.meta[0] = {
+                    name: 'description',
+                    content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form[option.title[page]]}`
+                };
+                this.seoService.updateTag(newMeta)
+                    .pipe(takeUntil(this.ngUnsubscribe))
+                    .subscribe();
         });
     }
     public updateMeta(form, id, page) {
         const option = this.metaOption;
 
-        this.seoService.getTags().subscribe( data => {
-            const newMeta: any = data.find(el => ( el.url.split('/').pop() ) === id) || {};
+        this.seoService.getTags()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe( data => {
+                const newMeta: any = data.find(el => ( el.url.split('/').pop() ) === id) || {};
 
-            if (!('_id' in newMeta)) { // если это старая акция в кторой не были проставлены метатеги при создании
-                this.setMeta({insertedIds: [id] }, form, page); // добавляем их
-            } else { // или обновляем
-                newMeta['title'] = `${form.name} ЖК «${option.siteName}» Официальный сайт`;
-                newMeta['h1'] = form.name;
-                newMeta['url'] = `/news-shares/${page}/list/1/${id}`;
-                newMeta['meta'][0] = {
-                    name: 'description',
-                    content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form.name}`
-                };
+                if (!('_id' in newMeta)) { // если это старая акция в кторой не были проставлены метатеги при создании
+                    this.setMeta({ _id: id }, form, page); // добавляем их
+                } else { // или обновляем
+                    newMeta['title'] = `${form[option.title[page]]} ЖК «${option.siteName}» Официальный сайт`;
+                    newMeta['h1'] = form[option.title[page]];
+                    newMeta['url'] = option.url[page] + id;
+                    newMeta['meta'][0] = {
+                        name: 'description',
+                        content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form[option.title[page]]}`
+                    };
 
-                this.seoService.updateTag(newMeta).subscribe();
-            }
+                    this.seoService.updateTag(newMeta)
+                        .pipe(takeUntil(this.ngUnsubscribe))
+                        .subscribe();
+                }
         });
+    }
+    public popMeta(id) {
+        this.seoService.getTags()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(meta => {
+                const tag = meta.find(el => el.url.split('/').pop() === id);
+                if (!tag) { return; }
+                this.seoService.deleteTag(tag._id)
+                    .pipe(takeUntil(this.ngUnsubscribe))
+                    .subscribe();
+        });
+    }
+
+    public unsubscribe() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
+    }
+
+    private getId(obj, page) {
+        if (page === 'news') {
+            return obj._id;
+        } else if (page === 'shares') {
+            return obj.insertedIds[0];
+        } else {
+            return obj;
+        }
     }
 }

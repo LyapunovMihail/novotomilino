@@ -2,12 +2,11 @@
 
 .news {
     width: 100%;
-   // min-height: calc(100vh - (67px + 50px));
     display: flex;
     flex-flow: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 67px 0 100px;
+    padding: 0 0 100px;
 
     &__nav {
         width: calc(100% - 30px);

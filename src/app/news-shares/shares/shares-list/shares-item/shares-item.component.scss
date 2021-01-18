@@ -13,10 +13,6 @@
     position: relative;
     padding: 52px 0 0;
 
-    // @media(max-width: 1440px) {
-    //     width: $w1279;
-    // }
-
     &__nav {
         position: absolute;
         left: 0;
@@ -43,7 +39,7 @@
         }
     }
 
-    &__header{
+    &__header {
         width: 100%;
         margin-top: 7px;
         transition: .2s linear;
@@ -125,7 +121,7 @@
         }
     }
 
-    &__time{
+    &__time {
         height: 55px;
         position: absolute;
         left: 50%;
@@ -154,10 +150,9 @@
     }
 
 
-    &__flats{
+    &__flats {
         width: 100%;
         box-sizing: border-box;
-        border-top: 1px solid rgba(0, 1, 5, 0.3);
         margin: 40px 0 100px;
     }
 }

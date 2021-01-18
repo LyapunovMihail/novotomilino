@@ -177,9 +177,10 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.close.emit();
         this.newsCreateService.formSubmit(form).subscribe(
             // а в общий компонент передается новый массив сниппетов
-            (data) => {
+            (data: any[]) => {
                 this.snippetsChange.emit(data);
-                this.metaRenderAdminService.setMeta(data, form, 'news');
+                const currItem = data.find(el => moment(el.created_at).isSame(form.created_at));
+                this.metaRenderAdminService.setMeta(currItem, form, 'news');
             },
             (err) => {
                 alert('Что-то пошло не так!');

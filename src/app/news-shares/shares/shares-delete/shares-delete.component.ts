@@ -2,11 +2,13 @@ import { AuthorizationObserverService } from '../../../authorization/authorizati
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { SharesService } from '../shares.service';
 import { Share } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { MetaRenderAdminService } from '../../render-meta-admin.service';
 
 @Component({
     selector : 'app-shares-delete',
     templateUrl : './shares-delete.component.html',
-    styleUrls : [ './shares-delete.component.scss' ]
+    styleUrls : [ './shares-delete.component.scss' ],
+    providers: [ MetaRenderAdminService ]
 })
 
 export class SharesDeleteComponent implements OnInit, OnDestroy {
@@ -29,6 +31,7 @@ export class SharesDeleteComponent implements OnInit, OnDestroy {
 
     constructor(
         private authorization: AuthorizationObserverService,
+        private metaAdminService: MetaRenderAdminService,
         private sharesService: SharesService,
         public ref: ChangeDetectorRef
     ) { }
@@ -50,6 +53,7 @@ export class SharesDeleteComponent implements OnInit, OnDestroy {
             (response) => {
                 this.close.emit();
                 this.snippetsChange.emit();
+                this.metaAdminService.popMeta(this.redactId);
             },
             (err) => {
                 alert('Что-то пошло не так!');

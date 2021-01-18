@@ -6,6 +6,7 @@ import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../..
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { MetaRenderAdminService } from '../../../render-meta-admin.service';
 
 @Component({
     selector : 'app-news-redact-form',
@@ -83,6 +84,7 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
+        private metaRenderAdminService: MetaRenderAdminService,
         private authorization: AuthorizationObserverService,
         private newsRedactService: NewsRedactFormService,
         public ref: ChangeDetectorRef
@@ -180,7 +182,10 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
         this.close.emit();
         this.newsRedactService.formSubmit(this.redactId, form).subscribe(
             // а в общий компонент передается новый массив сниппетов
-            (data) => this.snippetsChange.emit(data),
+            (data) => {
+                this.snippetsChange.emit(data);
+                this.metaRenderAdminService.updateMeta(form, this.redactId, 'news');
+            },
             (err) => {
                 alert('Что-то пошло не так!');
                 console.error(err);

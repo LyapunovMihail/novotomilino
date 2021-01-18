@@ -2,13 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-shares-component',
-    templateUrl: './shares.component.html',
-    styleUrls: ['./shares.component.scss']
+    template: '<router-outlet></router-outlet>',
 })
-export class SharesComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-}
+export class SharesComponent { }

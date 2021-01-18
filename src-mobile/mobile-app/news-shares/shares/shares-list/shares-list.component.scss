@@ -2,18 +2,17 @@
 
 .shares-preview {
     width: 100%;
-    max-width: 1280px;
     display: flex;
     flex-flow: column;
     align-items: center;
 
     &__list {
         width: calc(100% - 30px);
+        max-width: 707px;
         display: flex;
         flex-flow: row wrap;
         @media (min-width: 768px) {
             width: 100%;
-            max-width: 707px;
         }
         
         &-item {
@@ -56,8 +55,6 @@
                 @include font-smoothing;
                 color: $col-black;
                 margin: 0 0 10px;
-
-                &_shares {}
             }
             &-text {
                 @include f16-24;
