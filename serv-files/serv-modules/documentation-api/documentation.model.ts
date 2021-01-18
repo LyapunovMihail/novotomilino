@@ -78,7 +78,9 @@ export class DocumentationModel {
 
     async deleteFile(_id, file) {
         if (_id && file) {
-            await this.collection.updateOne({_id: ObjectId(_id)}, {$pull: {uploads: file}});
+          console.log('_id: ', _id);
+          console.log('file: ', file);
+            await this.collection.updateOne({_id: ObjectId(_id)}, {$pull: {uploads: {name: file.name, originalName: file.originalName, created_at: new Date(file.created_at)}}});
         }
         return await this.getObjects();
     }
