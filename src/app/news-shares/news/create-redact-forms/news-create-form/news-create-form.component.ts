@@ -6,6 +6,8 @@ import { EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { SeoService } from '../../../../seo/seo.service';
+import { MetaRenderAdminService } from '../../../render-meta-admin.service';
 
 @Component({
     selector : 'app-news-create-form',
@@ -13,12 +15,12 @@ import * as moment from 'moment';
     styleUrls : [ './../news-form.component.scss' ],
     providers : [
         Uploader,
+        MetaRenderAdminService,
         NewsCreateFormService
     ]
 })
 
 /*
-
     При открытии формы ее значения сбрасываются, устанавливаются дефолтные значения : created_at, last_modifyed, icon_mod.
 
     Кнопка "Добавить" будет иметь атрибут disable, до тех пор пока не заполнены обязательные поля :
@@ -29,7 +31,6 @@ import * as moment from 'moment';
 
     Блок с иконками для отображения на главной странице по умолчанию скрыт, и появляется
     при выборе поля "показывать на главной странице".
-
 */
 
 export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
@@ -80,6 +81,7 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
 
     constructor(
         private formBuilder: FormBuilder,
+        private metaRenderAdminService: MetaRenderAdminService,
         private authorization: AuthorizationObserverService,
         private newsCreateService: NewsCreateFormService,
         public ref: ChangeDetectorRef
@@ -175,7 +177,10 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.close.emit();
         this.newsCreateService.formSubmit(form).subscribe(
             // а в общий компонент передается новый массив сниппетов
-            (data) => this.snippetsChange.emit(data),
+            (data) => {
+                this.snippetsChange.emit(data);
+                this.metaRenderAdminService.setMeta(data, form, 'news');
+            },
             (err) => {
                 alert('Что-то пошло не так!');
                 console.error(err);
