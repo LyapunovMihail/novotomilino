@@ -68,7 +68,6 @@ export class NewsViewComponent implements OnInit {
                     this.description = data[0].description;
                     this.image = `/${NEWS_UPLOADS_PATH}${data[0].image}`;
                     this.checkPrevAndNext(id);
-                    setTimeout(() => this.setMeta(), 100);
                 } else {
                     this.router.navigate(['/error-404'], { skipLocationChange: true });
                 }
@@ -87,9 +86,5 @@ export class NewsViewComponent implements OnInit {
                 this.nextId = i !== data.length - 1 ? data[i + 1]._id : '';
             }
         });
-    }
-    private setMeta() {
-        this.titleService.setTitle(`${this.title} ЖК «Новотомилино» Официальный сайт`);
-        this.meta.updateTag({ name: 'description', content: `Новости ЖК "Новотомилино" - ${this.title}`});
     }
 }

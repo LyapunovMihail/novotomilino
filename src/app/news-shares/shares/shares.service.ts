@@ -41,7 +41,7 @@ export class SharesService {
     }
 
     public getFlatsByHousesAndNumbers(flatsData) {
-        return this.http.post('/api/search/by_houses_and_numbers', {flatsData});
+        return this.http.post('/api/search/by_houses_and_numbers', { flatsData: { ...flatsData, type: 'КВ' } });
     }
 
     public imageUpload(file) {
