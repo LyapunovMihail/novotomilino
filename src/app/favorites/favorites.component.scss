@@ -8,10 +8,7 @@
     padding: 50px 0 120px;
 
     &__container { @include container(); }
-    &__title {
-        font: 500 24px/29px $font-mus;
-        margin-bottom: 40px;
-    }
+    &__title { margin-bottom: 40px; }
 
     &__nav {
         display: flex;

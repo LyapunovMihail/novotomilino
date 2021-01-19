@@ -15,15 +15,7 @@
     &__head {
         margin-bottom: 24px;
         
-        &-title {
-            font: 30px/34px 'Leksa';
-            margin: 0 0 16px;
-        }
-        &-subtitle {
-            font: 500 24px/29px $font-mus;
-            // white-space: nowrap;
-            margin: 0 0 40px;
-        }
+        &-title { margin: 0 0 40px; }
     }
     &__nav {
         display: flex;

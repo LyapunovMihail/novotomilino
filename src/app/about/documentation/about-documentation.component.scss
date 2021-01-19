@@ -52,6 +52,10 @@
             max-width: 600px;
             box-sizing: border-box;
             padding: 12px;
+            &> a {
+                color: $col-orange;
+                &:hover { color: $col-orange--hover; }
+            }
         }
     }
 

@@ -34,8 +34,7 @@ export class MetaRenderAdminService {
         private seoService: SeoService
     ) { }
 
-    public setMeta(obj, form, page) {
-        const id = this.getId(obj, page);
+    public setMeta(id, form, page) {
         const option = this.metaOption;
 
         this.seoService.setTag()
@@ -43,12 +42,12 @@ export class MetaRenderAdminService {
             .subscribe( data => {
                 const newMeta = data.concat().pop();
 
-                newMeta.title = `${form[option.title[page]]} ЖК «${option.siteName}» Официальный сайт`;
+                newMeta.title = `${form[option.title[page]]} ЖК "${option.siteName}" Официальный сайт`;
                 newMeta.h1 = form[option.title[page]];
                 newMeta.url = option.url[page] + id;
                 newMeta.meta[0] = {
                     name: 'description',
-                    content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form[option.title[page]]}`
+                    content: `${option.typeName[page]} ЖК "${option.siteName}" - ${form[option.title[page]]}`
                 };
                 this.seoService.updateTag(newMeta)
                     .pipe(takeUntil(this.ngUnsubscribe))
@@ -64,14 +63,14 @@ export class MetaRenderAdminService {
                 const newMeta: any = data.find(el => ( el.url.split('/').pop() ) === id) || {};
 
                 if (!('_id' in newMeta)) { // если это старая акция в кторой не были проставлены метатеги при создании
-                    this.setMeta({ _id: id }, form, page); // добавляем их
+                    this.setMeta(id, form, page); // добавляем их
                 } else { // или обновляем
-                    newMeta['title'] = `${form[option.title[page]]} ЖК «${option.siteName}» Официальный сайт`;
+                    newMeta['title'] = `${form[option.title[page]]} ЖК "${option.siteName}" Официальный сайт`;
                     newMeta['h1'] = form[option.title[page]];
                     newMeta['url'] = option.url[page] + id;
                     newMeta['meta'][0] = {
                         name: 'description',
-                        content: `${option.typeName[page]} ЖК «${option.siteName}» - ${form[option.title[page]]}`
+                        content: `${option.typeName[page]} ЖК "${option.siteName}" - ${form[option.title[page]]}`
                     };
 
                     this.seoService.updateTag(newMeta)
@@ -95,15 +94,5 @@ export class MetaRenderAdminService {
     public unsubscribe() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-    }
-
-    private getId(obj, page) {
-        if (page === 'news') {
-            return obj._id;
-        } else if (page === 'shares') {
-            return obj.insertedIds[0];
-        } else {
-            return obj;
-        }
     }
 }

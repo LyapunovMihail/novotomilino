@@ -180,7 +180,7 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             (data: any[]) => {
                 this.snippetsChange.emit(data);
                 const currItem = data.find(el => moment(el.created_at).isSame(form.created_at));
-                this.metaRenderAdminService.setMeta(currItem, form, 'news');
+                this.metaRenderAdminService.setMeta(currItem._id, form, 'news');
             },
             (err) => {
                 alert('Что-то пошло не так!');

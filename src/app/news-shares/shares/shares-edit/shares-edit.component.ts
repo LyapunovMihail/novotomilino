@@ -210,11 +210,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         if (form.valid) {
             if (this.redactId === SHARES_CREATE_ID) {
                 this.sharesService.createShare(form.value).subscribe(
-                    (response) => {
+                    (response: any) => {
                         this.close.emit();
                         this.snippetsChange.emit(response);
                         this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
-                        this.metaAdminService.setMeta(response, form.value, 'shares');
+                        this.metaAdminService.setMeta(response.insertedIds[0], form.value, 'shares');
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
