@@ -1,19 +1,17 @@
 <header class="header">
 
-    <!-- <a routerLink="/quarantine" class="header__quarantine" *ngIf="!quarantineLinkHide && !active">
-        <span>Купите квартиру не выходя из дома</span>
-    </a> -->
-
     <div class="header__container header__container--fixed" [class.active]="active">
         <section class="header__head">
             <div class="header__head-logo" routerLink="/" (click)="closeNav()"></div>
-            <div class="header__head-menu" [class.header__head-menu--active]="active"
-                (click)="toggleNav()">
-                <span></span>
+
+            <div class="header__head-wrap">
+                <a href="tel:{{phone ? phone : '+74991109372'}}" class="header__head-number header__info-number"></a>
+                <div class="header__head-menu"
+                    [class.active]="active" (click)="toggleNav()"><span></span></div>
             </div>
         </section>
-        <nav class="header__nav" [class.header__nav--active]="active">
 
+        <nav class="header__nav" [class.active]="active">
             <div class="header__nav-container">
 
                 <ul class="header__nav-list">

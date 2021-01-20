@@ -2,10 +2,10 @@
 
 .error-page {
     width: 100%;
-    height: calc(100vh - (67px + 51px));
-    padding: 67px 0 0;
+    @include screenHeight();
     position: relative;
     background: #d4d590;
+    box-sizing: border-box;
     animation: bg-col 6s infinite;
     
     &__wrap {

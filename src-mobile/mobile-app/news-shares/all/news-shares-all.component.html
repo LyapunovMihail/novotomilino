@@ -27,7 +27,7 @@
                     </div>
     
                     <div class="news-all__snippet-descr">
-                        <h1 class="news-all__snippet-descr-title" [innerHTML]="snippet.title | myLineBreakPipe"></h1>
+                        <h2 class="news-all__snippet-descr-title" [innerHTML]="snippet.title | myLineBreakPipe"></h2>
                         <p *ngIf="snippet.description" class="news-all__snippet-descr-text" [innerHTML]="snippet.description | myLineBreakPipe"></p>
                         <p class="news-all__snippet-descr-date">{{snippet.created_at | date: 'dd.MM.yyyy' }}</p>
                     </div>
@@ -42,7 +42,7 @@
                         <div *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0" class="shares-all__snippet-finishing">Акция закончилась</div>
                     </div>
                     <div class="shares-all__snippet-descr">
-                        <h1 class="shares-all__snippet-descr-title g-stok-ic">{{snippet.name}}</h1>
+                        <h2 class="shares-all__snippet-descr-title g-stok-ic">{{snippet.name}}</h2>
                         <p class="shares-all__snippet-descr-text">{{snippet.text}}</p>
                         <p class="shares-all__snippet-descr-date">{{snippet.created_at | date: 'dd.MM.yyyy' }}</p>
                     </div>

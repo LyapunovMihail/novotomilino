@@ -66,6 +66,17 @@ $trans-img: transform .7s linear;
     -o-font-smoothing: antialiased;
 }
 
+$header-h: 52px;
+$footer-h: 51px;
+@mixin screenHeight($type: 'height', $h: $header-h, $f: $footer-h) {
+    @if ($type == 'min') {
+        min-height: calc(100vh - (#{$h} + #{$f}));
+    }
+    @if ($type == 'height') {
+        height: calc(100vh - (#{$h} + #{$f}));
+    }
+}
+
 @mixin overflow($x: scroll, $y: hidden) {
     overflow-x: $x;
     overflow-y: $y;
@@ -74,7 +85,7 @@ $trans-img: transform .7s linear;
     font-size: $fs;
     line-height: $lh;
 }
-@mixin size($w, $h) {
+@mixin size($w, $h: $w) {
     width: $w;
     height: $h;
 }

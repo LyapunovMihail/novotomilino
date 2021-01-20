@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
     public newsLoaded = false;
-    public isDescription;
 
     constructor(
         public platform: PlatformDetectService,

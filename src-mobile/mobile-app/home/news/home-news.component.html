@@ -26,8 +26,8 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
-                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
-                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <p class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></p>
+                    <p class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></p>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>
@@ -39,7 +39,7 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail" *ngIf="item.thumbnail">
                     </a>
-                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
+                    <p class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></p>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
                     <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id">
                         <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
                     </a>
-                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <p class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></p>
                     <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
                 </li>
             </ul>

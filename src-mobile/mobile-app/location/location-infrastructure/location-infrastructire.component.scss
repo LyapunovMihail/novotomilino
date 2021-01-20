@@ -2,7 +2,7 @@
 
 .infrastructure {
     width: 100%;
-    height: calc(100vh - 118px);
+    @include screenHeight();
     display: flex;
     flex-direction: column;
     box-sizing: border-box;

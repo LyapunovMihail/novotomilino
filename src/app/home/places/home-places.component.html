@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="main__place-slider-descr">
-                        <h2 *ngIf="!isAuthorizated" class="main__place-slider-title">{{item.name}}</h2>
+                        <p *ngIf="!isAuthorizated" class="main__place-slider-title">{{item.name}}</p>
                         <textarea (change)="changeName(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__place-slider-title main__place-slider-title--edit" [value]="item.name"></textarea>
                         <p *ngIf="!isAuthorizated" class="main__place-slider-text">{{item.description}}</p>
                         <textarea (change)="changeDescription(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__place-slider-text main__place-slider-text--edit" [value]="item.description"></textarea>

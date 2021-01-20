@@ -1,5 +1,7 @@
+@import '../../styles/modules/mixins/mixin.scss';
+
 .decoration {
     width: 100%;
-    height: calc(100vh - 67px - 51px);
+    @include screenHeight();
     position: relative;
 }

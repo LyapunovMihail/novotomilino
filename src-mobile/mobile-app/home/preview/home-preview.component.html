@@ -1,4 +1,4 @@
-<section class="home__preview home-preview" [class.home__preview--no-margin]="!isDescription">
+<section class="home__preview home-preview">
     
     <div class="home-preview__bgr"  *ngIf="gallerySlides">
         <img [src]="uploadsPath + gallerySlides[0].image" alt="home-preview">
@@ -9,31 +9,35 @@
 
         <div class="home-preview__content">
             <h2 class="home-preview__content-title g-title-path" *ngIf="homePreview">{{homePreview.title}}</h2>
-            <p class="home-preview__content-descr" *ngIf="homePreview">
-                {{homePreview.description}}
-            </p>
+            <a routerLink="/flats" class="home-preview__content-link">Выбрать квартиру</a>
         </div>
-        <div class="home-preview__news">
-            <ng-container *ngFor="let news of newsShares; let i = index">
 
-                <a class="home-preview__news-item" 
-                        [ngClass]="{'home-preview__news-item--shares': news.mainThumbnail, 'active': i === activeNews}"
-                        routerLink="{{news.mainThumbnail ? ('/news-shares/shares/list/1/' + news._id) : ('/news-shares/news/list/' + news._id)}}">
-                    <h6 class="home-preview__news-title">{{!news.mainThumbnail ? 'Новости' : 'Акции'}}</h6>
-                    <p class="home-preview__news-text">{{!news.mainThumbnail ? news.title : news.name}}</p>
-
-                    <p *ngIf="news.countdown && +news.finish_date >= 0" 
-                        class="home-preview__news-end">До конца акции {{news.finish_date | sharesDayPipe}}</p>
-                    <p *ngIf="news.countdown && +news.finish_date < 0"  
-                        class="home-preview__news-end">Акция закончилась</p>
-
-                    <div class="home-preview__news-timeline"></div>
-                </a>
-            </ng-container>
-        </div>
         <div class="home-preview__video" *ngIf="videoContent && videoContent.show">
             <button class="home-preview__video-btn" (click)="showVideo = true">{{videoContent.name}}</button>
         </div>
+    </div>
+
+    <div class="home-preview__description" *ngIf="homePreview && homePreview.description">
+        <p class="home-preview__description-text">{{homePreview.description}}</p>
+    </div>
+
+    <div class="home-preview__news">
+        <ng-container *ngFor="let news of newsShares; let i = index">
+
+            <a class="home-preview__news-item" 
+                    [ngClass]="{'home-preview__news-item--shares': news.mainThumbnail, 'active': i === activeNews}"
+                    routerLink="{{news.mainThumbnail ? ('/news-shares/shares/list/1/' + news._id) : ('/news-shares/news/list/' + news._id)}}">
+                <h6 class="home-preview__news-title">{{!news.mainThumbnail ? 'Новости' : 'Акции'}}</h6>
+                <p class="home-preview__news-text">{{!news.mainThumbnail ? news.title : news.name}}</p>
+
+                <p *ngIf="news.countdown && +news.finish_date >= 0" 
+                    class="home-preview__news-end">До конца акции {{news.finish_date | sharesDayPipe}}</p>
+                <p *ngIf="news.countdown && +news.finish_date < 0"  
+                    class="home-preview__news-end">Акция закончилась</p>
+
+                <div class="home-preview__news-timeline"></div>
+            </a>
+        </ng-container>
     </div>
 </section>
 

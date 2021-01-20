@@ -9,7 +9,7 @@
 
 .purchase {
     width: 100%;
-    min-height: calc(100vh - (67px + 50px));
+    @include screenHeight('min');
     box-sizing: border-box;
     padding: 40px 0 100px;
     display: flex;

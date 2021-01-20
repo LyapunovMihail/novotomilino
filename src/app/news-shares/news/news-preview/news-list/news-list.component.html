@@ -8,7 +8,7 @@
             <img class="snippets_list_item_img_content" [src]="uploadsPath + snippet.image">
         </div>
         <div class="news__snippets-descr">
-            <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
+            <h2 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h2>
             <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
             <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
         </div>

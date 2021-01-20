@@ -8,7 +8,8 @@ import {
 import { HomeService } from '../home.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 declare let $: any;
 
 @Component({
@@ -29,10 +30,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     public currentSlide = 0;
 
-    public showTrojka: boolean;
-
-    public slideWidth = document.documentElement.clientWidth;
-
     public gallerySlides: IGallerySnippet[];
 
     public activeNews = 0;
@@ -41,15 +38,14 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     private newsTimer;
 
-    private sharesTimer;
-
     public homePreview;
 
     public showVideo = false;
     public videoContent;
 
+    private ngUnsubscribe = new Subject();
+
     @Input() public newsShares;
-    @Input() public isDescription = true;
 
     constructor(
         public platform: PlatformDetectService,
@@ -57,28 +53,31 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
         public homeService: HomeService
     ) {}
 
-    public ngOnInit() {
-
+    ngOnInit() {
         if ( !this.platform.isBrowser ) { return false; }
 
         combineLatest(
             this.homeService.getHomePreview(),
             this.homeService.getPreviewVideo(),
             this.homeService.getGallerySnippet(EnumGallerySnippet.PREVIEW),
-        ).subscribe( ([previewText, previewVideo, gallerySnippet]) => {
+        ).pipe( takeUntil(this.ngUnsubscribe) )
+        .subscribe( ([previewText, previewVideo, gallerySnippet]) => {
             this.homePreview = previewText;
             this.videoContent = previewVideo;
             this.gallerySlides = gallerySnippet;
         });
 
         this.prepareMainNewsSnippets();
-        setTimeout( () => {
-            this.newsSlider(this.newsShares);
-        }, 1000);
+        setTimeout( () => this.newsSlider(this.newsShares), 1000);
+    }
+    ngOnDestroy() {
+        if ( !this.platform.isBrowser ) { return false; }
+        if (this.newsTimer) { clearInterval(this.newsTimer); }
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     prepareMainNewsSnippets() {
-        // this.newsShares.reverse();
         this.newsShares = this.newsShares.filter((news) => {
             return news.show_on_main;
         });
@@ -111,27 +110,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
             this.newsTimer = setInterval(() => {
                 this.activeNews = this.activeNews < newsList.length - 1 ? this.activeNews + 1 : 0;
             }, 6000);
-        }
-    }
-
-    ngOnDestroy() {
-        if ( !this.platform.isBrowser ) { return false; }
-
-        if (this.newsTimer) {
-            clearInterval(this.newsTimer);
-        }
-        if (this.sharesTimer) {
-            clearInterval(this.sharesTimer);
-        }
-    }
-
-    @HostListener('document:click', ['$event'])
-    public onDocumentClick(event) {
-        const trojkaDiv = $('.main__preview-threeRed');
-        if (!trojkaDiv.is(event.target) && !trojkaDiv.has(event.target).length) {
-            this.showTrojka = false;
-        } else {
-            this.showTrojka = true;
         }
     }
 }

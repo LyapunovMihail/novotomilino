@@ -2,14 +2,15 @@
 
 .home-preview {
     width: 100%;
-    height: calc(100vh - 67px - 50px);
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-flow: column;
+    align-items: center;
 
     &__bgr {
         width: 100%;
-        height: 100%;
+        // @include screenHeight();
+        height: calc(100vh - (#{$header-h} + #{$footer-h}) - 60px); // 60px - высота панели браузера
         position: absolute;
         top: 0; left: 0;
         z-index: 0;
@@ -33,7 +34,8 @@
     &__container {
         width: calc(100% - 60px);
         max-width: $tabletContainer;
-        height: 100%;
+        // @include screenHeight();
+        height: calc(100vh - (#{$header-h} + #{$footer-h}) - 60px); // 60px - высота панели браузера
         display: flex;
         align-items: flex-end;
         box-sizing: border-box;
@@ -76,9 +78,9 @@
         &-title {
             font: 30px/34px $font-leksa;
             @include font-smoothing;
+            white-space: pre-line;
             color: $col-white;
             margin: 0 0 20px;
-            white-space: pre-wrap;
 
             &--h1 {
                 font: 500 14px/18px $font-mus;
@@ -89,28 +91,52 @@
                 top: 16px; left: 0;
             }
         }
-        &-descr {
-            font: 16px/22px $font-mus;
+        &-link {
+            @include size(100%,48px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $col-orange;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+            font: 500 16px/20px $font-mus;
             @include font-smoothing;
             color: $col-white;
-            white-space: pre-wrap;
+            border-radius: 4px;
+        }
+    }
+    &__description {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #FAFAF3;
+        margin: 0 0 32px;
+        padding: 32px 0;
+
+        &-text {
+            width: calc(100% - 60px);
+            max-width: $tabletContainer;
+            font: 500 24px/32px $font-mus;
+            @include font-smoothing;
+            white-space: pre-line;
+            color: $col-black;
         }
     }
     &__news {
-        width: 280px;
+        width: calc(100% - 60px);
+        max-width: $tabletContainer;
         position: absolute;
-        top: 50px; left: 0;
+        top: 50px;
 
         &-item {
+            width: 280px;
             display: block;
-            width: 100%;
             position: absolute;
             top: 0; left: 0;
-            padding-left: 33px;
             transition: opacity .4s linear;
             box-sizing: border-box;
-            opacity: 0;
             pointer-events: none;
+            padding-left: 33px;
+            opacity: 0;
             &.active {
                 opacity: 1;
                 pointer-events: all;
@@ -199,24 +225,24 @@
 }
 @media (max-width: 760px) {
     .home-preview {
-        margin: 0 0 100px;
 
-        &__bgr::after {
-            height: 50%;
-        }
+        &__bgr::after { height: 50%; }
         &__container {
             width: calc(100% - 30px);
             padding: 0 0 20px;
         }
 
-        &__content {
-            max-width: 420px;
+        &__content-title { margin: 0 0 10px; }
+        &__description {
+            padding: 16px 0;
 
-            &-title { margin: 0 0 10px; }
-            &-descr { font: 14px/18px $font-mus; }
+            &-text { @include font-size(16px,24px); }
         }
         &__news {
-            top: calc(100% + 15px);
+            height: 42px;
+            top: auto;
+            position: relative;
+            margin: 0 0 32px;
 
             &-item {
                 &::before { top: 0; }
