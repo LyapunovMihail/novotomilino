@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'app-location',
     template: `
         <section class="location">
-            <router-outlet></router-outlet>
+            <ng-content></ng-content>
         </section>
     `,
     styleUrls: ['./location.component.scss']

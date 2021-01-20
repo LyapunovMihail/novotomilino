@@ -52,20 +52,12 @@ const FlatsComponents = [
         SearchSortingModule,
         GHMRangeNumberModule,
         RouterModule.forChild([
-            { path: 'flats', component: FlatsComponent,
-                children: [
-                    { path: '', redirectTo: 'search', pathMatch: 'full' },
-                    { path: 'search', component: FlatsComponent, pathMatch: 'full' },
-                    { path: '_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
-                ]},
-            { path: 'flats/commercial', component: CommercialComponent,
-                children: [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
-                    { path: 'list', component: CommercialListComponent },
-                    { path: 'section', component: CommercialSectionComponent },
-                    { path: 'section/search', component: CommercialSearchComponent },
-                ]
-            },
+            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
+            { path: 'flats/_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
+            { path: '', redirectTo: 'list', pathMatch: 'full' },
+            { path: 'flats/commercial/list', component: CommercialListComponent },
+            { path: 'flats/commercial/section', component: CommercialSectionComponent },
+            { path: 'flats/commercial/section/search', component: CommercialSearchComponent },
             { path: 'flats/house/:house/section/:section/floor/:floor/:type/:apartment', component: ModalApartamentComponent }
         ])
     ]

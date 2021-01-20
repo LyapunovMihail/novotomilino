@@ -59,7 +59,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
                         this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
                     }
                 );
-            
             this.fixedHeader();
         }
     }

@@ -34,12 +34,8 @@ const PurchaseComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: 'purchase', component: PurchaseComponent,
-                children: [
-                    { path: '', redirectTo: 'credit', pathMatch: 'full' },
-                    { path: 'credit', component: PurchaseCreditComponent },
-                    { path: 'installment', component: PurchaseInstallmentComponent }
-                ]}
+            { path: 'credit', component: PurchaseCreditComponent },
+            { path: 'installment', component: PurchaseInstallmentComponent }
         ])
     ],
     providers: [

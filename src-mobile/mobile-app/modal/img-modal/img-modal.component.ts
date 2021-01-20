@@ -8,7 +8,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
     template: `
         <div class="modal-plan" [class.modal-plan--active]="visible">
             <div>
-                <img [src]="url" alt="">
+                <img [src]="url" alt="" *ngIf="visible">
             </div>
         </div>
     `,
@@ -16,8 +16,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class ImgModalComponent implements OnInit, OnDestroy {
 
-    public visible: boolean;
-    public url: string;
+    public visible = false;
+    public url = '';
 
     private subs: Subscription[] = [];
     private _ngUnsubscribe: Subject<any> = new Subject();
