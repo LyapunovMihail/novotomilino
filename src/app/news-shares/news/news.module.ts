@@ -35,13 +35,14 @@ const NewsComponents = [
         LoaderModule,
         CreateRedactFormsModule,
         RouterModule.forChild([
-            { path: '', component: NewsComponent
-                , children : [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
-                    { path: 'list', component: NewsPreviewComponent },
-                    { path: 'list/:id', component: NewsViewComponent }
-                ]
-            }
+            { path: 'list', component: NewsPreviewComponent
+                // , children : [
+                //     { path: '', redirectTo: 'list', pathMatch: 'full' },
+                //     { path: 'list', component: NewsPreviewComponent },
+                //     { path: 'list/:id', component: NewsViewComponent }
+                // ]
+            },
+            { path: 'list/:id', component: NewsViewComponent }
         ])
     ]
 })

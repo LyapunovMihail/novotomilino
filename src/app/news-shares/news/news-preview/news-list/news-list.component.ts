@@ -4,7 +4,8 @@ import * as moment from 'moment';
 
 @Component({
     selector : 'app-news-list',
-    templateUrl : './news-list.component.html'
+    templateUrl : './news-list.component.html',
+    styleUrls: ['../../news.component.scss', '../../news.admin.scss'],
 })
 
 export class NewsListComponent {

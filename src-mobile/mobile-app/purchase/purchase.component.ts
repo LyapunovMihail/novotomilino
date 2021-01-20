@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
                 </div>
             </div>
 
-            <router-outlet></router-outlet>
+            <ng-content></ng-content>
         </section>
     `
 })

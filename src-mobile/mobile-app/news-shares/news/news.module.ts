@@ -30,13 +30,15 @@ const NewsComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: '', component: NewsComponent
-                , children : [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
-                    { path: 'list', component: NewsPreviewComponent },
-                    { path: 'list/:id', component: NewsViewComponent }
-                ]
-            }
+            // { path: '', component: NewsComponent
+            //     , children : [
+            //         { path: '', redirectTo: 'list', pathMatch: 'full' },
+            //         { path: 'list', component: NewsPreviewComponent },
+            //         { path: 'list/:id', component: NewsViewComponent }
+            //     ]
+            // }
+            { path: 'list', component: NewsPreviewComponent },
+            { path: 'list/:id', component: NewsViewComponent }
         ])
     ]
 })
