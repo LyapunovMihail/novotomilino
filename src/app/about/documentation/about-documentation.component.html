@@ -1,4 +1,4 @@
-<section class="documentation" *ngIf="objectsList && objectsList.length" id="documents">
+<section class="documentation" id="documents">
 
     <div class="documentation__wrapper">
 
@@ -20,7 +20,7 @@
                 а&nbsp;также прочие документы и&nbsp;информация по&nbsp;проекту опубликованы Застройщиком
                 путем размещения их&nbsp;в&nbsp;Единой информационной системе жилищного строительства (ЕИСЖС)
                 в&nbsp;сети Интернет по&nbsp;адресу:
-                <a target="_blank" href="https://xn--80az8a.xn--d1aqf.xn--p1ai/">наш.дом.рф</a>
+                <a target="_blank" href="https://наш.дом.рф/сервисы/единый-реестр-застройщиков/застройщик/8660">наш.дом.рф</a>
               </div>
 
             </div>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <ul class="documentation__objects">
+        <ul class="documentation__objects" *ngIf="objectsList && objectsList.length">
             <li class="documentation__object"
                 *ngFor="let object of objectsList">
                 <div class="documentation__object-header">
