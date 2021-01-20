@@ -53,4 +53,8 @@ export class CommercialSectionComponent implements OnInit {
         });
         this.sections.sort((a, b) => a.house - b.house);
     }
+
+    public bitNumber(val) {
+        return 
+    }
 }

@@ -4,9 +4,8 @@
         <div class="commercial-output__flat-container">
             <a class="commercial-output__flat-link" (click)="openApartmentModal(flat)">
                 <div class="g-flat__item-image">
-                    <!-- [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'" -->
                     <img class="result__scheme-content" 
-                    [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + 'floor_' + flat.floor + '_' + 'office' + flat.flat + '.svg'"
+                        [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'office.svg'"
                         (error)="img.style.display = 'none'" #img>
                         
                     <div class="image-error" *ngIf="img.style.display === 'none'"></div>

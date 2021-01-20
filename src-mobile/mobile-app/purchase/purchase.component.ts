@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     template: `
         <section class="purchase">
             <div class="purchase__container">
-                <h1 class="purchase__title">Условия покупки</h1>
+                <h1 class="purchase__title g-title-path">Условия покупки</h1>
                 <div class="purchase__descr">
                     <p>Продажа в ЖК осуществляется через эскроу-счета.
                         <br>

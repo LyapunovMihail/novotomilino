@@ -59,8 +59,9 @@ export class AppComponent implements OnInit {
                 return;
             }
 
-            console.log('CHECKK');
-            this.metaTagsRenderService.render(this.router.url, this.container);
+            console.log('this.router.url', this.router.url);
+            const url = this.router.url.startsWith('/flats/search') ? '/flats/plan' : this.router.url;
+            this.metaTagsRenderService.render(url, this.container);
 
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;

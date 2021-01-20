@@ -17,9 +17,9 @@ export class BitNumberPipe implements PipeTransform  {
         }
    }
 
-   transform( val: any ): SafeHtml {
+   transform(val: any, arg?: number ): SafeHtml {
         if (val && String(val).length > 0) {
-            return String(this.toNumber(val).toFixed(2)).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+            return String(this.toNumber(val).toFixed(arg || 2)).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
         } else {
             return val;
         }

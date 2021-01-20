@@ -11,8 +11,6 @@
         padding: 40px 0 24px;
 
         &-title {
-            font: 30px/34px $font-leksa;
-            @include font-smoothing();
             color: $col-black;
             max-width: 522px;
             margin: 0 0 25px;

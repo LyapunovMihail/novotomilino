@@ -31,7 +31,7 @@ export class HomeTriggerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.searchService.getObjects({})
+        this.searchService.getObjects({ status: '4' })
             .subscribe((flats) => {
                 this.flats = flats;
                 this.buildTriggersData(flats.filter(el => el.type === 'КВ'));
@@ -39,7 +39,6 @@ export class HomeTriggerComponent implements OnInit {
     }
 
     private buildTriggersData(flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
         if (flats.length) {
             for (let i = 0; i < 4; i++) {
                 const filteredFlats = flats.filter((flat) => {

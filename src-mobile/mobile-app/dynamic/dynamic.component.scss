@@ -4,7 +4,7 @@
     width: 100%;
     min-height: calc(100vh - 77px - 80px);
     box-sizing: border-box;
-    padding: 66px 0 96px;
+    padding: 40px 0 64px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,12 +18,7 @@
         position: relative;
 
         &-title {
-            font: 30px/34px $font-leksa;
             margin-bottom: 20px;
-            @media (max-width: 760px) {
-                font-size: 28px;
-                line-height: 28px;
-            }
         }
         &-text {
             font: 16px/24px $font-mus;

@@ -1,11 +1,5 @@
 @import "../../../styles/modules/mixins/mixin.scss";
 
-@mixin title-mobile () {
-    width: calc(100% - 30px);
-    font: 42px/48px 'Leksa';
-    @include font-smoothing;
-    color: $col-black;
-}
 
 
 .developer {
@@ -19,8 +13,9 @@
         @media(min-width: 767px) { width: calc(100% - 60px); }
 
         &-title {
-            @include title-mobile();
+            width: calc(100% - 30px);
             margin: 0 0 30px;
+            color: $col-black;
             white-space: nowrap;
             @media(min-width: 767px) { max-width: 615px; }
         }

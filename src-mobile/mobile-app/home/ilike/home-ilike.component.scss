@@ -29,8 +29,6 @@
         }
     }
     &__heading {
-        font: 28px/36px $font-leksa;
-        @include font-smoothing();
         margin: 16px 0 8px 0;
     }
     &__description {

@@ -16,8 +16,6 @@
 
         &-title {
             width: calc(100% - 30px);
-            font: 42px/48px 'Leksa';
-            @include font-smoothing;
             color: #fff;
             position: absolute;
             left: 15px;

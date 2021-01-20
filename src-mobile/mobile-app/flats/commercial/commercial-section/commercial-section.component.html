@@ -12,7 +12,7 @@
 
                     <div class="section-list__sections-count">Секция  {{park.section}}</div>
                     <div class="section-list__sections-floor">Этаж {{park.floor}}</div>
-                    <div class="section-list__sections-price">от {{park.price | myBitNumberPipe}} ₽</div>
+                    <div class="section-list__sections-price">от {{ park.price | myBitNumberPipe: 1 }} ₽</div>
                 </a>
             </div>
         </ng-container>

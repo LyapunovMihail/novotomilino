@@ -12,10 +12,7 @@
         width: calc(100% - 30px);
         max-width: $w1600;
         margin-bottom: 30px;
-        font: 41px/48px 'Leksa';
-        @include font-smoothing;
         color: $col-black;
-
         @media(min-width: 767px) {
             width: calc(100% - 60px);
         }

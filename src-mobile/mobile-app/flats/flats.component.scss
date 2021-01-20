@@ -4,7 +4,7 @@
 .flats {
     width: 100%;
     min-height: 100vh;
-    padding: 50px 0 50px; // Где 30 это отступ от хедера
+    padding: 40px 0 50px;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -12,8 +12,6 @@
 
     &__title {
         width: calc(100% - 60px);
-        font: 34px/44px 'Leksa';
-        @include font-smoothing;
         color: $col-black;
         margin: 0 0 40px;
         @media (max-width: 767px) {

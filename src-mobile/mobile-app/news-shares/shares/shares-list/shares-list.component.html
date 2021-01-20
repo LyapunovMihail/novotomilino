@@ -1,7 +1,7 @@
 <div class="news shares-preview">
 
     <div class="news__head">
-        <h1 class="news__head-title">Новости</h1>
+        <h1 class="news__head-title g-title-path">Новости</h1>
         <nav class="news__nav">
             <ul class="news__nav-list">
                 <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
@@ -33,13 +33,4 @@
             </a>
         </li>
     </ul>
-
-    <!-- <ul *ngIf="sharesLength > 10" class="shares-preview__paginator">
-        <ng-container *ngFor="let item of paginator; let i = index">
-            <li class="shares-preview__paginator-item"
-                *ngIf="sharesLength > item"
-                (click)="getShares(item); changeRoute(i); scrollTop()"
-                [ngClass]="{'shares-preview__paginator-item_active': activePaginatorItem === i}">{{i + 1}}</li>
-        </ng-container>
-    </ul>     -->
 </div>
