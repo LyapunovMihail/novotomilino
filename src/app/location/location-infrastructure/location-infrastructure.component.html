@@ -1,0 +1,17 @@
+<div class="location__infrastructure infrastructure">
+
+    <div class="infrastructure__filter">
+        <ul class="infrastructure__list">
+            <li (click)="openToolTip('all')" class="infrastructure__list-item item-active infrastructure__list-item--all">
+                <div class="infrastructure__checkbox infrastructure__checkbox_all"></div>
+                <p class="infrastructure__text">Все</p>
+            </li>
+            <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="infrastructure__list-item item-active infrastructure__list-item--{{item.type}}">
+                <div class="infrastructure__checkbox infrastructure__checkbox_{{item.type}}"></div>
+                <p class="infrastructure__text">{{item.content}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <div id="map" class="infrastructure__map"></div>
+</div>

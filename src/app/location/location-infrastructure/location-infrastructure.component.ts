@@ -1,15 +1,15 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { markersConfig, navList } from './config';
-import { PlatformDetectService } from './../../platform-detect.service';
+import { PlatformDetectService } from '../../platform-detect.service';
 import { Component, Inject, OnInit } from '@angular/core';
 declare let ymaps: any;
 declare let $: any;
 
 @Component({
     selector: 'app-location-infrastructure',
-    templateUrl: './location-infrastructire.component.html',
+    templateUrl: './location-infrastructure.component.html',
      // стили для маркеров лежат отдельно /app/styles/ui-kit/_markers
-    styleUrls: ['./../location.component.scss']
+    styleUrls: ['./location-infrastructure.component.scss']
 })
 
 export class LocationInfrastructureComponent implements OnInit {
@@ -35,10 +35,10 @@ export class LocationInfrastructureComponent implements OnInit {
 
         // кнопки бокового меню
         if (this.firstNavClick && type === 'all') {
-            $('.location__infrastructure-list-item--all').removeClass('item-active');
+            $('.infrastructure__list-item--all').removeClass('item-active');
             this.markers.forEach((marker) => {
                 if (marker.type !== 'main-marker') {
-                    $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
+                    $(`.infrastructure__list-item--${marker.type}`).removeClass('item-active');
                     marker.marker.options.set({
                         visible: false
                     });
@@ -50,7 +50,8 @@ export class LocationInfrastructureComponent implements OnInit {
         if (this.firstNavClick) {
             this.markers.forEach((marker) => {
                 if (marker.type !== type && marker.type !== 'main-marker') {
-                    $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
+                    $(`.infrastructure__list-item--${marker.type}`).removeClass('item-active');
+                    $(`.infrastructure__list-item--all`).removeClass('item-active');
                     marker.marker.options.set({
                         visible: false
                     });
@@ -60,22 +61,22 @@ export class LocationInfrastructureComponent implements OnInit {
             return;
         }
 
-        const item = $(`.location__infrastructure-list-item--${type}`);
+        const item = $(`.infrastructure__list-item--${type}`);
 
         item.toggleClass('item-active');
 
         if (type === 'all') {
             const checked = item.hasClass('item-active');
             this.markers.forEach((marker) => {
-                const elem = $(`.location__infrastructure-list-item--${marker.type}`);
+                const elem = $(`.infrastructure__list-item--${marker.type}`);
                 if (checked) {
                     if (!elem.hasClass('item-active')) {
-                        $(`.location__infrastructure-list-item--${marker.type}`).addClass('item-active');
+                        $(`.infrastructure__list-item--${marker.type}`).addClass('item-active');
                     }
                     marker.marker.options.set({ visible: true });
                 } else {
                     if (marker.type !== 'main-marker') {
-                        $(`.location__infrastructure-list-item--${marker.type}`).removeClass('item-active');
+                        $(`.infrastructure__list-item--${marker.type}`).removeClass('item-active');
                         marker.marker.options.set({ visible: false });
                     }
                 }
@@ -99,16 +100,26 @@ export class LocationInfrastructureComponent implements OnInit {
 
         const that = this;
         ymaps.ready(() => {
+            const zoomControl = new ymaps.control.ZoomControl({
+                options: {
+                    // size: "small",
+                    position: {
+                        left: 'auto',
+                        right: 10,
+                        top: 120,
+                    }
+                }
+            });
 
             const myMap = new ymaps.Map('map', {
                 center: [55.656725165497704, 37.92175475135617],
                 zoom: 14,
-                controls: ['zoomControl']
+                controls: [zoomControl]
             }, {
                 minZoom: 11,
                 maxZoom: 18
             });
-            myMap.behaviors.disable(['scrollZoom']);
+            // myMap.behaviors.disable(['scrollZoom']);
 
             // создание наземное наложение плана
             const polygon = new ymaps.Polygon([
