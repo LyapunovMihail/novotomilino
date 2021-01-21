@@ -24,7 +24,8 @@ export class DbCronUpdate {
 
     public start() {
         this.requestBase();
-        const task = new CronJob('0 8,13,19,23 * * *', () => {
+        // const task = new CronJob('0 8,13,19,23 * * *', () => {
+        const task = new CronJob('0 * * * *', () => {
             this.requestBase();
         }, false);
         task.start();
