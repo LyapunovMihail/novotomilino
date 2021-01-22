@@ -1,6 +1,17 @@
 <div class="location__routes routes">
 
     <div class="routes__aside">
+        <div class="routes__aside-info">
+            <a href="https://yandex.ru/maps/-/CCUIv4HnWD" target="_blank"
+               class="routes__aside-text routes__aside-text--location">
+                г. Люберцы, пос. Томилино, Рязанское шоссе, <br>
+                23-й километр
+            </a>
+            <p class="routes__aside-text routes__aside-text--timetable" *ngIf="page === 'office'">
+                График работы: <br>
+                ежедневно с 9:00 до 21:00
+            </p>
+        </div>
 
         <ul class="routes__aside_list">
 

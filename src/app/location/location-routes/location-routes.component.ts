@@ -68,17 +68,26 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
 
         const that = this;
         this.map = ymaps.ready(() => {
-
+            const zoomControl = new ymaps.control.ZoomControl({
+                options: {
+                    // size: "small",
+                    position: {
+                        left: 'auto',
+                        right: 10,
+                        top: 120,
+                    }
+                }
+            });
             // создание новой карты с опциями
             const myMap = new ymaps.Map('map', {
                 center: [55.673638, 37.861333],
                 zoom: 12,
-                controls: ['zoomControl']
+                controls: [zoomControl]
             }, {
                 minZoom: 11,
                 maxZoom: 18
             });
-            myMap.behaviors.disable(['scrollZoom']);
+            // myMap.behaviors.disable(['scrollZoom']);
 
             markersConfig.forEach( ( item: any, index ) => {
                 that.markers[index] = {};
