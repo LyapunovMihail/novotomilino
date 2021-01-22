@@ -1,5 +1,13 @@
 <section class="routes" *ngIf="page === 'routes'">
 
+    <div class="office__head">
+        <h1 class="office__head-title header__info-number g-title-path">Расположение</h1>
+        <p class="office__head-info">
+            Рязанское шоссе, 23-й километр
+            посёлок Томилино, городской округ Люберцы, Московская область
+        </p>
+    </div>
+
     <div id="map" class="routes_map"></div>
 
     <a class="routes__link"
@@ -13,7 +21,8 @@
 
 <section class="office" *ngIf="page === 'office'">
     <div class="office__head">
-        <a class="office__head-title header__info-number g-title-path" href="tel:{{phone ? phone : '+74991109372'}}">{{phone ? phone : '+7 (499) 110-93-72'}}</a>
+        <h1 class="office__head-title header__info-number g-title-path">Офис продаж</h1>
+<!--        <a class="office__head-title header__info-number g-title-path" href="tel:{{phone ? phone : '+74991109372'}}">{{phone ? phone : '+7 (499) 110-93-72'}}</a>-->
         <p class="office__head-info">
             Отдел продаж расположен на объекте, Рязанское шоссе, 23-й километр
             посёлок Томилино, городской округ Люберцы, Московская область

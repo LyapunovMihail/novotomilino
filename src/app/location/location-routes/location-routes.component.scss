@@ -1,0 +1,203 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.routes {
+    position: relative;
+    &__aside {
+        position: absolute;
+        background: #ffffff;
+        width: 400px;
+        top: 20px;
+        left: 20px;
+        padding: 15px 20px 10px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.1);
+
+        &-text {
+            @include fw14-20($col-61);
+            display: inline-block;
+            position: relative;
+            padding-left: 29px;
+            margin: 0 0 8px;
+            &::before {
+                @include before-img(24px, 24px);
+                left: 0;
+                top: -2px;
+                background-size: 100%;
+            }
+
+            &--location {
+                color: $col-orange;
+                &::before {
+                    background:
+                        url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z' fill='%23e7490f'/%3E%3C/svg%3E")
+                        no-repeat;
+                }
+                &:hover {
+                    color: $col-orange--hover;
+                    &::before {
+                        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' opacity='0.8' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z' fill='%23E7490F'/%3E%3C/svg%3E");
+                    }
+                }
+            }
+            &--timetable {
+                &::before {
+                    background:
+                        url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.3036 4.69634C17.0418 2.43453 13.3617 2.43456 11.0999 4.69638C9.55499 6.24132 9.01836 8.51807 9.68732 10.5837L3.15451 17.1165C3.05562 17.2154 3 17.3493 3 17.4894V20.4727C3 20.7642 3.23586 21 3.52734 21H6.51063C6.6507 21 6.78461 20.9444 6.88346 20.8455L7.62916 20.0993C7.74296 19.9855 7.79858 19.8258 7.78005 19.6657L7.62916 18.6896L8.79765 18.7598C9.05 18.7361 9.2493 18.5368 9.273 18.2844L9.06519 17.1376L10.1789 17.2673C10.3277 17.2874 10.4776 17.2375 10.5903 17.1376C10.7026 17.0372 10.767 16.894 10.767 16.7436L10.5903 15.6072L11.731 15.7617C11.8711 15.7617 12.005 15.7061 12.1038 15.6072L13.4562 14.2728C15.5213 14.9422 17.7587 14.446 19.3036 12.9001C21.5654 10.6383 21.5654 6.95815 19.3036 4.69634ZM17.8117 8.42536C17.1948 9.04232 16.1916 9.04232 15.5747 8.42536C14.9577 7.80841 14.9577 6.80522 15.5747 6.18827C16.1916 5.57131 17.1948 5.57131 17.8117 6.18827C18.4287 6.80522 18.4287 7.80841 17.8117 8.42536Z' fill='%23616161'/%3E%3C/svg%3E%0A")
+                        no-repeat;
+                }
+            }
+        }
+
+        &--office { top: 10px; }
+
+        &_list {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+
+            &_block {
+                border-bottom: 1px solid #d8d8d8;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            &_title {
+                @include fw14-20();
+                position: relative;
+                padding: 8px 0 8px 29px;
+                cursor: pointer;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 8px;
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    bottom: -1px;
+                    top: 0;
+                    margin: auto;
+                    background: url('/assets/img/location/routes/aside/caret-down.svg') center no-repeat;
+                    background-size: contain;
+                    width: 16px;
+                    height: 8px;
+                }
+
+                &--open {
+                    &:after {
+                        background-image: url('/assets/img/location/routes/aside/caret-up.svg');
+                    }
+                }
+
+                &--auto {
+                    &:before {
+                        background-image: url('/assets/img/location/routes/aside/auto-ic.svg');
+                    }
+                }
+                &--railway {
+                    &:before {
+                        background-image: url('/assets/img/location/routes/aside/railway-ic.svg');
+                    }
+
+                }
+                &--bus {
+                    &:before {
+                        background-image: url('/assets/img/location/routes/aside/bus-ic.svg');
+                    }
+
+                }
+                &--metro {
+                    &:before {
+                        background-image: url('/assets/img/location/routes/aside/metro-ic.svg');
+                    }
+
+                }
+            }
+
+            &_item {
+                cursor: pointer;
+                position: relative;
+                margin-bottom: 8px;
+                padding-left: 2px;
+                transition: .2s linear;
+
+                &:hover:not(.location_aside_list_item--active) {
+                    color: #888aa1;
+                }
+
+                &--active {
+                    color: #888aa1;
+                }
+
+                &_name {
+                    font: 500 14px/20px 'Museo Sans Cyrl', sans-serif;
+                    @include font-smoothing;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+
+                &_hint {
+                    opacity: 0.6;
+                }
+
+                &_subtext {
+
+                    &--bus:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 1px;
+                        margin: auto;
+                        background: url('/assets/img/location/routes/aside/bus-ic.svg') center no-repeat;
+                        width: 13px;
+                        height: 16px;
+                    }
+
+                    &_name {
+                        @include fw14-20();
+                        position: relative;
+                        margin-top: 8px;
+                        padding-left: 22px;
+                    }
+                    &_hint {
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+
+    &__routes {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    &__map {
+        width: 100%;
+        height: calc(100vh - 296px);
+        min-height: 448px;
+
+        &--routes {
+            //
+        }
+        &--office {
+            //
+        }
+    }
+}
+
