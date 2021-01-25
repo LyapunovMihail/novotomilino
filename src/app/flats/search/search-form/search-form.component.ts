@@ -1,4 +1,5 @@
 import { IFlatsSearchParams, TagInterface } from '../../../../../serv-files/serv-modules/seo-api/seo.interfaces';
+import { SearchFlatsLinkHandlerService } from '../../../commons/searchFlatsLinkHandler.service';
 import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -49,20 +50,23 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
         public activatedRoute: ActivatedRoute,
         private metaTagsRenderService: MetaTagsRenderService,
         public searchService: SearchService,
+        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
     ) {}
 
     ngOnInit() {
+        // if (Object.keys(this.activatedRoute.snapshot.queryParams).length > 0) {
+        //     this.snapshotParams = this.activatedRoute.snapshot.queryParams;
+        //     setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
+        //         this.searchFlatsLinkHandlerService.linkHandle(true, this.activatedRoute.snapshot.queryParams);
+        //     }, 1000);
+        // }
 
         this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
-
-            this.config.housesList = this.config.housesList.map( house => {
-                if ( house.value === 'all') { return house; }
-                house.disabled = !flats.some(flat => flat.house === Number(house.value));
-                return house;
-            });
-            this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+            this.setHouses(flats);
             setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
-                this.buildForm(this.activatedRoute.snapshot.queryParams);
+                if (!this.seoPageParams) {
+                    this.buildForm(this.activatedRoute.snapshot.queryParams);
+                }
             }, 600);
         });
 
@@ -71,9 +75,20 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
                 this.seoPageParams = params;
                 this.isSeoPageParamsLoaded = true;
                 if (!params) { return; }
+                this.searchFlatsLinkHandlerService.seoLinkHandle(true, this.router.url);
                 this.buildForm(this.seoPageParams);
             });
     }
+
+    private setHouses(flats) {
+        this.config.housesList = this.config.housesList.map( house => {
+            if ( house.value === 'all') { return house; }
+            house.disabled = !flats.some(flat => flat.house === Number(house.value));
+            return house;
+        });
+        this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if ('housesFromMinimap' in changes && this.form) {
             this.form.patchValue({ houses: this.housesFromMinimap });

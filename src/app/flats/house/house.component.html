@@ -69,11 +69,17 @@
     </div>
 
     <app-flats-search
+        (showPopular)="showPopular = true"
         [parentPlan]="false"
         [showSearchWindow]="true"
         [housesFromMinimap]="houseNumbers"
         (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
     </app-flats-search>
+
+    <app-popular
+        *ngIf="showPopular"
+        (close)="showPopular = false">
+    </app-popular>
 
     <div class="house__preloader" *ngIf="preloader">
         <app-loader
