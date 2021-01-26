@@ -54,32 +54,16 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
     ) {}
 
     ngOnInit() {
-        // if (Object.keys(this.activatedRoute.snapshot.queryParams).length > 0) {
-        //     this.snapshotParams = this.activatedRoute.snapshot.queryParams;
-        //     setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
-        //         this.searchFlatsLinkHandlerService.linkHandle(true, this.activatedRoute.snapshot.queryParams);
-        //     }, 1000);
-        // }
-
         this.searchService.getObjects({ type: 'КВ' }).subscribe( flats => {
             this.setHouses(flats);
+            this.getSeoPageParams();
             setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
                 if (!this.seoPageParams) {
                     this.buildForm(this.activatedRoute.snapshot.queryParams);
                 }
             }, 600);
         });
-
-        this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
-            .subscribe((params: IFlatsSearchParams) => {
-                this.seoPageParams = params;
-                this.isSeoPageParamsLoaded = true;
-                if (!params) { return; }
-                this.searchFlatsLinkHandlerService.seoLinkHandle(true, this.router.url);
-                this.buildForm(this.seoPageParams);
-            });
     }
-
     private setHouses(flats) {
         this.config.housesList = this.config.housesList.map( house => {
             if ( house.value === 'all') { return house; }
@@ -88,7 +72,16 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
         });
         this.allHouses = this.config.housesList.filter( house => !house.disabled).length - 1;
     }
-
+    private getSeoPageParams() {
+        this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
+            .subscribe((params: IFlatsSearchParams) => {
+                this.seoPageParams = params;
+                this.isSeoPageParamsLoaded = true;
+                if (!this.seoPageParams) { return; }
+                this.searchFlatsLinkHandlerService.seoLinkHandle(true, this.router.url);
+                this.buildForm(this.seoPageParams);
+            });
+    }
     ngOnChanges(changes: SimpleChanges) {
         if ('housesFromMinimap' in changes && this.form) {
             this.form.patchValue({ houses: this.housesFromMinimap });
