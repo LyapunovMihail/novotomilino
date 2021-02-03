@@ -1,0 +1,20 @@
+@import '../../../styles/modules/mixins/mixin';
+
+:host {
+    width: 100%;
+    display: block;
+}
+
+.info-block {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 40px;
+
+    &__text {
+        max-width: 480px;
+        font: 14px/18px $font-mus;
+        @include font-smoothing;
+        color: rgba($color: $col-black, $alpha: .5);
+        padding: 24px 0;
+    }
+}

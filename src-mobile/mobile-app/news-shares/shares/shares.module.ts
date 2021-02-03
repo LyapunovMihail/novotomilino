@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
 import { FlatSnippetModule } from '../../flats/flat-snippet/flat-snippet.module';
+import { InfoBlockModule } from '../../UI/info-block/info-block.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -22,6 +23,7 @@ const SHARES_COMPONENTS = [
     exports: [...SHARES_COMPONENTS],
     imports: [
         CommonModule,
+        InfoBlockModule,
         FlatSnippetModule,
         RouterModule.forChild([
             {

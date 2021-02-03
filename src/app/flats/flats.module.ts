@@ -24,6 +24,7 @@ import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentFurnitureComponent } from './apartment/apartment-furniture/apartment-furniture.component';
 import { SortModule } from './search/search-sorting/sorting.module';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -53,6 +54,7 @@ const FlatsComponents = [
         SortModule,
         FormsModule,
         LoaderModule,
+        InfoBlockModule,
         FlatSnippetModule,
         FormsRequestModule,
         ReactiveFormsModule,

@@ -1,5 +1,7 @@
 @import "../../../styles/modules/mixins/mixin";
 
+:host { flex-grow: 1; }
+
 .purchase__credit {
     width: $w1600;
     display: flex;

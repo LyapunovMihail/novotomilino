@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DynamicComponent } from './dynamic.component';
 import { NgModule } from '@angular/core';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const DynamicComponents = [
     DynamicComponent,
@@ -34,6 +35,7 @@ const DynamicComponents = [
         CommonModule,
         RouterModule,
         FormsModule,
+        InfoBlockModule,
         ReactiveFormsModule,
         RouterModule.forChild([
             { path: 'dynamic/:year/:month', component: DynamicComponent, pathMatch: 'full' }

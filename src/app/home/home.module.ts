@@ -16,6 +16,7 @@ import { VideoComponent } from './video/video.component';
 import { VideoAdminComponent } from './video/video-admin/video-admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeIlikeComponent } from './ilike/home-ilike.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports: [
@@ -39,6 +40,7 @@ import { HomeIlikeComponent } from './ilike/home-ilike.component';
     ],
     imports: [
         CommonModule,
+        InfoBlockModule,
         GHMTextAreaModule,
         ReactiveFormsModule,
         RouterModule.forChild([

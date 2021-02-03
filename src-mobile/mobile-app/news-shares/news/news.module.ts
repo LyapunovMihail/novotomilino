@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NewsComponent } from './news.component';
 import { NgModule } from '@angular/core';
+import { InfoBlockModule } from '../../UI/info-block/info-block.module';
 
 const NewsComponents = [
     NewsComponent,
@@ -29,6 +30,7 @@ const NewsComponents = [
         MyPipesModule,
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: '', component: NewsComponent
                 , children : [

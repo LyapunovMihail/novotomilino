@@ -2,6 +2,7 @@
 
 .commercial {
     width: 100%;
+    min-height: calc(100vh - (50px + 67px));
 
     &__head {
         width: 100%;

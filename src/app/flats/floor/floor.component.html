@@ -40,13 +40,14 @@
             [floorNumber]="floorNumber">
         </app-house-selector>
 
+        <app-floor-info-window
+            class="floor__info-window"
+            [infoWindow]="infoWindow">
+        </app-floor-info-window>
     </div>
 
-    <app-floor-info-window
-        class="floor__info-window"
-        [infoWindow]="infoWindow">
-    </app-floor-info-window>
 
+    <app-info-block></app-info-block>
 </div>
 
 <!-- <app-flats-apartment-modal *ngIf="showApartmentWindow"

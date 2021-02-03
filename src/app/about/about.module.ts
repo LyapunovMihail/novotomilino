@@ -15,6 +15,7 @@ import { LoaderModule } from '../UI/loader/loader.module';
 import { AboutNavMenuComponent } from './nav-menu/nav-menu.component';
 import { BuilderListComponent } from './builder/builder-list/builder-list.component';
 import { BuilderMapComponent } from './builder/builder-map/builder-map.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const AboutComponents = [
     AboutComponent,
@@ -41,6 +42,7 @@ const AboutComponents = [
         RouterModule,
         CommonModule,
         LoaderModule,
+        InfoBlockModule,
         GHMTextAreaModule,
         BrowserAnimationsModule,
         RouterModule.forChild([

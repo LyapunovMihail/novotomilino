@@ -9,10 +9,10 @@ import { HomeNewsComponent } from './news/home-news.component';
 import { HomeService } from './home.service';
 import { SharesDayPipe } from './preview/shares-day.pipe';
 import { LineBreakPipe } from './line-break.pipe';
-import { ScrollUpComponent } from './scroll-up/scroll-up.component';
 import { HomeTriggerComponent } from './trigger/home-trigger.component';
 import { VideoComponent } from './video/video.component';
 import { HomeIlikeComponent } from './ilike/home-ilike.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports : [
@@ -27,12 +27,12 @@ import { HomeIlikeComponent } from './ilike/home-ilike.component';
         HomeNewsComponent,
         SharesDayPipe,
         LineBreakPipe,
-        ScrollUpComponent,
         VideoComponent,
         HomeIlikeComponent,
     ],
     imports : [
         CommonModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: '', component: HomeComponent, pathMatch: 'full' }
         ])

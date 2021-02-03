@@ -1,5 +1,7 @@
 @import "../../../styles/modules/mixins/mixin";
 
+:host { flex-grow: 1; }
+
 .purchase-installment {
     width: $w1600;
 

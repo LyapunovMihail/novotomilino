@@ -1,13 +1,17 @@
 @import "../../styles/modules/mixins/mixin";
 
 .favorites {
-    height: auto;
+    height: calc(100vh - (67px + 50px));
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding: 50px 0 120px;
+    box-sizing: border-box;
+    padding: 50px 0 0;
 
-    &__container { @include container(); }
+    &__container {
+        @include container();
+        &:nth-child(2) { flex-grow: 1; }
+    }
     &__title { margin-bottom: 40px; }
 
     &__nav {

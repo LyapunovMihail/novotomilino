@@ -6,6 +6,7 @@ import { NewsSharesAllComponent } from './all/news-shares-all.component';
 import { NewsModule } from './news/news.module';
 import { SharesModule } from './shares/shares.module';
 import { MyPipesModule } from '../pipes/my-pipes.module';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports: [
@@ -23,6 +24,7 @@ import { MyPipesModule } from '../pipes/my-pipes.module';
         SharesModule,
         MyPipesModule,
         CommonModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: 'news-shares', component: NewsSharesComponent
                 , children : [

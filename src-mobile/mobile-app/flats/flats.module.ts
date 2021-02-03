@@ -20,6 +20,7 @@ import { ApartamentBitNumberPipe } from './modal-apartament/apartament-bit-numbe
 import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 import { SearchSortingModule } from './search-sorting/search-sorting.module';
 import { InputsListComponent } from './search-form/inputs-list/inputs-list.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -45,6 +46,7 @@ const FlatsComponents = [
         FormsModule,
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         FlatSnippetModule,
         FormsRequestModule,
         SearchOutputModule,
