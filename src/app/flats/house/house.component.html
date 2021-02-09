@@ -1,102 +1,104 @@
-<div class="house">
+<app-flats-page>
+    <div class="house">
 
-    <app-house-minimap 
-        *ngIf="houseNumbers"
-        [houseNumber]="houseNumbers"
-        (floorClicked)="floorEmitted()"
-    ></app-house-minimap>
+        <app-house-minimap
+            *ngIf="houseNumbers"
+            [houseNumber]="houseNumbers"
+            (floorClicked)="floorEmitted()"
+        ></app-house-minimap>
 
-    <div class="house__sections__nav">
-        <ul class="house__sections__nav-list">
-            <li class="house__sections__nav-item">
-                <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="house__sections" *ngIf="houseNumbers" #chessParent>
-
-        <div class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" #chessChild>
-            <ng-container *ngFor="let h of houseNumbers">
-                <ng-container *ngIf="chess[h] && chess[h].length">
-                    <ng-container *ngFor="let section of chess[h]; let s = index">
-                        <div class="house__sections-chess" *ngIf="section && section.length > 0">
-                            <ul class="house__sections-chess_section" [class.selected]="floorClicked" #sectionContainer>
-                                <p class="house__sections-chess_section_title" *ngIf="section && section.length > 0">Корпус {{h}}, Cекция {{s}}</p>
-                                <ng-container *ngFor="let floor of section; let j = index">
-                                    <li *ngIf="floor" class="house__sections-chess_section_floor">
-                                        <ul>
-                                            <ng-container *ngFor="let flat of floor; let i = index">
-                                                <li class="house__sections-chess_section_flat"
-                                                    [ngClass]="{'house__sections-chess_section_flat--free' : flat.status === '4' && !flat.discount,
-                                                                'house__sections-chess_section_flat--reserved' : flat.status === '8',
-                                                                'house__sections-chess_section_flat--not-sale' : flat.status === '1' && !flat.discount,
-                                                                'house__sections-chess_section_flat--sold-out' : flat.status === '-1',
-                                                                'house__sections-chess_section_flat--discount' : flat.discount && flat.status !== '8',
-                                                                'house__sections-chess_section_flat--disabled' : flat.disabled}">
-                                                    <a class="house__sections-chess_section_flat_link"
-                                                        (click)="openApartmentModal(i, floor)"
-                                                        (mouseenter)="showFlatBubble($event, flat, sectionContainer)"
-                                                        (mouseleave)="showBubble = false">
-                                                        {{flat.status !== '4' && flat.status !== '1' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
-                                                    </a>
-                                                </li>
-                                                <!--<li class="house__sections-chess_section_flat house__sections-chess_section_flat&#45;&#45;sold-out" *ngIf="!floor[i]"></li>-->
-                                            </ng-container>
-                                            <li class="house__sections-chess_section_floor-button" 
-                                              (mouseenter)="showFloorBubble($event, floor, (section.length - j))"
-                                              (mouseleave)="floorShowBubble = false">
-                                                <a class="house__sections-chess_section_floor-link"
-                                                    [routerLink]="'/flats/house/' + h + '/section/' + s + '/floor/' + (section.length - j)"> <!-- этаж и секция прописаны в любой квартире -->
-                                                    {{section.length - j}}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ng-container>
-                            </ul>
-                        </div>
-                    </ng-container>
-                </ng-container>
-            </ng-container>
+        <div class="house__sections__nav">
+            <ul class="house__sections__nav-list">
+                <li class="house__sections__nav-item">
+                    <a [routerLink]="'/flats/plan'" class="floor__nav-item-link">Общий вид</a>
+                </li>
+            </ul>
         </div>
 
-        <button class="house__sections-btn_prev" (click)="scrollPrev()" *ngIf="scroll !== 0">
-        </button>
-        <button class="house__sections-btn_next" (click)="scrollNext()" *ngIf="scroll !== chessMaxScroll">
-        </button>
+        <div class="house__sections" *ngIf="houseNumbers" #chessParent>
 
+            <div class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" #chessChild>
+                <ng-container *ngFor="let h of houseNumbers">
+                    <ng-container *ngIf="chess[h] && chess[h].length">
+                        <ng-container *ngFor="let section of chess[h]; let s = index">
+                            <div class="house__sections-chess" *ngIf="section && section.length > 0">
+                                <ul class="house__sections-chess_section" [class.selected]="floorClicked" #sectionContainer>
+                                    <p class="house__sections-chess_section_title" *ngIf="section && section.length > 0">Корпус {{h}}, Cекция {{s}}</p>
+                                    <ng-container *ngFor="let floor of section; let j = index">
+                                        <li *ngIf="floor" class="house__sections-chess_section_floor">
+                                            <ul>
+                                                <ng-container *ngFor="let flat of floor; let i = index">
+                                                    <li class="house__sections-chess_section_flat"
+                                                        [ngClass]="{'house__sections-chess_section_flat--free' : flat.status === '4' && !flat.discount,
+                                                                    'house__sections-chess_section_flat--reserved' : flat.status === '8',
+                                                                    'house__sections-chess_section_flat--not-sale' : flat.status === '1' && !flat.discount,
+                                                                    'house__sections-chess_section_flat--sold-out' : flat.status === '-1',
+                                                                    'house__sections-chess_section_flat--discount' : flat.discount && flat.status !== '8',
+                                                                    'house__sections-chess_section_flat--disabled' : flat.disabled}">
+                                                        <a class="house__sections-chess_section_flat_link"
+                                                            (click)="openApartmentModal(i, floor)"
+                                                            (mouseenter)="showFlatBubble($event, flat, sectionContainer)"
+                                                            (mouseleave)="showBubble = false">
+                                                            {{flat.status !== '4' && flat.status !== '1' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
+                                                        </a>
+                                                    </li>
+                                                    <!--<li class="house__sections-chess_section_flat house__sections-chess_section_flat&#45;&#45;sold-out" *ngIf="!floor[i]"></li>-->
+                                                </ng-container>
+                                                <li class="house__sections-chess_section_floor-button"
+                                                  (mouseenter)="showFloorBubble($event, floor, (section.length - j))"
+                                                  (mouseleave)="floorShowBubble = false">
+                                                    <a class="house__sections-chess_section_floor-link"
+                                                        [routerLink]="'/flats/house/' + h + '/section/' + s + '/floor/' + (section.length - j)"> <!-- этаж и секция прописаны в любой квартире -->
+                                                        {{section.length - j}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+            <button class="house__sections-btn_prev" (click)="scrollPrev()" *ngIf="scroll !== 0">
+            </button>
+            <button class="house__sections-btn_next" (click)="scrollNext()" *ngIf="scroll !== chessMaxScroll">
+            </button>
+
+        </div>
+
+        <app-flats-search
+            (showPopular)="showPopular = true"
+            [parentPlan]="false"
+            [showSearchWindow]="true"
+            [housesFromMinimap]="houseNumbers"
+            (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
+        </app-flats-search>
+
+        <app-popular
+            *ngIf="showPopular"
+            (close)="showPopular = false">
+        </app-popular>
+
+        <div class="house__preloader" *ngIf="preloader">
+            <app-loader
+                [loaderShow]="preloader"
+            ></app-loader>
+        </div>
     </div>
 
-    <app-flats-search
-        (showPopular)="showPopular = true"
-        [parentPlan]="false"
-        [showSearchWindow]="true"
-        [housesFromMinimap]="houseNumbers"
-        (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
-    </app-flats-search>
 
-    <app-popular
-        *ngIf="showPopular"
-        (close)="showPopular = false">
-    </app-popular>
+    <app-flats-flat-bubble
+        [bubbleData]="bubbleData"
+        [coords]="bubbleCoords"
+        [showBubble]="showBubble">
+    </app-flats-flat-bubble>
 
-    <div class="house__preloader" *ngIf="preloader">
-        <app-loader
-            [loaderShow]="preloader"
-        ></app-loader>
-    </div>
-</div>
-
-
-<app-flats-flat-bubble
-    [bubbleData]="bubbleData"
-    [coords]="bubbleCoords"
-    [showBubble]="showBubble">
-</app-flats-flat-bubble>
-
-<app-flats-floor-bubble
-    [coords]="bubbleCoords"
-    [bubbleData]="floorBubble"
-    [showBubble]="floorShowBubble"
-></app-flats-floor-bubble>
+    <app-flats-floor-bubble
+        [coords]="bubbleCoords"
+        [bubbleData]="floorBubble"
+        [showBubble]="floorShowBubble"
+    ></app-flats-floor-bubble>
+</app-flats-page>

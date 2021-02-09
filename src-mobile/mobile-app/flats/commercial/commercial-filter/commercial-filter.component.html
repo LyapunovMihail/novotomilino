@@ -1,64 +1,66 @@
-<form [formGroup]="form" class="search-form" *ngIf="form && showFilter">
+<app-commercial>
+    <form [formGroup]="form" class="search-form" *ngIf="form && showFilter">
 
-    <button class="search-form__reset-btn btn-close" (click)="close.emit(false)"></button>
-    
-    <div class="search-form__container">
-    
-        <div *ngIf="type === 'commercial-list'" class="search-form__wrapper search-form__wrapper_corpus">
-            <p class="search-form__section-name g-nav-title">Номер корпуса</p>
-    
-            <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                <p class="search-form__form-text search-form__form-text_corpus">{{ (form.controls['houses'].value).length === allHouses || form.controls['houses'].value.length === 0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
+        <button class="search-form__reset-btn btn-close" (click)="close.emit(false)"></button>
+
+        <div class="search-form__container">
+
+            <div *ngIf="type === 'commercial-list'" class="search-form__wrapper search-form__wrapper_corpus">
+                <p class="search-form__section-name g-nav-title">Номер корпуса</p>
+
+                <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
+                    <p class="search-form__form-text search-form__form-text_corpus">{{ (form.controls['houses'].value).length === allHouses || form.controls['houses'].value.length === 0 ? 'Все корпуса' : form.controls['houses'].value}}</p>
+                </div>
+
+                <div class="search-form__corpus" *ngIf="showCorpus">
+                    <app-search-checkbox-list
+                        [btnList]="config.housesList"
+                        [formControl]="form.controls['houses']"
+                        [name]="'house'"
+                        (close)="showCorpus = $event">
+                    </app-search-checkbox-list>
+                </div>
             </div>
 
-            <div class="search-form__corpus" *ngIf="showCorpus">
-                <app-search-checkbox-list
-                    [btnList]="config.housesList"
-                    [formControl]="form.controls['houses']"
-                    [name]="'house'"
-                    (close)="showCorpus = $event">
-                </app-search-checkbox-list>
-            </div>
-        </div>
-    
-        <div class="search-form__wrapper search-form__wrapper--space-floor">
-            <div class="search-form__wrapper search-form__wrapper--small">
-                <p class="search-form__section-name g-nav-title">Цена</p>
-                <div class="search-form__range">
-                    <span class="search-form__form-text">
-                        <span>
-                            <span #minPrice></span> млн &#8381;  
+            <div class="search-form__wrapper search-form__wrapper--space-floor">
+                <div class="search-form__wrapper search-form__wrapper--small">
+                    <p class="search-form__section-name g-nav-title">Цена</p>
+                    <div class="search-form__range">
+                        <span class="search-form__form-text">
+                            <span>
+                                <span #minPrice></span> млн &#8381;
+                            </span>
+                            <span>
+                                <span #maxPrice></span> млн &#8381;
+                            </span>
                         </span>
-                        <span>
-                            <span #maxPrice></span> млн &#8381;
-                        </span> 
-                    </span>
-                    <ghm-range-number
-                        [formControl]="form.controls['price']"
-                        [min]="config.price.min"
-                        [max]="config.price.max"
-                        [toFixed]="true"
-                        (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
-                    </ghm-range-number>
+                        <ghm-range-number
+                            [formControl]="form.controls['price']"
+                            [min]="config.price.min"
+                            [max]="config.price.max"
+                            [toFixed]="true"
+                            (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
+                        </ghm-range-number>
+                    </div>
+                </div>
+                <div class="search-form__wrapper search-form__wrapper--small">
+                    <p class="search-form__section-name g-nav-title">Площадь, м²</p>
+                    <div class="search-form__range">
+                        <span class="search-form__form-text">
+                            <span #minSpace></span>
+                            <span #maxSpace></span>
+                        </span>
+                        <ghm-range-number
+                            [formControl]="form.controls['space']"
+                            [min]="config.space.min"
+                            [max]="config.space.max"
+                            (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
+                        </ghm-range-number>
+                    </div>
                 </div>
             </div>
-            <div class="search-form__wrapper search-form__wrapper--small">
-                <p class="search-form__section-name g-nav-title">Площадь, м²</p>
-                <div class="search-form__range">
-                    <span class="search-form__form-text"> 
-                        <span #minSpace></span> 
-                        <span #maxSpace></span>
-                    </span>
-                    <ghm-range-number
-                        [formControl]="form.controls['space']"
-                        [min]="config.space.min"
-                        [max]="config.space.max"
-                        (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
-                    </ghm-range-number>
-                </div>
-            </div>
-        </div>
 
-        <button class="search-form__reset" (click)="formReset()">Сбросить форму</button>
-    </div>
-</form>
+            <button class="search-form__reset" (click)="formReset()">Сбросить форму</button>
+        </div>
+    </form>
+</app-commercial>

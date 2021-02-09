@@ -1,3 +1,4 @@
+import { NewsSharesComponentModule } from '../news-shares-component.module';
 import { NewsMainComponent } from './news-preview/news-main/news-main.component';
 import { LineBreakPipe } from './line-break.pipe';
 import { NewsService } from './news.service';
@@ -34,14 +35,10 @@ const NewsComponents = [
         CommonModule,
         LoaderModule,
         CreateRedactFormsModule,
+        NewsSharesComponentModule,
         RouterModule.forChild([
-            { path: '', component: NewsComponent
-                , children : [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
-                    { path: 'list', component: NewsPreviewComponent },
-                    { path: 'list/:id', component: NewsViewComponent }
-                ]
-            }
+            { path: 'list', component: NewsPreviewComponent },
+            { path: 'list/:id', component: NewsViewComponent }
         ])
     ]
 })

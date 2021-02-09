@@ -28,10 +28,10 @@ export class HeaderService {
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );
         return [
             { name: 'О ЖК', url: '/about' },
-            { name: 'Расположение', url: `/location` },
-            { name: 'Квартиры', url: `/flats`,
+            { name: 'Расположение', url: `/location/routes` },
+            { name: 'Квартиры', url: `/flats/plan`,
                 tooltip: [
-                    { name: 'Коммерческая недвижимость', url: '/flats/commercial' }
+                    { name: 'Коммерческая недвижимость', url: '/flats/commercial/list' }
                 ],
             },
             { name: 'Отделка', url: '/decoration',
@@ -40,8 +40,8 @@ export class HeaderService {
                 // ],
             },
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
-            { name: 'Условия покупки', url: '/purchase' },
-            { name: 'Новости и акции', url: '/news-shares' },
+            { name: 'Условия покупки', url: '/purchase/credit' },
+            { name: 'Новости и акции', url: '/news-shares/all' },
         ];
     }
 }

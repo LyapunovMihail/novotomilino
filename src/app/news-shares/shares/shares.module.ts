@@ -1,4 +1,5 @@
 import { FormsRequestModule } from '../../forms-request/forms-request.module';
+import { NewsSharesComponentModule } from '../news-shares-component.module';
 import { SharesEditFlatsComponent } from './shares-edit/shares-edit-controls/shares-edit-flats/shares-edit-flats.component';
 import { SharesDayPipe } from './shares-day.pipe';
 import { DatePickerModule } from './shares-edit/date-picker/date-picker.module';
@@ -44,15 +45,10 @@ const SHARES_COMPONENTS = [
         FormsModule,
         LoaderModule,
         FlatSnippetModule,
+        NewsSharesComponentModule,
         RouterModule.forChild([
-            {
-                path: '', component: SharesComponent,
-                children: [
-                    { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-                    { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-                    { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
-                ]
-            }
+            { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
+            { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
         ])
     ],
     providers: [

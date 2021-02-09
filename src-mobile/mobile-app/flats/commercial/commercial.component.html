@@ -1,4 +1,3 @@
-
 <section class="commercial">
     <ng-container *ngIf="showHead()">
         <div class="commercial__head" >
@@ -20,6 +19,6 @@
     </ng-container>
 
     <div class="commercial__container">
-        <router-outlet></router-outlet>
+        <ng-content></ng-content>
     </div>
 </section>

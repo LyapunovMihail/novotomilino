@@ -1,48 +1,49 @@
+<app-commercial>
+    <section class="commercial-floor" *ngIf="params">
 
-<section class="commercial-floor" *ngIf="params">
+        <div class="commercial-floor__head">
+            <a class="commercial-floor__head-back" routerLink="/flats/commercial/plan">Корпус {{params.houses}}, секция {{params.sections}}</a>
 
-    <div class="commercial-floor__head">
-        <a class="commercial-floor__head-back" routerLink="/flats/commercial/plan">Корпус {{params.houses}}, секция {{params.sections}}</a>
-
-        <nav class="commercial-floor__nav">
-            <p class="commercial-floor__nav-title g-nav-title">Выберите секцию</p>
-            <ul class="commercial-floor__nav-list">
-                <li class="commercial-floor__nav-item" *ngFor="let section of sections"
-                    [ngClass]="{'active': +params.sections === +section}"
-                    (click)="navigate(section)">{{section}}</li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="commercial-floor__image">
-        <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="commercial-floor__image-scheme" *ngIf="floorSvg"></div>
-        <div class="g-image-error" *ngIf="!floorSvg"></div>
-
-        <div class="commercial-floor__image-controls">
-            <app-floor-selector
-                [floorSelector]="floor"
-                [houseNumber]="params.houses"
-                [sectionNumber]="params.sections"
-                [floorNumber]="params.floor">
-            </app-floor-selector>
+            <nav class="commercial-floor__nav">
+                <p class="commercial-floor__nav-title g-nav-title">Выберите секцию</p>
+                <ul class="commercial-floor__nav-list">
+                    <li class="commercial-floor__nav-item" *ngFor="let section of sections"
+                        [ngClass]="{'active': +params.sections === +section}"
+                        (click)="navigate(section)">{{section}}</li>
+                </ul>
+            </nav>
         </div>
-    </div>
 
-    <app-floor-info-window
-        class="commercial-floor__info"
-        [infoWindow]="infoWindow">
-    </app-floor-info-window>
+        <div class="commercial-floor__image">
+            <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="commercial-floor__image-scheme" *ngIf="floorSvg"></div>
+            <div class="g-image-error" *ngIf="!floorSvg"></div>
 
-    <app-loader 
-        [loaderShow]="loadFloorSvg && !floorSvg">
-    </app-loader>
-</section>
+            <div class="commercial-floor__image-controls">
+                <app-floor-selector
+                    [floorSelector]="floor"
+                    [houseNumber]="params.houses"
+                    [sectionNumber]="params.sections"
+                    [floorNumber]="params.floor">
+                </app-floor-selector>
+            </div>
+        </div>
 
-<!-- <app-flats-apartment-modal 
-    *ngIf="showApartmentWindow"
-    [typeApartment]="'office'"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="floorFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal> -->
+        <app-floor-info-window
+            class="commercial-floor__info"
+            [infoWindow]="infoWindow">
+        </app-floor-info-window>
+
+        <app-loader
+            [loaderShow]="loadFloorSvg && !floorSvg">
+        </app-loader>
+    </section>
+
+    <!-- <app-flats-apartment-modal
+        *ngIf="showApartmentWindow"
+        [typeApartment]="'office'"
+        [showApartmentWindow]="showApartmentWindow"
+        [flatsList]="floorFlats"
+        [flatIndex]="selectedFlatIndex"
+        (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+    </app-flats-apartment-modal> -->
+</app-commercial>

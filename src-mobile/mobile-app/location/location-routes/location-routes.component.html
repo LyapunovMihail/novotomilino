@@ -1,42 +1,44 @@
-<section class="routes" *ngIf="page === 'routes'">
+<app-location>
+    <section class="routes" *ngIf="page === 'routes'">
 
-    <div class="office__head">
-        <h1 class="office__head-title header__info-number g-title-path">Расположение</h1>
-        <p class="office__head-info">
-            Рязанское шоссе, 23-й километр
-            посёлок Томилино, городской округ Люберцы, Московская область
-        </p>
-    </div>
+        <div class="office__head">
+            <h1 class="office__head-title header__info-number g-title-path">Расположение</h1>
+            <p class="office__head-info">
+                Рязанское шоссе, 23-й километр
+                посёлок Томилино, городской округ Люберцы, Московская область
+            </p>
+        </div>
 
-    <div id="map" class="routes_map"></div>
+        <div id="map" class="routes_map"></div>
 
-    <a class="routes__link"
-    href="https://yandex.ru/maps/10738/lubercy/?ll=37.925270%2C55.656866&mode=whatshere&whatshere%5Bpoint%5D=37.921343%2C55.656563&whatshere%5Bzoom%5D=17&z=17"
-        target="_blank">
-
-        <span class="routes__link-text">Как добраться</span>
-    </a>
-
-</section>
-
-<section class="office" *ngIf="page === 'office'">
-    <div class="office__head">
-        <h1 class="office__head-title header__info-number g-title-path">Офис продаж</h1>
-<!--        <a class="office__head-title header__info-number g-title-path" href="tel:{{phone ? phone : '+74991109372'}}">{{phone ? phone : '+7 (499) 110-93-72'}}</a>-->
-        <p class="office__head-info">
-            Отдел продаж расположен на объекте, Рязанское шоссе, 23-й километр
-            посёлок Томилино, городской округ Люберцы, Московская область
-        </p>
-        <br>
-        <p class="office__head-info">График работы <span>9:00-21:00 без выходных</span></p>
-    </div>
-
-    <a class="office__link"
+        <a class="routes__link"
         href="https://yandex.ru/maps/10738/lubercy/?ll=37.925270%2C55.656866&mode=whatshere&whatshere%5Bpoint%5D=37.921343%2C55.656563&whatshere%5Bzoom%5D=17&z=17"
-        target="_blank">
+            target="_blank">
 
-        <span class="routes__link-text">Как добраться</span>
-    </a>
+            <span class="routes__link-text">Как добраться</span>
+        </a>
 
-    <div id="map" class="office_map"></div>
-</section>
+    </section>
+
+    <section class="office" *ngIf="page === 'office'">
+        <div class="office__head">
+            <h1 class="office__head-title header__info-number g-title-path">Офис продаж</h1>
+    <!--        <a class="office__head-title header__info-number g-title-path" href="tel:{{phone ? phone : '+74991109372'}}">{{phone ? phone : '+7 (499) 110-93-72'}}</a>-->
+            <p class="office__head-info">
+                Отдел продаж расположен на объекте, Рязанское шоссе, 23-й километр
+                посёлок Томилино, городской округ Люберцы, Московская область
+            </p>
+            <br>
+            <p class="office__head-info">График работы <span>9:00-21:00 без выходных</span></p>
+        </div>
+
+        <a class="office__link"
+            href="https://yandex.ru/maps/10738/lubercy/?ll=37.925270%2C55.656866&mode=whatshere&whatshere%5Bpoint%5D=37.921343%2C55.656563&whatshere%5Bzoom%5D=17&z=17"
+            target="_blank">
+
+            <span class="routes__link-text">Как добраться</span>
+        </a>
+
+        <div id="map" class="office_map"></div>
+    </section>
+</app-location>

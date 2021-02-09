@@ -24,14 +24,8 @@ const SHARES_COMPONENTS = [
         CommonModule,
         FlatSnippetModule,
         RouterModule.forChild([
-            {
-                path: '', component: SharesComponent,
-                children: [
-                    { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-                    { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-                    { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
-                ]
-            }
+            { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
+            { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
         ])
     ],
     providers: [SharesService]

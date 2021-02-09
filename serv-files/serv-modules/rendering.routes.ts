@@ -1,4 +1,3 @@
-
 export const ROUTES: any[] = [
     '/',
     '/flats/plan',

@@ -1,64 +1,66 @@
-<div class="location__routes routes">
+<app-location>
+    <div class="location__routes routes">
 
-    <div class="routes__aside">
-        <div class="routes__aside-info">
-            <a href="https://yandex.ru/maps/-/CCUIv4HnWD" target="_blank"
-               class="routes__aside-text routes__aside-text--location">
-                г. Люберцы, пос. Томилино, Рязанское шоссе, <br>
-                23-й километр
-            </a>
-            <p class="routes__aside-text routes__aside-text--timetable" *ngIf="page === 'office'">
-                График работы: <br>
-                ежедневно с 9:00 до 21:00
-            </p>
+        <div class="routes__aside">
+            <div class="routes__aside-info">
+                <a href="https://yandex.ru/maps/-/CCUIv4HnWD" target="_blank"
+                   class="routes__aside-text routes__aside-text--location">
+                    г. Люберцы, пос. Томилино, Рязанское шоссе, <br>
+                    23-й километр
+                </a>
+                <p class="routes__aside-text routes__aside-text--timetable" *ngIf="page === 'office'">
+                    График работы: <br>
+                    ежедневно с 9:00 до 21:00
+                </p>
+            </div>
+
+            <ul class="routes__aside_list">
+
+                <!-- собираются маркеры с типом 'auto' -->
+                <div class="routes__aside_list_block">
+                    <h5 class="routes__aside_list_title routes__aside_list_title--auto" [class.routes__aside_list_title--open]="asideTypeActive === 'auto'" (click)="asideTypeActive = asideTypeActive === 'auto' ? '' : 'auto'">Автомобиль</h5>
+                    <ng-container *ngFor="let link of markers">
+                        <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'auto' && asideTypeActive === 'auto'" class="routes__aside_list_item">
+                            <p class="routes__aside_list_item_name">{{link.config.aside.text}} <br><span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                        </li>
+                    </ng-container>
+                </div>
+
+                <!-- собираются маркеры с типом 'railway' -->
+                <div  class="routes__aside_list_block">
+                    <h5 class="routes__aside_list_title routes__aside_list_title--railway" [class.routes__aside_list_title--open]="asideTypeActive === 'railway'" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'">Электричка</h5>
+                    <ng-container *ngFor="let link of markers">
+                        <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'railway' && asideTypeActive === 'railway'" class="routes__aside_list_item">
+                            <p class="routes__aside_list_item_name">{{link.config.aside.text}} <span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                            <p *ngFor="let subText of link.config.aside.subText" class="routes__aside_list_item_subtext_name">
+                                {{subText.text}}&nbsp;
+                                <span class="routes__aside_list_item_subtext_hint">{{subText.hint}}</span>
+                            </p>
+                        </li>
+                    </ng-container>
+                </div>
+
+                <!-- собираются маркеры с типом 'metro' -->
+                <div class="routes__aside_list_block">
+                    <h5 class="routes__aside_list_title routes__aside_list_title--metro" [class.routes__aside_list_title--open]="asideTypeActive === 'metro'" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'">Общественный транспорт</h5>
+                    <ng-container *ngFor="let link of markers">
+                        <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'metro' && asideTypeActive === 'metro'" class="routes__aside_list_item">
+                            <p class="routes__aside_list_item_name">{{link.config.aside.text}} <span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                            <p *ngFor="let subText of link.config.aside.subText" class="routes__aside_list_item_subtext_name routes__aside_list_item_subtext--bus">
+                                {{subText.text}}&nbsp;
+                                <span class="routes__aside_list_item_subtext_hint">{{subText.hint}}</span>
+                            </p>
+                        </li>
+                    </ng-container>
+                </div>
+
+            </ul>
+
         </div>
 
-        <ul class="routes__aside_list">
-
-            <!-- собираются маркеры с типом 'auto' -->
-            <div class="routes__aside_list_block">
-                <h5 class="routes__aside_list_title routes__aside_list_title--auto" [class.routes__aside_list_title--open]="asideTypeActive === 'auto'" (click)="asideTypeActive = asideTypeActive === 'auto' ? '' : 'auto'">Автомобиль</h5>
-                <ng-container *ngFor="let link of markers">
-                    <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'auto' && asideTypeActive === 'auto'" class="routes__aside_list_item">
-                        <p class="routes__aside_list_item_name">{{link.config.aside.text}} <br><span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
-                    </li>
-                </ng-container>
-            </div>
-
-            <!-- собираются маркеры с типом 'railway' -->
-            <div  class="routes__aside_list_block">
-                <h5 class="routes__aside_list_title routes__aside_list_title--railway" [class.routes__aside_list_title--open]="asideTypeActive === 'railway'" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'">Электричка</h5>
-                <ng-container *ngFor="let link of markers">
-                    <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'railway' && asideTypeActive === 'railway'" class="routes__aside_list_item">
-                        <p class="routes__aside_list_item_name">{{link.config.aside.text}} <span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
-                        <p *ngFor="let subText of link.config.aside.subText" class="routes__aside_list_item_subtext_name">
-                            {{subText.text}}&nbsp;
-                            <span class="routes__aside_list_item_subtext_hint">{{subText.hint}}</span>
-                        </p>
-                    </li>
-                </ng-container>
-            </div>
-
-            <!-- собираются маркеры с типом 'metro' -->
-            <div class="routes__aside_list_block">
-                <h5 class="routes__aside_list_title routes__aside_list_title--metro" [class.routes__aside_list_title--open]="asideTypeActive === 'metro'" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'">Общественный транспорт</h5>
-                <ng-container *ngFor="let link of markers">
-                    <li (click)="changeRoute(link)" [ngClass]="{ 'routes__aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'metro' && asideTypeActive === 'metro'" class="routes__aside_list_item">
-                        <p class="routes__aside_list_item_name">{{link.config.aside.text}} <span class="routes__aside_list_item_hint">{{link.config.aside.hint}}</span></p>
-                        <p *ngFor="let subText of link.config.aside.subText" class="routes__aside_list_item_subtext_name routes__aside_list_item_subtext--bus">
-                            {{subText.text}}&nbsp;
-                            <span class="routes__aside_list_item_subtext_hint">{{subText.hint}}</span>
-                        </p>
-                    </li>
-                </ng-container>
-            </div>
-
-        </ul>
-
+        <div id="map" class="routes__map"
+             [ngClass]="{'routes__map--office' : page === 'office',
+                         'routes__map--routes' : page === 'routes'}">
+        </div>
     </div>
-
-    <div id="map" class="routes__map"
-         [ngClass]="{'routes__map--office' : page === 'office',
-                     'routes__map--routes' : page === 'routes'}">
-    </div>
-</div>
+</app-location>

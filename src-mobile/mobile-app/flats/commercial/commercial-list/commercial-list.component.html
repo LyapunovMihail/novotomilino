@@ -1,38 +1,39 @@
+<app-commercial>
+    <section class="commercial-list">
 
-<section class="commercial-list">
-
-    <div class="commercial-list__show-wrap">
-        <button class="commercial-list__show-filter" (click)="openFilter()"
-            [ngClass]="{ 'active': showFilter }"
-        ></button>
-    </div>
-    
-    <div class="commercial-list__sort" *ngIf="params">
-        <p *ngIf="!counter" class="commercial-list__sort-find">Помещений по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
-        
-        <app-search-sorting
-            [counter]="counter"
-            [hideViewTypeBtn]="true"
-            [(ngModel)]="params.sort"
-            (ngModelChange)="sortFlats()"
-        ></app-search-sorting>
-    </div>
-
-    <app-commercial-output
-        [flatsList]="outputFlatsList"
-    ></app-commercial-output>
-
-    <app-commercial-filter 
-        [showFilter]="showFilter"
-        (formChange)="formChange($event)"
-        (close)="openFilter()"
-    ></app-commercial-filter>
-
-
-    <div class="commercial-list__footer" *ngIf="searchFlats">
-        <div class="commercial-list__footer-container">
-            <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="commercial-list__footer-more g-body_bold">Показать еще</button>
-            <button class="commercial-list__footer-up g-body_bold" (click)="scrollTop()" *ngIf="searchFlats.length >= 10">Наверх</button>
+        <div class="commercial-list__show-wrap">
+            <button class="commercial-list__show-filter" (click)="openFilter()"
+                [ngClass]="{ 'active': showFilter }"
+            ></button>
         </div>
-    </div>
-</section>
+
+        <div class="commercial-list__sort" *ngIf="params">
+            <p *ngIf="!counter" class="commercial-list__sort-find">Помещений по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
+
+            <app-search-sorting
+                [counter]="counter"
+                [hideViewTypeBtn]="true"
+                [(ngModel)]="params.sort"
+                (ngModelChange)="sortFlats()"
+            ></app-search-sorting>
+        </div>
+
+        <app-commercial-output
+            [flatsList]="outputFlatsList"
+        ></app-commercial-output>
+
+        <app-commercial-filter
+            [showFilter]="showFilter"
+            (formChange)="formChange($event)"
+            (close)="openFilter()"
+        ></app-commercial-filter>
+
+
+        <div class="commercial-list__footer" *ngIf="searchFlats">
+            <div class="commercial-list__footer-container">
+                <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="commercial-list__footer-more g-body_bold">Показать еще</button>
+                <button class="commercial-list__footer-up g-body_bold" (click)="scrollTop()" *ngIf="searchFlats.length >= 10">Наверх</button>
+            </div>
+        </div>
+    </section>
+</app-commercial>

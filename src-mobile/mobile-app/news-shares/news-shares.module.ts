@@ -24,14 +24,9 @@ import { MyPipesModule } from '../pipes/my-pipes.module';
         MyPipesModule,
         CommonModule,
         RouterModule.forChild([
-            { path: 'news-shares', component: NewsSharesComponent
-                , children : [
-                    { path: '', redirectTo: 'all', pathMatch: 'full'},
-                    { path: 'all', component: NewsSharesAllComponent},
-                    { path: 'news', loadChildren: './news/news.module#NewsModule'},
-                    { path: 'shares', loadChildren: './shares/shares.module#SharesModule'},
-                ]
-            }
+            { path: 'news-shares/all', component: NewsSharesAllComponent},
+            { path: 'news-shares/news', loadChildren: './news/news.module#NewsModule'},
+            { path: 'news-shares/shares', loadChildren: './shares/shares.module#SharesModule'},
         ])
     ]
 })
