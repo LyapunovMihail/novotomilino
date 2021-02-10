@@ -8,6 +8,8 @@ import { ExpressAppService } from './express-app.service';
 import { SERVER_CONFIGURATIONS } from './configuration';
 import { join } from 'path';
 import * as bodyParser from 'body-parser';
+import { ROUTES } from './rendering.routes';
+import { clientRender } from './utilits/client-render';
 import { DbCronUpdate } from './utilits/db-cron-update.utils';
 import * as session from 'express-session';
 import { ngExpressEngine } from '@nguniversal/express-engine';
@@ -37,6 +39,15 @@ async function bootstrap() {
 
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'browser'), { index: false });
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser'), { index: false });
+
+    ROUTES.forEach((route: any) => {
+        if (route.handle) {
+            appExpress.get(route.url, route.handle);
+        }
+        appExpress.get(route.url || route, (req: any, res) => {
+            clientRender(req, res, 200, req.session);
+        });
+    });
 
     setTimeout(() => {
         new DbCronUpdate(db.connection);

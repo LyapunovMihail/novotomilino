@@ -4,6 +4,7 @@ export const ROUTES: Routes = [
     { path: '', loadChildren : './home/home.module#HomeModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule' },
+    { path: 'dynamic/:year/:month', loadChildren: './dynamic/dynamic.module#DynamicModule' },
     { path: 'purchase/**', loadChildren: './purchase/purchase.module#PurchaseModule' },
     { path: 'quarantine', loadChildren: './quarantine-info/quarantine-info.module#QuarantineInfoModule' },
     { path: 'news-shares/**', loadChildren : './news-shares/news-shares.module#NewsSharesModule' },

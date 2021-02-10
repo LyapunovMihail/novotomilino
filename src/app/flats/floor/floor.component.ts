@@ -1,11 +1,10 @@
 import { IAddressItemFlat, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { animate } from '@angular/animations';
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import { FloorCount } from './floor-count';
 import { HttpClient } from '@angular/common/http';
 import { PlatformDetectService } from './../../platform-detect.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ViewEncapsulation, OnInit, OnDestroy, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FloorService } from './floor.service';
 import { Observable } from 'rxjs';
@@ -19,7 +18,7 @@ import { Observable } from 'rxjs';
         FloorService
     ],
     encapsulation: ViewEncapsulation.None,
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class FloorComponent implements OnInit, OnDestroy {
