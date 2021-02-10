@@ -1,6 +1,4 @@
 import { resolve } from 'path';
-import { rejects } from 'assert';
-import { async } from 'rxjs/internal/scheduler/async';
 const fs         = require('fs');
 const fileExists = require('file-exists');
 const pdf        = require('html-pdf');

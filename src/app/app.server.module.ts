@@ -1,7 +1,6 @@
 // Native
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
+import { ServerModule } from '@angular/platform-server';
 import { NgModule } from '@angular/core';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
@@ -10,15 +9,13 @@ import { AppModule } from './app.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { UniversalInterceptor } from './commons/universalInterceptor.service';
+import { UniversalInterceptor } from './universalInterceptor';
 
 @NgModule({
     imports: [
         AppModule,
-        BrowserModule.withServerTransition({ appId: 'ssr-novotomilino' }),
         ServerModule,
         ModuleMapLoaderModule,
-        ServerTransferStateModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
@@ -28,4 +25,4 @@ import { UniversalInterceptor } from './commons/universalInterceptor.service';
     }],
     bootstrap: [AppComponent]
 })
-export class ServerAppModule { }
+export class AppServerModule { }

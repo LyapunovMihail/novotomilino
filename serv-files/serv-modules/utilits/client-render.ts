@@ -16,7 +16,7 @@ export function clientRender(req: Request, res: Response, status: number, sessio
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
             res.render(
-                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'browser', 'index-mobile.html'),{
+                join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'mobile', 'index-mobile.html'),{
                     req,
                     res,
                     async: true,
@@ -29,7 +29,7 @@ export function clientRender(req: Request, res: Response, status: number, sessio
             );
         } else {
             res.render(
-                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'browser', 'index.html'), {
+                'index', {
                     req,
                     res,
                     async: true,
