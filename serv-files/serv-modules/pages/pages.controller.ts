@@ -18,7 +18,7 @@ export class PagesController {
     }
 
     @Get('*')
-    renderPage(@Req() req, @Res() res, @Session() session) {
-        clientRender(req, res, 200, session);
+    render404Page(@Req() req, @Res() res, @Session() session) {
+        clientRender(req, res, 404, session);
     }
 }

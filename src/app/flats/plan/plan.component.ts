@@ -100,7 +100,7 @@ export class PlanComponent implements OnInit {
         if (!this.infoAboutSect || this.showSearchWindow) { return; }
         const elem = document.querySelector('.plan__tooltip');
         const tooltip = elem ? { width: elem.clientWidth, height: elem.clientHeight } : { width: 0, height: 0 };
-        const jparent = { width: parent.clientWidth, height: parent.clientHeight }
+        const jparent = { width: parent.clientWidth, height: parent.clientHeight };
         this.coord = {
             x: ev.clientX,
             y: ev.clientY,

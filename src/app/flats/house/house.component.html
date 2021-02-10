@@ -16,7 +16,7 @@
         </div>
 
         <div class="house__sections" *ngIf="houseNumbers" #chessParent>
-    
+
             <div class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" #chessChild>
                 <ng-container *ngFor="let h of houseNumbers">
                     <ng-container *ngIf="chess[h] && chess[h].length">
@@ -34,6 +34,7 @@
                                                                     'house__sections-chess_section_flat--not-sale' : flat.status === '1' && !flat.discount,
                                                                     'house__sections-chess_section_flat--sold-out' : flat.status === '-1',
                                                                     'house__sections-chess_section_flat--discount' : flat.discount,
+
                                                                     'house__sections-chess_section_flat--disabled' : flat.disabled}">
                                                         <a class="house__sections-chess_section_flat_link"
                                                             (click)="openApartmentModal(i, floor)"

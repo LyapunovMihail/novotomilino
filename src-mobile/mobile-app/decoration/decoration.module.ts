@@ -32,12 +32,8 @@ let DecorationComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: 'decoration', component: DecorationComponent,
-                children : [
-                    { path: '', component: DecorationVariationComponent },
-                    { path: ':type', component: DecorationVariationComponent },
-                ]
-            }
+            { path: 'decoration', component: DecorationVariationComponent },
+            { path: 'decoration/:type', component: DecorationVariationComponent }
         ])
     ]
 })

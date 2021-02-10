@@ -56,7 +56,7 @@ const FlatsComponents = [
         RouterModule.forChild([
             { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
             { path: 'flats/_search', component: FlatsComponent, children: [{path: '**', component: FlatsComponent}]},
-            { path: '', redirectTo: 'list', pathMatch: 'full' },
+
             { path: 'flats/commercial/list', component: CommercialListComponent },
             { path: 'flats/commercial/section', component: CommercialSectionComponent },
             { path: 'flats/commercial/section/search', component: CommercialSearchComponent },

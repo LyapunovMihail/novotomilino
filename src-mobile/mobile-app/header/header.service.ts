@@ -6,7 +6,7 @@ export interface IHeaderLink {
     url: string;
 }
 
-@Injectable( )
+@Injectable()
 
 export class HeaderService {
 
@@ -40,7 +40,8 @@ export class HeaderService {
             // { name: 'Квартиры с мебелью', url: '/furniture/type/classic/variant/shatura/room/0' }, // type/:type/variant/:variant/room/:room
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
             { name: 'Условия покупки', url: '/purchase/credit' },
-            { name: 'Новости и акции', url: '/news-shares' },
+
+            { name: 'Новости и акции', url: '/news-shares/all' },
             // { name: 'Документация', url: '/documentation' }
         ];
     }

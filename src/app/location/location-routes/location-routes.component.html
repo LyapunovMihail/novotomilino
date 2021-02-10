@@ -54,14 +54,13 @@
                     </ng-container>
                 </div>
 
-              </ul>
+            </ul>
 
-          </div>
+        </div>
 
-          <!-- / Блок офиса продаж -->
-          <div id="map" class="location__map"
-               [ngClass]="{'location__map--office' : page === 'office',
-                           'location__map--routes' : page === 'routes'}">
-          </div>
-      </div>
+        <div id="map" class="routes__map"
+             [ngClass]="{'routes__map--office' : page === 'office',
+                         'routes__map--routes' : page === 'routes'}">
+        </div>
+    </div>
 </app-location>

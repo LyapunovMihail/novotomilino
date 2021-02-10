@@ -44,6 +44,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public lastScrollStep: number;
 
     public preloader = false;
+    public showPopular = false;
 
     public floorClicked: boolean;
     public bubbleCoords: IFlatBubbleCoordinates = {

@@ -42,7 +42,7 @@ export class DbCronUpdate {
         const parserStream = JSONStream.parse('*');
         const processingStream = new Writable({
             write: async (object, encoding, callback) => {
-                const item = this.transformFlatItem(object);
+                const item = this.transformFlatItem(object as any as DbJsonObject);
                 if (item != null) {
                     await collectionAddresses.insert(item);
                 }

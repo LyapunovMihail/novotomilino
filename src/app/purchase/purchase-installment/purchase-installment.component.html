@@ -1,4 +1,5 @@
 <app-purchase>
+<<<<<<< HEAD
 
     <div class="purchase-installment">
 
@@ -42,6 +43,50 @@
 
         </ul>
 
+=======
+    <div class="purchase-installment">
+
+        <ul class="purchase-installment__type">
+
+            <li class="purchase-installment__type-item">
+                <label class="purchase-installment__type-box" (click)="typeInstallment = freeInstallment; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' " checked>
+                    <div class="purchase-installment__type-radiobox"></div>
+                    <p class="purchase-installment__type-text">
+                        <span class="span-black span-block">Бесплатная рассрочка сроком <span class="span-nowrap">до 6 месяцев</span></span>
+                        Первоначальный взнос — не менее 50% от прайсовой цены.
+                        Погашение задолженности по рассрочке осуществляется
+                        <span class="span-black">равными</span> ежемесячными платежами.
+                    </p>
+                </label>
+            </li>
+            <li class="purchase-installment__type-item">
+                <label class="purchase-installment__type-box" (click)="typeInstallment = payInstallment; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                    <div class="purchase-installment__type-radiobox"></div>
+                    <p class="purchase-installment__type-text">
+                        <span class="span-block span-black">Платная рассрочка сроком <span class="span-nowrap">от 7 до 10 месяцев</span></span>
+                        Первоначальный взнос — не менее 50% от прайсовой цены.
+                        Погашение задолженности по рассрочке осуществляется
+                        <span class="span-black">аннуитетными</span> ежемесячными платежами.
+                    </p>
+                </label>
+            </li>
+            <!-- <li class="purchase-installment__type-item">
+                <label class="purchase-installment__type-box" (click)="typeInstallment = fullPay; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                    <div class="purchase-installment__type-radiobox"></div>
+                    <p class="purchase-installment__type-text">
+                        <span class="span-block span-black">100% оплата</span>
+                        При 100% оплате предоставляется скидка в размере 3%
+                        от стоимости квартиры, указанной в прайс-листе.
+                    </p>
+                </label>
+            </li> -->
+
+        </ul>
+
+>>>>>>> newSSR
         <ul class="purchase-installment__calculator installment-calculator">
 
             <li class="installment-calculator__item">
@@ -126,6 +171,7 @@
                 <p class="installment-calculator__result-title">Размер скидки</p>
                 <p class="installment-calculator__result-result">{{ fullPaySale(form.price.val) | installmentNumberPipe }} &#8381;</p>
             </div>
+<<<<<<< HEAD
 
             <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
                 <p class="installment-calculator__result-title">Итоговая стоимость квартиры</p>
@@ -133,7 +179,18 @@
             </div>
 
         </div>
+=======
 
+            <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
+                <p class="installment-calculator__result-title">Итоговая стоимость квартиры</p>
+                <p class="installment-calculator__result-result">{{ fullPayPrice(form.price.val) | installmentNumberPipe }} &#8381;</p>
+            </div>
+>>>>>>> newSSR
+
+        </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> newSSR
 </app-purchase>

@@ -1,6 +1,6 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
 import { FlatsService } from '../flats.service';
@@ -19,9 +19,6 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
     public isformSuccessOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
-
-    public isCreditFormSubmit = false;
-    public isReserveFormSubmit = false;
 
     constructor(
         public router: Router,
@@ -60,6 +57,9 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
             this.flatData = data;
             this.flatData.discount = this.getDiscount(data);
             this.flatData.inFavorite = this.inFavorite(data);
+        },
+            err => {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
         });
     }
     public previousRoute() {

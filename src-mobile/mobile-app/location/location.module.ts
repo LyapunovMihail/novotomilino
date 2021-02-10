@@ -25,6 +25,7 @@ const LocationComponents = [
             { path: 'location/office', component: LocationRoutesComponent },
             { path: 'location/routes', component: LocationRoutesComponent },
             { path: 'location/infrastructure', component: LocationInfrastructureComponent }
+
         ])
     ]
 })

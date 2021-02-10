@@ -68,6 +68,7 @@ const FlatsComponents = [
             { path: 'flats/commercial/list', component: CommercialListComponent },
             { path: 'flats/commercial/plan', component: CommercialPlanComponent },
             { path: 'flats/commercial/house/:houses/section/:sections/floor/:floor', component: CommercialFloorComponent },
+
             { path: 'flats/_search', component: PlanComponent, children: [{path: '**', component: PlanComponent}]},
             { path: 'flats/house', component: HouseComponent },
             { path: 'flats/house/:house/section/:section/floor/:floor', component: FloorComponent },

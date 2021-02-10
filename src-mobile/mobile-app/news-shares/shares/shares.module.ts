@@ -26,23 +26,8 @@ const SHARES_COMPONENTS = [
         InfoBlockModule,
         FlatSnippetModule,
         RouterModule.forChild([
-            // {
-            //     path: '', component: SharesComponent,
-            //     children: [
-            //         { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-            //         { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-            //         { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
-            //     ]
-            // }
-          {
-            path: 'list/:index', component: SharesListComponent,
-            // children: [
-            //     { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-            //     { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-            //     { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
-            // ]
-          },
-          { path: 'list/:index/:id', component: SharesItemComponent }
+            { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
+            { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
         ])
     ],
     providers: [SharesService]

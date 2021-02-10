@@ -41,7 +41,7 @@ export class HeaderService {
             },
             { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
             { name: 'Условия покупки', url: '/purchase/credit' },
-            { name: 'Новости и акции', url: '/news-shares' },
+            { name: 'Новости и акции', url: '/news-shares/all' },
         ];
     }
 }

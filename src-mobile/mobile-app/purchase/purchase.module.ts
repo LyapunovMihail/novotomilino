@@ -36,8 +36,8 @@ const PurchaseComponents = [
         RouterModule,
         InfoBlockModule,
         RouterModule.forChild([
-            { path: 'credit', component: PurchaseCreditComponent },
-            { path: 'installment', component: PurchaseInstallmentComponent }
+            { path: 'purchase/credit', component: PurchaseCreditComponent },
+            { path: 'purchase/installment', component: PurchaseInstallmentComponent }
         ])
     ],
     providers: [

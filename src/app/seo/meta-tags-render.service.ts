@@ -45,7 +45,9 @@ export class MetaTagsRenderService {
 
                 this.setH1(metas.h1, container);
 
-                this.setFlatsSearchParams(metas.flatsSearchParams);
+                setTimeout(() => {
+                    this.setFlatsSearchParams(metas.flatsSearchParams);
+                }, 250) // Даём время для подписки компонентов на получение параметров квартир
             },
             (err) => {
                 console.log(err);
