@@ -1,11 +1,12 @@
 @import "../../../../../styles/modules/mixins/mixin.scss";
 
 .shares-view {
-    position: relative;
     width: 100%;
+    min-height: calc(100vh - (102px + 184px));
     display: flex;
     flex-flow: column;
     align-items: center;
+    position: relative;
     padding: 0 0 64px;
 
     &__nav {

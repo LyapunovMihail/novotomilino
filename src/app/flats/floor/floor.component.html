@@ -47,7 +47,12 @@
             [infoWindow]="infoWindow">
         </app-floor-info-window>
 
+        <app-floor-info-window
+            class="floor__info-window"
+            [infoWindow]="infoWindow">
+        </app-floor-info-window>
     </div>
+
 
     <!-- <app-flats-apartment-modal *ngIf="showApartmentWindow"
         [showApartmentWindow]="showApartmentWindow"
@@ -55,4 +60,16 @@
         [flatIndex]="selectedFlatIndex"
         (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
     </app-flats-apartment-modal> -->
+
+
+
+    <app-info-block></app-info-block>
 </app-flats-page>
+
+<!-- <app-flats-apartment-modal *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="floorFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal> -->
+

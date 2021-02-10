@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { InstallmentTypesComponent } from './purchase-installment/installment-types/installment-types.component';
 import { InstallmentResultComponent } from './purchase-installment/installment-result/installment-result.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const PurchaseComponents = [
     PurchaseComponent,
@@ -33,6 +34,7 @@ const PurchaseComponents = [
         GHMRangetNumberModule,
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: 'credit', component: PurchaseCreditComponent },
             { path: 'installment', component: PurchaseInstallmentComponent }

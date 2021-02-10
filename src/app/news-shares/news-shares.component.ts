@@ -5,6 +5,7 @@ import { MetaRenderAdminService } from './render-meta-admin.service';
     selector: 'app-news-shares',
     template: `
         <router-outlet></router-outlet>
+        <app-info-block></app-info-block>
     `,
     styleUrls: ['./news-shares.component.scss'],
     providers: [ MetaRenderAdminService ],

@@ -8,6 +8,7 @@ import { FavoritesCommercialComponent } from './commercial/commercial-list.compo
 import { SortModule } from '../flats/search/search-sorting/sorting.module';
 import { FormsModule } from '@angular/forms';
 import { FlatSnippetModule } from '../flats/flat-snippet/flat-snippet.module';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports: [
@@ -24,6 +25,7 @@ import { FlatSnippetModule } from '../flats/flat-snippet/flat-snippet.module';
         SortModule,
         FormsModule,
         CommonModule,
+        InfoBlockModule,
         FlatsListModule,
         FlatSnippetModule,
         RouterModule.forChild([

@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PurchaseCreditComponents } from './purchase-credit/credit';
 import { LoaderModule } from '../UI/loader/loader.module';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const PurchaseComponents = [
     PurchaseComponent,
@@ -32,6 +33,7 @@ const PurchaseComponents = [
         LoaderModule,
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: 'purchase/credit', component: PurchaseCreditComponent },
             { path: 'purchase/installment', component: PurchaseInstallmentComponent }

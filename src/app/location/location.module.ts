@@ -1,5 +1,5 @@
 import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
-import { LocationInfrastructureComponent } from './location-infrastructure/location-infrastructire.component';
+import { LocationInfrastructureComponent } from './location-infrastructure/location-infrastructure.component';
 import { LocationRoutesComponent } from './location-routes/location-routes.component';
 import { LocationComponent } from './location.component';
 import { RouterModule } from '@angular/router';

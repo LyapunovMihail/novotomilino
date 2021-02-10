@@ -2,6 +2,7 @@
 
 .commercial-floor {
     width: 100%;
+    min-height: calc(100vh - 350px);
     display: flex;
     align-items: center;
     flex-flow: column nowrap;

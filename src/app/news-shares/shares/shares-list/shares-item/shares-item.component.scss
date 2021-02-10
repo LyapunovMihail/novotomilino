@@ -9,7 +9,7 @@
 
 .client-share {
     width: $w1600;
-    min-height: 100%;
+    min-height: calc(100vh - (67px + 50px + 170px)); // 146 + 50 это высота хедера и футера
     position: relative;
     padding: 52px 0 0;
 

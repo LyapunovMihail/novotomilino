@@ -24,6 +24,8 @@ import { Component } from '@angular/core';
             </div>
 
             <ng-content></ng-content>
+
+            <app-info-block></app-info-block>
         </section>
     `
 })

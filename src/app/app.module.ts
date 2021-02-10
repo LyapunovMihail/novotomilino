@@ -44,6 +44,7 @@ import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { DocumentationModule } from './documentation/documentation.module';
 import { QuarantineInfoModule } from './quarantine-info/quarantine-info.module';
 import { RedPopupComponent } from './3red-popup/3red-popup.component';
+import { AgreementModule } from './agreement/agreement.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -51,7 +52,6 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { AgreementModule } from './agreement/agreement.module';
 
 // Application wide providers
 const APP_PROVIDERS = [

@@ -2,6 +2,7 @@
 
 .news {
     width: 100%;
+    min-height: calc(100vh - (102px + 120px));
     display: flex;
     flex-flow: column;
     align-items: center;

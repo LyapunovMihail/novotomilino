@@ -28,21 +28,8 @@
             </div>
         </div>
 
-        <app-floor-info-window
-            class="commercial-floor__info"
-            [infoWindow]="infoWindow">
-        </app-floor-info-window>
-
         <app-loader
             [loaderShow]="loadFloorSvg && !floorSvg">
         </app-loader>
     </section>
 </app-commercial>
-<!-- <app-flats-apartment-modal 
-    *ngIf="showApartmentWindow"
-    [typeApartment]="'office'"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="floorFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal> -->

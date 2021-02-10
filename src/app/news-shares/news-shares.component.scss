@@ -2,12 +2,12 @@
 
 .news {
     width: 100%;
-    min-height: calc(100vh - (146px + 51px)); // 146 + 50 это высота хедера и футера
+    min-height: calc(100vh - (67px + 50px + 118px   )); // 146 + 50 это высота хедера и футера
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
     box-sizing: border-box;
     position: relative;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
     
     &__head {
         width: calc(100% - 60px);

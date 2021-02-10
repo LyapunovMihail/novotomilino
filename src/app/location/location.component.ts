@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-location',
-    template: `
-        <section class="location">
-            <ng-content></ng-content>
-        </section>
-    `,
+    templateUrl: './location.component.html',
     styleUrls: ['./location.component.scss']
 })
 
 export class LocationComponent {
-
-    constructor () {}
-
+    constructor(
+        public router: Router
+    ) {
+    }
 }
