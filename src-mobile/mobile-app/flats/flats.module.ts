@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchOutputModule } from './search-output/search-output.module';
 import { CommercialComponents } from './commercial/commercial';
-import { CommercialComponent } from './commercial/commercial.component';
 import { CommercialListComponent } from './commercial/commercial-list/commercial-list.component';
 import { CommercialSectionComponent } from './commercial/commercial-section/commercial-section.component';
 import { CommercialSearchComponent } from './commercial/commercial-search/commercial-search.component';

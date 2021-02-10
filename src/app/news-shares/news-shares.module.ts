@@ -8,7 +8,6 @@ import { NewsModule } from './news/news.module';
 import { SharesModule } from './shares/shares.module';
 import { LoaderModule } from '../UI/loader/loader.module';
 import { MetaRenderAdminService } from './render-meta-admin.service';
-import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports: [
@@ -25,7 +24,6 @@ import { InfoBlockModule } from '../UI/info-block/info-block.module';
         SharesModule,
         CommonModule,
         LoaderModule,
-        InfoBlockModule,
         CreateRedactFormsModule,
         NewsSharesComponentModule,
         RouterModule.forChild([
