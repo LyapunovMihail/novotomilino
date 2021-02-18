@@ -7,10 +7,10 @@
             <div class="apartament-furniture__vars-wrap--scroll">
                 <div class="apartament-furniture__vars-wrap--padding">
                     <label class="apartament-furniture__vars-item" *ngFor="let item of furnitureVariant">
-                        <input type="radio" name="furnitureVariant">
+                        <input type="radio" name="furnitureVariant" [checked]="item.name === 'Шатура'">
                         <div>
                             <span class="apartament-furniture__vars-name">{{item.name}}</span>
-                            <span class="apartament-furniture__vars-price">{{item.price}} &#8381;</span>
+                            <!-- <span class="apartament-furniture__vars-price">{{item.price}} &#8381;</span> -->
                         </div>
                     </label>
                 </div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="apartament-furniture__info">
-        <div class="apartament-furniture__info-head">
+        <!-- <div class="apartament-furniture__info-head">
             <p class="apartament-furniture__info-title">В стоимость включено:</p>
             <div class="apartament-furniture__info-kitchen">
                 <div class="apartament-furniture__info-text notice">
@@ -58,17 +58,17 @@
                 </div>
                 <p class="apartament-furniture__info-text">464 555 &#8381;</p>
             </div>
-        </div>
+        </div> -->
         <div class="apartament-furniture__info-option">
             <div class="apartament-furniture__info-switcher">
                 <p class="apartament-furniture__info-title">Предметы мебели <br> (опционально):</p>
-                <label>
+                <!-- <label>
                     <input type="checkbox" name="furniture-option" #furnitureOption>
                     <div></div>
-                </label>
+                </label> -->
             </div>
 
-            <ng-container *ngIf="furnitureOption.checked">
+            <ng-container> <!-- *ngIf="furnitureOption.checked" -->
                 <div class="apartament-furniture__info-list">
                     <label>
                         <div class="apartament-furniture__info-checkbox">
