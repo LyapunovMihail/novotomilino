@@ -51,7 +51,7 @@ $col-black-3: rgba($color: $col-black, $alpha: .3);
         }
         &-name {
             color: $col-black;
-            margin-right: 8px;
+            // margin-right: 8px;
         }
         &-price {
             display: flex;
@@ -149,7 +149,7 @@ $col-black-3: rgba($color: $col-black, $alpha: .3);
         &-text {
             font: 500 14px/18px $font-mus;
             @include font-smoothing;
-            color: $col-black-3;
+            color: #666769;
             &.notice {
                 position: relative;
                 &> span {
