@@ -5,7 +5,7 @@ import { FloorCount } from './floor-count';
 import { HttpClient } from '@angular/common/http';
 import { PlatformDetectService } from './../../platform-detect.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ViewEncapsulation, OnInit, OnDestroy, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, OnDestroy, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FloorService } from './floor.service';
 import { Observable } from 'rxjs';
 
@@ -44,7 +44,8 @@ export class FloorComponent implements OnInit, OnDestroy {
         public platform: PlatformDetectService,
         public http: HttpClient,
         public floorService: FloorService,
-        private flatsDiscountService: FlatsDiscountService
+        private flatsDiscountService: FlatsDiscountService,
+        private changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public ngOnInit() {
@@ -69,6 +70,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                         this.floorSvg = data;
                         this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
                         this.loadFloorSvg = false;
+                        this.changeDetectorRef.detectChanges();
 
                         this.floorService.getObjects({
                             houses: this.houseNumber + '',
@@ -110,10 +112,6 @@ export class FloorComponent implements OnInit, OnDestroy {
     }
 
     public openApartmentModal(index, floorFlats) {
-        // this.selectedFlatIndex = index;
-        // this.floorFlats = floorFlats;
-        // this.windowScrollLocker.block();
-        // this.showApartmentWindow = true;
         const flatData = floorFlats.find((el,j) => j === index);
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0] }));
         this.router.navigate([`/flats/house/${flatData.house}/section/${flatData.section}/floor/${flatData.floor}/flat/${flatData.flat}`]);
