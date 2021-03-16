@@ -43,7 +43,6 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     @Input() public showSearchWindow: boolean;
     @Input() public housesFromMinimap: string[];
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
-    @Output() public showPopular = new EventEmitter<any>();
 
     constructor(
         public router: Router,

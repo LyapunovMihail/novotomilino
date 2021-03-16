@@ -64,6 +64,7 @@ const FlatsComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
+            { path: 'flats/popular', component: PopularComponent },
             { path: 'flats/plan', component: PlanComponent },
             { path: 'flats/commercial/list', component: CommercialListComponent },
             { path: 'flats/commercial/plan', component: CommercialPlanComponent },

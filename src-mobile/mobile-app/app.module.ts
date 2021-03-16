@@ -90,7 +90,7 @@ interface StoreType {
 }
 
 @NgModule({
-    // bootstrap: [ AppComponent ],
+    bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
         ImgModalComponent,

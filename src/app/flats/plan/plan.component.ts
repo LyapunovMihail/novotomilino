@@ -18,7 +18,6 @@ import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-
 export class PlanComponent implements OnInit {
 
     public showSearchWindow = false;
-    public showPopular = false;
     public houses: IHousePlanItem[] = PLAN_SVG;
     public activeLink = '';
     public metaTags;

@@ -1,4 +1,5 @@
 import { ADDRESSES_COLLECTION_NAME } from './addresses-api/addresses.interfaces';
+import { floorCount } from './addresses-api/floor-count';
 import { SERVER_CONFIGURATIONS } from './configuration';
 import { MongoConnectionService } from './mongo-connection.service';
 import { NEWS_COLLECTION_NAME } from './news-api/news.interfaces';
@@ -64,22 +65,36 @@ export const ROUTES: any[] = [
         },
     },
 
+    '/flats/popular',
     '/flats/plan',
     '/flats/search',
-
     '/flats/_search',
     '/flats/_search/**',
     '/flats/house',
     {
         url: '/flats/house/:house/section/:section/floor/:floor',
         handle: async (req: any, res: Response, next) => {
-            await checkFlatsHouseSectionFloor(req, res, next);
+            const completed = await checkFlatsHouseSectionFloor(req, res);
+            if (completed) {
+                next();
+            }
         },
     },
     {
         url: '/flats/house/:house/section/:section/floor/:floor/:type/:apartment',
         handle: async (req: any, res: Response, next) => {
             await checkFlatsApartment(req, res, next);
+        },
+    },
+    '/flats/commercial/list',
+    '/flats/commercial/plan',
+    {
+        url: '/flats/commercial/house/:house/section/:section/floor/:floor',
+        handle: async (req: any, res: Response, next) => {
+            const completed = await checkCommercialFlatsHouseSectionFloor(req, res);
+            if (completed) {
+                next();
+            }
         },
     },
 ];
@@ -109,14 +124,21 @@ function checkDynamicMonthAndYear(req: any, res: Response, next) {
     }
 }
 
-async function checkFlatsHouseSectionFloor(req: any, res: Response, next) {
+async function checkFlatsHouseSectionFloor(req: any, res: Response) {
     const dir = join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'desktop', 'assets', 'floor-plans', `house_${req.params.house}`,
         `section_${req.params.section}`, `floor_${req.params.floor}`, `sect_${req.params.section}_fl_${req.params.floor}.svg`);
     const floorSchemeExist = fs.existsSync(dir);
     if (!floorSchemeExist) {
         clientRender(req, res, 404, req.session);
+        return false;
+    }
+
+    if (floorCount[req.params.house] && floorCount[req.params.house][req.params.section]
+        && floorCount[req.params.house][req.params.section].some((floor) => floor === Number(req.params.floor))) {
+        return true;
     } else {
-        next();
+        clientRender(req, res, 404, req.session);
+        return false;
     }
 }
 
@@ -130,5 +152,23 @@ async function checkFlatsApartment(req: any, res: Response, next) {
         clientRender(req, res, 404, req.session);
     } else {
         next();
+    }
+}
+
+async function checkCommercialFlatsHouseSectionFloor(req: any, res: Response) {
+    const dir = join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'desktop', 'assets', 'floor-plans', `house_${req.params.house}`,
+        `section_${req.params.section}`, `floor_${req.params.floor}`, `sect_${req.params.section}_fl_${req.params.floor}.svg`);
+    const floorSchemeExist = fs.existsSync(dir);
+    if (!floorSchemeExist) {
+        clientRender(req, res, 404, req.session);
+        return false;
+    }
+
+    if (floorCount[req.params.house] && floorCount[req.params.house][req.params.section]
+        && (req.params.floor === '0' || req.params.floor === '1')) {
+        return true;
+    } else {
+        clientRender(req, res, 404, req.session);
+        return false;
     }
 }
