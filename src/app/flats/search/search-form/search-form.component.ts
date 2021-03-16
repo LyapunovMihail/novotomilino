@@ -188,7 +188,9 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     public ngOnDestroy() {
-        this.formEvents.unsubscribe();
-        this.seoPageEvent.unsubscribe();
+        if (this.formEvents && this.seoPageEvent) {
+            this.formEvents.unsubscribe();
+            this.seoPageEvent.unsubscribe();
+        }
     }
 }
