@@ -18,7 +18,7 @@ import * as moment from 'moment';
 export class SharesItemComponent implements OnInit {
 
     public share;
-
+    public isLoadComplete = false;
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     public indexNum: number;
@@ -70,6 +70,7 @@ export class SharesItemComponent implements OnInit {
         if (this.share) {
             this.share.shareFlats = this.share.shareFlats.map(el => {
                 el.discount = this.getDiscount(el);
+                el.flat = Number(el.flat);
                 return el;
             });
             this.refreshShareFlats();
@@ -113,6 +114,9 @@ export class SharesItemComponent implements OnInit {
                     this.share.shareFlats = this.share.shareFlats
                         .map((flat: ShareFlat) => this.updateFlat(flat, refreshFlats))
                         .filter((el: ShareFlat) => el);
+                    this.changeRef.detectChanges();
+                    this.isLoadComplete = true;
+
                 },
                 (err) => console.error(err)
             );

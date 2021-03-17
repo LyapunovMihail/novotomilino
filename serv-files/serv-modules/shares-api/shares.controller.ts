@@ -36,7 +36,6 @@ export class SharesController extends SharesModel {
         }));
 
         this.router.post('/admin/shares/update', responseHandler(async(req) => {
-            console.log(req.body.id);
             return await this.updateShare(req.body.id, req.body.obj);
         }));
 

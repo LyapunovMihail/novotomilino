@@ -62,7 +62,6 @@ export class ApartmentComponent implements OnInit, OnDestroy {
             this.flatData = data;
             this.flatData.discount = this.getDiscount(data);
             this.flatData.inFavorite = this.inFavorite(data);
-            console.log('flatData -> ', data);
         },
             err => {
                 this.router.navigate(['/error-404'], { skipLocationChange: true });

@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="client-share__flats">
+        <div class="client-share__flats" *ngIf="isLoadComplete">
             <ng-container *ngFor="let flat of share.shareFlats">
                 <app-flat-snippet
                     [flatData]="flat"

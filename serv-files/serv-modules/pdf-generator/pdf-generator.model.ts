@@ -103,8 +103,6 @@ export class PDFGeneratorModel {
             const result = await this.convert(html);
             const way = `/${PDF_UPLOADS_PATH}/businesscard.pdf`;
 
-            console.log('result promise', result);
-
             return way;
         })();
     }

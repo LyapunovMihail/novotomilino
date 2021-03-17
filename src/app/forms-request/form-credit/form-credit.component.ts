@@ -71,7 +71,6 @@ export class FormCreditComponent implements OnChanges {
             this.form.controls['type'].setValue(this.type);
             this.form.controls['articleId'].setValue(this.articleId);
             this.form.controls['description'].setValue('');
-            console.log('this.form.value: ', this.form.value);
         }
     }
 

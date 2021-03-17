@@ -21,7 +21,6 @@ export class FormsRequestService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
-        console.log('form: ', form);
         return this.http.post('/api/request_form/credit', message, { headers } );
     }
 
@@ -31,7 +30,6 @@ export class FormsRequestService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
-        console.log('form: ', form);
         return this.http.post('/api/request_form/reserve', message, { headers } );
     }
 
