@@ -84,7 +84,9 @@ export class DynamicObjectComponent implements OnInit, OnDestroy, AfterViewInit,
     }
 
     ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public startSlideShow(id, i) {

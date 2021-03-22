@@ -95,7 +95,9 @@ export class DynamicDateComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

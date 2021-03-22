@@ -209,6 +209,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
 
     public ngOnDestroy() {
         this.windowScrollLocker.unblock();
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
     }
 }

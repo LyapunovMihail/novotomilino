@@ -57,8 +57,12 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if ( this.platform.isBrowser ) {
-            this.AuthorizationEvent.unsubscribe();
-            this.routerEvent.unsubscribe();
+            if (this.AuthorizationEvent) {
+                this.AuthorizationEvent.unsubscribe();
+            }
+            if (this.routerEvent) {
+                this.routerEvent.unsubscribe();
+            }
         }
     }
 

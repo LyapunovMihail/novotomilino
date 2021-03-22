@@ -204,6 +204,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public ngOnDestroy() {
         // отписка от событий роута
-        this.routerEvent.unsubscribe();
+        if (this.routerEvent) {
+            this.routerEvent.unsubscribe();
+        }
     }
 }
