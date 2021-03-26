@@ -3,29 +3,29 @@
 
     <div class="apartament-furniture__vars">
         <p class="apartament-furniture__vars-text">Показать:</p>
-        <label class="apartament-furniture__vars-item" *ngFor="let item of furnitureVariant">
-            <input type="radio" name="furnitureVariant" [checked]="item.name === 'Шатура'">
+        <label class="apartament-furniture__vars-item" *ngFor="let item of furniture; let i = index">
+            <input type="radio" name="furnitureVariant" [checked]="furnitureVariant.id === furniture[i].id">
             <div>
-                <span class="apartament-furniture__vars-name">{{item.name}}</span>
-                <!-- <span class="apartament-furniture__vars-price">{{item.price}} &#8381;</span> -->
+                <span class="apartament-furniture__vars-name">{{item.vendor}}</span>
+                 <span class="apartament-furniture__vars-price">{{item.charCost}} &#8381;</span>
             </div>
         </label>
     </div>
     <div class="apartament-furniture__content">
         <div class="apartament-furniture__slides">
             <figure class="apartament-furniture__slides-item">
-                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img1.style.display = 'none'" #img1>
+                <img [src]="furnitureVariant.charMainImage[0]" alt="furniture-preview" (error)="img1.style.display = 'none'" #img1>
                 <div *ngIf="img1.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
             </figure>
             <figure class="apartament-furniture__slides-item">
-                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img2.style.display = 'none'" #img2>
+                <img [src]="furnitureVariant.charMainImage[1]" alt="furniture-preview" (error)="img2.style.display = 'none'" #img2>
                 <div *ngIf="img2.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
             </figure>
             <figure class="apartament-furniture__slides-item">
-                <img [src]="'z.jpg'" alt="furniture-preview" (error)="img3.style.display = 'none'" #img3>
+                <img [src]="furnitureVariant.charMainImage[2]" alt="furniture-preview" (error)="img3.style.display = 'none'" #img3>
                 <div *ngIf="img3.style.display === 'none'" class="apartament-furniture__slides-error">Изображение недоступно</div>
             </figure>
-            <a class="apartament-furniture__slides-item apartament-furniture__slides-item--link">
+            <a class="apartament-furniture__slides-item apartament-furniture__slides-item--link" routerLink="/decoration/furniture">
                 <h2 class="apartament-furniture__slides-title">Больше примеров</h2>
                 <p class="apartament-furniture__slides-text">Подробная галерея для всех видов меблировки и квартир</p>
             </a>

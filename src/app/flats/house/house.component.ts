@@ -72,6 +72,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.service.getHousesChess().subscribe(
             (data) => {
                 this.chess = data;
+                console.log('chess: ', this.chess);
                 this.routerEvent = this.routerChange();
             },
             (err) => {

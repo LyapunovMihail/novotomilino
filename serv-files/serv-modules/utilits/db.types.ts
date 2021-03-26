@@ -20,3 +20,12 @@ export interface DbJsonObject {
     SaleChars?: any[];
     planid: string;
 }
+
+export interface DbFurnitureItemsObject {
+    id: string;
+    itemId: string;
+    itemName: string;
+    itemsDefaultCount: string;
+    itemPrice: string;
+    chSalesId: string;
+}

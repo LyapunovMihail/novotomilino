@@ -2,6 +2,7 @@ import * as moment from 'moment';
 import _date = moment.unitOfTime._date;
 
 export const ADDRESSES_COLLECTION_NAME = 'addresses';
+export const ADDRESSES_FURNITURE_COLLECTION_NAME = 'furniture';
 
 /**
  * коды отделки
@@ -63,18 +64,20 @@ export interface IAddressItemFlat {
     floorsInSection: number;
     flatsInFloor: number;
     isEuro: string;
-    saleChars?: any[] | any;
+    furniture?: any[];
     _id?: any;
 }
 
 export interface IFlatWithDiscount extends IAddressItemFlat {
     discount: number;
 }
-export interface IFlatWithFurniture extends IAddressItemFlat {
-    furniture: {
-        id: string;
-        items: IFlatFurniture[];
-    };
+export interface IFlatFurniture {
+    id: string;
+    saleCharName: string;
+    vendor: string;
+    charCost: string;
+    charMainImage: string[];
+    items: IFlatFurnitureItem[];
 }
 /*{
     id: 'a34d17fc-e612-eb11-80fd-001dd8bb025e',
@@ -84,9 +87,13 @@ export interface IFlatWithFurniture extends IAddressItemFlat {
     itemPrice: 38760.00,
     chSalesId: 'eaac5462-15f1-ea11-80fd-001dd8bb025e'
 }*/
-export interface IFlatFurniture {
+export interface IFlatFurnitureItem {
+    id: string;
+    itemId: string;
     itemName: string;
     itemPrice: number;
+    itemsDefaultCount: number;
+    chSalesId: string;
 }
 
 export interface IFlatResponse {

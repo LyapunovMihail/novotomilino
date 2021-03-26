@@ -24,7 +24,7 @@ export interface IAddressItemFlat {
     floorsInSection: number;
     flatsInFloor: number;
     isEuro: string;
-    saleChars?: any[] | any;
+    furniture?: any[];
     _id?: any;
 }
 

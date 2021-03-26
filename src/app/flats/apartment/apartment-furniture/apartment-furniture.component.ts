@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { furnitureVariant } from './config';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IFlatFurniture } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Component({
     selector: 'app-apartment-furniture',
@@ -8,15 +7,23 @@ import { furnitureVariant } from './config';
     styleUrls: ['./apartment-furniture.component.scss']
 })
 
-export class ApartmentFurnitureComponent implements OnInit {
+export class ApartmentFurnitureComponent implements OnInit, OnChanges {
 
-    public furnitureVariant = furnitureVariant;
+    public furnitureVariant: IFlatFurniture;
     public furnitureImages = [];
 
-    @Input() public flatData: IFlatWithDiscount;
+    @Input() public furniture: IFlatFurniture[];
     @Input() public isActive: boolean;
 
     constructor() { }
 
     ngOnInit() { }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('isActive' in changes && changes.isActive.currentValue === true) {
+            if ('furniture' in changes) {
+                this.furnitureVariant = changes.furniture.currentValue[0];
+            }
+        }
+    }
 }

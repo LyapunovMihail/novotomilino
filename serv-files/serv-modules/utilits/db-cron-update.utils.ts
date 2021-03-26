@@ -1,15 +1,16 @@
 import {
-    ADDRESSES_COLLECTION_NAME,
-    IAddressItemFlat,
-} from '../addresses-api/addresses.config';
+    ADDRESSES_COLLECTION_NAME, ADDRESSES_FURNITURE_COLLECTION_NAME,
+    IAddressItemFlat, IFlatFurniture, IFlatFurnitureItem
+} from '../addresses-api/addresses.interfaces';
 import * as request from 'request';
 import * as cron from 'cron';
 import {
     Writable,
 } from 'stream';
 import * as JSONStream from 'JSONStream';
-import { DbJsonObject } from './db.types';
+import { DbFurnitureItemsObject, DbJsonObject } from './db.types';
 const url = 'http://incrm.ru/export-tred/ExportToSite.svc/ExportToTf/json';
+const urlFurniture = 'http://incrm.ru/Export-TRED/ExportToSite.svc/ExportToSaleCharItems';
 const CronJob = cron.CronJob;
 
 export class DbCronUpdate {
@@ -23,9 +24,11 @@ export class DbCronUpdate {
     }
 
     public start() {
+        this.requestFurnitureItems();
         this.requestBase();
         // const task = new CronJob('0 8,13,19,23 * * *', () => {
-        const task = new CronJob('0 * * * *', () => {
+        const task = new CronJob('0 * * * *', async () => {
+            this.requestFurnitureItems();
             this.requestBase();
         }, false);
         task.start();
@@ -42,7 +45,7 @@ export class DbCronUpdate {
         const parserStream = JSONStream.parse('*');
         const processingStream = new Writable({
             write: async (object, encoding, callback) => {
-                const item = this.transformFlatItem(object as any as DbJsonObject);
+                const item = await this.transformFlatItem(object as any as DbJsonObject);
                 if (item != null) {
                     await collectionAddresses.insert(item);
                 }
@@ -79,7 +82,7 @@ export class DbCronUpdate {
         });
     }
 
-    public transformFlatItem(object: DbJsonObject) {
+    public async transformFlatItem(object: DbJsonObject) {
         if (('Article' in object) && !object.Article.startsWith('НТМ')) {
             return;
         }
@@ -109,7 +112,7 @@ export class DbCronUpdate {
             articleId: object.ArticleID,
             floorsInSection: Number(object.planid.split('/')[0]),
             flatsInFloor: Number(object.planid.split('/')[1]),
-            saleChars: ('SaleChars' in object) ? this.paraseSaleChars(object.SaleChars) : null,
+            furniture: ('SaleChars' in object) ? await this.parseSaleChars(object.SaleChars) : null,
         };
 
         this.counter++;
@@ -138,18 +141,6 @@ export class DbCronUpdate {
                 }
         }
     }
-    private paraseSaleChars(object) {
-        const newObject = object.map(el => {
-            const newCtrl = {};
-            // tslint:disable-next-line: forin
-            for (const key in el) { newCtrl[this.myCase(key)] = el[key]; }
-            return newCtrl;
-        });
-        return newObject;
-    }
-    private myCase(ctrl) {
-        return `${ctrl[0].toLowerCase()}${ctrl.slice(1)}`;
-    }
 
     private parseArticle(article: string) {
         // НТМ-03-01-04-02-018
@@ -161,5 +152,82 @@ export class DbCronUpdate {
             floor,
             flat,
         };
+    }
+
+    private async parseSaleChars(saleChars) {
+        const newSaleChars = await Promise.all(saleChars.map(async el => {
+            const newCtrl: IFlatFurniture = {
+                id: el.Id,
+                saleCharName: el.SaleCharName,
+                vendor: el.Vendor,
+                charCost: el.CharCost,
+                charMainImage: [el.CharMainImage],
+                items: await this.getFurnitureItems(el.Id)
+            };
+            return newCtrl;
+
+        }));
+        return newSaleChars;
+    }
+    private myCase(ctrl) {
+        return `${ctrl[0].toLowerCase()}${ctrl.slice(1)}`;
+    }
+    private async getFurnitureItems(id): Promise<IFlatFurnitureItem[]> {
+        const collectionFurniture = await this.db.collection(ADDRESSES_FURNITURE_COLLECTION_NAME);
+        const furniture = await collectionFurniture.findOne({id}) as IFlatFurniture;
+        // console.log('furniture: ', furniture.items);
+        return furniture.items;
+    }
+
+    public async requestFurnitureItems() {
+
+        const collectionFurniture = this.db.collection(ADDRESSES_FURNITURE_COLLECTION_NAME);
+
+        // Create request, parse, process streams
+        const requestStream = request.get({url: urlFurniture, json: true});
+        const parserStream = JSONStream.parse('*');
+
+        this.counter = 0;
+
+        const processingStream = new Writable({
+            write: async (object, encoding, callback) => {
+                this.counter = object.length;
+                for (const item of object) {
+                    await collectionFurniture.insertOne(item);
+                }
+                // await Promise.all(object.forEach(async (item: IFlatFurniture) => {
+                //     await collectionFurniture.insertOne(item);
+                // }));
+                callback();
+            },
+            objectMode: true,
+        });
+
+        const errorHandler = (err, name) => {
+            const errorText = `${name} error. ${(new Date())} DB UPDATE FAILED WITH ERROR: ${err};`;
+            console.log(errorText, err);
+        };
+
+        requestStream
+            .on('error', (err) => errorHandler(err, 'requestStream'))
+            .on('response', async (res) => {
+                console.log(`Furniture DB update request ${(new Date())}, response status code ${res.statusCode};`);
+                if (res.statusCode === 200) {
+                    await collectionFurniture.remove({});
+                }
+            })
+            .on('end', () => console.log(`furniture requestStream is ended ${(new Date())};`))
+            .pipe(parserStream)
+            .on('error', (err) => errorHandler(err, 'parserStream'))
+            .pipe(processingStream)
+            .on('error', (err) => errorHandler(err, 'processingStream'));
+
+        processingStream.on('finish', async () => {
+            try {
+                console.log(`furniture processingStream is finished ${(new Date())}; DB HAS BEEN UPDATED; furniture count: ${this.counter}`);
+            } catch (err) {
+                errorHandler(err, 'test base rename');
+            }
+        });
     }
 }
