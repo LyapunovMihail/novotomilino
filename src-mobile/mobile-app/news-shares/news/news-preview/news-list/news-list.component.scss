@@ -62,7 +62,12 @@
         }
         &-text {
             @include f16-24;
+            max-height: 48px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
             color: rgba(0, 1, 5, 0.6);
+            overflow: hidden;
             margin: 0 0 10px;
         }
         &-date {

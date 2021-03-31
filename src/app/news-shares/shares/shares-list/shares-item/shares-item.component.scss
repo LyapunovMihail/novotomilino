@@ -1,22 +1,25 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
 :host {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .client-share {
-    width: $w1600;
+    width: 100%;
+    display: flex;
     min-height: calc(100vh - (67px + 50px + 170px)); // 146 + 50 это высота хедера и футера
-    position: relative;
+    flex-direction: column;
+    align-items: center;
     padding: 52px 0 0;
+
+    &__container {
+        @include container();
+        position: relative;
+    }
 
     &__nav {
         position: absolute;
         left: 0;
-        top: 15px;
+        top: -35px;
         
         &-back{
             @include fw18-24;
