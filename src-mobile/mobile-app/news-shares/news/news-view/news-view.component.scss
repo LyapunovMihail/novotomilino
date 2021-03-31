@@ -1,8 +1,8 @@
 @import "../../../../styles/modules/mixins/mixin.scss";
 
 .news-view {
+    @include screenHeight('min');
     position: relative;
-    padding: 0 0 64px;
 
     &__nav {
         width: calc(100% - 30px);

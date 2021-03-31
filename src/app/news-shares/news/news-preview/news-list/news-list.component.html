@@ -1,4 +1,4 @@
-<app-news-shares class="news__snippets-list">
+<div class="news__snippets-list">
         <!-- Отображать сниппет только если у него отрицательное значение показа на главной
             и если выбранная категория равна категории сниппета или 'ALL' -->
     <div class="news__snippets-item" *ngFor="let snippet of snippetsArray">
@@ -17,4 +17,4 @@
             <button (click)="deleteSnippet.emit(snippet._id)" class="admin-controll admin__news-btn-delete">Удалить</button>
         </div>
     </div>
-</app-news-shares>
+</div>

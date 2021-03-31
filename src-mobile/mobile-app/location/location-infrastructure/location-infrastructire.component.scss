@@ -9,34 +9,20 @@
 
     &__head {
         width: 100%;
-        // height: 199px;
         padding: 24px 15px 10px;
         box-sizing: border-box;
         display: flex;
-        flex-flow: column;
-        align-items: center;
+        justify-content: center;
 
         &-title {
             color: $col-black;
             margin: 0 0 10px;
         }
-        &-info,
-        &-text {
-            @include f16-24;
-            color: rgba(0, 1, 5, 0.8);
-            text-align: center;
-
-            &_bold {
-                font-weight: 500;
-                color: $col-black;
-            }
-            span { white-space: nowrap; }
-        }
     }
 
-    &_map {
+    &__map {
         width: 100%;
-        height: calc(100vh - 167px - 51px - 63px);
+        flex-grow: 1;
         min-height: 400px;
     }
 }

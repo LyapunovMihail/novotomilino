@@ -2,7 +2,7 @@
 
 .commercial {
     width: 100%;
-    height: calc(100vh - (52px + 50px));
+    @include screenHeight('min');
     display: flex;
     flex-flow: column;
     align-items: center;

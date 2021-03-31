@@ -21,7 +21,7 @@
         <p class="home-preview__description-text">{{homePreview.description}}</p>
     </div>
 
-    <div class="home-preview__news">
+    <div class="home-preview__news" *ngIf="newsShares.length">
         <ng-container *ngFor="let news of newsShares; let i = index">
 
             <a class="home-preview__news-item" 
