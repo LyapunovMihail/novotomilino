@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EnumGallerySnippet, GALLERY_UPLOADS_PATH, IGallerySnippet } from '../../../../serv-files/serv-modules/gallery-api/gallery.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { HomeService } from '../home.service';
@@ -15,7 +15,7 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
     ]
 })
 
-export class HomePlacesComponent implements OnInit {
+export class HomePlacesComponent implements OnInit, OnDestroy {
 
     public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
 
@@ -54,7 +54,9 @@ export class HomePlacesComponent implements OnInit {
 
     ngOnDestroy() {
         if (!this.platform.isBrowser) { return false; }
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public nextBtn() {

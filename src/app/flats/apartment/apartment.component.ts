@@ -81,8 +81,9 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
         this.clickedPdf = true;
         const location = window.location.href;
-        const modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
-
+        // const modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+        const modeIndex = 'prod';
+        //
         if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
             this.clickedPdf = false;
             window.open(this.pdfLink);

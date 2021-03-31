@@ -47,7 +47,9 @@ export class DynamicAdminCreateComponent implements OnInit, OnChanges, OnDestroy
     }
 
     public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public ngOnChanges(changes: SimpleChanges) {
