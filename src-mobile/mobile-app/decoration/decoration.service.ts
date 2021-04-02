@@ -55,21 +55,23 @@ export class DecorationService {
                 '/assets/img/decoration/hallway/hall_classic.jpg',
                 '/assets/img/decoration/hallway/hall_modern.jpg',
             ]
+        }, {
+            name: 'Общедомовые пространства',
+            mod: 'places',
+            url: '/decoration/places',
+            preview: '/assets/img/decoration/places/1.jpg',
+            images: [
+                '/assets/img/decoration/places/1.jpg',
+                '/assets/img/decoration/places/2.jpg',
+                '/assets/img/decoration/places/3.jpg',
+                '/assets/img/decoration/places/4.jpg',
+                '/assets/img/decoration/places/5.jpg',
+                '/assets/img/decoration/places/6.jpg',
+                '/assets/img/decoration/places/7.jpg',
+                '/assets/img/decoration/places/8.jpg',
+                '/assets/img/decoration/places/9.jpg',
+            ]
         }
-        // {
-        //     name: 'Общедомовые пространства',
-        //     mod: 'places',
-        //     url: '/decoration/places',
-        //     preview: '/assets/img/decoration/places.jpg',
-        //     images: [
-        //         '/assets/img/decoration/places/float_1.jpg',
-        //         '/assets/img/decoration/places/float_1-2.jpg',
-        //         '/assets/img/decoration/places/float_3.jpg',
-        //         '/assets/img/decoration/places/float_1-3.jpg',
-        //         '/assets/img/decoration/places/float.jpg',
-        //         '/assets/img/decoration/places/float-17.jpg'
-        //     ]
-        // }
     ];
 
     public getDecorationItems() {

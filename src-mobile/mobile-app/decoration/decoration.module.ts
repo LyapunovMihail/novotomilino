@@ -9,6 +9,7 @@ import { DecorationSliderComponent } from './decoration-placement/decoration-sli
 import { DecorationSliderListComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list.component';
 import { DecorationSliderListItemComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list-item/decoration-slider-list-item.component';
 import { DecorationSliderBtnsComponent } from './decoration-placement/decoration-slider/decoration-slider-btns/decoration-slider-btns.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 let DecorationComponents = [
     DecorationComponent,
@@ -31,6 +32,7 @@ let DecorationComponents = [
     imports: [
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: 'decoration', component: DecorationVariationComponent },
             { path: 'decoration/:type', component: DecorationVariationComponent }

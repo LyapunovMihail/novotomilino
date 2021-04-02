@@ -37,13 +37,6 @@
 .triggers {
     margin: 0 0 30px;
     &:last-child { margin: 0 0 96px; }
-    @media(max-width: 767px) {
-        margin: 0 0 10px;
-        &:last-child { margin: 0 0 96px; }
-    }
-    @media (max-width: 425px) {
-        &:last-child { margin: 0 0 64px; }
-    }
 }
 
 .home__snippet {
@@ -56,7 +49,6 @@
         max-width: 706px;
         display: flex;
         flex-flow: row wrap;
-        @media(max-width: 767px) { max-width: 290px; }
     }
     &-item {
         width: 338px;
@@ -69,11 +61,6 @@
         &:nth-child(2n) { margin-right: 0; }
         &:nth-last-child(2),
         &:last-child { margin-bottom: 0; }
-        @media(max-width: 767px) {
-            margin: 0 0 10px;
-            &:nth-last-child(2) { margin: 0 0 10px; }
-            &:last-child { margin: 0; }
-        }
     }
     &-name {
         font: 23px/32px 'Leksa', 'sans-serif';
@@ -158,13 +145,21 @@
 }
 
 @media (max-width: 767px) {
+    .triggers {
+        margin: 0 0 10px;
+        &:last-child { margin: 0 0 96px; }
+    }
+
+    .home__snippet-item {
+        width: 100%;
+        margin: 0 0 10px;
+        &:nth-last-child(2) { margin: 0 0 10px; }
+        &:last-child { margin: 0; }
+    }
     
     .commercial {
         margin: 0 0 16px;
 
-        &__container {
-            max-width: 290px;
-        }
         &__snippet {
             min-height: unset;
             padding: 12px 16px;
@@ -175,9 +170,6 @@
         }
     }
     .storerooms-parking {
-        &__container {
-            max-width: 290px;
-        }
         &__snippet {
             min-height: unset;
             margin-bottom: 16px;
@@ -191,4 +183,8 @@
             position: relative;
         }
     }
+}
+
+@media (max-width: 425px) {
+    .triggers:last-child { margin: 0 0 64px; }
 }

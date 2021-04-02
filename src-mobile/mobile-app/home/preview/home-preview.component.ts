@@ -26,6 +26,7 @@ declare let $: any;
 
 export class HomePreviewComponent implements OnInit, OnDestroy {
 
+    screenHeight = window.innerHeight - (52 + 50);
     public uploadsPath: string = `/${GALLERY_UPLOADS_PATH}`;
 
     public currentSlide = 0;
