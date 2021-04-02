@@ -25,7 +25,8 @@
 
         &-img {
             width: 100%;
-            height: 62.5vw;
+            height: vw(200px);
+            max-height: 383px;
             border-radius: 4px;
             position: relative;
             overflow: hidden;
