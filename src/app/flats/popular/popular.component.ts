@@ -17,7 +17,6 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 export class PopularComponent implements OnInit, OnDestroy {
 
     public metaTags;
-    @Output() public close = new EventEmitter<boolean>();
 
     constructor(
         private searchService: SearchService,
@@ -32,7 +31,6 @@ export class PopularComponent implements OnInit, OnDestroy {
         this.searchService.getMetaTags()
         .subscribe((tags) => {
                 this.metaTags = tags;
-                console.log('metaTags', tags);
             },
             (err) => console.log(err));
     }
@@ -43,10 +41,19 @@ export class PopularComponent implements OnInit, OnDestroy {
         } else {
             this.searchFlatsLinkHandlerService.seoLinkHandle(true, url);
         }
-        this.close.emit(false);
+    }
+
+    public previousRoute() {
+        const prevRoute = JSON.parse(sessionStorage.getItem('vb2-prev-route'));
+        if (prevRoute.route === '/flats/plan') {
+            this.searchFlatsLinkHandlerService.linkHandle(true, prevRoute.params);
+            return;
+        }
+        this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
     }
 
     ngOnDestroy() {
         this.scrollLock.unblock();
+        sessionStorage.removeItem('vb2-prev-route');
     }
 }

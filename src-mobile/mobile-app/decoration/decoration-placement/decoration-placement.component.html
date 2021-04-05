@@ -6,9 +6,5 @@
         [slideList]="slideList">
     </app-decoration-slider>
 
-    <p class="placement__title">{{name}}: {{
-        slideList.length === 2 ? (activeIndex === 0 ? 'Классика' : 'Модерн') :
-        (activeIndex <= 1 ? 'Классика' : 'Модерн')
-    }}</p>
-
+    <p class="placement__title">{{ noticeContent() }}</p>
 </section>

@@ -16,8 +16,9 @@ export class FlatsDiscountService {
     public getShares() {
         this.http.get<{ length: number, sharesList: Share[] }>(`/api/shares/list?limit=${100}&skip=${0}`)
             .subscribe((data: { length: number, sharesList: Share[] }) => {
+                this.shareFLats = [];
                 data.sharesList.forEach((share: Share) => {
-                    this.shareFLats = [...this.shareFLats, ...share.shareFlats];
+                    this.shareFLats.push(...share.shareFlats);
                 });
             }, (err) => {
                 console.log(err);

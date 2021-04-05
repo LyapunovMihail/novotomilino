@@ -36,7 +36,9 @@ export class DecorationVariationComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.routerEvents.unsubscribe();
+        if (this.routerEvents) {
+            this.routerEvents.unsubscribe();
+        }
     }
 
     public defineType() {

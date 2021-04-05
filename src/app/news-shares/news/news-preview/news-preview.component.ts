@@ -7,6 +7,7 @@ import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 @Component({
     selector: 'app-news-preview',
     templateUrl: './news-preview.component.html',
+    styleUrls: ['../news.component.scss', '../news.admin.scss'],
     providers: [
         WindowScrollLocker
     ]
@@ -58,7 +59,9 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public createSnippet() {

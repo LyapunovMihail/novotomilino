@@ -1,15 +1,14 @@
 import { resolve } from 'path';
-import { rejects } from 'assert';
-import { async } from 'rxjs/internal/scheduler/async';
 const fs         = require('fs');
 const fileExists = require('file-exists');
 const pdf        = require('html-pdf');
 const path       = require("path");
 const ObjectId   = require('mongodb').ObjectID;
 
+// const devModPath = resolve(__dirname, '..', '..', '..', 'src');
+// const prodModPath = resolve(process.cwd(), '..',  'dist', 'desktop');
 const devModPath = resolve(__dirname, '..', '..', '..', 'src');
-const prodModPath = resolve(__dirname, '..', 'desktop', 'browser');
-
+const prodModPath = resolve(process.cwd(), 'dist', 'desktop');
 const PDF_UPLOADS_PATH = 'uploads/pdf';
 
 export class PDFGeneratorModel {
@@ -28,14 +27,15 @@ export class PDFGeneratorModel {
             const options = {
                 format: 'A4',
                 orientation: 'landscape',
-                base: `${(this.params !== 'prod') ? devModPath : ''}/`,
-                script: `${(this.params !== 'prod') ? devModPath : prodModPath}/assets/html-pdf/pdf_a4_portrait.js`,
+                base: `file:///${prodModPath}/`,
+                script: `${this.rootPath}/assets/html-pdf/pdf_a4_portrat.js`,
                 quality: '100',
-                // phantomPath:  process.env.PHANTOM_PATH || null ,
+                // phantomPath:  '/home/shepotmonaha/Public/novotomilino/node_modules/phantomjs-prebuilt/bin/phantomjs',
             };
 
             pdf.create(html, options).toFile(`./${PDF_UPLOADS_PATH}/businesscard.pdf`, (err, file) => {
                 console.log('in pdf Create ', file);
+                console.log('in pdf Create ', err);
                 res(file.filename);
             });
         });
@@ -104,8 +104,6 @@ export class PDFGeneratorModel {
             const html = await this.htmlRender(svgFloor, svgFlat, phoneNumber, this.flatInfo);
             const result = await this.convert(html);
             const way = `/${PDF_UPLOADS_PATH}/businesscard.pdf`;
-
-            console.log('result promise', result);
 
             return way;
         })();

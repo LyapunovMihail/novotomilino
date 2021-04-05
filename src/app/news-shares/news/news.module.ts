@@ -1,3 +1,4 @@
+import { NewsSharesComponentModule } from '../news-shares-component.module';
 import { NewsMainComponent } from './news-preview/news-main/news-main.component';
 import { LineBreakPipe } from './line-break.pipe';
 import { NewsService } from './news.service';
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LoaderModule } from '../../UI/loader/loader.module';
+import { InfoBlockModule } from '../../UI/info-block/info-block.module';
 
 const NewsComponents = [
     NewsComponent,
@@ -33,15 +35,12 @@ const NewsComponents = [
     imports: [
         CommonModule,
         LoaderModule,
+        InfoBlockModule,
         CreateRedactFormsModule,
+        NewsSharesComponentModule,
         RouterModule.forChild([
-            { path: '', component: NewsComponent
-                , children : [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
-                    { path: 'list', component: NewsPreviewComponent },
-                    { path: 'list/:id', component: NewsViewComponent }
-                ]
-            }
+            { path: 'list', component: NewsPreviewComponent },
+            { path: 'list/:id', component: NewsViewComponent }
         ])
     ]
 })

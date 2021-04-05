@@ -148,6 +148,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     number: null,
                     section: null,
                     floor: null,
+                    flat: null,
                     space: null,
                     room: null,
                     decoration: null,

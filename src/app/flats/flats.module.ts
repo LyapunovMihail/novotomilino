@@ -64,24 +64,16 @@ const FlatsComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: 'flats', component: FlatsComponent,
-                children: [
-                    { path: '', redirectTo: 'plan', pathMatch: 'full' },
-                    { path: 'plan', component: PlanComponent },
-                    { path: 'commercial', component: CommercialComponent,
-                        children: [
-                            { path: '', redirectTo: 'list', pathMatch: 'full' },
-                            { path: 'list', component: CommercialListComponent },
-                            { path: 'plan', component: CommercialPlanComponent },
-                            { path: 'house/:houses/section/:sections/floor/:floor', component: CommercialFloorComponent },
-                        ]
-                    },
-                    { path: '_search', component: PlanComponent, children: [{path: '**', component: PlanComponent}]},
-                    { path: 'house', component: HouseComponent },
-                    { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
-                    { path: 'house/:house/section/:section/floor/:floor/:type/:apartment', component: ApartmentComponent }
-                ]
-            }
+            { path: 'flats/popular', component: PopularComponent },
+            { path: 'flats/plan', component: PlanComponent },
+            { path: 'flats/commercial/list', component: CommercialListComponent },
+            { path: 'flats/commercial/plan', component: CommercialPlanComponent },
+            { path: 'flats/commercial/house/:houses/section/:sections/floor/:floor', component: CommercialFloorComponent },
+
+            { path: 'flats/_search', component: PlanComponent, children: [{path: '**', component: PlanComponent}]},
+            { path: 'flats/house', component: HouseComponent },
+            { path: 'flats/house/:house/section/:section/floor/:floor', component: FloorComponent },
+            { path: 'flats/house/:house/section/:section/floor/:floor/:type/:apartment', component: ApartmentComponent }
         ])
     ]
 })

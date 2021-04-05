@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
+import { FloorCount } from '../../floor/floor-count';
 import { FloorService } from '../../floor/floor.service';
 import { CommercialService } from '../commercial.service';
 
@@ -25,6 +26,7 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
     public apartaments;
     public paramsSubcribe;
     public config;
+    public floorCount = FloorCount;
 
     public floorSvg;
     public loadFloorSvg = false;
@@ -60,21 +62,26 @@ export class CommercialFloorComponent implements OnInit, OnDestroy {
 
     private subscribeParams() {
         this.paramsSubcribe = this.activateRouter.params.subscribe(params => {
-            this.params = params;
+            if (this.floorCount[params.houses] && this.floorCount[params.houses][params.sections]
+                && (params.floor === '0' || params.floor === '1')) {
+                this.params = params;
 
-            this.getFloorSvg(this.getSVGpath(this.params.houses, this.params.sections, this.params.floor))
-                .subscribe((data: string) => {
-                    this.floorSvg = data;
-                    this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
+                this.getFloorSvg(this.getSVGpath(this.params.houses, this.params.sections, this.params.floor))
+                    .subscribe((data: string) => {
+                        this.floorSvg = data;
+                        this.floorSvg = this.floorSvg.slice(1, 4) !== 'svg' ? '' : this.floorSvg;
 
-                    this.getFlats(this.params);
-                },
-                (err) => {
-                    this.floorSvg = '';
-                    this.getFlats(this.params);
-                    console.log(err);
-                }
-            );
+                        this.getFlats(this.params);
+                    },
+                    (err) => {
+                        this.floorSvg = '';
+                        this.getFlats(this.params);
+                        console.log(err);
+                    }
+                );
+            }  else {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
+            }
         });
     }
     private getFlats(value) {

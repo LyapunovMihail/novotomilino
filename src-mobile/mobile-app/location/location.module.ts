@@ -22,13 +22,10 @@ const LocationComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: 'location', component: LocationComponent,
-                children: [
-                    { path: '', redirectTo: 'routes', pathMatch: 'full' },
-                    { path: 'office', component: LocationRoutesComponent },
-                    { path: 'routes', component: LocationRoutesComponent },
-                    { path: 'infrastructure', component: LocationInfrastructureComponent },
-                ]}
+            { path: 'location/office', component: LocationRoutesComponent },
+            { path: 'location/routes', component: LocationRoutesComponent },
+            { path: 'location/infrastructure', component: LocationInfrastructureComponent }
+
         ])
     ]
 })

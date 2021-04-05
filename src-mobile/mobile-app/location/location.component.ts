@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-location',
     template: `
-            <router-outlet></router-outlet>
+            <ng-content></ng-content>
     `,
     styles: ['']
 })

@@ -1,35 +1,40 @@
-<div *ngIf="share" class="client-share">
+<app-news-shares>
+    <div *ngIf="share" class="client-share">
 
-    <div class="client-share__nav">
-        <a routerLink="/news-shares/shares/list/1" class="client-share__nav-back">Все акции</a>
-    </div>
+        <div class="client-share__container">
 
-    <div class="client-share__header">
-        <div class="client-share__header-wrap">
-            <a class="client-share__header-btn client-share__header-prev" [class.client-share__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></a>
-            <a class="client-share__header-btn client-share__header-next" [class.client-share__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></a>
-            <div class="client-share__header-img-wrap">
-                <img [src]="uploadsPath + share.mainImage" class="client-share__header-img">
-                <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">
-                    <span>{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
+            <div class="client-share__nav">
+                <a routerLink="/news-shares/shares/list/1" class="client-share__nav-back">Все акции</a>
+            </div>
+    
+            <div class="client-share__header">
+                <div class="client-share__header-wrap">
+                    <a class="client-share__header-btn client-share__header-prev" [class.client-share__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></a>
+                    <a class="client-share__header-btn client-share__header-next" [class.client-share__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></a>
+                    <div class="client-share__header-img-wrap">
+                        <img [src]="uploadsPath + share.mainImage" class="client-share__header-img">
+                        <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">
+                            <span>{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
+                        </div>
+                        <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="client-share__time">
+                            <span>Акция закончилась</span>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="client-share__time">
-                    <span>Акция закончилась</span>
+                <div class="client-share__content">
+                    <h1 class="client-share__content-name">{{share.name}}</h1>
+                    <p class="client-share__content-text">{{share.text}}</p>
                 </div>
             </div>
-        </div>
-        <div class="client-share__content">
-            <h1 class="client-share__content-name">{{share.name}}</h1>
-            <p class="client-share__content-text">{{share.text}}</p>
+    
+            <div class="client-share__flats" *ngIf="isLoadComplete">
+                <ng-container *ngFor="let flat of share.shareFlats">
+                    <app-flat-snippet
+                        [flatData]="flat"
+                        [viewType]="'inline'"
+                    ></app-flat-snippet>
+                </ng-container>
+            </div>
         </div>
     </div>
-
-    <div class="client-share__flats">
-        <ng-container *ngFor="let flat of share.shareFlats">
-            <app-flat-snippet
-                [flatData]="flat"
-                [viewType]="'inline'"
-            ></app-flat-snippet>
-        </ng-container>
-    </div>
-</div>
+</app-news-shares>

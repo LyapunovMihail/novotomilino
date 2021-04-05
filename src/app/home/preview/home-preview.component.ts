@@ -153,7 +153,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if ( !this.platform.isBrowser ) { return false; }
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
 
         if (this.newsTimer) {
             clearInterval(this.newsTimer);

@@ -1,79 +1,76 @@
-<div class="plan flats_main" #parent
-    (mousemove)="onMousemove($event, parent)" 
-    (click)="onclick()">
+<app-flats-page>
+    <div class="plan flats_main" #parent
+        (mousemove)="onMousemove($event, parent)"
+        (click)="onclick()">
 
-    <h1 class="plan__title plan__title--h1">Подбор квартиры ЖК Новотомилино</h1>
-    <h2 class="plan__title">Выберите дом</h2>
-    <div class="plan__rose"></div>
+        <h1 class="plan__title plan__title--h1">Подбор квартиры ЖК Новотомилино</h1>
+        <h2 class="plan__title">Выберите дом</h2>
+        <div class="plan__rose"></div>
 
-    <div class="plan_house-select flats_wrapper">
+        <div class="plan_house-select flats_wrapper">
 
-        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/plan.jpg">
+            <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/plan.jpg">
 
-        <a *ngFor="let house of houses"
-            class="plan_house-select_link plan_house-select_link--house-{{house.houseNumber}}"
-            [ngClass]="{'active' : infoAboutSect && house.houseNumber === infoAboutSect.houseNumber,
-                        'z-index-off' : showSearchWindow}"
-            (mouseenter)="onmouseenter(house)"
-            (mouseleave)="infoAboutSect = null"
-            (click)="svgRouterLink($event, house.houseNumber)">
+            <a *ngFor="let house of houses"
+                class="plan_house-select_link plan_house-select_link--house-{{house.houseNumber}}"
+                [ngClass]="{'active' : infoAboutSect && house.houseNumber === infoAboutSect.houseNumber,
+                            'z-index-off' : showSearchWindow}"
+                (mouseenter)="onmouseenter(house)"
+                (mouseleave)="infoAboutSect = null"
+                (click)="svgRouterLink($event, house.houseNumber)">
 
-            №{{house.houseNumber}} <span></span> {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
-        </a>
+                №{{house.houseNumber}} <span></span> {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
+            </a>
 
-        <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
-            class="plan_house-select_svg flats_svg">
+            <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
+                class="plan_house-select_svg flats_svg">
 
-            <ng-container *ngFor="let plan of houses">
-                <a (click)="svgRouterLink($event, plan.houseNumber)"
-                        [style.pointer-events]="plan.freeFlats ? 'all' : 'none'">
+                <ng-container *ngFor="let plan of houses">
+                    <a (click)="svgRouterLink($event, plan.houseNumber)"
+                            [style.pointer-events]="plan.freeFlats ? 'all' : 'none'">
 
-                    <path class="plan_house-select_svg_house"
-                        [attr.transform]="plan.transform"
-                        (mouseenter)="onmouseenter(plan)"
-                        (mouseleave)="infoAboutSect = null"
-                        [attr.d]="plan.svgPath"
-                          id="k-{{plan.houseNumber}}">
-                    </path>
-                </a>
+                        <path class="plan_house-select_svg_house"
+                            [attr.transform]="plan.transform"
+                            (mouseenter)="onmouseenter(plan)"
+                            (mouseleave)="infoAboutSect = null"
+                            [attr.d]="plan.svgPath"
+                              id="k-{{plan.houseNumber}}">
+                        </path>
+                    </a>
+                </ng-container>
+            </svg>
+        </div>
+
+        <div class="plan__tooltip" [ngStyle]="{'left': (coord.x + coord.posX) + 'px', 'top': (coord.y + coord.posY) + 'px'}" *ngIf="infoAboutSect && coord">
+            <h5 class="plan__tooltip-title">Корпус №{{infoAboutSect.houseNumber}}</h5>
+            <ng-container *ngFor="let rooms of infoAboutSect.rooms">
+                <p class="plan__tooltip-row" *ngIf="rooms.minPrice">
+                    <span class="plan__tooltip-rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
+                    <span class="plan__tooltip-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
+                </p>
             </ng-container>
-        </svg>
+        </div>
     </div>
 
-    <div class="plan__tooltip" [ngStyle]="{'left': (coord.x + coord.posX) + 'px', 'top': (coord.y + coord.posY) + 'px'}" *ngIf="infoAboutSect && coord">
-        <h5 class="plan__tooltip-title">Корпус №{{infoAboutSect.houseNumber}}</h5>
-        <ng-container *ngFor="let rooms of infoAboutSect.rooms">
-            <p class="plan__tooltip-row" *ngIf="rooms.minPrice">
-                <span class="plan__tooltip-rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
-                <span class="plan__tooltip-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
-            </p>
-        </ng-container>
-    </div>
-</div>
+    <button class="search__show-btn" [ngClass]="{'search__show-btn_active': showSearchWindow}" (click)="showSearchWindow = !showSearchWindow">
+        <p>{{ showSearchWindow ? 'Поиск по корпусам' : 'Поиск по параметрам'}}</p>
 
-<button class="search__show-btn" [ngClass]="{'search__show-btn_active': showSearchWindow}" (click)="showSearchWindow = !showSearchWindow">
-    <p>{{ showSearchWindow ? 'Поиск по корпусам' : 'Поиск по параметрам'}}</p>
-
-    <svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-            <g class="search__show-btn_stroke" transform="translate(-237.000000, -2091.000000)" stroke="#FFFFFF" stroke-width="2">
-                <g id="Group-9" transform="translate(180.000000, 2078.000000)">
-                    <g id="Group-5" transform="translate(58.000000, 10.000000)">
-                        <polyline id="Path" transform="translate(3.000000, 10.000000) rotate(-90.000000) translate(-3.000000, -10.000000) " points="9 13 3 7 -3 13"></polyline>
+        <svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                <g class="search__show-btn_stroke" transform="translate(-237.000000, -2091.000000)" stroke="#FFFFFF" stroke-width="2">
+                    <g id="Group-9" transform="translate(180.000000, 2078.000000)">
+                        <g id="Group-5" transform="translate(58.000000, 10.000000)">
+                            <polyline id="Path" transform="translate(3.000000, 10.000000) rotate(-90.000000) translate(-3.000000, -10.000000) " points="9 13 3 7 -3 13"></polyline>
+                        </g>
                     </g>
                 </g>
             </g>
-        </g>
-    </svg>
-</button>
+        </svg>
+    </button>
 
-<app-flats-search
-    (showPopular)="showPopular = true"
-    [showSearchWindow]="showSearchWindow"
-    [parentPlan]="true">
-</app-flats-search>
+    <app-flats-search
+        [showSearchWindow]="showSearchWindow"
+        [parentPlan]="true">
+    </app-flats-search>
 
-<app-popular
-    *ngIf="showPopular"
-    (close)="showPopular = false">
-</app-popular>
+</app-flats-page>

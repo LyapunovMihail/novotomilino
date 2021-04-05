@@ -107,7 +107,7 @@ interface StoreType {
 }
 
 @NgModule({
-  // bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent ],
   declarations: [
       AppComponent,
       VideoModalComponent,
@@ -116,7 +116,8 @@ interface StoreType {
       RedPopupComponent
   ],
   imports: [
-    ...APP_MODULES
+    ...APP_MODULES,
+      BrowserModule.withServerTransition({ appId: 'ssr-novotomilino' })
   ],
   providers: [
     ...APP_PROVIDERS

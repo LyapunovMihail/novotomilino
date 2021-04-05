@@ -121,18 +121,6 @@ export class LocationInfrastructureComponent implements OnInit {
             });
             // myMap.behaviors.disable(['scrollZoom']);
 
-            // создание наземное наложение плана
-            const polygon = new ymaps.Polygon([
-                    [ [55.683600, 37.895600], [55.685350, 37.895600], [55.685350, 37.898540], [55.683600, 37.898540] ]
-                ], {}, {
-                    fillImageHref: '/assets/img/office/plan.png',
-                    fillMethod: 'stretch',
-                    stroke: false
-                }
-            );
-            // добавление плана на карту
-            myMap.geoObjects.add(polygon);
-
             // из маркер-конфига собираем массив маркеров
             markersConfig.forEach( ( item, index ) => {
                 that.markers[index] = {};

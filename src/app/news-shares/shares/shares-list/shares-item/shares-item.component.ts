@@ -18,7 +18,7 @@ import * as moment from 'moment';
 export class SharesItemComponent implements OnInit {
 
     public share;
-
+    public isLoadComplete = false;
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     public indexNum: number;
@@ -67,12 +67,17 @@ export class SharesItemComponent implements OnInit {
 
     public getSnippet(id) {
         this.share = this.sharesList.find((share) => share._id === id);
-        this.share.shareFlats = this.share.shareFlats.map(el => {
-            el.discount = this.getDiscount(el);
-            return el;
-        });
-        this.refreshShareFlats();
-        this.checkPrevAndNext(id);
+        if (this.share) {
+            this.share.shareFlats = this.share.shareFlats.map(el => {
+                el.discount = this.getDiscount(el);
+                el.flat = Number(el.flat);
+                return el;
+            });
+            this.refreshShareFlats();
+            this.checkPrevAndNext(id);
+        } else {
+            this.router.navigate(['/error-404'], { skipLocationChange: true });
+        }
     }
 
     public checkPrevAndNext(id) {
@@ -109,6 +114,9 @@ export class SharesItemComponent implements OnInit {
                     this.share.shareFlats = this.share.shareFlats
                         .map((flat: ShareFlat) => this.updateFlat(flat, refreshFlats))
                         .filter((el: ShareFlat) => el);
+                    this.changeRef.detectChanges();
+                    this.isLoadComplete = true;
+
                 },
                 (err) => console.error(err)
             );

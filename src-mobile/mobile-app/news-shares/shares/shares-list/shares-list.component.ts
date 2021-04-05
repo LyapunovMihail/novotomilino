@@ -6,7 +6,6 @@ import { Share, SHARES_UPLOADS_PATH } from '../../../../../serv-files/serv-modul
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 
-
 @Component({
     selector: 'app-shares-list',
     templateUrl: './shares-list.component.html',

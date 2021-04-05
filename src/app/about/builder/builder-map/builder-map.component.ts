@@ -65,7 +65,7 @@ export class BuilderMapComponent implements OnInit, OnChanges {
 
             this.markers[index] = {};
             this.markers[index].click = false;
-            this.markers[index].url = `http://95.142.35.16:8010/objects/list/${item._id}`;
+            this.markers[index].url = `http://3-red.com/objects/list/${item._id}`;
             this.markers[index].thumbnail = item.image;
             this.markers[index].name = item.title;
             this.markers[index].status = item.status;

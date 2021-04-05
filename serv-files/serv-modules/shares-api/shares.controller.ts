@@ -18,7 +18,7 @@ export class SharesController extends SharesModel {
       private expressAppService: ExpressAppService,
       private mongoConnectionService: MongoConnectionService
     ) {
-        super(mongoConnectionService.getDb().connection.db);
+        super(MongoConnectionService.getDb().connection.db);
         this.routing();
     }
 
@@ -36,7 +36,6 @@ export class SharesController extends SharesModel {
         }));
 
         this.router.post('/admin/shares/update', responseHandler(async(req) => {
-            console.log(req.body.id);
             return await this.updateShare(req.body.id, req.body.obj);
         }));
 

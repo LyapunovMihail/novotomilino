@@ -1,7 +1,7 @@
 import { PlatformDetectService } from './../platform-detect.service';
-import { IAddressItemFlat, IFlatResponse, IFlatWithDiscount } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IFlatWithDiscount } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Router } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlatsService } from './flats.service';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
 import { FlatsDiscountService } from '../commons/flats-discount.service';

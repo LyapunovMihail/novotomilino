@@ -9,6 +9,7 @@ import { DecorationSliderComponent } from './decoration-placement/decoration-sli
 import { DecorationSliderListComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list.component';
 import { DecorationSliderListItemComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list-item/decoration-slider-list-item.component';
 import { DecorationSliderBtnsComponent } from './decoration-placement/decoration-slider/decoration-slider-btns/decoration-slider-btns.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 import { LoaderModule } from '../UI/loader/loader.module';
 
 const DecorationComponents = [
@@ -33,13 +34,10 @@ const DecorationComponents = [
         CommonModule,
         RouterModule,
         LoaderModule,
+        InfoBlockModule,
         RouterModule.forChild([
-            { path: 'decoration', component: DecorationComponent,
-                children : [
-                    { path: '', component: DecorationVariationComponent },
-                    { path: ':type', component: DecorationVariationComponent },
-                ]
-            }
+            { path: 'decoration', component: DecorationVariationComponent },
+            { path: 'decoration/:type', component: DecorationVariationComponent },
         ])
     ]
 })

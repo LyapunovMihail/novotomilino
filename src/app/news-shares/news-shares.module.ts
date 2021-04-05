@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NewsSharesComponentModule } from './news-shares-component.module';
 import { CreateRedactFormsModule } from './news/create-redact-forms/create-redact-forms.module';
 import { RouterModule } from '@angular/router';
-import { NewsSharesComponent } from './news-shares.component';
 import { NewsSharesAllComponent } from './all/news-shares-all.component';
 import { NewsModule } from './news/news.module';
 import { SharesModule } from './shares/shares.module';
 import { LoaderModule } from '../UI/loader/loader.module';
 import { MetaRenderAdminService } from './render-meta-admin.service';
-import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 @NgModule({
     exports: [
-        NewsSharesComponent,
         NewsSharesAllComponent
     ],
     declarations: [
-        NewsSharesComponent,
         NewsSharesAllComponent
     ],
     providers: [
@@ -27,17 +24,12 @@ import { InfoBlockModule } from '../UI/info-block/info-block.module';
         SharesModule,
         CommonModule,
         LoaderModule,
-        InfoBlockModule,
         CreateRedactFormsModule,
+        NewsSharesComponentModule,
         RouterModule.forChild([
-            { path: 'news-shares', component: NewsSharesComponent
-                , children : [
-                    { path: '', redirectTo: 'all', pathMatch: 'full'},
-                    { path: 'all', component: NewsSharesAllComponent},
-                    { path: 'news', loadChildren: './news/news.module#NewsModule'},
-                    { path: 'shares', loadChildren: './shares/shares.module#SharesModule'},
-                ]
-            }
+            { path: 'news-shares/all', component: NewsSharesAllComponent},
+            { path: 'news-shares/news', loadChildren: './news/news.module#NewsModule'},
+            { path: 'news-shares/shares', loadChildren: './shares/shares.module#SharesModule'},
         ])
     ]
 })

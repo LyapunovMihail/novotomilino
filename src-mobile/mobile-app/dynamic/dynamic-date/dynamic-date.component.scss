@@ -37,6 +37,9 @@
         border: 0;
         color: $col-black;
         outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         &::before {
             content: '';
             width: 8px;

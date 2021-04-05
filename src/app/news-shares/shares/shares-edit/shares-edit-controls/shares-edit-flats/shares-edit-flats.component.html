@@ -3,16 +3,19 @@
         <div class="share-view__select-item share-view__select-corpus">
             <!-- Тут должен быть выбор корпуса -->
             <select [(ngModel)]="shareFlat.house"
-                    (ngModelChange)="changeSectionAndHouse({section: shareFlat.section, house: $event})"
-                    class="share-view__select-list">
+                    (ngModelChange)="shareFlat.flat = null; changeSectionAndHouse({section: shareFlat.section, house: $event})"
+                    class="share-view__select-list"
+                    [value]="">
+                <option value="null" disabled selected hidden>Выберите дом</option>
                 <option *ngFor="let house of housesOptions"
                         [value]="house">Корпус {{house}}</option>
             </select>
         </div>
         <div class="share-view__select-item share-view__select-house">
             <select [(ngModel)]="shareFlat.section"
-                (ngModelChange)="changeSectionAndHouse({section: $event, house: shareFlat.house})"
+                (ngModelChange)="shareFlat.flat = null; changeSectionAndHouse({section: $event, house: shareFlat.house})"
                 class="share-view__select-list">
+                <option value="null" disabled selected hidden>Выберите секцию</option>
                 <option *ngFor="let section of sectionsOptions"
                     [value]="section">Секция {{section}}</option>
             </select>
@@ -21,6 +24,7 @@
             <select [(ngModel)]="shareFlat.flat"
                 (ngModelChange)="changeFlat($event)"
                 class="share-view__select-list">
+                <option value="null" disabled selected hidden>Выберите квартиру</option>
                 <option *ngFor="let flat of flatsOptions"
                     [value]="flat">Квартира {{flat}}</option>
             </select>

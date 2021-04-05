@@ -35,8 +35,6 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
             this.object = this.objectsArray.filter((i) => {
                 return i._id === this.slideShowId;
             });
-            console.log(this.object);
-            console.log(this.slides);
         }
     }
 
@@ -59,8 +57,6 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
     }
 
     next() {
-        console.log(this.objectsArray);
-        console.log('id: ', this.slideShowId);
         if(this.slideShowCurrent < this.slides.length - 1){
             this.slideShowCurrent ++ ;
         } else {

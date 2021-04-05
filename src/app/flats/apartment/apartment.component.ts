@@ -62,7 +62,9 @@ export class ApartmentComponent implements OnInit, OnDestroy {
             this.flatData = data;
             this.flatData.discount = this.getDiscount(data);
             this.flatData.inFavorite = this.inFavorite(data);
-            console.log('flatData -> ', data);
+        },
+            err => {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
         });
     }
 
@@ -79,8 +81,9 @@ export class ApartmentComponent implements OnInit, OnDestroy {
 
         this.clickedPdf = true;
         const location = window.location.href;
-        const modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
-
+        // const modeIndex = location.indexOf('localhost') >= 0 ? 'dev' : 'prod';
+        const modeIndex = 'prod';
+        //
         if (this.pdfLink && this.pdfLink.length > 0 && this.changeFlatData === this.flatData) {
             this.clickedPdf = false;
             window.open(this.pdfLink);

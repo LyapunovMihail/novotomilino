@@ -64,7 +64,7 @@ export class NewsViewComponent implements OnInit {
                 }
             },
             (err) => {
-               // this.router.navigate(['/error-404'], { skipLocationChange: true });
+               this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.error(err);
             }
         );

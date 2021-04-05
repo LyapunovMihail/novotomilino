@@ -49,9 +49,12 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     writeValue(value: any) {
         this.shareFlat = value;
-        if (this.shareFlat) {
+        if (this.shareFlat.house && this.shareFlat.section) {
             this.changeSectionAndHouse({section: this.shareFlat.section, house: this.shareFlat.house});
         }
+        // else {
+        //     this.changeSectionAndHouse({section: this.sectionsOptions[0], house: this.housesOptions[0]});
+        // }
     }
 
     propagateChange = (_: any) => {};
@@ -71,11 +74,13 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     }
 
     changeSectionAndHouse(params) {
-        this.sharesService.getFlatsBySectionAndHouse(params)
-            .subscribe((data: IAddressItemFlat[]) => {
-                this.flats = data;
-                this.initFlatsOptions();
-            });
+        if (params.section && params.house) {
+            this.sharesService.getFlatsBySectionAndHouse(params)
+                .subscribe((data: IAddressItemFlat[]) => {
+                    this.flats = data;
+                    this.initFlatsOptions();
+                });
+        }
     }
 
     changeFlat(e) {
@@ -84,6 +89,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
             return;
         }
         this.shareFlat = {discountType: this.shareFlat.discountType, discountValue: this.shareFlat.discountValue, ...flat};
+        this.propagateChange(this.shareFlat);
     }
 
     initFlatsOptions() {
@@ -94,5 +100,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.flatsOptions = this.flats.map((flat) => {
             return flat.flat;
         });
+
+        // this.changeFlat(this.flats[0].flat);
     }
 }
