@@ -9,7 +9,7 @@ export class ProjectsModel {
     constructor( public db: any ) { }
 
     public async get3redObjects(mode) {
-        this.collection = await mongoose.useDb( (mode === 'dev' ? '3red' : '3-red_dev') ).collection(this.collectionName);
+        this.collection = await mongoose.useDb( (mode === 'dev' ? '3red' : '3-red') ).collection(this.collectionName);
         return await this.collection.find({ publish: true }).toArray();
     }
 }
