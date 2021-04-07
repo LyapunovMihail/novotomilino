@@ -1,4 +1,11 @@
-import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
+import {
+    IDecorationFurniture,
+    IDecorationPreviewType,
+    IDecorationPreviewVendor,
+    IDecorationType,
+    IDecorationVendor
+} from '../decoration-api/decoration.interfaces';
+import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat, IFlatFurnitureItem } from './addresses.interfaces';
 import * as request from 'request';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
@@ -108,6 +115,9 @@ export class AddressesModel {
                 decMas.push(...FormConfig.extraDecorationList.map((item) => item.value));
             }
             request.decoration = { $in: decMas};
+        }
+        if ('furniture' in query && query.furniture.split(',').every((item) => FormConfig.furniture.some((i) => item === i.value))) {
+            request.furniture = {$ne: null};
         }
 
         let parameters = {};
@@ -227,31 +237,93 @@ export class AddressesModel {
             type: query.type === 'flat' ? 'КВ' : 'КН',
         };
         const flat = await this.collection.findOne(params);
-        if (flat.saleChars && flat.saleChars.length) { // если есть список меблировки
-            const furnitureList = await this.getFurnitureJSON(); // получаем список составляющих(доп. стол, стул, тумба и тд) меблировки с выгрузки
-
-            if (flat.saleChars.some(el => furnitureList.findIndex(item => item.id === el.id) >= 0) ) { // если id поставщика совпадает c id составляющих
-                flat.saleChars = await this.buildFlatWithFurniture(flat.saleChars, furnitureList); // добавляем к имеющеися меблировки еще одно поле с комплектующими
-            }
-            // console.log(furnitureList, Array.isArray(furnitureList));
-        }
-        return await flat;
+        return flat;
     }
-    private getFurnitureJSON(): Promise<any[]> {
-        return new Promise((resp,rej) => {
-            const url = 'http://incrm.ru/Export-TRED/ExportToSite.svc/ExportToSaleCharItems';
-            request.get({url, json: true}, (err, res, body) => {
-                resp(body.saleCharItems);
+
+    public async getDecorationData() {
+        const flats: IAddressItemFlat[] = await this.collection.find({type: 'КВ', decoration: {$in: ['08', '09']}, furniture: {$ne: null}}).toArray(); // Классика, Модерн
+        const decorationTypes: IDecorationType[] = [];
+
+        flats.forEach((item) => {
+
+            let decorationType = decorationTypes.find((decoration) => decoration.type === item.decorationName);
+            if (!decorationType) {
+                decorationType = { type: item.decorationName, vendors: []};
+                decorationTypes.push(decorationType);
+            }
+
+            const decorationVendors: IDecorationVendor[] = decorationType.vendors;
+            item.furniture.forEach((fur) => {
+                let decorationVendor = decorationVendors.find((decoration) => decoration.vendor === fur.vendor);
+                if (!decorationVendor) {
+                    decorationVendor = { vendor: fur.vendor, furniture: [] };
+                    decorationVendors.push(decorationVendor);
+                }
+                const decorationFurniture: IDecorationFurniture[] = decorationVendor.furniture;
+                let furniture = decorationFurniture.find((decoration) => decoration.rooms === item.rooms);
+                if (furniture) {
+                    if (!furniture.images.some((image) => image === fur.charMainImage)) {
+                        furniture.images.push(fur.charMainImage);
+                    }
+                    if (furniture.price > fur.charCost) {
+                        furniture.price = fur.charCost;
+                    }
+                } else {
+                    furniture = {rooms: item.rooms, price: fur.charCost, items: fur.items, images: []};
+                    decorationFurniture.push(furniture);
+                }
+
+                decorationFurniture.sort((a, b) => a.rooms - b.rooms);
             });
         });
+
+        return decorationTypes;
     }
-    private buildFlatWithFurniture(saleChars, items) {
-        return saleChars.map(el => {
-            const furniture = items.find(item => el.id === item.id);
-            if (!furniture) return el;
-            const ctrl = { ...el };
-            ctrl['items'] = furniture.items || [];
-            return ctrl;
+
+    public async getDecorationPreview() {
+        const flats: IAddressItemFlat[] = await this.collection.find({type: 'КВ', decoration: {$in: ['08', '09']}, furniture: {$ne: null}}).toArray(); // Классика, Модерн
+        const decorationVendors: IDecorationPreviewVendor[] = [];
+
+        flats.forEach((item) => {
+
+            // let decorationType = decorationTypes.find((decoration) => decoration.type === item.decorationName);
+            // if (!decorationType) {
+            //     decorationType = { type: item.decorationName, vendors: []};
+            //     decorationTypes.push(decorationType);
+            // }
+
+            item.furniture.forEach((fur) => {
+                let decorationVendor = decorationVendors.find((decoration) => decoration.vendor === fur.vendor);
+                if (!decorationVendor) {
+                    decorationVendor = { vendor: fur.vendor, types: [] };
+                    decorationVendors.push(decorationVendor);
+                }
+
+                const decorationTypes: IDecorationPreviewType[] = decorationVendor.types;
+                let decorationType = decorationTypes.find((decoration) => decoration.type === item.decorationName);
+                if (!decorationType) {
+                    decorationType = { type: item.decorationName, furniture: []};
+                    decorationTypes.push(decorationType);
+                }
+
+                const decorationFurniture: IDecorationFurniture[] = decorationType.furniture;
+                let furniture = decorationFurniture.find((decoration) => decoration.rooms === item.rooms);
+                if (furniture) {
+                    if (!furniture.images.some((image) => image === fur.charMainImage)) {
+                        furniture.images.push(fur.charMainImage);
+                    }
+                    if (furniture.price > fur.charCost) {
+                        furniture.price = fur.charCost;
+                    }
+                } else {
+                    furniture = {rooms: item.rooms, price: fur.charCost, items: fur.items, images: []};
+                    decorationFurniture.push(furniture);
+                }
+
+                decorationFurniture.sort((a, b) => a.rooms - b.rooms);
+            });
         });
+
+        return decorationVendors;
     }
 }

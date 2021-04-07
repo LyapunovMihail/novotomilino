@@ -1,0 +1,68 @@
+<section class="furniture-slider" *ngIf="routerParams && routerParamsVerified">
+
+    <div class="furniture-slider__container">
+
+        <h2 class="furniture-slider__title">Квартиры с мебелью</h2>
+
+        <div class="furniture-slider__info">
+            Вы можете включить стоимость мебели в ваш ипотечный кредит! <br>
+            Подробности уточняйте на сайте и у менеджеров в офисе продаж.
+        </div>
+
+        <div class="furniture-slider__type">
+            <a (click)="navigate('type', item.type)" class="furniture-slider__type-item" [class.active]="routerParams.type === item.type" *ngFor="let item of typeList">{{item.type}}</a>
+            <!--<a (click)="navigate('type', 'modern')" class="furniture-slider__type-item" [class.active]="routerParams.type === 'modern'">Модерн</a>-->
+        </div>
+        <div class="furniture-slider__vendor">
+            <!--<nav-menu-->
+                <!--[navList]="navList"-->
+                <!--[linkType]="'else'"-->
+                <!--[activePointDefault]="activeRouter"-->
+                <!--(routeNavigate)="navigate('vendor', $event)"-->
+            <!--&gt;</nav-menu>-->
+            <div class="furniture-slider__nav">
+                <div class="furniture-slider__nav-wrap">
+                    <a class="furniture-slider__nav-item" [class.active]="routerParams.vendor === item.vendor" (click)="navigate('vendor', item.vendor)" *ngFor="let item of vendorList;">{{item.vendor}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="furniture-slider__rooms">
+        <div class="furniture-slider__rooms-wrap">
+            <div class="furniture-slider__rooms-wrap--scroll">
+                <div class="furniture-slider__rooms-wrap--padding">
+                    <a (click)="navigate('room', item.rooms)" class="furniture-slider__rooms-item" [class.active]="+routerParams.room === item.rooms" *ngFor="let item of furnitureList"
+                       [ngClass]="{'active': +routerParams.room === item.rooms, 'disabled': !item.images}">
+                        <p>{{item.rooms === 0 ? 'Студия' : item.rooms + ' комнатная'}}</p>
+                        <p>от {{item.price | myBitNumberPipe:0}} ₽</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="furniture-slider__container">
+        <div class="furniture-slider__slider">
+            <div class="furniture-slider__slider-wrap furniture-slider__slider-wrap--slides furniture-swiper">
+                <button class="furniture-slider__slider-btn swiper-btn swiper-btn--prev"></button>
+                <button class="furniture-slider__slider-btn swiper-btn swiper-btn--next"></button>
+
+                <div class="furniture-slider__slider-swiper swiper-wrapper">
+                    <ng-container *ngFor="let slide of slides">
+                        <img [src]="slide" alt="slide" class="swiper-slide">
+                    </ng-container>
+                </div>
+                <div class="furniture-slider__slider-pagination swiper-pagination">
+                    <span *ngFor="let slide of slides; index as i" [class.active]="slideCount === i"></span>
+                </div>
+            </div>
+            <div class="furniture-slider__slider-wrap furniture-slider__slider-wrap--info">
+                <!-- <p class="furniture-slider__slider-title"></p> -->
+                <p class="furniture-slider__slider-text">
+                    Кухонный комплект и вся необходимая встроенная техника (включая варочную панель, 
+                    духовой шкаф, холодильник и вытяжку), мойка и кухонный смеситель. Прихожая, диван-книжка, 
+                    системы для хранения и др. сопутствующие элементы меблировки и аксессуары.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

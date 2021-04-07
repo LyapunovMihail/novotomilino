@@ -1,4 +1,5 @@
 // import { ApartmentModule } from './apartment/apartment.module';
+import { ApartmentFurnitureSlideshowComponent } from './apartment/apartment-furniture/apartment-furniture-slideshow/apartment-furniture-slideshow.component';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
@@ -16,7 +17,6 @@ import { PlanComponents } from './plan/plan';
 import { PopularComponent } from './popular/popular.component';
 import { LoaderModule } from '../UI/loader/loader.module';
 import { CommercialComponents } from './commercial/commercial';
-import { CommercialComponent } from './commercial/commercial.component';
 import { CommercialListComponent } from './commercial/list/commercial-list.component';
 import { CommercialPlanComponent } from './commercial/plan/commercial-plan.component';
 import { CommercialFloorComponent } from './commercial/floor/commercial-floor.component';
@@ -31,6 +31,7 @@ const FlatsComponents = [
     PopularComponent,
     ApartmentComponent,
     ApartmentFurnitureComponent,
+    ApartmentFurnitureSlideshowComponent,
 
     ...CommercialComponents,
 

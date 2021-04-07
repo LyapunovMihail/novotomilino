@@ -1,0 +1,260 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.furniture-slider {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 52px 0 64px;
+
+    &__container {
+        @include container();
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    &__title {
+        font: 500 42px/128% $font-leksa;
+        @include font-smoothing;
+        color: $col-black;
+        margin: 0 0 32px;
+    }
+    &__info {
+        width: 100%;
+        border-radius: 4px;
+        font: 500 14px/18px $font-mus;
+        @include font-smoothing;
+        color: #666769;
+        box-sizing: border-box;
+        border: 1px solid $col-red;
+        background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='11.5' stroke='%23E7490F'/%3E%3Crect x='11' y='6' width='2' height='8' rx='1' fill='%23E7490F'/%3E%3Crect x='11' y='16' width='2' height='2' rx='1' fill='%23E7490F'/%3E%3C/svg%3E%0A") 12px 10px no-repeat;
+        padding: 10px 12px 10px 46px;
+        margin: 0 0 32px;
+    }
+
+    &__type {
+        display: flex;
+        margin: 0 0 32px;
+
+        &-item {
+            font: 14px/18px $font-mus;
+            color: $col-black;
+            transition: border-color .2s linear;
+            border: 1px solid #E2E2E2;
+            padding: 4px 8px;
+            cursor: pointer;
+            &+ a { margin-left: 8px; }
+            &:hover { border-color: $col-red; }
+            &.active {
+                border-color: $col-red;
+                background-color: $col-red;
+                color: $col-white;
+                transition: none;
+            }
+        }
+    }
+    &__vendor {
+        width: 100%;
+        margin: 0 0 32px;
+    }
+
+    &__rooms {
+        width: calc(100% - 60px);
+        max-width: 704px;
+        overflow: hidden;
+        margin: 0 0 16px;
+
+        &-wrap {
+            width: 100%;
+            height: 76px;
+            overflow: hidden;
+
+            &--scroll {
+                width: 100%;
+                height: calc(100% + 20px);
+                display: flex;
+                justify-content: flex-start;
+                overflow-y: hidden;
+                overflow-x: auto;
+            }
+            &--padding {
+                display: flex;
+                align-items: flex-start;
+                height: calc(100% - 20px);
+                box-sizing: border-box;
+                //padding: 0 32px;
+            }
+        }
+
+        &-item {
+            min-width: 160px;
+            min-height: 74px;
+            white-space: nowrap;
+            box-sizing: border-box;
+            border: 1px solid #e2e2e2;
+            transition: border-color .2s linear;
+            padding: 8px 16px 12px;
+            cursor: pointer;
+            &:hover { border-color: rgba($color: $col-red, $alpha: .3); }
+            &.active { border-color: $col-red; }
+            &+ a { margin-left: 8px; }
+            &.disabled {
+                opacity: .5;
+                pointer-events: none;
+            }
+
+            &> p {
+                &:first-child {
+                    font: 500 20px/28px $font-mus;
+                    color: $col-black;
+                    margin: 0 0 8px;
+                }
+                &:last-child {
+                    font: 14px/18px $font-mus;
+                    color: $col-76;
+                }
+            }
+        }
+    }
+
+    &__slider {
+
+        &-wrap {
+            position: relative;
+
+            &--slides {
+                width: 100%;
+                height: 432px;
+                margin: 0 0 24px;
+            }
+            &--info {
+                width: 100%;
+            }
+        }
+        &-btn {
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+
+            &.swiper-btn--prev { left: 24px; }
+            &.swiper-btn--next { right: 24px; }
+        }
+        &-pagination {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 8px; left: 0;
+            z-index: 2;
+
+            &> span {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: rgba($color: $col-white, $alpha: .5);
+                &+ span { margin-left: 4px; }
+                &.active { background-color: $col-red; }
+            }
+        }
+
+        &-swiper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            
+            .swiper-slide {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0; left: 0;
+                opacity: 0 !important;
+                transition: opacity .7s ease;
+                &.active { opacity: 1 !important; }
+            }
+        }
+
+        &-text {
+            font: 16px/20px $font-mus;
+            color: $col-76;
+        }
+    }
+
+    &__nav {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 16px;
+
+        &-wrap {
+            display: flex;
+            padding: 0 0 10px;
+            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
+        }
+        &-item {
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            color: rgba(0, 1, 5, 0.7);
+            box-sizing: border-box;
+            cursor: pointer;
+            &+ a { margin-left: 16px; }
+
+            &.active {
+                color: #000105;
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -11px;
+                    width: 100%;
+                    height: 2px;
+                    background: #e7490f;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .furniture-slider {
+        padding-top: 32px;
+
+        &__container { width: calc(100% - 32px); }
+        &__title {
+            @include font-size(28px,36px);
+            margin: 0 0 24px;
+        }
+        &__info > br { display: none; }
+        &__type { margin: 0 0 32px; }
+        &__vendor { margin: 0 0 12px; }
+        &__rooms {
+            //&-wrap--padding { padding: 0 calc((100% - 380px) / 2); }
+            width: calc(100% - 32px);
+            &-item {
+                min-width: 128px;
+                min-height: 62px;
+                padding: 8px 12px;
+
+                &> p:first-child { @include font-size(16px, 20px); }
+            }
+        }
+        &__slider {
+            &-wrap--slides {
+                height: vw(200px);
+                min-height: 200px;
+                max-height: 265px;
+                margin: 0 0 12px;
+            }
+            &-btn { display: none; }
+        }
+    }
+}
+@media (max-width: 412px) {
+    .furniture-slider__rooms-wrap--padding {
+        //padding: 0 16px;
+    }
+}

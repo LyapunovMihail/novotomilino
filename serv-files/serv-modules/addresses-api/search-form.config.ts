@@ -29,6 +29,12 @@ export const FormConfig = {
         { name: 'апартаменты', value: 'АП' },
         { name: 'коммерческая недвижимость', value: 'КН' },
     ],
+    furniture: [
+        {
+            name: 'С мебелью',
+            value: '1'
+        }
+    ],
     decorationList: [
         {
             name: 'без отделки',

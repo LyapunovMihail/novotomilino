@@ -1,0 +1,24 @@
+
+
+<section class="decoration-furniture">
+
+    <div class="decoration-furniture__container">
+        <h1 class="g-title-path decoration-furniture__title">Квартиры с мебелью</h1>
+
+        <div class="decoration-furniture__block" *ngFor="let item of furniture">
+            <h3 class="decoration-furniture__block-name">{{item.vendor}}</h3>
+
+            <div class="decoration-furniture__block-wrap">
+                <!-- type/:type/variant/:variant/room/:room -->
+                <a class="decoration-furniture__type" *ngFor="let type of item.types"
+                  [routerLink]="'type/' + type.type + '/vendor/' + item.vendor + '/room/0'">
+                    <p class="decoration-furniture__type-name">{{type.type}}</p>
+
+                    <figure class="decoration-furniture__type-preview">
+                        <img [src]="type.furniture[0].images[0]" alt="type-preview">
+                    </figure>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

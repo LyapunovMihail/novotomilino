@@ -128,6 +128,11 @@
                     [formControl]="form.controls['decoration']"
                     [name]="'decoration'">
                 </app-search-checkbox-list>
+                <app-search-checkbox-list
+                    [btnList]="config.furniture"
+                    [formControl]="form.controls['furniture']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list>
             </div>
             <a href="javascript:void(0)" class="search-form__popular" (click)="openPopularModal()">Популярные категории</a>
         </div>

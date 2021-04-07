@@ -64,7 +64,7 @@ export interface IAddressItemFlat {
     floorsInSection: number;
     flatsInFloor: number;
     isEuro: string;
-    furniture?: any[];
+    furniture?: IFlatFurniture[];
     _id?: any;
 }
 
@@ -75,9 +75,10 @@ export interface IFlatFurniture {
     id: string;
     saleCharName: string;
     vendor: string;
-    charCost: string;
-    charMainImage: string[];
+    charCost: number;
+    charMainImage: string;
     items: IFlatFurnitureItem[];
+    charImages: {url: string}[];
 }
 /*{
     id: 'a34d17fc-e612-eb11-80fd-001dd8bb025e',

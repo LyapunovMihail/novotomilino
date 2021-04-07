@@ -55,6 +55,10 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
     private getFlatData() {
         this.flatsService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
             this.flatData = data;
+            if (!this.flatData) {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
+                return;
+            }
             this.flatData.discount = this.getDiscount(data);
             this.flatData.inFavorite = this.inFavorite(data);
         },

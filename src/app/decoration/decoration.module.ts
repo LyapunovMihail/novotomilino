@@ -1,3 +1,6 @@
+import { DecorationFurnitureComponent } from './decoration-furniture/decoration-furniture.component';
+import { BitNumberPipe } from './decoration-furniture/furniture-slider/bit-number.pipe';
+import { FurnitureSliderComponent } from './decoration-furniture/furniture-slider/furniture-slider.component';
 import { DecorationPlacementComponent } from './decoration-placement/decoration-placement.component';
 import { DecorationComponent } from './decoration.component';
 import { RouterModule } from '@angular/router';
@@ -19,7 +22,10 @@ const DecorationComponents = [
     DecorationSliderComponent,
     DecorationSliderListComponent,
     DecorationSliderListItemComponent,
-    DecorationSliderBtnsComponent
+    DecorationSliderBtnsComponent,
+    DecorationFurnitureComponent,
+    FurnitureSliderComponent,
+    BitNumberPipe
 ];
 
 @NgModule({
@@ -34,8 +40,10 @@ const DecorationComponents = [
         RouterModule,
         LoaderModule,
         RouterModule.forChild([
+            { path: 'decoration/furniture', component: DecorationFurnitureComponent },
+            { path: 'decoration/furniture/type/:type/vendor/:vendor/room/:room', component: FurnitureSliderComponent },
             { path: 'decoration', component: DecorationVariationComponent },
-            { path: 'decoration/:type', component: DecorationVariationComponent },
+            { path: 'decoration/:type', component: DecorationSliderComponent },
         ])
     ]
 })

@@ -11,7 +11,7 @@
                     {{(flatData.rooms === 0) ? 'Студия' : flatData.rooms + ' комнатная'}}, № {{flatData.flat}}
                     <span *ngIf="isEuro">Евро</span>
                 </p>
-                <p class="flat-snippet__link-text">{{flatData.decorationName}}</p>
+                <p class="flat-snippet__link-text">{{flatData.decorationName}}<ng-container *ngIf="flatData.furniture">, +/- мебель</ng-container></p>
             </div>
             <div class="flat-snippet__link-wrap flat-snippet__link-wrap--info">
                 <div>

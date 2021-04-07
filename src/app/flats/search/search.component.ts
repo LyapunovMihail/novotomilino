@@ -84,6 +84,10 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
             params['euro'] = (form.euro).join(',');
         }
 
+        if (form['furniture'].length > 0) {
+            params['furniture'] = (form.furniture).join(',');
+        }
+
         if (form['decoration'].length > 0) {
             params['decoration'] = (form.decoration).join(',');
         }

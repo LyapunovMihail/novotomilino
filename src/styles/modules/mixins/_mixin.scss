@@ -66,3 +66,8 @@ $text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     @include font-smoothing();
     color: $color;
 }
+
+@mixin size($w, $h: $w) {
+    width: $w;
+    height: $h;
+}

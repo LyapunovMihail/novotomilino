@@ -1,4 +1,3 @@
-
 <div class="flat-snippet">
     <a class="flat-snippet__link" [title]="statusNotSale" (click)="goToFlat()">
         <figure class="flat-snippet__link-image">
@@ -12,7 +11,7 @@
         <p class="flat-snippet__link-text flat-snippet__link-text--space">{{flatData.space}} м²</p>
         <p class="flat-snippet__link-text flat-snippet__link-text--floor">{{flatData.floor}} этаж</p>
         <p class="flat-snippet__link-text flat-snippet__link-text--house">Корпус {{flatData.house}}</p>
-        <p class="flat-snippet__link-text flat-snippet__link-text--decoration">{{flatData.decorationName}}</p>
+        <p class="flat-snippet__link-text flat-snippet__link-text--decoration">{{flatData.decorationName}}<ng-container *ngIf="flatData.furniture">,<br>+/- мебель</ng-container></p>
         <div class="flat-snippet__link-price">
             <p [class.old-price]="flatData.discount" class="flat-snippet__link-text flat-snippet__link-text--price">
                 {{flatData.price | flatNumberPipe}} &#8381;

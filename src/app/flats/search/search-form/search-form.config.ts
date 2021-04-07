@@ -27,6 +27,12 @@ export const FormConfig = {
             value: '1'
         }
     ],
+    furniture: [
+        {
+            name: 'С мебелью',
+            value: '1'
+        }
+    ],
     typeList: [
         {
             name: 'Квартиры',

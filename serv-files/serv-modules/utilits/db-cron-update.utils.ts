@@ -154,80 +154,62 @@ export class DbCronUpdate {
         };
     }
 
-    private async parseSaleChars(saleChars) {
-        const newSaleChars = await Promise.all(saleChars.map(async el => {
+    private async parseSaleChars(saleChars): Promise<IFlatFurniture[]> {
+        const newSaleChars: IFlatFurniture[] = [];
+        // await Promise.all(saleChars.map(async el => {
+        for (const el of saleChars) {
+            const { items, images } = await this.getFurnitureItems(el.Id);
             const newCtrl: IFlatFurniture = {
                 id: el.Id,
                 saleCharName: el.SaleCharName,
                 vendor: el.Vendor,
-                charCost: el.CharCost,
-                charMainImage: [el.CharMainImage],
-                items: await this.getFurnitureItems(el.Id)
+                charCost: Math.abs(el.CharCost),
+                charMainImage: el.CharMainImage,
+                items,
+                charImages: images
             };
-            return newCtrl;
-
-        }));
+            newSaleChars.push(newCtrl);
+        }
+            // const newCtrl: IFlatFurniture = {
+            //     id: el.Id,
+            //     saleCharName: el.SaleCharName,
+            //     vendor: el.Vendor,
+            //     charCost: Math.abs(el.CharCost),
+            //     charMainImage: el.CharMainImage,
+            //     items,
+            //     charImages: images
+            // };
+            // return newCtrl;
+        // }));
         return newSaleChars;
     }
     private myCase(ctrl) {
         return `${ctrl[0].toLowerCase()}${ctrl.slice(1)}`;
     }
-    private async getFurnitureItems(id): Promise<IFlatFurnitureItem[]> {
+    private async getFurnitureItems(id): Promise<{items: IFlatFurnitureItem[], images: {url: string}[]}> {
         const collectionFurniture = await this.db.collection(ADDRESSES_FURNITURE_COLLECTION_NAME);
         const furniture = await collectionFurniture.findOne({id}) as IFlatFurniture;
-        // console.log('furniture: ', furniture.items);
-        return furniture.items;
+        return { items: furniture.items, images: furniture.charImages};
     }
 
     public async requestFurnitureItems() {
 
         const collectionFurniture = this.db.collection(ADDRESSES_FURNITURE_COLLECTION_NAME);
 
-        // Create request, parse, process streams
-        const requestStream = request.get({url: urlFurniture, json: true});
-        const parserStream = JSONStream.parse('*');
-
-        this.counter = 0;
-
-        const processingStream = new Writable({
-            write: async (object, encoding, callback) => {
-                this.counter = object.length;
-                for (const item of object) {
-                    await collectionFurniture.insertOne(item);
-                }
-                // await Promise.all(object.forEach(async (item: IFlatFurniture) => {
-                //     await collectionFurniture.insertOne(item);
-                // }));
-                callback();
-            },
-            objectMode: true,
+        request.get({url: urlFurniture, json: true}, async (err, res, body) => {
+            if (err) {
+                errorHandler(err, 'requestStream');
+            }
+            this.counter = body.saleCharItems.length;
+            for (const item of body.saleCharItems) {
+                await collectionFurniture.insertOne(item);
+            }
+            console.log(`furniture processingStream is finished ${(new Date())}; DB HAS BEEN UPDATED; furniture count: ${this.counter}`);
         });
 
         const errorHandler = (err, name) => {
             const errorText = `${name} error. ${(new Date())} DB UPDATE FAILED WITH ERROR: ${err};`;
             console.log(errorText, err);
         };
-
-        requestStream
-            .on('error', (err) => errorHandler(err, 'requestStream'))
-            .on('response', async (res) => {
-                console.log(`Furniture DB update request ${(new Date())}, response status code ${res.statusCode};`);
-                if (res.statusCode === 200) {
-                    await collectionFurniture.remove({});
-                }
-            })
-            .on('end', () => console.log(`furniture requestStream is ended ${(new Date())};`))
-            .pipe(parserStream)
-            .on('error', (err) => errorHandler(err, 'parserStream'))
-            .pipe(processingStream)
-            .on('error', (err) => errorHandler(err, 'processingStream'));
-
-        processingStream.on('finish', async () => {
-            try {
-                console.log(`furniture processingStream is finished ${(new Date())}; DB HAS BEEN UPDATED; furniture count: ${this.counter}`);
-            } catch (err) {
-                errorHandler(err, 'test base rename');
-            }
-        });
     }
 }

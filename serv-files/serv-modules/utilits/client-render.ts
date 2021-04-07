@@ -15,7 +15,7 @@ export function ShouldSendMobileVersion(req, session) {
 export function clientRender(req: Request, res: Response, status: number, session) {
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
-            res.render(
+            res.status(status).render(
                 join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'mobile', 'index-mobile.html'),{
                     req,
                     res,
@@ -28,7 +28,7 @@ export function clientRender(req: Request, res: Response, status: number, sessio
                 },
             );
         } else {
-            res.render(
+            res.status(status).render(
                 'index', {
                     req,
                     res,

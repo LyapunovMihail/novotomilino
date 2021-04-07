@@ -1,3 +1,4 @@
+import { ApartmentFurnitureSlideshowComponent } from './modal-apartament/apartment-furniture/apartment-furniture-slideshow/apartment-furniture-slideshow.component';
 import { SearchFormPipe } from './search-form/search-form.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { GHMRangeNumberModule } from './search-form/ghm-range-number/ghm-range-number.module';
@@ -28,6 +29,7 @@ const FlatsComponents = [
     SearchFormPipe,
     ModalApartamentComponent,
     ApartmentFurnitureComponent,
+    ApartmentFurnitureSlideshowComponent,
     ApartamentBitNumberPipe,
     InputsListComponent,
 ];

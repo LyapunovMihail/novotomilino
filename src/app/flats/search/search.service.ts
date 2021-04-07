@@ -24,7 +24,7 @@ export class SearchService {
         return this.http.get('/api/search-config');
     }
     public getFlatData(route) {
-        return this.http.get('/api' + route);
+        return this.http.get('/api' + route); // /flats/house/:house/section/:section/floor/:floor/:type/:apartment
     }
 
     public getPDF(id, mod) {

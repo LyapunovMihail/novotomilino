@@ -63,21 +63,21 @@
         </ul>
     </div>
 
-    <!--<div class="apartament__furniture">-->
-        <!--<label class="apartament__furniture-head" for="switcher">-->
-            <!--<h2 class="apartament__furniture-title">Меблировка</h2>-->
-            <!--<label class="apartament__furniture-switcher">-->
-                <!--<input id="switcher" type="checkbox" #furnitureSwitcher>-->
-                <!--<div></div>-->
-            <!--</label>-->
-        <!--</label>-->
+    <div class="apartament__furniture" *ngIf="typeApartment !== 'office' && (flatData.furniture && flatData.furniture.length)">
+        <label class="apartament__furniture-head" for="switcher">
+            <h2 class="apartament__furniture-title">Меблировка</h2>
+            <label class="apartament__furniture-switcher">
+                <input id="switcher" type="checkbox" #furnitureSwitcher>
+                <div></div>
+            </label>
+        </label>
 
-        <!--<app-apartment-furniture-->
-            <!--*ngIf="furnitureSwitcher.checked"-->
-            <!--[flatData]="flatData"-->
-            <!--[isActive]="furnitureSwitcher.checked"-->
-        <!--&gt;</app-apartment-furniture>-->
-    <!--</div>-->
+        <app-apartment-furniture
+            *ngIf="furnitureSwitcher.checked"
+            [furniture]="flatData.furniture"
+            [isActive]="furnitureSwitcher.checked"
+        ></app-apartment-furniture>
+    </div>
 
     <div class="apartament__ctrls">
         <button class="apartament__ctrls-reserve" (click)="isReserveFormOpen = true">Забронировать</button>

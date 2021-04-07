@@ -29,12 +29,10 @@ export class DynamicObjectSlideshowComponent implements OnChanges {
 
     ngOnChanges() {
         if ( this.isSlideShow ) {
-            this.slides = this.objectsArray.filter((i) => {
-                return i._id === this.slideShowId;
-            })[0]['images'];
             this.object = this.objectsArray.filter((i) => {
                 return i._id === this.slideShowId;
             });
+            this.slides = this.object[0].images;
         }
     }
 

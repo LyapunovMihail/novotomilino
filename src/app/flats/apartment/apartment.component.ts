@@ -1,6 +1,6 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -60,6 +60,10 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     private getFlatData() {
         this.searchService.getFlatData(this.router.url).subscribe( (data: IFlatWithDiscount) => {
             this.flatData = data;
+            if (!this.flatData) {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
+                return;
+            }
             this.flatData.discount = this.getDiscount(data);
             this.flatData.inFavorite = this.inFavorite(data);
         },

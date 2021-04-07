@@ -1,6 +1,8 @@
 import { ADDRESSES_COLLECTION_NAME } from './addresses-api/addresses.interfaces';
+import { AddressesModel } from './addresses-api/addresses.model';
 import { floorCount } from './addresses-api/floor-count';
 import { SERVER_CONFIGURATIONS } from './configuration';
+import { sliderContent } from './decoration-api/config';
 import { MongoConnectionService } from './mongo-connection.service';
 import { NEWS_COLLECTION_NAME } from './news-api/news.interfaces';
 import { SHARES_COLLECTION_NAME } from './shares-api/shares.interfaces';
@@ -64,6 +66,16 @@ export const ROUTES: any[] = [
             }
         },
     },
+    '/decoration/furniture',
+    {
+        url: '/decoration/furniture/type/:type/vendor/:vendor/room/:room',
+        handle: async (req: any, res: Response, next) => {
+            const completed = await checkDecorationFurnitureParams(req, res);
+            if (completed) {
+                next();
+            }
+        },
+    },
 
     '/flats/popular',
     '/flats/plan',
@@ -122,6 +134,28 @@ function checkDynamicMonthAndYear(req: any, res: Response, next) {
     } else {
         clientRender(req, res, 404, req.session);
     }
+}
+
+async function checkDecorationFurnitureParams(req, res: Response) {
+    const decorationTypes = await new AddressesModel(MongoConnectionService.getDb().connection.db).getDecorationData();
+    const decorationType = decorationTypes.find((data) => data.type === req.params.type);
+    if (!decorationType) {
+        clientRender(req, res, 404, req.session);
+        return false;
+    }
+    const vendorList = decorationType.vendors;
+    const decorationVendor = vendorList.find((data) => data.vendor === req.params.vendor);
+    if (!decorationVendor) {
+        clientRender(req, res, 404, req.session);
+        return false;
+    }
+    const furnitureList = decorationVendor.furniture;
+    const furnitureItem = furnitureList.find((data) => data.rooms === Number(req.params.room));
+    if (!isFinite(Number(req.params.room)) || !furnitureItem) {
+        clientRender(req, res, 404, req.session);
+        return false;
+    }
+    return true;
 }
 
 async function checkFlatsHouseSectionFloor(req: any, res: Response) {
