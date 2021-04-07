@@ -2,8 +2,8 @@
 
 :host {
     width: 100%;
-    height: calc(100% / 4);
-    min-height: calc((100% - 960px) / 3);
+    height: calc(100% / 5);
+    min-height: calc((100% - 960px) / 4);
     transition: min-height .3s linear .1s, height .3s linear .1s;
 }
 

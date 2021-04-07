@@ -11,6 +11,7 @@ import { DecorationSliderComponent } from './decoration-placement/decoration-sli
 import { DecorationSliderListComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list.component';
 import { DecorationSliderListItemComponent } from './decoration-placement/decoration-slider/decoration-slider-list/decoration-slider-list-item/decoration-slider-list-item.component';
 import { DecorationSliderBtnsComponent } from './decoration-placement/decoration-slider/decoration-slider-btns/decoration-slider-btns.component';
+import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
 const DecorationComponents = [
     DecorationComponent,
@@ -35,6 +36,7 @@ const DecorationComponents = [
     imports: [
         CommonModule,
         RouterModule,
+        InfoBlockModule,
         RouterModule.forChild([
             { path: 'decoration/furniture/type/:type/vendor/:vendor/room/:room', component: FurnitureSliderComponent },
             { path: 'decoration', component: DecorationVariationComponent },

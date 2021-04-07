@@ -1,10 +1,10 @@
 <section class="home__preview home-preview">
     
-    <div class="home-preview__bgr"  *ngIf="gallerySlides">
+    <div class="home-preview__bgr"  *ngIf="gallerySlides" [style.height.px]="screenHeight">
         <img [src]="uploadsPath + gallerySlides[0].image" alt="home-preview">
     </div>
 
-    <div class="home-preview__container">
+    <div class="home-preview__container" [style.height.px]="screenHeight">
         <h1 class="home-preview__content-title home-preview__content-title--h1">Официальный сайт ЖК Новотомилино</h1>
 
         <div class="home-preview__content">
@@ -21,7 +21,7 @@
         <p class="home-preview__description-text">{{homePreview.description}}</p>
     </div>
 
-    <div class="home-preview__news">
+    <div class="home-preview__news" *ngIf="newsShares.length">
         <ng-container *ngFor="let news of newsShares; let i = index">
 
             <a class="home-preview__news-item" 

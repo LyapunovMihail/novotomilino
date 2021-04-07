@@ -1,5 +1,12 @@
 .decoration {
     width: 100%;
     height: calc(100vh - (64px + 50px));
+    padding: 0 0 102px;
     position: relative;
+    overflow: hidden;
+
+    &__info-block {
+        position: absolute;
+        bottom: 0;
+    }
 }

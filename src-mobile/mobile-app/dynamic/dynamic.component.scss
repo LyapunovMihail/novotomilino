@@ -4,12 +4,12 @@
     width: 100%;
     @include screenHeight('min');
     box-sizing: border-box;
-    padding: 40px 0 64px;
+    padding: 40px 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    @media (max-width: 760px) { padding: 32px 0 64px; }
+    @media (max-width: 760px) { padding: 32px 0 0; }
 
     &__header {
         width: $mobileContainer;

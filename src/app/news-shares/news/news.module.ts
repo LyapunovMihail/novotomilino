@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LoaderModule } from '../../UI/loader/loader.module';
+import { InfoBlockModule } from '../../UI/info-block/info-block.module';
 
 const NewsComponents = [
     NewsComponent,
@@ -34,6 +35,7 @@ const NewsComponents = [
     imports: [
         CommonModule,
         LoaderModule,
+        InfoBlockModule,
         CreateRedactFormsModule,
         NewsSharesComponentModule,
         RouterModule.forChild([

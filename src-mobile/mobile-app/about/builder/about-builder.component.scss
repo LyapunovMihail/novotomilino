@@ -35,12 +35,13 @@
         }
     }
     &__switch {
-        width: calc(100% - 30px);
+        width: calc(100% - 60px);
         max-width: 1280px;
         display: flex;
         align-items: center;
         margin: 0 0 16px; 
         @media(max-width: 767px) {
+            width: calc(100% - 30px);
             flex-flow: column;
             align-items: flex-start;
         }
@@ -92,11 +93,14 @@
         }
     }
     &__nav {
-        width: calc(100% - 30px);
+        width: calc(100% - 60px);
         max-width: 1280px;
         display: flex;
         justify-content: flex-start;
-        margin: 0 0 16px; 
+        margin: 0 0 16px;
+        @media (max-width: 767px) {
+            width: calc(100% - 30px);
+        }
 
         &-wrap {
             display: flex;

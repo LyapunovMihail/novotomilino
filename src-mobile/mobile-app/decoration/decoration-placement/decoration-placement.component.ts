@@ -21,4 +21,21 @@ export class DecorationPlacementComponent implements OnChanges {
             this.activeIndex = 0;
         }
     }
+
+    noticeContent(): string {
+        if (this.pageType === 'places') {
+            return this.name;
+        } else {
+            switch (this.slideList.length) {
+                case 2:
+                    return this.activeIndex === 0
+                        ? `${this.name}: Классика`
+                        : `${this.name}: Модерн`;
+                default:
+                    return this.activeIndex <= 1
+                        ? `${this.name}: Классика`
+                        : `${this.name}: Модерн`;
+            }
+        }
+    }
 }
