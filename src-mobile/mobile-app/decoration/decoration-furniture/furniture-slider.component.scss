@@ -39,9 +39,10 @@
 
         &-item {
             font: 14px/18px $font-mus;
-            color: $col-black;
+            color: #232731;
             transition: border-color .2s linear;
-            border: 1px solid #E2E2E2;
+            border: 1px solid #E7490F;
+            border-radius: 16px;
             padding: 4px 8px;
             cursor: pointer;
             &+ a { margin-left: 8px; }
@@ -56,7 +57,7 @@
     }
     &__vendor {
         width: 100%;
-        margin: 0 0 32px;
+        margin: 0 0 24px;
     }
 
     &__rooms {
@@ -112,7 +113,7 @@
                 }
                 &:last-child {
                     font: 14px/18px $font-mus;
-                    color: $col-76;
+                    color: #666769
                 }
             }
         }
@@ -187,7 +188,6 @@
         max-width: 1280px;
         display: flex;
         justify-content: flex-start;
-        margin: 0 0 16px;
 
         &-wrap {
             display: flex;

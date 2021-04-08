@@ -51,18 +51,22 @@ export class FurnitureSliderComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         setTimeout(() => this.swiperInit(), 1000);
     }
-
     private routerParamsSubscr() {
         this.routerParams = this.activatedRoute.snapshot.params;
         this.routerSubscr = this.activatedRoute.params.subscribe( params => {
             this.routerParams = { ...params };
-            this.slideCount = 0;
+            // this.slideCount = 0;
             this.validateParams();
             if (this.routerParamsVerified && !this.furnitureItem.images) {
                 this.navigate('room', 0);
             }
             if (this.swiperSlider) {
-                setTimeout(() => this.swiperSlider.update(), 100);
+                console.log('CHECK');
+                console.log('this.slideCount before: ', this.slideCount);
+                setTimeout(() => {
+                    this.swiperSlider.update();
+                    console.log('this.slideCount after: ', this.slideCount);
+                }, 100);
             }
         });
     }

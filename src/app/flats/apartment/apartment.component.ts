@@ -1,6 +1,6 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
 import { PlatformDetectService } from '../../platform-detect.service';
@@ -23,6 +23,7 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public pdfLink: string;
     public clickedPdf = false;
     public changeFlatData;
+    public furnitureCost = 0;
 
     constructor(
         private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService,
@@ -31,6 +32,7 @@ export class ApartmentComponent implements OnInit, OnDestroy {
         private favoritesService: FavoritesService,
         public searchService: SearchService,
         public router: Router,
+        private changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public get apartamentRooms() {
@@ -127,5 +129,10 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     public setFavorite(): void {
         this.flatData.inFavorite = !this.flatData.inFavorite;
         this.favoritesService.setFavorite(this.flatData);
+    }
+
+    public changeFurnitureCost(e) {
+        this.furnitureCost = e;
+        this.changeDetectorRef.detectChanges();
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { IFlatFurniture, IFlatFurnitureItem } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 
@@ -9,7 +9,7 @@ import { WindowScrollLocker } from '../../../commons/window-scroll-block';
     providers: [WindowScrollLocker]
 })
 
-export class ApartmentFurnitureComponent implements OnInit {
+export class ApartmentFurnitureComponent implements OnInit, OnDestroy {
 
     public furnitureVariant: IFlatFurniture;
     public furnitureImages = [];
@@ -19,6 +19,7 @@ export class ApartmentFurnitureComponent implements OnInit {
 
     @Input() public furniture: IFlatFurniture[];
     @Input() public isActive: boolean;
+    @Output() public changeFurnitureCost = new EventEmitter<number>();
 
     get fixedInPriceItems(): IFlatFurnitureItem[] {
         return this.furnitureVariant.items.filter((item) => item.itemsDefaultCount === 999);
@@ -31,10 +32,12 @@ export class ApartmentFurnitureComponent implements OnInit {
     ngOnInit() {
         this.furnitureVariant = this.furniture[0];
         this.totalCost = this.furnitureVariant.charCost;
+        this.changeFurnitureCost.emit(this.totalCost);
     }
 
     public calculateTotalPrice(e, item) {
         this.totalCost = e.target.checked ? this.totalCost + item.itemPrice : this.totalCost - item.itemPrice;
+        this.changeFurnitureCost.emit(this.totalCost);
     }
 
     public startSlideShow() {
@@ -42,5 +45,9 @@ export class ApartmentFurnitureComponent implements OnInit {
             this.windowScrollLocker.block();
             this.isSlideShow = true;
         }
+    }
+
+    ngOnDestroy() {
+        this.changeFurnitureCost.emit(0);
     }
 }

@@ -57,7 +57,7 @@
                     </li>
                     <li>
                         <p>Стоимость</p>
-                        <p [class.discount]="flatData.discount">{{ (flatData.discount ? (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe}} &#8381;</p>
+                        <p [class.discount]="flatData.discount">{{ (flatData.discount ? (flatData.price - flatData.discount + furnitureCost) : flatData.price + furnitureCost) | myBitNumberPipe}} &#8381;</p>
                     </li>
                     <!-- <li>
                         <p>Срок сдачи</p>
@@ -81,6 +81,7 @@
                     *ngIf="furnitureSwitcher.checked"
                     [furniture]="flatData.furniture"
                     [isActive]="furnitureSwitcher.checked"
+                    (changeFurnitureCost)="changeFurnitureCost($event)"
                 ></app-apartment-furniture>
             </div>
          </div>

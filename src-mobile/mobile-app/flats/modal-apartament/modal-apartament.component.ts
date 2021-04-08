@@ -1,6 +1,6 @@
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FavoritesService } from '../../favorites/favorites.service';
 import { FlatsService } from '../flats.service';
@@ -19,12 +19,14 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
     public isformSuccessOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
+    public furnitureCost = 0;
 
     constructor(
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         private favoritesService: FavoritesService,
         private flatsService: FlatsService,
+        private changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public get apartamentRooms() {
@@ -89,5 +91,10 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
     }
     public inFavorite(flat): boolean {
         return this.favoritesService.inFavorite(flat);
+    }
+
+    public changeFurnitureCost(e) {
+        this.furnitureCost = e;
+        this.changeDetectorRef.detectChanges();
     }
 }
