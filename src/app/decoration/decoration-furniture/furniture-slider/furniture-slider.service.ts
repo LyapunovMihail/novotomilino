@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDecorationPreviewVendor, IDecorationType } from '../../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
+import { IDecorationFurniturePreview, IDecorationFurnitureSlider } from '../../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
 
 @Injectable()
 
@@ -9,12 +9,12 @@ export class FurnitureSliderService {
 
     constructor( private http: HttpClient ) {}
 
-    public getDecorationFurnitureData(): Observable<IDecorationType[]> {
-        return this.http.get<IDecorationType[]>('/api/get_decoration_data');
+    public getDecorationFurnitureSliderData(): Observable<IDecorationFurnitureSlider[]> {
+        return this.http.get<IDecorationFurnitureSlider[]>('/api/decoration/slider/get');
     }
 
-    public getDecorationFurniturePreview(): Observable<IDecorationPreviewVendor[]> {
-        return this.http.get<IDecorationPreviewVendor[]>('/api/get_decoration_preview');
+    public getDecorationFurniturePreviewData(): Observable<IDecorationFurniturePreview[]> {
+        return this.http.get<IDecorationFurniturePreview[]>('/api/decoration/preview/get');
     }
 
 

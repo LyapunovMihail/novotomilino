@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IDecorationFurniturePreview } from '../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
 
 export interface IHeaderLink {
     name: string;
@@ -9,6 +11,8 @@ export interface IHeaderLink {
 @Injectable()
 
 export class HeaderService {
+
+    public linksData: any = {};
 
     constructor(
         private http: HttpClient
@@ -24,11 +28,11 @@ export class HeaderService {
     public getPhone() {
         return this.http.get('/api/contacts/phone');
     }
+    public getDecorationFurnitureLink(): Observable<IDecorationFurniturePreview[]> {
+        return this.http.get<IDecorationFurniturePreview[]>('/api/decoration/preview/get');
+    }
 
-    public links(data) {
-        let date = new Date();
-        let year = (data.year) ? data.year : date.getFullYear();
-        let month = (data.month) ? data.month : ( date.getMonth() + 1 );
+    public links() {
         return [
             { name: 'О ЖК', url: '/about' },
             { name: 'Офис продаж', url: `/location/office` },
@@ -37,8 +41,8 @@ export class HeaderService {
             { name: 'Квартиры', url: `/flats/search` },
             { name: 'Коммерческая недвижимость', url: `/flats/commercial/list` },
             { name: 'Отделка', url: '/decoration' },
-            { name: 'Квартиры с мебелью', url: '/decoration/furniture/type/Классика/vendor/Шатура/room/0' }, // type/:type/variant/:variant/room/:room
-            { name: 'Ход строительства', url: `/dynamic/${year}/${month}` },
+            { name: 'Квартиры с мебелью', url: this.linksData.furniture.link }, // type/:type/variant/:variant/room/:room
+            { name: 'Ход строительства', url: `/dynamic/${this.linksData.dynamic.year}/${this.linksData.dynamic.month}` },
             { name: 'Условия покупки', url: '/purchase/credit' },
 
             { name: 'Новости и акции', url: '/news-shares/all' },

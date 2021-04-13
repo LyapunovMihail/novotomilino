@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDecorationFurniture, IDecorationType, IDecorationVendor } from '../../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
+import { IDecorationFurnitureSlider, IDecorationFurnitureSnippet, IDecorationFurnitureVendor } from '../../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
 import { FurnitureSliderService } from './furniture-slider.service';
 
 @Component({
@@ -16,17 +16,12 @@ export class FurnitureSliderComponent implements OnInit {
     public routerSubscr;
     public routerParamsVerified = false;
 
-    public typeList: IDecorationType[];
-    public vendorList: IDecorationVendor[];
-    public furnitureList: IDecorationFurniture[];
-    public furnitureItem: IDecorationFurniture;
+    public typeList: IDecorationFurnitureSlider[];
+    public vendorList: IDecorationFurnitureVendor[];
+    public furnitureList: IDecorationFurnitureSnippet[];
+    public furnitureItem: IDecorationFurnitureSnippet;
 
     public slideCount = 0;
-    public navList = [
-        { name: 'Шатура', link: 'shatura' },
-        { name: 'Лазурит', link: 'lazurit' },
-        // { name: 'Хофф', link: 'hoff' },
-    ];
 
     constructor(
         private furnitureSliderService: FurnitureSliderService,
@@ -35,10 +30,9 @@ export class FurnitureSliderComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.furnitureSliderService.getDecorationFurnitureData()
+        this.furnitureSliderService.getDecorationFurnitureSliderData()
             .subscribe(
                 (data) => {
-                    console.log('data: ', data);
                     this.typeList = data;
                     this.routerParamsSubscr();
                 },

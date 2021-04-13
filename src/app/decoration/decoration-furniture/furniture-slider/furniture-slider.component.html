@@ -8,7 +8,6 @@
 
         <div class="furniture-slider__type">
             <a (click)="navigate('type', item.type)" class="furniture-slider__type-item" [class.active]="routerParams.type === item.type" *ngFor="let item of typeList">{{item.type}}</a>
-            <!--<a (click)="navigate('type', 'modern')" class="furniture-slider__type-item" [class.active]="routerParams.type === 'modern'">Модерн</a>-->
         </div>
         <div class="furniture-slider__vendor">
             <!--<nav-menu class="variation__nav"-->
@@ -54,5 +53,17 @@
                 </p>
             </div>
         </div>
+
+        <div class="furniture-slider__result">
+
+            <app-search-output
+                [parentPlan]="false"
+                [parentDecoration]="true"
+                [flatsList]="furnitureItem.flats"
+                [preloader]="false"
+                [count]="furnitureItem.flats.length">
+            </app-search-output>
+        </div>
+
     </div>
 </section>

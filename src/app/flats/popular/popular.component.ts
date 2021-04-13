@@ -35,7 +35,8 @@ export class PopularComponent implements OnInit, OnDestroy {
             (err) => console.log(err));
     }
 
-    public navigate(url, flatsParams) {
+    public navigate(url, flatsParams, e) {
+        e.preventDefault();
         if (!flatsParams) {
             this.router.navigate([url]);
         } else {
@@ -44,11 +45,12 @@ export class PopularComponent implements OnInit, OnDestroy {
     }
 
     public previousRoute() {
-        const prevRoute = JSON.parse(sessionStorage.getItem('vb2-prev-route'));
+        const prevRoute = JSON.parse(sessionStorage.getItem('ntm-prev-route'));
         if (prevRoute.route === '/flats/plan') {
             this.searchFlatsLinkHandlerService.linkHandle(true, prevRoute.params);
             return;
         }
+        console.log('CHECK');
         this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
     }
 

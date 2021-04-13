@@ -47,6 +47,7 @@ export class SearchSortingComponent implements OnInit {
     @Input() public counter;
     @Input() public hideViewTypeBtn: boolean;
     @Input() public viewType: 'block' | 'inline';
+    @Input() public parentDecoration: boolean;
 
     constructor( public flatsDiscountService: FlatsDiscountService ) {}
 

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ContactsController } from './contacts-api/contacts.controller';
+import { DecorationController } from './decoration-api/decoration.controller';
 import { MongoConnectionService } from './mongo-connection.service';
 import { AuthorizationController } from './authorization-api/authorization.controller';
 import { NewsController } from './news-api/news.controller';
@@ -41,6 +42,7 @@ import { ProjectsController } from './projects-api/projects-api.controller';
         SeoController,
         PDFController,
         ProjectsController,
+        DecorationController
     ],
     providers: [
         MongoConnectionService,

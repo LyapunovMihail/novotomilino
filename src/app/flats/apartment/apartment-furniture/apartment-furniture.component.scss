@@ -74,11 +74,9 @@ $col-black-3: rgba($color: $col-black, $alpha: .3);
     }
     &__slides {
         width: 256px * 2 + 8px;
-        height: 160px * 2 + 8px;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
         align-content: space-between;
-        justify-content: space-between;
         margin-right: 32px;
 
         &-item {

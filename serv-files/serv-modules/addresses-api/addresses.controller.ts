@@ -36,12 +36,6 @@ export class AddressesController extends AddressesModel {
         this.router.post('/search/by_houses_and_numbers', responseHandler(async(req) => {
             return await this.getObjectsByHousesAndNumbers(req.body);
         }));
-        this.router.get('/get_decoration_data', responseHandler(async(req) => {
-            return await this.getDecorationData();
-        }));
-        this.router.get('/get_decoration_preview', responseHandler(async(req) => {
-            return await this.getDecorationPreview();
-        }));
         this.router.get('/favorites/get', responseHandler(async(req) => {
             return await this.getFavorites(req.session);
         }));

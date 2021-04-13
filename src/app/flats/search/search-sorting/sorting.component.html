@@ -1,7 +1,7 @@
 
 <div class="search-sorting">
 
-    <div class="search-sorting__sort">
+    <div class="search-sorting__sort" *ngIf="!parentDecoration">
         <div class="search-sorting__sort-changed" (click)="showTooltip = !showTooltip" 
             [ngClass]="{'isOpen': showTooltip, 'fromLess': !activeValue}">{{activeSort}}</div>
         

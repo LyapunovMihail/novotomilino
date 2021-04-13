@@ -1,3 +1,4 @@
+import { BitNumberPipe } from '../bit-number.pipe';
 import { PlatformDetectService } from './../../platform-detect.service';
 import { FormsRequestService } from './../forms-request.service';
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
@@ -7,14 +8,16 @@ declare let $: any;
 @Component({
     selector: 'app-form-credit',
     styleUrls: ['./../forms-request.component.scss'],
-    templateUrl: './form-credit.component.html'
+    templateUrl: './form-credit.component.html',
+    providers: [BitNumberPipe]
 })
 
 export class FormCreditComponent implements OnChanges {
 
-    @Input() public isOpen: boolean = false;
+    @Input() public isOpen = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
+    @Input() public furnitureCost: number;
     @Input() public articleId: string;
     @Input() public type: string;
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
@@ -35,7 +38,8 @@ export class FormCreditComponent implements OnChanges {
         wait_for_call: 'now',
         agreement: true,
         articleId: '',
-        description: ''
+        description: '',
+        furnitureCost: ''
     });
 
     public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -44,7 +48,8 @@ export class FormCreditComponent implements OnChanges {
     constructor(
         public formBuilder: FormBuilder,
         public service: FormsRequestService,
-        public platform: PlatformDetectService
+        public platform: PlatformDetectService,
+        private bitNumberPipe: BitNumberPipe
     ) { }
 
     public get typeApartament() {
@@ -71,6 +76,7 @@ export class FormCreditComponent implements OnChanges {
             this.form.controls['type'].setValue(this.type);
             this.form.controls['articleId'].setValue(this.articleId);
             this.form.controls['description'].setValue('');
+            this.form.controls['furnitureCost'].setValue(this.bitNumberPipe.transform(this.furnitureCost, 0) + ' р.');
         }
     }
 

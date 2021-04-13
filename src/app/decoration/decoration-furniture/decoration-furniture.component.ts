@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IDecorationPreviewVendor } from '../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
-import { furnitureConf } from './config';
+import { IDecorationFurniturePreview } from '../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
 import { FurnitureSliderService } from './furniture-slider/furniture-slider.service';
 
 @Component({
@@ -12,13 +11,14 @@ import { FurnitureSliderService } from './furniture-slider/furniture-slider.serv
 
 export class DecorationFurnitureComponent implements OnInit {
 
-    public furniture: IDecorationPreviewVendor[];
+    public furniture: IDecorationFurniturePreview[];
+
     constructor(
         private furnitureSliderService: FurnitureSliderService,
     ) { }
 
     ngOnInit() {
-        this.furnitureSliderService.getDecorationFurniturePreview()
+        this.furnitureSliderService.getDecorationFurniturePreviewData()
             .subscribe(
                 (data) => {
                     this.furniture = data;

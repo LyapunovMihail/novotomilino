@@ -2,7 +2,7 @@ import { ADDRESSES_COLLECTION_NAME } from './addresses-api/addresses.interfaces'
 import { AddressesModel } from './addresses-api/addresses.model';
 import { floorCount } from './addresses-api/floor-count';
 import { SERVER_CONFIGURATIONS } from './configuration';
-import { sliderContent } from './decoration-api/config';
+import { DecorationModel } from './decoration-api/decoration.model';
 import { MongoConnectionService } from './mongo-connection.service';
 import { NEWS_COLLECTION_NAME } from './news-api/news.interfaces';
 import { SHARES_COLLECTION_NAME } from './shares-api/shares.interfaces';
@@ -137,7 +137,7 @@ function checkDynamicMonthAndYear(req: any, res: Response, next) {
 }
 
 async function checkDecorationFurnitureParams(req, res: Response) {
-    const decorationTypes = await new AddressesModel(MongoConnectionService.getDb().connection.db).getDecorationData();
+    const decorationTypes = await new DecorationModel(MongoConnectionService.getDb().connection.db).getDecorationSliderData();
     const decorationType = decorationTypes.find((data) => data.type === req.params.type);
     if (!decorationType) {
         clientRender(req, res, 404, req.session);

@@ -1,3 +1,4 @@
+import { BitNumberPipe } from '../bit-number.pipe';
 import { PlatformDetectService } from './../../platform-detect.service';
 import { FormsRequestService } from './../forms-request.service';
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
@@ -7,14 +8,16 @@ declare let $: any;
 @Component({
     selector: 'app-form-reserve',
     styleUrls: ['./../forms-request.component.scss'],
-    templateUrl: './form-reserve.component.html'
+    templateUrl: './form-reserve.component.html',
+    providers: [BitNumberPipe]
 })
 
 export class FormReserveComponent implements OnChanges {
 
-    @Input() isOpen: boolean = false;
+    @Input() isOpen = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
+    @Input() public furnitureCost: number;
     @Input() public articleId: string;
     @Input() public type: string;
     @Output() close: EventEmitter<boolean> = new EventEmitter();
@@ -33,7 +36,8 @@ export class FormReserveComponent implements OnChanges {
         wait_for_call: 'now',
         agreement: true,
         articleId: '',
-        description: ''
+        description: '',
+        furnitureCost: ''
     });
 
     public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -42,7 +46,8 @@ export class FormReserveComponent implements OnChanges {
     constructor(
         public formBuilder: FormBuilder,
         public service: FormsRequestService,
-        public platform: PlatformDetectService
+        public platform: PlatformDetectService,
+        private bitNumberPipe: BitNumberPipe
     ) { }
 
     public get typeApartament() {
@@ -67,6 +72,7 @@ export class FormReserveComponent implements OnChanges {
             this.form.controls['type'].setValue(this.type);
             this.form.controls['articleId'].setValue(this.articleId);
             this.form.controls['description'].setValue('');
+            this.form.controls['furnitureCost'].setValue(this.bitNumberPipe.transform(this.furnitureCost, 0) + ' р.');
         }
     }
 

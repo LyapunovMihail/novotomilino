@@ -15,9 +15,12 @@
             <div class="header__nav-container">
 
                 <ul class="header__nav-list">
-                    <li class="header__nav-list-item" *ngFor="let link of links">
-                        <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
-                    </li>
+                    <ng-container *ngFor="let link of links">
+                        <li class="header__nav-list-item" *ngIf="link">
+                            <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
+                        </li>
+                    </ng-container>
+
                     <li class="header__nav-list-item">
                         <a class="header__nav-list-item-link" [routerLink]="'/favorites'" (click)="closeNav()">Избранное <span *ngIf="favoriteCounter && favoriteCounter > 0">({{favoriteCounter}})</span></a>
                     </li>

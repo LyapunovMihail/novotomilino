@@ -188,7 +188,8 @@ export class SearchFormComponent implements OnInit, OnDestroy, OnChanges {
         this.form.patchValue({ [type]: val });
     }
 
-    public openPopularModal() {
+    public openPopularModal(e) {
+        e.preventDefault();
         sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRoute.snapshot.queryParams }));
         this.router.navigate([`/flats/popular`]);
     }

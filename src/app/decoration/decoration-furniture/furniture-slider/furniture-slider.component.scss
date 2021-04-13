@@ -204,4 +204,8 @@
             color: rgba($color: $col-black, $alpha: .6);
         }
     }
+
+    &__result {
+        width: 100%;
+    }
 }

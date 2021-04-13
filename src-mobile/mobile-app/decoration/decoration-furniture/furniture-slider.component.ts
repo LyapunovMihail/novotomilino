@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDecorationFurniture, IDecorationType, IDecorationVendor } from '../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
+import { IDecorationFurnitureSlider, IDecorationFurnitureSnippet, IDecorationFurnitureVendor } from '../../../../serv-files/serv-modules/decoration-api/decoration.interfaces';
 import { FurnitureSliderService } from './furniture-slider.service';
 declare const Swiper: any;
 
@@ -17,19 +17,16 @@ export class FurnitureSliderComponent implements OnInit, AfterViewInit {
     public routerSubscr;
     public routerParamsVerified = false;
 
-    public typeList: IDecorationType[];
-    public vendorList: IDecorationVendor[];
-    public furnitureList: IDecorationFurniture[];
-    public furnitureItem: IDecorationFurniture;
+    public typeList: IDecorationFurnitureSlider[];
+    public vendorList: IDecorationFurnitureVendor[];
+    public furnitureList: IDecorationFurnitureSnippet[];
+    public furnitureItem: IDecorationFurnitureSnippet;
 
     public slideCount = 0;
-    public navList = [
-        { name: 'Шатура', link: 'shatura' },
-        { name: 'Лазурит', link: 'lazurit' },
-        // { name: 'Хофф', link: 'hoff' },
-    ];
 
     private swiperSlider: any;
+
+    public viewType: 'block' | 'inline' = 'block';
 
     constructor(
         private furnitureSliderService: FurnitureSliderService,
@@ -38,10 +35,9 @@ export class FurnitureSliderComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
-        this.furnitureSliderService.getDecorationFurnitureData()
+        this.furnitureSliderService.getDecorationFurnitureSliderData()
             .subscribe(
                 (data) => {
-                    console.log('data: ', data);
                     this.typeList = data;
                     this.routerParamsSubscr();
                 },
@@ -55,17 +51,13 @@ export class FurnitureSliderComponent implements OnInit, AfterViewInit {
         this.routerParams = this.activatedRoute.snapshot.params;
         this.routerSubscr = this.activatedRoute.params.subscribe( params => {
             this.routerParams = { ...params };
-            // this.slideCount = 0;
             this.validateParams();
             if (this.routerParamsVerified && !this.furnitureItem.images) {
                 this.navigate('room', 0);
             }
             if (this.swiperSlider) {
-                console.log('CHECK');
-                console.log('this.slideCount before: ', this.slideCount);
                 setTimeout(() => {
                     this.swiperSlider.update();
-                    console.log('this.slideCount after: ', this.slideCount);
                 }, 100);
             }
         });
@@ -116,5 +108,17 @@ export class FurnitureSliderComponent implements OnInit, AfterViewInit {
                 slideChange: () => this.slideCount = this.swiperSlider.realIndex
             }
         });
+    }
+
+    public parseText(num) {
+
+        num = Math.abs(num) % 100;
+        const words = ['квартира', 'квартиры', 'квартир'];
+        const sum = num % 10;
+
+        if (num > 10 && num < 20) { return words[2]; }
+        if (sum > 1 && sum < 5) { return words[1]; }
+        if (sum === 1) { return words[0]; }
+        return words[2];
     }
 }

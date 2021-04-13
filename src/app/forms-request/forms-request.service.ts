@@ -49,6 +49,11 @@ export class FormsRequestService {
                 --- Удобное время для связи ---: ${payTime}
             `;
         }
+        if (form.furnitureCost !== '0 р.') {
+            descr = descr + `
+                --- Включена меблировка стоимостью ---: ${form.furnitureCost}
+            `;
+        }
 
         return {
             ArticleId: form.articleId,

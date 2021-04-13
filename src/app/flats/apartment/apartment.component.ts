@@ -75,12 +75,16 @@ export class ApartmentComponent implements OnInit, OnDestroy {
     }
 
     public previousRoute() {
-        const prevRoute = JSON.parse(sessionStorage.getItem('ntm-prev-route'));
-        if (prevRoute.route === '/flats/plan') {
+        const prevRoute = JSON.parse(localStorage.getItem('ntm-prev-route'));
+        prevRoute.route = decodeURI(prevRoute.route);
+        if (prevRoute && prevRoute.route === '/flats/plan') {
             this.searchFlatsLinkHandlerService.linkHandle(true, prevRoute.params);
             return;
+        } else if (prevRoute && prevRoute.route !== '/flats/plan') {
+            this.router.navigate([prevRoute.route], { queryParams: prevRoute.params });
+        } else {
+            this.router.navigate(['/flats/plan']);
         }
-        this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
     }
     public routePDF() {
         if (!this.platformDetectService.isBrowser) { return; }

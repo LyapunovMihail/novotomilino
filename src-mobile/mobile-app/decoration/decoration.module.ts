@@ -1,3 +1,4 @@
+import { SearchOutputModule } from '../flats/search-output/search-output.module';
 import { FurnitureSliderComponent } from './decoration-furniture/furniture-slider.component';
 import { SearchBitNumberPipe } from './decoration-furniture/search-bit-number.pipe';
 import { DecorationPlacementComponent } from './decoration-placement/decoration-placement.component';
@@ -37,6 +38,7 @@ const DecorationComponents = [
         CommonModule,
         RouterModule,
         InfoBlockModule,
+        SearchOutputModule,
         RouterModule.forChild([
             { path: 'decoration/furniture/type/:type/vendor/:vendor/room/:room', component: FurnitureSliderComponent },
             { path: 'decoration', component: DecorationVariationComponent },

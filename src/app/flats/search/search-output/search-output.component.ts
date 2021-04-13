@@ -10,7 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     selector: 'app-search-output',
     templateUrl: './search-output.component.html',
     styleUrls: ['./search-output.component.scss'],
-    providers: [ WindowScrollLocker ]
+    providers: [
+        WindowScrollLocker,
+        SearchService
+    ]
 })
 
 export class SearchOutputComponent implements OnInit {
@@ -24,6 +27,7 @@ export class SearchOutputComponent implements OnInit {
     @Input() public count: number;
     @Input() public preloader: boolean;
     @Input() public parentPlan: boolean;
+    @Input() public parentDecoration: boolean;
     @Input() public flatsList: IFlatWithDiscount[] = [];
 
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();

@@ -16,6 +16,5 @@ export const SearchComponents = [
     SeoPageComponent,
     SearchFormComponent,
     InputsListComponent,
-    SearchOutputComponent,
     CheckboxListComponent,
 ];

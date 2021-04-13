@@ -11,7 +11,6 @@
 
         <div class="furniture-slider__type">
             <a (click)="navigate('type', item.type)" class="furniture-slider__type-item" [class.active]="routerParams.type === item.type" *ngFor="let item of typeList">{{item.type}}</a>
-            <!--<a (click)="navigate('type', 'modern')" class="furniture-slider__type-item" [class.active]="routerParams.type === 'modern'">Модерн</a>-->
         </div>
         <div class="furniture-slider__vendor">
             <!--<nav-menu-->
@@ -59,10 +58,43 @@
                 <!-- <p class="furniture-slider__slider-title"></p> -->
                 <p class="furniture-slider__slider-text">
                     Кухонный комплект и вся необходимая встроенная техника (включая варочную панель, 
-                    духовой шкаф, холодильник и вытяжку), мойка и кухонный смеситель. Прихожая, диван-книжка, 
+                    духовой шкаф, холодильник и вытяжку), мойка и кухонный смеситель. Прихожая, диван-книжка,
                     системы для хранения и др. сопутствующие элементы меблировки и аксессуары.
                 </p>
             </div>
         </div>
+    </div>
+
+    <div class="furniture-slider__flats-container">
+
+        <div class="furniture-slider__flats-row">
+            <p class="furniture-slider__flats-count" *ngIf="furnitureItem.flats.length > 0">Найдено {{furnitureItem.flats.length}} {{parseText(furnitureItem.flats.length)}} с меблеровкой</p>
+            <div class="furniture-slider__flats-type">
+                <button class="furniture-slider__flats-type_item" [class.active]="viewType === 'block'" (click)="viewType = 'block'">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="5" height="5" stroke="#000105"/>
+                        <rect x="0.5" y="8.5" width="5" height="5" stroke="#000105"/>
+                        <rect x="8.5" y="0.5" width="5" height="5" stroke="#000105"/>
+                        <rect x="8.5" y="8.5" width="5" height="5" stroke="#000105"/>
+                    </svg>
+                </button>
+                <button class="furniture-slider__flats-type_item" [class.active]="viewType === 'inline'" (click)="viewType = 'inline'">
+                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3.19995" width="12.8001" height="1.56522" fill="#000105"/>
+                        <rect width="1.60002" height="1.56522" fill="#000105"/>
+                        <rect x="3.19995" y="5.21741" width="12.8001" height="1.56522" fill="#000105"/>
+                        <rect y="5.21741" width="1.60002" height="1.56522" fill="#000105"/>
+                        <rect x="3.19995" y="10.4348" width="12.8001" height="1.56522" fill="#000105"/>
+                        <rect y="10.4348" width="1.60002" height="1.56522" fill="#000105"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <app-search-output
+            [viewType]="viewType"
+            [flatsCount]="furnitureItem.flats.length"
+            [flatsList]="furnitureItem.flats"
+        ></app-search-output>
     </div>
 </section>

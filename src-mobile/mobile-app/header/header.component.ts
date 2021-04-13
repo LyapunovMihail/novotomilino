@@ -1,11 +1,12 @@
-import { WindowEventsService } from '../commons/window-events.observer.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { WindowEventsService } from '../commons/window-events.observer.service';
 import { WindowScrollLocker } from '../commons/window-scroll-block';
-import { HeaderService } from './header.service';
-import { Router, NavigationEnd } from '@angular/router';
 import { FavoritesService } from '../favorites/favorites.service';
+import { HeaderService } from './header.service';
+
 declare let $: any;
 
 
@@ -54,13 +55,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.headerService.getDynamicLink()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
-                (data) => {
-                    this.links = this.headerService.links(data);
+                (data: any) => {
+                    const date = new Date();
+                    this.headerService.linksData.dynamic = {
+                        year: (data.year) ? data.year : date.getFullYear(),
+                        month: (data.month) ? data.month : (date.getMonth() + 1)
+                    };
+                    this.getDecorationFurnitureLink();
                 },
                 (err) => {
                     console.error(err);
-                    let date = new Date();
-                    this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
+                    const date = new Date();
+                    this.headerService.linksData.dynamic = {
+                        year: date.getFullYear(),
+                        month: date.getMonth() + 1
+                    };
+                    this.getDecorationFurnitureLink();
                 }
             );
 
@@ -71,6 +81,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
             this.fixedHeader();
         });
+
+    }
+    public getDecorationFurnitureLink() {
+        this.headerService.getDecorationFurnitureLink()
+            .subscribe(
+                (data) => {
+                    if (data.length) {
+                        this.headerService.linksData.furniture = {
+                            link: `/decoration/furniture/type/${data[0].types[0].type}/vendor/${data[0].vendor}/room/${data[0].types[0].rooms}`
+                        };
+                    } else {
+                        this.headerService.linksData.furniture = {
+                            link: null
+                        };
+                    }
+                    this.links = this.headerService.links();
+                },
+                (err) => {
+                    console.error(err);
+                    this.headerService.linksData.furniture = {
+                        link: null
+                    };
+                    this.links = this.headerService.links();
+                }
+            );
     }
 
     public ngOnDestroy() {

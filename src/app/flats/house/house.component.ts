@@ -1,7 +1,6 @@
-import { IAddressItemFlat, IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
-import { FloorCount } from '../floor/floor-count';
 import { IFlatBubbleCoordinates } from './flat-bubble/flat-bubble.component';
 import { HouseService } from './house.service';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -1,12 +1,13 @@
 <div class="search-output" *ngIf="flatsList">
 
     <div class="search-output__head">
-        <h2 class="search-output__head-title">Найдено {{flatsCount()}} {{ parseText( flatsCount() ) }}</h2>
+        <h2 class="search-output__head-title">Найдено {{flatsCount()}} {{ parseText( flatsCount() ) }} {{parentDecoration ? 'c меблеровкой' : ''}}</h2>
 
         <app-search-sorting
             [(ngModel)]="sort"
             [ngModelOptions]="{standalone: true}"
-            (ngModelChange)="sortFlats(sort)">
+            (ngModelChange)="sortFlats(sort)"
+            [parentDecoration]="parentDecoration">
         </app-search-sorting>
     </div>
 
@@ -22,7 +23,7 @@
         </ng-container>
 
         <app-loader
-            *ngIf="this.preloader === true && parentPlan"
+            *ngIf="preloader === true && parentPlan"
             [loaderHeight]="300"
             [loaderShow]="preloader && parentPlan">
         </app-loader>

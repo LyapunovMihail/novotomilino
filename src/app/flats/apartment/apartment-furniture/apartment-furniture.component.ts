@@ -41,8 +41,6 @@ export class ApartmentFurnitureComponent implements OnInit, OnDestroy {
     }
 
     public startSlideShow() {
-        this.furnitureVariant.charImages = [{"url":"https://incrm.ru/DOC/TRED/plans/ntm_meb/test.jpg"},{"url":"https://incrm.ru/DOC/TRED/plans/ntm_meb/shatura_ntm_st_11.jpg"},{"url":"https://incrm.ru/DOC/TRED/plans/ntm_meb/test.jpg"},{"url":"https://incrm.ru/DOC/TRED/plans/ntm_meb/test.jpg"}];
-
         if (this.furnitureVariant.charImages) {
             this.windowScrollLocker.block();
             this.isSlideShow = true;

@@ -68,9 +68,15 @@ export class ModalApartamentComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/error-404'], { skipLocationChange: true });
         });
     }
+
     public previousRoute() {
-        const prevRoute = JSON.parse(sessionStorage.getItem('ntm-prev-route'));
-        this.router.navigate([prevRoute.route || '/flats'], { queryParams: prevRoute.params });
+        const prevRoute = JSON.parse(localStorage.getItem('ntm-prev-route'));
+        prevRoute.route = decodeURI(prevRoute.route);
+        if (prevRoute) {
+            this.router.navigate([prevRoute.route], { queryParams: prevRoute.params });
+        } else {
+            this.router.navigate(['/flats/search']);
+        }
     }
 
     public getDiscount(flat): number {

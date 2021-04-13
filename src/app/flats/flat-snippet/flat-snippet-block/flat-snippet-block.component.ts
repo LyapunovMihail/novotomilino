@@ -35,7 +35,9 @@ export class FlatSnippetBlockComponent implements OnInit {
         this.favoritesService.setFavorite(this.flatData);
     }
     public goToFlat() {
-        sessionStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRoute.snapshot.queryParams }));
+        localStorage.setItem('ntm-prev-route', JSON.stringify({ route: this.router.url.split('?')[0], params: this.activatedRoute.snapshot.queryParams }));
+        console.log('this.router.url: ', this.router.url);
+        console.log('sessionStorage.getItem: ', localStorage.getItem('ntm-prev-route'));
         this.router.navigate([`/flats/house/${this.flatData.house}/section/${this.flatData.section}/floor/${this.flatData.floor}/flat/${this.flatData.flat}`]);
     }
 }

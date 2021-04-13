@@ -1,28 +1,30 @@
-import { IFlatFurnitureItem } from '../addresses-api/addresses.interfaces';
+import { IAddressItemFlat, IFlatFurnitureItem } from '../addresses-api/addresses.interfaces';
 
-export interface IDecorationType {
+export interface IDecorationFurnitureSlider {
     type: string;
-    vendors: IDecorationVendor[];
+    vendors: IDecorationFurnitureVendor[];
 }
 
-export interface IDecorationVendor {
+export interface IDecorationFurnitureVendor {
     vendor: string;
-    furniture: IDecorationFurniture[];
+    furniture: IDecorationFurnitureSnippet[];
 }
 
-export interface IDecorationFurniture {
+export interface IDecorationFurnitureSnippet {
     rooms: number;
     price: number;
     items: IFlatFurnitureItem[];
     images: string[];
+    flats?: IAddressItemFlat[];
 }
 
-export interface IDecorationPreviewVendor {
+export interface IDecorationFurniturePreview {
     vendor: string;
-    types: IDecorationPreviewType[];
+    types: IDecorationFurnitureType[];
 }
 
-export interface IDecorationPreviewType {
+export interface IDecorationFurnitureType {
     type: string;
-    furniture: IDecorationFurniture[];
+    image: string;
+    rooms: number;
 }

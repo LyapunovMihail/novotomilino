@@ -23,6 +23,7 @@ import { CommercialFloorComponent } from './commercial/floor/commercial-floor.co
 import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ApartmentFurnitureComponent } from './apartment/apartment-furniture/apartment-furniture.component';
+import { SearchOutputModule } from './search/search-output/search-output.module';
 import { SortModule } from './search/search-sorting/sorting.module';
 import { InfoBlockModule } from '../UI/info-block/info-block.module';
 
@@ -56,11 +57,11 @@ const FlatsComponents = [
         FormsModule,
         LoaderModule,
         InfoBlockModule,
-        FlatSnippetModule,
         FormsRequestModule,
         ReactiveFormsModule,
         GHMRangeNumberModule,
         GHMRangeNumberModule,
+        SearchOutputModule,
 
         CommonModule,
         RouterModule,
