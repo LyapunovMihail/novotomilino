@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router
-    ) { }
+    ) {}
 
     public ngOnInit() {
         if (this.platformDetectService.isBrowser) {

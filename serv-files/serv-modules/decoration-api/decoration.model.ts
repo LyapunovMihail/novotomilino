@@ -86,4 +86,8 @@ export class DecorationModel {
 
         return decorationVendors;
     }
+
+    public async flatWithFurniture() {
+        return await this.collection.find({ type: 'КВ', saleChars: { $ne: null } }).count();
+    }
 }

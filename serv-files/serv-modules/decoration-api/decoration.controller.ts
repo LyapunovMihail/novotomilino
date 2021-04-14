@@ -24,6 +24,9 @@ export class DecorationController extends DecorationModel {
         this.router.get('/decoration/preview/get', responseHandler(async(req) => {
             return await this.getDecorationPreviewData();
         }));
+        this.router.get('/decoration/count/get', responseHandler(async(req) => {
+            return await this.flatWithFurniture();
+        }));
 
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);

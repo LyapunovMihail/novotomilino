@@ -21,6 +21,9 @@ export class HeaderService {
     public getPhone() {
         return this.http.get('/api/contacts/phone');
     }
+    public showDecorFurniture() {
+        return this.http.get('/api/decoration/count/get'); // addresses.controler
+    }
 
     public links(data): IHeaderLink[] {
         let date = new Date();
