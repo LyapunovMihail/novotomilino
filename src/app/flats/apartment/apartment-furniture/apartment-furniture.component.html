@@ -7,7 +7,9 @@
             <input type="radio" name="furnitureVariant" [checked]="furnitureVariant.id === furniture[i].id" (change)="furnitureVariant = furniture[i]">
             <div>
                 <span class="apartament-furniture__vars-name">{{item.vendor}} &nbsp;</span>
-                 <span class="apartament-furniture__vars-price">{{item.charCost | myBitNumberPipe:0}} &#8381;</span>
+                <span class="apartament-furniture__vars-price" *ngIf="item.charCost">от {{item.charCost | myBitNumberPipe:0}} &#8381;</span>
+                <span class="apartament-furniture__vars-price" *ngIf="!item.charCost && fixedInPriceItems.length">от {{fixedInPriceItemsSum | myBitNumberPipe:0}} &#8381;</span>
+                <span class="apartament-furniture__vars-price" *ngIf="!item.charCost && !fixedInPriceItems.length">от {{minItemsPrice | myBitNumberPipe:0}} &#8381;</span>
             </div>
         </label>
     </div>
@@ -23,26 +25,68 @@
             </a>
         </div>
         <div class="apartament-furniture__info">
-            <div class="apartament-furniture__info-head" *ngIf="fixedInPriceItems.length">
-                <p class="apartament-furniture__info-title">В стоимость включено:</p>
-                <div class="apartament-furniture__info-kitchen" *ngFor="let item of fixedInPriceItems">
-                    <div class="apartament-furniture__info-text notice" >
-                        {{item.itemName}}
-                        <!--<span></span>-->
-                        <!--<div class="apartament-furniture__info-notice">-->
+            <div class="apartament-furniture__info-head">
+                <p class="apartament-furniture__info-title">Базовый комплект (обязательно)</p>
+                <ng-container *ngIf="fixedInPriceItems.length">
+                    <div class="apartament-furniture__info-kitchen" *ngFor="let item of fixedInPriceItems">
+                        <div class="apartament-furniture__info-text notice">
+                            {{item.itemName}}
+                            <!--<span></span>-->
+                            <!--<div class="apartament-furniture__info-notice">-->
+                                <!--<p class="apartament-furniture__info-title">Включает в себя</p>-->
+                                <!--<ul>-->
+                                    <!--<li class="apartament-furniture__info-text">Кухонный комплект</li>-->
+                                    <!--<li class="apartament-furniture__info-text">Варочная панель</li>-->
+                                    <!--<li class="apartament-furniture__info-text">Духовой шкаф</li>-->
+                                    <!--<li class="apartament-furniture__info-text">Холодильник</li>-->
+                                    <!--<li class="apartament-furniture__info-text">Вытяжка</li>-->
+                                    <!--<li class="apartament-furniture__info-text">Мойка и кухонный смеситель</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        </div>
+                        <p class="apartament-furniture__info-text">{{item.itemPrice | myBitNumberPipe:0}} &#8381;</p>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!fixedInPriceItems.length && furnitureVariant.charCost">
+                    <div class="apartament-furniture__info-kitchen">
+                        <div class="apartament-furniture__info-text notice">
+                            Кухня со встроенной техникой
+                            <!--<span></span>-->
+                            <!--<div class="apartament-furniture__info-notice">-->
                             <!--<p class="apartament-furniture__info-title">Включает в себя</p>-->
                             <!--<ul>-->
-                                <!--<li class="apartament-furniture__info-text">Кухонный комплект</li>-->
-                                <!--<li class="apartament-furniture__info-text">Варочная панель</li>-->
-                                <!--<li class="apartament-furniture__info-text">Духовой шкаф</li>-->
-                                <!--<li class="apartament-furniture__info-text">Холодильник</li>-->
-                                <!--<li class="apartament-furniture__info-text">Вытяжка</li>-->
-                                <!--<li class="apartament-furniture__info-text">Мойка и кухонный смеситель</li>-->
+                            <!--<li class="apartament-furniture__info-text">Кухонный комплект</li>-->
+                            <!--<li class="apartament-furniture__info-text">Варочная панель</li>-->
+                            <!--<li class="apartament-furniture__info-text">Духовой шкаф</li>-->
+                            <!--<li class="apartament-furniture__info-text">Холодильник</li>-->
+                            <!--<li class="apartament-furniture__info-text">Вытяжка</li>-->
+                            <!--<li class="apartament-furniture__info-text">Мойка и кухонный смеситель</li>-->
                             <!--</ul>-->
-                        <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                        <p class="apartament-furniture__info-text">{{furnitureVariant.charCost | myBitNumberPipe:0}} &#8381;</p>
                     </div>
-                    <p class="apartament-furniture__info-text">{{item.itemPrice | myBitNumberPipe:0}} &#8381;</p>
-                </div>
+                </ng-container>
+                <ng-container *ngIf="!fixedInPriceItems.length && !furnitureVariant.charCost">
+                    <div class="apartament-furniture__info-kitchen">
+                        <div class="apartament-furniture__info-text notice">
+                            Не включено
+                            <!--<span></span>-->
+                            <!--<div class="apartament-furniture__info-notice">-->
+                            <!--<p class="apartament-furniture__info-title">Включает в себя</p>-->
+                            <!--<ul>-->
+                            <!--<li class="apartament-furniture__info-text">Кухонный комплект</li>-->
+                            <!--<li class="apartament-furniture__info-text">Варочная панель</li>-->
+                            <!--<li class="apartament-furniture__info-text">Духовой шкаф</li>-->
+                            <!--<li class="apartament-furniture__info-text">Холодильник</li>-->
+                            <!--<li class="apartament-furniture__info-text">Вытяжка</li>-->
+                            <!--<li class="apartament-furniture__info-text">Мойка и кухонный смеситель</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                        </div>
+                        <p class="apartament-furniture__info-text">0 &#8381;</p>
+                    </div>
+                </ng-container>
             </div>
             <div class="apartament-furniture__info-option">
                 <div class="apartament-furniture__info-switcher">

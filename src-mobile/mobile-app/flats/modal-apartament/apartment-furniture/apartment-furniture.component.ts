@@ -25,6 +25,17 @@ export class ApartmentFurnitureComponent implements OnInit, OnDestroy {
         return this.furnitureVariant.items.filter((item) => item.itemsDefaultCount === 999);
     }
 
+    get fixedInPriceItemsSum() {
+        return this.fixedInPriceItems.reduce((accumulator, a) => {
+            return accumulator + a.itemPrice;
+        }, 0);
+    }
+
+    get minItemsPrice() {
+        const itemsPrices = this.furnitureVariant.items.map((item) => item.itemPrice);
+        return Math.min(...itemsPrices);
+    }
+
     constructor(
         public windowScrollLocker: WindowScrollLocker
     ) {}
